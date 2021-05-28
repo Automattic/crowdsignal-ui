@@ -1,0 +1,41 @@
+{
+  "name": "@crowdsignal/feedback-widget",
+  "version": "1.0.0",
+  "description": "Feedback button widget for Crowdsignal.com.",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "author": "Kuba Birecki <kuba.birecki@crystalplanet.io>",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/feedback-widget/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "browser": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "scripts": {
+    "build": "calypso-build ./src/index.js",
+    "build:wp": "calypso-build ./src/index.js --env WP",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@crowdsignal/components": "file:../components",
+    "@emotion/cache": "^10.0.29",
+    "@emotion/core": "^10.1.1",
+    "@emotion/css": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
+    "@wordpress/components": "^14.1.0",
+    "@wordpress/element": "^3.1.0",
+    "@wordpress/i18n": "^4.1.0"
+  },
+  "devDependencies": {
+    "@automattic/calypso-build": "^7.0.0",
+    "@wordpress/scripts": "^16.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^5.37.1"
+  }
+}
