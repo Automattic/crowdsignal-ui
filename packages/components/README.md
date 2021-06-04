@@ -1,11 +1,3 @@
-# `components`
+# Crowdsignal components
 
-> TODO: description
-
-## Usage
-
-```
-const components = require('components');
-
-// TODO: DEMONSTRATE API
-```
+The main frontend components directory for our apps.
