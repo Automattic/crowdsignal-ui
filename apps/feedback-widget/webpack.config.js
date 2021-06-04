@@ -13,7 +13,11 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 		output: {
 			...baseConfig.output,
 			filename: `feedback-${ package.version }${ buildSuffix }.js`,
-			library: [ 'crowdsignal', 'feedbackWidget' ],
+			library: {
+				name: [ 'crowdsignal', 'FeedbackWidget' ],
+				type: 'assign',
+				export: 'default',
+			},
 		},
 		plugins: [
 			...baseConfig.plugins.map(
