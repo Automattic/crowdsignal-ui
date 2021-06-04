@@ -1,0 +1,23 @@
+{
+  "name": "@crowdsignal/http",
+  "version": "0.1.0",
+  "description": "Lightweight wrapper for the fetch API used by other Crowdsignal libraries.",
+  "keywords": [
+    "crowdsignal",
+    "http"
+  ],
+  "author": "Automattic Inc.",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/http/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
