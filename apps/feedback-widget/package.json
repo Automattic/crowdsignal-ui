@@ -1,0 +1,33 @@
+{
+  "name": "@crowdsignal/feedback-widget",
+  "version": "1.0.0",
+  "description": "Feedback button widget for Crowdsignal.com.",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "author": "Automattic Inc.",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/feedback-widget/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "browser": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "scripts": {
+    "build": "calypso-build ./src/index.js",
+    "build:wp": "calypso-build ./src/index.js --env WP"
+  },
+  "dependencies": {
+    "@crowdsignal/components": "^0.1.0",
+    "@crowdsignal/rest-api": "^0.1.0",
+    "@crowdsignal/styles": "^0.1.0",
+    "@wordpress/components": "^14.1.1",
+    "@wordpress/element": "^3.1.1",
+    "@wordpress/i18n": "^4.1.1",
+    "lodash": "^4.17.21"
+  }
+}
