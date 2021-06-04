@@ -10,8 +10,8 @@ import { isNumber } from 'lodash';
 /**
  * Internal dependencies
  */
+import { StyleProvider } from '@crowdsignal/components';
 import FeedbackWidget from './widget';
-import StyleProvider from './style-provider';
 
 const renderWidget = ( surveyId ) => {
 	const wrapperElement = document.createElement( 'div' );
@@ -20,7 +20,11 @@ const renderWidget = ( surveyId ) => {
 	const shadowRoot = wrapperElement.attachShadow( { mode: 'closed' } );
 
 	render(
-		<StyleProvider namespace="feedback-widget" container={ shadowRoot }>
+		<StyleProvider
+			reset
+			namespace="feedback-widget"
+			container={ shadowRoot }
+		>
 			<FeedbackWidget surveyId={ surveyId } />
 		</StyleProvider>,
 		shadowRoot

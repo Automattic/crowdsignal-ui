@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-// import { CrowdsignalFooter } from '@crowdsignal/components';
+import { CrowdsignalFooter } from '@crowdsignal/components';
 import FeedbackForm from './form';
 import FeedbackSubmit from './submit';
 import { View } from './constants';
@@ -21,7 +21,7 @@ import { View } from './constants';
  */
 import { Popover } from './styles/popover-styles';
 
-const FeedbackPopover = ( { settings } ) => {
+const FeedbackPopover = ( { settings, surveyId } ) => {
 	const [ currentView, setCurrentView ] = useState( View.QUESTION );
 	const [ height, setHeight ] = useState( 'auto' );
 
@@ -29,12 +29,8 @@ const FeedbackPopover = ( { settings } ) => {
 
 	const handleSubmit = () => {
 		setHeight( `${ popover.current.offsetHeight }px` );
-		setView( View.SUBMIT );
+		setCurrentView( View.SUBMIT );
 	};
-
-	// somehow switch source for WP sites ?
-
-	console.log( currentView );
 
 	return (
 		<Popover
@@ -44,16 +40,17 @@ const FeedbackPopover = ( { settings } ) => {
 		>
 			{ currentView === View.QUESTION && (
 				<FeedbackForm
+					surveyId={ surveyId }
 					onSubmit={ handleSubmit }
 					settings={ settings }
 				/>
 			) }
 
 			{ currentView === View.SUBMIT && (
-				<FeedbackSubmit settings={ settings } />
+				<FeedbackSubmit settings={ settings } />
 			) }
 
-{/*			{ showBranding && (
+			{ settings.showBranding && (
 				<CrowdsignalFooter
 					logo
 					source="feedback-widget"
@@ -63,7 +60,7 @@ const FeedbackPopover = ( { settings } ) => {
 					) }
 				/>
 			) }
-*/}		</Popover>
+		</Popover>
 	);
 };
 

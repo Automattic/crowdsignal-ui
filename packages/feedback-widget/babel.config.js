@@ -4,7 +4,7 @@ module.exports = {
 		'@automattic/calypso-build/babel/default',
 	],
 	plugins: [
-		'@babel/transform-runtime',
+		'@babel/plugin-transform-runtime',
 		'@wordpress/babel-plugin-import-jsx-pragma',
 	],
 };

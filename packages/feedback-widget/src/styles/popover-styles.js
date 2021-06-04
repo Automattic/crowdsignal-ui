@@ -7,17 +7,8 @@ import { css } from '@emotion/core';
 /**
  * Internal dependencies
  */
-// import { COLORS } from 'where?';
-
-
-const breakpoint = ( size ) => {
-	const direction = size.slice( 0, 1 );
-	const screenSize = size.slice( 1 );
-
-	const minMax = direction === '>' ? 'min' : 'max';
-
-	return `@media screen and (${ minMax }-width: ${ screenSize })`;
-};
+import { breakpoint, color } from '@crowdsignal/styles';
+import { wpPopoverStyles } from './wordpress-popover';
 
 // needs to go into the main one!!!
 export const PopoverWrapper = styled.div`
@@ -27,32 +18,29 @@ export const PopoverWrapper = styled.div`
 
 	${ props => props.position };
 
-	/* & .components-popover {
-	// 	position: fixed;
-	// }
-	*/
+	${ wpPopoverStyles }
 
-	& .components-popover__content {
+	& .components-popover .components-popover__content {
 		backgroundColor: transparent;
 
 	}
 `;
 
 export const Popover = styled.div( ( {
-	backgroundColor = '#fff',
-	buttonColor = '#c9356e',
-	height = 'auto',
-	textColor = '#101517',
+	backgroundColor,
+	buttonColor,
+	height,
+	textColor,
 } ) => {
 	return css`
-		background-color: ${ backgroundColor };
-		border-top: 10px solid ${ buttonColor };
-		box-shadow: 1px 1px 7px rgba(0, 0, 0, .3);
+		background-color: ${ backgroundColor || color( 'surface' ) };
+		border-top: 10px solid ${ buttonColor || color( 'secondary' ) };
+		box-shadow: 1px 1px 7px ${ color( 'shadow' ) };
 		box-sizing: border-box;
-		color: ${ textColor };
+		color: ${ textColor || color( 'text' ) };
 		display: flex;
-		flex-diraction: column;
-		height: ${ height };
+		flex-direction: column;
+		height: ${ height || 'auto' };
 		max-height: 480px;
 		outline: 0;
 		overflow-y: scroll;

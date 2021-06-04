@@ -4,13 +4,7 @@ const webpack = require( 'webpack' );
 const getBaseConfig = require( '@automattic/calypso-build/webpack.config.js' );
 
 function getWebpackConfig( env, { entry, ...argv } ) {
-	const baseConfig = getBaseConfig(
-		env,
-		{
-			...argv,
-			entry: entry[0],
-		}
-	);
+	const baseConfig = getBaseConfig( env, argv );
 
 	const buildSuffix = argv.env.WP === 'WP' ? '.wp' : '';
 

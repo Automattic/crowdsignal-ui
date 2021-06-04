@@ -2,17 +2,25 @@
  * External dependencies
  */
 import { RawHTML, useState } from '@wordpress/element';
+import { isEmpty } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import { updateFeedbackResponse } from '@crowdsignal/rest-api';
 
 /**
  * Style dependencies
  */
-import { FeedbackInput, Header, SubmitButton } from './styles/form-styles.js';
+import { Form, Input, Header, Button } from './styles/form-styles.js';
 
 const FeedbackForm = ( {
 	onSubmit,
 	settings,
+	surveyId,
 } ) => {
 	const [ errors, setErrors ] = useState( {} );
+	const [ submitting, setSubmitting ] = useState( false );
 	const [ formData, setFormData ] = useState( {
 		feedback: '',
 		email: '',
@@ -24,9 +32,10 @@ const FeedbackForm = ( {
 			[ field ]: event.target.value,
 		} );
 
-
 	const handleSubmit = async ( event ) => {
 		event.preventDefault();
+
+		setSubmitting( true );
 
 		const validation = {
 			feedback: isEmpty( formData.feedback ),
@@ -40,22 +49,23 @@ const FeedbackForm = ( {
 			return;
 		}
 
-		// submit request here
-		console.log( 'Request submitted ' );
-		// also this function is async but does it need to be?
-
-		onSubmit();
+		try {
+			await updateFeedbackResponse( surveyId, formData );
+			onSubmit();
+		} finally {
+			setSubmitting( false );
+		}
 	};
 
 	const { text, style } = settings;
 
 	return (
-		<form onSubmit={ handleSubmit }>
+		<Form onSubmit={ handleSubmit }>
 			<Header>
 				<RawHTML>{ text.header }</RawHTML>
 			</Header>
 
-			<FeedbackInput
+			<Input
 				as="textarea"
 				error={ errors.feedback }
 				placeholder={ text.feedback }
@@ -65,7 +75,7 @@ const FeedbackForm = ( {
 				{ ...style }
 			/>
 
-			<FeedbackInput
+			<Input
 				error={ errors.email }
 				placeholder={ text.email }
 				value={ formData.email }
@@ -73,12 +83,11 @@ const FeedbackForm = ( {
 				{ ...style }
 			/>
 
-			<SubmitButton type="submit">
+			<Button primary type="submit" disabled={ submitting }>
 				{ text.submitButton }
-			</SubmitButton>
-		</form>
+			</Button>
+		</Form>
 	);
-	
 };
 
 export default FeedbackForm;

@@ -4,6 +4,7 @@
 import { Dropdown } from '@wordpress/components';
 import {
 	useCallback,
+	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState
@@ -12,6 +13,7 @@ import {
 /**
  * Internal dependencies
  */
+import { fetchFeedbackSurvey } from '@crowdsignal/rest-api';
 import FeedbackPopover from './popover';
 import FeedbackToggle from './toggle';
 import { adjustFrameOffset, getPopoverPosition, getTogglePosition } from './util';
@@ -24,7 +26,7 @@ import { PopoverWrapper } from './styles/popover-styles';
 
 const settings = {
 	emailRequired: true,
-	position: 'bottom right',
+	position: 'center right',
 	style: {
 	},
 	text: {
@@ -36,19 +38,13 @@ const settings = {
 		toggle: 'Get to the chopper!',
 	},
 	toggleMode: ToggleMode.CLICK,
+	showBranding: true,
 };
 
 const FeedbackWidget = ( {
-	// position,
 	surveyId,
 } ) => {
-	// Should probably be a HoC instead of a hook!
-	// const survey = useFeedbackSurvey( surveyId );
-	// if ( ! survey ) {
-	// 	return null;
-	// }
-	// -------------------------------------------
-
+	const [ survey, setSurvey ] = useState( null );
 	const [ position, setPosition ] = useState( {} );
 
 	const toggle = useRef( null );
@@ -83,6 +79,15 @@ const FeedbackWidget = ( {
 		updatePosition();
 	}, [ updatePosition ] );
 
+	useEffect( () => {
+		const fetchData = async () => {
+			const survey = await fetchFeedbackSurvey( surveyId );
+			console.log( survey );
+		};
+
+		fetchData();
+	}, [] );
+
 	return (
 		<PopoverWrapper position={ position }>
 			<Dropdown
@@ -99,7 +104,7 @@ const FeedbackWidget = ( {
 					/>
 				) }
 				renderContent={ () => (
-					<FeedbackPopover settings={ settings } />
+					<FeedbackPopover surveyId={ surveyId } settings={ settings } />
 				) }
 			/>
 		</PopoverWrapper>
@@ -107,6 +112,3 @@ const FeedbackWidget = ( {
 };
 
 export default FeedbackWidget;
-
-// export other things here as well ( render, getposition, styles? )
-// figure out how to isolate styles in the editor?
