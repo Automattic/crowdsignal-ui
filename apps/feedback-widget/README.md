@@ -1,37 +1,14 @@
 # Feedback widget
 
-The feedback widget can be embedded on any page to collect feedback on Crowdsignal.com.
-
-## Installation
-
-Install the module:
-
-```
-npm install @crowdsignal/feedback-widget
-```
-
-Or use our CDN, or download one of our releases.
+Embed the feedback widget on your page and collect feedback with Crowdsignal.com.
 
 ## Usage
 
-Add the following JS snippet to enable the feedback widget to your page. Replace `surveyId` with a valid feedback survey ID.
+Add the following JS snippet to enable the feedback widget to your page. Make sure to replace `surveyId` with a valid feedback survey ID.
 
-```
+```html
+<script src="https://app.crowdsignal.com/js/feedback-1.0.0.js"></script>
 <script>
-Crowdsignal.widgets.Feedback( {
-    position: 'bottom left',
-    surveyId: 123456,
-} );
+    crowdsignal.FeedbackWidget( surveyId );
 </script>
-```
-
-```
-const feedbackWidget = require('feedback-widget');
-
-// TODO: DEMONSTRATE API
-```
-
-
-```
-
 ```
