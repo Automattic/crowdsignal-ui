@@ -1,7 +1,27 @@
 {
-  "name": "root",
+  "name": "Crowdsignal",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
+  },
+  "dependencies": {
+    "@crowdsignal/feedback-widget": "file:packages/components",
+    "@crowdsignal/styles": "file:packages/styles",
+    "@emotion/cache": "^10.0.29",
+    "@emotion/core": "^10.1.1",
+    "@emotion/styled": "^10.0.27"
+  },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "@automattic/calypso-build": "^7.0.0",
+    "@wordpress/scripts": "^16.1.0",
+    "lerna": "^4.0.0",
+    "webpack": "^5.37.1"
+  },
+  "scripts": {
+    "check-licenses": "wp-scripts check-licenses --prod --gpl2",
+    "lint:js": "wp-scripts lint-js"
   }
 }
