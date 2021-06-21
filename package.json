@@ -8,8 +8,6 @@
     ]
   },
   "dependencies": {
-    "@crowdsignal/feedback-widget": "file:packages/components",
-    "@crowdsignal/styles": "file:packages/styles",
     "@emotion/cache": "^10.0.29",
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27"
