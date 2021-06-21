@@ -17,7 +17,7 @@ const renderWidget = ( surveyId ) => {
 	const wrapperElement = document.createElement( 'div' );
 	document.body.appendChild( wrapperElement );
 
-	const shadowRoot = wrapperElement.attachShadow( { mode: 'closed' } );
+	const shadowRoot = wrapperElement.attachShadow( { mode: 'open' } );
 
 	render(
 		<StyleProvider
