@@ -1089,19 +1089,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@crowdsignal/feedback-widget@file:packages/components":
-  version "0.1.0"
-  dependencies:
-    "@crowdsignal/styles" "^0.1.0"
-    "@wordpress/element" "^3.1.1"
-    lodash "^4.17.21"
-
-"@crowdsignal/styles@file:packages/styles":
-  version "0.1.0"
-  dependencies:
-    "@automattic/color-studio" "^2.5.0"
-    lodash "^4.17.21"
-
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.3.tgz#90420f9f9c6d3987f176a19a7d8e764271a2f55d"
