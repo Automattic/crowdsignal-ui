@@ -42,6 +42,7 @@ export const Toggle = styled.button( ( {
 		font-size: 16px;
 		font-weight: 600;
 		line-height: 1.5;
+		outline: 0;
 		padding: 10px 16px;
 		white-space: nowrap;
 

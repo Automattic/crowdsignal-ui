@@ -32,35 +32,41 @@ export const Header = styled.h3( ( {
 } );
 
 const inputError = css`
-	border: 3px solid ${ color( `error` ) };
-	box-sizing: border-box;
-	content: "";
-	display: block;
-	position: absolute;
-	top: -4px;
-	left: -4px;
-	bottom: -4px;
-	right: -4px;
-	z-index: -1;
+	&::before {
+		border: 3px solid ${ color( `error` ) };
+		box-sizing: border-box;
+		content: "";
+		display: block;
+		position: absolute;
+		top: -4px;
+		left: -4px;
+		bottom: -4px;
+		right: -4px;
+		z-index: -1;
+	}
 `;
 
-export const Input = styled.input( ( {
-	error,
-	textSize,
-} ) => {
+export const InputWrapper = styled.div( ( { error } ) => {
+	return css`
+		display: flex;
+		margin: 0 0 24px;
+		position: relative;
+		width: 100%;
+		z-index: 1;
+
+		${ error && inputError }
+	`;
+} );
+
+export const Input = styled.input( ( { textSize } ) => {
 	return css`
 		border: 1px solid ${ color( 'border' ) };
 		box-sizing: border-box;
 		display: flex;
 		font-size: ${ textSize || '18px' };
-		margin: 0 0 24px;
 		outline: 0;
 		padding: 16px;
-		position: relative;
 		width: 100%;
-		z-index: 1;
-
-		${ error && inputError };
 	`;
 } );
 

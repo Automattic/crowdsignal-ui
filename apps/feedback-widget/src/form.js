@@ -12,7 +12,7 @@ import { updateFeedbackResponse } from '@crowdsignal/rest-api';
 /**
  * Style dependencies
  */
-import { Form, Input, Header, Button } from './styles/form-styles.js';
+import { Form, Input, InputWrapper, Header, Button } from './styles/form-styles.js';
 
 const FeedbackForm = ( {
 	onSubmit,
@@ -39,13 +39,15 @@ const FeedbackForm = ( {
 
 		const validation = {
 			feedback: isEmpty( formData.feedback ),
-			email:
-				settings.requireEmail &&
-				( isEmpty( formData.email ) || formData.email.match( /^\s+@\s+$/ ) ),
+			email: ! isEmpty( formData.email )
+				? ! formData.email.match( /^\w+@\w+\.\w+$/ )
+				: settings.emailRequired,
 		};
+
 		setErrors( validation );
 
 		if ( validation.feedback || validation.email ) {
+			setSubmitting( false );
 			return;
 		}
 
@@ -65,23 +67,25 @@ const FeedbackForm = ( {
 				<RawHTML>{ text.header }</RawHTML>
 			</Header>
 
-			<Input
-				as="textarea"
-				error={ errors.feedback }
-				placeholder={ text.feedback }
-				rows={ 6 }
-				value={ formData.feedback }
-				onChange={ handleChange( 'feedback' ) }
-				{ ...style }
-			/>
+			<InputWrapper error={ errors.feedback }>
+				<Input
+					as="textarea"
+					placeholder={ text.feedback }
+					rows={ 6 }
+					value={ formData.feedback }
+					onChange={ handleChange( 'feedback' ) }
+					{ ...style }
+				/>
+			</InputWrapper>
 
-			<Input
-				error={ errors.email }
-				placeholder={ text.email }
-				value={ formData.email }
-				onChange={ handleChange( 'email' ) }
-				{ ...style }
-			/>
+			<InputWrapper error={ errors.email }>
+				<Input
+					placeholder={ text.email }
+					value={ formData.email }
+					onChange={ handleChange( 'email' ) }
+					{ ...style }
+				/>
+			</InputWrapper>
 
 			<Button primary type="submit" disabled={ submitting }>
 				{ text.submitButton }
