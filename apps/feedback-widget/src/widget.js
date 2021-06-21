@@ -36,7 +36,7 @@ const settings = {
 		header: '&#x1F44B; Do you have some feedback for us?',
 		submitButton: 'Submit',
 		submitMessage: 'Thanks for letting us know! &#x1F64F;',
-		toggle: 'Get to the chopper!',
+		toggle: 'Feedback',
 	},
 	toggleMode: ToggleMode.CLICK,
 	showBranding: false,
