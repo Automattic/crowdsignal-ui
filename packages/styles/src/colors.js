@@ -4,6 +4,11 @@
 import Palette from '@automattic/color-studio';
 import { includes, isObject, keys } from 'lodash';
 
+/**
+ * Internal dependencies
+ */
+import { hexToRGBA } from './util';
+
 const defaultColorMap = {
 	neutral: {
 		[0]: Palette.colors[ 'Gray 0' ],
@@ -124,9 +129,9 @@ const defaultColorMap = {
 	link: '#44cee6',
 	border: Palette.colors[ 'Gray 5' ],
 	surface: Palette.colors[ 'White' ],
-	shadow: `rgba( ${ Palette.colors[ 'Black' ] }, 0.3 )`,
-	backdrop: `rgba( ${ Palette.colors[ 'Gray 90' ] }, 0.4 )`,
-	transparent: `rgba( ${ Palette.colors[ 'White' ] }, 0 )`,
+	shadow: hexToRGBA( Palette.colors[ 'Black' ], 0.3 ),
+	backdrop: hexToRGBA( Palette.colors[ 'Gray 90' ], 0.4 ),
+	transparent: hexToRGBA( Palette.colors[ 'White' ], 0 ),
 	facebook: '#3b5998',
 	twitter: '#1da1f2',
 };
