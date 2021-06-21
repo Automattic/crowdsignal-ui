@@ -1,0 +1,23 @@
+{
+  "name": "@crowdsignal/rest-api",
+  "version": "0.1.0",
+  "description": "JS bindings for Crowdsignal API.",
+  "keywords": [
+    "crowdsignal",
+    "api"
+  ],
+  "author": "Automattic Inc.",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/rest-api/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "dependencies": {
+    "@crowdsignal/http": "^0.1.0"
+  }
+}
