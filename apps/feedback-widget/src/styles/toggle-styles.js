@@ -11,7 +11,6 @@ import { color } from '@crowdsignal/styles';
 
 const verticalToggleWrapper = ( { align } ) => {
 	return css`
-		margin-top: -50%;
 		transform-origin: top ${ align === 'right' ? 'left' : 'right' };
 		transform: rotateZ(270deg) ${ align === 'right' ? 'translateX(-100%)' : 'translateY(-100%)' };
 	`;
@@ -35,7 +34,6 @@ export const Toggle = styled.button( ( {
 } ) => {
 	return css`
 		align-items: center;
-		box-shadow: 1px 1px 7px ${ color( 'shadow' ) };
 		border: 0;
 		cursor: pointer;
 		background-color: ${ backgroundColor || color( 'secondary' ) };

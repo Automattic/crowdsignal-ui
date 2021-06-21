@@ -13,6 +13,7 @@ import {
 /**
  * Internal dependencies
  */
+import { Popover } from '@crowdsignal/components';
 import { fetchFeedbackSurvey } from '@crowdsignal/rest-api';
 import FeedbackPopover from './popover';
 import FeedbackToggle from './toggle';
@@ -25,25 +26,26 @@ import { ToggleMode } from './constants'
 import { PopoverWrapper } from './styles/popover-styles';
 
 const settings = {
-	emailRequired: true,
+	emailRequired: false,
 	position: 'center right',
 	style: {
 	},
 	text: {
-		email: 'Your email',
-		feedback: 'Please give some feedback',
-		header: 'Oh, hi Mark!',
-		submitButton: 'All in!',
-		submitMessage: 'Much success!',
+		email: 'Your email (optional)',
+		feedback: 'Anything we can help you with?',
+		header: '&#x1F44B; Do you have some feedback for us?',
+		submitButton: 'Submit',
+		submitMessage: 'Thanks for letting us know! &#x1F64F;',
 		toggle: 'Get to the chopper!',
 	},
 	toggleMode: ToggleMode.CLICK,
-	showBranding: true,
+	showBranding: false,
 };
 
 const FeedbackWidget = ( {
 	surveyId,
 } ) => {
+	const [ active, setActive ] = useState( false );
 	const [ survey, setSurvey ] = useState( null );
 	const [ position, setPosition ] = useState( {} );
 
@@ -88,26 +90,35 @@ const FeedbackWidget = ( {
 		fetchData();
 	}, [] );
 
+	const handleToggle = useCallback( () => {
+		setActive( ! active );
+	}, [ active, setActive ] );
+
+	const handleClose = useCallback( () => {
+		setActive( false );
+	}, [ setActive ] );
+
 	return (
-		<PopoverWrapper position={ position }>
-			<Dropdown
-				popoverProps={ {
-					position: getPopoverPosition( settings.position ),
-				} }
-				renderToggle={ ( { isOpen, onToggle } ) => (
-					<FeedbackToggle
-						ref={ toggle }
-						isOpen={ isOpen }
-						onClick={ onToggle }
-						onToggle={ updatePosition }
-						settings={ settings }
-					/>
-				) }
-				renderContent={ () => (
-					<FeedbackPopover surveyId={ surveyId } settings={ settings } />
-				) }
-			/>
-		</PopoverWrapper>
+		<>
+			<PopoverWrapper position={ position }>
+				<FeedbackToggle
+					ref={ toggle }
+					isOpen={ active }
+					onClick={ handleToggle }
+					onToggle={ updatePosition }
+					settings={ settings }
+				/>
+			</PopoverWrapper>
+
+			<Popover
+				isVisible={ active }
+				context={ toggle }
+				onClose={ handleClose }
+				position={ getPopoverPosition( settings.position ) }
+			>
+				<FeedbackPopover surveyId={ surveyId } settings={ settings } />
+			</Popover>
+		</>
 	);
 };
 

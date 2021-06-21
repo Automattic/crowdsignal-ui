@@ -1,10 +1,6 @@
 /**
  * External dependencies
  */
-
-/**
- * WordPress dependencies
- */
 import { useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -35,6 +31,7 @@ const FeedbackPopover = ( { settings, surveyId } ) => {
 	return (
 		<Popover
 			ref={ popover }
+			className="feedback-widget__popover"
 			height={ height }
 			{ ...settings.style }
 		>
