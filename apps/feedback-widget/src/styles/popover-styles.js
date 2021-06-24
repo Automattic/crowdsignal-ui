@@ -8,7 +8,6 @@ import { css } from '@emotion/core';
  * Internal dependencies
  */
 import { breakpoint, color } from '@crowdsignal/styles';
-import { wpPopoverStyles } from './wordpress-popover';
 
 // needs to go into the main one!!!
 export const PopoverWrapper = styled.div`
@@ -17,8 +16,6 @@ export const PopoverWrapper = styled.div`
 	z-index: 9999999;
 
 	${ props => props.position };
-
-	${ wpPopoverStyles }
 
 	& .components-popover .components-popover__content {
 		backgroundColor: transparent;
@@ -35,6 +32,7 @@ export const Popover = styled.div( ( {
 	return css`
 		background-color: ${ backgroundColor || color( 'surface' ) };
 		border-top: 10px solid ${ buttonColor || color( 'secondary' ) };
+		border-radius: 0 0 10px 10px;
 		box-shadow: 1px 1px 7px ${ color( 'shadow' ) };
 		box-sizing: border-box;
 		color: ${ textColor || color( 'text' ) };
