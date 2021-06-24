@@ -57,6 +57,6 @@ const Dropdown = () => {
 
 **position**: Determines the position of the popover relative to the context element.
 
-- Type: `String` - (`top left`, `top right`, `center left`, `center right`, `bottom left`, `bottom right`)
+- Type: `String` - (`auto`, ``top left`, `top right`, `center left`, `center right`, `bottom left`, `bottom right`)
 - Required: No
 - Default: `bottom left`

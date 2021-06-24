@@ -6,7 +6,7 @@ import {
 	RawHTML,
 	useCallback,
 	useEffect,
-	useLayoutEffect
+	useLayoutEffect,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -21,7 +21,7 @@ import { ToggleMode } from './constants';
 import { ToggleWrapper, Toggle } from './styles/toggle-styles.js';
 
 const FeedbackToggle = ( { isOpen, onClick, onToggle, settings }, ref ) => {
-	const { position, style, text, toggleMode } = settings;
+	const { position, text, toggleMode } = settings;
 	const [ y, x ] = position.split( ' ' );
 
 	useLayoutEffect( onToggle, [ isOpen ] );
@@ -43,10 +43,7 @@ const FeedbackToggle = ( { isOpen, onClick, onToggle, settings }, ref ) => {
 	}, [ settings.toggleMode, isOpen ] );
 
 	return (
-		<ToggleWrapper
-			align={ x }
-			isVertical={ y === 'center' }
-		>
+		<ToggleWrapper align={ x } isVertical={ y === 'center' }>
 			<Toggle
 				as="button"
 				ref={ ref }
@@ -54,15 +51,9 @@ const FeedbackToggle = ( { isOpen, onClick, onToggle, settings }, ref ) => {
 				onClick={ onClick }
 				onMouseEnter={ handleHover }
 			>
-				{ ! isOpen && (
-					<RawHTML>{ text.toggle }</RawHTML>
-				) }
+				{ ! isOpen && <RawHTML>{ text.toggle }</RawHTML> }
 
-				{ isOpen && (
-					<>
-						{ __( 'Close', 'feedback-widget' ) }
-					</>
-				) }
+				{ isOpen && <>{ __( 'Close', 'feedback-widget' ) }</> }
 			</Toggle>
 		</ToggleWrapper>
 	);

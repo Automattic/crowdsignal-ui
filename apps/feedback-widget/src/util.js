@@ -48,12 +48,14 @@ export const getTogglePosition = (
 ) => {
 	const [ y, x ] = position.split( ' ' );
 
-	let offset = {
-		left: isObject( padding ) ? padding.left : padding,
-		right: isObject( padding ) ? padding.right : padding,
-		top: isObject( padding ) ? padding.top : padding,
-		bottom: isObject( padding ) ? padding.bottom : padding,
-	};
+	let offset = isObject( padding )
+		? padding
+		: {
+				left: padding,
+				right: padding,
+				top: padding,
+				bottom: padding,
+		  };
 
 	if ( frameElement ) {
 		offset = addFrameOffsets(
@@ -83,9 +85,9 @@ export const adjustFrameOffset = ( position, verticalAlign, width, height ) => {
 export const getPopoverPosition = ( position ) => {
 	const [ y, x ] = position.split( ' ' );
 
-	if ( y !== 'center' ) {
-		return;
+	if ( y === 'center' ) {
+		return x === 'left' ? 'center right' : 'center left';
 	}
 
-	return x === 'left' ? 'center right' : 'center left';
+	return 'auto';
 };

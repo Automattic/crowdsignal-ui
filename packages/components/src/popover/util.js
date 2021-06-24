@@ -45,6 +45,7 @@ export const getPopoverOffset = ( position, popover, context ) => {
 			};
 
 		case 'bottom left':
+		case 'auto':
 		default:
 			return {
 				right: window.innerWidth - contextBox.left - contextBox.width,

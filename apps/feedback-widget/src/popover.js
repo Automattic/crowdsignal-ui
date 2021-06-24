@@ -53,7 +53,7 @@ const FeedbackPopover = ( { settings, surveyId } ) => {
 					source="feedback-widget"
 					message={ __(
 						'Collect your own feedback with Crowdsignal',
-						'feedback-widget',
+						'feedback-widget'
 					) }
 				/>
 			) }
