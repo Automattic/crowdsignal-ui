@@ -20,6 +20,7 @@
   },
   "scripts": {
     "check-licenses": "wp-scripts check-licenses --prod --gpl2",
+    "format": "wp-scripts format",
     "lint:js": "wp-scripts lint-js"
   }
 }
