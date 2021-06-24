@@ -9,39 +9,42 @@ import { omit } from 'lodash';
  */
 import { Button } from './styles.js';
 
-const ButtonComponent = ( {
-    accent,
-    borderless,
-    children,
-    className,
-    compact,
-    disabled,
-    facebook,
-    highlight,
-    large,
-    scary,
-    twitter,
-    ...props
-}, ref ) => {
-    if ( props.href && ! disabled ) {
-        const rel = props.target
-            ? ( props.rel || '' ).replace( /noopener|noreferrer/g, '' ) + ' noopener noreferrer'
-            : props.rel;
+const ButtonComponent = (
+	{ children, className, disabled, ...props },
+	ref
+) => {
+	if ( props.href && ! disabled ) {
+		const rel = props.target
+			? ( props.rel || '' ).replace( /noopener|noreferrer/g, '' ) +
+			  ' noopener noreferrer'
+			: props.rel;
 
-        return (
-            <Button as={ 'a' } ref={ ref } { ...props } rel={ rel } className={ className }>
-                { children }
-            </Button>
-        );
-    }
+		return (
+			<Button
+				as={ 'a' }
+				ref={ ref }
+				{ ...props }
+				rel={ rel }
+				className={ className }
+			>
+				{ children }
+			</Button>
+		);
+	}
 
-    const buttonProps = omit( props, [ 'href', 'rel', 'target' ] );
+	const buttonProps = omit( props, [ 'href', 'rel', 'target' ] );
 
-    return (
-        <Button ref={ ref } type="button" { ...buttonProps } className={ className } disabled={ disabled }>
-            { children }
-        </Button>
-    );
+	return (
+		<Button
+			ref={ ref }
+			type="button"
+			{ ...buttonProps }
+			className={ className }
+			disabled={ disabled }
+		>
+			{ children }
+		</Button>
+	);
 };
 
 export default forwardRef( ButtonComponent );

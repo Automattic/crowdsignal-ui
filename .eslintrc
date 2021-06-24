@@ -5,6 +5,9 @@
 			"error",
 			10
 		],
+		"jsx-a11y/anchor-has-content": [
+			"off"
+		],
 		"max-depth": [
 			"error",
 			2
@@ -24,6 +27,9 @@
 				"argsIgnorePattern": "^_$",
 				"varsIgnorePattern": "^_$"
 			}
-		]
+		],
+		"@wordpress/no-unused-vars-before-return": [
+			"off"
+		],
 	}
 }

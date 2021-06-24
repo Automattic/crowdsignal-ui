@@ -29,13 +29,17 @@ export const getPopoverOffset = ( position, popover, context ) => {
 		case 'center left':
 			return {
 				right: window.innerWidth - contextBox.left + POPOVER_OFFSET,
-				top: contextBox.top + ( contextBox.height - popoverBox.height ) / 2,
+				top:
+					contextBox.top +
+					( contextBox.height - popoverBox.height ) / 2,
 			};
 
 		case 'center right':
 			return {
 				left: contextBox.left + contextBox.width + POPOVER_OFFSET,
-				top: contextBox.top + ( contextBox.height - popoverBox.height ) / 2,
+				top:
+					contextBox.top +
+					( contextBox.height - popoverBox.height ) / 2,
 			};
 
 		case 'bottom right':

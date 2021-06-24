@@ -3,7 +3,7 @@
  */
 import { CacheProvider, Global } from '@emotion/core';
 import createCache from '@emotion/cache';
-import { useEffect, useRef, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -20,9 +20,7 @@ const StyleProvider = ( { container, children, namespace, reset } ) => {
 
 	return (
 		<CacheProvider value={ cache }>
-			{ reset && (
-				<Global styles={ resetCSS } />
-			) }
+			{ reset && <Global styles={ resetCSS } /> }
 
 			{ children }
 		</CacheProvider>
