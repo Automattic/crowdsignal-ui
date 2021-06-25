@@ -111,13 +111,13 @@ const scaryButton = ( isBorderless ) => css`
 	}
 `;
 
-const compactButton = () => css`
+const compactButton = () => css``;
+
+const largeButton = () => css`
 	font-size: 12px;
 	height: 45px;
 	padding: 9px 30px;
 `;
-
-const largeButton = () => css``;
 
 export const Button = styled.button(
 	( {
