@@ -17,12 +17,23 @@
     "@wordpress/scripts": "^16.1.0",
     "husky": "^6.0.0",
     "lerna": "^4.0.0",
+    "lint-staged": "^11.0.0",
     "webpack": "^5.37.1"
   },
   "scripts": {
     "check-licenses": "wp-scripts check-licenses --prod --gpl2",
     "format": "wp-scripts format",
     "lint:js": "wp-scripts lint-js",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
     "postinstall": "node ./node_modules/husky/lib/bin install"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint:js"
+    ],
+    "packages/*/package.json": [
+      "yarn lint:pkg-json",
+      "yarn check-licenses"
+    ]
   }
 }
