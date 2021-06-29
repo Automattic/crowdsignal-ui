@@ -82,7 +82,7 @@ const secondaryButton = ( isBorderless ) => css`
 const highlightButton = ( isBorderless ) => css`
 	background-color: ${ color( 'highlight' ) };
 	border-color: ${ color( 'highlight', 'dark' ) };
-	color: ${ isBorderless ? color( 'highlight') : color( 'text-inverted' ) };
+	color: ${ isBorderless ? color( 'highlight' ) : color( 'text-inverted' ) };
 
 	&:hover {
 		background-color: ${ color( 'highlight', 'light' ) };
@@ -117,29 +117,30 @@ const compactButton = () => css`
 	padding: 9px 30px;
 `;
 
-const largeButton = () => css`
-`;
+const largeButton = () => css``;
 
-export const Button = styled.button( ( {
-	borderless,
-	compact,
-	highlight,
-	large,
-	primary,
-	scary,
-	secondary,
-} ) => {
-	return css`
-		${ baseButton };
+export const Button = styled.button(
+	( {
+		borderless,
+		compact,
+		highlight,
+		large,
+		primary,
+		scary,
+		secondary,
+	} ) => {
+		return css`
+			${ baseButton };
 
-		${ scary && scaryButton( borderless ) };
-		${ highlight && highlightButton( borderless ) };
-		${ secondary && secondaryButton( borderless ) };
-		${ primary && primaryButton( borderless ) };
+			${ scary && scaryButton( borderless ) };
+			${ highlight && highlightButton( borderless ) };
+			${ secondary && secondaryButton( borderless ) };
+			${ primary && primaryButton( borderless ) };
 
-		${ borderless && borderlessButton };
+			${ borderless && borderlessButton };
 
-		${ compact && compactButton( borderless ) };
-		${ large && largeButton( borderless ) };
-	`;
-} );
+			${ compact && compactButton( borderless ) };
+			${ large && largeButton( borderless ) };
+		`;
+	}
+);

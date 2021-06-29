@@ -17,9 +17,7 @@ export const Form = styled.form`
 	width: 100%;
 `;
 
-export const Header = styled.h3( ( {
-	textColor,
-} ) => {
+export const Header = styled.h3( ( { textColor } ) => {
 	return css`
 		color: ${ textColor || color( `text` ) };
 		flex-grow: 1;
@@ -34,7 +32,7 @@ export const Header = styled.h3( ( {
 const inputError = css`
 	border: 3px solid ${ color( `error` ) };
 	box-sizing: border-box;
-	content: "";
+	content: '';
 	display: block;
 	position: absolute;
 	top: -4px;
@@ -44,10 +42,7 @@ const inputError = css`
 	z-index: -1;
 `;
 
-export const Input = styled.input( ( {
-	error,
-	textSize,
-} ) => {
+export const Input = styled.input( ( { error, textSize } ) => {
 	return css`
 		border: 1px solid ${ color( 'border' ) };
 		box-sizing: border-box;
@@ -64,10 +59,7 @@ export const Input = styled.input( ( {
 	`;
 } );
 
-export const Button = styled.button( ( {
-	buttonColor,
-	buttonTextColor,
-} ) => {
+export const Button = styled.button( ( { buttonColor, buttonTextColor } ) => {
 	return css`
 		background-color: ${ buttonColor || color( 'primary' ) };
 		border-color: ${ buttonColor || color( 'primary', 'dark' ) };
@@ -80,7 +72,7 @@ export const Button = styled.button( ( {
 		font-weight: bold;
 		height: 45px;
 		padding: 9px 30px;
-		transition: background-color .1s ease-out, border-color .1s ease-out;
+		transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
 		white-space: nowrap;
 		width: fit-content;
 	`;

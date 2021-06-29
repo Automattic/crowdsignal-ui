@@ -14,11 +14,7 @@ import { updateFeedbackResponse } from '@crowdsignal/rest-api';
  */
 import { Form, Input, Header, Button } from './styles/form-styles.js';
 
-const FeedbackForm = ( {
-	onSubmit,
-	settings,
-	surveyId,
-} ) => {
+const FeedbackForm = ( { onSubmit, settings, surveyId } ) => {
 	const [ errors, setErrors ] = useState( {} );
 	const [ submitting, setSubmitting ] = useState( false );
 	const [ formData, setFormData ] = useState( {
@@ -26,8 +22,8 @@ const FeedbackForm = ( {
 		email: '',
 	} );
 
-	const handleChange = ( field ) =>
-		( event ) => setFormData( {
+	const handleChange = ( field ) => ( event ) =>
+		setFormData( {
 			...formData,
 			[ field ]: event.target.value,
 		} );
@@ -41,7 +37,8 @@ const FeedbackForm = ( {
 			feedback: isEmpty( formData.feedback ),
 			email:
 				settings.requireEmail &&
-				( isEmpty( formData.email ) || formData.email.match( /^\s+@\s+$/ ) ),
+				( isEmpty( formData.email ) ||
+					formData.email.match( /^\s+@\s+$/ ) ),
 		};
 		setErrors( validation );
 

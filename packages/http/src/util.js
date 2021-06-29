@@ -6,14 +6,17 @@ import { join, keys, map, reduce, trimEnd } from 'lodash';
 /**
  * Converts an object into a URL query string.
  *
- * @param  {object} query A map of request query parameters.
+ * @param  {Object} query A map of request query parameters.
  * @return {string}        Query string.
  */
 export const queryString = ( query ) => {
-	const values = join( map(
-		query,
-		( value, key ) => `${ key }=${ encodeURIComponent( value ) }`
-	), '&' );
+	const values = join(
+		map(
+			query,
+			( value, key ) => `${ key }=${ encodeURIComponent( value ) }`
+		),
+		'&'
+	);
 
 	return trimEnd( `?${ values }`, '?' );
 };
@@ -22,7 +25,7 @@ export const queryString = ( query ) => {
  * Takes the headers from a Response object and parses them into a plain object.
  *
  * @param  {Response} response Response object.
- * @return {object}            Response headers.
+ * @return {Object}            Response headers.
  */
 export const extractHeaders = ( response ) => {
 	const headers = {};
@@ -36,12 +39,18 @@ export const extractHeaders = ( response ) => {
 	return headers;
 };
 
-export const objectToFormData = ( formData ) =>
+/**
+ * Transforms a JavaScript object into a FormData instance.
+ *
+ * @param  {Object}   data Data to be appended
+ * @return {FormData}      FormData object
+ */
+export const objectToFormData = ( data ) =>
 	reduce(
-		keys( formData ),
+		keys( data ),
 		( form, key ) => {
-			form.append( key, formData[key] );
+			form.append( key, data[ key ] );
 			return form;
 		},
-		new FormData()
+		new window.FormData()
 	);

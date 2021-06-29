@@ -21,5 +21,8 @@
   "dependencies": {
     "@automattic/color-studio": "^2.5.0",
     "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@emotion/core": "^10.1.1"
   }
 }

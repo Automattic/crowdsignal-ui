@@ -2,18 +2,14 @@
  * External dependencies
  */
 import { createInterpolateElement } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import {
-	Footer,
-	FooterLink,
-	Logo,
-	UpgradeTooltip,
-} from './styles.js';
+import { Footer, FooterLink, Logo, UpgradeTooltip } from './styles.js';
 
-const CrowdsignalFooterUpgradeLink = ( { source } ) => (
+export const CrowdsignalFooterUpgradeLink = ( { source } ) => (
 	<UpgradeTooltip>
 		{ createInterpolateElement(
 			__(
@@ -53,7 +49,8 @@ const CrowdsignalFooter = ( {
 		</FooterLink>
 
 		{ upgradeLink && (
-			<Tooltip text={ <UpgradeTooltip source={ source } /> } position="top center">
+			<>
+				<UpgradeTooltip source={ source } />
 				<a
 					href={ `https://crowdsignal.com/pricing?ref=${ source }` }
 					target="_blank"
@@ -61,19 +58,21 @@ const CrowdsignalFooter = ( {
 				>
 					{ __( 'Hide', 'components' ) }
 				</a>
-			</Tooltip>
+			</>
 		) }
 
-		<Logo
-			href={ `https://crowdsignal.com?ref=${ source }` }
-			target="_blank"
-			rel="noopener noreferrer"
-		>
-			<img
-				src="https://app.crowdsignal.com/images/svg/cs-logo-dots.svg"
-				alt="Crowdsignal"
-			/>
-		</Logo>
+		{ logo && (
+			<Logo
+				href={ `https://crowdsignal.com?ref=${ source }` }
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<img
+					src="https://app.crowdsignal.com/images/svg/cs-logo-dots.svg"
+					alt="Crowdsignal"
+				/>
+			</Logo>
+		) }
 	</Footer>
 );
 

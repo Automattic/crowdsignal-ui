@@ -1,6 +1,6 @@
 const path = require( 'path' );
-const package = require( './package.json' );
 const webpack = require( 'webpack' );
+const package = require( './package.json' );
 const getBaseConfig = require( '@automattic/calypso-build/webpack.config.js' );
 
 function getWebpackConfig( env, { entry, ...argv } ) {
@@ -20,19 +20,17 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 			},
 		},
 		plugins: [
-			...baseConfig.plugins.map(
-				( plugin ) => {
-					if ( plugin.constructor.name !== 'DefinePlugin' ) {
-						return plugin;
-					}
-
-					return new webpack.DefinePlugin( {
-						...plugin.definitions,
-						'process.env.COMPONENT_SYSTEM_PHASE': JSON.stringify( 1 )
-					} );
+			...baseConfig.plugins.map( ( plugin ) => {
+				if ( plugin.constructor.name !== 'DefinePlugin' ) {
+					return plugin;
 				}
-			),
-		]
+
+				return new webpack.DefinePlugin( {
+					...plugin.definitions,
+					'process.env.COMPONENT_SYSTEM_PHASE': JSON.stringify( 1 ),
+				} );
+			} ),
+		],
 	};
 }
 

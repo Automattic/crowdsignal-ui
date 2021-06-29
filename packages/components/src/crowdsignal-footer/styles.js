@@ -23,7 +23,7 @@ export const FooterLink = styled.div( ( { style } ) => {
 		text-transform: uppercase;
 		vertical-align: middle;
 
-		&:not(:hover) {
+		&:not( :hover ) {
 			color: ${ style.color || color( 'text' ) };
 			opacity: 0.4;
 		}

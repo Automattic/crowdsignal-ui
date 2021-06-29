@@ -1,13 +1,12 @@
 /**
  * External dependencies
  */
-import { Dropdown } from '@wordpress/components';
 import {
 	useCallback,
 	useEffect,
 	useLayoutEffect,
 	useRef,
-	useState
+	useState,
 } from '@wordpress/element';
 
 /**
@@ -17,8 +16,12 @@ import { Popover } from '@crowdsignal/components';
 import { fetchFeedbackSurvey } from '@crowdsignal/rest-api';
 import FeedbackPopover from './popover';
 import FeedbackToggle from './toggle';
-import { adjustFrameOffset, getPopoverPosition, getTogglePosition } from './util';
-import { ToggleMode } from './constants'
+import {
+	adjustFrameOffset,
+	getPopoverPosition,
+	getTogglePosition,
+} from './util';
+import { ToggleMode } from './constants';
 
 /**
  * Style dependencies
@@ -28,8 +31,7 @@ import { PopoverWrapper } from './styles/popover-styles';
 const settings = {
 	emailRequired: false,
 	position: 'center right',
-	style: {
-	},
+	style: {},
 	text: {
 		email: 'Your email (optional)',
 		feedback: 'Anything we can help you with?',
@@ -42,17 +44,15 @@ const settings = {
 	showBranding: false,
 };
 
-const FeedbackWidget = ( {
-	surveyId,
-} ) => {
+const FeedbackWidget = ( { surveyId } ) => {
 	const [ active, setActive ] = useState( false );
-	const [ survey, setSurvey ] = useState( null );
+	const [ _, setSurvey ] = useState( null );
 	const [ position, setPosition ] = useState( {} );
 
 	const toggle = useRef( null );
 
 	const updatePosition = useCallback( () => {
-		const [ y, x ] = settings.position.split( ' ' );
+		const [ y ] = settings.position.split( ' ' );
 
 		setPosition(
 			adjustFrameOffset(
@@ -72,7 +72,7 @@ const FeedbackWidget = ( {
 				),
 				y,
 				toggle.current.offsetWidth,
-				toggle.current.offsetHeight,
+				toggle.current.offsetHeight
 			)
 		);
 	}, [ toggle.current ] );
@@ -82,10 +82,8 @@ const FeedbackWidget = ( {
 	}, [ updatePosition ] );
 
 	useEffect( () => {
-		const fetchData = async () => {
-			const survey = await fetchFeedbackSurvey( surveyId );
-			console.log( survey );
-		};
+		const fetchData = async () =>
+			setSurvey( await fetchFeedbackSurvey( surveyId ) );
 
 		fetchData();
 	}, [] );

@@ -4,7 +4,12 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 
-const InputWrapper = styled.div( ( { error, warning } ) => {
+/**
+ * Internal dependencies
+ */
+import { color } from '@crowdsignal/styles';
+
+export const InputWrapper = styled.div( ( { error, warning } ) => {
 	let borderColor = color( 'border' );
 
 	if ( error ) {
@@ -30,11 +35,11 @@ const InputWrapper = styled.div( ( { error, warning } ) => {
 	`;
 } );
 
-const InputPrefix = styled.span`
+export const InputPrefix = styled.span`
 	color: ${ color( 'text-subtle' ) };
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
 	border: 0;
 	box-shadow: none;
 	box-sizing: border-box;

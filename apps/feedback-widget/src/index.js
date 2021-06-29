@@ -1,11 +1,7 @@
 /**
  * External dependencies
  */
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/core';
-
 import { render } from '@wordpress/element';
-import { isNumber } from 'lodash';
 
 /**
  * Internal dependencies

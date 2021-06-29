@@ -3,14 +3,10 @@
  */
 import { InputPrefix, InputWrapper, Input } from './styles';
 
-const FormTextInput = ( { className, compact, error, inputRef, prefix, style, warning, ...props } ) => {
+const FormTextInput = ( { className, inputRef, prefix, style, ...props } ) => {
 	return (
 		<InputWrapper className={ className } style={ style }>
-			{ prefix && (
-				<InputPrefix>
-					{ prefix }
-				</InputPrefix>
-			) }
+			{ prefix && <InputPrefix>{ prefix }</InputPrefix> }
 
 			<Input ref={ inputRef } type="text" { ...props } />
 		</InputWrapper>
