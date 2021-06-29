@@ -1,0 +1,25 @@
+{
+  "name": "@crowdsignal/block-editor",
+  "version": "0.1.0",
+  "description": "Crowdsignal Block Editor",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "author": "Automattic Inc.",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/block-editor/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "scripts": {
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "dependencies": {
+    "isolated-block-editor": "github:automattic/isolated-block-editor#1.2.2",
+    "lodash": "^4.17.21"
+  }
+}
