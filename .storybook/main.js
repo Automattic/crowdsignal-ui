@@ -1,4 +1,7 @@
-const stories = [ '../apps/**/stories/*.js', '../packages/**/stories/*.js' ];
+const stories = [
+	'../apps/*/!(node_modules)/**/stories/*.js',
+	'../packages/*/!(node_modules)/**/stories/*.js',
+];
 
 module.exports = {
 	stories,
