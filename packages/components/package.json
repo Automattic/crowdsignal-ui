@@ -2,23 +2,22 @@
   "name": "@crowdsignal/components",
   "version": "0.1.0",
   "description": "Crowdsignal frontend component library.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
   "keywords": [
     "crowdsignal"
   ],
-  "author": "Automattic Inc.",
   "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/components/README.md",
-  "license": "GPL-2.0-or-later",
-  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
   },
-  "scripts": {
-  },
   "bugs": {
     "url": "https://github.com/Automattic/crowdsignal-ui/issues"
   },
+  "main": "src/index.js",
   "dependencies": {
+    "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
     "@wordpress/element": "^3.1.1",
     "@wordpress/i18n": "^4.1.1",
