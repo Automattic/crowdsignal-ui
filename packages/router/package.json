@@ -1,0 +1,26 @@
+{
+  "name": "@crowdsignal/router",
+  "version": "0.1.0",
+  "description": "Simple frontend router for @wordpress/element.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal",
+    "router"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/router/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@wordpress/element": "^3.1.1",
+    "history": "^5.0.0",
+    "lodash": "^4.17.21",
+    "route-parser": "^0.0.5"
+  }
+}
