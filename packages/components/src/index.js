@@ -1,4 +1,9 @@
 export { default as Button } from './button';
 export { default as CrowdsignalFooter } from './crowdsignal-footer';
+export { default as CrowdsignalLogo } from './crowdsignal-logo';
+export { default as FormTextInput } from './form-text-input';
+export { default as PageHeader } from './page-header';
 export { default as Popover } from './popover';
+export { default as PopoverMenu } from './popover-menu';
 export { default as StyleProvider } from './style-provider';
+export { default as TabNavigation } from './tab-navigation';
