@@ -6,6 +6,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
+import { CrowdsignalLogo } from '@crowdsignal/components';
 import LoggedIn from './logged-in';
 import LoggedOut from './logged-out';
 
@@ -21,7 +22,9 @@ const Masterbar = ( { isAdmin, user } ) => {
 
 	return (
 		<header className={ classes }>
-			<a href="/" className="masterbar__logo-link"></a>
+			<a href="/" className="masterbar__logo-link">
+				<CrowdsignalLogo size={ 48 } />
+			</a>
 
 			{ user && <LoggedIn isAdmin={ isAdmin } user={ user } /> }
 			{ ! user && <LoggedOut /> }
