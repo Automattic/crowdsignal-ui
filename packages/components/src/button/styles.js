@@ -18,6 +18,7 @@ const baseButton = css`
 	border-width: 1px 1px 2px;
 	box-sizing: border-box;
 	cursor: pointer;
+	color: var( --color-text );
 	display: inline-flex;
 	font-size: 14px;
 	height: 32px;

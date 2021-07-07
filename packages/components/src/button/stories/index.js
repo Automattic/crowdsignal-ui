@@ -79,33 +79,33 @@ export const Primary = () => (
 	</>
 );
 
-export const Accent = () => (
+export const Secondary = () => (
 	<>
-		<Button accent large>
+		<Button secondary large>
 			Large
 		</Button>
-		<Button accent>Medium</Button>
-		<Button accent compact>
+		<Button secondary>Medium</Button>
+		<Button secondary compact>
 			Compact
 		</Button>
 
-		<Button accent disabled large>
+		<Button secondary disabled large>
 			Large
 		</Button>
-		<Button accent disabled>
+		<Button secondary disabled>
 			Medium
 		</Button>
-		<Button accent disabled compact>
+		<Button secondary disabled compact>
 			Compact
 		</Button>
 
-		<Button accent borderless large>
+		<Button secondary borderless large>
 			Large
 		</Button>
-		<Button accent borderless>
+		<Button secondary borderless>
 			Medium
 		</Button>
-		<Button accent borderless compact>
+		<Button secondary borderless compact>
 			Compact
 		</Button>
 	</>
