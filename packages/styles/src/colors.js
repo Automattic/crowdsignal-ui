@@ -2,7 +2,7 @@
  * External dependencies
  */
 import Palette from '@automattic/color-studio';
-import { includes, isObject, keys } from 'lodash';
+import { includes, isObject, join, keys, map } from 'lodash';
 
 /**
  * Internal dependencies
@@ -148,3 +148,20 @@ export const color = ( domain, value = 'default' ) => {
 
 	return defaultColorMap[ domain ][ value ];
 };
+
+const toCSS = ( colors, prefix = '' ) => {
+	if ( isObject( colors ) ) {
+		return join(
+			map( colors, ( value, key ) =>
+				toCSS( value, `${ prefix }-${ key }` )
+			),
+			''
+		);
+	}
+
+	const colorVarName = prefix.match( /^\-(.*?)(\-default)?$/i );
+
+	return `--color-${ colorVarName[ 1 ] }: ${ colors };`;
+};
+
+export const colorVars = () => toCSS( defaultColorMap );

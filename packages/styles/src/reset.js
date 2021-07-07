@@ -6,14 +6,25 @@ import { css } from '@emotion/core';
 /**
  * Internal dependencies
  */
-import { color } from './colors';
+import { colorVars } from './colors';
 
-export const reset = css`
-	:host {
-		color: ${ color( 'text' ) };
+export const resetStyles = ( { shadowRoot = false } ) => css`
+	${ shadowRoot ? ':host' : ':root' } {
+		${ colorVars() };
+
+		color: var( --color-text );
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 			Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 			'Segoe UI Symbol';
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		color: var( --color-text );
 	}
 
 	button,

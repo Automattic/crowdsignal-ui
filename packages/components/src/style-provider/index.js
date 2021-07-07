@@ -8,7 +8,7 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { reset as resetCSS } from '@crowdsignal/styles';
+import { resetStyles as resetStyles } from '@crowdsignal/styles';
 
 const StyleProvider = ( { container, children, namespace, reset } ) => {
 	const [ cache ] = useState(
@@ -20,7 +20,13 @@ const StyleProvider = ( { container, children, namespace, reset } ) => {
 
 	return (
 		<CacheProvider value={ cache }>
-			{ reset && <Global styles={ resetCSS } /> }
+			{ reset && (
+				<Global
+					styles={ resetStyles( {
+						shadowRoot: container instanceof window.ShadowRoot,
+					} ) }
+				/>
+			) }
 
 			{ children }
 		</CacheProvider>
