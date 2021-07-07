@@ -6,7 +6,7 @@ import { Global } from '@emotion/core';
 /**
  * Internal dependencies
  */
-import { StyleProvider } from '@crowdsignal/components';
+import StyleProvider from '../packages/components/src/style-provider';
 
 export const decorators = [
 	( Story ) => (
