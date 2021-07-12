@@ -1,0 +1,33 @@
+{
+  "name": "@crowdsignal/dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Crowdsignal dashboard.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "browser": true,
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/dashboard/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@crowdsignal/block-editor": "^0.1.0",
+    "@crowdsignal/components": "^0.1.0",
+    "@crowdsignal/router": "^0.1.0",
+    "@wordpress/element": "^3.1.1",
+    "@wordpress/i18n": "^4.1.1",
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "build": "calypso-build ./src/index.js"
+  }
+}

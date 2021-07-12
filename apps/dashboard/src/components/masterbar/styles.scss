@@ -1,0 +1,69 @@
+.masterbar {
+	align-items: center;
+	background: var(--color-secondary-90);
+	box-sizing: border-box;
+	display: flex;
+	height: 64px;
+	justify-content: center;
+	padding: 0;
+	position: relative;
+	width: 100%;
+
+	&.is-admin {
+		background: linear-gradient(135deg, var(--color-secondary-90) 10%, var(--color-highlight) 100%);
+	}
+}
+
+.masterbar__navigation {
+	flex: 1;
+}
+
+.masterbar__logo-link {
+	display: block;
+	margin: 0 32px;
+}
+
+.masterbar__navigation-list {
+	display: flex;
+	justify-content: flex-start;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.masterbar__navigation-button {
+	align-items: center;
+	background: none;
+	border: 0;
+	color: var(--color-text-inverted);
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 14px;
+	font-weight: bold;
+	height: 64px;
+	line-height: 64px;
+	outline: 0;
+	padding: 0 32px;
+	text-decoration: none;
+}
+
+.masterbar__navigation-button.is-user-toggle {
+	& .icon {
+		display: inline-flex;
+		margin: 0 0 0 10px;
+		transform: rotate(0);
+		transition: transform .15s cubic-bezier(.175,.885,.32,1.275);
+
+		.masterbar.with-user-menu & {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.masterbar__user-menu .popover-menu {
+	min-width: 180px;
+}
+
+.masterbar__login-popover {
+
+}
