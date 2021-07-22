@@ -10,7 +10,6 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 		...baseConfig,
 		output: {
 			...baseConfig.output,
-			filename: `dashboard-${ package.version }.js`,
 		},
 		externals: {
 			react: 'React',
@@ -34,6 +33,24 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 				} );
 			} ),
 		],
+		resolve: {
+			...baseConfig.resolve,
+			modules: [
+				...baseConfig.resolve.modules,
+				path.resolve( __dirname, 'src/' ),
+			],
+		},
+		devServer: {
+			contentBase: [
+				path.join(__dirname, 'dist'),
+				path.join(__dirname, 'public'),
+			],
+			compress: true,
+			host: 'crowdsignal.localhost',
+			https: true,
+			port: 9000,
+			historyApiFallback: true,
+		},
 	};
 }
 
