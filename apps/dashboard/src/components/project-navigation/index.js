@@ -18,20 +18,20 @@ const Tab = {
 	RESULTS: 'results',
 };
 
-const PollNavigation = ( { activeTab, pollId } ) => (
-	<div className="poll-navigation">
+const ProjectNavigation = ( { activeTab, projectId } ) => (
+	<div className="project-navigation">
 		<PageHeader>My Great New Poll</PageHeader>
 
 		<TabNavigation>
 			<TabNavigation.Tab
 				isSelected={ activeTab === Tab.EDITOR }
-				href={ `/edit/poll/${ pollId }` }
+				href={ `/edit/poll/${ projectId }` }
 			>
 				{ __( 'Edior', 'dashboard' ) }
 			</TabNavigation.Tab>
 			<TabNavigation.Tab
 				isSelected={ activeTab === Tab.RESULTS }
-				href={ `/edit/poll/${ pollId }/results` }
+				href={ `/edit/poll/${ projectId }/results` }
 			>
 				{ __( 'Results', 'dashboard' ) }
 			</TabNavigation.Tab>
@@ -39,6 +39,6 @@ const PollNavigation = ( { activeTab, pollId } ) => (
 	</div>
 );
 
-PollNavigation.Tab = Tab;
+ProjectNavigation.Tab = Tab;
 
-export default PollNavigation;
+export default ProjectNavigation;
