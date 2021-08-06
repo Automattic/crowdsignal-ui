@@ -31,5 +31,12 @@
 		"@wordpress/no-unused-vars-before-return": [
 			"off"
 		],
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"paths": ["apps/dashboard/src"]
+			}
+		}
 	}
 }
