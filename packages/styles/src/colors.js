@@ -12,6 +12,7 @@ import { hexToRGBA } from './util';
 const defaultColorMap = {
 	neutral: {
 		0: Palette.colors[ 'Gray 0' ],
+		5: Palette.colors[ 'Gray 5' ],
 		10: Palette.colors[ 'Gray 10' ],
 		20: Palette.colors[ 'Gray 20' ],
 		30: Palette.colors[ 'Gray 30' ],
@@ -28,6 +29,7 @@ const defaultColorMap = {
 	},
 	success: {
 		0: Palette.colors[ 'Green 0' ],
+		5: Palette.colors[ 'Green 5' ],
 		10: Palette.colors[ 'Green 10' ],
 		20: Palette.colors[ 'Green 20' ],
 		30: Palette.colors[ 'Green 30' ],
@@ -44,6 +46,7 @@ const defaultColorMap = {
 	},
 	warning: {
 		0: Palette.colors[ 'Yellow 0' ],
+		5: Palette.colors[ 'Yellow 5' ],
 		10: Palette.colors[ 'Yellow 10' ],
 		20: Palette.colors[ 'Yellow 20' ],
 		30: Palette.colors[ 'Yellow 30' ],
@@ -60,6 +63,7 @@ const defaultColorMap = {
 	},
 	error: {
 		0: Palette.colors[ 'Red 0' ],
+		5: Palette.colors[ 'Red 5' ],
 		10: Palette.colors[ 'Red 10' ],
 		20: Palette.colors[ 'Red 20' ],
 		30: Palette.colors[ 'Red 30' ],
@@ -76,6 +80,7 @@ const defaultColorMap = {
 	},
 	primary: {
 		0: Palette.colors[ 'Pink 0' ],
+		5: Palette.colors[ 'Pink 5' ],
 		10: Palette.colors[ 'Pink 10' ],
 		20: Palette.colors[ 'Pink 20' ],
 		30: Palette.colors[ 'Pink 30' ],
@@ -92,6 +97,7 @@ const defaultColorMap = {
 	},
 	secondary: {
 		0: Palette.colors[ 'WordPress Blue 0' ],
+		5: Palette.colors[ 'WordPress Blue 5' ],
 		10: Palette.colors[ 'WordPress Blue 10' ],
 		20: Palette.colors[ 'WordPress Blue 20' ],
 		30: Palette.colors[ 'WordPress Blue 30' ],
