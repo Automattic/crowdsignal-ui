@@ -1,0 +1,60 @@
+@keyframes crowdsignal_editor_pulse {
+	0% { opacity: 0.5 }
+	50% { opacity: 0.2 }
+	100% { opacity: 0.5 }
+}
+
+.editor__loading-placeholder {
+	width: 100%;
+}
+
+.editor__loading-placeholder-navigation {
+	border: 1px solid var( --color-border );
+	box-sizing: border-box;
+	display: flex;
+	height: 65px;
+	padding: 15px 32px;
+
+	&::before {
+		animation-iteration-count: infinite;
+		animation-duration: 1s;
+		animation-name: crowdsignal_editor_pulse;
+		background: var( --color-neutral-5 );
+		border-radius: 17px;
+		content: "";
+		display: block;
+		height: 34px;
+		width: 300px;
+	}
+}
+
+.editor__loading-placeholder-content {
+	display: flex;
+	flex-direction: column;
+	padding: 15px 32px;
+
+	&::before {
+		animation-iteration-count: infinite;
+		animation-duration: 1s;
+		animation-name: crowdsignal_editor_pulse;
+		background: var( --color-neutral-5 );
+		border-radius: 12px;
+		content: "";
+		display: block;
+		height: 24px;
+		margin-bottom: 15px;
+		width: 550px;
+	}
+
+	&::after {
+		animation-iteration-count: infinite;
+		animation-duration: 1s;
+		animation-name: crowdsignal_editor_pulse;
+		background: var( --color-neutral-5 );
+		border-radius: 12px;
+		content: "";
+		display: block;
+		height: 24px;
+		width: 200px;
+	}
+}
