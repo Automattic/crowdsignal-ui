@@ -27,7 +27,11 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.21"
   },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
+  },
   "scripts": {
-    "build": "calypso-build ./src/index.js"
+    "build": "calypso-build ./src/index.js",
+    "start": "webpack serve"
   }
 }
