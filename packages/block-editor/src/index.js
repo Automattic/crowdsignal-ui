@@ -6,11 +6,11 @@ import { noop } from 'lodash';
 
 const settings = {};
 
-export const BlockEditor = () => {
+export const BlockEditor = ( { onSave } ) => {
 	return (
 		<IsolatedBlockEditor
 			settings={ settings }
-			onSaveContent={ noop }
+			onSaveContent={ onSave }
 			onLoad={ ( parse ) => parse( '' ) }
 			onError={ noop }
 		/>
