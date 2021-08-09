@@ -19,7 +19,7 @@ const App = () => {
 				<main className="app__content">
 					<Switch>
 						<Route
-							path="/edit/poll/:projectId"
+							path="/edit/poll(/:projectId)"
 							component={ Editor }
 						/>
 						<Route
