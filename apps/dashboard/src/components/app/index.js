@@ -3,8 +3,8 @@
  */
 import { Route, Router, Switch } from '@crowdsignal/router';
 import Masterbar from '../masterbar';
-import PollEditor from '../poll-editor';
-import PollResults from '../poll-results';
+import Editor from '../editor';
+import Results from '../results';
 
 const allowedRoutes = /^\/(edit)\/.*/i;
 
@@ -19,12 +19,12 @@ const App = () => {
 				<main className="app__content">
 					<Switch>
 						<Route
-							path="/edit/poll/:pollId"
-							component={ PollEditor }
+							path="/edit/poll(/:projectId)"
+							component={ Editor }
 						/>
 						<Route
-							path="/edit/poll/:pollId/results"
-							component={ PollResults }
+							path="/edit/poll/:projectId/results"
+							component={ Results }
 						/>
 
 						<Route path="*any" component={ NotFound } />
