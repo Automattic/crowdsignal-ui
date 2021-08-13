@@ -10,6 +10,6 @@ export default {
 			return createProject( project );
 		}
 
-		return updateProject( projectId );
+		return updateProject( projectId, project );
 	},
 };
