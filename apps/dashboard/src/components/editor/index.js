@@ -43,11 +43,11 @@ const Editor = ( { projectId } ) => {
 		}
 	}, [] );
 
-	const handleSaveContent = useCallback(
-		debounce( ( content ) => {
+	const handleSaveBlocks = useCallback(
+		debounce( ( blocks ) => {
 			try {
 				saveAndUpdateProject( projectId, {
-					content,
+					blocks,
 				} );
 			} catch ( error ) {
 				// console.error( error );
@@ -68,7 +68,7 @@ const Editor = ( { projectId } ) => {
 				projectId={ projectId }
 			/>
 
-			<BlockEditor onSave={ handleSaveContent } />
+			<BlockEditor onSave={ handleSaveBlocks } />
 		</div>
 	);
 };
