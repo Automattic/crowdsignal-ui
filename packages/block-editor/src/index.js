@@ -10,7 +10,7 @@ export const BlockEditor = ( { onSave } ) => {
 	return (
 		<IsolatedBlockEditor
 			settings={ settings }
-			onSaveContent={ onSave }
+			onSaveBlocks={ onSave }
 			onLoad={ ( parse ) => parse( '' ) }
 			onError={ noop }
 		/>
