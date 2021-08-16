@@ -20,6 +20,8 @@ import uiResolvers from './ui/resolvers';
 import * as uiSelectors from './ui/selectors';
 import * as userActions from './users/actions';
 import * as userSelectors from './users/selectors';
+import * as uiControls from './ui/controls';
+
 import reducer from './reducer';
 
 export const STORE_NAME = 'crowdsignal/dashboard';
@@ -36,6 +38,7 @@ export const store = createReduxStore( STORE_NAME, {
 		...controls,
 		...pollControls,
 		...projectControls,
+		...uiControls,
 	},
 	selectors: {
 		...accountSelectors,

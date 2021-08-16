@@ -11,6 +11,8 @@ import {
 	CURRENT_USER_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
+	FETCH_ONGOING,
+	FETCH_IDLE,
 } from '../action-types';
 
 const currentUserId = ( state = 0, action ) => {
@@ -41,7 +43,20 @@ const notices = ( state = {}, action ) => {
 	return state;
 };
 
+const isFetching = ( state = false, action ) => {
+	if ( action.type === FETCH_ONGOING ) {
+		return true;
+	}
+
+	if ( action.type === FETCH_IDLE ) {
+		return false;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	currentUserId,
 	notices,
+	isFetching,
 } );

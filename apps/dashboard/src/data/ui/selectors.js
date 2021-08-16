@@ -13,3 +13,6 @@ export const getCurrentUserId = ( state ) =>
 
 export const getCurrentUser = ( state ) =>
 	getUser( state, getCurrentUserId( state ) );
+
+export const isFetching = ( state ) =>
+	get( state, [ 'ui', 'isFetching' ], false );

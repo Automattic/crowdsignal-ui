@@ -11,6 +11,8 @@ import {
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
 	ROUTE_UPDATE,
+	FETCH_ONGOING,
+	FETCH_IDLE,
 } from '../action-types';
 
 export function removeNotice( noticeId ) {
@@ -63,3 +65,15 @@ export const updateCurrentUser = ( userId ) => ( {
 	type: CURRENT_USER_UPDATE,
 	userId,
 } );
+
+export function fetchOngoing() {
+	return {
+		type: FETCH_ONGOING,
+	};
+}
+
+export function fetchIdle() {
+	return {
+		type: FETCH_IDLE,
+	};
+}
