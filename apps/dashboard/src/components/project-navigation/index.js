@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { PageHeader, TabNavigation } from '@crowdsignal/components';
+import ProjectTools from '../project-tools';
 
 /**
  * Style dependencies
@@ -21,7 +22,6 @@ const Tab = {
 const ProjectNavigation = ( { activeTab, projectId } ) => (
 	<div className="project-navigation">
 		<PageHeader>My Great New Poll</PageHeader>
-
 		<TabNavigation>
 			<TabNavigation.Tab
 				isSelected={ activeTab === Tab.EDITOR }
@@ -36,6 +36,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => (
 				{ __( 'Results', 'dashboard' ) }
 			</TabNavigation.Tab>
 		</TabNavigation>
+		<ProjectTools />
 	</div>
 );
 
