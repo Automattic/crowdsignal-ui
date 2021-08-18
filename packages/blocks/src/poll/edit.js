@@ -12,6 +12,11 @@ import { includes, round } from 'lodash';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 
+/**
+ * Style dependencies
+ */
+import { PollWrapper } from './styles/poll';
+
 const ALLOWED_BLOCKS = [ 'crowdsignal-forms/poll-answer', 'core/paragraph' ];
 
 const PollBlock = ( props ) => {
@@ -54,7 +59,7 @@ const PollBlock = ( props ) => {
 				showHandle={ isResizable }
 				resizeRatio={ 2 }
 			>
-				<div>
+				<PollWrapper>
 					<RichText
 						tagName="h3"
 						placeholder={ __( 'Enter your question', 'blocks' ) }
@@ -63,14 +68,16 @@ const PollBlock = ( props ) => {
 
 					<InnerBlocks
 						template={ [
-							[ 'core/paragraph', { content: 'Hello' } ],
+							[ 'crowdsignal-forms/poll-answer', {} ],
+							[ 'crowdsignal-forms/poll-answer', {} ],
+							[ 'crowdsignal-forms/poll-answer', {} ],
 						] }
 						templateLock={ false }
 						allowedBlocks={ ALLOWED_BLOCKS }
 						orientation="vertical"
 						__experimentalMoverDirection="vertical"
 					/>
-				</div>
+				</PollWrapper>
 			</ResizableBox>
 		</>
 	);

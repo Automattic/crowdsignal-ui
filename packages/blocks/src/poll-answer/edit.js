@@ -2,8 +2,8 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
+import { createBlock } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -14,10 +14,13 @@ import { useClientId } from '@crowdsignal/hooks';
  * Style dependencies
  */
 
-const PollAnswer = ( { attributes, setAttributes } ) => {
+const PollAnswer = ( { attributes, onReplace, setAttributes } ) => {
 	useClientId( { attributes, setAttributes } );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
+
+	const handleSplit = ( label ) =>
+		createBlock( 'crowdsignal-forms/poll-answer', { label } );
 
 	return (
 		<div>
@@ -26,9 +29,8 @@ const PollAnswer = ( { attributes, setAttributes } ) => {
 				multiline={ false }
 				preserveWhiteSpace={ false }
 				onChange={ handleChangeLabel }
-				onSplit={ noop }
-				onReplace={ noop }
-				onRemove={ noop }
+				onReplace={ onReplace }
+				onSplit={ handleSplit }
 				value={ attributes.label }
 				allowedFormats={ [] }
 				withoutInteractiveFormatting
