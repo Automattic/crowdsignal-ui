@@ -12,6 +12,7 @@ import { debounce } from 'lodash';
 import { BlockEditor } from '@crowdsignal/block-editor';
 import ProjectNavigation from 'components/project-navigation';
 import { STORE_NAME } from 'data';
+import { registerBlocks } from './blocks';
 import EditorLoadingPlaceholder from './loading-placeholder';
 
 /**
@@ -72,5 +73,7 @@ const Editor = ( { projectId } ) => {
 		</div>
 	);
 };
+
+registerBlocks();
 
 export default Editor;
