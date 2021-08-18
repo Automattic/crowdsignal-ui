@@ -8,18 +8,18 @@ import { __ } from '@wordpress/i18n';
  */
 import { Button } from '@crowdsignal/components';
 import { STORE_NAME } from 'data';
-import { useDispatch, withSelect } from '@wordpress/data';
+import { useDispatch } from '@wordpress/data';
 /**
  * Style dependencies
  */
 import './style.scss';
 
-const ProjectTools = ( { projectId, isFetching } ) => {
+const ProjectTools = ( { projectId, isSaving } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const syncProject = () => {
 		saveAndUpdateProject( projectId, {
-			title: 'this is here to create a the mock project',
+			title: 'Drafted!',
 		} );
 	};
 
@@ -32,18 +32,14 @@ const ProjectTools = ( { projectId, isFetching } ) => {
 
 	return (
 		<div className="project-tools">
-			<Button onClick={ syncProject } disabled={ isFetching }>
+			<Button onClick={ syncProject } disabled={ isSaving }>
 				{ __( 'Save draft', 'dashboard' ) }
 			</Button>
-			<Button primary onClick={ publishProject } disabled={ isFetching }>
+			<Button primary onClick={ publishProject } disabled={ isSaving }>
 				{ __( 'Publish', 'dashboard' ) }
 			</Button>
 		</div>
 	);
 };
 
-export default withSelect( ( select ) => {
-	return {
-		isFetching: select( STORE_NAME ).isFetching(),
-	};
-} )( ProjectTools );
+export default ProjectTools;

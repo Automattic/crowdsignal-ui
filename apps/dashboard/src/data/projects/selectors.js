@@ -8,3 +8,6 @@ export const getLastUpdatedProjectId = ( state ) =>
 
 export const getProject = ( state, projectId ) =>
 	get( state, [ 'projects', 'items', projectId ], null );
+
+export const isSaving = ( state ) =>
+	get( state, [ 'projects', 'isSaving' ], false );

@@ -1,11 +1,16 @@
 /**
  * Internal dependencies
  */
-
-import { PROJECT_SAVE, PROJECT_UPDATE } from '../action-types';
-import { fetchOngoing, fetchIdle, redirect } from 'data/ui/actions';
+import {
+	PROJECT_SAVE,
+	PROJECT_UPDATE,
+	PROJECT_SAVE_SUCCESS,
+	PROJECT_SAVE_ERROR,
+} from '../action-types';
 
 export function saveProject( projectId, project ) {
+	// eslint-disable-next-line
+	console.log( 'action', PROJECT_SAVE );
 	return {
 		type: PROJECT_SAVE,
 		projectId,
@@ -21,9 +26,21 @@ export function updateProject( projectId, project ) {
 	};
 }
 
+export function saveSuccessProject( projectId ) {
+	return {
+		type: PROJECT_SAVE_SUCCESS,
+		projectId,
+	};
+}
+
+export function saveErrorProject() {
+	return {
+		type: PROJECT_SAVE_ERROR,
+	};
+}
+
 export function* saveAndUpdateProject( projectId, project ) {
 	try {
-		yield fetchOngoing();
 		const response = yield saveProject( projectId, project );
 		const id = projectId || response.data.id;
 
@@ -31,14 +48,9 @@ export function* saveAndUpdateProject( projectId, project ) {
 			...project,
 			id,
 		} );
-
-		if ( ! projectId ) {
-			// this should only happen when creating a new project
-			yield redirect( `/${ id }` );
-		}
-
-		return fetchIdle();
+		return saveSuccessProject( id );
 	} catch ( error ) {
+		saveErrorProject( projectId );
 		// Save failed
 		throw error;
 	}
