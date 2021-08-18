@@ -14,6 +14,8 @@ import {
 } from '../action-types';
 
 const items = ( state = {}, action ) => {
+	// eslint-disable-next-line
+	console.log( 'reducer:items', action.type );
 	if ( action.type === PROJECT_UPDATE ) {
 		return {
 			...state,
@@ -34,7 +36,7 @@ const lastUpdatedItemId = ( state = 0, action ) => {
 
 const isSaving = ( state = false, action ) => {
 	// eslint-disable-next-line
-	console.log( 'reducer', action.type );
+	console.log( 'reducer:isSaving', action.type );
 	if ( action.type === PROJECT_SAVE ) {
 		return true;
 	}

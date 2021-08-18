@@ -7,10 +7,11 @@ import {
 	PROJECT_SAVE_SUCCESS,
 	PROJECT_SAVE_ERROR,
 } from '../action-types';
+// import { save } from './controls';
 
 export function saveProject( projectId, project ) {
 	// eslint-disable-next-line
-	console.log( 'action', PROJECT_SAVE );
+	console.log( 'project:action', PROJECT_SAVE );
 	return {
 		type: PROJECT_SAVE,
 		projectId,
@@ -33,15 +34,19 @@ export function saveSuccessProject( projectId ) {
 	};
 }
 
-export function saveErrorProject() {
+export function saveErrorProject( message ) {
 	return {
 		type: PROJECT_SAVE_ERROR,
+		message,
 	};
 }
 
 export function* saveAndUpdateProject( projectId, project ) {
+	// eslint-disable-next-line
+	console.log( 'saveAndUpdateProject', projectId );
 	try {
 		const response = yield saveProject( projectId, project );
+		// const response = yield save( projectId, project );
 		const id = projectId || response.data.id;
 
 		yield updateProject( id, {
@@ -50,7 +55,7 @@ export function* saveAndUpdateProject( projectId, project ) {
 		} );
 		return saveSuccessProject( id );
 	} catch ( error ) {
-		saveErrorProject( projectId );
+		saveErrorProject( error.message );
 		// Save failed
 		throw error;
 	}
