@@ -14,7 +14,14 @@ import Toolbar from './toolbar';
  */
 import './style.scss';
 
-const settings = {};
+const settings = {
+	iso: {
+		toolbar: {
+			inspector: true,
+			toc: true,
+		},
+	},
+};
 
 export const BlockEditor = ( { onSave } ) => {
 	return (
