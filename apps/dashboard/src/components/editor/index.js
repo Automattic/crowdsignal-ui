@@ -13,6 +13,7 @@ import { BlockEditor } from '@crowdsignal/block-editor';
 import ProjectNavigation from '../project-navigation';
 import { registerBlocks } from './blocks';
 // import { STORE_NAME } from 'data';
+import { registerBlocks } from './blocks';
 // import EditorLoadingPlaceholder from './loading-placeholder';
 
 /**
