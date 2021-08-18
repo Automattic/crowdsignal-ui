@@ -10,8 +10,6 @@ import {
 import { save } from './controls';
 
 export function saveProject( projectId, project ) {
-	// eslint-disable-next-line
-	console.log( 'project:action', PROJECT_SAVE );
 	return {
 		type: PROJECT_SAVE,
 		projectId,
@@ -42,13 +40,9 @@ export function saveErrorProject( message ) {
 }
 
 export function* saveAndUpdateProject( projectId, project ) {
-	// eslint-disable-next-line
-	console.log( 'saveAndUpdateProject', projectId );
 	try {
 		const response = yield save( projectId, project );
 		// const response = yield saveProject( projectId, project );
-		// eslint-disable-next-line
-		console.log( response );
 		const id = projectId || response.data.id;
 
 		yield updateProject( id, {
