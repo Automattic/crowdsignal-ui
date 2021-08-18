@@ -22,7 +22,7 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, projectId } ) => {
-	const isSaving = useSelect( STORE_NAME ).isSaving();
+	const isSaving = useSelect( ( select ) => select( STORE_NAME ).isSaving() );
 	return (
 		<div className="project-navigation">
 			<PageHeader>My Great New Poll</PageHeader>
