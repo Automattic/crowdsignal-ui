@@ -55,6 +55,8 @@ export const infoNotice = ( message, { id, ...options } ) =>
 	createNotice( id || uniqueId(), 'info', message, options );
 
 export function redirect( path ) {
+	// eslint-disable-next-line
+	console.log( 'redirect', path );
 	return {
 		type: ROUTE_UPDATE,
 		path,

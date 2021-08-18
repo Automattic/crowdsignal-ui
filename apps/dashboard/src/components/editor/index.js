@@ -1,18 +1,17 @@
 /**
  * External dependencies
  */
-// import { useCallback, useEffect } from '@wordpress/element';
-// import { useDispatch, select } from '@wordpress/data';
+import { useCallback } from '@wordpress/element';
+import { useDispatch, select } from '@wordpress/data';
 // import { __ } from '@wordpress/i18n';
-// import { debounce } from 'lodash';
+import { debounce } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { BlockEditor } from '@crowdsignal/block-editor';
-import ProjectNavigation from '../project-navigation';
-import { registerBlocks } from './blocks';
-// import { STORE_NAME } from 'data';
+import ProjectNavigation from 'components/project-navigation';
+import { STORE_NAME } from 'data';
 import { registerBlocks } from './blocks';
 // import EditorLoadingPlaceholder from './loading-placeholder';
 
@@ -22,7 +21,9 @@ import { registerBlocks } from './blocks';
 import './style.scss';
 
 const Editor = ( { projectId } ) => {
-	// const { redirect, saveAndUpdateProject } = useDispatch( STORE_NAME );
+	const { redirect, saveAndUpdateProject, saveProject } = useDispatch(
+		STORE_NAME
+	);
 
 	// useEffect( () => {
 	// 	if ( projectId ) {
@@ -45,20 +46,24 @@ const Editor = ( { projectId } ) => {
 	// 	}
 	// }, [] );
 
-	// const handleSaveBlocks = useCallback(
-	// 	debounce( ( blocks ) => {
-	// 		try {
-	// 			saveAndUpdateProject( projectId, {
-	// 				blocks,
-	// 			} );
-	// 		} catch ( error ) {
-	// 			// console.error( error );
-	// 			// console.error( 'Failed to save project content.' );
-	// 		}
-	// 	}, 1000 ),
-	// 	[ projectId, saveAndUpdateProject ]
-	// );
-	const handleSaveBlocks = () => {};
+	const handleSaveBlocks = useCallback(
+		debounce( ( blocks ) => {
+			try {
+				saveProject( projectId, { blocks } );
+				saveAndUpdateProject( projectId, {
+					blocks,
+				} );
+
+				const id = select( STORE_NAME ).getLastUpdatedProjectId();
+
+				redirect( `/edit/poll/${ id }` );
+			} catch ( error ) {
+				// console.error( error );
+				// console.error( 'Failed to save project content.' );
+			}
+		}, 1000 ),
+		[ projectId, saveAndUpdateProject ]
+	);
 
 	// if ( ! projectId ) {
 	// 	return <EditorLoadingPlaceholder />;
