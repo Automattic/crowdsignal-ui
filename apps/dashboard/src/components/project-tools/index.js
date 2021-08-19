@@ -15,18 +15,16 @@ import { useDispatch } from '@wordpress/data';
 import './style.scss';
 
 const ProjectTools = ( { projectId, isSaving } ) => {
-	const { saveAndUpdateProject, saveProject } = useDispatch( STORE_NAME );
+	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const syncProject = () => {
 		const payload = { title: 'Drafted!' };
-		saveProject( projectId, payload );
-		return saveAndUpdateProject( projectId, payload );
+		saveAndUpdateProject( projectId, payload );
 	};
 
 	const publishProject = () => {
-		const payload = { title: 'Published!' };
-		saveProject( projectId, payload );
-		return saveAndUpdateProject( projectId, payload );
+		const payload = { title: 'Published!', publish: true };
+		saveAndUpdateProject( projectId, payload );
 	};
 
 	return (
