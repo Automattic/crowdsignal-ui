@@ -26,7 +26,7 @@ import reducer from './reducer';
 
 export const STORE_NAME = 'crowdsignal/dashboard';
 
-export const store = createReduxStore( STORE_NAME, {
+const storeConfig = {
 	actions: {
 		...accountActions,
 		...pollActions,
@@ -51,6 +51,7 @@ export const store = createReduxStore( STORE_NAME, {
 	resolvers: {
 		...uiResolvers,
 	},
-} );
+};
 
+export const store = createReduxStore( STORE_NAME, storeConfig );
 register( store );
