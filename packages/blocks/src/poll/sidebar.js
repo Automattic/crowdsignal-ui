@@ -15,7 +15,6 @@ import {
 	ContrastChecker,
 	InspectorControls,
 	URLInput,
-	useSetting,
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalPanelColorGradientSettings as PanelColorGradientSettings,
 } from '@wordpress/block-editor';
@@ -32,8 +31,6 @@ import {
 } from './constants';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
-	const gradients = useSetting( 'color.gradients' ) || [];
-
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
 			[ key ]: value,
@@ -165,9 +162,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			</PanelBody>
 
 			<PanelColorGradientSettings
-				title={ __( 'Style', 'blocks' ) }
-				initialOpen={ false }
-				gradients={ [] }
+				title={ __( 'Color', 'blocks' ) }
 				disableCustomGradients={ false }
 				settings={ [
 					{
@@ -183,12 +178,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 							'backgroundColor'
 						),
 						onGradientChange: handleChangeAttribute( 'gradient' ),
-						gradients,
-					},
-					{
-						label: __( 'Border color', 'blocks' ),
-						colorValue: attributes.borderColor,
-						onColorChange: handleChangeAttribute( 'borderColor' ),
 					},
 				] }
 			>
@@ -196,7 +185,39 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					backgroundColor={ attributes.backgroundColor }
 					textColor={ attributes.textColor }
 				/>
+			</PanelColorGradientSettings>
 
+			<PanelColorGradientSettings
+				title={ __( 'Border', 'blocks' ) }
+				settings={ [
+					{
+						label: __( 'Border color', 'blocks ' ),
+						colorValue: attributes.borderColor,
+						onColorChange: handleChangeAttribute( 'borderColor' ),
+					},
+				] }
+			>
+				<TextControl
+					label={ __( 'Border thickness', 'blocks' ) }
+					type="number"
+					value={ attributes.borderWidth }
+					onChange={ handleChangeAttribute( 'borderWidth' ) }
+				/>
+				<TextControl
+					label={ __( 'Corner radius', 'blocks' ) }
+					type="number"
+					value={ attributes.borderRadius }
+					onChange={ handleChangeAttribute( 'borderRadius' ) }
+				/>
+
+				<ToggleControl
+					label={ __( 'Drop shadow', 'blocks' ) }
+					checked={ attributes.boxShadow }
+					onChange={ handleChangeAttribute( 'boxShadow' ) }
+				/>
+			</PanelColorGradientSettings>
+
+			<PanelBody title={ __( 'Typography', 'blocks' ) }>
 				<SelectControl
 					label={ __( 'Choose font', 'blocks' ) }
 					value={ attributes.fontFamily }
@@ -312,40 +333,21 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 						},
 					] }
 				/>
+			</PanelBody>
 
-				{ attributes.align !== 'full' && (
-					<>
-						<TextControl
-							type="number"
-							label={ __( 'Width (%)', 'blocks' ) }
-							value={ attributes.width }
-							onChange={ handleChangeAttribute( 'width' ) }
-						/>
-						<Button isSmall onClick={ handleResetWidth }>
-							{ __( 'Reset', 'blocks' ) }
-						</Button>
-					</>
-				) }
-
-				<TextControl
-					label={ __( 'Border thickness', 'blocks' ) }
-					type="number"
-					value={ attributes.borderWidth }
-					onChange={ handleChangeAttribute( 'borderWidth' ) }
-				/>
-				<TextControl
-					label={ __( 'Corner radius', 'blocks' ) }
-					type="number"
-					value={ attributes.borderRadius }
-					onChange={ handleChangeAttribute( 'borderRadius' ) }
-				/>
-
-				<ToggleControl
-					label={ __( 'Drop shadow', 'blocks' ) }
-					checked={ attributes.boxShadow }
-					onChange={ handleChangeAttribute( 'boxShadow' ) }
-				/>
-			</PanelColorGradientSettings>
+			{ attributes.align !== 'full' && (
+				<PanelBody title={ __( 'Width settings', 'blocks' ) }>
+					<TextControl
+						type="number"
+						label={ __( 'Width (%)', 'blocks' ) }
+						value={ attributes.width }
+						onChange={ handleChangeAttribute( 'width' ) }
+					/>
+					<Button isSmall onClick={ handleResetWidth }>
+						{ __( 'Reset', 'blocks' ) }
+					</Button>
+				</PanelBody>
+			) }
 
 			<PanelBody
 				title={ __( 'Answer settings', 'blocks' ) }

@@ -22,6 +22,10 @@ export default {
 		type: 'number',
 		default: 0,
 	},
+	boxShadow: {
+		type: 'boolean',
+		default: false,
+	},
 	borderWidth: {
 		type: 'number',
 		default: 2,
