@@ -14,6 +14,7 @@ import {
 	FETCH_ONGOING,
 	FETCH_IDLE,
 } from '../action-types';
+import { redirect as routeRedirect } from '@crowdsignal/router';
 
 export function removeNotice( noticeId ) {
 	return {
@@ -55,8 +56,7 @@ export const infoNotice = ( message, { id, ...options } ) =>
 	createNotice( id || uniqueId(), 'info', message, options );
 
 export function redirect( path ) {
-	// eslint-disable-next-line
-	console.log( 'redirect', path );
+	routeRedirect( path ); // the infamy!!!
 	return {
 		type: ROUTE_UPDATE,
 		path,
