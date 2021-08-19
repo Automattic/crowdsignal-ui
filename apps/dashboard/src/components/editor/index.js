@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useCallback } from '@wordpress/element';
-import { useDispatch, select } from '@wordpress/data';
+import { useDispatch } from '@wordpress/data';
 // import { __ } from '@wordpress/i18n';
 import { debounce } from 'lodash';
 
@@ -21,9 +21,7 @@ import { registerBlocks } from './blocks';
 import './style.scss';
 
 const Editor = ( { projectId } ) => {
-	const { redirect, saveAndUpdateProject, saveProject } = useDispatch(
-		STORE_NAME
-	);
+	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	// useEffect( () => {
 	// 	if ( projectId ) {
@@ -37,7 +35,7 @@ const Editor = ( { projectId } ) => {
 	//
 	// 		const id = select( STORE_NAME ).getLastUpdatedProjectId();
 	//
-	// 		redirect( `/edit/poll${ id }` );
+	// 		redirect( `/edit/poll/${ id }` );
 	// 	} catch ( error ) {
 	// 		// Creating a new project failed, return to the main dashboard screen and display an error.
 	// 		// redirect() doesn't work as it's not part of the app yet.
@@ -49,14 +47,9 @@ const Editor = ( { projectId } ) => {
 	const handleSaveBlocks = useCallback(
 		debounce( ( blocks ) => {
 			try {
-				saveProject( projectId, { blocks } );
 				saveAndUpdateProject( projectId, {
 					blocks,
 				} );
-
-				const id = select( STORE_NAME ).getLastUpdatedProjectId();
-
-				redirect( `/edit/poll/${ id }` );
 			} catch ( error ) {
 				// console.error( error );
 				// console.error( 'Failed to save project content.' );

@@ -4,30 +4,41 @@
 // import { createProject, updateProject } from '@crowdsignal/rest-api';
 import { PROJECT_SAVE } from '../action-types';
 
-export const save = ( projectId = null, project ) => {
-	return {
-		type: PROJECT_SAVE,
-		projectId,
-		project,
-	};
-};
+// these two to mock the api request without all the dashboard mess it creates
+// remove and uncomment the import at the top to save against the API
+const createProject = ( project ) =>
+	new Promise( ( resolve, reject ) => {
+		setTimeout( () => {
+			if ( window.failme ) {
+				reject( { status: 500, data: 'error data' } );
+			}
+			resolve( {
+				data: {
+					...project,
+					id: parseInt( Math.random() * 1000000, 10 ),
+				},
+			} );
+		}, 1000 );
+	} );
+
+const updateProject = ( projectId, project ) =>
+	new Promise( ( resolve, reject ) => {
+		setTimeout( () => {
+			if ( window.failme ) {
+				reject( { status: 500, data: 'error data' } );
+			}
+			resolve( { data: { ...project, id: projectId } } );
+		}, 1000 );
+	} );
 
 export default {
-	[ PROJECT_SAVE ]: ( { projectId, project } ) => {
-		// if ( ! projectId ) {
-		// 	return createProject( project );
-		// }
-		//
-		// return updateProject( projectId, project );
+	[ PROJECT_SAVE ]( { projectId, project } ) {
+		// eslint-disable-next-line
+		console.log( 'project::control', PROJECT_SAVE );
+		if ( ! projectId ) {
+			return createProject( project );
+		}
 
-		// testing code if you don't feel like creating a new project each time:
-		return new Promise( ( resolve, reject ) => {
-			setTimeout( () => {
-				if ( window.failme ) {
-					reject( new Error( `Error saving ${ projectId }` ) );
-				}
-				resolve( { data: { ...project, id: 123 } } );
-			}, 1000 );
-		} );
+		return updateProject( projectId, project );
 	},
 };
