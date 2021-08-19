@@ -7,8 +7,4 @@ export * from './route';
 export * from './router';
 export * from './switch';
 
-export const redirect = ( uri ) => {
-	// eslint-disable-next-line
-	console.log( uri );
-	history.push( uri );
-};
+export const redirect = ( uri ) => history.push( uri );
