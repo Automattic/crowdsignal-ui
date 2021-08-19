@@ -20,6 +20,8 @@ export default {
 	attributes,
 	supports: {
 		align: [ 'center', 'wide', 'full' ],
+		html: false,
+		reusable: false,
 	},
 	getEditWrapperProps: ( { align } ) => ( {
 		'data-align': align,

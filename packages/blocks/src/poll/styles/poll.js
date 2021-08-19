@@ -2,16 +2,27 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 
-export const PollWrapper = styled.div( ( {} ) => {
-	return css`
-		border: 1px solid var( --color-border );
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 5px;
-		padding: 16px 24px;
-		position: relative;
-		text-align: left;
-	`;
-} );
+export const EditorWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	width: 100%;
+`;
+
+export const PollWrapper = styled.div`
+	border-style: solid;
+	box-sizing: border-box;
+	padding: 16px 24px;
+	position: relative;
+	text-align: left;
+	width: 100%;
+
+	.block-editor-block-list__layout > * {
+		margin-bottom: 16px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+`;

@@ -10,17 +10,18 @@ import { includes, round } from 'lodash';
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
+import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 
 /**
  * Style dependencies
  */
-import { PollWrapper } from './styles/poll';
+import { EditorWrapper, PollWrapper } from './styles/poll';
 
 const ALLOWED_BLOCKS = [ 'crowdsignal-forms/poll-answer', 'core/paragraph' ];
 
 const PollBlock = ( props ) => {
-	const { attributes, isSelected, setAttributes } = props;
+	const { attributes, className, isSelected, setAttributes } = props;
 
 	useClientId( props );
 
@@ -32,22 +33,20 @@ const PollBlock = ( props ) => {
 		}
 
 		setAttributes( {
-			style: {
-				...attributes.style,
-				width: round(
-					( element.offsetWidth / element.parentNode.offsetWidth ) *
-						100
-				),
-			},
+			width: round(
+				( element.offsetWidth /
+					element.parentNode.parentNode.offsetWidth ) *
+					100
+			),
 		} );
 	};
 
 	const isResizable = isSelected && attributes.align !== 'full';
 	const blockWidth =
-		attributes.align !== 'full' ? `${ attributes.style.width }%` : 'auto';
+		attributes.align !== 'full' ? `${ attributes.width }%` : 'auto';
 
 	return (
-		<>
+		<EditorWrapper>
 			<Sidebar { ...props } />
 
 			<ResizableBox
@@ -59,7 +58,13 @@ const PollBlock = ( props ) => {
 				showHandle={ isResizable }
 				resizeRatio={ 2 }
 			>
-				<PollWrapper>
+				<PollWrapper
+					className={ className }
+					style={ {
+						...useColorStyles( attributes ),
+						...useBorderStyles( attributes ),
+					} }
+				>
 					<RichText
 						tagName="h3"
 						placeholder={ __( 'Enter your question', 'blocks' ) }
@@ -79,7 +84,7 @@ const PollBlock = ( props ) => {
 					/>
 				</PollWrapper>
 			</ResizableBox>
-		</>
+		</EditorWrapper>
 	);
 };
 

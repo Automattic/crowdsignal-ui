@@ -1,8 +1,4 @@
 export default {
-	buttonStyle: {
-		type: 'object',
-		default: {},
-	},
 	clientId: {
 		type: 'string',
 		default: null,
@@ -11,12 +7,36 @@ export default {
 		type: 'object',
 		default: {},
 	},
-	style: {
-		type: 'object',
-		default: {},
-	},
 	question: {
 		type: 'string',
 		default: null,
+	},
+	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
+	backgroundColor: {
+		type: 'string',
+	},
+	borderColor: {
+		type: 'string',
+	},
+	borderRadius: {
+		type: 'number',
+		default: 0,
+	},
+	borderWidth: {
+		type: 'number',
+		default: 2,
+	},
+	fontFamily: {
+		type: 'string',
+	},
+	gradient: {
+		type: 'string',
+	},
+	textColor: {
+		type: 'string',
+	},
+	width: {
+		type: 'number',
+		default: 100,
 	},
 };

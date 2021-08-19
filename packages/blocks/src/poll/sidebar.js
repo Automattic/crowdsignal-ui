@@ -14,8 +14,10 @@ import {
 import {
 	ContrastChecker,
 	InspectorControls,
-	PanelColorSettings,
 	URLInput,
+	useSetting,
+	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+	__experimentalPanelColorGradientSettings as PanelColorGradientSettings,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -23,8 +25,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import {
-	AnswerStyle,
-	ButtonAlignment,
 	ClosedPollState,
 	ConfirmMessageType,
 	FontFamilyType,
@@ -32,25 +32,11 @@ import {
 } from './constants';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
+	const gradients = useSetting( 'color.gradients' ) || [];
+
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
 			[ key ]: value,
-		} );
-
-	const handleChangeStyle = ( key ) => ( value ) =>
-		setAttributes( {
-			style: {
-				...attributes.style,
-				[ key ]: value,
-			},
-		} );
-
-	const handleChangeButtonStyle = ( key ) => ( value ) =>
-		setAttributes( {
-			buttonStyle: {
-				...attributes.buttonStyle,
-				[ key ]: value,
-			},
 		} );
 
 	const handleChangeRestriction = ( key ) => ( value ) =>
@@ -178,36 +164,43 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				) }
 			</PanelBody>
 
-			<PanelColorSettings
-				title={ __( 'Block styling', 'blocks' ) }
+			<PanelColorGradientSettings
+				title={ __( 'Style', 'blocks' ) }
 				initialOpen={ false }
-				colorSettings={ [
+				gradients={ [] }
+				disableCustomGradients={ false }
+				settings={ [
 					{
 						label: __( 'Text color', 'blocks' ),
-						value: attributes.style.color,
-						onChange: handleChangeStyle( 'textColor' ),
+						colorValue: attributes.textColor,
+						onColorChange: handleChangeAttribute( 'textColor' ),
 					},
 					{
 						label: __( 'Background color', 'blocks' ),
-						value: attributes.style.backgroundColor,
-						onChange: handleChangeStyle( 'backgroundColor' ),
+						colorValue: attributes.backgroundColor,
+						gradientValue: attributes.gradient,
+						onColorChange: handleChangeAttribute(
+							'backgroundColor'
+						),
+						onGradientChange: handleChangeAttribute( 'gradient' ),
+						gradients,
 					},
 					{
 						label: __( 'Border color', 'blocks' ),
-						value: attributes.style.borderColor,
-						onChange: handleChangeStyle( 'borderColor' ),
+						colorValue: attributes.borderColor,
+						onColorChange: handleChangeAttribute( 'borderColor' ),
 					},
 				] }
 			>
 				<ContrastChecker
-					backgroundColor={ attributes.style.backgroundColor }
-					textColor={ attributes.style.color }
+					backgroundColor={ attributes.backgroundColor }
+					textColor={ attributes.textColor }
 				/>
 
 				<SelectControl
 					label={ __( 'Choose font', 'blocks' ) }
-					value={ attributes.style.fontFamily }
-					onChange={ handleChangeStyle( 'fontFamily' ) }
+					value={ attributes.fontFamily }
+					onChange={ handleChangeAttribute( 'fontFamily' ) }
 					options={ [
 						{
 							label: __( 'Default theme font', 'blocks' ),
@@ -325,8 +318,8 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 						<TextControl
 							type="number"
 							label={ __( 'Width (%)', 'blocks' ) }
-							value={ attributes.style.width }
-							onChange={ handleChangeStyle( 'width' ) }
+							value={ attributes.width }
+							onChange={ handleChangeAttribute( 'width' ) }
 						/>
 						<Button isSmall onClick={ handleResetWidth }>
 							{ __( 'Reset', 'blocks' ) }
@@ -337,62 +330,22 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<TextControl
 					label={ __( 'Border thickness', 'blocks' ) }
 					type="number"
-					value={ attributes.style.borderWidth }
-					onChange={ handleChangeStyle( 'borderWidth' ) }
+					value={ attributes.borderWidth }
+					onChange={ handleChangeAttribute( 'borderWidth' ) }
 				/>
 				<TextControl
 					label={ __( 'Corner radius', 'blocks' ) }
 					type="number"
-					value={ attributes.style.borderRadius }
-					onChange={ handleChangeStyle( 'borderRadius' ) }
+					value={ attributes.borderRadius }
+					onChange={ handleChangeAttribute( 'borderRadius' ) }
 				/>
 
 				<ToggleControl
 					label={ __( 'Drop shadow', 'blocks' ) }
-					checked={ attributes.style.hasBoxShadow }
-					onChange={ handleChangeStyle( 'hasBoxShadow' ) }
+					checked={ attributes.boxShadow }
+					onChange={ handleChangeAttribute( 'boxShadow' ) }
 				/>
-			</PanelColorSettings>
-
-			<PanelColorSettings
-				title={ __( 'Button styling', 'blocks' ) }
-				initialOpen={ false }
-				colorSettings={ [
-					{
-						label: __( 'Text color', 'blocks' ),
-						value: attributes.buttonStyle.color,
-						onChange: handleChangeButtonStyle( 'color' ),
-					},
-					{
-						label: __( 'Background color', 'blocks' ),
-						value: attributes.buttonStyle.backgroundColor,
-						onChange: handleChangeButtonStyle( 'backgroundColor' ),
-					},
-				] }
-			>
-				<ContrastChecker
-					textColor={ attributes.buttonStyle.color }
-					backgroundColor={ attributes.buttonStyle.backgroundColor }
-				/>
-
-				{ AnswerStyle.BUTTON === attributes.answerStyle && (
-					<SelectControl
-						label={ __( 'Alignment', 'blocks' ) }
-						value={ attributes.buttonStyle.align }
-						onChange={ handleChangeButtonStyle( 'align' ) }
-						options={ [
-							{
-								label: __( 'List', 'blocks' ),
-								value: ButtonAlignment.LIST,
-							},
-							{
-								label: __( 'Inline', 'blocks' ),
-								value: ButtonAlignment.INLINE,
-							},
-						] }
-					/>
-				) }
-			</PanelColorSettings>
+			</PanelColorGradientSettings>
 
 			<PanelBody
 				title={ __( 'Answer settings', 'blocks' ) }
