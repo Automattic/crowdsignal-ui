@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isNumber } from 'lodash';
+import { isFinite } from 'lodash';
 
 export const useColorStyles = ( {
 	backgroundColor,
@@ -18,6 +18,10 @@ export const useBorderStyles = ( {
 	borderWidth,
 } ) => ( {
 	borderColor,
-	borderRadius: isNumber( borderRadius ) ? `${ borderRadius }px` : null,
-	borderWidth: isNumber( borderWidth ) ? `${ borderWidth }px` : null,
+	borderRadius: isFinite( parseInt( borderRadius, 10 ) )
+		? `${ borderRadius }px`
+		: null,
+	borderWidth: isFinite( parseInt( borderWidth, 10 ) )
+		? `${ borderWidth }px`
+		: null,
 } );
