@@ -17,6 +17,8 @@
   },
   "main": "src/index.js",
   "dependencies": {
+    "@wordpress/components": "^15.0.0",
+    "@wordpress/i18n": "^4.2.1",
     "isolated-block-editor": "github:automattic/isolated-block-editor#2.3.0",
     "lodash": "^4.17.21"
   },

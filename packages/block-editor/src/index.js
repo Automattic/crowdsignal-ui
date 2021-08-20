@@ -5,6 +5,11 @@ import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line 
 import { noop } from 'lodash';
 
 /**
+ * Internal dependencies
+ */
+import Toolbar from './toolbar';
+
+/**
  * Style dependencies
  */
 import './style.scss';
@@ -18,6 +23,8 @@ export const BlockEditor = ( { onSave } ) => {
 			onSaveBlocks={ onSave }
 			onLoad={ ( parse ) => parse( '' ) }
 			onError={ noop }
-		/>
+		>
+			<Toolbar />
+		</IsolatedBlockEditor>
 	);
 };
