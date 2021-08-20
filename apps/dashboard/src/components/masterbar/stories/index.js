@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import Masterbar from '../';
+import { Masterbar } from '../';
 import * as Type from '../../../util/user/account-types';
 
 export default {

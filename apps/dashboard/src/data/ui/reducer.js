@@ -7,7 +7,19 @@ import { omit } from 'lodash';
 /**
  * Internal dependencies
  */
-import { NOTICE_CREATE, NOTICE_REMOVE } from 'data/action-types';
+import {
+	CURRENT_USER_UPDATE,
+	NOTICE_CREATE,
+	NOTICE_REMOVE,
+} from 'data/action-types';
+
+const currentUserId = ( state = 0, action ) => {
+	if ( action.type === CURRENT_USER_UPDATE ) {
+		return action.userId;
+	}
+
+	return state;
+};
 
 const notices = ( state = {}, action ) => {
 	if ( action.type === NOTICE_CREATE ) {
@@ -30,5 +42,6 @@ const notices = ( state = {}, action ) => {
 };
 
 export default combineReducers( {
+	currentUserId,
 	notices,
 } );

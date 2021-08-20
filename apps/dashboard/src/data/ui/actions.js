@@ -6,7 +6,12 @@ import { uniqueId } from 'lodash';
 /**
  * Internal dependencies
  */
-import { NOTICE_CREATE, NOTICE_REMOVE, ROUTE_UPDATE } from 'data/action-types';
+import {
+	CURRENT_USER_UPDATE,
+	NOTICE_CREATE,
+	NOTICE_REMOVE,
+	ROUTE_UPDATE,
+} from 'data/action-types';
 
 export function removeNotice( noticeId ) {
 	return {
@@ -53,3 +58,8 @@ export function redirect( path ) {
 		path,
 	};
 }
+
+export const updateCurrentUser = ( userId ) => ( {
+	type: CURRENT_USER_UPDATE,
+	userId,
+} );

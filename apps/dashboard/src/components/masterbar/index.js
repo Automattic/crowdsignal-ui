@@ -1,12 +1,14 @@
 /**
  * External dependencies
  */
+import { withSelect } from '@wordpress/data';
 import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
 import { CrowdsignalLogo } from '@crowdsignal/components';
+import { STORE_NAME } from 'data';
 import LoggedIn from './logged-in';
 import LoggedOut from './logged-out';
 
@@ -15,7 +17,7 @@ import LoggedOut from './logged-out';
  */
 import './styles.scss';
 
-const Masterbar = ( { isAdmin, user } ) => {
+export const Masterbar = ( { isAdmin, user } ) => {
 	const classes = classnames( 'masterbar', {
 		'is-admin': isAdmin,
 	} );
@@ -32,4 +34,6 @@ const Masterbar = ( { isAdmin, user } ) => {
 	);
 };
 
-export default Masterbar;
+export default withSelect( ( select ) => ( {
+	user: select( STORE_NAME ).getCurrentUser(),
+} ) )( Masterbar );
