@@ -7,7 +7,7 @@ import { combineReducers } from '@wordpress/data';
  * Internal dependencies
  */
 import {
-	PROJECT_SAVE_START,
+	PROJECT_SAVE,
 	PROJECT_UPDATE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_SAVE_SUCCESS,
@@ -33,7 +33,7 @@ const lastUpdatedItemId = ( state = 0, action ) => {
 };
 
 const isSaving = ( state = false, action ) => {
-	if ( action.type === PROJECT_SAVE_START ) {
+	if ( action.type === PROJECT_SAVE ) {
 		return true;
 	}
 

@@ -2,7 +2,15 @@
  * Internal dependencies
  */
 // import { createProject, updateProject } from '@crowdsignal/rest-api';
-import { PROJECT_SAVE } from '../action-types';
+import { PROJECT_SAVE_REQUEST } from '../action-types';
+
+export function saveProjectRequest( projectId, project ) {
+	return {
+		type: PROJECT_SAVE_REQUEST,
+		projectId,
+		project,
+	};
+}
 
 // these two to mock the api request without all the dashboard mess it creates
 // remove and uncomment the import at the top to save against the API
@@ -32,9 +40,7 @@ const updateProject = ( projectId, project ) =>
 	} );
 
 export default {
-	[ PROJECT_SAVE ]( { projectId, project } ) {
-		// eslint-disable-next-line
-		console.log( 'project::control', PROJECT_SAVE );
+	[ PROJECT_SAVE_REQUEST ]( { projectId, project } ) {
 		if ( ! projectId ) {
 			return createProject( project );
 		}

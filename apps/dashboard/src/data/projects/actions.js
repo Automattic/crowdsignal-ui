@@ -5,22 +5,14 @@ import {
 	PROJECT_SAVE,
 	PROJECT_UPDATE,
 	PROJECT_SAVE_SUCCESS,
-	PROJECT_SAVE_START,
 	PROJECT_SAVE_ERROR,
 } from '../action-types';
 import { redirect } from 'data/ui/actions';
+import { saveProjectRequest } from './controls';
 
-export function saveProject( projectId, project ) {
+export function saveProject() {
 	return {
 		type: PROJECT_SAVE,
-		projectId,
-		project,
-	};
-}
-
-export function saveProjectStart() {
-	return {
-		type: PROJECT_SAVE_START,
 	};
 }
 
@@ -48,8 +40,8 @@ export function saveProjectError( message ) {
 
 export function* saveAndUpdateProject( projectId, project ) {
 	try {
-		yield saveProjectStart(); // sets isLoading
-		const response = yield saveProject( projectId, project );
+		yield saveProject(); // sets isLoading
+		const response = yield saveProjectRequest( projectId, project );
 		const id = projectId || response.data.id;
 
 		yield updateProject( id, { ...project, id } );
