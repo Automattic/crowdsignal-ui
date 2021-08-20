@@ -27,7 +27,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => (
 				isSelected={ activeTab === Tab.EDITOR }
 				href={ `/edit/poll/${ projectId }` }
 			>
-				{ __( 'Edior', 'dashboard' ) }
+				{ __( 'Editor', 'dashboard' ) }
 			</TabNavigation.Tab>
 			<TabNavigation.Tab
 				isSelected={ activeTab === Tab.RESULTS }
