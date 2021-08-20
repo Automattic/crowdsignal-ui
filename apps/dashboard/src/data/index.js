@@ -6,17 +6,19 @@ import { createReduxStore, register } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import controls from './controls';
 import * as accountActions from './accounts/actions';
-import * as pollActions from './polls/actions';
-import * as projectActions from './projects/actions';
-import * as uiActions from './ui/actions';
-import * as userActions from './users/actions';
-import pollControls from './polls/controls';
-import projectControls from './projects/controls';
 import * as accountSelectors from './accounts/selectors';
+import * as pollActions from './polls/actions';
+import pollControls from './polls/controls';
 import * as pollSelectors from './polls/selectors';
+import * as projectActions from './projects/actions';
 import * as projectSelectors from './projects/selectors';
+import projectControls from './projects/controls';
+import * as uiActions from './ui/actions';
+import uiResolvers from './ui/resolvers';
 import * as uiSelectors from './ui/selectors';
+import * as userActions from './users/actions';
 import * as userSelectors from './users/selectors';
 import reducer from './reducer';
 
@@ -31,6 +33,7 @@ export const store = createReduxStore( STORE_NAME, {
 		...userActions,
 	},
 	controls: {
+		...controls,
 		...pollControls,
 		...projectControls,
 	},
@@ -42,6 +45,9 @@ export const store = createReduxStore( STORE_NAME, {
 		...userSelectors,
 	},
 	reducer,
+	resolvers: {
+		...uiResolvers,
+	},
 } );
 
 register( store );
