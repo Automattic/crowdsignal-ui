@@ -40,7 +40,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 					{ __( 'Results', 'dashboard' ) }
 				</TabNavigation.Tab>
 			</TabNavigation>
-			<ProjectTools isSaving={ isSaving } />
+			<ProjectTools projectId={ projectId } isSaving={ isSaving } />
 		</div>
 	);
 };
