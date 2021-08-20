@@ -49,7 +49,7 @@ const MasterbarUserMenu = ( { user } ) => {
 				{ showUpgradeLink && (
 					<>
 						<PopoverMenu.Item
-							href={ `/upgrade.php?source=header-link-${ user.account.type }` }
+							href={ `/upgrade.php?source=header-link-${ user.accountType }` }
 						>
 							{ __( 'Upgrade your account', 'dashboard' ) }
 						</PopoverMenu.Item>

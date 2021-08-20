@@ -8,28 +8,27 @@ import { includes } from 'lodash';
  */
 import * as AccountType from './account-types';
 
-export const isPro = ( user ) => user.account.type === AccountType.PRO;
+export const isPro = ( user ) => user.accountType === AccountType.PRO;
 
 export const isJetpackPro = ( user ) =>
-	user.account.type === AccountType.JETPACK_PRO;
+	user.accountType === AccountType.JETPACK_PRO;
 
 export const isCorporate = ( user ) =>
 	includes(
 		[ AccountType.CORPORATE, AccountType.CORPORATE_6_MONTHLY ],
-		user.account.type
+		user.accountType
 	);
 
 export const isEnterprise = ( user ) =>
-	user.account.type === AccountType.ENTERPRISE;
+	user.accountType === AccountType.ENTERPRISE;
 
-export const isVIP = ( user ) => user.account.type === AccountType.VIP;
+export const isVIP = ( user ) => user.accountType === AccountType.VIP;
 
-export const isPremium = ( user ) => user.account.type === AccountType.PREMIUM;
+export const isPremium = ( user ) => user.accountType === AccountType.PREMIUM;
 
-export const isBusiness = ( user ) =>
-	user.account.type === AccountType.BUSINESS;
+export const isBusiness = ( user ) => user.accountType === AccountType.BUSINESS;
 
-export const isTeam = ( user ) => user.account.type === AccountType.TEAM;
+export const isTeam = ( user ) => user.accountType === AccountType.TEAM;
 
 export const hasCapability = ( user, capability ) =>
 	includes( user.capabilities, capability );
