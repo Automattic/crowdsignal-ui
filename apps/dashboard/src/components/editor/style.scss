@@ -1,8 +1,9 @@
-.poll-editor {
+.editor {
 	.iso-editor {
 		--wp-admin-theme-color: var( --color-text );
 
 		border-top: 0;
 		color: var( --color-text );
+		z-index: -1;
 	}
 }
