@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import attributes from './attributes';
 import EditPollAnswer from './edit';
 
 export default {
@@ -14,4 +15,5 @@ export default {
 	category: 'crowdsignal-forms',
 	parent: [ 'crowdsignal-forms/poll' ],
 	edit: EditPollAnswer,
+	attributes,
 };
