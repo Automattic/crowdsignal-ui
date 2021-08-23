@@ -7,6 +7,7 @@ import { css } from '@emotion/core';
 export const Wrapper = styled.div( ( props ) => {
 	return css`
 		position: fixed;
+		z-index: 1000;
 
 		${ props.position };
 	`;
