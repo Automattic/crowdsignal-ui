@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { PROJECT_SAVE, PROJECT_UPDATE } from 'data/action-types';
+import { PROJECT_SAVE, PROJECT_UPDATE } from '../action-types';
 
 export function saveProject( projectId, project ) {
 	return {

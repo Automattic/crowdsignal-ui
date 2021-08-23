@@ -11,7 +11,7 @@ import {
 	CURRENT_USER_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
-} from 'data/action-types';
+} from '../action-types';
 
 const currentUserId = ( state = 0, action ) => {
 	if ( action.type === CURRENT_USER_UPDATE ) {

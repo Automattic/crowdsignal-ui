@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import ProjectNavigation from 'components/project-navigation';
+import ProjectNavigation from '../project-navigation';
 
 const Results = ( { projectId } ) => {
 	return (

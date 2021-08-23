@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { createProject, updateProject } from '@crowdsignal/rest-api';
-import { PROJECT_SAVE } from 'data/action-types';
+import { PROJECT_SAVE } from '../action-types';
 
 export default {
 	[ PROJECT_SAVE ]: ( { projectId, project } ) => {

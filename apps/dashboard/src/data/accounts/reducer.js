@@ -6,8 +6,8 @@ import { combineReducers } from '@wordpress/data';
 /**
  * Internal dependecies
  */
-import { ACCOUNT_SIGNAL_COUNT_UPDATE, ACCOUNT_UPDATE } from 'data/action-types';
-import { keyedReducer } from 'data/util';
+import { ACCOUNT_SIGNAL_COUNT_UPDATE, ACCOUNT_UPDATE } from '../action-types';
+import { keyedReducer } from '../util';
 
 const type = ( state = null, action ) => {
 	if ( action.type === ACCOUNT_UPDATE ) {

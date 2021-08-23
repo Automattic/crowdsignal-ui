@@ -11,7 +11,7 @@ import {
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
 	ROUTE_UPDATE,
-} from 'data/action-types';
+} from '../action-types';
 
 export function removeNotice( noticeId ) {
 	return {

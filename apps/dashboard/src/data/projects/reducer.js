@@ -6,7 +6,7 @@ import { combineReducers } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { PROJECT_UPDATE } from 'data/action-types';
+import { PROJECT_UPDATE } from '../action-types';
 
 const items = ( state = {}, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
