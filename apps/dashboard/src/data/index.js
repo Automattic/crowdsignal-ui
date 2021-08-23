@@ -21,6 +21,7 @@ import * as uiSelectors from './ui/selectors';
 import * as userActions from './users/actions';
 import * as userSelectors from './users/selectors';
 import * as uiControls from './ui/controls';
+import projectResolvers from './projects/resolvers';
 
 import reducer from './reducer';
 
@@ -50,6 +51,7 @@ const storeConfig = {
 	reducer,
 	resolvers: {
 		...uiResolvers,
+		...projectResolvers,
 	},
 };
 
