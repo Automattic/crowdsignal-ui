@@ -11,8 +11,8 @@ import {
 	USER_ACCOUNT_UPDATE,
 	USER_CAPABILITIES_UPDATE,
 	USER_PROFILE_UPDATE,
-} from 'data/action-types';
-import { keyedReducer } from 'data/util';
+} from '../action-types';
+import { keyedReducer } from '../util';
 
 const account = ( state, action ) => {
 	if ( action.type === USER_ACCOUNT_UPDATE ) {

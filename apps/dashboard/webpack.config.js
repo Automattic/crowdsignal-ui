@@ -33,13 +33,6 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 				} );
 			} ),
 		],
-		resolve: {
-			...baseConfig.resolve,
-			modules: [
-				...baseConfig.resolve.modules,
-				path.resolve( __dirname, 'src/' ),
-			],
-		},
 		devServer: {
 			contentBase: [
 				path.join(__dirname, 'dist'),

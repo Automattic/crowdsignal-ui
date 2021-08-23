@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { POLL_SAVE, POLL_UPDATE } from 'data/action-types';
+import { POLL_SAVE, POLL_UPDATE } from '../action-types';
 
 export function savePoll( pollId, poll ) {
 	return {

@@ -6,7 +6,7 @@ import { get, includes } from 'lodash';
 /**
  * Internal dependencies
  */
-import { getAccountSignalCount, getAccountType } from 'data/accounts/selectors';
+import { getAccountSignalCount, getAccountType } from '../accounts/selectors';
 
 export const getUserAccountId = ( state, userId ) =>
 	get( state, [ 'users', userId, 'account' ], 0 );

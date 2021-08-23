@@ -6,7 +6,7 @@ import { get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { getUser } from 'data/users/selectors';
+import { getUser } from '../users/selectors';
 
 export const getCurrentUserId = ( state ) =>
 	get( state, [ 'ui', 'currentUserId' ], 0 );

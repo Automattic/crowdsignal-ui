@@ -8,7 +8,7 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { CrowdsignalLogo } from '@crowdsignal/components';
-import { STORE_NAME } from 'data';
+import { STORE_NAME } from '../../data';
 import LoggedIn from './logged-in';
 import LoggedOut from './logged-out';
 

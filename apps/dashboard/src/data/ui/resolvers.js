@@ -2,14 +2,14 @@
  * Internal dependencies
  */
 import { fetchUser } from '@crowdsignal/rest-api';
-import { dispatchAsync } from 'data/actions';
-import { updateAccount, updateAccountSignalCount } from 'data/accounts/actions';
+import { dispatchAsync } from '../actions';
+import { updateAccount, updateAccountSignalCount } from '../accounts/actions';
 import {
 	updateUserAccount,
 	updateUserCapabilities,
 	updateUserProfile,
-} from 'data/users/actions';
-import { updateCurrentUser } from 'data/ui/actions';
+} from '../users/actions';
+import { updateCurrentUser } from '../ui/actions';
 
 function* getCurrentUser() {
 	try {

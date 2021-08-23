@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { ACCOUNT_SIGNAL_COUNT_UPDATE, ACCOUNT_UPDATE } from 'data/action-types';
+import { ACCOUNT_SIGNAL_COUNT_UPDATE, ACCOUNT_UPDATE } from '../action-types';
 
 export const updateAccount = (
 	accountId,

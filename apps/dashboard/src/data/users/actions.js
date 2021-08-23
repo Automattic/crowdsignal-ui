@@ -5,7 +5,7 @@ import {
 	USER_ACCOUNT_UPDATE,
 	USER_CAPABILITIES_UPDATE,
 	USER_PROFILE_UPDATE,
-} from 'data/action-types';
+} from '../action-types';
 
 export const updateUserAccount = ( userId, accountId ) => ( {
 	type: USER_ACCOUNT_UPDATE,
