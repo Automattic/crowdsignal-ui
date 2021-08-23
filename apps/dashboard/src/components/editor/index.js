@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useCallback } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, withSelect } from '@wordpress/data';
 // import { __ } from '@wordpress/i18n';
 import { debounce } from 'lodash';
 
@@ -20,34 +20,15 @@ import { registerBlocks } from './blocks';
  */
 import './style.scss';
 
-const Editor = ( { projectId } ) => {
+const Editor = ( { projectId, project } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
-
-	// useEffect( () => {
-	// 	if ( projectId ) {
-	// 		return;
-	// 	}
-	//
-	// 	try {
-	// 		saveAndUpdateProject( 0, {
-	// 			title: __( 'Untitled Project', 'dashboard' ),
-	// 		} );
-	//
-	// 		const id = select( STORE_NAME ).getLastUpdatedProjectId();
-	//
-	// 		redirect( `/edit/poll/${ id }` );
-	// 	} catch ( error ) {
-	// 		// Creating a new project failed, return to the main dashboard screen and display an error.
-	// 		// redirect() doesn't work as it's not part of the app yet.
-	// 		console.error( error );
-	// 		// window.location.replace( 'https://app.crowdsignal.com/dashboard' );
-	// 	}
-	// }, [] );
 
 	const handleSaveBlocks = useCallback(
 		debounce( ( blocks ) => {
 			try {
+				const currentProject = project || {};
 				saveAndUpdateProject( projectId, {
+					...currentProject,
 					blocks,
 				} );
 			} catch ( error ) {
@@ -76,4 +57,10 @@ const Editor = ( { projectId } ) => {
 
 registerBlocks();
 
-export default Editor;
+export default withSelect( ( select, ownProps ) => {
+	return {
+		project:
+			ownProps.projectId &&
+			select( STORE_NAME ).getProject( ownProps.projectId ),
+	};
+} )( Editor );
