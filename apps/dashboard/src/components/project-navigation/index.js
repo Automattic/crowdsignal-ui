@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { PageHeader, TabNavigation } from '@crowdsignal/components';
 import ProjectTools from '../project-tools';
-import { STORE_NAME } from 'data';
+import { STORE_NAME } from '../../data';
 import { useSelect } from '@wordpress/data';
 
 /**

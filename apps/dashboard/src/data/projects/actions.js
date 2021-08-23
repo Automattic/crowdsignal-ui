@@ -7,7 +7,7 @@ import {
 	PROJECT_SAVE_SUCCESS,
 	PROJECT_SAVE_ERROR,
 } from '../action-types';
-import { redirect } from 'data/ui/actions';
+import { redirect } from '../ui/actions';
 import { saveProjectRequest } from './controls';
 
 export function saveProject() {

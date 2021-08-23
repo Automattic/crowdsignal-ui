@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { Button } from '@crowdsignal/components';
-import { STORE_NAME } from 'data';
+import { STORE_NAME } from '../../data';
 import { useDispatch } from '@wordpress/data';
 /**
  * Style dependencies
