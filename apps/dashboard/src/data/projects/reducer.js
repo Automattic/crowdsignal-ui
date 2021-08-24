@@ -8,9 +8,8 @@ import { combineReducers } from '@wordpress/data';
  */
 import {
 	PROJECT_SAVE,
-	PROJECT_UPDATE,
 	PROJECT_SAVE_ERROR,
-	PROJECT_SAVE_SUCCESS,
+	PROJECT_UPDATE,
 } from '../action-types';
 
 const items = ( state = {}, action ) => {
@@ -32,14 +31,14 @@ const lastUpdatedItemId = ( state = 0, action ) => {
 	return state;
 };
 
-const isSaving = ( state = false, action ) => {
+const isProjectSaving = ( state = false, action ) => {
 	if ( action.type === PROJECT_SAVE ) {
 		return true;
 	}
 
 	if (
 		action.type === PROJECT_SAVE_ERROR ||
-		action.type === PROJECT_SAVE_SUCCESS
+		action.type === PROJECT_UPDATE
 	) {
 		return false;
 	}
@@ -50,5 +49,5 @@ const isSaving = ( state = false, action ) => {
 export default combineReducers( {
 	items,
 	lastUpdatedItemId,
-	isSaving,
+	isProjectSaving,
 } );
