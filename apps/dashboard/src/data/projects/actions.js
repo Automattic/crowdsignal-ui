@@ -3,12 +3,15 @@
  */
 import {
 	PROJECT_SAVE,
-	PROJECT_UPDATE,
-	PROJECT_SAVE_SUCCESS,
 	PROJECT_SAVE_ERROR,
+	PROJECT_UPDATE,
 } from '../action-types';
 import { redirect } from '../ui/actions';
-import { saveProjectRequest } from './controls';
+import {
+	createProject,
+	updateProject as patchProject,
+} from '@crowdsignal/rest-api';
+import { dispatchAsync } from '../actions';
 
 export function saveProject() {
 	return {
@@ -24,13 +27,6 @@ export function updateProject( projectId, project ) {
 	};
 }
 
-export function saveProjectSuccess( projectId ) {
-	return {
-		type: PROJECT_SAVE_SUCCESS,
-		projectId,
-	};
-}
-
 export function saveProjectError( message ) {
 	return {
 		type: PROJECT_SAVE_ERROR,
@@ -39,17 +35,18 @@ export function saveProjectError( message ) {
 }
 
 export function* saveAndUpdateProject( projectId, project ) {
-	try {
-		yield saveProject(); // sets isLoading
-		const response = yield saveProjectRequest( projectId, project );
-		const id = projectId || response.data.id;
+	yield saveProject(); // sets isLoading
 
-		yield updateProject( id, { ...project, id } );
-		yield redirect( `/edit/poll/${ id }` );
-		return saveProjectSuccess( id );
+	try {
+		const response = projectId
+			? yield dispatchAsync( patchProject, [ projectId, project ] )
+			: yield dispatchAsync( createProject, [ project ] );
+
+		yield redirect( `/edit/poll/${ response.data.id }` );
+
+		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
-		// eslint-disable-next-line
-		console.error( error );
+		// Request failed
 		return saveProjectError( error.message );
 	}
 }
