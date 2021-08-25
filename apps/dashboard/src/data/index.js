@@ -14,13 +14,11 @@ import pollControls from './polls/controls';
 import * as pollSelectors from './polls/selectors';
 import * as projectActions from './projects/actions';
 import * as projectSelectors from './projects/selectors';
-import projectControls from './projects/controls';
 import * as uiActions from './ui/actions';
 import uiResolvers from './ui/resolvers';
 import * as uiSelectors from './ui/selectors';
 import * as userActions from './users/actions';
 import * as userSelectors from './users/selectors';
-import * as uiControls from './ui/controls';
 import projectResolvers from './projects/resolvers';
 
 import reducer from './reducer';
@@ -38,8 +36,6 @@ const storeConfig = {
 	controls: {
 		...controls,
 		...pollControls,
-		...projectControls,
-		...uiControls,
 	},
 	selectors: {
 		...accountSelectors,
