@@ -1,6 +1,6 @@
 const stories = [
-	'../apps/*/!(node_modules)/**/stories/*.js',
-	'../packages/*/!(node_modules)/**/stories/*.js',
+	'../apps/*/!(node_modules)/**/stories/!(example).js',
+	'../packages/*/!(node_modules)/**/stories/!(example).js',
 ];
 
 module.exports = {
