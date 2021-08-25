@@ -11,21 +11,13 @@ export default {
 	backgroundColor: {
 		type: 'string',
 	},
-	borderColor: {
-		type: 'string',
-	},
-	borderRadius: {
-		type: 'number',
-		default: null,
-	},
-	borderWidth: {
-		type: 'number',
-		default: null,
-	},
 	gradient: {
 		type: 'string',
 	},
 	textColor: {
 		type: 'string',
+	},
+	width: {
+		type: 'number',
 	},
 };
