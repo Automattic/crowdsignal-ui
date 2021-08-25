@@ -6,7 +6,8 @@ import {
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
 } from '../action-types';
-import { redirect } from '../ui/actions';
+import { redirect } from '@crowdsignal/router';
+
 import {
 	createProject,
 	updateProject as patchProject,

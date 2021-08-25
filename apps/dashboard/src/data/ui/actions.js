@@ -10,9 +10,7 @@ import {
 	CURRENT_USER_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
-	ROUTE_UPDATE,
 } from '../action-types';
-import { redirect as routeRedirect } from '@crowdsignal/router';
 
 export function removeNotice( noticeId ) {
 	return {
@@ -52,14 +50,6 @@ export const successNotice = ( message, { id, ...options } ) =>
 
 export const infoNotice = ( message, { id, ...options } ) =>
 	createNotice( id || uniqueId(), 'info', message, options );
-
-export function redirect( path ) {
-	routeRedirect( path ); // the infamy!!!
-	return {
-		type: ROUTE_UPDATE,
-		path,
-	};
-}
 
 export const updateCurrentUser = ( userId ) => ( {
 	type: CURRENT_USER_UPDATE,
