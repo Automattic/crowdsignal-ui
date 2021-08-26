@@ -14,17 +14,18 @@ import pollControls from './polls/controls';
 import * as pollSelectors from './polls/selectors';
 import * as projectActions from './projects/actions';
 import * as projectSelectors from './projects/selectors';
-import projectControls from './projects/controls';
 import * as uiActions from './ui/actions';
 import uiResolvers from './ui/resolvers';
 import * as uiSelectors from './ui/selectors';
 import * as userActions from './users/actions';
 import * as userSelectors from './users/selectors';
+import projectResolvers from './projects/resolvers';
+
 import reducer from './reducer';
 
 export const STORE_NAME = 'crowdsignal/dashboard';
 
-export const store = createReduxStore( STORE_NAME, {
+const storeConfig = {
 	actions: {
 		...accountActions,
 		...pollActions,
@@ -35,7 +36,6 @@ export const store = createReduxStore( STORE_NAME, {
 	controls: {
 		...controls,
 		...pollControls,
-		...projectControls,
 	},
 	selectors: {
 		...accountSelectors,
@@ -47,7 +47,9 @@ export const store = createReduxStore( STORE_NAME, {
 	reducer,
 	resolvers: {
 		...uiResolvers,
+		...projectResolvers,
 	},
-} );
+};
 
+export const store = createReduxStore( STORE_NAME, storeConfig );
 register( store );

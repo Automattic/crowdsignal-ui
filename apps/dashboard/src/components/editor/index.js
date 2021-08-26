@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { useCallback, useEffect } from '@wordpress/element';
-import { useDispatch, select } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { useCallback } from '@wordpress/element';
+import { useDispatch, withSelect } from '@wordpress/data';
+// import { __ } from '@wordpress/i18n';
 import { debounce } from 'lodash';
 
 /**
@@ -13,41 +13,22 @@ import { BlockEditor } from '@crowdsignal/block-editor';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
-import EditorLoadingPlaceholder from './loading-placeholder';
+// import EditorLoadingPlaceholder from './loading-placeholder';
 
 /**
  * Style dependencies
  */
 import './style.scss';
 
-const Editor = ( { projectId } ) => {
-	const { redirect, saveAndUpdateProject } = useDispatch( STORE_NAME );
-
-	useEffect( () => {
-		if ( projectId ) {
-			return;
-		}
-
-		try {
-			saveAndUpdateProject( 0, {
-				title: __( 'Untitled Project', 'dashboard' ),
-			} );
-
-			const id = select( STORE_NAME ).getLastUpdatedProjectId();
-
-			redirect( `/edit/poll${ id }` );
-		} catch ( error ) {
-			// Creating a new project failed, return to the main dashboard screen and display an error.
-			// redirect() doesn't work as it's not part of the app yet.
-
-			window.location.replace( 'https://app.crowdsignal.com/dashboard' );
-		}
-	}, [] );
+const Editor = ( { projectId, project } ) => {
+	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const handleSaveBlocks = useCallback(
 		debounce( ( blocks ) => {
 			try {
+				const currentProject = project || {};
 				saveAndUpdateProject( projectId, {
+					...currentProject,
 					blocks,
 				} );
 			} catch ( error ) {
@@ -58,9 +39,9 @@ const Editor = ( { projectId } ) => {
 		[ projectId, saveAndUpdateProject ]
 	);
 
-	if ( ! projectId ) {
-		return <EditorLoadingPlaceholder />;
-	}
+	// if ( ! projectId ) {
+	// 	return <EditorLoadingPlaceholder />;
+	// }
 
 	return (
 		<div className="editor">
@@ -76,4 +57,10 @@ const Editor = ( { projectId } ) => {
 
 registerBlocks();
 
-export default Editor;
+export default withSelect( ( select, ownProps ) => {
+	return {
+		project:
+			ownProps.projectId &&
+			select( STORE_NAME ).getProject( ownProps.projectId ),
+	};
+} )( Editor );

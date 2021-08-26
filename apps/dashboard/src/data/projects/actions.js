@@ -1,13 +1,22 @@
 /**
  * Internal dependencies
  */
-import { PROJECT_SAVE, PROJECT_UPDATE } from '../action-types';
+import {
+	PROJECT_SAVE,
+	PROJECT_SAVE_ERROR,
+	PROJECT_UPDATE,
+} from '../action-types';
+import { redirect } from '@crowdsignal/router';
 
-export function saveProject( projectId, project ) {
+import {
+	createProject,
+	updateProject as patchProject,
+} from '@crowdsignal/rest-api';
+import { dispatchAsync } from '../actions';
+
+export function saveProject() {
 	return {
 		type: PROJECT_SAVE,
-		projectId,
-		project,
 	};
 }
 
@@ -19,17 +28,26 @@ export function updateProject( projectId, project ) {
 	};
 }
 
-export function* saveAndUpdateProject( projectId, project ) {
-	try {
-		const response = yield saveProject( projectId, project );
-		const id = projectId || response.data.id;
+export function saveProjectError( message ) {
+	return {
+		type: PROJECT_SAVE_ERROR,
+		message,
+	};
+}
 
-		return updateProject( id, {
-			...project,
-			id,
-		} );
+export function* saveAndUpdateProject( projectId, project ) {
+	yield saveProject(); // sets isLoading
+
+	try {
+		const response = projectId
+			? yield dispatchAsync( patchProject, [ projectId, project ] )
+			: yield dispatchAsync( createProject, [ project ] );
+
+		yield redirect( `/edit/poll/${ response.data.id }` );
+
+		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
-		// Save failed
-		throw error;
+		// Request failed
+		return saveProjectError( error.message );
 	}
 }
