@@ -18,8 +18,6 @@ import Sidebar from './sidebar';
  */
 import { EditorWrapper, PollWrapper } from './styles/poll';
 
-const ALLOWED_BLOCKS = [ 'crowdsignal-forms/poll-answer', 'core/paragraph' ];
-
 const PollBlock = ( props ) => {
 	const { attributes, className, isSelected, setAttributes } = props;
 
@@ -72,15 +70,11 @@ const PollBlock = ( props ) => {
 					/>
 
 					<InnerBlocks
+						templateLock="all"
 						template={ [
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
+							[ 'crowdsignal-forms/poll-vote-view', {} ],
+							[ 'crowdsignal-forms/poll-results-view', {} ],
 						] }
-						templateLock={ false }
-						allowedBlocks={ ALLOWED_BLOCKS }
-						orientation="vertical"
-						__experimentalMoverDirection="vertical"
 					/>
 				</PollWrapper>
 			</ResizableBox>

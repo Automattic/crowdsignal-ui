@@ -13,7 +13,7 @@ export default {
 	title: __( 'Poll Answer', 'blocks' ),
 	description: __( 'Add more answer options to your poll', 'blocks' ),
 	category: 'crowdsignal-forms',
-	parent: [ 'crowdsignal-forms/poll' ],
+	parent: [ 'crowdsignal-forms/poll-vote-view' ],
 	edit: EditPollAnswer,
 	attributes,
 };

@@ -7,14 +7,17 @@ import { forEach } from 'lodash';
 /**
  * Internal dependencies
  */
-import { pollBlock, pollAnswerBlock } from '@crowdsignal/blocks';
+import * as blocks from '@crowdsignal/blocks';
 
-const BLOCKS = {
-	'crowdsignal-forms/poll': pollBlock,
-	'crowdsignal-forms/poll-answer': pollAnswerBlock,
+const ENABLED_BLOCKS = {
+	'crowdsignal-forms/poll': blocks.pollBlock,
+	'crowdsignal-forms/poll-answer': blocks.pollAnswerBlock,
+	'crowdsignal-forms/poll-results-summary': blocks.pollResultsSummaryBlock,
+	'crowdsignal-forms/poll-results-view': blocks.pollResultsViewBlock,
+	'crowdsignal-forms/poll-vote-view': blocks.pollVoteViewBlock,
 };
 
 export const registerBlocks = () =>
-	forEach( BLOCKS, ( block, key ) => {
+	forEach( ENABLED_BLOCKS, ( block, key ) => {
 		registerBlockType( key, block );
 	} );
