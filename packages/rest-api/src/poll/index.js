@@ -34,3 +34,12 @@ export const updatePoll = ( pollId, data ) =>
 		},
 		body: JSON.stringify( data ),
 	} );
+
+export const fetchPollResults = ( pollId, query = {} ) =>
+	http( {
+		host: 'https://api.crowdsignal.com',
+		path: `/v3/polls/${ pollId }/results`,
+		method: 'POST',
+		mode: 'cors',
+		query,
+	} );
