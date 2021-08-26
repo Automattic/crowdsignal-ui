@@ -68,7 +68,7 @@ const PollBlock = ( props ) => {
 					<RichText
 						tagName="h3"
 						placeholder={ __( 'Enter your question', 'blocks' ) }
-						onChange={ handleChangeQuestion( 'question' ) }
+						onChange={ handleChangeQuestion }
 					/>
 
 					<InnerBlocks

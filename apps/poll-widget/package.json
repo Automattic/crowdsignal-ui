@@ -1,13 +1,15 @@
 {
-  "name": "@crowdsignal/blocks",
+  "name": "@crowdsignal/poll-widget",
   "version": "0.1.0",
-  "description": "Block editor Crowdsignal blocks.",
-  "author": "Automattic Inc.",
-  "license": "GPL-2.0-or-later",
+  "description": "Poll widget for Crowdsignal.com.",
   "keywords": [
     "crowdsignal"
   ],
-  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/blocks/README.md",
+  "author": "Automattic Inc.",
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/apps/poll-widget/README.md",
+  "license": "GPL-2.0-or-later",
+  "main": "src/index.js",
+  "browser": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
@@ -15,18 +17,21 @@
   "bugs": {
     "url": "https://github.com/Automattic/crowdsignal-ui/issues"
   },
-  "main": "src/index.js",
+  "scripts": {
+    "build": "calypso-build ./src/index.js",
+    "build:wp": "calypso-build ./src/index.js --env WP"
+  },
   "dependencies": {
-    "@crowdsignal/hooks": "^0.1.0",
+    "@crowdsignal/blocks": "^0.1.0",
+    "@crowdsignal/components": "^0.1.0",
+    "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
     "@wordpress/block-editor": "^7.0.0",
-    "@wordpress/blocks": "^11.0.0",
     "@wordpress/components": "^15.0.0",
     "@wordpress/element": "^4.0.0",
     "@wordpress/i18n": "^4.2.1",
     "classnames": "^2.3.1",
-    "lodash": "^4.17.21",
-    "uuid": "^8.3.2"
+    "lodash": "^4.17.21"
   },
   "peerDependencies": {
     "@emotion/core": "^10.1.1",

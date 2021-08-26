@@ -2,7 +2,9 @@
  * External dependencies
  */
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
-import { noop } from 'lodash';
+import { useCallback } from '@wordpress/element';
+import { parse } from '@wordpress/blocks';
+import { debounce, noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -24,11 +26,16 @@ const settings = {
 };
 
 export const BlockEditor = ( { onSave } ) => {
+	const handleChangeContent = useCallback(
+		debounce( ( content ) => onSave( parse( content ) ), 1000 ),
+		[ onSave ]
+	);
+
 	return (
 		<IsolatedBlockEditor
 			settings={ settings }
-			onSaveBlocks={ onSave }
-			onLoad={ ( parse ) => parse( '' ) }
+			onSaveContent={ handleChangeContent }
+			onLoad={ () => parse( '' ) }
 			onError={ noop }
 		>
 			<Toolbar />

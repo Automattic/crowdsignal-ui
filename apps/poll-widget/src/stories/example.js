@@ -1,0 +1,96 @@
+export default [
+	{
+		clientId: '12e49194-d9cf-4297-947c-c4655817754a',
+		name: 'crowdsignal-forms/poll',
+		isValid: true,
+		attributes: {
+			clientId: '8a777fba-d401-48eb-b313-a7631fd25a15',
+			restrictions: {},
+			question: '<meta charset="utf-8">e<sup>iπ</sup> + 1 = ?',
+			borderRadius: 25,
+			boxShadow: false,
+			borderWidth: 2,
+			gradient:
+				'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+			textColor: '#ffffff',
+			width: 72,
+		},
+		innerBlocks: [
+			{
+				clientId: '51126a46-77c6-40b6-be85-bbf3441e4a2f',
+				name: 'core/paragraph',
+				isValid: true,
+				attributes: {
+					content:
+						"Some say it's the most beautiful of equations. You could also say, others just think <em>nothing</em> of it. 😉",
+					dropCap: false,
+				},
+				innerBlocks: [],
+				validationIssues: [],
+				originalContent:
+					"<p>Some say it's the most beautiful of equations. You could also say, others just think <em>nothing</em> of it. 😉</p>",
+			},
+			{
+				clientId: '0a2b3946-f7ef-44d7-9007-c0e103a607c0',
+				name: 'crowdsignal-forms/poll-answer',
+				isValid: true,
+				attributes: {
+					clientId: '3a141dce-b216-45e9-869e-86930e0017f8',
+					label: '0',
+					backgroundColor: '#ffffff',
+					textColor: '#000000',
+					width: 100,
+				},
+				innerBlocks: [],
+				validationIssues: [],
+				originalContent: '',
+			},
+			{
+				clientId: '642beaa6-7941-47c0-bc64-cf8d5c7fddc5',
+				name: 'crowdsignal-forms/poll-answer',
+				isValid: true,
+				attributes: {
+					clientId: 'cf3deef9-f6b2-453d-bfc1-1c79b745061e',
+					label: '2',
+					backgroundColor: '#000000',
+					textColor: '#ffffff',
+					width: 100,
+				},
+				innerBlocks: [],
+				validationIssues: [],
+				originalContent: '',
+			},
+			{
+				clientId: '06cbb961-2f47-4030-a8f2-1047785794b8',
+				name: 'crowdsignal-forms/poll-answer',
+				isValid: true,
+				attributes: {
+					clientId: 'c3c8f208-0e80-41cf-bd5c-490f29890f87',
+					label: 'e',
+					backgroundColor: '#ffffff',
+					textColor: '#000000',
+					width: 100,
+				},
+				innerBlocks: [],
+				validationIssues: [],
+				originalContent: '',
+			},
+			{
+				clientId: '069078d9-0fb7-4e58-a879-b4df0473818e',
+				name: 'crowdsignal-forms/poll-answer',
+				isValid: true,
+				attributes: {
+					clientId: '84aa4826-2725-4840-be39-288d3eb5a3a3',
+					label: 'π',
+					backgroundColor: '#000000',
+					width: 100,
+				},
+				innerBlocks: [],
+				validationIssues: [],
+				originalContent: '',
+			},
+		],
+		validationIssues: [],
+		originalContent: '',
+	},
+];
