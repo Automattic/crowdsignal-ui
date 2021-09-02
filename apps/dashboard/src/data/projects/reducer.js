@@ -31,7 +31,7 @@ const lastUpdatedItemId = ( state = 0, action ) => {
 	return state;
 };
 
-const isProjectSaving = ( state = false, action ) => {
+const isSaving = ( state = false, action ) => {
 	if ( action.type === PROJECT_SAVE ) {
 		return true;
 	}
@@ -49,5 +49,5 @@ const isProjectSaving = ( state = false, action ) => {
 export default combineReducers( {
 	items,
 	lastUpdatedItemId,
-	isProjectSaving,
+	isSaving,
 } );
