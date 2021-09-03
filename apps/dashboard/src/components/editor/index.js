@@ -13,7 +13,7 @@ import { BlockEditor } from '@crowdsignal/block-editor';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
-// import EditorLoadingPlaceholder from './loading-placeholder';
+import EditorLoadingPlaceholder from './loading-placeholder';
 
 /**
  * Style dependencies
@@ -42,9 +42,10 @@ const Editor = ( { projectId } ) => {
 		[ projectId, saveAndUpdateProject ]
 	);
 
-	// if ( ! projectId ) {
-	// 	return <EditorLoadingPlaceholder />;
-	// }
+	if ( projectId && null === project ) {
+		// project is being loaded
+		return <EditorLoadingPlaceholder />;
+	}
 
 	return (
 		<div className="editor">
