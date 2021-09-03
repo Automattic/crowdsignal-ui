@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useCallback } from '@wordpress/element';
-import { useDispatch, withSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 // import { __ } from '@wordpress/i18n';
 import { debounce } from 'lodash';
 
@@ -20,7 +20,10 @@ import { registerBlocks } from './blocks';
  */
 import './style.scss';
 
-const Editor = ( { projectId, project } ) => {
+const Editor = ( { projectId } ) => {
+	const project = useSelect( ( select ) =>
+		select( STORE_NAME ).getProject( projectId )
+	);
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const handleSaveBlocks = useCallback(
@@ -57,10 +60,4 @@ const Editor = ( { projectId, project } ) => {
 
 registerBlocks();
 
-export default withSelect( ( select, ownProps ) => {
-	return {
-		project:
-			ownProps.projectId &&
-			select( STORE_NAME ).getProject( ownProps.projectId ),
-	};
-} )( Editor );
+export default Editor;
