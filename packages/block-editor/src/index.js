@@ -25,7 +25,7 @@ const settings = {
 	},
 };
 
-export const BlockEditor = ( { onSave } ) => {
+export const BlockEditor = ( { onSave, onLoad, children } ) => {
 	const handleChangeContent = useCallback(
 		debounce( ( content ) => onSave( parse( content ) ), 1000 ),
 		[ onSave ]
@@ -35,10 +35,11 @@ export const BlockEditor = ( { onSave } ) => {
 		<IsolatedBlockEditor
 			settings={ settings }
 			onSaveContent={ handleChangeContent }
-			onLoad={ () => parse( '' ) }
+			onLoad={ onLoad || noop }
 			onError={ noop }
 		>
 			<Toolbar />
+			{ children }
 		</IsolatedBlockEditor>
 	);
 };
