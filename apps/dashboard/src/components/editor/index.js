@@ -32,14 +32,22 @@ const Editor = ( { projectId } ) => {
 				const currentProject = project || {};
 				saveAndUpdateProject( projectId, {
 					...currentProject,
-					blocks,
+					content: {
+						...currentProject.content,
+						draft: {
+							pages: [ [ ...blocks ] ],
+						},
+					},
 				} );
 			} catch ( error ) {
-				// console.error( error );
-				// console.error( 'Failed to save project content.' );
+				// TODO: replace this with some nince notice or something
+				// eslint-disable-next-line
+				console.error( 'Failed to save project content.' );
+				// eslint-disable-next-line
+				console.error( error );
 			}
 		}, 1000 ),
-		[ projectId, saveAndUpdateProject ]
+		[ projectId, project ]
 	);
 
 	if ( projectId && null === project ) {
