@@ -6,6 +6,9 @@ import { dispatchAsync } from '../actions';
 import { updateProject } from '../projects/actions';
 
 function* getProject( projectId ) {
+	if ( ! projectId ) {
+		return null;
+	}
 	try {
 		const response = yield dispatchAsync( fetchProject, [ projectId ] );
 
