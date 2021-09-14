@@ -18,12 +18,9 @@ const App = () => {
 
 				<main className="app__content">
 					<Switch>
+						<Route path="/edit(/:projectId)" component={ Editor } />
 						<Route
-							path="/edit/poll(/:projectId)"
-							component={ Editor }
-						/>
-						<Route
-							path="/edit/poll/:projectId/results"
+							path="/edit/:projectId/results"
 							component={ Results }
 						/>
 
