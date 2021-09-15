@@ -43,7 +43,7 @@ export function* saveAndUpdateProject( projectId, project ) {
 			? yield dispatchAsync( patchProject, [ projectId, project ] )
 			: yield dispatchAsync( createProject, [ project ] );
 
-		yield redirect( `/edit/${ response.data.id }` );
+		yield redirect( `/project/${ response.data.id }` );
 
 		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
