@@ -43,8 +43,9 @@ export function* saveAndUpdateProject( projectId, project ) {
 			? yield dispatchAsync( patchProject, [ projectId, project ] )
 			: yield dispatchAsync( createProject, [ project ] );
 
+		yield updateProject( response.data.id, response.data );
 		redirect( `/project/${ response.data.id }` );
-		return updateProject( response.data.id, response.data );
+		return;
 	} catch ( error ) {
 		// Request failed
 		return saveProjectError( error.message );
