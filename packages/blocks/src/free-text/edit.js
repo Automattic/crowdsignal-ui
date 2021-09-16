@@ -32,8 +32,6 @@ const FreeText = ( props ) => {
 				onChange={ handleChangeNote }
 				value={ attributes.note }
 			/>
-
-			<pre>{ JSON.stringify( attributes, null, 4 ) }</pre>
 		</>
 	);
 };
