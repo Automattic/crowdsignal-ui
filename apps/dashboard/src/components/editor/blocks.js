@@ -7,12 +7,16 @@ import { forEach } from 'lodash';
 /**
  * Internal dependencies
  */
-import { pollBlock, pollAnswerBlock, freeText } from '@crowdsignal/blocks';
+import {
+	pollBlock,
+	pollAnswerBlock,
+	freeTextQuestionBlock,
+} from '@crowdsignal/blocks';
 
 const BLOCKS = {
 	'crowdsignal-forms/poll': pollBlock,
 	'crowdsignal-forms/poll-answer': pollAnswerBlock,
-	'crowdsignal-forms/free-text': freeText,
+	'crowdsignal-forms/free-text': freeTextQuestionBlock,
 };
 
 export const registerBlocks = () =>
