@@ -6,7 +6,7 @@ import Masterbar from '../masterbar';
 import Editor from '../editor';
 import Results from '../results';
 
-const allowedRoutes = /^\/(edit)\/.*/i;
+const allowedRoutes = /^\/(project)\/.*/i;
 
 const NotFound = () => <div className="app__not-found">404</div>;
 
@@ -19,11 +19,11 @@ const App = () => {
 				<main className="app__content">
 					<Switch>
 						<Route
-							path="/edit/poll(/:projectId)"
+							path="/project(/:projectId)"
 							component={ Editor }
 						/>
 						<Route
-							path="/edit/poll/:projectId/results"
+							path="/project/:projectId/results"
 							component={ Results }
 						/>
 
