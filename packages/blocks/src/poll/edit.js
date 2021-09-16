@@ -69,6 +69,7 @@ const PollBlock = ( props ) => {
 						tagName="h3"
 						placeholder={ __( 'Enter your question', 'blocks' ) }
 						onChange={ handleChangeQuestion }
+						value={ attributes.question || '' }
 					/>
 
 					<InnerBlocks
