@@ -32,7 +32,7 @@ const MultipleChoice = ( props ) => {
 	return (
 		<MultipleChoiceWrapper>
 			<RichText
-				tagName="h3"
+				tagName="p"
 				placeholder={ __( 'Enter your question', 'blocks' ) }
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
