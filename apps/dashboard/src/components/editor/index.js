@@ -93,7 +93,7 @@ const Editor = ( { projectId } ) => {
 				onLoad={ noop }
 				onError={ noop }
 			>
-				<Toolbar />
+				<Toolbar projectId={ projectId } />
 				<BlockLoader blocks={ displayedBlocks } />
 			</IsolatedBlockEditor>
 		</div>
