@@ -29,7 +29,9 @@
     "@wordpress/element": "^4.0.0",
     "@wordpress/i18n": "^4.2.1",
     "classnames": "^2.2.5",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+	"isolated-block-editor": "github:automattic/isolated-block-editor#2.3.0",
+	"@wordpress/components": "^15.0.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
