@@ -6,6 +6,11 @@
 
 		border: 0;
 		color: var( --color-text );
+
+		.wp-block.is-selected, .wp-block:hover {
+			// the color of the first shadow should be inherited from the theme background (it's only a mask to gain some margin on the block)
+			box-shadow: -10px 0px 0px white, -12px 0px 0px #c8366e;
+		}
 	}
 
 	.edit-post-header__settings > .components-button {
@@ -18,7 +23,7 @@
 		&.is-crowdsignal {
 			--wp-admin-theme-color: var( --color-primary-50 );
 			--wp-admin-theme-color-darker-10: var( --color-primary-60 );
-			--wp-admin-theme-color-darker-20: var( --color-primary-70 );			
+			--wp-admin-theme-color-darker-20: var( --color-primary-70 );
 		}
 	}
 }
