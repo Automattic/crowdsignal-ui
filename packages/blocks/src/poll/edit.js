@@ -18,7 +18,11 @@ import Sidebar from './sidebar';
  */
 import { EditorWrapper, PollWrapper } from './styles/poll';
 
-const ALLOWED_BLOCKS = [ 'crowdsignal-forms/poll-answer', 'core/paragraph' ];
+const ALLOWED_BLOCKS = [
+	'crowdsignal-forms/poll-answer',
+	'core/image',
+	'core/paragraph',
+];
 
 const PollBlock = ( props ) => {
 	const { attributes, className, isSelected, setAttributes } = props;
