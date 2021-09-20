@@ -10,7 +10,9 @@ import { InnerBlocks } from '@wordpress/block-editor';
 import attributes from './attributes';
 import EditMultipleChoice from './edit';
 
-export default {
+const name = 'crowdsignal-forms/multiple-choice';
+
+const settings = {
 	apiVersion: 1,
 	title: __( 'Multiple Choice', 'blocks' ),
 	description: __(
@@ -25,4 +27,9 @@ export default {
 		html: false,
 		reusable: false,
 	},
+};
+
+export default {
+	name,
+	settings,
 };

@@ -9,7 +9,9 @@ import { __ } from '@wordpress/i18n';
 import attributes from './attributes';
 import EditFreeText from './edit';
 
-export default {
+const name = 'crowdsignal-forms/free-text';
+
+const settings = {
 	apiVersion: 1,
 	title: __( 'Free Text', 'blocks' ),
 	description: __( 'Allows for a free text response on your form', 'blocks' ),
@@ -20,4 +22,9 @@ export default {
 		html: false,
 		reusable: false,
 	},
+};
+
+export default {
+	name,
+	settings,
 };
