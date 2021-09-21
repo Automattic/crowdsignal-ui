@@ -10,7 +10,9 @@ import { __ } from '@wordpress/i18n';
 import attributes from './attributes';
 import EditPoll from './edit';
 
-export default {
+const name = 'crowdsignal-forms/poll';
+
+const settings = {
 	apiVersion: 1,
 	title: __( 'Poll', 'blocks' ),
 	description: __( "Create polls and get your audience's opinion", 'blocks' ),
@@ -26,4 +28,9 @@ export default {
 	getEditWrapperProps: ( { align } ) => ( {
 		'data-align': align,
 	} ),
+};
+
+export default {
+	name,
+	settings,
 };
