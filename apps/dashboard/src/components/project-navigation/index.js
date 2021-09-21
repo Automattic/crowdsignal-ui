@@ -7,9 +7,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { PageHeader, TabNavigation } from '@crowdsignal/components';
-import ProjectTools from '../project-tools';
-import { STORE_NAME } from '../../data';
-import { useSelect } from '@wordpress/data';
 
 /**
  * Style dependencies
@@ -22,9 +19,6 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, projectId } ) => {
-	const isSaving = useSelect( ( select ) =>
-		select( STORE_NAME ).isProjectSaving()
-	);
 	return (
 		<div className="project-navigation">
 			<PageHeader>My Great New Poll</PageHeader>
@@ -42,7 +36,6 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 					{ __( 'Results', 'dashboard' ) }
 				</TabNavigation.Tab>
 			</TabNavigation>
-			<ProjectTools projectId={ projectId } isSaving={ isSaving } />
 		</div>
 	);
 };

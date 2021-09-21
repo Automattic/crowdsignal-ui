@@ -4,22 +4,33 @@
 import { useCallback } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 // import { __ } from '@wordpress/i18n';
-import { debounce, get } from 'lodash';
+import { debounce, get, noop } from 'lodash';
+import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
+import { parse } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
-import { BlockEditor } from '@crowdsignal/block-editor';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import BlockLoader from './block-loader';
+import Toolbar from './toolbar';
 
 /**
  * Style dependencies
  */
 import './style.scss';
+
+const editorSettings = {
+	iso: {
+		toolbar: {
+			inspector: true,
+			toc: true,
+		},
+	},
+};
 
 const Editor = ( { projectId } ) => {
 	const project = useSelect( ( select ) =>
@@ -39,9 +50,10 @@ const Editor = ( { projectId } ) => {
 
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
-	const handleSaveBlocks = useCallback(
-		debounce( ( blocks ) => {
+	const handleChangeContent = useCallback(
+		debounce( ( content ) => {
 			try {
+				const blocks = parse( content );
 				const currentProject = project || {};
 				saveAndUpdateProject( projectId, {
 					...currentProject,
@@ -75,9 +87,15 @@ const Editor = ( { projectId } ) => {
 				projectId={ projectId }
 			/>
 
-			<BlockEditor onSave={ handleSaveBlocks }>
+			<IsolatedBlockEditor
+				settings={ editorSettings }
+				onSaveContent={ handleChangeContent }
+				onLoad={ noop }
+				onError={ noop }
+			>
+				<Toolbar projectId={ projectId } />
 				<BlockLoader blocks={ displayedBlocks } />
-			</BlockEditor>
+			</IsolatedBlockEditor>
 		</div>
 	);
 };
