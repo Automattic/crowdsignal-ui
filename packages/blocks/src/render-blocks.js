@@ -11,11 +11,10 @@ import {
 	keys,
 	lowerCase,
 	map,
+	uniqueId,
 } from 'lodash';
 
-/**
- * Internal dependencies
- */
+const KEY_PREFIX = 'crowdsignal-block-';
 
 const parser = new window.DOMParser();
 
@@ -36,6 +35,7 @@ const parseNodes = ( nodes ) =>
 			children: parseNodes( node.childNodes ),
 			props: {
 				className: node.classList.value,
+				key: uniqueId( KEY_PREFIX ),
 			},
 		};
 	} );
@@ -134,6 +134,7 @@ export const renderBlocks = ( blocks = [], blockMap = {} ) =>
 					blockMap[ block.name ],
 					{
 						attributes: block.attributes,
+						key: uniqueId( KEY_PREFIX ),
 					},
 					children
 				);
