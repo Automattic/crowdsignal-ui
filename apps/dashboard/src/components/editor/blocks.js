@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { forEach, omit } from 'lodash';
+import { forEach } from 'lodash';
 
 /**
  * Internal dependencies
@@ -10,6 +10,6 @@ import { forEach, omit } from 'lodash';
 import * as blocks from '@crowdsignal/block-editor';
 
 export const registerBlocks = () =>
-	forEach( omit( blocks, [ 'renderBlocks' ] ), ( block ) => {
+	forEach( blocks, ( block ) => {
 		registerBlockType( block.name, block.settings );
 	} );
