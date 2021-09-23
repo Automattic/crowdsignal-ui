@@ -25,6 +25,9 @@ import './style.scss';
 
 const editorSettings = {
 	iso: {
+		defaultPreferences: {
+			fixedToolbar: false,
+		},
 		toolbar: {
 			inspector: true,
 			toc: true,
