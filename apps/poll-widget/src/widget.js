@@ -5,7 +5,7 @@
 /**
  * Internal dependencies
  */
-import { renderBlocks } from '@crowdsignal/block-editor';
+import { renderBlocks } from '@crowdsignal/blocks';
 import Poll from './poll';
 import PollAnswer from './poll-answer';
 
