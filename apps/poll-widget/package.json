@@ -22,7 +22,7 @@
     "build:wp": "calypso-build ./src/index.js --env WP"
   },
   "dependencies": {
-    "@crowdsignal/blocks": "^0.1.0",
+    "@crowdsignal/block-editor": "^0.1.0",
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",

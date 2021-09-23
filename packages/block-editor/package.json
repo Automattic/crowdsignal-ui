@@ -1,7 +1,7 @@
 {
-  "name": "@crowdsignal/blocks",
+  "name": "@crowdsignal/block-editor",
   "version": "0.1.0",
-  "description": "Block editor Crowdsignal blocks.",
+  "description": "Crowdsignal block editor blocks.",
   "author": "Automattic Inc.",
   "license": "GPL-2.0-or-later",
   "keywords": [
