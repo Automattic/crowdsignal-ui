@@ -19,16 +19,19 @@ const StyledQuestionWrapper = styled.div`
 	width: 100%;
 `;
 
-const QuestionWrapper = ( { attributes, className, children } ) => (
+const QuestionWrapper = ( { attributes, children, style = {}, ...props } ) => (
 	<StyledQuestionWrapper
-		className={ className }
 		style={ {
 			...useColorStyles( attributes ),
 			...useBorderStyles( attributes ),
+			...style,
 		} }
+		{ ...props }
 	>
 		{ children }
 	</StyledQuestionWrapper>
 );
+
+QuestionWrapper.className = StyledQuestionWrapper;
 
 export default QuestionWrapper;

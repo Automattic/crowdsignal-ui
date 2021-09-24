@@ -6,7 +6,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { renderBlocks } from '@crowdsignal/blocks';
+import { Poll, renderBlocks } from '@crowdsignal/blocks';
 import { STORE_NAME } from '../../data';
 
 const FormPreview = ( { projectId } ) => {
@@ -19,9 +19,7 @@ const FormPreview = ( { projectId } ) => {
 	}
 
 	return renderBlocks( project.content.draft.pages[ 0 ], {
-		'crowdsignal-forms/poll': ( { children } ) => (
-			<div className="poll">{ children }</div>
-		),
+		'crowdsignal-forms/poll': Poll,
 		'crowdsignal-forms/poll-answer': () => (
 			<div className="poll-answer">Answer Block</div>
 		),
