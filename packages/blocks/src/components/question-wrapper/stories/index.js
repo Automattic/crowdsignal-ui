@@ -5,7 +5,7 @@ import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
 import QuestionWrapper from '../';
 
 export default {
-	title: 'Components/Question Wrapper',
+	title: 'Blocks/Question Wrapper',
 	component: QuestionWrapper,
 };
 
@@ -17,7 +17,7 @@ const exampleAttributes = {
 	textColor: '#ffffff',
 };
 
-const Default = () => {
+const Default = () => (
 	<QuestionWrapper
 		className="custom-class-name"
 		style={ {
@@ -25,8 +25,8 @@ const Default = () => {
 			...useBorderStyles( exampleAttributes ),
 			width: '600px',
 		} }
-	/>;
-};
+	/>
+);
 
 export { Default as QuestionWrapper };
 

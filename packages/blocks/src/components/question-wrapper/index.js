@@ -1,9 +1,14 @@
 /**
  * External dependencies
  */
-import { styled } from '@emotion/styled';
+import styled from '@emotion/styled';
 
-const QuestionWrapper = styled.div`
+/**
+ * Internal dependencies
+ */
+import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
+
+const StyledQuestionWrapper = styled.div`
 	border-style: solid;
 	box-sizing: border-box;
 	display: flex;
@@ -13,5 +18,17 @@ const QuestionWrapper = styled.div`
 	text-align: left;
 	width: 100%;
 `;
+
+const QuestionWrapper = ( { attributes, className, children } ) => (
+	<StyledQuestionWrapper
+		className={ className }
+		style={ {
+			...useColorStyles( attributes ),
+			...useBorderStyles( attributes ),
+		} }
+	>
+		{ children }
+	</StyledQuestionWrapper>
+);
 
 export default QuestionWrapper;
