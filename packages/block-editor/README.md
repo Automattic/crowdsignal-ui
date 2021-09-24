@@ -1,3 +1,3 @@
-# @crowdsignal/block-editor
+# @crowdsignal/blocks
 
-This package contains all the common code shared between Crowdsignal's editor instances.
+A library containing the UI for the block editor.
