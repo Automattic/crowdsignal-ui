@@ -36,6 +36,9 @@
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
   },
+  "peerDependencies": {
+    "@emotion/styled": "^10.0.27"
+  },
   "scripts": {
     "build": "calypso-build ./src/index.js",
     "start": "webpack serve"
