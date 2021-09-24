@@ -69,17 +69,19 @@ const PollBlock = ( props ) => {
 						value={ attributes.question || '' }
 					/>
 
-					<InnerBlocks
-						template={ [
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
-						] }
-						templateLock={ false }
-						allowedBlocks={ ALLOWED_BLOCKS }
-						orientation="vertical"
-						__experimentalMoverDirection="vertical"
-					/>
+					<QuestionWrapper.Content>
+						<InnerBlocks
+							template={ [
+								[ 'crowdsignal-forms/poll-answer', {} ],
+								[ 'crowdsignal-forms/poll-answer', {} ],
+								[ 'crowdsignal-forms/poll-answer', {} ],
+							] }
+							templateLock={ false }
+							allowedBlocks={ ALLOWED_BLOCKS }
+							orientation="vertical"
+							__experimentalMoverDirection="vertical"
+						/>
+					</QuestionWrapper.Content>
 				</QuestionWrapper>
 			</ResizableBox>
 		</EditorWrapper>

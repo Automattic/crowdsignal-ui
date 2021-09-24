@@ -21,7 +21,7 @@ const Poll = ( { attributes, className, children } ) => {
 		>
 			<RichText.Content tagName="h3" value={ attributes.question } />
 
-			{ children }
+			<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
 		</QuestionWrapper>
 	);
 };

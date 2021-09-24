@@ -4,13 +4,12 @@
 import { RichText } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
+import { Button } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
-import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 
 const PollAnswer = ( props ) => {
@@ -36,24 +35,23 @@ const PollAnswer = ( props ) => {
 		<>
 			<Sidebar { ...props } />
 
-			<div className={ classnames( className, 'wp-block-button' ) }>
-				<RichText
-					className="wp-block-button__link"
-					style={ {
-						...useColorStyles( attributes ),
-						width,
-					} }
-					placeholder={ __( 'Enter an answer', 'blocks' ) }
-					multiline={ false }
-					preserveWhiteSpace={ false }
-					onChange={ handleChangeLabel }
-					onReplace={ onReplace }
-					onSplit={ handleSplit }
-					value={ attributes.label }
-					allowedFormats={ [] }
-					withoutInteractiveFormatting
-				/>
-			</div>
+			<Button
+				attributes={ attributes }
+				as={ RichText }
+				className={ className }
+				style={ {
+					width,
+				} }
+				placeholder={ __( 'Enter an answer', 'blocks' ) }
+				multiline={ false }
+				preserveWhiteSpace={ false }
+				onChange={ handleChangeLabel }
+				onReplace={ onReplace }
+				onSplit={ handleSplit }
+				value={ attributes.label }
+				allowedFormats={ [] }
+				withoutInteractiveFormatting
+			/>
 		</>
 	);
 };

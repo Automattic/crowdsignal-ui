@@ -19,6 +19,24 @@ const StyledQuestionWrapper = styled.div`
 	width: 100%;
 `;
 
+const Content = styled.div`
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+
+	& > *:not( .block-editor-inner-blocks ),
+	.block-editor-block-list__layout > * {
+		margin-bottom: 16px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+`;
+
 const QuestionWrapper = ( { attributes, children, style = {}, ...props } ) => (
 	<StyledQuestionWrapper
 		style={ {
@@ -32,6 +50,6 @@ const QuestionWrapper = ( { attributes, children, style = {}, ...props } ) => (
 	</StyledQuestionWrapper>
 );
 
-QuestionWrapper.className = StyledQuestionWrapper;
+QuestionWrapper.Content = Content;
 
 export default QuestionWrapper;
