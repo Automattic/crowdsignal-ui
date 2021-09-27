@@ -36,6 +36,11 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			[ key ]: value,
 		} );
 
+	const handleChangeNumberAttribute = ( key ) => ( value ) =>
+		setAttributes( {
+			[ key ]: parseInt( value, 10 ),
+		} );
+
 	const handleChangeRestriction = ( key ) => ( value ) =>
 		setAttributes( {
 			restrictions: {
@@ -201,13 +206,13 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'Border thickness', 'blocks' ) }
 					type="number"
 					value={ attributes.borderWidth }
-					onChange={ handleChangeAttribute( 'borderWidth' ) }
+					onChange={ handleChangeNumberAttribute( 'borderWidth' ) }
 				/>
 				<TextControl
 					label={ __( 'Corner radius', 'blocks' ) }
 					type="number"
 					value={ attributes.borderRadius }
-					onChange={ handleChangeAttribute( 'borderRadius' ) }
+					onChange={ handleChangeNumberAttribute( 'borderRadius' ) }
 				/>
 
 				<ToggleControl
@@ -341,7 +346,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 						type="number"
 						label={ __( 'Width (%)', 'blocks' ) }
 						value={ attributes.width }
-						onChange={ handleChangeAttribute( 'width' ) }
+						onChange={ handleChangeNumberAttribute( 'width' ) }
 					/>
 					<Button isSmall onClick={ handleResetWidth }>
 						{ __( 'Reset', 'blocks' ) }
