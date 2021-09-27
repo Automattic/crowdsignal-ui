@@ -10,13 +10,13 @@ import { includes, round } from 'lodash';
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
-import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 
 /**
  * Style dependencies
  */
-import { EditorWrapper, PollWrapper } from './styles/poll';
+import { QuestionWrapper } from '@crowdsignal/blocks';
+import { EditorWrapper } from './styles/poll';
 
 const ALLOWED_BLOCKS = [ 'crowdsignal-forms/poll-answer', 'core/paragraph' ];
 
@@ -58,12 +58,9 @@ const PollBlock = ( props ) => {
 				showHandle={ isResizable }
 				resizeRatio={ 2 }
 			>
-				<PollWrapper
+				<QuestionWrapper
+					attributes={ attributes }
 					className={ className }
-					style={ {
-						...useColorStyles( attributes ),
-						...useBorderStyles( attributes ),
-					} }
 				>
 					<RichText
 						tagName="h3"
@@ -72,18 +69,20 @@ const PollBlock = ( props ) => {
 						value={ attributes.question || '' }
 					/>
 
-					<InnerBlocks
-						template={ [
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
-							[ 'crowdsignal-forms/poll-answer', {} ],
-						] }
-						templateLock={ false }
-						allowedBlocks={ ALLOWED_BLOCKS }
-						orientation="vertical"
-						__experimentalMoverDirection="vertical"
-					/>
-				</PollWrapper>
+					<QuestionWrapper.Content>
+						<InnerBlocks
+							template={ [
+								[ 'crowdsignal-forms/poll-answer', {} ],
+								[ 'crowdsignal-forms/poll-answer', {} ],
+								[ 'crowdsignal-forms/poll-answer', {} ],
+							] }
+							templateLock={ false }
+							allowedBlocks={ ALLOWED_BLOCKS }
+							orientation="vertical"
+							__experimentalMoverDirection="vertical"
+						/>
+					</QuestionWrapper.Content>
+				</QuestionWrapper>
 			</ResizableBox>
 		</EditorWrapper>
 	);

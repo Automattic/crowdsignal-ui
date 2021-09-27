@@ -20,6 +20,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@crowdsignal/block-editor": "^0.1.0",
+    "@crowdsignal/blocks": "^0.1.0",
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
@@ -34,6 +35,9 @@
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
+  },
+  "peerDependencies": {
+    "@emotion/styled": "^10.0.27"
   },
   "scripts": {
     "build": "calypso-build ./src/index.js",

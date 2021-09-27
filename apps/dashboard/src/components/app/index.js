@@ -4,6 +4,7 @@
 import { Route, Router, Switch } from '@crowdsignal/router';
 import Masterbar from '../masterbar';
 import Editor from '../editor';
+import FormPreview from '../form-preview';
 import Results from '../results';
 
 const allowedRoutes = /^\/(project)\/.*/i;
@@ -25,6 +26,10 @@ const App = () => {
 						<Route
 							path="/project/:projectId/results"
 							component={ Results }
+						/>
+						<Route
+							path="/project/:projectId/preview"
+							component={ FormPreview }
 						/>
 
 						<Route path="*any" component={ NotFound } />
