@@ -8,7 +8,7 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 
 	return {
 		...baseConfig,
-		devtool: env === 'production' ? null : 'eval-cheap-module-source-map',
+		devtool: baseConfig.mode === 'production' ? false : 'eval-cheap-module-source-map',
 		output: {
 			...baseConfig.output,
 		},
