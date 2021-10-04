@@ -1,0 +1,37 @@
+{
+  "name": "@crowdsignal/project-renderer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Crowdsignal project renderer.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "browser": true,
+  "homepage": "https://github.com/Automattic/crowdsignal-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@crowdsignal/blocks": "^0.1.0",
+    "@crowdsignal/components": "^0.1.0",
+    "@wordpress/element": "^4.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
+  },
+  "peerDependencies": {
+    "@emotion/styled": "^10.0.27"
+  },
+  "scripts": {
+    "build": "calypso-build ./src/index.js",
+    "start": "webpack serve"
+  }
+}
