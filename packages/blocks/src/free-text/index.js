@@ -11,7 +11,7 @@ import { FormTextarea, QuestionWrapper } from '../components';
 
 const FreeText = ( { attributes, className } ) => {
 	const { inputProps } = useField( {
-		name: `q_${ attributes.id }`,
+		name: `q_${ attributes.clientId }`,
 	} );
 
 	return (
