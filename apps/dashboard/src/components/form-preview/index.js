@@ -34,9 +34,12 @@ const FormPreview = ( { projectId } ) => {
 		return null;
 	}
 
+	// eslint-disable-next-line no-console
+	const handleSubmit = ( data ) => console.log( data );
+
 	return (
 		<ContentWrapper>
-			<Form name={ `f-${ projectId }` }>
+			<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
 					'crowdsignal-forms/answer': Answer,
 					'crowdsignal-forms/free-text': FreeText,

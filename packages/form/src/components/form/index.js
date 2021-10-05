@@ -12,7 +12,7 @@ import { STORE_NAME } from '../../data';
 const Context = createContext( 'form' );
 
 const Form = ( { children, name, onSubmit, ...props } ) => {
-	const { data } = useSelect(
+	const data = useSelect(
 		( select ) => select( STORE_NAME ).getFormData( name ),
 		[ name ]
 	);
