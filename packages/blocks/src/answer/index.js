@@ -3,12 +3,14 @@
  */
 import classnames from 'classnames';
 import styled from '@emotion/styled';
+import { useContext } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
 import { Button } from '../components';
+import MultipleChoice from '../multiple-choice';
 
 const Input = styled.input`
 	height: 1px;
@@ -20,8 +22,14 @@ const Input = styled.input`
 const Answer = ( { attributes, className } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
+	const parentQuestion = useContext( MultipleChoice.Context );
+
+	// REVIEWER NOTE: choiceType value is assigned from ChoiceType constant under block-editor/multiple-choice/constants,
+	// being 0 = ChoiceType.SINGLE. Hardcoded here as I'm not sure how to import such constant values from the block-editor package.
 	const { inputProps } = useField( {
-		name: `q_${ 'test' }[choice]`,
+		name: `q_${ parentQuestion.clientId }[choice]${
+			parentQuestion.choiceType !== 0 ? '[]' : ''
+		}`,
 		type: 'checkbox',
 		value: attributes.clientId,
 	} );
