@@ -1,0 +1,25 @@
+{
+  "name": "@crowdsignal/form",
+  "version": "0.1.0",
+  "description": "Form handling powered by @wordpress/data.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal",
+    "form"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/form/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@wordpress/data": "^6.0.0",
+    "@wordpress/element": "^4.0.0",
+    "lodash": "^4.17.21"
+  }
+}

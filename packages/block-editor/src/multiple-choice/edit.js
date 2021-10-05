@@ -17,7 +17,7 @@ import { MultipleChoiceWrapper } from './styles/multiple-choice';
 const ALLOWED_ANSWER_BLOCKS = [
 	'core/image',
 	'core/paragraph',
-	'crowdsignal-forms/poll-answer',
+	'crowdsignal-forms/answer',
 ];
 
 const MultipleChoice = ( props ) => {
@@ -45,9 +45,9 @@ const MultipleChoice = ( props ) => {
 			/>
 			<InnerBlocks
 				template={ [
-					[ 'crowdsignal-forms/poll-answer', {} ],
-					[ 'crowdsignal-forms/poll-answer', {} ],
-					[ 'crowdsignal-forms/poll-answer', {} ],
+					[ 'crowdsignal-forms/answer', {} ],
+					[ 'crowdsignal-forms/answer', {} ],
+					[ 'crowdsignal-forms/answer', {} ],
 				] }
 				templateLock={ false }
 				allowedBlocks={ ALLOWED_ANSWER_BLOCKS }
