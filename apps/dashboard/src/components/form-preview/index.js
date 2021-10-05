@@ -8,12 +8,15 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import {
+	Answer,
 	FreeText,
 	MultipleChoice,
 	Poll,
 	PollAnswer,
+	SubmitButton,
 	renderBlocks,
 } from '@crowdsignal/blocks';
+import { Form } from '@crowdsignal/form';
 import { STORE_NAME } from '../../data';
 
 const ContentWrapper = styled.div`
@@ -33,12 +36,16 @@ const FormPreview = ( { projectId } ) => {
 
 	return (
 		<ContentWrapper>
-			{ renderBlocks( project.content.draft.pages[ 0 ], {
-				'crowdsignal-forms/poll': Poll,
-				'crowdsignal-forms/poll-answer': PollAnswer,
-				'crowdsignal-forms/free-text': FreeText,
-				'crowdsignal-forms/multiple-choice': MultipleChoice,
-			} ) }
+			<Form name={ `f-${ projectId }` }>
+				{ renderBlocks( project.content.draft.pages[ 0 ], {
+					'crowdsignal-forms/answer': Answer,
+					'crowdsignal-forms/free-text': FreeText,
+					'crowdsignal-forms/multiple-choice': MultipleChoice,
+					'crowdsignal-forms/poll': Poll,
+					'crowdsignal-forms/poll-answer': PollAnswer,
+					'crowdsignal-forms/submit-button': SubmitButton,
+				} ) }
+			</Form>
 		</ContentWrapper>
 	);
 };
