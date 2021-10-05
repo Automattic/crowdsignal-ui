@@ -25,12 +25,17 @@ const Answer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( MultipleChoice.Context );
 
 	// REVIEWER NOTE: choiceType value is assigned from ChoiceType constant under block-editor/multiple-choice/constants,
-	// being 0 = ChoiceType.SINGLE. Hardcoded here as I'm not sure how to import such constant values from the block-editor package.
+	// being 0 = ChoiceType.SINGLE. Hardcoded here as I'm not sure how to import such constant values from the block-editor package
+	// or how are we going to handle the option as it determines both presentational and functional properties, albeit the latter
+	// would be irrevelevant since we render blocks (backend has no saying on how the block should be rendered).
+	const isMultipleSelection =
+		parentQuestion.choiceType !== 0 && parentQuestion.choiceType !== 1;
+
 	const { inputProps } = useField( {
 		name: `q_${ parentQuestion.clientId }[choice]${
-			parentQuestion.choiceType !== 0 ? '[]' : ''
+			isMultipleSelection ? '[]' : ''
 		}`,
-		type: 'checkbox',
+		type: isMultipleSelection ? 'checkbox' : 'radio',
 		value: attributes.clientId,
 	} );
 
