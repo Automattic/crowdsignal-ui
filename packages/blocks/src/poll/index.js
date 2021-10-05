@@ -15,7 +15,6 @@ const Poll = ( { attributes, className, children } ) => {
 	return (
 		<QuestionWrapper
 			attributes={ attributes }
-			as={ 'form' }
 			className={ className }
 			style={ { width } }
 		>
