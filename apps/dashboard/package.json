@@ -26,14 +26,14 @@
     "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
-    "@wordpress/blocks": "^11.0.0",
-    "@wordpress/data": "^6.0.0",
-    "@wordpress/element": "^4.0.0",
-    "@wordpress/i18n": "^4.2.1",
+    "@wordpress/blocks": "^11.1.0",
+    "@wordpress/components": "^17.0.0",
+    "@wordpress/data": "^6.1.0",
+    "@wordpress/element": "^4.0.1",
+    "@wordpress/i18n": "^4.2.2",
     "classnames": "^2.2.5",
-    "lodash": "^4.17.21",
-	"isolated-block-editor": "github:automattic/isolated-block-editor#2.3.0",
-	"@wordpress/components": "^15.0.0"
+    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#0e1739d13227f6d31fcecddb582e580eb57641d7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"

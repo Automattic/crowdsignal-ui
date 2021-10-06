@@ -18,7 +18,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@wordpress/element": "4.0.0",
+    "@wordpress/element": "4.0.1",
     "history": "^5.0.0",
     "lodash": "^4.17.21",
     "route-parser": "^0.0.5"
