@@ -1,12 +1,14 @@
 /**
  * External dependencies
  */
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { PageHeader, TabNavigation } from '@crowdsignal/components';
+import { EditablePageHeader, TabNavigation } from '@crowdsignal/components';
+import { STORE_NAME } from '../../data';
 
 /**
  * Style dependencies
@@ -19,9 +21,25 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, projectId } ) => {
+	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
+
+	const project = useSelect(
+		( select ) => select( STORE_NAME ).getProject( projectId ),
+		[ projectId ]
+	);
+
+	const updateTitle = ( title ) =>
+		saveAndUpdateProject( projectId, {
+			name: title,
+			title,
+		} );
+
 	return (
 		<div className="project-navigation">
-			<PageHeader>My Great New Poll</PageHeader>
+			<EditablePageHeader
+				onChange={ updateTitle }
+				text={ project.title }
+			/>
 			<TabNavigation>
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.EDITOR }
