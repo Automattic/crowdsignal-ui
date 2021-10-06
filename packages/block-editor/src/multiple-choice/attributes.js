@@ -1,5 +1,3 @@
-import { ChoiceType } from './constants';
-
 export default {
 	clientId: {
 		type: 'string',
@@ -25,10 +23,6 @@ export default {
 	allowOther: {
 		type: 'boolean',
 		default: false,
-	},
-	choiceType: {
-		type: 'number',
-		default: ChoiceType.SINGLE,
 	},
 	minimumChoices: {
 		type: 'number',
