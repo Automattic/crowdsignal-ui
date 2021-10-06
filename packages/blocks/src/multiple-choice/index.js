@@ -9,7 +9,7 @@ import { createContext } from '@wordpress/element';
  */
 import { QuestionWrapper } from '../components';
 
-const Context = createContext( 'multiple-choice' );
+const Context = createContext( 'crowdsignal/multiple-choice' );
 
 const MultipleChoice = ( { attributes, children, className } ) => {
 	return (
