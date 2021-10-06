@@ -42,12 +42,48 @@ const Toolbar = ( { projectId } ) => {
 			...payload,
 		} );
 	};
+
+	const shareHandler = () => {
+		if ( project.permalink ) {
+			window.navigator.clipboard.writeText( project.permalink ).then(
+				() => {
+					// eslint-disable-next-line
+					window.alert(
+						`Project's public URL ( ${ project.permalink } ) has been copied to clipboard`
+					);
+				},
+				( err ) => {
+					// eslint-disable-next-line
+					window.alert( 'Share URL could not be copied to clipboard' );
+					// eslint-disable-next-line
+					console.error( err );
+				}
+			);
+		} else {
+			// eslint-disable-next-line
+			window.alert( 'Share URL will is only available for published projects' );
+		}
+		return false;
+	};
+
+	const isPublished = project && project.content && project.content.published;
+
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
-			<Button className="is-crowdsignal">
+			<Button
+				className="is-crowdsignal"
+				href={ `/project/${ projectId }/preview` }
+				target="_blank"
+				disabled={ ! projectId }
+			>
 				{ __( 'Preview', 'block-editor' ) }
 			</Button>
-			<Button className="is-crowdsignal" variant="secondary">
+			<Button
+				className="is-crowdsignal"
+				variant="secondary"
+				onClick={ shareHandler }
+				disabled={ ! isPublished }
+			>
 				{ __( 'Share', 'block-editor' ) }
 			</Button>
 			<Button
