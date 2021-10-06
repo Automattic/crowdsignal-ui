@@ -32,11 +32,11 @@ export default {
 	},
 	minimumChoices: {
 		type: 'number',
-		default: 0,
+		default: 1,
 	},
 	maximumChoices: {
 		type: 'number',
-		default: 0,
+		default: 1,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
