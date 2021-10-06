@@ -24,6 +24,7 @@ export const pageStyles = css`
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		height: 100vh;
 		width: 100%;
 	}
 `;
