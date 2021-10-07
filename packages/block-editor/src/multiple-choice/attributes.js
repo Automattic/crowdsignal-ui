@@ -1,5 +1,3 @@
-import { ChoiceType } from './constants';
-
 export default {
 	clientId: {
 		type: 'string',
@@ -26,17 +24,13 @@ export default {
 		type: 'boolean',
 		default: false,
 	},
-	choiceType: {
-		type: 'number',
-		default: ChoiceType.SINGLE,
-	},
 	minimumChoices: {
 		type: 'number',
-		default: 0,
+		default: 1,
 	},
 	maximumChoices: {
 		type: 'number',
-		default: 0,
+		default: 1,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {

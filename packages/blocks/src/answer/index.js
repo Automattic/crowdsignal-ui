@@ -3,12 +3,14 @@
  */
 import classnames from 'classnames';
 import styled from '@emotion/styled';
+import { useContext } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
 import { Button } from '../components';
+import MultipleChoice from '../multiple-choice';
 
 const Input = styled.input`
 	height: 1px;
@@ -20,9 +22,15 @@ const Input = styled.input`
 const Answer = ( { attributes, className } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
+	const parentQuestion = useContext( MultipleChoice.Context );
+
+	const isMultipleSelection = parentQuestion.maximumChoices > 1;
+
 	const { inputProps } = useField( {
-		name: `q_${ 'test' }[choice]`,
-		type: 'checkbox',
+		name: `q_${ parentQuestion.clientId }[choice]${
+			isMultipleSelection ? '[]' : ''
+		}`,
+		type: isMultipleSelection ? 'checkbox' : 'radio',
 		value: attributes.clientId,
 	} );
 
