@@ -3,7 +3,7 @@
  */
 import { useCallback } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-// import { __ } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { debounce, get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { parse } from '@wordpress/blocks';
@@ -16,6 +16,7 @@ import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import BlockLoader from './block-loader';
+import DocumentSettings from './document-settings';
 import Toolbar from './toolbar';
 
 /**
@@ -29,9 +30,11 @@ const editorSettings = {
 			fixedToolbar: false,
 		},
 		toolbar: {
+			documentInspector: __( 'Document', 'dashboard' ),
 			inspector: true,
 			toc: true,
 		},
+		// documentInspector: __( 'Document', 'dashboard' ),
 	},
 };
 
@@ -97,6 +100,8 @@ const Editor = ( { projectId } ) => {
 				onError={ noop }
 			>
 				<Toolbar projectId={ projectId } />
+				<DocumentSettings />
+
 				<BlockLoader blocks={ displayedBlocks } />
 			</IsolatedBlockEditor>
 		</div>
