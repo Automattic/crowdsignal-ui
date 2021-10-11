@@ -38,6 +38,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {
+    "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27"
   },
   "scripts": {
