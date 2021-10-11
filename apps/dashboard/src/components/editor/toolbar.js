@@ -22,15 +22,13 @@ const Toolbar = ( { projectId } ) => {
 	} );
 
 	const syncProject = () => {
-		const payload = { title: 'Drafted!' };
 		saveAndUpdateProject( projectId, {
 			...project,
-			...payload,
 		} );
 	};
 
 	const publishProject = () => {
-		const payload = { title: 'Published!', publish: true };
+		const payload = { publish: true };
 		saveAndUpdateProject( projectId, {
 			...project,
 			content: {
