@@ -12,7 +12,12 @@ import App from './components/app';
 const renderProject = () =>
 	render(
 		<StyleProvider reset>
-			<App project={ window.project } />
+			<App
+				project={ window.__CS_PROJECT__.project }
+				page={ window.__CS_PROJECT__.p }
+				responseHash={ window.__CS_PROJECT__.r }
+				startDate={ window.__CS_PROJECT__.startDate }
+			/>
 		</StyleProvider>,
 		document.getElementById( 'crowdsignal-project' )
 	);
