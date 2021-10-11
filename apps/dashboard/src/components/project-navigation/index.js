@@ -38,7 +38,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 		<div className="project-navigation">
 			<EditablePageHeader
 				onChange={ updateTitle }
-				text={ project.title }
+				text={ project?.title || __( 'Untitled Project', 'dashboard' ) }
 			/>
 			<TabNavigation>
 				<TabNavigation.Tab
