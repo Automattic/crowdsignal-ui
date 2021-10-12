@@ -50,6 +50,7 @@
 	background-color: transparent;
 	border: 0;
 	box-sizing: border-box;
+	color: var(--color-text);
 	cursor: pointer;
 	display: flex;
 	font-size: 12px;
@@ -61,8 +62,10 @@
 	text-decoration: none;
 	width: 100%;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: var(--color-neutral-0);
+		color: var(--color-text);
 	}
 }
 

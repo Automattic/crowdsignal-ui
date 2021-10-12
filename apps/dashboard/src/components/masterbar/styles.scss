@@ -19,7 +19,7 @@
 }
 
 .masterbar__logo-link {
-	display: block;
+	display: flex;
 	margin: 0 32px;
 }
 
@@ -45,6 +45,11 @@
 	outline: 0;
 	padding: 0 32px;
 	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: var(--color-text-inverted);
+	}
 }
 
 .masterbar__navigation-button.is-user-toggle {
