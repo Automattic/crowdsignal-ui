@@ -11,6 +11,7 @@ import { parse } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
+import { useStylesheet } from '@crowdsignal/hooks';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
@@ -79,6 +80,10 @@ const Editor = ( { projectId } ) => {
 			}
 		}, 1000 ),
 		[ projectId, project ]
+	);
+
+	useStylesheet(
+		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
 
 	if ( projectId && null === project ) {
