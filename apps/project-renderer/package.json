@@ -23,7 +23,7 @@
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/form": "^0.1.0",
     "@crowdsignal/hooks": "^0.1.0",
-    "@wordpress/element": "^4.0.1",
+    "@wordpress/element": "^4.0.2",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
