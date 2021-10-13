@@ -40,9 +40,13 @@ const editorSettings = {
 };
 
 const Editor = ( { projectId } ) => {
-	const project = useSelect( ( select ) =>
-		select( STORE_NAME ).getProject( projectId )
-	);
+	const [ project, isDraftSaved, isPublishSaved ] = useSelect( ( select ) => {
+		return [
+			select( STORE_NAME ).getProject( projectId ),
+			select( STORE_NAME ).isProjectDraftSaved(),
+			select( STORE_NAME ).isProjectPublishSaved(),
+		];
+	} );
 
 	const projectContent = get( project, [ 'content' ], {} );
 
@@ -55,9 +59,9 @@ const Editor = ( { projectId } ) => {
 		draftedBlocks
 	);
 
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
+	const { saveAndUpdateProject, changeProject } = useDispatch( STORE_NAME );
 
-	const handleChangeContent = useCallback(
+	const debounceSave = useCallback(
 		debounce( ( content ) => {
 			try {
 				const blocks = parse( content );
@@ -78,12 +82,22 @@ const Editor = ( { projectId } ) => {
 				// eslint-disable-next-line
 				console.error( error );
 			}
-		}, 1000 ),
+		}, 2000 ),
 		[ projectId, project ]
 	);
 
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
+	);
+
+	const handleChangeContent = useCallback(
+		( content ) => {
+			if ( isDraftSaved || isPublishSaved ) {
+				changeProject();
+			}
+			debounceSave( content );
+		},
+		[ debounceSave, isDraftSaved, isPublishSaved ]
 	);
 
 	if ( projectId && null === project ) {
