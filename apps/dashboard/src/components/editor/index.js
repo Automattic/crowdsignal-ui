@@ -40,11 +40,10 @@ const editorSettings = {
 };
 
 const Editor = ( { projectId } ) => {
-	const [ project, isDraftSaved, isPublishSaved ] = useSelect( ( select ) => {
+	const [ project, isSaved ] = useSelect( ( select ) => {
 		return [
 			select( STORE_NAME ).getProject( projectId ),
-			select( STORE_NAME ).isProjectDraftSaved(),
-			select( STORE_NAME ).isProjectPublishSaved(),
+			select( STORE_NAME ).isProjectSaved(),
 		];
 	} );
 
@@ -92,12 +91,12 @@ const Editor = ( { projectId } ) => {
 
 	const handleChangeContent = useCallback(
 		( content ) => {
-			if ( isDraftSaved || isPublishSaved ) {
-				changeProject();
+			if ( isSaved ) {
+				changeProject( project );
 			}
 			debounceSave( content );
 		},
-		[ debounceSave, isDraftSaved, isPublishSaved ]
+		[ debounceSave, isSaved ]
 	);
 
 	if ( projectId && null === project ) {
