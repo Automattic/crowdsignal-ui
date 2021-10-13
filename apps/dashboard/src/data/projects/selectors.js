@@ -11,3 +11,9 @@ export const getProject = ( state, projectId ) =>
 
 export const isProjectSaving = ( state ) =>
 	get( state, [ 'projects', 'isSaving' ], false );
+
+export const isProjectDraftSaved = ( state ) =>
+	get( state, [ 'projects', 'isDraftSaved' ], false );
+
+export const isProjectPublishSaved = ( state ) =>
+	get( state, [ 'projects', 'isPublishSaved' ], false );
