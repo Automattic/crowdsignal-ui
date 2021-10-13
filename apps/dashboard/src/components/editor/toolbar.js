@@ -82,7 +82,9 @@ const Toolbar = ( { projectId } ) => {
 				onClick={ syncProject }
 				disabled={ isSaving || isDraftSaved }
 			>
-				{ __( 'Save draft', 'dashboard' ) }
+				{ isDraftSaved
+					? __( 'Draft saved', 'dashboard' )
+					: __( 'Save draft', 'dashboard' ) }
 			</Button>
 			<Button
 				className="is-crowdsignal"
@@ -93,6 +95,18 @@ const Toolbar = ( { projectId } ) => {
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</Button>
+			{ ! isPublishSaved && (
+				<Button
+					className="is-crowdsignal"
+					variant={ isPublished ? 'tertiary' : 'primary' }
+					onClick={ publishProject }
+					disabled={ isSaving }
+				>
+					{ isPublished
+						? __( 'Update', 'dashboard' )
+						: __( 'Publish', 'dashboard' ) }
+				</Button>
+			) }
 			{ isPublished && (
 				<Button
 					className="is-crowdsignal"
@@ -101,18 +115,6 @@ const Toolbar = ( { projectId } ) => {
 					disabled={ ! isPublished }
 				>
 					{ __( 'Share', 'block-editor' ) }
-				</Button>
-			) }
-			{ ! isPublishSaved && (
-				<Button
-					className="is-crowdsignal"
-					variant="primary"
-					onClick={ publishProject }
-					disabled={ isSaving }
-				>
-					{ isPublished
-						? __( 'Update', 'dashboard' )
-						: __( 'Publish', 'dashboard' ) }
 				</Button>
 			) }
 		</ToolbarSlot>
