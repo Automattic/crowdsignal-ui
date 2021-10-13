@@ -13,6 +13,7 @@ import {
 	PROJECT_UPDATE,
 	PROJECT_CHANGE,
 } from '../action-types';
+import * as ProjectStatus from '../../util/project/project-status';
 
 const items = ( state = {}, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
@@ -48,47 +49,41 @@ const isSaving = ( state = false, action ) => {
 	return state;
 };
 
-const isDraftSaved = ( state = false, action ) => {
+const projectStatus = (
+	state = ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES,
+	action
+) => {
+	let newStatus = state;
+	const hasBeenPublished = get(
+		action,
+		[ 'project', 'content', 'published' ],
+		null
+	);
 	if ( action.type === PROJECT_UPDATE ) {
-		return true;
+		newStatus = ProjectStatus.DRAFT;
+		if (
+			hasBeenPublished &&
+			action.project.content.published.ts <
+				action.project.content.draft.ts
+		) {
+			newStatus = ProjectStatus.PUBLIC_WITH_UNPUBLISHED_CHAGES;
+		} else if ( hasBeenPublished ) {
+			newStatus = ProjectStatus.PUBLIC;
+		}
 	}
 
 	if ( action.type === PROJECT_CHANGE ) {
-		return false;
+		newStatus = ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES;
+		if ( hasBeenPublished ) {
+			newStatus = ProjectStatus.PUBLIC_WITH_UNSAVED_CHAGES;
+		}
 	}
-
-	return state;
-};
-
-const isPublishSaved = ( state = false, action ) => {
-	if ( action.type === PROJECT_UPDATE ) {
-		const publishTimestamp = get(
-			action,
-			[ 'project', 'content', 'published', 'ts' ],
-			0
-		);
-		const draftTimestamp = get(
-			action,
-			[ 'project', 'content', 'draft', 'ts' ],
-			0
-		);
-		return (
-			action.project.published === true &&
-			publishTimestamp > draftTimestamp
-		);
-	}
-
-	if ( action.type === PROJECT_CHANGE ) {
-		return false;
-	}
-
-	return state;
+	return newStatus;
 };
 
 export default combineReducers( {
 	items,
 	lastUpdatedItemId,
 	isSaving,
-	isDraftSaved,
-	isPublishSaved,
+	projectStatus,
 } );
