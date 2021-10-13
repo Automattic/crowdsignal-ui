@@ -3,7 +3,7 @@
  */
 import { fetchProject } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
-import { updateProject } from '../projects/actions';
+import { updateProject, loadedProject } from '../projects/actions';
 
 function* getProject( projectId ) {
 	if ( ! projectId ) {
@@ -13,6 +13,7 @@ function* getProject( projectId ) {
 		const response = yield dispatchAsync( fetchProject, [ projectId ] );
 
 		yield updateProject( projectId, response.data );
+		yield loadedProject( projectId );
 	} catch ( error ) {
 		// Some fetch error, need to handle this more gracefully
 	}
