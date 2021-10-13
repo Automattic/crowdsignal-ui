@@ -34,7 +34,7 @@ const editorSettings = {
 			documentInspector: __( 'Document', 'dashboard' ),
 			inspector: true,
 			navigation: true,
-			toc: true,
+			toc: false,
 		},
 	},
 };
