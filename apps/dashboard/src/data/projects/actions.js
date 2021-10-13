@@ -14,9 +14,10 @@ import {
 } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
 
-export function saveProject() {
+export function saveProject( publish ) {
 	return {
 		type: PROJECT_SAVE,
+		publish,
 	};
 }
 
@@ -36,7 +37,7 @@ export function saveProjectError( message ) {
 }
 
 export function* saveAndUpdateProject( projectId, project ) {
-	yield saveProject(); // sets isLoading
+	yield saveProject( project.publish ); // sets isLoading
 
 	try {
 		const response = projectId
