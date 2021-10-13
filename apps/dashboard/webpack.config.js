@@ -3,6 +3,8 @@ const webpack = require( 'webpack' );
 const package = require( './package.json' );
 const getBaseConfig = require( '@automattic/calypso-build/webpack.config.js' );
 
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
+
 function getWebpackConfig( env, { entry, ...argv } ) {
 	const baseConfig = getBaseConfig( env, argv );
 
@@ -12,10 +14,10 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 		output: {
 			...baseConfig.output,
 		},
-		externals: {
-			react: 'React',
-			'react-dom': 'ReactDOM',
-		},
+		// externals: {
+		// 	react: 'React',
+		// 	'react-dom': 'ReactDOM',
+		// },
 		plugins: [
 			...baseConfig.plugins.map( ( plugin ) => {
 				if ( plugin.constructor.name !== 'DefinePlugin' ) {
@@ -33,6 +35,9 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 					'process.env.COMPONENT_SYSTEM_PHASE': JSON.stringify( 1 ),
 				} );
 			} ),
+			// new DependencyExtractionWebpackPlugin( {
+			// 	injectPolyfill: true,
+			// } ),
 		],
 		devServer: {
 			contentBase: [

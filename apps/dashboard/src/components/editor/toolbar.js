@@ -52,14 +52,18 @@ const Toolbar = ( { projectId } ) => {
 				},
 				( err ) => {
 					// eslint-disable-next-line
-					window.alert( 'Share URL could not be copied to clipboard' );
+					window.alert(
+						'Share URL could not be copied to clipboard'
+					);
 					// eslint-disable-next-line
 					console.error( err );
 				}
 			);
 		} else {
 			// eslint-disable-next-line
-			window.alert( 'Share URL will is only available for published projects' );
+			window.alert(
+				'Share URL will is only available for published projects'
+			);
 		}
 		return false;
 	};

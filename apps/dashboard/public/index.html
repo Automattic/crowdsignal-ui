@@ -4,14 +4,79 @@
 	<title>Crowdsignal Dashboard</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://app.crowdsignal.com/js/production/gutenberg-v11.6.0.css" />
 	<link rel="stylesheet" href="/main.css" />
 </head>
 
 <body>
 	<div id="crowdsignal-dashboard"></div>
 
-	<script src="https://app.crowdsignal.com/js/react/react.development.js"></script>
-	<script src="https://app.crowdsignal.com/js/react/react-dom.development.js"></script>
+<!-- 	<script src="https://app.crowdsignal.com/js/react/react.production.min.js"></script>
+	<script src="https://app.crowdsignal.com/js/react/react-dom.production.min.js"></script>
+ -->
+
+	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/vendor/react.min.755b0ae9.js?m=1624062436h"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/vendor/react-dom.min.edd8b7a6.js?m=1624062436h"></script>
+
+	<!-- <script src="https://app.crowdsignal.com/js/production/lodash-4.17.15.min.js"></script> -->
+	<script src="https://s0.wp.com/wp-includes/js/dist/vendor/lodash.min.js?m=1627645843h&ver=4.17.19"></script>
+	
+	<script src="https://app.crowdsignal.com/js/production/moment-2.29.1.min.js"></script>
+	<script src="/regeneratorRuntime.js"></script>
+	<script>
+		window.lodash = window._;
+		window.regeneratorRuntime = window.runtime;
+	</script>
+	<!-- <script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill.js"></script> -->
+
+	<!-- <script src="https://app.crowdsignal.com/js/production/gutenberg-v11.6.0.js"></script> -->
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/escape-html/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/dom/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/dom-ready/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/date/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/element/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/hooks/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/html-entities/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/i18n/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/is-shallow-equal/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/primitives/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/priority-queue/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/react-i18n/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/redux-routine/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/shortcode/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/token-list/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/url/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/wordcount/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/deprecated/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/keycodes/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/compose/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/data/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/data-controls/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/notices/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/rich-text/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/viewport/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/a11y/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/annotations/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/api-fetch/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/autop/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/blob/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/block-serialization-default-parser/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/block-serialization-spec-parser/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/keyboard-shortcuts/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/media-utils/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/core-data/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/warning/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/components/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/plugins/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/blocks/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/list-reusable-blocks/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/block-editor/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/block-library/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/reusable-blocks/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/server-side-render/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/editor/index.min.js"></script>
+ 	<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/v11.6.0/build/format-library/index.min.js"></script>
+
 	<script src="/main.js"></script>
 </body>
 </html>

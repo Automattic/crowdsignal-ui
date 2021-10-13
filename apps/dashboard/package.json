@@ -26,13 +26,14 @@
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
     "@wordpress/blocks": "^11.0.0",
+    "@wordpress/components": "^15.0.0",
     "@wordpress/data": "^6.0.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^3.2.1",
     "@wordpress/element": "^4.0.0",
     "@wordpress/i18n": "^4.2.1",
     "classnames": "^2.2.5",
-    "lodash": "^4.17.21",
-	"isolated-block-editor": "github:automattic/isolated-block-editor#2.3.0",
-	"@wordpress/components": "^15.0.0"
+    "isolated-block-editor": "github:automattic/isolated-block-editor#2.3.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.2"
@@ -42,7 +43,7 @@
     "@emotion/styled": "^10.0.27"
   },
   "scripts": {
-    "build": "calypso-build ./src/index.js",
+    "build": "calypso-build ./src/index.js --env WP",
     "start": "webpack serve"
   }
 }

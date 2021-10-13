@@ -19,7 +19,7 @@ export function updatePoll( pollId, poll ) {
 	};
 }
 
-export function* saveAndUpdatePoll( pollId, poll ) {
+export const saveAndUpdatePoll = function* ( pollId, poll ) {
 	try {
 		const response = yield savePoll( pollId, poll );
 		const id = pollId || response.data.id;
@@ -32,4 +32,4 @@ export function* saveAndUpdatePoll( pollId, poll ) {
 		// Save failed
 		throw error;
 	}
-}
+};
