@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { combineReducers } from '@wordpress/data';
+import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -61,12 +62,18 @@ const isDraftSaved = ( state = false, action ) => {
 
 const isPublishSaved = ( state = false, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
-		return action.project.published === true;
+		const publishTs = get(
+			action,
+			[ 'project', 'content', 'published', 'ts' ],
+			0
+		);
+		const draftTs = get(
+			action,
+			[ 'project', 'content', 'draft', 'ts' ],
+			0
+		);
+		return action.project.published === true && publishTs > draftTs;
 	}
-
-	// if ( action.type === PROJECT_SAVE ) {
-	// 	return action.publish === true;
-	// }
 
 	if ( action.type === PROJECT_CHANGE ) {
 		return false;
