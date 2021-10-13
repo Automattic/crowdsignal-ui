@@ -10,17 +10,19 @@ import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line impo
  */
 import { STORE_NAME } from '../../data';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { PUBLIC_WITH_UNPUBLISHED_CHAGES } from '../../util/project/project-status';
 
 const Toolbar = ( { projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
-	const [ project, isSaving, isDraftSaved, isPublishSaved ] = useSelect(
+	const [ project, isSaving, isSaved, isPublic, projectStatus ] = useSelect(
 		( select ) => {
 			return [
 				select( STORE_NAME ).getProject( projectId ),
 				select( STORE_NAME ).isProjectSaving(),
-				select( STORE_NAME ).isProjectDraftSaved(),
-				select( STORE_NAME ).isProjectPublishSaved(),
+				select( STORE_NAME ).isProjectSaved(),
+				select( STORE_NAME ).isProjectPublic(),
+				select( STORE_NAME ).getProjectStatus(),
 			];
 		}
 	);
@@ -72,17 +74,19 @@ const Toolbar = ( { projectId } ) => {
 		return false;
 	};
 
-	const isPublished = project && project.content && project.content.published;
-
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
 			<Button
 				className="is-crowdsignal"
 				variant="tertiary"
 				onClick={ syncProject }
-				disabled={ isSaving || isDraftSaved }
+				disabled={
+					isSaving ||
+					isSaved ||
+					projectStatus === PUBLIC_WITH_UNPUBLISHED_CHAGES
+				}
 			>
-				{ isDraftSaved
+				{ isSaved || ( ! isSaved && isPublic )
 					? __( 'Draft saved', 'dashboard' )
 					: __( 'Save draft', 'dashboard' ) }
 			</Button>
@@ -95,24 +99,24 @@ const Toolbar = ( { projectId } ) => {
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</Button>
-			{ ! isPublishSaved && (
+			{ ! isSaved && (
 				<Button
 					className="is-crowdsignal"
-					variant={ isPublished ? 'tertiary' : 'primary' }
+					variant={ isPublic ? 'tertiary' : 'primary' }
 					onClick={ publishProject }
 					disabled={ isSaving }
 				>
-					{ isPublished
+					{ isPublic
 						? __( 'Update', 'dashboard' )
 						: __( 'Publish', 'dashboard' ) }
 				</Button>
 			) }
-			{ isPublished && (
+			{ isPublic && (
 				<Button
 					className="is-crowdsignal"
 					variant="primary"
 					onClick={ shareHandler }
-					disabled={ ! isPublished }
+					disabled={ isSaving }
 				>
 					{ __( 'Share', 'block-editor' ) }
 				</Button>
