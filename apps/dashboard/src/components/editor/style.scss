@@ -55,23 +55,8 @@
 			position: relative;
 		}
 
-		.popover-slot .iso-inspector {
-			.components-panel__header {
-				padding: 0;
-
-				ul {
-					display: flex;
-					padding: 0;
-				}
-
-				.components-button {
-					height: 48px;
-				}
-			}
-
-			.components-panel__body {
-				box-sizing: border-box;
-			}
+		.components-panel__header.edit-post-sidebar__panel-tabs ul {
+			padding: 0
 		}
 	}
 
