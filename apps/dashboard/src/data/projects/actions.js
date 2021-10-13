@@ -21,10 +21,9 @@ export function changeProject() {
 	};
 }
 
-export function saveProject( publish ) {
+export function saveProject() {
 	return {
 		type: PROJECT_SAVE,
-		publish,
 	};
 }
 
@@ -44,7 +43,7 @@ export function saveProjectError( message ) {
 }
 
 export function* saveAndUpdateProject( projectId, project ) {
-	yield saveProject( project.publish ); // sets isLoading
+	yield saveProject(); // sets isLoading
 
 	try {
 		const response = projectId
