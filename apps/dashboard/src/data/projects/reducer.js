@@ -62,17 +62,20 @@ const isDraftSaved = ( state = false, action ) => {
 
 const isPublishSaved = ( state = false, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
-		const publishTs = get(
+		const publishTimestamp = get(
 			action,
 			[ 'project', 'content', 'published', 'ts' ],
 			0
 		);
-		const draftTs = get(
+		const draftTimestamp = get(
 			action,
 			[ 'project', 'content', 'draft', 'ts' ],
 			0
 		);
-		return action.project.published === true && publishTs > draftTs;
+		return (
+			action.project.published === true &&
+			publishTimestamp > draftTimestamp
+		);
 	}
 
 	if ( action.type === PROJECT_CHANGE ) {
