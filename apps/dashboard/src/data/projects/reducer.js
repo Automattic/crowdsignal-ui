@@ -10,7 +10,6 @@ import {
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
-	PROJECT_LOADED,
 	PROJECT_CHANGE,
 } from '../action-types';
 
@@ -49,7 +48,7 @@ const isSaving = ( state = false, action ) => {
 };
 
 const isDraftSaved = ( state = false, action ) => {
-	if ( action.type === PROJECT_UPDATE || action.type === PROJECT_LOADED ) {
+	if ( action.type === PROJECT_UPDATE ) {
 		return true;
 	}
 
@@ -61,13 +60,13 @@ const isDraftSaved = ( state = false, action ) => {
 };
 
 const isPublishSaved = ( state = false, action ) => {
-	if ( action.type === PROJECT_LOADED ) {
-		return true;
+	if ( action.type === PROJECT_UPDATE ) {
+		return action.project.published === true;
 	}
 
-	if ( action.type === PROJECT_SAVE ) {
-		return action.publish === true;
-	}
+	// if ( action.type === PROJECT_SAVE ) {
+	// 	return action.publish === true;
+	// }
 
 	if ( action.type === PROJECT_CHANGE ) {
 		return false;
