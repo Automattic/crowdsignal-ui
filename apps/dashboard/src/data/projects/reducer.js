@@ -10,7 +10,7 @@ import {
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
-	PROJECT_CHANGE,
+	PROJECT_CONTENT_CHANGE,
 } from '../action-types';
 
 const items = ( state = {}, action ) => {
@@ -52,7 +52,7 @@ const isSaved = ( state = true, action ) => {
 		return true;
 	}
 
-	if ( action.type === PROJECT_CHANGE ) {
+	if ( action.type === PROJECT_CONTENT_CHANGE ) {
 		return false;
 	}
 

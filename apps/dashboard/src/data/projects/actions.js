@@ -5,7 +5,7 @@ import {
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
-	PROJECT_CHANGE,
+	PROJECT_CONTENT_CHANGE,
 } from '../action-types';
 import { redirect } from '@crowdsignal/router';
 
@@ -17,7 +17,7 @@ import { dispatchAsync } from '../actions';
 
 export function changeProject( project ) {
 	return {
-		type: PROJECT_CHANGE,
+		type: PROJECT_CONTENT_CHANGE,
 		project,
 	};
 }
