@@ -1,0 +1,20 @@
+{
+  "name": "@crowdsignal/icons",
+  "version": "0.1.0",
+  "description": "Crowdsignal icon library",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal",
+    "icons"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/icons/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js"
+}
