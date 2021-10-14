@@ -10,22 +10,19 @@ import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line impo
  */
 import { STORE_NAME } from '../../data';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { PUBLIC_WITH_UNPUBLISHED_CHAGES } from '../../util/project/project-status';
+import { hasUnpublishedChanges } from '../../util/project';
 
 const Toolbar = ( { projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
-	const [ project, isSaving, isSaved, isPublic, projectStatus ] = useSelect(
-		( select ) => {
-			return [
-				select( STORE_NAME ).getProject( projectId ),
-				select( STORE_NAME ).isProjectSaving(),
-				select( STORE_NAME ).isProjectSaved(),
-				select( STORE_NAME ).isProjectPublic(),
-				select( STORE_NAME ).getProjectStatus(),
-			];
-		}
-	);
+	const [ project, isSaving, isSaved, isPublic ] = useSelect( ( select ) => {
+		return [
+			select( STORE_NAME ).getProject( projectId ),
+			select( STORE_NAME ).isProjectSaving(),
+			select( STORE_NAME ).isProjectSaved(),
+			select( STORE_NAME ).isProjectPublic(),
+		];
+	} );
 
 	const syncProject = () => {
 		saveAndUpdateProject( projectId, {
@@ -81,9 +78,7 @@ const Toolbar = ( { projectId } ) => {
 				variant="tertiary"
 				onClick={ syncProject }
 				disabled={
-					isSaving ||
-					isSaved ||
-					projectStatus === PUBLIC_WITH_UNPUBLISHED_CHAGES
+					isSaving || isSaved || hasUnpublishedChanges( project )
 				}
 			>
 				{ isSaved || ( ! isSaved && isPublic )
@@ -99,7 +94,7 @@ const Toolbar = ( { projectId } ) => {
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</Button>
-			{ ! isSaved && (
+			{ ( ! isPublic || hasUnpublishedChanges( project ) ) && (
 				<Button
 					className="is-crowdsignal"
 					variant={ isPublic ? 'tertiary' : 'primary' }
