@@ -30,6 +30,7 @@ export const editorSettings = {
 		},
 		sidebar: {
 			inserter: true,
+			inspector: true,
 		},
 		toolbar: {
 			documentInspector: __( 'Document', 'dashboard' ),
