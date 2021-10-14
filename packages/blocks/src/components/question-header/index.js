@@ -11,6 +11,10 @@ import QuestionWrapper from '../question-wrapper';
 const QuestionHeader = styled.h3`
 	margin-top: 0;
 
+	> div {
+		display: inline;
+	}
+
 	${ QuestionWrapper.className }.is-required &::after {
 		display: 'inline';
 		content: ' *';

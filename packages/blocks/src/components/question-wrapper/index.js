@@ -13,6 +13,8 @@ const StyledQuestionWrapper = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 24px;
+	margin-top: 24px;
 	padding: 24px;
 	position: relative;
 	text-align: left;

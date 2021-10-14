@@ -2,23 +2,36 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import { FormTextarea, QuestionWrapper } from '../components';
+import { FormTextarea, QuestionHeader, QuestionWrapper } from '../components';
 
 const FreeText = ( { attributes, className } ) => {
 	const { inputProps } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
 	} );
 
-	return (
-		<QuestionWrapper attributes={ attributes } className={ className }>
-			<RichText.Content tagName="h3" value={ attributes.question } />
+	const classes = classnames( className, {
+		'is-required': attributes.mandatory,
+	} );
 
-			<FormTextarea { ...inputProps } rows={ 6 } />
+	return (
+		<QuestionWrapper attributes={ attributes } className={ classes }>
+			<RichText.Content
+				tagName={ QuestionHeader }
+				value={ attributes.question }
+			/>
+
+			<FormTextarea
+				style={ {
+					height: attributes.inputHeight,
+				} }
+				{ ...inputProps }
+			/>
 		</QuestionWrapper>
 	);
 };
