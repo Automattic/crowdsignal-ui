@@ -20,9 +20,11 @@ import { Form } from '@crowdsignal/form';
 import { STORE_NAME } from '../../data';
 
 const ContentWrapper = styled.div`
+	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 720px;
 	padding: 20px;
+	width: 100%;
 `;
 
 const FormPreview = ( { projectId } ) => {
