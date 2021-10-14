@@ -53,32 +53,33 @@ const projectStatus = (
 	state = ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES,
 	action
 ) => {
-	let newStatus = state;
 	const hasBeenPublished = get(
 		action,
 		[ 'project', 'content', 'published' ],
 		null
 	);
 	if ( action.type === PROJECT_UPDATE ) {
-		newStatus = ProjectStatus.DRAFT;
 		if (
 			hasBeenPublished &&
 			action.project.content.published.timestamp <
 				action.project.content.draft.timestamp
 		) {
-			newStatus = ProjectStatus.PUBLIC_WITH_UNPUBLISHED_CHAGES;
-		} else if ( hasBeenPublished ) {
-			newStatus = ProjectStatus.PUBLIC;
+			return ProjectStatus.PUBLIC_WITH_UNPUBLISHED_CHAGES;
 		}
+
+		if ( hasBeenPublished ) {
+			return ProjectStatus.PUBLIC;
+		}
+		return ProjectStatus.DRAFT;
 	}
 
 	if ( action.type === PROJECT_CHANGE ) {
-		newStatus = ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES;
 		if ( hasBeenPublished ) {
-			newStatus = ProjectStatus.PUBLIC_WITH_UNSAVED_CHAGES;
+			return ProjectStatus.PUBLIC_WITH_UNSAVED_CHAGES;
 		}
+		return ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES;
 	}
-	return newStatus;
+	return state;
 };
 
 export default combineReducers( {
