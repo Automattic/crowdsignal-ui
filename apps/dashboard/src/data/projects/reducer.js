@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { combineReducers } from '@wordpress/data';
-import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,7 +12,6 @@ import {
 	PROJECT_UPDATE,
 	PROJECT_CHANGE,
 } from '../action-types';
-import * as ProjectStatus from '../../util/project/project-status';
 
 const items = ( state = {}, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
@@ -49,36 +47,15 @@ const isSaving = ( state = false, action ) => {
 	return state;
 };
 
-const projectStatus = (
-	state = ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES,
-	action
-) => {
-	const hasBeenPublished = get(
-		action,
-		[ 'project', 'content', 'published' ],
-		null
-	);
+const isSaved = ( state = true, action ) => {
 	if ( action.type === PROJECT_UPDATE ) {
-		if (
-			hasBeenPublished &&
-			action.project.content.published.timestamp <
-				action.project.content.draft.timestamp
-		) {
-			return ProjectStatus.PUBLIC_WITH_UNPUBLISHED_CHAGES;
-		}
-
-		if ( hasBeenPublished ) {
-			return ProjectStatus.PUBLIC;
-		}
-		return ProjectStatus.DRAFT;
+		return true;
 	}
 
 	if ( action.type === PROJECT_CHANGE ) {
-		if ( hasBeenPublished ) {
-			return ProjectStatus.PUBLIC_WITH_UNSAVED_CHAGES;
-		}
-		return ProjectStatus.DRAFT_WITH_UNSAVED_CHANGES;
+		return false;
 	}
+
 	return state;
 };
 
@@ -86,5 +63,5 @@ export default combineReducers( {
 	items,
 	lastUpdatedItemId,
 	isSaving,
-	projectStatus,
+	isSaved,
 } );
