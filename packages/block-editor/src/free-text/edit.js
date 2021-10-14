@@ -2,37 +2,66 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
+import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { TextareaControl } from '@wordpress/components';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
+import {
+	FormTextarea,
+	QuestionHeader,
+	QuestionWrapper,
+} from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
+import Sidebar from './sidebar';
 
 const FreeText = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, className, setAttributes } = props;
 
 	useClientId( props );
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
-	const handleChangeNote = ( note ) => setAttributes( { note } );
+	const handleResizeInput = ( event, handle, element ) => {
+		if ( handle !== 'bottom' ) {
+			return;
+		}
+
+		setAttributes( {
+			inputHeight: `${ element.offsetHeight }px`,
+		} );
+	};
+
+	const classes = classnames( className, {
+		'is-required': attributes.mandatory,
+	} );
 
 	return (
-		<>
+		<QuestionWrapper attributes={ attributes } className={ classes }>
+			<Sidebar { ...props } />
+
 			<RichText
-				tagName="p"
+				tagName={ QuestionHeader }
 				placeholder={ __( 'Enter your question', 'blocks' ) }
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
 			/>
-			<TextareaControl
-				rows={ 6 }
-				onChange={ handleChangeNote }
-				value={ attributes.note }
-			/>
-		</>
+
+			<ResizableBox
+				size={ { width: '100%', height: attributes.inputHeight } }
+				minHeight="35px"
+				enable={ { bottom: true } }
+				onResizeStop={ handleResizeInput }
+			>
+				<FormTextarea.Preview
+					style={ {
+						height: '100%',
+					} }
+				/>
+			</ResizableBox>
+		</QuestionWrapper>
 	);
 };
 

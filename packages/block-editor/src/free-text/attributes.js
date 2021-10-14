@@ -45,6 +45,9 @@ export default {
 	gradient: {
 		type: 'string',
 	},
+	inputHeight: {
+		type: 'string',
+	},
 	textColor: {
 		type: 'string',
 	},
