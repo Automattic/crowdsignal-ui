@@ -6,5 +6,6 @@ module.exports = {
 	plugins: [
 		'@babel/plugin-transform-runtime',
 		'@wordpress/babel-plugin-import-jsx-pragma',
+		'babel-plugin-emotion',
 	],
 };
