@@ -9,11 +9,11 @@ import { get } from 'lodash';
  */
 import {
 	Answer,
-	FreeText,
 	MultipleChoice,
 	Poll,
 	PollAnswer,
 	SubmitButton,
+	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
@@ -71,11 +71,11 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 				<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 					{ renderBlocks( content, {
 						'crowdsignal-forms/answer': Answer,
-						'crowdsignal-forms/free-text': FreeText,
 						'crowdsignal-forms/multiple-choice': MultipleChoice,
 						'crowdsignal-forms/poll': Poll,
 						'crowdsignal-forms/poll-answer': PollAnswer,
 						'crowdsignal-forms/submit-button': SubmitButton,
+						'crowdsignal-forms/text-question': TextQuestion,
 					} ) }
 				</Form>
 			</ContentWrapper>

@@ -17,7 +17,7 @@ import {
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 
-const FreeText = ( props ) => {
+const EditTextQuestion = ( props ) => {
 	const { attributes, className, setAttributes } = props;
 
 	useClientId( props );
@@ -65,4 +65,4 @@ const FreeText = ( props ) => {
 	);
 };
 
-export default FreeText;
+export default EditTextQuestion;

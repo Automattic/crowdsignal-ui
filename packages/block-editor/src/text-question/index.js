@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import attributes from './attributes';
 import EditFreeText from './edit';
 
-const name = 'crowdsignal-forms/free-text';
+const name = 'crowdsignal-forms/text-question';
 
 const settings = {
 	apiVersion: 1,

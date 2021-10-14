@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import { useField } from '@crowdsignal/form';
 import { FormTextarea, QuestionHeader, QuestionWrapper } from '../components';
 
-const FreeText = ( { attributes, className } ) => {
+const TextQuestion = ( { attributes, className } ) => {
 	const { inputProps } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
 	} );
@@ -36,4 +36,4 @@ const FreeText = ( { attributes, className } ) => {
 	);
 };
 
-export default FreeText;
+export default TextQuestion;

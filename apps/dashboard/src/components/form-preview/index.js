@@ -9,11 +9,11 @@ import styled from '@emotion/styled';
  */
 import {
 	Answer,
-	FreeText,
 	MultipleChoice,
 	Poll,
 	PollAnswer,
 	SubmitButton,
+	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
@@ -44,11 +44,11 @@ const FormPreview = ( { projectId } ) => {
 			<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
 					'crowdsignal-forms/answer': Answer,
-					'crowdsignal-forms/free-text': FreeText,
 					'crowdsignal-forms/multiple-choice': MultipleChoice,
 					'crowdsignal-forms/poll': Poll,
 					'crowdsignal-forms/poll-answer': PollAnswer,
 					'crowdsignal-forms/submit-button': SubmitButton,
+					'crowdsignal-forms/text-question': TextQuestion,
 				} ) }
 			</Form>
 		</ContentWrapper>
