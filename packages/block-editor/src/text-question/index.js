@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { TextQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditFreeText from './edit';
 
@@ -13,9 +14,13 @@ const name = 'crowdsignal-forms/text-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Free Text', 'blocks' ),
-	description: __( 'Allows for a free text response on your form', 'blocks' ),
+	title: __( 'Text Question', 'blocks' ),
+	description: __(
+		'Ask a question and offer an open text field to enter an answer.',
+		'blocks'
+	),
 	category: 'crowdsignal-forms',
+	icon: <TextQuestionIcon />,
 	edit: EditFreeText,
 	attributes,
 	supports: {
