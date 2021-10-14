@@ -63,8 +63,8 @@ const projectStatus = (
 		newStatus = ProjectStatus.DRAFT;
 		if (
 			hasBeenPublished &&
-			action.project.content.published.ts <
-				action.project.content.draft.ts
+			action.project.content.published.timestamp <
+				action.project.content.draft.timestamp
 		) {
 			newStatus = ProjectStatus.PUBLIC_WITH_UNPUBLISHED_CHAGES;
 		} else if ( hasBeenPublished ) {
