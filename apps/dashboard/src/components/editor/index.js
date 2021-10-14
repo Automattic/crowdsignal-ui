@@ -58,7 +58,9 @@ const Editor = ( { projectId } ) => {
 		draftedBlocks
 	);
 
-	const { saveAndUpdateProject, changeProject } = useDispatch( STORE_NAME );
+	const { saveAndUpdateProject, changeProjectContent } = useDispatch(
+		STORE_NAME
+	);
 
 	const debounceSave = useCallback(
 		debounce( ( content ) => {
@@ -92,7 +94,7 @@ const Editor = ( { projectId } ) => {
 	const handleChangeContent = useCallback(
 		( content ) => {
 			if ( isSaved ) {
-				changeProject( project );
+				changeProjectContent( project );
 			}
 			debounceSave( content );
 		},

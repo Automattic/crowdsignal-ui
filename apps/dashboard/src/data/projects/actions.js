@@ -15,7 +15,7 @@ import {
 } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
 
-export function changeProject( project ) {
+export function changeProjectContent( project ) {
 	return {
 		type: PROJECT_CONTENT_CHANGE,
 		project,
