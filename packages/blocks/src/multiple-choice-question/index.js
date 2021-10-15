@@ -3,19 +3,26 @@
  */
 import { RichText } from '@wordpress/block-editor';
 import { createContext } from '@wordpress/element';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
-import { QuestionWrapper } from '../components';
+import { QuestionHeader, QuestionWrapper } from '../components';
 
 const Context = createContext();
 
 const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
+	const classes = classnames( className, {
+		'is-required': attributes.mandatory,
+	} );
+
 	return (
-		<QuestionWrapper attributes={ attributes } className={ className }>
-			<RichText.Content tagName="h3" value={ attributes.question } />
-			<RichText.Content value={ attributes.note } />
+		<QuestionWrapper attributes={ attributes } className={ classes }>
+			<RichText.Content
+				tagName={ QuestionHeader }
+				value={ attributes.question }
+			/>
 
 			<Context.Provider value={ attributes }>
 				<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
