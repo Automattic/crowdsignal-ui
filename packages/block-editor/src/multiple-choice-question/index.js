@@ -8,19 +8,19 @@ import { InnerBlocks } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import attributes from './attributes';
-import EditMultipleChoice from './edit';
+import EditMultipleChoiceQuestion from './edit';
 
-const name = 'crowdsignal-forms/multiple-choice';
+const name = 'crowdsignal-forms/multiple-choice-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Multiple Choice', 'blocks' ),
+	title: __( 'Multiple Choice Question', 'blocks' ),
 	description: __(
-		'Allows for a multiple choice question on your form',
+		'Ask a question and offer multiple answer options.',
 		'blocks'
 	),
 	category: 'crowdsignal-forms',
-	edit: EditMultipleChoice,
+	edit: EditMultipleChoiceQuestion,
 	save: () => <InnerBlocks.Content />,
 	attributes,
 	supports: {

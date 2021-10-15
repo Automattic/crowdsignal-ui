@@ -20,7 +20,7 @@ const ALLOWED_ANSWER_BLOCKS = [
 	'crowdsignal-forms/answer',
 ];
 
-const MultipleChoice = ( props ) => {
+const EditMultipleChoiceQuestion = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	useClientId( props );
@@ -58,4 +58,4 @@ const MultipleChoice = ( props ) => {
 	);
 };
 
-export default MultipleChoice;
+export default EditMultipleChoiceQuestion;

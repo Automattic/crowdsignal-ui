@@ -9,9 +9,9 @@ import { createContext } from '@wordpress/element';
  */
 import { QuestionWrapper } from '../components';
 
-const Context = createContext( 'crowdsignal/multiple-choice' );
+const Context = createContext();
 
-const MultipleChoice = ( { attributes, children, className } ) => {
+const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 	return (
 		<QuestionWrapper attributes={ attributes } className={ className }>
 			<RichText.Content tagName="h3" value={ attributes.question } />
@@ -24,6 +24,6 @@ const MultipleChoice = ( { attributes, children, className } ) => {
 	);
 };
 
-MultipleChoice.Context = Context;
+MultipleChoiceQuestion.Context = Context;
 
-export default MultipleChoice;
+export default MultipleChoiceQuestion;

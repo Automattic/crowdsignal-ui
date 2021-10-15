@@ -9,7 +9,7 @@ import { get } from 'lodash';
  */
 import {
 	Answer,
-	MultipleChoice,
+	MultipleChoiceQuestion,
 	Poll,
 	PollAnswer,
 	SubmitButton,
@@ -71,7 +71,7 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 				<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 					{ renderBlocks( content, {
 						'crowdsignal-forms/answer': Answer,
-						'crowdsignal-forms/multiple-choice': MultipleChoice,
+						'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
 						'crowdsignal-forms/poll': Poll,
 						'crowdsignal-forms/poll-answer': PollAnswer,
 						'crowdsignal-forms/submit-button': SubmitButton,
