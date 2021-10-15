@@ -19,7 +19,7 @@ const Input = styled.input`
 	width: 1px;
 `;
 
-const Answer = ( { attributes, className } ) => {
+const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
@@ -54,4 +54,4 @@ const Answer = ( { attributes, className } ) => {
 	);
 };
 
-export default Answer;
+export default MultipleChoiceAnswer;

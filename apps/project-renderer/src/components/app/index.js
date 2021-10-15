@@ -8,7 +8,7 @@ import { get } from 'lodash';
  * Internal dependencies
  */
 import {
-	Answer,
+	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	Poll,
 	PollAnswer,
@@ -70,7 +70,7 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 			<ContentWrapper>
 				<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 					{ renderBlocks( content, {
-						'crowdsignal-forms/answer': Answer,
+						'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 						'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
 						'crowdsignal-forms/poll': Poll,
 						'crowdsignal-forms/poll-answer': PollAnswer,

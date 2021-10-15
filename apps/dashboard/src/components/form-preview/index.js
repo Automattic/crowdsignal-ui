@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import {
-	Answer,
+	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	Poll,
 	PollAnswer,
@@ -43,7 +43,7 @@ const FormPreview = ( { projectId } ) => {
 		<ContentWrapper>
 			<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
-					'crowdsignal-forms/answer': Answer,
+					'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 					'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
 					'crowdsignal-forms/poll': Poll,
 					'crowdsignal-forms/poll-answer': PollAnswer,

@@ -1,6 +1,6 @@
 export * from './components';
 
-export { default as Answer } from './answer';
+export { default as MultipleChoiceAnswer } from './multiple-choice-answer';
 export { default as MultipleChoiceQuestion } from './multiple-choice-question';
 export { default as Poll } from './poll';
 export { default as PollAnswer } from './poll-answer';
