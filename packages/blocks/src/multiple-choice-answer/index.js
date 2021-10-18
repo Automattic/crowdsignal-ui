@@ -38,6 +38,10 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 		'is-selected': inputProps.checked,
 	} );
 
+	if ( ! attributes.label ) {
+		return null;
+	}
+
 	return (
 		<Button
 			as="label"
