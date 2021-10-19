@@ -1,21 +1,16 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import {
-	Button,
-	FormCheckbox,
-	MultipleChoiceQuestion,
-	getBlockStyle,
-} from '@crowdsignal/blocks';
+import { MultipleChoiceQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import { useParentAttributes } from '../util/use-parent-attributes';
+import EditButtonAnswer from './edit-button';
+import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
 
 const EditMultipleChoiceAnswer = ( props ) => {
@@ -39,53 +34,29 @@ const EditMultipleChoiceAnswer = ( props ) => {
 
 	const blockStyle = getBlockStyle( questionAttributes.className );
 
-	const width = attributes.width ? `${ attributes.width }%` : null;
-
 	return (
 		<>
 			<Sidebar { ...props } />
 
 			{ blockStyle === MultipleChoiceQuestion.Style.CHECKBOX && (
-				<FormCheckbox.Label as={ 'div' } className={ className }>
-					<FormCheckbox
-						type={
-							questionAttributes.maximumChoices === 1
-								? 'radio'
-								: 'checkbox'
-						}
-					/>
-
-					<RichText
-						placeholder={ __( 'Enter an answer', 'blocks' ) }
-						multiline={ false }
-						preserveWhiteSpace={ false }
-						onChange={ handleChangeLabel }
-						onReplace={ onReplace }
-						onSplit={ handleSplit }
-						value={ attributes.label }
-						allowedFormats={ [] }
-						withoutInteractiveFormatting
-					/>
-				</FormCheckbox.Label>
-			) }
-
-			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
-				<Button
+				<EditCheckboxAnswer
 					attributes={ attributes }
-					as={ RichText }
 					className={ className }
-					style={ {
-						width,
-					} }
-					placeholder={ __( 'Enter an answer', 'blocks' ) }
-					multiline={ false }
-					preserveWhiteSpace={ false }
+					multipleChoice={ questionAttributes.maximumChoices !== 1 }
 					onChange={ handleChangeLabel }
 					onReplace={ onReplace }
 					onSplit={ handleSplit }
-					value={ attributes.label }
-					allowedFormats={ [] }
-					withoutInteractiveFormatting
+				/>
+			) }
+
+			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
+				<EditButtonAnswer
+					attributes={ attributes }
+					className={ className }
+					multipleChoice={ questionAttributes.maximumChoices !== 1 }
+					onChange={ handleChangeLabel }
+					onReplace={ onReplace }
+					onSplit={ handleSplit }
 				/>
 			) }
 		</>
