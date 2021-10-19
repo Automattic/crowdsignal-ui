@@ -21,7 +21,7 @@ const EditCheckboxAnswer = ( {
 		<FormCheckbox type={ multipleChoice ? 'checkbox' : 'radio' } />
 
 		<RichText
-			placeholder={ __( 'Enter an answer', 'blocks' ) }
+			placeholder={ __( 'Enter an answer', 'blocks-editor' ) }
 			multiline={ false }
 			preserveWhiteSpace={ false }
 			onChange={ onChange }

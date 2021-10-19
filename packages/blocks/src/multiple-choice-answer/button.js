@@ -6,13 +6,18 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { Button } from '../components';
+import { Button, FormCheckbox } from '../components';
 
-const Input = styled.input`
-	height: 1px;
-	position: absolute;
-	top: -20px;
-	width: 1px;
+const ButtonContent = styled.span`
+	align-items: center;
+	display: flex;
+	overflow: hidden;
+	position: relative;
+
+	${ FormCheckbox.className }.is-radio {
+		position: absolute;
+		left: -999px;
+	}
 `;
 
 const ButtonAnswer = ( { attributes, className, inputProps } ) => {
@@ -27,9 +32,11 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 				width,
 			} }
 		>
-			{ attributes.label }
+			<ButtonContent>
+				<FormCheckbox { ...inputProps } />
 
-			<Input { ...inputProps } />
+				{ attributes.label }
+			</ButtonContent>
 		</Button>
 	);
 };
