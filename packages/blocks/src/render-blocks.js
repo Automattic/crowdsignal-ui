@@ -134,6 +134,7 @@ export const renderBlocks = ( blocks = [], blockMap = {} ) =>
 					blockMap[ block.name ],
 					{
 						attributes: block.attributes,
+						className: block.attributes.className,
 						key: uniqueId( KEY_PREFIX ),
 					},
 					children
