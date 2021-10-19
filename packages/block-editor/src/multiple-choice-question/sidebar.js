@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -17,6 +17,11 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			[ key ]: value,
 		} );
 
+	const handleChangeNumberAttribute = ( key ) => ( value ) =>
+		setAttributes( {
+			[ key ]: parseInt( value, 10 ),
+		} );
+
 	return (
 		<InspectorControls>
 			<PanelBody
@@ -24,9 +29,27 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				initialOpen={ true }
 			>
 				<ToggleControl
-					label={ __( 'The answer is required' ) }
+					label={ __( 'An answer is required' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
+				/>
+
+				{ attributes.mandatory && (
+					<TextControl
+						label={ __( 'Min. choices', 'blocks' ) }
+						type="number"
+						value={ attributes.minimumChoices }
+						onChange={ handleChangeNumberAttribute(
+							'minimumChoices'
+						) }
+					/>
+				) }
+
+				<TextControl
+					label={ __( 'Max. choices', 'blocks' ) }
+					type="number"
+					value={ attributes.maximumChoices }
+					onChange={ handleChangeNumberAttribute( 'maximumChoices' ) }
 				/>
 			</PanelBody>
 

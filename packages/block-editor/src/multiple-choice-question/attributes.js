@@ -18,7 +18,7 @@ export default {
 	},
 	minimumChoices: {
 		type: 'number',
-		default: 1,
+		default: 0,
 	},
 	maximumChoices: {
 		type: 'number',

@@ -9,6 +9,7 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { QuestionHeader, QuestionWrapper } from '../components';
+import { Style } from './constants';
 
 const Context = createContext();
 
@@ -32,5 +33,6 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 };
 
 MultipleChoiceQuestion.Context = Context;
+MultipleChoiceQuestion.Style = Style;
 
 export default MultipleChoiceQuestion;
