@@ -1,19 +1,22 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { Button } from '@crowdsignal/blocks';
+import { MultipleChoiceQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
+import { useParentAttributes } from '../util/use-parent-attributes';
+import EditButtonAnswer from './edit-button';
+import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
 
 const EditMultipleChoiceAnswer = ( props ) => {
-	const { attributes, className, onReplace, setAttributes } = props;
+	const { attributes, className, clientId, onReplace, setAttributes } = props;
+
+	const questionAttributes = useParentAttributes( clientId );
 
 	useClientId( { attributes, setAttributes } );
 
@@ -29,29 +32,33 @@ const EditMultipleChoiceAnswer = ( props ) => {
 			label,
 		} );
 
-	const width = attributes.width ? `${ attributes.width }%` : null;
+	const blockStyle = getBlockStyle( questionAttributes.className );
 
 	return (
 		<>
-			<Sidebar { ...props } />
+			<Sidebar blockStyle={ blockStyle } { ...props } />
 
-			<Button
-				attributes={ attributes }
-				as={ RichText }
-				className={ className }
-				style={ {
-					width,
-				} }
-				placeholder={ __( 'Enter an answer', 'blocks' ) }
-				multiline={ false }
-				preserveWhiteSpace={ false }
-				onChange={ handleChangeLabel }
-				onReplace={ onReplace }
-				onSplit={ handleSplit }
-				value={ attributes.label }
-				allowedFormats={ [] }
-				withoutInteractiveFormatting
-			/>
+			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
+				<EditCheckboxAnswer
+					attributes={ attributes }
+					className={ className }
+					multipleChoice={ questionAttributes.maximumChoices !== 1 }
+					onChange={ handleChangeLabel }
+					onReplace={ onReplace }
+					onSplit={ handleSplit }
+				/>
+			) }
+
+			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
+				<EditButtonAnswer
+					attributes={ attributes }
+					className={ className }
+					multipleChoice={ questionAttributes.maximumChoices !== 1 }
+					onChange={ handleChangeLabel }
+					onReplace={ onReplace }
+					onSplit={ handleSplit }
+				/>
+			) }
 		</>
 	);
 };

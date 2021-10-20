@@ -14,6 +14,7 @@ import { useClientId } from '@crowdsignal/hooks';
  * Style dependencies
  */
 import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
+import Toolbar from './toolbar';
 import Sidebar from './sidebar';
 
 const ALLOWED_ANSWER_BLOCKS = [
@@ -35,6 +36,7 @@ const EditMultipleChoiceQuestion = ( props ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
+			<Toolbar { ...props } />
 			<Sidebar { ...props } />
 
 			<RichText
@@ -59,3 +61,8 @@ const EditMultipleChoiceQuestion = ( props ) => {
 };
 
 export default EditMultipleChoiceQuestion;
+
+// get parent attributes might work like:
+//
+// getBlockHierarchyRootClientId = return parent clientId
+// getblockAttributes( parentClientId );

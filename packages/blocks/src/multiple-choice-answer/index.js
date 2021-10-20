@@ -2,35 +2,27 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import styled from '@emotion/styled';
 import { useContext } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import { Button } from '../components';
 import MultipleChoiceQuestion from '../multiple-choice-question';
-
-const Input = styled.input`
-	height: 1px;
-	position: absolute;
-	top: -20px;
-	width: 1px;
-`;
+import { getBlockStyle } from '../util';
+import ButtonAnswer from './button';
+import CheckboxAnswer from './checkbox';
 
 const MultipleChoiceAnswer = ( { attributes, className } ) => {
-	const width = attributes.width ? `${ attributes.width }%` : null;
-
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
 
-	const isMultipleSelection = parentQuestion.maximumChoices > 1;
+	const isMultiSelect = parentQuestion.maximumChoices !== 1;
 
 	const { inputProps } = useField( {
 		name: `q_${ parentQuestion.clientId }[choice]${
-			isMultipleSelection ? '[]' : ''
+			isMultiSelect ? '[]' : ''
 		}`,
-		type: isMultipleSelection ? 'checkbox' : 'radio',
+		type: isMultiSelect ? 'checkbox' : 'radio',
 		value: attributes.clientId,
 	} );
 
@@ -38,19 +30,29 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 		'is-selected': inputProps.checked,
 	} );
 
+	if ( ! attributes.label ) {
+		return null;
+	}
+
+	if (
+		getBlockStyle( parentQuestion.className ) ===
+		MultipleChoiceQuestion.Style.LIST
+	) {
+		return (
+			<CheckboxAnswer
+				attributes={ attributes }
+				className={ classes }
+				inputProps={ inputProps }
+			/>
+		);
+	}
+
 	return (
-		<Button
-			as="label"
+		<ButtonAnswer
 			attributes={ attributes }
 			className={ classes }
-			style={ {
-				width,
-			} }
-		>
-			{ attributes.label }
-
-			<Input { ...inputProps } />
-		</Button>
+			inputProps={ inputProps }
+		/>
 	);
 };
 

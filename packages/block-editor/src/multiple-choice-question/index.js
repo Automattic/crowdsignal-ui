@@ -7,6 +7,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
+import { MultipleChoiceQuestion } from '@crowdsignal/blocks';
 import attributes from './attributes';
 import EditMultipleChoiceQuestion from './edit';
 
@@ -27,6 +28,26 @@ const settings = {
 		html: false,
 		reusable: false,
 	},
+	styles: [
+		{
+			name: MultipleChoiceQuestion.Style.BUTTON,
+			label: __( 'Buttons', 'block-editor' ),
+			isDefault: true,
+		},
+		{
+			name: MultipleChoiceQuestion.Style.LIST,
+			label: __( 'List', 'block-editor' ),
+		},
+	],
+	variations: [
+		{
+			isDefault: true,
+			attributes: {
+				// Force the correct className onto the block by default
+				className: 'is-style-button',
+			},
+		},
+	],
 };
 
 export default {
