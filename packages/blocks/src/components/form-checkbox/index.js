@@ -70,6 +70,7 @@ const CheckboxWrapper = styled.div`
 		border: 4.5px solid transparent;
 		border-radius: 50%;
 		height: 1em;
+		margin: 0;
 		position: absolute;
 		left: -2px;
 		top: -2px;
