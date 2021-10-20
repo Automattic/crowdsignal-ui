@@ -9,20 +9,22 @@ import styled from '@emotion/styled';
  */
 import {
 	Answer,
-	FreeText,
 	MultipleChoice,
 	Poll,
 	PollAnswer,
 	SubmitButton,
+	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
 import { STORE_NAME } from '../../data';
 
 const ContentWrapper = styled.div`
+	box-sizing: border-box;
 	margin: 0 auto;
 	max-width: 720px;
 	padding: 20px;
+	width: 100%;
 `;
 
 const FormPreview = ( { projectId } ) => {
@@ -42,11 +44,11 @@ const FormPreview = ( { projectId } ) => {
 			<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
 					'crowdsignal-forms/answer': Answer,
-					'crowdsignal-forms/free-text': FreeText,
 					'crowdsignal-forms/multiple-choice': MultipleChoice,
 					'crowdsignal-forms/poll': Poll,
 					'crowdsignal-forms/poll-answer': PollAnswer,
 					'crowdsignal-forms/submit-button': SubmitButton,
+					'crowdsignal-forms/text-question': TextQuestion,
 				} ) }
 			</Form>
 		</ContentWrapper>

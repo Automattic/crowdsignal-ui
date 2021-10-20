@@ -13,7 +13,9 @@ const StyledQuestionWrapper = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	padding: 16px 24px;
+	margin-bottom: 24px;
+	margin-top: 24px;
+	padding: 24px;
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -50,6 +52,7 @@ const QuestionWrapper = ( { attributes, children, style = {}, ...props } ) => (
 	</StyledQuestionWrapper>
 );
 
+QuestionWrapper.className = StyledQuestionWrapper;
 QuestionWrapper.Content = Content;
 
 export default QuestionWrapper;
