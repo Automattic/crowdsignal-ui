@@ -36,7 +36,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 
 	return (
 		<>
-			<Sidebar { ...props } />
+			<Sidebar blockStyle={ blockStyle } { ...props } />
 
 			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
 				<EditCheckboxAnswer

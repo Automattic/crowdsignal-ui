@@ -8,9 +8,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { MultipleChoiceQuestion } from '@crowdsignal/blocks';
 import ColorSettings from '../components/color-settings';
 
-const Sidebar = ( { attributes, setAttributes } ) => {
+const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 	const handleChangeWidth = ( value ) =>
 		setAttributes( {
 			width: attributes.width === value ? undefined : value,
@@ -23,24 +24,26 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				setAttributes={ setAttributes }
 			/>
 
-			<PanelBody title={ __( 'Width settings', 'blocks' ) }>
-				<ButtonGroup aria-label={ __( 'Button width' ) }>
-					{ [ 25, 50, 75, 100 ].map( ( width ) => (
-						<Button
-							isSmall
-							key={ width }
-							variant={
-								width === attributes.width
-									? 'primary'
-									: undefined
-							}
-							onClick={ () => handleChangeWidth( width ) }
-						>
-							{ width }%
-						</Button>
-					) ) }
-				</ButtonGroup>
-			</PanelBody>
+			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
+				<PanelBody title={ __( 'Width settings', 'blocks' ) }>
+					<ButtonGroup aria-label={ __( 'Button width' ) }>
+						{ [ 25, 50, 75, 100 ].map( ( width ) => (
+							<Button
+								isSmall
+								key={ width }
+								variant={
+									width === attributes.width
+										? 'primary'
+										: undefined
+								}
+								onClick={ () => handleChangeWidth( width ) }
+							>
+								{ width }%
+							</Button>
+						) ) }
+					</ButtonGroup>
+				</PanelBody>
+			) }
 		</InspectorControls>
 	);
 };
