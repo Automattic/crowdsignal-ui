@@ -3,17 +3,9 @@ export default {
 		type: 'string',
 		default: null,
 	},
-	restrictions: {
-		type: 'object',
-		default: {},
-	},
 	question: {
 		type: 'string',
 		default: null,
-	},
-	note: {
-		type: 'string',
-		default: '',
 	},
 	// should this be an entry on restrictions?
 	mandatory: {
@@ -51,17 +43,10 @@ export default {
 		type: 'number',
 		default: 2,
 	},
-	fontFamily: {
-		type: 'string',
-	},
 	gradient: {
 		type: 'string',
 	},
 	textColor: {
 		type: 'string',
-	},
-	width: {
-		type: 'number',
-		default: 100,
 	},
 };

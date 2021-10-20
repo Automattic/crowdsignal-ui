@@ -12,7 +12,7 @@ import { Button } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 
-const EditAnswer = ( props ) => {
+const EditMultipleChoiceAnswer = ( props ) => {
 	const { attributes, className, onReplace, setAttributes } = props;
 
 	useClientId( { attributes, setAttributes } );
@@ -56,4 +56,4 @@ const EditAnswer = ( props ) => {
 	);
 };
 
-export default EditAnswer;
+export default EditMultipleChoiceAnswer;

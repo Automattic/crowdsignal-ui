@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -17,11 +17,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			[ key ]: value,
 		} );
 
-	const handleChangeInputHeight = ( value ) =>
-		setAttributes( {
-			inputHeight: `${ value }px`,
-		} );
-
 	return (
 		<InspectorControls>
 			<PanelBody
@@ -32,12 +27,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'The answer is required' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
-				/>
-
-				<TextControl
-					label="Input field height"
-					type="number"
-					onChange={ handleChangeInputHeight }
 				/>
 			</PanelBody>
 

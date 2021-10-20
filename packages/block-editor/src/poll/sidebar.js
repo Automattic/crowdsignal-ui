@@ -9,20 +9,15 @@ import {
 	TextareaControl,
 	TextControl,
 	TimePicker,
-	ToggleControl,
 } from '@wordpress/components';
-import {
-	ContrastChecker,
-	InspectorControls,
-	URLInput,
-	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
-	__experimentalPanelColorGradientSettings as PanelColorGradientSettings,
-} from '@wordpress/block-editor';
+import { InspectorControls, URLInput } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
+import BorderSettings from '../components/border-settings';
+import ColorSettings from '../components/color-settings';
 import {
 	ClosedPollState,
 	ConfirmMessageType,
@@ -166,61 +161,14 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				) }
 			</PanelBody>
 
-			<PanelColorGradientSettings
-				title={ __( 'Color', 'blocks' ) }
-				disableCustomGradients={ false }
-				settings={ [
-					{
-						label: __( 'Text color', 'blocks' ),
-						colorValue: attributes.textColor,
-						onColorChange: handleChangeAttribute( 'textColor' ),
-					},
-					{
-						label: __( 'Background color', 'blocks' ),
-						colorValue: attributes.backgroundColor,
-						gradientValue: attributes.gradient,
-						onColorChange: handleChangeAttribute(
-							'backgroundColor'
-						),
-						onGradientChange: handleChangeAttribute( 'gradient' ),
-					},
-				] }
-			>
-				<ContrastChecker
-					backgroundColor={ attributes.backgroundColor }
-					textColor={ attributes.textColor }
-				/>
-			</PanelColorGradientSettings>
-
-			<PanelColorGradientSettings
-				title={ __( 'Border', 'blocks' ) }
-				settings={ [
-					{
-						label: __( 'Border color', 'blocks ' ),
-						colorValue: attributes.borderColor,
-						onColorChange: handleChangeAttribute( 'borderColor' ),
-					},
-				] }
-			>
-				<TextControl
-					label={ __( 'Border thickness', 'blocks' ) }
-					type="number"
-					value={ attributes.borderWidth }
-					onChange={ handleChangeNumberAttribute( 'borderWidth' ) }
-				/>
-				<TextControl
-					label={ __( 'Corner radius', 'blocks' ) }
-					type="number"
-					value={ attributes.borderRadius }
-					onChange={ handleChangeNumberAttribute( 'borderRadius' ) }
-				/>
-
-				<ToggleControl
-					label={ __( 'Drop shadow', 'blocks' ) }
-					checked={ attributes.boxShadow }
-					onChange={ handleChangeAttribute( 'boxShadow' ) }
-				/>
-			</PanelColorGradientSettings>
+			<ColorSettings
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>
+			<BorderSettings
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>
 
 			<PanelBody title={ __( 'Typography', 'blocks' ) }>
 				<SelectControl

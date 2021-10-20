@@ -10,7 +10,7 @@ import { useContext } from '@wordpress/element';
  */
 import { useField } from '@crowdsignal/form';
 import { Button } from '../components';
-import MultipleChoice from '../multiple-choice';
+import MultipleChoiceQuestion from '../multiple-choice-question';
 
 const Input = styled.input`
 	height: 1px;
@@ -19,10 +19,10 @@ const Input = styled.input`
 	width: 1px;
 `;
 
-const Answer = ( { attributes, className } ) => {
+const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
-	const parentQuestion = useContext( MultipleChoice.Context );
+	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
 
 	const isMultipleSelection = parentQuestion.maximumChoices > 1;
 
@@ -54,4 +54,4 @@ const Answer = ( { attributes, className } ) => {
 	);
 };
 
-export default Answer;
+export default MultipleChoiceAnswer;
