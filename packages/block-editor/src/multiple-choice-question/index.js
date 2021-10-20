@@ -35,8 +35,8 @@ const settings = {
 			isDefault: true,
 		},
 		{
-			name: MultipleChoiceQuestion.Style.CHECKBOX,
-			label: __( 'Checkboxes', 'block-editor' ),
+			name: MultipleChoiceQuestion.Style.LIST,
+			label: __( 'List', 'block-editor' ),
 		},
 	],
 	variations: [

@@ -38,7 +38,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 		<>
 			<Sidebar { ...props } />
 
-			{ blockStyle === MultipleChoiceQuestion.Style.CHECKBOX && (
+			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
 				<EditCheckboxAnswer
 					attributes={ attributes }
 					className={ className }

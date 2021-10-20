@@ -36,7 +36,7 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 
 	if (
 		getBlockStyle( parentQuestion.className ) ===
-		MultipleChoiceQuestion.Style.CHECKBOX
+		MultipleChoiceQuestion.Style.LIST
 	) {
 		return (
 			<CheckboxAnswer
