@@ -1,7 +1,12 @@
 /**
  * External dependencies
  */
-import { Button, ButtonGroup, PanelBody } from '@wordpress/components';
+import {
+	Button,
+	ButtonGroup,
+	PanelBody,
+	ToggleControl,
+} from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -12,6 +17,11 @@ import { MultipleChoiceQuestion } from '@crowdsignal/blocks';
 import ColorSettings from '../components/color-settings';
 
 const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
+	const handleChangeAttribute = ( key ) => ( value ) =>
+		setAttributes( {
+			[ key ]: value,
+		} );
+
 	const handleChangeWidth = ( value ) =>
 		setAttributes( {
 			width: attributes.width === value ? undefined : value,
@@ -19,13 +29,26 @@ const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 
 	return (
 		<InspectorControls>
+			<PanelBody title={ __( 'Answer settings' ) }>
+				<ToggleControl
+					label={ __(
+						'Sync style settings for all answers',
+						'block-editor'
+					) }
+					checked={ attributes.shareSiblingAttributes }
+					onChange={ handleChangeAttribute(
+						'shareSiblingAttributes'
+					) }
+				/>
+			</PanelBody>
+
 			<ColorSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
 
 			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
-				<PanelBody title={ __( 'Width settings', 'blocks' ) }>
+				<PanelBody title={ __( 'Width settings', 'block-editor' ) }>
 					<ButtonGroup aria-label={ __( 'Button width' ) }>
 						{ [ 25, 50, 75, 100 ].map( ( width ) => (
 							<Button
