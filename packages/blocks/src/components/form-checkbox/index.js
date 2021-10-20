@@ -31,18 +31,19 @@ const CheckboxWrapper = styled.div`
 	width: 1em;
 
 	&.is-selected {
-		background-color: #000;
+		background-color: currentColor;
 	}
 
 	&.is-selected::after {
+		border-color: #fff;
 		border-style: solid;
 		border-width: 0 0 2px 2px;
 		box-sizing: border-box;
 		content: '';
 		display: inline-flex;
-		filter: invert( 1 );
 		height: 0.25em;
 		margin: -20% 0 0 -30%;
+		mix-blend-mode: unset;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -55,7 +56,7 @@ const CheckboxWrapper = styled.div`
 	}
 
 	&.is-radio.is-selected {
-		background-color: none;
+		background-color: transparent;
 	}
 
 	&.is-radio.is-selected::after {
@@ -64,8 +65,8 @@ const CheckboxWrapper = styled.div`
 		animation-iteration-count: 1;
 		animation-timing-function: ease-out;
 		background-clip: padding-box;
-		background-color: var( --wp--preset--color--border );
-		background-color: #000;
+		background-color: currentColor;
+		background-blend-mode: multiply;
 		border: 4.5px solid transparent;
 		border-radius: 50%;
 		height: 1em;
