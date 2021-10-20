@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { FormCheckbox } from '@crowdsignal/blocks';
+import { useColorStyles } from '@crowdsignal/styles';
 
 const EditCheckboxAnswer = ( {
 	attributes,
@@ -17,7 +18,11 @@ const EditCheckboxAnswer = ( {
 	onReplace,
 	onSplit,
 } ) => (
-	<FormCheckbox.Label as={ 'div' } className={ className }>
+	<FormCheckbox.Label
+		as={ 'div' }
+		className={ className }
+		style={ useColorStyles( attributes ) }
+	>
 		<FormCheckbox type={ multipleChoice ? 'checkbox' : 'radio' } />
 
 		<RichText

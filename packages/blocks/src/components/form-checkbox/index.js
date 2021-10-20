@@ -35,7 +35,6 @@ const CheckboxWrapper = styled.div`
 	}
 
 	&.is-selected::after {
-		border-color: #000;
 		border-style: solid;
 		border-width: 0 0 2px 2px;
 		box-sizing: border-box;
