@@ -18,7 +18,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 
 const EditTextQuestion = ( props ) => {
-	const { attributes, className, setAttributes } = props;
+	const { attributes, className, isSelected, setAttributes } = props;
 
 	useClientId( props );
 
@@ -54,6 +54,7 @@ const EditTextQuestion = ( props ) => {
 				minHeight="35px"
 				enable={ { bottom: true } }
 				onResizeStop={ handleResizeInput }
+				showHandle={ isSelected }
 			>
 				<FormTextarea.Preview
 					style={ {
