@@ -23,6 +23,7 @@
     "@crowdsignal/blocks": "^0.1.0",
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/form": "^0.1.0",
+    "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
     "@wordpress/blocks": "^11.0.0",

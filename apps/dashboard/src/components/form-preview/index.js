@@ -17,6 +17,7 @@ import {
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
+import { useStylesheet } from '@crowdsignal/hooks';
 import { STORE_NAME } from '../../data';
 
 const ContentWrapper = styled.div`
@@ -30,6 +31,10 @@ const ContentWrapper = styled.div`
 const FormPreview = ( { projectId } ) => {
 	const project = useSelect( ( select ) =>
 		select( STORE_NAME ).getProject( projectId )
+	);
+
+	useStylesheet(
+		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
 
 	if ( ! project?.content?.draft ) {
