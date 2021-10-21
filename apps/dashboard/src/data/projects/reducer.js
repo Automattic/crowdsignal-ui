@@ -10,6 +10,7 @@ import {
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
+	PROJECT_CONTENT_CHANGE,
 } from '../action-types';
 
 const items = ( state = {}, action ) => {
@@ -46,8 +47,21 @@ const isSaving = ( state = false, action ) => {
 	return state;
 };
 
+const isSaved = ( state = true, action ) => {
+	if ( action.type === PROJECT_UPDATE ) {
+		return true;
+	}
+
+	if ( action.type === PROJECT_CONTENT_CHANGE ) {
+		return false;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	items,
 	lastUpdatedItemId,
 	isSaving,
+	isSaved,
 } );

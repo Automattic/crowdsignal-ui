@@ -3,7 +3,7 @@
 	"rules": {
 		"complexity": [
 			"error",
-			10
+			11
 		],
 		"jsx-a11y/anchor-has-content": [
 			"off"

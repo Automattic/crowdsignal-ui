@@ -11,3 +11,13 @@ export const getProject = ( state, projectId ) =>
 
 export const isProjectSaving = ( state ) =>
 	get( state, [ 'projects', 'isSaving' ], false );
+
+export const isProjectPublic = ( state ) =>
+	get(
+		getProject( state, getLastUpdatedProjectId( state ) ),
+		[ 'content', 'published' ],
+		false
+	);
+
+export const isProjectSaved = ( state ) =>
+	get( state, [ 'projects', 'isSaved' ], false );
