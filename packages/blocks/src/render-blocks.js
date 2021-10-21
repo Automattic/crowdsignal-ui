@@ -9,9 +9,10 @@ import {
 	isEmpty,
 	isString,
 	keys,
-	lowerCase,
+	toLower,
 	map,
 	uniqueId,
+	zipObject,
 } from 'lodash';
 
 const KEY_PREFIX = 'crowdsignal-block-';
@@ -30,11 +31,17 @@ const parseNodes = ( nodes ) =>
 			return node.textContent;
 		}
 
+		const { class: className, ...attributes } = zipObject(
+			map( node.attributes, 'nodeName' ),
+			map( node.attributes, 'value' )
+		);
+
 		return {
-			name: lowerCase( node.tagName ),
+			name: toLower( node.tagName ),
 			children: parseNodes( node.childNodes ),
 			props: {
-				className: node.classList.value,
+				...attributes,
+				className,
 				key: uniqueId( KEY_PREFIX ),
 			},
 		};
@@ -77,8 +84,12 @@ const appendInnerBlocks = ( blockName, elements, innerBlocks ) => {
  * @param  {Object} elements
  * @return {Array}           Array of React elements.
  */
-const createElementsRecursive = ( elements ) =>
-	map( elements, ( element ) => {
+const createElementsRecursive = ( elements ) => {
+	if ( isEmpty( elements ) ) {
+		return null;
+	}
+
+	return map( elements, ( element ) => {
 		if ( isString( element ) ) {
 			return element;
 		}
@@ -92,6 +103,7 @@ const createElementsRecursive = ( elements ) =>
 			element.innerBlocks || createElementsRecursive( element.children )
 		);
 	} );
+};
 
 /**
  * Converts a HTML string into React elements
