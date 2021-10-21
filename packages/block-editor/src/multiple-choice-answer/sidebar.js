@@ -29,19 +29,6 @@ const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={ __( 'Answer settings' ) }>
-				<ToggleControl
-					label={ __(
-						'Sync style settings for all answers',
-						'block-editor'
-					) }
-					checked={ attributes.shareSiblingAttributes }
-					onChange={ handleChangeAttribute(
-						'shareSiblingAttributes'
-					) }
-				/>
-			</PanelBody>
-
 			<ColorSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }
@@ -67,6 +54,19 @@ const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 					</ButtonGroup>
 				</PanelBody>
 			) }
+
+			<PanelBody title={ __( 'Style settings' ) }>
+				<ToggleControl
+					label={ __(
+						'Sync style settings for all answers',
+						'block-editor'
+					) }
+					checked={ attributes.shareSiblingAttributes }
+					onChange={ handleChangeAttribute(
+						'shareSiblingAttributes'
+					) }
+				/>
+			</PanelBody>
 		</InspectorControls>
 	);
 };
