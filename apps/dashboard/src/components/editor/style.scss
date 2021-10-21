@@ -58,6 +58,13 @@
 	.components-panel__header.edit-post-sidebar__panel-tabs ul {
 			padding: 0
 	}
+
+	// Fix isolated-block-editor's misalignment of list blocks
+	ul.block-editor-block-list__block,
+	ol.block-editor-block-list__block {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 .edit-post-header__settings > .components-button {
