@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { createBlock } from '@wordpress/blocks';
+import { compose } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -9,6 +10,7 @@ import { createBlock } from '@wordpress/blocks';
 import { MultipleChoiceQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import { useParentAttributes } from '../util/use-parent-attributes';
+import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
 import EditButtonAnswer from './edit-button';
 import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
@@ -63,4 +65,11 @@ const EditMultipleChoiceAnswer = ( props ) => {
 	);
 };
 
-export default EditMultipleChoiceAnswer;
+export default compose(
+	withSharedSiblingAttributes( [
+		'backgroundColor',
+		'gradient',
+		'textColor',
+		'width',
+	] )
+)( EditMultipleChoiceAnswer );

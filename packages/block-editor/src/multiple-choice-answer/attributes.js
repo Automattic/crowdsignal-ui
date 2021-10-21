@@ -7,6 +7,10 @@ export default {
 		type: 'string',
 		default: null,
 	},
+	shareSiblingAttributes: {
+		type: 'boolean',
+		default: true,
+	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
 		type: 'string',
