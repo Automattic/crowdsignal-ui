@@ -27,6 +27,7 @@ const Toolbar = ( { projectId } ) => {
 	const syncProject = () => {
 		saveAndUpdateProject( projectId, {
 			...project,
+			public: false,
 		} );
 	};
 

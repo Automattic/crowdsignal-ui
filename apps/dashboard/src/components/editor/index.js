@@ -75,6 +75,7 @@ const Editor = ( { projectId } ) => {
 							pages: [ [ ...blocks ] ],
 						},
 					},
+					public: false,
 				} );
 			} catch ( error ) {
 				// TODO: replace this with some nince notice or something
@@ -83,7 +84,7 @@ const Editor = ( { projectId } ) => {
 				// eslint-disable-next-line
 				console.error( error );
 			}
-		}, 2000 ),
+		}, 5000 ),
 		[ projectId, project ]
 	);
 
