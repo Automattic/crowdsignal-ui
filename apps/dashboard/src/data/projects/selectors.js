@@ -15,7 +15,7 @@ export const isProjectSaving = ( state ) =>
 export const isProjectPublic = ( state ) =>
 	get(
 		getProject( state, getLastUpdatedProjectId( state ) ),
-		[ 'content', 'published' ],
+		[ 'content', 'public' ],
 		false
 	);
 

@@ -28,10 +28,10 @@ const ContentWrapper = styled.div`
 
 const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 	// page on backend starts at ID = 1, try to substract or default to 0
-	page = get( project, [ 'content', 'published', 'pages', page - 1 ] )
+	page = get( project, [ 'content', 'public', 'pages', page - 1 ] )
 		? page - 1
 		: 0;
-	const content = project.content.published.pages[ page ];
+	const content = project.content.public.pages[ page ];
 	const projectId = project.id;
 
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );

@@ -31,12 +31,12 @@ const Toolbar = ( { projectId } ) => {
 	};
 
 	const publishProject = () => {
-		const payload = { publish: true };
+		const payload = { public: true };
 		saveAndUpdateProject( projectId, {
 			...project,
 			content: {
 				...project.content,
-				published: {
+				public: {
 					...project.content.draft,
 				},
 			},

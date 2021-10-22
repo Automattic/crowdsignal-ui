@@ -49,12 +49,12 @@ const Editor = ( { projectId } ) => {
 
 	const projectContent = get( project, [ 'content' ], {} );
 
-	// TODO: need to compare draft/published, offer "restore" drafted content
+	// TODO: need to compare draft/public, offer "restore" drafted content
 	const draftedBlocks = get( projectContent, [ 'draft', 'pages', 0 ], [] );
 
 	const displayedBlocks = get(
 		projectContent,
-		[ 'published', 'pages', 0 ],
+		[ 'public', 'pages', 0 ],
 		draftedBlocks
 	);
 
