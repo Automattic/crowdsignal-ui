@@ -77,11 +77,9 @@ const Toolbar = ( { projectId } ) => {
 				className="is-crowdsignal"
 				variant="tertiary"
 				onClick={ syncProject }
-				disabled={
-					isSaving || isSaved || hasUnpublishedChanges( project )
-				}
+				disabled={ isSaving || isSaved }
 			>
-				{ isSaved || ( ! isSaved && isPublic )
+				{ isSaved
 					? __( 'Draft saved', 'dashboard' )
 					: __( 'Save draft', 'dashboard' ) }
 			</Button>
