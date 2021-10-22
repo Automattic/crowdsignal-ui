@@ -34,9 +34,7 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 	const content = project.content.published.pages[ page ];
 	const projectId = project.id;
 
-	useStylesheet(
-		'https://app.crowdsignal.com/themes/leven/style-editor.css'
-	);
+	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
