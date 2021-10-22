@@ -27,16 +27,17 @@ const Toolbar = ( { projectId } ) => {
 	const syncProject = () => {
 		saveAndUpdateProject( projectId, {
 			...project,
+			public: false,
 		} );
 	};
 
 	const publishProject = () => {
-		const payload = { publish: true };
+		const payload = { public: true };
 		saveAndUpdateProject( projectId, {
 			...project,
 			content: {
 				...project.content,
-				published: {
+				public: {
 					...project.content.draft,
 				},
 			},
@@ -77,11 +78,9 @@ const Toolbar = ( { projectId } ) => {
 				className="is-crowdsignal"
 				variant="tertiary"
 				onClick={ syncProject }
-				disabled={
-					isSaving || isSaved || hasUnpublishedChanges( project )
-				}
+				disabled={ isSaving || isSaved }
 			>
-				{ isSaved || ( ! isSaved && isPublic )
+				{ isSaved
 					? __( 'Draft saved', 'dashboard' )
 					: __( 'Save draft', 'dashboard' ) }
 			</Button>
