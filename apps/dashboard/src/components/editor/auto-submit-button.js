@@ -4,7 +4,7 @@
 import { createBlock } from '@wordpress/blocks';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
-import { filter, includes, map, size } from 'lodash';
+import { flatten, includes, map } from 'lodash';
 
 /**
  * Internal dependencies
@@ -25,50 +25,64 @@ const FORM_BLOCKS = map(
 	'name'
 );
 
+/**
+ * Returns a flat array of all block names, including child-blocks
+ *
+ * @param  {Array} blocks Blocks
+ * @return {Array}        Block names
+ */
+const flattenBlocksNames = ( blocks ) => {
+	if ( blocks.length === 0 ) {
+		return [];
+	}
+
+	return flatten(
+		blocks.map( ( block ) => [
+			block.name,
+			...flattenBlocksNames( block.innerBlocks ),
+		] )
+	);
+};
+
 const AutoSubmitButton = () => {
-	const [ currentFormBlocksCount, setCurrentFormBlocksCount ] = useState( 0 );
+	const [ currentFormBlocks, setCurrentFormBlocks ] = useState( 0 );
 
 	const { insertBlock } = useDispatch( 'core/block-editor' );
-	const { formBlocksCount, lastBlockIndex, submitButtonCount } = useSelect(
+	const { formBlocks, submitButtonBlocks, totalBlocks } = useSelect(
 		( select ) => {
-			const blockEditorData = select( 'core/block-editor' );
+			const blocks = select( 'core/block-editor' ).getBlocks();
+			const blockNames = flattenBlocksNames( blocks );
 
 			return {
-				formBlocksCount: size(
-					filter(
-						map(
-							blockEditorData.getClientIdsWithDescendants(),
-							blockEditorData.getBlockName
-						),
-						( blockName ) => includes( FORM_BLOCKS, blockName )
-					)
-				),
-				lastBlockIndex: blockEditorData.getBlocks().length - 1,
-				submitButtonCount: blockEditorData.getGlobalBlockCount(
-					submitButtonBlock.name
-				),
+				totalBlocks: blocks.length,
+				formBlocks: blockNames.filter( ( blockName ) =>
+					includes( FORM_BLOCKS, blockName )
+				).length,
+				submitButtonBlocks: blockNames.filter(
+					( blockName ) => blockName === submitButtonBlock.name
+				).length,
 			};
 		}
 	);
 
 	useEffect( () => {
 		if (
-			currentFormBlocksCount === 0 &&
-			formBlocksCount !== 0 &&
-			submitButtonCount === 0
+			currentFormBlocks === 0 &&
+			formBlocks !== 0 &&
+			submitButtonBlocks === 0
 		) {
 			insertBlock(
 				createBlock( submitButtonBlock.name ),
-				lastBlockIndex + 1,
+				totalBlocks,
 				'',
 				false
 			);
 		}
 
-		if ( currentFormBlocksCount !== formBlocksCount ) {
-			setCurrentFormBlocksCount( formBlocksCount );
+		if ( currentFormBlocks !== formBlocks ) {
+			setCurrentFormBlocks( formBlocks );
 		}
-	}, [ currentFormBlocksCount, formBlocksCount, submitButtonCount ] );
+	}, [ currentFormBlocks, formBlocks, submitButtonBlocks ] );
 
 	return null;
 };
