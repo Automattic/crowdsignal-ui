@@ -16,7 +16,6 @@ import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
 import EditorLoadingPlaceholder from './loading-placeholder';
-import BlockLoader from './block-loader';
 import DocumentSettings from './document-settings';
 import Toolbar from './toolbar';
 
@@ -88,6 +87,10 @@ const Editor = ( { projectId } ) => {
 		[ projectId, project ]
 	);
 
+	const loadEditorContent = useCallback( () => displayedBlocks, [
+		displayedBlocks,
+	] );
+
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
@@ -117,13 +120,11 @@ const Editor = ( { projectId } ) => {
 			<IsolatedBlockEditor
 				settings={ editorSettings }
 				onSaveContent={ handleChangeContent }
-				onLoad={ noop }
+				onLoad={ loadEditorContent }
 				onError={ noop }
 			>
 				<Toolbar projectId={ projectId } />
 				<DocumentSettings />
-
-				<BlockLoader blocks={ displayedBlocks } />
 			</IsolatedBlockEditor>
 		</div>
 	);
