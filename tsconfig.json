@@ -1,18 +1,32 @@
 {
 	"compilerOptions": {
 		"allowJs": true,
-		"noEmit": true,
 		"jsx": "preserve",
-		"strict": true,
+		"allowSyntheticDefaultImports": true,
 		"target": "esnext",
 		"module": "esnext",
 		"isolatedModules": true,
+		"noEmit": true,
+
+		/* Strict Type-Checking Options */
+		"strict": true,
+
+		/* Additional Checks */
+
+		/* Module Resolution Options */
 		"moduleResolution": "node",
-		"types": [],
-		"typeRoots": []
+		"esModuleInterop": false,
+		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"paths": {
+			"react": ["node_modules/@types/react"]
+		}
 	},
 	"include": [
 		"apps/*/src/**/*.js",
 		"packages/*/src/**/*.js",
+	],
+	"exclude": [
+		"node_modules"
 	]
 }
