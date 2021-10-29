@@ -55,6 +55,7 @@
   "scripts": {
     "build": "./scripts/build-release.sh",
     "check-licenses": "wp-scripts check-licenses --prod --gpl2",
+    "check-types": "tsc",
     "format": "wp-scripts format",
     "lint:js": "wp-scripts lint-js",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
