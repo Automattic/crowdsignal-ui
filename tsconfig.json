@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"noEmit": true,
+		"jsx": "preserve",
+		"strict": true,
+		"target": "esnext",
+		"module": "esnext",
+		"isolatedModules": true,
+		"moduleResolution": "node",
+		"types": [],
+		"typeRoots": []
+	},
+	"include": [
+		"apps/*/src/**/*.js",
+		"packages/*/src/**/*.js",
+	]
+}
