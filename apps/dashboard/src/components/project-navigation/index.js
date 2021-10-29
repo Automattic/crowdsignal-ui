@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * External dependencies
  */
@@ -8,6 +10,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { EditablePageHeader, TabNavigation } from '@crowdsignal/components';
+import { updateProjectTitle } from '@crowdsignal/types';
 import { STORE_NAME } from '../../data';
 
 /**
@@ -15,24 +18,35 @@ import { STORE_NAME } from '../../data';
  */
 import './style.scss';
 
+/**
+ * @typedef {import("../../../../../packages/types/src/project").Project} Project
+ */
+
+/**
+ * @enum {string}
+ */
 const Tab = {
 	EDITOR: 'editor',
 	RESULTS: 'results',
 };
 
+/**
+ * @param {Object} props
+ * @param {string} props.activeTab
+ * @param {number} props.projectId
+ */
 const ProjectNavigation = ( { activeTab, projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
+	/** @type {Project} */
 	const project = useSelect(
 		( select ) => select( STORE_NAME ).getProject( projectId ),
 		[ projectId ]
 	);
 
+	/** @type {(title: string) => void} */
 	const updateTitle = ( title ) =>
-		saveAndUpdateProject( projectId, {
-			name: title,
-			title,
-		} );
+		saveAndUpdateProject( projectId, updateProjectTitle( project, title ) );
 
 	return (
 		<div className="project-navigation">

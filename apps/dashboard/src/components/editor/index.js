@@ -47,8 +47,8 @@ const editorSettings = {
 };
 
 /**
- * @param  {Object} props
- * @param  {number} props.projectId
+ * @param {Object} props
+ * @param {number} props.projectId
  */
 const Editor = ( { projectId } ) => {
 	/** @type {[Project, boolean]} */

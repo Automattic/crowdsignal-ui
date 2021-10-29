@@ -2,16 +2,22 @@
  * External dependencies
  */
 import { Button } from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { useCallback } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
 
 /**
  * Internal dependencies
  */
+import { publishProject } from '@crowdsignal/types';
 import { STORE_NAME } from '../../data';
-import { useDispatch, useSelect } from '@wordpress/data';
 import { hasUnpublishedChanges } from '../../util/project';
 
+/**
+ * @param {Object} params
+ * @param {number} params.projectId
+ */
 const Toolbar = ( { projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
@@ -24,26 +30,15 @@ const Toolbar = ( { projectId } ) => {
 		];
 	} );
 
-	const syncProject = () => {
-		saveAndUpdateProject( projectId, {
-			...project,
-			public: false,
-		} );
-	};
+	// To do: There's a race condition between this and the editor debounce
+	//        that can cause the very latest changes not to be picked up
+	const syncProject = useCallback( () => {
+		saveAndUpdateProject( projectId, project );
+	}, [ projectId, project ] );
 
-	const publishProject = () => {
-		const payload = { public: true };
-		saveAndUpdateProject( projectId, {
-			...project,
-			content: {
-				...project.content,
-				public: {
-					...project.content.draft,
-				},
-			},
-			...payload,
-		} );
-	};
+	const handlePublish = useCallback( () => {
+		saveAndUpdateProject( projectId, publishProject( project ) );
+	}, [ projectId, project ] );
 
 	const shareHandler = () => {
 		if ( project.permalink ) {
@@ -97,7 +92,7 @@ const Toolbar = ( { projectId } ) => {
 				<Button
 					className="is-crowdsignal"
 					variant={ isPublic ? 'tertiary' : 'primary' }
-					onClick={ publishProject }
+					onClick={ handlePublish }
 					disabled={ isSaving }
 				>
 					{ isPublic

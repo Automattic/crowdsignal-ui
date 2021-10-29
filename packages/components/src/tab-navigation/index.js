@@ -13,6 +13,11 @@ import Tab from './tab';
  */
 import './style.scss';
 
+/**
+ * @param  {Object}  props
+ * @param  {any[]}   props.children
+ * @param  {string=} props.className
+ */
 const TabNavigation = ( { children, className } ) => {
 	const classes = classnames( 'tab-navigation', className );
 
