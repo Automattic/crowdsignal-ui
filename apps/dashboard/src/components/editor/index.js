@@ -1,17 +1,20 @@
+// @ts-check
+
 /**
  * External dependencies
  */
-import { useCallback } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { debounce, get, noop } from 'lodash';
-import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { parse } from '@wordpress/blocks';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { useCallback } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
+import { debounce, noop } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { useStylesheet } from '@crowdsignal/hooks';
+import { createProject, updateProjectPage } from '@crowdsignal/types';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
@@ -24,6 +27,10 @@ import Toolbar from './toolbar';
  * Style dependencies
  */
 import './style.scss';
+
+/**
+ * @typedef {import("../../../../../packages/types/src/project").Project} Project
+ */
 
 const editorSettings = {
 	iso: {
@@ -39,7 +46,12 @@ const editorSettings = {
 	},
 };
 
+/**
+ * @param  {Object} props
+ * @param  {number} props.projectId
+ */
 const Editor = ( { projectId } ) => {
+	/** @type {[Project, boolean]} */
 	const [ project, isSaved ] = useSelect( ( select ) => {
 		return [
 			select( STORE_NAME ).getProject( projectId ),
@@ -47,36 +59,23 @@ const Editor = ( { projectId } ) => {
 		];
 	} );
 
-	const projectContent = get( project, [ 'content' ], {} );
-
-	// TODO: need to compare draft/public, offer "restore" drafted content
-	const draftedBlocks = get( projectContent, [ 'draft', 'pages', 0 ], [] );
-
-	const displayedBlocks = get(
-		projectContent,
-		[ 'public', 'pages', 0 ],
-		draftedBlocks
-	);
-
 	const { saveAndUpdateProject, changeProjectContent } = useDispatch(
 		STORE_NAME
 	);
 
+	/** @type {(content: string) => void} */
 	const debounceSave = useCallback(
 		debounce( ( content ) => {
 			try {
 				const blocks = parse( content );
-				const currentProject = project || {};
-				saveAndUpdateProject( projectId, {
-					...currentProject,
-					content: {
-						...currentProject.content,
-						draft: {
-							pages: [ [ ...blocks ] ],
-						},
-					},
-					public: false,
-				} );
+
+				const updatedProject = updateProjectPage(
+					project || createProject(),
+					blocks,
+					0
+				);
+
+				saveAndUpdateProject( projectId, updatedProject );
 			} catch ( error ) {
 				// TODO: replace this with some nince notice or something
 				// eslint-disable-next-line
@@ -87,6 +86,9 @@ const Editor = ( { projectId } ) => {
 		}, 5000 ),
 		[ projectId, project ]
 	);
+
+	const editorBlocks = ( project.publicContent || project.draftContent )
+		.pages[ 0 ];
 
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
@@ -123,7 +125,7 @@ const Editor = ( { projectId } ) => {
 				<Toolbar projectId={ projectId } />
 				<DocumentSettings />
 
-				<BlockLoader blocks={ displayedBlocks } />
+				<BlockLoader blocks={ editorBlocks } />
 			</IsolatedBlockEditor>
 		</div>
 	);

@@ -26,6 +26,7 @@
     "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
+    "@crowdsignal/types": "^0.1.0",
     "@wordpress/blocks": "^11.0.0",
     "@wordpress/data": "^6.0.0",
     "@wordpress/element": "^4.0.0",
