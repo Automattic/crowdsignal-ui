@@ -1,7 +1,17 @@
+/* eslint-disable complexity */
+
 /**
  * External dependencies
  */
-import { Button } from '@wordpress/components';
+import {
+	Button,
+	Icon,
+	MenuGroup,
+	MenuItem,
+	Popover,
+} from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { check, external } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
 
@@ -13,6 +23,9 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { hasUnpublishedChanges } from '../../util/project';
 
 const Toolbar = ( { projectId } ) => {
+	const [ showPreviewDropdown, setShowPreviewDropdown ] = useState( false );
+	const [ previewDeviceType, setPreviewDeviceType ] = useState( 'Desktop' );
+
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const [ project, isSaving, isSaved, isPublic ] = useSelect( ( select ) => {
@@ -87,11 +100,53 @@ const Toolbar = ( { projectId } ) => {
 			<Button
 				className="is-crowdsignal"
 				variant="tertiary"
-				href={ `/project/${ projectId }/preview` }
-				target="_blank"
+				onClick={ () => setShowPreviewDropdown( true ) }
 				disabled={ ! projectId }
 			>
 				{ __( 'Preview', 'block-editor' ) }
+
+				{ showPreviewDropdown && (
+					<Popover onClose={ () => setShowPreviewDropdown( false ) }>
+						<MenuGroup>
+							<MenuItem
+								onClick={ () =>
+									setPreviewDeviceType( 'Desktop' )
+								}
+								icon={
+									previewDeviceType === 'Desktop' && check
+								}
+							>
+								{ __( 'Desktop', 'dashboard' ) }
+							</MenuItem>
+							<MenuItem
+								onClick={ () =>
+									setPreviewDeviceType( 'Tablet' )
+								}
+								icon={ previewDeviceType === 'Tablet' && check }
+							>
+								{ __( 'Tablet', 'dashboard' ) }
+							</MenuItem>
+							<MenuItem
+								onClick={ () =>
+									setPreviewDeviceType( 'Mobile' )
+								}
+								icon={ previewDeviceType === 'Mobile' && check }
+							>
+								{ __( 'Mobile', 'dashboard' ) }
+							</MenuItem>
+						</MenuGroup>
+						<MenuGroup>
+							<Button
+								variant="tertiary"
+								href={ `/project/${ projectId }/preview` }
+								target="_blank"
+							>
+								{ __( 'Preview in a new tab', 'dashboard' ) }
+								<Icon icon={ external } />
+							</Button>
+						</MenuGroup>
+					</Popover>
+				) }
 			</Button>
 			{ ( ! isPublic || hasUnpublishedChanges( project ) ) && (
 				<Button
