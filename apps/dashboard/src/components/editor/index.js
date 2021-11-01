@@ -32,9 +32,9 @@ const editorSettings = {
 		toolbar: {
 			documentInspector: __( 'Document', 'dashboard' ),
 			inspector: true,
-			toc: true,
+			navigation: true,
+			toc: false,
 		},
-		// documentInspector: __( 'Document', 'dashboard' ),
 	},
 };
 

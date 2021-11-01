@@ -17,7 +17,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@wordpress/element": "^4.0.0",
+    "@wordpress/element": "^4.0.2",
     "lodash": "^4.17.21",
     "uuid": "^8.3.2"
   }

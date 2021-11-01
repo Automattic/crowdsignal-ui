@@ -4,6 +4,7 @@
 @import '~@wordpress/block-library/build-style/editor.css';
 @import '~@wordpress/block-library/build-style/theme.css';
 @import '~@wordpress/format-library/build-style/style.css';
+@import '~isolated-block-editor/build-browser/core.css';
 
 #crowdsignal-dashboard .block-editor-block-list__layout.is-root-container {
 	.wp-block,
@@ -23,68 +24,59 @@
 .editor {
 	flex: 1;
 	position: relative;
+}
 
-	.iso-editor {
-		--wp-admin-theme-color: var( --color-neutral-80 );
-		--wp-admin-theme-color-darker-10: var( --color-neutral-90 );
-		--wp-admin-theme-color-darker-20: var( --color-neutral-100 );
+.editor .iso-editor {
+	--wp-admin-theme-color: var( --color-neutral-80 );
+	--wp-admin-theme-color-darker-10: var( --color-neutral-90 );
+	--wp-admin-theme-color-darker-20: var( --color-neutral-100 );
 
-		background-color: transparent;
-		border: 0;
-		color: var( --color-text );
-		flex: 1;
-		max-height: 100%;
+	background-color: transparent;
+	border: 0;
+	color: var( --color-text );
+	flex: 1;
+	max-height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 65px;
+
+	.edit-post-layout.interface-interface-skeleton {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
-		top: 65px;
-
-		> div:nth-child(2) {
-			display: flex;
-			flex-direction: column;
-			max-height: 100%;
-
-			> div:nth-child(4) {
-				overflow-y: scroll;
-			}
-		}
-
-		.edit-post-visual-editor {
-			position: relative;
-		}
-
-		.popover-slot .iso-inspector {
-			.components-panel__header {
-				padding: 0;
-
-				ul {
-					display: flex;
-					padding: 0;
-				}
-
-				.components-button {
-					height: 48px;
-				}
-			}
-
-			.components-panel__body {
-				box-sizing: border-box;
-			}
-		}
+		top: 0;
 	}
 
-	.edit-post-header__settings > .components-button {
-		margin-right: 12px;
+	.edit-post-visual-editor {
+		background-color: transparent;
+		position: relative;
+	}
 
-		&:last-child {
-			margin-right: 0;
-		}
+	.components-panel__header.edit-post-sidebar__panel-tabs ul {
+			padding: 0
+	}
 
-		&.is-crowdsignal {
-			--wp-admin-theme-color: var( --color-primary-50 );
-			--wp-admin-theme-color-darker-10: var( --color-primary-60 );
-			--wp-admin-theme-color-darker-20: var( --color-primary-70 );
-		}
+	// Fix isolated-block-editor's misalignment of list blocks
+	ul.block-editor-block-list__block,
+	ol.block-editor-block-list__block {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.edit-post-header__settings > .components-button {
+	margin-right: 12px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	&.is-crowdsignal {
+		--wp-admin-theme-color: var( --color-primary-50 );
+		--wp-admin-theme-color-darker-10: var( --color-primary-60 );
+		--wp-admin-theme-color-darker-20: var( --color-primary-70 );
 	}
 }
