@@ -32,7 +32,7 @@
     "@wordpress/element": "^4.0.2",
     "@wordpress/i18n": "^4.2.3",
     "classnames": "^2.2.5",
-    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#3a937f20454cc29d19a34208796e0f2b3b96d72f",
+    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.6.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

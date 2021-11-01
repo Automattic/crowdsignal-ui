@@ -12304,9 +12304,9 @@ isobject@^4.0.0:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
   integrity sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
 
-"isolated-block-editor@git://github.com/Automattic/isolated-block-editor.git#3a937f20454cc29d19a34208796e0f2b3b96d72f":
-  version "2.5.1"
-  resolved "git://github.com/Automattic/isolated-block-editor.git#3a937f20454cc29d19a34208796e0f2b3b96d72f"
+"isolated-block-editor@git://github.com/Automattic/isolated-block-editor.git#2.6.0":
+  version "2.6.0"
+  resolved "git://github.com/Automattic/isolated-block-editor.git#51f95bf5cf879cfbb80ce1ba61dc7dd7fe0c293b"
   dependencies:
     "@wordpress/a11y" "^3.2.3"
     "@wordpress/annotations" "^2.2.4"
@@ -12370,7 +12370,7 @@ isobject@^4.0.0:
     redux-undo "^1.0.1"
     refx "^3.1.1"
     uuid "^8.3.2"
-    yjs "^13.5.13"
+    yjs "^13.5.16"
 
 isomorphic.js@^0.2.4:
   version "0.2.4"
@@ -13793,7 +13793,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lib0@^0.2.41:
+lib0@^0.2.42:
   version "0.2.42"
   resolved "https://registry.yarnpkg.com/lib0/-/lib0-0.2.42.tgz#6d8bf1fb8205dec37a953c521c5ee403fd8769b0"
   integrity sha512-8BNM4MiokEKzMvSxTOC3gnCBisJH+jL67CnSnqzHv3jli3pUvGC8wz+0DQ2YvGr4wVQdb2R2uNNPw9LEpVvJ4Q==
@@ -21384,12 +21384,12 @@ yauzl@^2.10.0:
     buffer-crc32 "~0.2.3"
     fd-slicer "~1.1.0"
 
-yjs@^13.5.13:
-  version "13.5.13"
-  resolved "https://registry.yarnpkg.com/yjs/-/yjs-13.5.13.tgz#0bf4d415938fd57212805ba942a5d18ec77fb537"
-  integrity sha512-5vDcT2ZY8USY6jfwGU1xWcyLz4UwOZH9ue5Ri/G9qv3u4rD7bhKeZhtQM+92/7ft6T2fnZf6roVhDvCx7ixf7g==
+yjs@^13.5.16:
+  version "13.5.17"
+  resolved "https://registry.yarnpkg.com/yjs/-/yjs-13.5.17.tgz#888830e015cce709f3413f78cfdcf3c2176d4b0a"
+  integrity sha512-EeroWadB+/SlGuNwXaIjo75QlTlCjst3U/dLqhTkqwIXeCGl/nRTbQev+iYgWZVskD1eTCvaDc2FdrGdpKq32A==
   dependencies:
-    lib0 "^0.2.41"
+    lib0 "^0.2.42"
 
 yocto-queue@^0.1.0:
   version "0.1.0"
