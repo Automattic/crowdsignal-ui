@@ -1,31 +1,19 @@
-/* eslint-disable complexity */
-
 /**
  * External dependencies
  */
-import {
-	Button,
-	Icon,
-	MenuGroup,
-	MenuItem,
-	Popover,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { check, external } from '@wordpress/icons';
+import { Button } from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
 
 /**
  * Internal dependencies
  */
+import PreviewButton from './preview-button';
 import { STORE_NAME } from '../../data';
-import { useDispatch, useSelect } from '@wordpress/data';
 import { hasUnpublishedChanges } from '../../util/project';
 
 const Toolbar = ( { projectId } ) => {
-	const [ showPreviewDropdown, setShowPreviewDropdown ] = useState( false );
-	const [ previewDeviceType, setPreviewDeviceType ] = useState( 'Desktop' );
-
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const [ project, isSaving, isSaved, isPublic ] = useSelect( ( select ) => {
@@ -97,57 +85,9 @@ const Toolbar = ( { projectId } ) => {
 					? __( 'Draft saved', 'dashboard' )
 					: __( 'Save draft', 'dashboard' ) }
 			</Button>
-			<Button
-				className="is-crowdsignal"
-				variant="tertiary"
-				onClick={ () => setShowPreviewDropdown( true ) }
-				disabled={ ! projectId }
-			>
-				{ __( 'Preview', 'block-editor' ) }
 
-				{ showPreviewDropdown && (
-					<Popover onClose={ () => setShowPreviewDropdown( false ) }>
-						<MenuGroup>
-							<MenuItem
-								onClick={ () =>
-									setPreviewDeviceType( 'Desktop' )
-								}
-								icon={
-									previewDeviceType === 'Desktop' && check
-								}
-							>
-								{ __( 'Desktop', 'dashboard' ) }
-							</MenuItem>
-							<MenuItem
-								onClick={ () =>
-									setPreviewDeviceType( 'Tablet' )
-								}
-								icon={ previewDeviceType === 'Tablet' && check }
-							>
-								{ __( 'Tablet', 'dashboard' ) }
-							</MenuItem>
-							<MenuItem
-								onClick={ () =>
-									setPreviewDeviceType( 'Mobile' )
-								}
-								icon={ previewDeviceType === 'Mobile' && check }
-							>
-								{ __( 'Mobile', 'dashboard' ) }
-							</MenuItem>
-						</MenuGroup>
-						<MenuGroup>
-							<Button
-								variant="tertiary"
-								href={ `/project/${ projectId }/preview` }
-								target="_blank"
-							>
-								{ __( 'Preview in a new tab', 'dashboard' ) }
-								<Icon icon={ external } />
-							</Button>
-						</MenuGroup>
-					</Popover>
-				) }
-			</Button>
+			<PreviewButton projectId={ projectId } />
+
 			{ ( ! isPublic || hasUnpublishedChanges( project ) ) && (
 				<Button
 					className="is-crowdsignal"

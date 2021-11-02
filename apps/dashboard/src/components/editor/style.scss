@@ -67,16 +67,9 @@
 	}
 }
 
-.edit-post-header__settings > .components-button {
-	margin-right: 12px;
 
-	&:last-child {
-		margin-right: 0;
-	}
-
-	&.is-crowdsignal {
-		--wp-admin-theme-color: var( --color-primary-50 );
-		--wp-admin-theme-color-darker-10: var( --color-primary-60 );
-		--wp-admin-theme-color-darker-20: var( --color-primary-70 );
-	}
+.edit-post-header__settings .components-button.is-crowdsignal {
+	--wp-admin-theme-color: var( --color-primary-50 );
+	--wp-admin-theme-color-darker-10: var( --color-primary-60 );
+	--wp-admin-theme-color-darker-20: var( --color-primary-70 );
 }
