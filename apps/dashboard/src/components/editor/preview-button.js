@@ -3,12 +3,11 @@
  */
 import {
 	Button,
+	DropdownMenu,
 	Icon,
-	MenuGroup,
 	MenuItem,
-	Popover,
+	MenuGroup,
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { check, external } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
@@ -19,9 +18,12 @@ import { __ } from '@wordpress/i18n';
 import { PreviewType } from './constants';
 import { STORE_NAME } from '../../data';
 
-const PreviewButton = ( { projectId } ) => {
-	const [ showDropdown, setShowDropdown ] = useState( false );
+/**
+ * Style dependencies
+ */
+import { ExternalPreviewLink } from './styles/preview-button';
 
+const PreviewButton = ( { projectId } ) => {
 	const { setEditorPreviewType } = useDispatch( STORE_NAME );
 
 	const previewType = useSelect(
@@ -29,20 +31,17 @@ const PreviewButton = ( { projectId } ) => {
 			select( STORE_NAME ).getEditorPreviewType() || PreviewType.DESKTOP
 	);
 
-	const toggleDropdown = () => setShowDropdown( ! showDropdown );
-
 	return (
-		<div>
-			<Button
-				className="is-crowdsignal"
-				variant="tertiary"
-				onClick={ toggleDropdown }
-			>
-				{ __( 'Preview', 'block-editor' ) }
-			</Button>
-
-			{ showDropdown && (
-				<Popover onClose={ toggleDropdown }>
+		<DropdownMenu
+			icon={ null }
+			toggleProps={ {
+				isTertiary: true,
+				className: 'is-crowdsignal',
+				children: __( 'Preview', 'dashboard' ),
+			} }
+		>
+			{ () => (
+				<>
 					<MenuGroup>
 						<MenuItem
 							onClick={ () =>
@@ -71,21 +70,24 @@ const PreviewButton = ( { projectId } ) => {
 							{ __( 'Mobile', 'dashboard' ) }
 						</MenuItem>
 					</MenuGroup>
+
 					{ projectId && (
 						<MenuGroup>
-							<Button
+							<ExternalPreviewLink
+								as={ Button }
+								className={ ExternalPreviewLink }
 								variant="tertiary"
 								href={ `/project/${ projectId }/preview` }
 								target="_blank"
 							>
 								{ __( 'Preview in a new tab', 'dashboard' ) }
 								<Icon icon={ external } />
-							</Button>
+							</ExternalPreviewLink>
 						</MenuGroup>
 					) }
-				</Popover>
+				</>
 			) }
-		</div>
+		</DropdownMenu>
 	);
 };
 
