@@ -12,6 +12,11 @@ import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line impo
 import PublishButton from './publish-button';
 import { STORE_NAME } from '../../data';
 
+/**
+ * Style dependencies
+ */
+import { ToolbarButton } from './styles/button';
+
 const Toolbar = ( { projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
@@ -60,8 +65,8 @@ const Toolbar = ( { projectId } ) => {
 
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
-			<Button
-				className="is-crowdsignal"
+			<ToolbarButton
+				as={ Button }
 				variant="tertiary"
 				onClick={ syncProject }
 				disabled={ isSaving || isSaved }
@@ -69,28 +74,28 @@ const Toolbar = ( { projectId } ) => {
 				{ isSaved
 					? __( 'Draft saved', 'dashboard' )
 					: __( 'Save draft', 'dashboard' ) }
-			</Button>
-			<Button
-				className="is-crowdsignal"
+			</ToolbarButton>
+			<ToolbarButton
+				as={ Button }
 				variant="tertiary"
 				href={ `/project/${ projectId }/preview` }
 				target="_blank"
 				disabled={ ! projectId }
 			>
 				{ __( 'Preview', 'block-editor' ) }
-			</Button>
+			</ToolbarButton>
 
 			<PublishButton projectId={ projectId } />
 
 			{ isPublic && (
-				<Button
-					className="is-crowdsignal"
+				<ToolbarButton
+					as={ Button }
 					variant="primary"
 					onClick={ shareHandler }
 					disabled={ isSaving }
 				>
 					{ __( 'Share', 'block-editor' ) }
-				</Button>
+				</ToolbarButton>
 			) }
 		</ToolbarSlot>
 	);

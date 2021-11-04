@@ -7,6 +7,10 @@ export const ToolbarButton = styled.button`
 	--wp-admin-theme-color: var( --color-primary-50 );
 	--wp-admin-theme-color-darker-10: var( --color-primary-60 );
 	--wp-admin-theme-color-darker-20: var( --color-primary-70 );
+
+	&:disabled:not( .is-primary ) {
+		background-color: transparent;
+	}
 `;
 
 export const PublishButtonNotice = styled.span`
