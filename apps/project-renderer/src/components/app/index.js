@@ -2,7 +2,8 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { get } from 'lodash';
+import { useState, useEffect } from '@wordpress/element';
+// import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -18,6 +19,7 @@ import {
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
+import { fetchProjectForm } from '@crowdsignal/rest-api';
 
 // TODO: this is just to make the render look good, selected theme should take care of this?
 const ContentWrapper = styled.div`
@@ -26,13 +28,27 @@ const ContentWrapper = styled.div`
 	padding: 20px;
 `;
 
-const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
-	// page on backend starts at ID = 1, try to substract or default to 0
-	page = get( project, [ 'content', 'public', 'pages', page - 1 ] )
-		? page - 1
-		: 0;
-	const content = project.content.public.pages[ page ];
-	const projectId = project.id;
+const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
+	const [ content, setContent ] = useState( [] );
+	// eslint-disable-next-line
+	const [ startDate, setStartDate ] = useState( startTime );
+	// eslint-disable-next-line
+	const [ currentPage, setCurrentPage ] = useState( page );
+	// eslint-disable-next-line
+	const [ responseHash, setResponseHash ] = useState( respondentId );
+
+	useEffect( () => {
+		fetchProjectForm( projectCode )
+			.then( ( res ) => {
+				return setContent( res.data );
+			} )
+			.catch( ( err ) => {
+				// should get some block here to show the error
+				setContent( [] );
+				// eslint-disable-next-line
+				console.log( err );
+			} );
+	}, [ projectCode ] );
 
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
 
@@ -41,7 +57,7 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 			return;
 		}
 		const form = new window.FormData();
-		form.append( 'p', page );
+		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
 		form.append( 'startTime', startDate || parseInt( Date.now() / 1000 ) );
 		Object.keys( data ).forEach( ( key ) =>
@@ -50,7 +66,7 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 
 		window
 			.fetch(
-				`https://api.crowdsignal.com/v4/projects/${ projectId }/responses`,
+				`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
 				{
 					method: 'POST',
 					body: form,
@@ -64,14 +80,21 @@ const App = ( { project, page = 0, responseHash = '', startDate = 0 } ) => {
 			} )
 			// eslint-disable-next-line no-console
 			.catch( ( err ) => console.error( err ) )
-			// eslint-disable-next-line no-console
-			.then( ( json ) => console.log( json ) );
+			.then( ( json ) => {
+				// eslint-disable-next-line no-console
+				console.log( json );
+				// all the setters should be called here: page, responseHash, content and startTime
+			} );
 	};
+
+	if ( ! content ) {
+		return 'Wait...';
+	}
 
 	return (
 		<div className="app">
 			<ContentWrapper>
-				<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
+				<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
 					{ renderBlocks( content, {
 						'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 						'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
