@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-import { Button } from '@wordpress/components';
+import { Button, Popover } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
@@ -12,7 +13,14 @@ import { submitButtonBlock } from '@crowdsignal/block-editor';
 import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges } from '../../util/project';
 
+/**
+ * Style dependencies
+ */
+import { PublishButtonNotice, ToolbarButton } from './styles/button';
+
 const PublishButton = ( { projectId } ) => {
+	const [ displayNotice, setDisplayNotice ] = useState( false );
+
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const [
@@ -43,21 +51,40 @@ const PublishButton = ( { projectId } ) => {
 		} );
 	};
 
+	const toggleNotice = () => setDisplayNotice( ! displayNotice );
+
+	const isMissingSubmitButton = currentPageSubmitButtonCount === 0;
+	const disabled = isSaving || isMissingSubmitButton;
+
 	if ( isPublic && ! hasUnpublishedChanges( project ) ) {
 		return null;
 	}
 
 	return (
-		<Button
+		<ToolbarButton
+			as={ Button }
 			className="is-crowdsignal"
 			variant={ isPublic ? 'tertiary' : 'primary' }
+			disabled={ disabled }
 			onClick={ publishProject }
-			disabled={ isSaving || currentPageSubmitButtonCount < 1 }
+			onMouseEnter={ toggleNotice }
+			onMouseLeave={ toggleNotice }
 		>
 			{ isPublic
 				? __( 'Update', 'dashboard' )
 				: __( 'Publish', 'dashboard' ) }
-		</Button>
+
+			{ displayNotice && isMissingSubmitButton && (
+				<Popover noArrow={ false }>
+					<PublishButtonNotice>
+						{ __(
+							'Please add a Submit Button to the current page in order to publish your project.',
+							'dashboard'
+						) }
+					</PublishButtonNotice>
+				</Popover>
+			) }
+		</ToolbarButton>
 	);
 };
 
