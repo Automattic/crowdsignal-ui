@@ -16,7 +16,6 @@ import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
 import AutoSubmitButton from './auto-submit-button';
-import EditorLoadingPlaceholder from './loading-placeholder';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import Toolbar from './toolbar';
