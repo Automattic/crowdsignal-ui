@@ -2,15 +2,15 @@
  * External dependencies
  */
 import { Button } from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
 
 /**
  * Internal dependencies
  */
+import PublishButton from './publish-button';
 import { STORE_NAME } from '../../data';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { hasUnpublishedChanges } from '../../util/project';
 
 const Toolbar = ( { projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
@@ -28,20 +28,6 @@ const Toolbar = ( { projectId } ) => {
 		saveAndUpdateProject( projectId, {
 			...project,
 			public: false,
-		} );
-	};
-
-	const publishProject = () => {
-		const payload = { public: true };
-		saveAndUpdateProject( projectId, {
-			...project,
-			content: {
-				...project.content,
-				public: {
-					...project.content.draft,
-				},
-			},
-			...payload,
 		} );
 	};
 
@@ -93,18 +79,9 @@ const Toolbar = ( { projectId } ) => {
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</Button>
-			{ ( ! isPublic || hasUnpublishedChanges( project ) ) && (
-				<Button
-					className="is-crowdsignal"
-					variant={ isPublic ? 'tertiary' : 'primary' }
-					onClick={ publishProject }
-					disabled={ isSaving }
-				>
-					{ isPublic
-						? __( 'Update', 'dashboard' )
-						: __( 'Publish', 'dashboard' ) }
-				</Button>
-			) }
+
+			<PublishButton projectId={ projectId } />
+
 			{ isPublic && (
 				<Button
 					className="is-crowdsignal"

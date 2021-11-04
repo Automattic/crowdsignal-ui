@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { Button } from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { isEmpty } from 'lodash';
 
@@ -10,7 +11,6 @@ import { isEmpty } from 'lodash';
  */
 import { submitButtonBlock } from '@crowdsignal/block-editor';
 import { STORE_NAME } from '../../data';
-import { useDispatch, useSelect } from '@wordpress/data';
 import { hasUnpublishedChanges } from '../../util/project';
 
 const includesSubmitButton = ( blocks ) => {
@@ -63,11 +63,9 @@ const PublishButton = ( { projectId } ) => {
 		} );
 	};
 
-	if ( ! isPublic || hasUnpublishedChanges( project ) ) {
+	if ( isPublic && ! hasUnpublishedChanges( project ) ) {
 		return null;
 	}
-
-	// Todo: add hover popover to explain a submit button is missing
 
 	return (
 		<Button
