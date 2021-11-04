@@ -66,7 +66,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 
 		window
 			.fetch(
-				`https://api.crowdsignal.com/v4/projects/content/${ projectCode }`,
+				`https://api.crowdsignal.com/v4/projects/${ projectCode }/content`,
 				{
 					method: 'POST',
 					body: form,

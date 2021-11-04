@@ -38,6 +38,6 @@ export const updateProject = ( projectId, data ) =>
 export const fetchProjectPage = ( projectId, page ) =>
 	http( {
 		host: 'https://api.crowdsignal.com',
-		path: `/v4/projects/content/${ projectId }/page/${ page }`,
+		path: `/v4/projects/${ projectId }/content/page/${ page }`,
 		method: 'GET',
 	} );
