@@ -18,6 +18,7 @@ const StyledButtonWrapper = styled.div`
 const StyledButton = styled.button`
 	border: 0;
 	cursor: pointer;
+	display: flex;
 	overflow: hidden;
 	position: relative;
 
