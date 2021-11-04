@@ -1,9 +1,10 @@
 /**
  * External dependencies
  */
+import { useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import styled from '@emotion/styled';
 import { useState, useEffect } from '@wordpress/element';
-// import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -37,6 +38,8 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	// eslint-disable-next-line
 	const [ responseHash, setResponseHash ] = useState( respondentId );
 
+	const [ hasResponded, setHasResponded ] = useState( false );
+
 	useEffect( () => {
 		fetchProjectForm( projectCode )
 			.then( ( res ) => {
@@ -56,6 +59,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 		if ( ! data ) {
 			return;
 		}
+
 		const form = new window.FormData();
 		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
@@ -76,6 +80,8 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 				if ( ! res.ok ) {
 					throw new Error( res.status );
 				}
+
+				setHasResponded( true );
 				return res.json();
 			} )
 			// eslint-disable-next-line no-console
@@ -94,16 +100,27 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	return (
 		<div className="app">
 			<ContentWrapper>
-				<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
-					{ renderBlocks( content, {
-						'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
-						'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
-						'crowdsignal-forms/poll': Poll,
-						'crowdsignal-forms/poll-answer': PollAnswer,
-						'crowdsignal-forms/submit-button': SubmitButton,
-						'crowdsignal-forms/text-question': TextQuestion,
-					} ) }
-				</Form>
+				{ ! hasResponded && (
+					<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
+						{ renderBlocks( content, {
+							'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
+							'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
+							'crowdsignal-forms/poll': Poll,
+							'crowdsignal-forms/poll-answer': PollAnswer,
+							'crowdsignal-forms/submit-button': SubmitButton,
+							'crowdsignal-forms/text-question': TextQuestion,
+						} ) }
+					</Form>
+				) }
+
+				{ hasResponded && (
+					<h3>
+						{ __(
+							'Thank you for your response!',
+							'project-renderer'
+						) }
+					</h3>
+				) }
 			</ContentWrapper>
 		</div>
 	);
