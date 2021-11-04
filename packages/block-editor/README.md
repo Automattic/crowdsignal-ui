@@ -6,7 +6,7 @@ This package contains the editor interface for all of our blocks. For public fac
 
 All of our blocks are registered under `crowdsignal-forms` namespace, so the complete block name should look something like this: `crowdsignal-forms/my-block`.
 
-In general, the block registered name should match it's display name closely. If a block happens to fall within a certain category, it's good to signify that using an appropriate suffix. For example:
+In general, the block registered name should match its display name closely. If a block happens to fall within a certain category, it's good to signify that using an appropriate suffix. For example:
 
 - `-question`
 - `-answer`

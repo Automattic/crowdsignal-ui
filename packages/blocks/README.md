@@ -2,7 +2,7 @@
 
 Crowdsignal block library. This package contains the implementation of the user-facing interface of all our blocks. For editor interface see [@crowdsignal/block-editor](../block-editor).
 
-**Note:** `@crowdsignal/block-editor` depends on `@crowdsignal/blocks` but `@crowdsignal/blocks` **must not** depend on `@crowdsignal/block-edito`.
+**Note:** `@crowdsignal/block-editor` depends on `@crowdsignal/blocks` but `@crowdsignal/blocks` **must not** depend on `@crowdsignal/block-editor`.
 
 ## Block architecture
 
@@ -10,8 +10,8 @@ Our blocks are exclusively [dynamic](https://developer.wordpress.org/block-edito
 
 The advantages of such approach are:
 
-- It gives us maximum flexibility and consistency in terms of being able to serve the block anywhere and it working/feeling the same.
-- Minimal overhead for implementing our block inside other services or plugins.
+- Consistent look and feel for our blocks regardles of the platform.
+- All block content are easily embeddable.
 
 ## Creating new blocks
 
