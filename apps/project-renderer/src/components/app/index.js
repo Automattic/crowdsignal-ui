@@ -19,7 +19,7 @@ import {
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
-import { fetchProjectPage } from '@crowdsignal/rest-api';
+import { fetchProjectForm } from '@crowdsignal/rest-api';
 
 // TODO: this is just to make the render look good, selected theme should take care of this?
 const ContentWrapper = styled.div`
@@ -38,7 +38,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	const [ responseHash, setResponseHash ] = useState( respondentId );
 
 	useEffect( () => {
-		fetchProjectPage( projectCode, currentPage )
+		fetchProjectForm( projectCode )
 			.then( ( res ) => {
 				return setContent( res.data );
 			} )
@@ -66,7 +66,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 
 		window
 			.fetch(
-				`https://api.crowdsignal.com/v4/projects/${ projectCode }/content`,
+				`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
 				{
 					method: 'POST',
 					body: form,
