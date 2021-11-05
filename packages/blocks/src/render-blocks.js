@@ -3,6 +3,7 @@
  */
 import { createElement } from '@wordpress/element';
 import {
+	camelCase,
 	filter,
 	flatten,
 	includes,
@@ -20,6 +21,26 @@ const KEY_PREFIX = 'crowdsignal-block-';
 const parser = new window.DOMParser();
 
 /**
+ * Parses a style string and converts it to a style object.
+ *
+ * @param  {string} styleString HTML style attribute
+ * @return {Object}             Style object
+ */
+const parseStyles = ( styleString ) => {
+	if ( ! styleString ) {
+		return null;
+	}
+
+	return styleString
+		.split( ';' )
+		.map( ( rule ) => rule.split( ':' ) )
+		.reduce( ( styles, [ property, value ] ) => {
+			styles[ camelCase( property ) ] = value;
+			return styles;
+		}, {} );
+};
+
+/**
  * Parses DOM nodes into an array of objects to be used to create React elements.
  *
  * @param  {HTMLCollection} nodes
@@ -31,7 +52,7 @@ const parseNodes = ( nodes ) =>
 			return node.textContent;
 		}
 
-		const { class: className, ...attributes } = zipObject(
+		const { class: className, style, ...attributes } = zipObject(
 			map( node.attributes, 'nodeName' ),
 			map( node.attributes, 'value' )
 		);
@@ -42,6 +63,7 @@ const parseNodes = ( nodes ) =>
 			props: {
 				...attributes,
 				className,
+				style: parseStyles( style ),
 				key: uniqueId( KEY_PREFIX ),
 			},
 		};
@@ -67,6 +89,7 @@ const appendInnerBlocks = ( blockName, elements, innerBlocks ) => {
 		// case 'core/media-text':
 		// 	const container = find(
 		// 		elements[0].children,
+
 		// 		( element ) => element.props.className.indexOf( 'wp-block-media-text__content' ) >= 0
 		// 	);
 
