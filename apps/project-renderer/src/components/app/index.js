@@ -1,10 +1,9 @@
 /**
  * External dependencies
  */
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import styled from '@emotion/styled';
-import { useState, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -101,7 +100,10 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 		<div className="app">
 			<ContentWrapper>
 				{ ! hasResponded && (
-					<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
+					<Form
+						name={ `f-${ projectCode }` }
+						onSubmit={ handleSubmit }
+					>
 						{ renderBlocks( content, {
 							'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 							'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
