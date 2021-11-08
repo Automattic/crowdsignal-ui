@@ -2,25 +2,25 @@
 // @ts-check
 
 /**
- * @template F extends (...args: any[]) => any
+ * @template F
  *
  * @typedef {F extends ((...args: infer A) => any) ? A : never} Params
  */
 
 /**
- * @template T extends any[]
+ * @template T
  *
  * @typedef {T extends [any, ...any[]] ? T[0] : never} Head
  */
 
 /**
- * @template T extends any[]
+ * @template T
  *
  * @typedef {T extends [_: any, ...tail: infer TT] ? TT : []} Tail
  */
 
 /**
- * @template F extends (...args: any[] => any)
+ * @template F
  *
  * @typedef {F extends ((...args: any[]) => infer R) ? R : never} ReturnType
  */
