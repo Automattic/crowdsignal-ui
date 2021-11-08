@@ -37,6 +37,10 @@ const editorSettings = {
 			toc: false,
 		},
 	},
+	editor: {
+		alignWide: true,
+		supportsLayout: false,
+	},
 };
 
 const Editor = ( { projectId } ) => {
