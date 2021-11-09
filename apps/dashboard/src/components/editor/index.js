@@ -1,12 +1,11 @@
 /**
  * External dependencies
  */
+import { parse } from '@wordpress/blocks';
 import { useCallback } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
 import { debounce, get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
-import { getCategories, parse, setCategories } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -18,6 +17,7 @@ import { registerBlocks } from './blocks';
 import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
+import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import { hasUnpublishedChanges } from '../../util/project';
 
@@ -25,32 +25,6 @@ import { hasUnpublishedChanges } from '../../util/project';
  * Style dependencies
  */
 import './style.scss';
-
-const editorSettings = {
-	iso: {
-		defaultPreferences: {
-			fixedToolbar: false,
-		},
-		toolbar: {
-			documentInspector: __( 'Document', 'dashboard' ),
-			inspector: true,
-			navigation: true,
-			toc: false,
-		},
-	},
-	editor: {
-		alignWide: true,
-		supportsLayout: false,
-	},
-};
-
-setCategories( [
-	{
-		title: __( 'Form', 'dashboard' ),
-		slug: 'crowdsignal-forms/form',
-	},
-	...getCategories(),
-] );
 
 const Editor = ( { projectId } ) => {
 	const [ project, isSaved ] = useSelect( ( select ) => {
