@@ -39,7 +39,10 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	useEffect( () => {
 		fetchProjectForm( projectCode )
 			.then( ( res ) => {
-				return setContent( res.data );
+				if ( ! res.data || ! res.data.content ) {
+					throw new Error( 'Empty response' );
+				}
+				return setContent( res.data.content );
 			} )
 			.catch( ( err ) => {
 				// should get some block here to show the error
@@ -77,16 +80,19 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 					throw new Error( res.status );
 				}
 
-				setHasResponded( true );
 				return res.json();
 			} )
-			// eslint-disable-next-line no-console
-			.catch( ( err ) => console.error( err ) )
 			.then( ( json ) => {
-				// eslint-disable-next-line no-console
-				console.log( json );
+				if ( ! json || ! json.content ) {
+					throw new Error( 'Empty response' );
+				}
+
+				setHasResponded( true );
+				setContent( json.content );
 				// all the setters should be called here: page, responseHash, content and startTime
-			} );
+			} )
+			// eslint-disable-next-line no-console
+			.catch( ( err ) => console.error( err ) );
 	};
 
 	if ( ! content ) {
