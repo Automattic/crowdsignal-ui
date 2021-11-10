@@ -19,6 +19,7 @@ import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import Toolbar from './toolbar';
+import { hasUnpublishedChanges } from '../../util/project';
 
 /**
  * Style dependencies
@@ -92,9 +93,18 @@ const Editor = ( { projectId } ) => {
 		[ projectId, project ]
 	);
 
-	const loadEditorContent = useCallback( () => displayedBlocks, [
-		displayedBlocks,
-	] );
+	const loadEditorContent = useCallback( () => {
+		if ( hasUnpublishedChanges( project ) ) {
+			// eslint-disable-next-line
+			const restore = window.confirm(
+				'You have unpublished changes for this project, do you want to restore the draft version?'
+			);
+			if ( restore ) {
+				return draftedBlocks;
+			}
+		}
+		return displayedBlocks;
+	}, [ displayedBlocks ] );
 
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
