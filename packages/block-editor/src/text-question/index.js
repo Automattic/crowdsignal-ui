@@ -19,7 +19,7 @@ const settings = {
 		'Ask a question and offer an open text field to enter an answer.',
 		'blocks'
 	),
-	category: 'crowdsignal-forms',
+	category: 'crowdsignal-forms/questions',
 	icon: <TextQuestionIcon />,
 	edit: EditFreeText,
 	attributes,

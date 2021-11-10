@@ -14,7 +14,7 @@ const name = 'crowdsignal-forms/submit-button';
 const settings = {
 	title: __( 'Submit Button', 'blocks' ),
 	description: __( 'Submit the form', 'blocks' ),
-	category: 'crowdsignal-forms',
+	category: 'crowdsignal-forms/questions',
 	edit: EditSubmitButton,
 	attributes,
 };

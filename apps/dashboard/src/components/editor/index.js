@@ -6,7 +6,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { debounce, get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
-import { parse } from '@wordpress/blocks';
+import { getCategories, parse, setCategories } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -42,6 +42,14 @@ const editorSettings = {
 		supportsLayout: false,
 	},
 };
+
+setCategories( [
+	{
+		title: __( 'Questions', 'dashboard' ),
+		slug: 'crowdsignal-forms/questions',
+	},
+	...getCategories(),
+] );
 
 const Editor = ( { projectId } ) => {
 	const [ project, isSaved ] = useSelect( ( select ) => {
