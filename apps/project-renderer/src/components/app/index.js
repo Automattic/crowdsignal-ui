@@ -54,7 +54,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
-			return;
+			data = {};
 		}
 
 		const form = new window.FormData();
