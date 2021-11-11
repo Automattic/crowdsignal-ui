@@ -10,8 +10,6 @@ import styled from '@emotion/styled';
 import {
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
-	Poll,
-	PollAnswer,
 	SubmitButton,
 	TextQuestion,
 	renderBlocks,
@@ -50,8 +48,6 @@ const FormPreview = ( { projectId } ) => {
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
 					'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 					'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
-					'crowdsignal-forms/poll': Poll,
-					'crowdsignal-forms/poll-answer': PollAnswer,
 					'crowdsignal-forms/submit-button': SubmitButton,
 					'crowdsignal-forms/text-question': TextQuestion,
 				} ) }

@@ -11,8 +11,6 @@ import styled from '@emotion/styled';
 import {
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
-	Poll,
-	PollAnswer,
 	SubmitButton,
 	TextQuestion,
 	renderBlocks,
@@ -107,8 +105,6 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 						{ renderBlocks( content, {
 							'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 							'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
-							'crowdsignal-forms/poll': Poll,
-							'crowdsignal-forms/poll-answer': PollAnswer,
 							'crowdsignal-forms/submit-button': SubmitButton,
 							'crowdsignal-forms/text-question': TextQuestion,
 						} ) }
