@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import styled from '@emotion/styled';
 
 /**
@@ -40,7 +39,10 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	useEffect( () => {
 		fetchProjectForm( projectCode )
 			.then( ( res ) => {
-				return setContent( res.data );
+				if ( ! res.data || ! res.data.content ) {
+					throw new Error( 'Empty response' );
+				}
+				return setContent( res.data.content );
 			} )
 			.catch( ( err ) => {
 				// should get some block here to show the error
@@ -54,7 +56,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
-			return;
+			data = {};
 		}
 
 		const form = new window.FormData();
@@ -78,21 +80,32 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 					throw new Error( res.status );
 				}
 
-				setHasResponded( true );
 				return res.json();
 			} )
-			// eslint-disable-next-line no-console
-			.catch( ( err ) => console.error( err ) )
 			.then( ( json ) => {
-				// eslint-disable-next-line no-console
-				console.log( json );
+				if ( ! json || ! json.content ) {
+					throw new Error( 'Empty response' );
+				}
+
+				setHasResponded( true );
+				setContent( json.content );
 				// all the setters should be called here: page, responseHash, content and startTime
-			} );
+			} )
+			// eslint-disable-next-line no-console
+			.catch( ( err ) => console.error( err ) );
 	};
 
 	if ( ! content ) {
 		return 'Wait...';
 	}
+
+	const renderContent = () =>
+		renderBlocks( content, {
+			'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
+			'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
+			'crowdsignal-forms/submit-button': SubmitButton,
+			'crowdsignal-forms/text-question': TextQuestion,
+		} );
 
 	return (
 		<div className="app">
@@ -102,23 +115,11 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 						name={ `f-${ projectCode }` }
 						onSubmit={ handleSubmit }
 					>
-						{ renderBlocks( content, {
-							'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
-							'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
-							'crowdsignal-forms/submit-button': SubmitButton,
-							'crowdsignal-forms/text-question': TextQuestion,
-						} ) }
+						{ renderContent() }
 					</Form>
 				) }
 
-				{ hasResponded && (
-					<h3>
-						{ __(
-							'Thank you for your response!',
-							'project-renderer'
-						) }
-					</h3>
-				) }
+				{ hasResponded && renderContent() }
 			</ContentWrapper>
 		</div>
 	);
