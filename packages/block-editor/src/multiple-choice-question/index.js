@@ -21,7 +21,7 @@ const settings = {
 		'Ask a question and offer multiple answer options.',
 		'blocks'
 	),
-	category: 'crowdsignal-forms/questions',
+	category: 'crowdsignal-forms/form',
 	icon: <MultipleChoiceQuestionIcon />,
 	edit: EditMultipleChoiceQuestion,
 	save: () => <InnerBlocks.Content />,

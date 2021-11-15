@@ -45,8 +45,8 @@ const editorSettings = {
 
 setCategories( [
 	{
-		title: __( 'Questions', 'dashboard' ),
-		slug: 'crowdsignal-forms/questions',
+		title: __( 'Form', 'dashboard' ),
+		slug: 'crowdsignal-forms/form',
 	},
 	...getCategories(),
 ] );
