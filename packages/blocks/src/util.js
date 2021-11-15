@@ -5,8 +5,6 @@
  * @return {string}           Block style
  */
 export const getBlockStyle = ( className ) => {
-	const styleClass =
-		className && className.match( /is-style-([^\s]+)/i )[ 1 ];
-
+	const styleClass = className && className.match( /is-style-([^\s]+)/i );
 	return styleClass ? styleClass[ 1 ] : '';
 };
