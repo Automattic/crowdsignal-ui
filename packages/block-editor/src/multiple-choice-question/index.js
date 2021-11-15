@@ -8,6 +8,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import { MultipleChoiceQuestion } from '@crowdsignal/blocks';
+import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditMultipleChoiceQuestion from './edit';
 
@@ -21,6 +22,7 @@ const settings = {
 		'blocks'
 	),
 	category: 'crowdsignal-forms/questions',
+	icon: <MultipleChoiceQuestionIcon />,
 	edit: EditMultipleChoiceQuestion,
 	save: () => <InnerBlocks.Content />,
 	attributes,
