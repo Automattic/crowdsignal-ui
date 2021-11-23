@@ -1,6 +1,7 @@
 /**
  * Internal dependencies
  */
+import IFrame from '../iframe';
 import ProjectNavigation from '../project-navigation';
 
 const Results = ( { projectId } ) => {
@@ -10,7 +11,11 @@ const Results = ( { projectId } ) => {
 				activeTab={ ProjectNavigation.Tab.RESULTS }
 				projectId={ projectId }
 			/>
-			Results
+
+			<IFrame
+				src={ `/surveys/${ projectId }/report/overview` }
+				width="100%"
+			/>
 		</div>
 	);
 };
