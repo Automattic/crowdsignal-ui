@@ -11,6 +11,7 @@ import {
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	SubmitButton,
+	TextInput,
 	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
@@ -104,6 +105,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 			'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 			'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
 			'crowdsignal-forms/submit-button': SubmitButton,
+			'crowdsignal-forms/text-input': TextInput,
 			'crowdsignal-forms/text-question': TextQuestion,
 		} );
 
