@@ -43,6 +43,13 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 			host: 'crowdsignal.localhost',
 			https: true,
 			port: 9000,
+			proxy: {
+				'/surveys': {
+					changeOrigin: true,
+					secure: false,
+					target: 'https://app.crowdsignal.com',
+				},
+			},
 			historyApiFallback: true,
 		},
 	};
