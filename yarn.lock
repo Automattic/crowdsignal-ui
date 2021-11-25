@@ -5215,7 +5215,7 @@
   resolved "https://registry.yarnpkg.com/@wordpress/browserslist-config/-/browserslist-config-4.0.1.tgz#dcb1b4bcef1224c5a6c814a8e8ea4be83baa7740"
   integrity sha512-mmLxc21NWxZSSPvD592tmzpBlme+nB0fbG1xO+EldS4vQkeWIQUZlNbrMijZM/hpFaBqDEJCAZFUPUpw1XwBWg==
 
-"@wordpress/components@^19.0.0", "@wordpress/components@^19.0.5":
+"@wordpress/components@^19.0.0", "@wordpress/components@^19.0.4", "@wordpress/components@^19.0.5":
   version "19.0.5"
   resolved "https://registry.yarnpkg.com/@wordpress/components/-/components-19.0.5.tgz#b78c91a296a1e9a04dc89b4c43ed20970cc6a09c"
   integrity sha512-xtXTpPvmByVPjIWWo/v8ZzVsEtx9dq6bsdOOkDTnFFUXTcgxJb12RmgbsDR+E/L+z9IwuGxLwt08EGrWWvKF6w==
@@ -12506,9 +12506,9 @@ isobject@^4.0.0:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
   integrity sha512-S/2fF5wH8SJA/kmwr6HYhK/RI/OkhD84k8ntalo0iJjZikgq1XFvR5M8NPT1x5F7fBwCG3qHfnzeP/Vh/ZxCUA==
 
-"isolated-block-editor@git://github.com/Automattic/isolated-block-editor.git#2.7.0":
+"isolated-block-editor@git://github.com/Automattic/isolated-block-editor.git#a1fa71448efddd02ed645939d284fbe81dfe13a2":
   version "2.7.0"
-  resolved "git://github.com/Automattic/isolated-block-editor.git#5791a6ae0f616df4b109c42e209ec67f8f17e684"
+  resolved "git://github.com/Automattic/isolated-block-editor.git#a1fa71448efddd02ed645939d284fbe81dfe13a2"
   dependencies:
     "@wordpress/a11y" "^3.2.3"
     "@wordpress/annotations" "^2.2.5"
@@ -12516,7 +12516,7 @@ isobject@^4.0.0:
     "@wordpress/autop" "^3.2.2"
     "@wordpress/base-styles" "^4.0.2"
     "@wordpress/blob" "^3.2.1"
-    "@wordpress/block-editor" "^7.0.4"
+    "@wordpress/block-editor" "^8.0.5"
     "@wordpress/block-library" "^6.0.2"
     "@wordpress/block-serialization-default-parser" "^4.2.2"
     "@wordpress/block-serialization-spec-parser" "^4.2.0"
