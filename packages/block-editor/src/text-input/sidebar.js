@@ -26,27 +26,30 @@ export default ( { attributes, setAttributes } ) => {
 			[ key ]: value,
 		} );
 
+	const handleChangeNumericAttribute = ( key ) => ( value ) =>
+		handleChangeAttribute( key )( parseInt( value ) );
+
 	return (
 		<InspectorControls>
 			<PanelBody
-				title={ __( 'Field Settings', 'blocks' ) }
+				title={ __( 'Field Settings', 'block-editor' ) }
 				initialOpen={ true }
 			>
 				<ToggleControl
-					label={ __( 'The field is required' ) }
+					label={ __( 'The field is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
 				/>
 				<TextControl
-					label="Input field height"
+					label={ __( 'Input field height', 'block-editor' ) }
 					type="number"
 					value={ attributes.inputHeight }
-					onChange={ handleChangeAttribute( 'inputHeight' ) }
+					onChange={ handleChangeNumericAttribute( 'inputHeight' ) }
 				/>
 				<ToggleGroupControl
-					onChange={ handleChangeAttribute( 'width' ) }
+					label={ __( 'Field Width', 'block-editor' ) }
 					value={ attributes.width }
-					label={ __( 'Field Width' ) }
+					onChange={ handleChangeAttribute( 'width' ) }
 				>
 					{ widthOptions.map( ( option ) => (
 						<ToggleGroupControlOption

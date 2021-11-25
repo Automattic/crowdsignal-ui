@@ -11,7 +11,7 @@ import { FormTextInput } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 
-const TextInput = ( props ) => {
+const EditTextInput = ( props ) => {
 	const { attributes, setAttributes } = props;
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
@@ -20,7 +20,7 @@ const TextInput = ( props ) => {
 		<div style={ { ...useColorStyles( attributes ) } }>
 			<Sidebar { ...props } />
 			<RichText
-				placeholder={ __( 'Enter form label', 'blocks' ) }
+				placeholder={ __( 'Enter form label', 'block-editor' ) }
 				onChange={ handleChangeLabel }
 				value={ attributes.label }
 			/>
@@ -34,4 +34,4 @@ const TextInput = ( props ) => {
 	);
 };
 
-export default TextInput;
+export default EditTextInput;
