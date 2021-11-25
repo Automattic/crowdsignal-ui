@@ -26,13 +26,13 @@
     "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
-    "@wordpress/blocks": "^11.1.1",
-    "@wordpress/components": "^18.0.0",
-    "@wordpress/data": "^6.1.1",
-    "@wordpress/element": "^4.0.2",
+    "@wordpress/blocks": "^11.1.2",
+    "@wordpress/components": "^19.0.0",
+    "@wordpress/data": "^6.1.2",
+    "@wordpress/element": "^4.0.3",
     "@wordpress/i18n": "^4.2.3",
     "classnames": "^2.2.5",
-    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.6.0",
+    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.7.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

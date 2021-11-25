@@ -18,8 +18,8 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@wordpress/data": "^6.1.1",
-    "@wordpress/element": "^4.0.2",
+    "@wordpress/data": "^6.1.2",
+    "@wordpress/element": "^4.0.3",
     "lodash": "^4.17.21"
   }
 }

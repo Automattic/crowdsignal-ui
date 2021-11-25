@@ -25,8 +25,8 @@
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
-    "@wordpress/components": "^18.0.0",
-    "@wordpress/element": "^4.0.2",
+    "@wordpress/components": "^19.0.0",
+    "@wordpress/element": "^4.0.3",
     "@wordpress/i18n": "^4.2.3",
     "lodash": "^4.17.21"
   },
