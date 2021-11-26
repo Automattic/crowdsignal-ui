@@ -24,7 +24,7 @@ const EditTextInput = ( props ) => {
 				onChange={ handleChangeLabel }
 				value={ attributes.label }
 			/>
-			<FormTextInput
+			<FormTextInput.Preview
 				style={ {
 					width: `${ attributes.width }%`,
 					height: `${ attributes.inputHeight }px`,
