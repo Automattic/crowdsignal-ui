@@ -4,6 +4,7 @@
 import { parse } from '@wordpress/blocks';
 import { useCallback } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 import { debounce, get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 
@@ -11,6 +12,7 @@ import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line 
  * Internal dependencies
  */
 import { useStylesheet } from '@crowdsignal/hooks';
+import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import { registerBlocks } from './blocks';
@@ -104,11 +106,18 @@ const Editor = ( { projectId } ) => {
 
 	if ( projectId && null === project ) {
 		// project is being loaded
-		return <EditorLoadingPlaceholder />;
+		return (
+			<>
+				<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
+				<EditorLoadingPlaceholder />
+			</>
+		);
 	}
 
 	return (
 		<div className="editor">
+			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
+
 			<ProjectNavigation
 				activeTab={ ProjectNavigation.Tab.EDITOR }
 				projectId={ projectId }
