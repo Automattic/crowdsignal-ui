@@ -15,7 +15,7 @@ const TextInput = ( { attributes } ) => {
 			<RichText.Content value={ attributes.label } />
 			<FormTextInput
 				style={ {
-					width: `${ attributes.width }%`,
+					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
 				} }
 			/>
