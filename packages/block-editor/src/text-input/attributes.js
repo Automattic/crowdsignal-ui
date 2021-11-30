@@ -15,10 +15,10 @@ export default {
 	},
 	inputHeight: {
 		type: 'number',
-		default: 30,
+		default: 40,
 	},
-	width: {
-		type: 'number',
-		default: 100,
+	inputWidth: {
+		type: 'string',
+		default: '100%',
 	},
 };

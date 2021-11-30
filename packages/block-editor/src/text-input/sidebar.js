@@ -19,7 +19,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import ColorSettings from '../components/color-settings';
 
 export default ( { attributes, setAttributes } ) => {
-	const widthOptions = [ 25, 50, 75, 100 ];
+	const widthOptions = [ '25%', '50%', '75%', '100%' ];
 
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
@@ -48,14 +48,14 @@ export default ( { attributes, setAttributes } ) => {
 				/>
 				<ToggleGroupControl
 					label={ __( 'Field Width', 'block-editor' ) }
-					value={ attributes.width }
-					onChange={ handleChangeAttribute( 'width' ) }
+					value={ attributes.inputWidth }
+					onChange={ handleChangeAttribute( 'inputWidth' ) }
 				>
 					{ widthOptions.map( ( option ) => (
 						<ToggleGroupControlOption
 							key={ option }
 							value={ option }
-							label={ `${ option }%` }
+							label={ option }
 						/>
 					) ) }
 				</ToggleGroupControl>

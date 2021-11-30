@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
+import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -12,9 +13,20 @@ import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 
 const EditTextInput = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, setAttributes, isSelected } = props;
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
+
+	const handleResizeInput = ( event, handle, element ) => {
+		if ( handle !== 'bottom' && handle !== 'right' ) {
+			return;
+		}
+
+		setAttributes( {
+			inputHeight: element.offsetHeight,
+			inputWidth: `${ element.offsetWidth }px`,
+		} );
+	};
 
 	return (
 		<div style={ { ...useColorStyles( attributes ) } }>
@@ -24,12 +36,18 @@ const EditTextInput = ( props ) => {
 				onChange={ handleChangeLabel }
 				value={ attributes.label }
 			/>
-			<FormTextInput.Preview
-				style={ {
-					width: `${ attributes.width }%`,
+			<ResizableBox
+				minHeight="40px"
+				showHandle={ isSelected }
+				enable={ { bottom: true, right: true } }
+				onResizeStop={ handleResizeInput }
+				size={ {
+					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
 				} }
-			/>
+			>
+				<FormTextInput.Preview />
+			</ResizableBox>
 		</div>
 	);
 };

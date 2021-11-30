@@ -3,22 +3,32 @@
  */
 import styled from '@emotion/styled';
 
-const FormTextInputWrapper = styled.div`
-	pointer-events: none;
+const FormTextInputWapper = styled.div(
+	{
+		width: '100%',
+		height: '100%',
+	},
+	( props ) => ( {
+		pointerEvents: props.isPreview && 'none',
+	} )
+);
+
+const Input = styled.input`
+	width: 100%;
+	height: 100%;
+	min-height: 40px;
 `;
 
-const FormTextInput = ( { className, ...props } ) => {
+const FormTextInput = ( { className, isPreview, ...props } ) => {
 	return (
-		<div className={ className }>
-			<input type="text" { ...props } />
-		</div>
+		<FormTextInputWapper className={ className } isPreview={ isPreview }>
+			<Input type="text" { ...props } />
+		</FormTextInputWapper>
 	);
 };
 
 FormTextInput.Preview = ( props ) => (
-	<FormTextInputWrapper>
-		<FormTextInput { ...props } />
-	</FormTextInputWrapper>
+	<FormTextInput isPreview={ true } { ...props } />
 );
 
 export default FormTextInput;
