@@ -2,12 +2,12 @@
  * External dependencies
  */
 import { useSelect } from '@wordpress/data';
-import styled from '@emotion/styled';
 
 /**
  * Internal dependencies
  */
 import {
+	ContentWrapper,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	SubmitButton,
@@ -18,14 +18,6 @@ import {
 import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
 import { STORE_NAME } from '../../data';
-
-const ContentWrapper = styled.div`
-	box-sizing: border-box;
-	margin: 0 auto;
-	max-width: 720px;
-	padding: 20px;
-	width: 100%;
-`;
 
 const FormPreview = ( { projectId } ) => {
 	const project = useSelect( ( select ) =>
@@ -45,8 +37,12 @@ const FormPreview = ( { projectId } ) => {
 	const handleSubmit = ( data ) => console.log( data );
 
 	return (
-		<ContentWrapper>
-			<Form name={ `f-${ projectId }` } onSubmit={ handleSubmit }>
+		<Form
+			name={ `f-${ projectId }` }
+			onSubmit={ handleSubmit }
+			className="project-content"
+		>
+			<ContentWrapper>
 				{ renderBlocks( project.content.draft.pages[ 0 ], {
 					'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 					'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
@@ -54,8 +50,8 @@ const FormPreview = ( { projectId } ) => {
 					'crowdsignal-forms/text-input': TextInput,
 					'crowdsignal-forms/text-question': TextQuestion,
 				} ) }
-			</Form>
-		</ContentWrapper>
+			</ContentWrapper>
+		</Form>
 	);
 };
 
