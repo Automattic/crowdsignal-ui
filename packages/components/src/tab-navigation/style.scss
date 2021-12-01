@@ -47,4 +47,8 @@
 		border-color: var(--color-neutral-70);
 		font-weight: bold;
 	}
+
+	.tab-navigation__item.is-disabled & {
+		pointer-events: none;
+	}
 }
