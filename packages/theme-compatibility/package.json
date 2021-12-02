@@ -1,0 +1,22 @@
+{
+  "name": "@crowdsignal/theme-compatibility",
+  "version": "0.1.0",
+  "description": "Crowdsignal compatibility stylesheets for WordPress themes",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal",
+    "themes"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/form/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "scripts": {
+    "build": "calypso-build"
+  }
+}
