@@ -28,6 +28,10 @@ export const editorSettings = {
 		defaultPreferences: {
 			fixedToolbar: false,
 		},
+		sidebar: {
+			inserter: true,
+			inspector: true,
+		},
 		toolbar: {
 			documentInspector: __( 'Document', 'dashboard' ),
 			inspector: true,
