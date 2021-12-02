@@ -44,11 +44,13 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.EDITOR }
 					href={ `/project/${ projectId }` }
+					isDisabled={ ! projectId }
 				>
 					{ __( 'Editor', 'dashboard' ) }
 				</TabNavigation.Tab>
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.RESULTS }
+					isDisabled={ ! projectId }
 					href={ `/project/${ projectId }/results` }
 				>
 					{ __( 'Results', 'dashboard' ) }
