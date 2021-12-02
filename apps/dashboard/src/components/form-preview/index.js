@@ -35,6 +35,7 @@ const FormPreview = ( { projectId } ) => {
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
+	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
 
 	if ( ! project?.content?.draft ) {
 		return null;
