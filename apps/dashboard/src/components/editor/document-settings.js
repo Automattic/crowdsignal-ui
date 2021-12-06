@@ -7,21 +7,13 @@ import { get } from 'lodash';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line
 import { __experimentalGetSettings, format } from '@wordpress/date';
-import {
-	CustomSelectControl,
-	ExternalLink,
-	PanelBody,
-	PanelRow,
-	ToggleControl,
-} from '@wordpress/components';
+import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
 // import { GlobalStylesUI } from '@wordpress/edit-site/src/components/global-styles';
 
 const DocumentSettings = ( { project } ) => {
 	const dateSettings = __experimentalGetSettings();
 	const formatDate = ( timestamp ) =>
 		format( dateSettings.formats.datetime, timestamp * 1000 );
-
-	const formTimeoutOptions = [ { key: 24, name: '24 hours' } ];
 
 	const isPublic = get( project, [ 'content', 'public' ], false );
 	const visibiliy = isPublic
@@ -40,11 +32,6 @@ const DocumentSettings = ( { project } ) => {
 	);
 	const lastUpdated = Math.max( publicTimestamp, draftTimestamp );
 
-	//eslint-disable-next-line
-	const handleChangeRestriction = ( key ) => ( value ) => {
-		//TODO: Call API to save values
-	};
-
 	return (
 		<DocumentSection>
 			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
@@ -61,10 +48,7 @@ const DocumentSettings = ( { project } ) => {
 					<span>{ formatDate( lastUpdated ) }</span>
 				</PanelRow>
 			</PanelBody>
-			<PanelBody
-				title={ __( 'Permalink', 'dashboard' ) }
-				initialOpen={ false }
-			>
+			<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
 				<PanelRow>
 					<span>View Project</span>
 				</PanelRow>
@@ -72,46 +56,6 @@ const DocumentSettings = ( { project } ) => {
 					{ project.permalink }
 				</ExternalLink>
 			</PanelBody>
-			<PanelBody
-				title={ __( 'Restrictions', 'dashboard' ) }
-				initialOpen={ false }
-			>
-				<ToggleControl
-					label={ __( 'Captcha protection', 'dashboard' ) }
-					value={ project.restrictCaptcha }
-					onChange={ handleChangeRestriction( 'restrictCaptcha' ) }
-				/>
-				<ToggleControl
-					label={ __( 'Password protection', 'dashboard' ) }
-					value={ project.restrictPassword }
-					onChange={ handleChangeRestriction( 'restrictPassword' ) }
-				/>
-				<ToggleControl
-					label={ __( 'One response per computer', 'dashboard' ) }
-					value={ project.restrictQuota }
-					onChange={ handleChangeRestriction( 'restrictQuota' ) }
-				/>
-				<ToggleControl
-					label={ __( 'IP restriction', 'dashboard' ) }
-					value={ project.restrictIp }
-					onChange={ handleChangeRestriction( 'restrictIp' ) }
-				/>
-				<ToggleControl
-					label={ __( 'Email restriction', 'dashboard' ) }
-					value={ project.restrictEmail }
-					onChange={ handleChangeRestriction( 'restrictEmail' ) }
-				/>
-				<CustomSelectControl
-					label={ __( 'Form Timeout', 'dashboard' ) }
-					options={ formTimeoutOptions }
-					value={ formTimeoutOptions.find(
-						( o ) => o.key === project.responseTimeout
-					) }
-				/>
-			</PanelBody>
-			{ /*<PanelBody title={ __( 'Theme', 'dashboard' ) } />*/ }
-			{ /*<PanelBody title={ __( 'Navigation', 'dashboard' ) } />*/ }
-			{ /*<PanelBody title={ __( 'Language', 'dashboard' ) } />*/ }
 			{ /*<GlobalStylesUI />*/ }
 		</DocumentSection>
 	);
