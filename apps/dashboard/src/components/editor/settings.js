@@ -29,7 +29,7 @@ export const editorSettings = {
 			fixedToolbar: false,
 		},
 		toolbar: {
-			documentInspector: __( 'Document', 'dashboard' ),
+			documentInspector: __( 'Project', 'dashboard' ),
 			inspector: true,
 			navigation: true,
 			toc: false,
