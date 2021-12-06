@@ -109,7 +109,7 @@ const appendInnerBlocks = ( blockName, elements, innerBlocks ) => {
  */
 const createElementsRecursive = ( elements ) => {
 	if ( isEmpty( elements ) ) {
-		return null;
+		return [];
 	}
 
 	return map( elements, ( element ) => {
@@ -117,13 +117,18 @@ const createElementsRecursive = ( elements ) => {
 			return element;
 		}
 
+		const children = [
+			...( element.innerBlocks || [] ),
+			...createElementsRecursive( element.children ),
+		];
+
 		return createElement(
 			element.name,
 			element.props,
 
 			// In practice, if an element is the host for inner blocks
 			// it's children should alwyas be empty here.
-			element.innerBlocks || createElementsRecursive( element.children )
+			( children.length && children ) || null
 		);
 	} );
 };
