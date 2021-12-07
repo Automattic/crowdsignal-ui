@@ -8,7 +8,6 @@ import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line
 import { __experimentalGetSettings, format } from '@wordpress/date';
 import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
-// import { GlobalStylesUI } from '@wordpress/edit-site/src/components/global-styles';
 
 const DocumentSettings = ( { project } ) => {
 	const dateSettings = __experimentalGetSettings();
@@ -50,13 +49,12 @@ const DocumentSettings = ( { project } ) => {
 			</PanelBody>
 			<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
 				<PanelRow>
-					<span>View Project</span>
+					<span>{ __( 'View Project', 'dashboard' ) }</span>
 				</PanelRow>
 				<ExternalLink href={ project.permalink }>
 					{ project.permalink }
 				</ExternalLink>
 			</PanelBody>
-			{ /*<GlobalStylesUI />*/ }
 		</DocumentSection>
 	);
 };
