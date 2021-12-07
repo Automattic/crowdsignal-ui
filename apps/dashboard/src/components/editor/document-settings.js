@@ -34,15 +34,15 @@ const DocumentSettings = ( { project } ) => {
 	return (
 		<DocumentSection>
 			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
-				<PanelRow>
+				<PanelRow className="project-visibility">
 					<span>{ __( 'Visibility', 'dashboard' ) }</span>
 					<span>{ visibiliy }</span>
 				</PanelRow>
-				<PanelRow>
+				<PanelRow className="project-creation-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
 					<span>{ formatDate( project.created ) }</span>
 				</PanelRow>
-				<PanelRow>
+				<PanelRow className="project-last-update-date">
 					<span>{ __( 'Last Updated', 'dashboard' ) }</span>
 					<span>{ formatDate( lastUpdated ) }</span>
 				</PanelRow>

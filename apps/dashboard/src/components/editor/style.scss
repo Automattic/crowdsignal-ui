@@ -63,11 +63,30 @@ html.interface-interface-skeleton__html-container {
 			padding: 0
 	}
 
+	.components-panel__body-title {
+		.components-panel__body-toggle {
+			font-weight: 600;
+		}
+	}
+
 	// Fix isolated-block-editor's misalignment of list blocks
 	ul.block-editor-block-list__block,
 	ol.block-editor-block-list__block {
 		margin-left: auto;
 		margin-right: auto;
+	}
+}
+
+.iso-sidebar {
+	.project-visibility, .project-creation-date, .project-last-update-date {
+		span {
+			&:first-child {
+				margin-right: 5px;
+			}
+			&:last-child {
+				white-space: nowrap;
+			}
+		}
 	}
 }
 
