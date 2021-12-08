@@ -17,6 +17,7 @@ const EditCheckboxAnswer = ( {
 	onChange,
 	onReplace,
 	onSplit,
+	onDelete,
 } ) => (
 	<FormCheckbox.Label
 		as={ 'div' }
@@ -32,6 +33,7 @@ const EditCheckboxAnswer = ( {
 			onChange={ onChange }
 			onReplace={ onReplace }
 			onSplit={ onSplit }
+			onRemove={ onDelete }
 			value={ attributes.label }
 			allowedFormats={ [] }
 			withoutInteractiveFormatting

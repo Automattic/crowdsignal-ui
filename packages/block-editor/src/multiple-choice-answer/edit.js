@@ -3,6 +3,7 @@
  */
 import { createBlock } from '@wordpress/blocks';
 import { compose } from '@wordpress/compose';
+import { useDispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -18,6 +19,20 @@ import Sidebar from './sidebar';
 const EditMultipleChoiceAnswer = ( props ) => {
 	const { attributes, className, clientId, onReplace, setAttributes } = props;
 
+	const { removeBlock } = useDispatch( 'core/block-editor' );
+
+	const answersCount = useSelect(
+		( select ) => {
+			const { getBlockCount, getBlockRootClientId } = select(
+				'core/block-editor'
+			);
+
+			const questionClientId = getBlockRootClientId( clientId );
+			return getBlockCount( questionClientId );
+		},
+		[ clientId ]
+	);
+
 	const questionAttributes = useParentAttributes( clientId );
 
 	useClientId( { attributes, setAttributes } );
@@ -25,7 +40,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
 	const handleSplit = ( label ) =>
-		createBlock( 'crowdsignal-forms/answer', {
+		createBlock( 'crowdsignal-forms/multiple-choice-answer', {
 			...attributes,
 			clientId:
 				label && attributes.label.indexOf( label ) === 0
@@ -33,6 +48,14 @@ const EditMultipleChoiceAnswer = ( props ) => {
 					: undefined,
 			label,
 		} );
+
+	const handleDelete = () => {
+		if ( answersCount <= 2 ) {
+			return;
+		}
+
+		removeBlock( clientId );
+	};
 
 	const blockStyle = getBlockStyle( questionAttributes.className );
 
@@ -59,6 +82,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 					onChange={ handleChangeLabel }
 					onReplace={ onReplace }
 					onSplit={ handleSplit }
+					onDelete={ handleDelete }
 				/>
 			) }
 		</>
