@@ -94,6 +94,7 @@ const Editor = ( { projectId } ) => {
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
 	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
+	useStylesheet( '/ui/stable/theme-compatibility/leven-editor.min.css' );
 
 	const handleChangeContent = useCallback(
 		( content ) => {

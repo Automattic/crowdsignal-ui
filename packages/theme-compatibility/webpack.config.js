@@ -4,7 +4,8 @@ const FixStyleOnlyEntriesPlugin = require( 'webpack-fix-style-only-entries' );
 module.exports = {
 	mode: 'production',
 	entry: {
-		leven: './stylesheets/leven.scss',
+		'leven': './stylesheets/leven.scss',
+		'leven-editor': './stylesheets/leven-editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
