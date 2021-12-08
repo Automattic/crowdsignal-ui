@@ -10,9 +10,9 @@ import { __experimentalGetSettings, format } from '@wordpress/date';
 import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
 
 const DocumentSettings = ( { project } ) => {
-	const dateSettings = __experimentalGetSettings();
+	const DATETIME_FORMAT = 'F j, Y H:i';
 	const formatDate = ( timestamp ) =>
-		format( dateSettings.formats.datetime, timestamp * 1000 );
+		format( DATETIME_FORMAT, timestamp * 1000 );
 
 	const isPublic = get( project, [ 'content', 'public' ], false );
 	const visibiliy = isPublic
@@ -38,12 +38,12 @@ const DocumentSettings = ( { project } ) => {
 					<span>{ __( 'Visibility', 'dashboard' ) }</span>
 					<span>{ visibiliy }</span>
 				</PanelRow>
-				<PanelRow className="project-creation-date">
+				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
 					<span>{ formatDate( project.created ) }</span>
 				</PanelRow>
-				<PanelRow className="project-last-update-date">
-					<span>{ __( 'Last Updated', 'dashboard' ) }</span>
+				<PanelRow className="project-updated-date">
+					<span>{ __( 'Updated', 'dashboard' ) }</span>
 					<span>{ formatDate( lastUpdated ) }</span>
 				</PanelRow>
 			</PanelBody>
