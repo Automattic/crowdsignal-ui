@@ -8,6 +8,6 @@ export const useParentAttributes = ( clientId ) =>
 		const blockEditor = select( 'core/block-editor' );
 
 		return blockEditor.getBlockAttributes(
-			blockEditor.getBlockHierarchyRootClientId( clientId )
+			blockEditor.getBlockRootClientId( clientId )
 		);
 	} );
