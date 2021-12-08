@@ -10,6 +10,8 @@ import classnames from 'classnames';
 import { useColorStyles } from '@crowdsignal/styles';
 
 const StyledButtonWrapper = styled.div`
+	display: flex;
+
 	&.is-selected {
 		filter: invert( 1 );
 	}
@@ -18,7 +20,7 @@ const StyledButtonWrapper = styled.div`
 const StyledButton = styled.button`
 	border: 0;
 	cursor: pointer;
-	display: flex;
+	display: inline-flex;
 	overflow: hidden;
 	position: relative;
 
@@ -35,10 +37,14 @@ const Button = ( {
 	...props
 } ) => (
 	<StyledButtonWrapper
-		className={ classnames( className, 'wp-block-button' ) }
+		className={ classnames(
+			'crowdsignal-forms-button',
+			className,
+			'wp-block-button'
+		) }
 	>
 		<StyledButton
-			className="wp-block-button__link"
+			className="crowdsignal-forms-button__button wp-block-button__link"
 			style={ {
 				...useColorStyles( attributes ),
 				...style,
