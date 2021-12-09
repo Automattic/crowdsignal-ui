@@ -28,6 +28,7 @@ const EditButtonAnswer = ( {
 	onChange,
 	onReplace,
 	onSplit,
+	onDelete,
 } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
@@ -48,6 +49,7 @@ const EditButtonAnswer = ( {
 					onChange={ onChange }
 					onReplace={ onReplace }
 					onSplit={ onSplit }
+					onRemove={ onDelete }
 					value={ attributes.label }
 					multiline={ false }
 					preserveWhiteSpace={ false }
