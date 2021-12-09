@@ -30,9 +30,13 @@ const EditMultipleChoiceQuestion = ( props ) => {
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
-	const classes = classnames( className, {
-		'is-required': attributes.mandatory,
-	} );
+	const classes = classnames(
+		'crowdsignal-forms-multiple-choice-question-block',
+		className,
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
@@ -45,24 +49,21 @@ const EditMultipleChoiceQuestion = ( props ) => {
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
 			/>
-			<InnerBlocks
-				template={ [
-					[ 'crowdsignal-forms/multiple-choice-answer', {} ],
-					[ 'crowdsignal-forms/multiple-choice-answer', {} ],
-					[ 'crowdsignal-forms/multiple-choice-answer', {} ],
-				] }
-				templateLock={ false }
-				allowedBlocks={ ALLOWED_ANSWER_BLOCKS }
-				orientation="vertical"
-				__experimentalMoverDirection="vertical"
-			/>
+			<QuestionWrapper.Content>
+				<InnerBlocks
+					template={ [
+						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
+						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
+						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
+					] }
+					templateLock={ false }
+					allowedBlocks={ ALLOWED_ANSWER_BLOCKS }
+					orientation="vertical"
+					__experimentalMoverDirection="vertical"
+				/>
+			</QuestionWrapper.Content>
 		</QuestionWrapper>
 	);
 };
 
 export default EditMultipleChoiceQuestion;
-
-// get parent attributes might work like:
-//
-// getBlockHierarchyRootClientId = return parent clientId
-// getblockAttributes( parentClientId );

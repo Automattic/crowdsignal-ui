@@ -1,0 +1,10 @@
+.crowdsignal-forms-button {
+	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
+		margin-top: 16px;
+	}
+}
+
+.crowdsignal-forms__question-wrapper {
+	margin-bottom: 64px;
+	margin-top: 64px;
+}

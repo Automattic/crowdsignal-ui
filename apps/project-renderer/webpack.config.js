@@ -1,4 +1,5 @@
 const path = require( 'path' );
+const express = require( 'express' );
 const webpack = require( 'webpack' );
 const package = require( './package.json' );
 const getBaseConfig = require( '@automattic/calypso-build/webpack.config.js' );
@@ -43,6 +44,14 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 			host: 'crowdsignal.localhost',
 			https: true,
 			port: 9001,
+			before: ( app ) => {
+				app.use(
+					'/ui/stable/theme-compatibility',
+					express.static(
+						path.resolve( __dirname, '../../packages/theme-compatibility/dist' )
+					)
+				);
+			},
 			historyApiFallback: true,
 		},
 	};

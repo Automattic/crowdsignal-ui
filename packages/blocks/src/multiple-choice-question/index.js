@@ -14,9 +14,13 @@ import { Style } from './constants';
 const Context = createContext();
 
 const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
-	const classes = classnames( className, {
-		'is-required': attributes.mandatory,
-	} );
+	const classes = classnames(
+		'crowdsignal-forms-multiple-choice-question-block',
+		className,
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>

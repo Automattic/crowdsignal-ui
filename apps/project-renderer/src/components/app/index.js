@@ -54,6 +54,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	}, [ projectCode ] );
 
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
+	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
