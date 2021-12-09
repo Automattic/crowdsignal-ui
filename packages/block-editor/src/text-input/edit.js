@@ -38,7 +38,6 @@ const EditTextInput = ( props ) => {
 				placeholder={ __( 'Enter form label', 'block-editor' ) }
 				onChange={ handleChangeLabel }
 				value={ attributes.label }
-				data-client-id={ attributes.clientId }
 			/>
 			<ResizableBox
 				minHeight="40px"
