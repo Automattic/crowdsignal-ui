@@ -1,8 +1,5 @@
-.crowdsignal-forms-multiple-choice-answer-block {
-    .wp-block[data-type="crowdsignal-forms/multiple-choice-question"]:not(.is-selected):not(.has-child-selected) &.is-empty {
-        height: 0;
-        opacity: 0;
-        margin-bottom: -16px;
-        margin-top: 0;
+.wp-block[data-type="crowdsignal-forms/multiple-choice-question"]:not(.is-selected):not(.has-child-selected) {
+    .wp-block[data-type="crowdsignal-forms/multiple-choice-answer"].is-empty {
+        display: none;
     }
 }
