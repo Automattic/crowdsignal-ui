@@ -7,6 +7,7 @@ export const DEVICE_REPORT = 'device-report';
 export const UNLIMITED_EMAIL_RESPONSES = 'unlimited-email-responses';
 export const CUSTOM_STYLE = 'custom-style';
 export const OVERRIDES = 'overrides';
+export const PROJECT = 'feature-project';
 export const POLL = 'feature-poll';
 export const RATING = 'feature-rating';
 export const SURVEY = 'feature-survey';
