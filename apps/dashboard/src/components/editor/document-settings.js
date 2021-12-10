@@ -3,33 +3,19 @@
  */
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
-import { get } from 'lodash';
 import { __ } from '@wordpress/i18n';
-// eslint-disable-next-line
-import { __experimentalGetSettings, format } from '@wordpress/date';
 import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
 
-const DocumentSettings = ( { project } ) => {
-	const DATETIME_FORMAT = 'F j, Y H:i';
-	const formatDate = ( timestamp ) =>
-		format( DATETIME_FORMAT, timestamp * 1000 );
+/**
+ * Internal dependencies
+ */
+import { isPublic, getLastUpdatedDate } from '../../util/project';
+import { timestampToDate } from '../../util/date';
 
-	const isPublic = get( project, [ 'content', 'public' ], false );
-	const visibiliy = isPublic
+const DocumentSettings = ( { project } ) => {
+	const visibiliy = isPublic( project )
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
-
-	const publicTimestamp = get(
-		project,
-		[ 'content', 'public', 'timestamp' ],
-		0
-	);
-	const draftTimestamp = get(
-		project,
-		[ 'content', 'draft', 'timestamp' ],
-		0
-	);
-	const lastUpdated = Math.max( publicTimestamp, draftTimestamp );
 
 	return (
 		<DocumentSection>
@@ -40,11 +26,13 @@ const DocumentSettings = ( { project } ) => {
 				</PanelRow>
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
-					<span>{ formatDate( project.created ) }</span>
+					<span>{ timestampToDate( project.created ) }</span>
 				</PanelRow>
 				<PanelRow className="project-updated-date">
 					<span>{ __( 'Updated', 'dashboard' ) }</span>
-					<span>{ formatDate( lastUpdated ) }</span>
+					<span>
+						{ timestampToDate( getLastUpdatedDate( project ) ) }
+					</span>
 				</PanelRow>
 			</PanelBody>
 			<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
