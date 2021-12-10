@@ -39,8 +39,13 @@ const DocumentSettings = ( { project } ) => {
 				<PanelRow>
 					<span>{ __( 'View Project', 'dashboard' ) }</span>
 				</PanelRow>
-				<ExternalLink href={ project.permalink }>
-					{ project.permalink }
+				<ExternalLink
+					href={ project.permalink }
+					title={ project.permalink }
+				>
+					<span className="components-external-link__text">
+						{ project.permalink }
+					</span>
 				</ExternalLink>
 			</PanelBody>
 		</DocumentSection>
