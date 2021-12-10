@@ -7,6 +7,7 @@ import { render } from '@wordpress/element';
  * Internal dependencies
  */
 import { StyleProvider } from '@crowdsignal/components';
+import { Route, Router } from '@crowdsignal/router';
 import App from './components/app';
 
 const renderProject = () => {
@@ -14,21 +15,12 @@ const renderProject = () => {
 	if ( ! container ) {
 		return;
 	}
-	const { pid, page, rid, startDate } = container.dataset;
-
-	// default to location path
-	const projectId = pid
-		? pid
-		: window.location.pathname.replaceAll( '/', '' );
 
 	return render(
 		<StyleProvider reset>
-			<App
-				projectCode={ projectId }
-				page={ page }
-				respondentId={ rid }
-				startTime={ startDate }
-			/>
+			<Router>
+				<Route path="/:projectCode" component={ App } />
+			</Router>
 		</StyleProvider>,
 		container
 	);
