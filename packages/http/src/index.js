@@ -25,6 +25,13 @@ const globalHeaders = {
 const hostHeaders = {};
 
 /**
+ * Host specific options added to every request to the host.
+ *
+ * @type {Object}
+ */
+const hostOptions = {};
+
+/**
  * Adds a key/value pair to the global headers array that's
  * appended to every ajax request.
  *
@@ -65,6 +72,22 @@ export const getHeader = ( key, host = '' ) => {
 
 	return globalHeaders[ key ];
 };
+
+/**
+ * Adds a key/value pair to the host specific options array
+ * appended to every ajax request to the given host.
+ *
+ * @param  {string} host  Hostname including protocol.
+ *                        Should be the same as the 'host' param for http() calls.
+ * @param  {string} key   Option key
+ * @param  {string} value Option value
+ * @return {void}
+ */
+export const setHostOption = ( host, key, value ) =>
+	( hostOptions[ host ] = {
+		...hostOptions[ host ],
+		[ key ]: value,
+	} );
 
 /**
  * Handles failed requests/error responses.
@@ -109,12 +132,10 @@ const onRequestSuccess = ( rawResponse ) => {
  * @return {Promise}         Request promise.
  */
 export const http = ( options ) => {
-	const requestOptions = omit( options, [
-		'headers',
-		'host',
-		'path',
-		'query',
-	] );
+	const requestOptions = {
+		...( hostOptions[ options.host ] || [] ),
+		...omit( options, [ 'headers', 'host', 'path', 'query' ] ),
+	};
 
 	requestOptions.headers = merge(
 		globalHeaders,
