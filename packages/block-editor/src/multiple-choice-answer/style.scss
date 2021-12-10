@@ -1,0 +1,5 @@
+.wp-block[data-type="crowdsignal-forms/multiple-choice-question"]:not(.is-selected):not(.has-child-selected) {
+    .wp-block[data-type="crowdsignal-forms/multiple-choice-answer"].is-empty {
+        display: none;
+    }
+}

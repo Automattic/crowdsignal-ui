@@ -1,0 +1,24 @@
+{
+  "name": "@crowdsignal/block-editor-filters",
+  "version": "0.1.0",
+  "description": "Crowdsignal block editor filter functions.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/block-editor-filters/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@crowdsignal/block-editor": "^0.1.0",
+    "classnames": "^2.3.1",
+    "lodash": "^4.17.21"
+  }
+}

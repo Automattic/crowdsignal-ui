@@ -26,9 +26,13 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 		value: attributes.clientId,
 	} );
 
-	const classes = classnames( className, {
-		'is-selected': inputProps.checked,
-	} );
+	const classes = classnames(
+		'crowdsignal-forms-multiple-choice-answer-block',
+		className,
+		{
+			'is-selected': inputProps.checked,
+		}
+	);
 
 	if ( ! attributes.label ) {
 		return null;

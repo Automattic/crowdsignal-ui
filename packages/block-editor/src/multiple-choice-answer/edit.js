@@ -4,6 +4,7 @@
 import { createBlock } from '@wordpress/blocks';
 import { compose } from '@wordpress/compose';
 import { useDispatch, useSelect } from '@wordpress/data';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -15,6 +16,11 @@ import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attribu
 import EditButtonAnswer from './edit-button';
 import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
+
+/**
+ * Style dependencies
+ */
+import './style.scss';
 
 const EditMultipleChoiceAnswer = ( props ) => {
 	const { attributes, className, clientId, onReplace, setAttributes } = props;
@@ -59,6 +65,14 @@ const EditMultipleChoiceAnswer = ( props ) => {
 
 	const blockStyle = getBlockStyle( questionAttributes.className );
 
+	const classes = classnames(
+		'crowdsignal-forms-multiple-choice-answer-block',
+		className,
+		{
+			'is-empty': ! attributes.label,
+		}
+	);
+
 	return (
 		<>
 			<Sidebar blockStyle={ blockStyle } { ...props } />
@@ -66,7 +80,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
 				<EditCheckboxAnswer
 					attributes={ attributes }
-					className={ className }
+					className={ classes }
 					multipleChoice={ questionAttributes.maximumChoices !== 1 }
 					onChange={ handleChangeLabel }
 					onReplace={ onReplace }
@@ -77,7 +91,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
 				<EditButtonAnswer
 					attributes={ attributes }
-					className={ className }
+					className={ classes }
 					multipleChoice={ questionAttributes.maximumChoices !== 1 }
 					onChange={ handleChangeLabel }
 					onReplace={ onReplace }
