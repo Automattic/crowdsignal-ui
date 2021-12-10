@@ -132,7 +132,7 @@ const Editor = ( { projectId } ) => {
 				onError={ noop }
 			>
 				<Toolbar projectId={ projectId } />
-				<DocumentSettings />
+				<DocumentSettings project={ project } />
 
 				<AutoSubmitButton />
 			</IsolatedBlockEditor>

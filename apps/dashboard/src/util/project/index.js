@@ -3,6 +3,20 @@
  */
 import { get } from 'lodash';
 
+const getProjectTimestamp = ( project, contentType ) =>
+	get( project, [ 'content', contentType, 'timestamp' ], 0 );
+
+const getPublicTimestamp = ( project ) =>
+	getProjectTimestamp( project, 'public' );
+
+const getDraftTimestamp = ( project ) =>
+	getProjectTimestamp( project, 'draft' );
+
 export const hasUnpublishedChanges = ( project ) =>
-	get( project, [ 'content', 'draft', 'timestamp' ], 0 ) >
-	get( project, [ 'content', 'public', 'timestamp' ], 0 );
+	getDraftTimestamp( project ) > getPublicTimestamp( project );
+
+export const getLastUpdatedDate = ( project ) =>
+	Math.max( getPublicTimestamp( project ), getDraftTimestamp( project ) );
+
+export const isPublic = ( project ) =>
+	get( project, [ 'content', 'public' ], false );

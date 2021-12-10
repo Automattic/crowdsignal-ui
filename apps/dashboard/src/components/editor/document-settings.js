@@ -3,13 +3,53 @@
  */
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
-// import { GlobalStylesUI } from '@wordpress/edit-site/src/components/global-styles';
+import { __ } from '@wordpress/i18n';
+import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
 
-const DocumentSettings = () => (
-	<DocumentSection>
-		Great things will come here
-		{ /*<GlobalStylesUI />*/ }
-	</DocumentSection>
-);
+/**
+ * Internal dependencies
+ */
+import { isPublic, getLastUpdatedDate } from '../../util/project';
+import { timestampToDate } from '../../util/date';
+
+const DocumentSettings = ( { project } ) => {
+	const visibiliy = isPublic( project )
+		? __( 'Public', 'dashboard' )
+		: __( 'Private', 'dashboard' );
+
+	return (
+		<DocumentSection>
+			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
+				<PanelRow className="project-visibility">
+					<span>{ __( 'Visibility', 'dashboard' ) }</span>
+					<span>{ visibiliy }</span>
+				</PanelRow>
+				<PanelRow className="project-created-date">
+					<span>{ __( 'Created', 'dashboard' ) }</span>
+					<span>{ timestampToDate( project.created ) }</span>
+				</PanelRow>
+				<PanelRow className="project-updated-date">
+					<span>{ __( 'Updated', 'dashboard' ) }</span>
+					<span>
+						{ timestampToDate( getLastUpdatedDate( project ) ) }
+					</span>
+				</PanelRow>
+			</PanelBody>
+			<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
+				<PanelRow>
+					<span>{ __( 'View Project', 'dashboard' ) }</span>
+				</PanelRow>
+				<ExternalLink
+					href={ project.permalink }
+					title={ project.permalink }
+				>
+					<span className="components-external-link__text">
+						{ project.permalink }
+					</span>
+				</ExternalLink>
+			</PanelBody>
+		</DocumentSection>
+	);
+};
 
 export default DocumentSettings;

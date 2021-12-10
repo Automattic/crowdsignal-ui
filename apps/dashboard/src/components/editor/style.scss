@@ -63,11 +63,48 @@ html.interface-interface-skeleton__html-container {
 			padding: 0
 	}
 
+	.components-panel__body-title {
+		.components-panel__body-toggle {
+			font-weight: 600;
+		}
+	}
+
 	// Fix isolated-block-editor's misalignment of list blocks
 	ul.block-editor-block-list__block,
 	ol.block-editor-block-list__block {
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.components-external-link {
+		display: flex;
+		align-items: center;
+
+		&__text {
+			text-overflow: ellipsis;
+			max-width: 100%;
+			box-sizing: border-box;
+			overflow: hidden;
+			display: inline-block;
+			white-space: nowrap;
+		}
+
+		&__icon {
+			margin: 0;
+		}
+	}
+}
+
+.iso-sidebar {
+	.project-visibility, .project-created-date, .project-updated-date {
+		span {
+			&:first-child {
+				margin-right: 5px;
+			}
+			&:last-child {
+				white-space: nowrap;
+			}
+		}
 	}
 }
 
