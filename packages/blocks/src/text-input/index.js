@@ -8,8 +8,13 @@ import { RichText } from '@wordpress/block-editor';
  */
 import { useColorStyles } from '@crowdsignal/styles';
 import { FormTextInput } from '../components';
+import { useField } from '@crowdsignal/form';
 
 const TextInput = ( { attributes } ) => {
+	const { inputProps } = useField( {
+		name: `q_${ attributes.clientId }[text]`,
+	} );
+
 	return (
 		<div style={ { ...useColorStyles( attributes ) } }>
 			<RichText.Content value={ attributes.label } />
@@ -18,6 +23,7 @@ const TextInput = ( { attributes } ) => {
 					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
 				} }
+				{ ...inputProps }
 			/>
 		</div>
 	);

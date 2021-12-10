@@ -42,7 +42,10 @@ export const useField = ( { name: fieldName, type, value } ) => {
 	const inputProps = {
 		name: fieldName,
 		onChange,
-		value: type === 'checkbox' || type === 'radio' ? value : currentValue,
+		value:
+			type === 'checkbox' || type === 'radio'
+				? value
+				: currentValue || '',
 	};
 
 	if ( type === 'checkbox' ) {

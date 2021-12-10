@@ -11,9 +11,12 @@ import { __ } from '@wordpress/i18n';
 import { FormTextInput } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
+import { useClientId } from '@crowdsignal/hooks';
 
 const EditTextInput = ( props ) => {
 	const { attributes, setAttributes, isSelected } = props;
+
+	useClientId( props );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
