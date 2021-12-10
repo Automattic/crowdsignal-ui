@@ -20,3 +20,10 @@ export const getLastUpdatedDate = ( project ) =>
 
 export const isPublic = ( project ) =>
 	get( project, [ 'content', 'public' ], false );
+
+export const projectHash = ( project ) => {
+	const url = new window.URL( project.permalink );
+	const match = url.pathname.match( /^\/([0-9a-fA-F]+)\/?/ );
+
+	return match ? match[ 1 ] : '';
+};

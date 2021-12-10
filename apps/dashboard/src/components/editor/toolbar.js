@@ -11,6 +11,7 @@ import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line impo
  */
 import PublishButton from './publish-button';
 import { STORE_NAME } from '../../data';
+import { projectHash } from '../../util/project';
 
 /**
  * Style dependencies
@@ -63,6 +64,13 @@ const Toolbar = ( { projectId } ) => {
 		return false;
 	};
 
+	const previewURL =
+		process.env.NODE_ENV !== 'production'
+			? `https://crowdsignal.localhost:9001/${ projectHash(
+					project
+			  ) }?preview=true`
+			: `${ project.permalink }?preview=true`;
+
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
 			<ToolbarButton
@@ -78,7 +86,7 @@ const Toolbar = ( { projectId } ) => {
 			<ToolbarButton
 				as={ Button }
 				variant="tertiary"
-				href={ `/project/${ projectId }/preview` }
+				href={ previewURL }
 				target="_blank"
 				disabled={ ! projectId }
 			>
