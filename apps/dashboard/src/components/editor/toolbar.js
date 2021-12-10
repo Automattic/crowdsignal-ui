@@ -69,7 +69,7 @@ const Toolbar = ( { projectId } ) => {
 			? `https://crowdsignal.localhost:9001/${ projectHash(
 					project
 			  ) }?preview=true`
-			: `${ project.permalink }?preview=true`;
+			: `${ project?.permalink }?preview=true`;
 
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
