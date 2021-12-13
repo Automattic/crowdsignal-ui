@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { RichText } from '@wordpress/block-editor';
+
+/**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
@@ -15,7 +20,7 @@ const TextInput = ( { attributes } ) => {
 			className="crowdsignal-forms-text-input-block"
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<label htmlFor={ attributes.clientId }>{ attributes.label }</label>
+			<RichText.Content value={ attributes.label } />
 			<FormTextInput
 				id={ attributes.clientId }
 				style={ {

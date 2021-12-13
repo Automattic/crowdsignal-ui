@@ -1,3 +1,7 @@
+/**
+ * External dependencies
+ */
+import { RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
 
 /**
@@ -17,7 +21,10 @@ const TextQuestion = ( { attributes, className } ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<QuestionHeader>{ attributes.question }</QuestionHeader>
+			<RichText.Content
+				tagName={ QuestionHeader }
+				value={ attributes.question }
+			/>
 
 			<FormTextarea
 				style={ {
