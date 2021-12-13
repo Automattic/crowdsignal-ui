@@ -8,7 +8,7 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-const ColorSettings = ( { attributes, setAttributes } ) => {
+const ColorSettings = ( { attributes, setAttributes, initialOpen } ) => {
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
 			[ key ]: value,
@@ -18,6 +18,7 @@ const ColorSettings = ( { attributes, setAttributes } ) => {
 		<PanelColorGradientSettings
 			title={ __( 'Color', 'blocks' ) }
 			disableCustomGradients={ false }
+			initialOpen={ initialOpen }
 			settings={ [
 				{
 					label: __( 'Text color', 'blocks' ),

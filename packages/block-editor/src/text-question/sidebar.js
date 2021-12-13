@@ -42,10 +42,12 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			</PanelBody>
 
 			<ColorSettings
+				initialOpen={ false }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
 			<BorderSettings
+				initialOpen={ false }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
