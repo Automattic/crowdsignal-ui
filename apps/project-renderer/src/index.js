@@ -16,10 +16,20 @@ const renderProject = () => {
 		return;
 	}
 
+	const projectProps = {};
+
+	if ( container.dataset.pid ) {
+		projectProps.projectCode = container.dataset.pid;
+	}
+
 	return render(
 		<StyleProvider reset>
 			<Router>
-				<Route path="/:projectCode" component={ App } />
+				<Route
+					path="/:projectCode"
+					component={ App }
+					{ ...projectProps }
+				/>
 			</Router>
 		</StyleProvider>,
 		container
