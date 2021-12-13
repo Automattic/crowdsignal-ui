@@ -24,8 +24,8 @@ const Checkmark = styled.span`
 	}
 `;
 
-const CheckmarkWrapper = ( { attributes, isSelected } ) => {
-	if ( attributes.isMultiSelect || ! isSelected ) {
+const CheckmarkWrapper = ( { isMultiSelect, isSelected } ) => {
+	if ( isMultiSelect || ! isSelected ) {
 		return null;
 	}
 

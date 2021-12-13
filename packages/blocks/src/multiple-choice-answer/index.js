@@ -56,6 +56,7 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 			attributes={ attributes }
 			className={ classes }
 			inputProps={ inputProps }
+			isMultiSelect={ isMultiSelect }
 		/>
 	);
 };

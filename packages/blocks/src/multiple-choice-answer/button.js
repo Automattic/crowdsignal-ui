@@ -22,7 +22,12 @@ const ButtonContent = styled.span`
 	}
 `;
 
-const ButtonAnswer = ( { attributes, className, inputProps } ) => {
+const ButtonAnswer = ( {
+	attributes,
+	className,
+	inputProps,
+	isMultiSelect,
+} ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
 	return (
@@ -40,7 +45,7 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 				{ attributes.label }
 
 				<Checkmark
-					attributes={ attributes }
+					isMultiSelect={ isMultiSelect }
 					isSelected={ inputProps.checked }
 				/>
 			</ButtonContent>

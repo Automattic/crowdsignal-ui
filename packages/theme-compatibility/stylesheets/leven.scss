@@ -1,3 +1,7 @@
+:root {
+	--crowdsignal-forms-button-selected-background-color: #1285ce;
+}
+
 .crowdsignal-forms-button {
 	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
 		margin-top: 16px;
