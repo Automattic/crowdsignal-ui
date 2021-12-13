@@ -31,6 +31,10 @@ const CheckboxWrapper = styled.div`
 	transform: translateY( 1px );
 	width: 1em;
 
+	.crowdsignal-forms-button & {
+		transform: none;
+	}
+
 	&.is-selected {
 		background-color: currentColor;
 	}
