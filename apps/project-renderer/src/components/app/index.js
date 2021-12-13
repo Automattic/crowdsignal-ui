@@ -20,6 +20,8 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
 
+import './style.scss';
+
 // TODO: this is just to make the render look good, selected theme should take care of this?
 const ContentWrapper = styled.div`
 	margin: 0 auto;

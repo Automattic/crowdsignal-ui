@@ -21,6 +21,7 @@ const FormTextarea = styled.textarea`
 	border-width: 1px;
 	box-sizing: border-box;
 	width: 100%;
+	padding: 7px;
 `;
 
 FormTextarea.Preview = ( { style, ...props } ) => (
