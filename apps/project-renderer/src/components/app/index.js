@@ -17,6 +17,7 @@ import {
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
+import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
 
 // TODO: this is just to make the render look good, selected theme should take care of this?
@@ -26,7 +27,13 @@ const ContentWrapper = styled.div`
 	padding: 20px;
 `;
 
-const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
+const App = ( {
+	projectCode,
+	page = 0,
+	preview,
+	respondentId = '',
+	startTime = 0,
+} ) => {
 	const [ content, setContent ] = useState( [] );
 	// eslint-disable-next-line
 	const [ startDate, setStartDate ] = useState( startTime );
@@ -38,7 +45,16 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 	const [ hasResponded, setHasResponded ] = useState( false );
 
 	useEffect( () => {
-		fetchProjectForm( projectCode )
+		if ( preview ) {
+			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
+			setHostOption(
+				'https://api.crowdsignal.com',
+				'credentials',
+				'include'
+			);
+		}
+
+		fetchProjectForm( projectCode, preview ? { preview: true } : {} )
 			.then( ( res ) => {
 				if ( ! res.data || ! res.data.content ) {
 					throw new Error( 'Empty response' );
@@ -51,7 +67,7 @@ const App = ( { projectCode, page = 0, respondentId = '', startTime = 0 } ) => {
 				// eslint-disable-next-line
 				console.log( err );
 			} );
-	}, [ projectCode ] );
+	}, [ projectCode, preview ] );
 
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
 	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );

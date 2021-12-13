@@ -35,9 +35,10 @@ export const updateProject = ( projectId, data ) =>
 		body: JSON.stringify( data ),
 	} );
 
-export const fetchProjectForm = ( projectId ) =>
+export const fetchProjectForm = ( projectId, query = {} ) =>
 	http( {
 		host: 'https://api.crowdsignal.com',
 		path: `/v4/projects/${ projectId }/form`,
 		method: 'GET',
+		query,
 	} );
