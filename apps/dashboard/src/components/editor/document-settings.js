@@ -17,6 +17,8 @@ const DocumentSettings = ( { project } ) => {
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
 
+	const currentTimestamp = parseInt( new Date().getTime() / 1000 );
+
 	return (
 		<DocumentSection>
 			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
@@ -26,28 +28,36 @@ const DocumentSettings = ( { project } ) => {
 				</PanelRow>
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
-					<span>{ timestampToDate( project.created ) }</span>
+					<span>
+						{ timestampToDate(
+							project?.created || currentTimestamp
+						) }
+					</span>
 				</PanelRow>
 				<PanelRow className="project-updated-date">
 					<span>{ __( 'Updated', 'dashboard' ) }</span>
 					<span>
-						{ timestampToDate( getLastUpdatedDate( project ) ) }
+						{ timestampToDate(
+							getLastUpdatedDate( project ) || currentTimestamp
+						) }
 					</span>
 				</PanelRow>
 			</PanelBody>
-			<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
-				<PanelRow>
-					<span>{ __( 'View Project', 'dashboard' ) }</span>
-				</PanelRow>
-				<ExternalLink
-					href={ project.permalink }
-					title={ project.permalink }
-				>
-					<span className="components-external-link__text">
-						{ project.permalink }
-					</span>
-				</ExternalLink>
-			</PanelBody>
+			{ project && (
+				<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
+					<PanelRow>
+						<span>{ __( 'View Project', 'dashboard' ) }</span>
+					</PanelRow>
+					<ExternalLink
+						href={ project.permalink }
+						title={ project.permalink }
+					>
+						<span className="components-external-link__text">
+							{ project.permalink }
+						</span>
+					</ExternalLink>
+				</PanelBody>
+			) }
 		</DocumentSection>
 	);
 };
