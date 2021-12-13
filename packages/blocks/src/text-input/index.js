@@ -22,7 +22,6 @@ const TextInput = ( { attributes } ) => {
 		>
 			<RichText.Content value={ attributes.label } />
 			<FormTextInput
-				id={ attributes.clientId }
 				style={ {
 					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
