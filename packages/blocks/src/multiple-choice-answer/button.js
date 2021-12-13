@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { RichText } from '@wordpress/block-editor';
 import styled from '@emotion/styled';
 
 /**
@@ -42,7 +43,7 @@ const ButtonAnswer = ( {
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
 
-				{ attributes.label }
+				<RichText.Content value={ attributes.label } />
 
 				<Checkmark
 					isMultiSelect={ isMultiSelect }

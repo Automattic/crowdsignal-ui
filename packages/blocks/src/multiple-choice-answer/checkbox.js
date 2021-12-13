@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { RichText } from '@wordpress/block-editor';
+
+/**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
@@ -12,7 +17,7 @@ const Checkbox = ( { attributes, className, inputProps } ) => {
 		>
 			<FormCheckbox { ...inputProps } />
 
-			{ attributes.label }
+			<RichText.Content value={ attributes.label } />
 		</FormCheckbox.Label>
 	);
 };
