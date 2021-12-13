@@ -27,7 +27,7 @@ export const projectHash = ( project ) => {
 	}
 
 	const url = new window.URL( project.permalink );
-	const match = url.pathname.match( /^\/([0-9a-fA-F]+)\/?/ );
+	const match = url.pathname.match( /^\/([0-9a-zA-Z-]+)\/?/ );
 
 	return match ? match[ 1 ] : '';
 };
