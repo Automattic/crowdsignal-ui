@@ -7,12 +7,14 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import { Button, FormCheckbox } from '../components';
+import Checkmark from './checkmark';
 
 const ButtonContent = styled.span`
 	align-items: center;
 	display: flex;
 	overflow: hidden;
 	position: relative;
+	width: 100%;
 
 	${ FormCheckbox.className }.is-radio {
 		position: absolute;
@@ -36,6 +38,11 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 				<FormCheckbox { ...inputProps } />
 
 				{ attributes.label }
+
+				<Checkmark
+					attributes={ attributes }
+					isSelected={ inputProps.checked }
+				/>
 			</ButtonContent>
 		</Button>
 	);
