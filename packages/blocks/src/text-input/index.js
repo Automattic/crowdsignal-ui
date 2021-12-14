@@ -16,7 +16,10 @@ const TextInput = ( { attributes } ) => {
 	} );
 
 	return (
-		<div style={ { ...useColorStyles( attributes ) } }>
+		<div
+			className="crowdsignal-forms-text-input-block"
+			style={ { ...useColorStyles( attributes ) } }
+		>
 			<RichText.Content value={ attributes.label } />
 			<FormTextInput
 				style={ {
