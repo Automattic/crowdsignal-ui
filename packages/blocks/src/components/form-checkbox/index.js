@@ -28,27 +28,30 @@ const CheckboxWrapper = styled.div`
 	margin-right: 0.7em;
 	overflow: hidden;
 	position: relative;
+	transform: translateY( 1px );
 	width: 1em;
+
+	.crowdsignal-forms-button & {
+		transform: none;
+	}
 
 	&.is-selected {
 		background-color: currentColor;
 	}
 
 	&.is-selected::after {
-		border-color: #fff;
+		border-color: inherit;
 		border-style: solid;
-		border-width: 0 0 2px 2px;
+		border-width: 0 0 3px 3px;
 		box-sizing: border-box;
 		content: '';
 		display: inline-flex;
-		height: 0.25em;
-		margin: -20% 0 0 -30%;
-		mix-blend-mode: unset;
+		filter: invert( 1 ) grayscale( 1 ) contrast( 100 );
+		height: 50%;
+		margin: 0;
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: rotateZ( -45deg );
-		width: 0.5em;
+		transform: scale( 0.7 ) rotate( -45deg );
+		width: 100%;
 	}
 
 	&.is-radio {
@@ -69,6 +72,7 @@ const CheckboxWrapper = styled.div`
 		background-blend-mode: multiply;
 		border: 4.5px solid transparent;
 		border-radius: 50%;
+		filter: none;
 		height: 1em;
 		margin: 0;
 		position: absolute;

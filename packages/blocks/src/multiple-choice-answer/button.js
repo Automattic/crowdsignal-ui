@@ -1,18 +1,21 @@
 /**
  * External dependencies
  */
+import { RichText } from '@wordpress/block-editor';
 import styled from '@emotion/styled';
 
 /**
  * Internal dependencies
  */
 import { Button, FormCheckbox } from '../components';
+import Checkmark from './checkmark';
 
 const ButtonContent = styled.span`
 	align-items: center;
 	display: flex;
 	overflow: hidden;
 	position: relative;
+	width: 100%;
 
 	${ FormCheckbox.className }.is-radio {
 		position: absolute;
@@ -20,7 +23,12 @@ const ButtonContent = styled.span`
 	}
 `;
 
-const ButtonAnswer = ( { attributes, className, inputProps } ) => {
+const ButtonAnswer = ( {
+	attributes,
+	className,
+	inputProps,
+	isMultiSelect,
+} ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
 	return (
@@ -35,7 +43,12 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
 
-				{ attributes.label }
+				<RichText.Content value={ attributes.label } />
+
+				<Checkmark
+					isMultiSelect={ isMultiSelect }
+					isSelected={ inputProps.checked }
+				/>
 			</ButtonContent>
 		</Button>
 	);
