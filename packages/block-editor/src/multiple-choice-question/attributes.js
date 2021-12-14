@@ -37,11 +37,11 @@ export default {
 	},
 	boxShadow: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	borderWidth: {
 		type: 'number',
-		default: 2,
+		default: 0,
 	},
 	gradient: {
 		type: 'string',

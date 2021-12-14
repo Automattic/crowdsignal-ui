@@ -20,6 +20,10 @@ const StyledQuestionWrapper = styled.div`
 	position: relative;
 	text-align: left;
 	width: 100%;
+
+	&.has-box-shadow {
+		box-shadow: 2px 2px 8px rgba( 0, 0, 0, 0.23 );
+	}
 `;
 
 const Content = styled.div`
@@ -49,7 +53,10 @@ const QuestionWrapper = ( {
 } ) => {
 	const classes = classnames(
 		'crowdsignal-forms-question-wrapper',
-		className
+		className,
+		{
+			'has-box-shadow': attributes.boxShadow,
+		}
 	);
 
 	return (
