@@ -8,7 +8,7 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-const BorderSettings = ( { attributes, setAttributes } ) => {
+const BorderSettings = ( { attributes, setAttributes, initialOpen } ) => {
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
 			[ key ]: value,
@@ -22,6 +22,7 @@ const BorderSettings = ( { attributes, setAttributes } ) => {
 	return (
 		<PanelColorGradientSettings
 			title={ __( 'Border', 'blocks' ) }
+			initialOpen={ initialOpen }
 			settings={ [
 				{
 					label: __( 'Border color', 'blocks ' ),

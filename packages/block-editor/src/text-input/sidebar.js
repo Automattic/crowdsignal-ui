@@ -61,6 +61,7 @@ export default ( { attributes, setAttributes } ) => {
 				</ToggleGroupControl>
 			</PanelBody>
 			<ColorSettings
+				initialOpen={ false }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
