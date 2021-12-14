@@ -98,6 +98,14 @@ html.interface-interface-skeleton__html-container {
 			margin: 0;
 		}
 	}
+
+	& :where(.wp-block)[data-align=right] > * {
+		float: right;
+	}
+
+	& :where(.wp-block)[data-align=left] > * {
+		float: left;
+	}
 }
 
 .iso-sidebar {
