@@ -20,6 +20,11 @@ const settings = {
 		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
+	keywords: [
+		__( 'form', 'block-edtor' ),
+		__( 'input', 'block-edtor' ),
+		__( 'text input', 'block-edtor' ),
+	],
 	icon: <TextInputIcon />,
 	edit: Edit,
 	attributes,

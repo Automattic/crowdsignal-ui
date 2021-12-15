@@ -16,6 +16,13 @@ const settings = {
 	title: __( 'Submit Button', 'blocks' ),
 	description: __( 'Submit the form', 'blocks' ),
 	category: 'crowdsignal-forms/form',
+	keywords: [
+		__( 'submit', 'block-edtor' ),
+		__( 'button', 'block-edtor' ),
+		__( 'continue', 'block-edtor' ),
+		__( 'next', 'block-edtor' ),
+		__( 'send', 'block-edtor' ),
+	],
 	icon: <SubmitButtonIcon />,
 	edit: EditSubmitButton,
 	attributes,
