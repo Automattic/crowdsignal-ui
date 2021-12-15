@@ -18,14 +18,31 @@ setCategories( [
 export const editorSettings = {
 	iso: {
 		blocks: {
-			disallowBlocks: [
-				'core/audio',
-				'core/calendar',
-				'core/cover',
-				'core/embed',
-				'core/file',
-				'core/media-text',
-				'core/shortcode',
+			allowBlocks: [
+				'core/buttons',
+				'core/code',
+				'core/columns',
+				'core/group',
+				'core/heading',
+				'core/html',
+				'core/image',
+				'core/list',
+				'core/paragraph',
+				'core/preformatted',
+				'core/pullquote',
+				'core/quote',
+				'core/row',
+				'core/separator',
+				'core/spacer',
+				'core/table',
+				'core/verse',
+				'core/video',
+
+				'crowdsignal-forms/multiple-choice-question',
+				'crowdsignal-forms/multiple-choice-answer',
+				'crowdsignal-forms/submit-button',
+				'crowdsignal-forms/text-input',
+				'crowdsignal-forms/text-question',
 			],
 		},
 		defaultPreferences: {
