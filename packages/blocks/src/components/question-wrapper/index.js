@@ -16,7 +16,7 @@ const StyledQuestionWrapper = styled.div`
 	flex-direction: column;
 	margin-bottom: 24px;
 	margin-top: 24px;
-	padding: 24px;
+	padding: 32px;
 	position: relative;
 	text-align: left;
 	width: 100%;

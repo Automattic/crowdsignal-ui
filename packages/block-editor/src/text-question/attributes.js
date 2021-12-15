@@ -29,15 +29,15 @@ export default {
 	},
 	borderRadius: {
 		type: 'number',
-		default: 0,
+		default: 5,
 	},
 	boxShadow: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	borderWidth: {
 		type: 'number',
-		default: 0,
+		default: 1,
 	},
 	fontFamily: {
 		type: 'string',
