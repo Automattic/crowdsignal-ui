@@ -29,14 +29,17 @@ import { hasUnpublishedChanges } from '../../util/project';
 import './style.scss';
 
 const Editor = ( { projectId } ) => {
-	const [ project, isSaved ] = useSelect( ( select ) => {
+	const [ project, isSaved, isEditDisabled ] = useSelect( ( select ) => {
 		return [
 			select( STORE_NAME ).getProject( projectId ),
 			select( STORE_NAME ).isProjectSaved(),
+			select( STORE_NAME ).isEditDisabled(),
 		];
 	} );
 
 	const projectContent = get( project, [ 'content' ], {} );
+
+	const saveDebounceTimeout = projectId ? 5000 : 500;
 
 	// TODO: need to compare draft/public, offer "restore" drafted content
 	const draftedBlocks = get( projectContent, [ 'draft', 'pages', 0 ], [] );
@@ -55,11 +58,9 @@ const Editor = ( { projectId } ) => {
 		debounce( ( content ) => {
 			try {
 				const blocks = parse( content );
-				const currentProject = project || {};
+
 				saveAndUpdateProject( projectId, {
-					...currentProject,
 					content: {
-						...currentProject.content,
 						draft: {
 							pages: [ [ ...blocks ] ],
 						},
@@ -73,7 +74,7 @@ const Editor = ( { projectId } ) => {
 				// eslint-disable-next-line
 				console.error( error );
 			}
-		}, 5000 ),
+		}, saveDebounceTimeout ),
 		[ projectId, project ]
 	);
 
@@ -98,12 +99,16 @@ const Editor = ( { projectId } ) => {
 
 	const handleChangeContent = useCallback(
 		( content ) => {
+			if ( isEditDisabled ) {
+				return;
+			}
+
 			if ( isSaved ) {
 				changeProjectContent( project );
 			}
 			debounceSave( content );
 		},
-		[ debounceSave, isSaved ]
+		[ debounceSave, isSaved, isEditDisabled ]
 	);
 
 	if ( projectId && null === project ) {
