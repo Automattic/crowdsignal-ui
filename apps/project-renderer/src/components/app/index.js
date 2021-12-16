@@ -129,8 +129,14 @@ const App = ( {
 	}
 
 	return (
-		<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
-			<ContentWrapper>{ renderContent() }</ContentWrapper>
+		<Form
+			className="crowdsignal-forms-form"
+			name={ `f-${ projectCode }` }
+			onSubmit={ handleSubmit }
+		>
+			<ContentWrapper className="crowdsignal-forms-form__content">
+				{ renderContent() }
+			</ContentWrapper>
 		</Form>
 	);
 };
