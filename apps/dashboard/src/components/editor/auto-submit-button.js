@@ -13,6 +13,7 @@ import {
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
 	textQuestionBlock,
+	textInputBlock,
 	submitButtonBlock,
 } from '@crowdsignal/block-editor';
 
@@ -21,6 +22,7 @@ const FORM_BLOCKS = map(
 		multipleChoiceAnswerBlock,
 		multipleChoiceQuestionBlock,
 		textQuestionBlock,
+		textInputBlock,
 	],
 	'name'
 );
