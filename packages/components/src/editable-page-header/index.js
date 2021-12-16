@@ -15,13 +15,13 @@ import Form from './form';
 import './style.scss';
 import classnames from 'classnames';
 
-const EditablePageHeader = ( { onChange, text, isEditDisabled } ) => {
+const EditablePageHeader = ( { onChange, text, disabled } ) => {
 	const [ active, setActive ] = useState( false );
 
 	useEffect( () => setActive( false ), [ text ] );
 
 	const showForm = () => {
-		if ( isEditDisabled ) {
+		if ( disabled ) {
 			return;
 		}
 
@@ -30,7 +30,7 @@ const EditablePageHeader = ( { onChange, text, isEditDisabled } ) => {
 	const hideForm = () => setActive( false );
 
 	const classes = classnames( 'editable-page-header', {
-		'is-disabled': isEditDisabled,
+		'is-disabled': disabled,
 	} );
 
 	return (

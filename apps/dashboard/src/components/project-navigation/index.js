@@ -44,7 +44,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 			<EditablePageHeader
 				onChange={ updateTitle }
 				text={ project?.title || __( 'Untitled Project', 'dashboard' ) }
-				isEditDisabled={ isEditDisabled }
+				disabled={ isEditDisabled }
 			/>
 			<TabNavigation>
 				<TabNavigation.Tab
