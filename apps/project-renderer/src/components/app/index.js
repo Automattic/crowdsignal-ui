@@ -2,12 +2,12 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
-import styled from '@emotion/styled';
 
 /**
  * Internal dependencies
  */
 import {
+	ContentWrapper,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	SubmitButton,
@@ -20,14 +20,10 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
 
+/**
+ * Style dependencies
+ */
 import './style.scss';
-
-// TODO: this is just to make the render look good, selected theme should take care of this?
-const ContentWrapper = styled.div`
-	margin: 0 auto;
-	max-width: 720px;
-	padding: 20px;
-`;
 
 const App = ( {
 	projectCode,
@@ -128,21 +124,14 @@ const App = ( {
 			'crowdsignal-forms/text-question': TextQuestion,
 		} );
 
-	return (
-		<div className="app">
-			<ContentWrapper>
-				{ ! hasResponded && (
-					<Form
-						name={ `f-${ projectCode }` }
-						onSubmit={ handleSubmit }
-					>
-						{ renderContent() }
-					</Form>
-				) }
+	if ( hasResponded ) {
+		return <ContentWrapper>{ renderContent() }</ContentWrapper>;
+	}
 
-				{ hasResponded && renderContent() }
-			</ContentWrapper>
-		</div>
+	return (
+		<Form name={ `f-${ projectCode }` } onSubmit={ handleSubmit }>
+			<ContentWrapper>{ renderContent() }</ContentWrapper>
+		</Form>
 	);
 };
 

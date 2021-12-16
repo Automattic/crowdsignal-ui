@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import { useColorStyles } from '@crowdsignal/styles';
 
 const StyledButtonWrapper = styled.div`
-	display: flex;
+	display: block;
 `;
 
 const StyledButton = styled.button`
