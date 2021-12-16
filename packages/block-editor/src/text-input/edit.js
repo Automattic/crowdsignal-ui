@@ -32,7 +32,10 @@ const EditTextInput = ( props ) => {
 	};
 
 	return (
-		<div style={ { ...useColorStyles( attributes ) } }>
+		<div
+			className="crowdsignal-forms-text-input-block"
+			style={ { ...useColorStyles( attributes ) } }
+		>
 			<Sidebar { ...props } />
 			<RichText
 				placeholder={ __( 'Enter form label', 'block-editor' ) }
@@ -49,7 +52,7 @@ const EditTextInput = ( props ) => {
 					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				<FormTextInput.Preview />
+				<FormTextInput.Preview className="crowdsignal-forms-text-input-block__wrapper" />
 			</ResizableBox>
 		</div>
 	);
