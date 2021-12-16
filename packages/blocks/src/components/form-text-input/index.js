@@ -9,17 +9,14 @@ const FormTextInputWapper = styled.div`
 	pointer-events: none;
 `;
 
+const Input = styled.input`
+	width: 100%;
+	height: 100%;
+	min-height: 40px;
+`;
+
 const FormTextInput = ( { style = {}, ...props } ) => (
-	<input
-		type="text"
-		style={ {
-			width: '100%',
-			height: '100%',
-			minHeight: '40px',
-			...style,
-		} }
-		{ ...props }
-	/>
+	<Input type="text" style={ { ...style } } { ...props } />
 );
 
 FormTextInput.Preview = ( { className, ...props } ) => (

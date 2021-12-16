@@ -47,6 +47,7 @@ export default {
 	},
 	inputHeight: {
 		type: 'string',
+		default: '80px',
 	},
 	textColor: {
 		type: 'string',
