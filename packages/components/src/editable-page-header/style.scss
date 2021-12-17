@@ -1,6 +1,11 @@
 .editable-page-header {
 	align-items: center;
 	display: flex;
+
+	&.is-disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
 }
 
 .editable-page-header__form {

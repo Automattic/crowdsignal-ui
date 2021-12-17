@@ -21,3 +21,6 @@ export const isProjectPublic = ( state ) =>
 
 export const isProjectSaved = ( state ) =>
 	get( state, [ 'projects', 'isSaved' ], false );
+
+export const isEditDisabled = ( state ) =>
+	isProjectSaving( state ) && getLastUpdatedProjectId( state ) === 0;
