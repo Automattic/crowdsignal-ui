@@ -68,7 +68,13 @@ const App = ( {
 	}, [ projectCode, preview ] );
 
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
-	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
+	useStylesheet(
+		`${
+			process.env.NODE_ENV === 'production'
+				? 'https://app.crowdsignal.com'
+				: ''
+		}/ui/stable/theme-compatibility/leven.min.css`
+	);
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
