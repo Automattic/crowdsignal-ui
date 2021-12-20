@@ -16,6 +16,11 @@ const settings = {
 	title: __( 'Answer', 'blocks' ),
 	description: __( 'Add more answer options to your question', 'blocks' ),
 	category: 'crowdsignal-forms/form',
+	keywords: [
+		__( 'answer', 'block-edtor' ),
+		__( 'option', 'block-edtor' ),
+		__( 'choice', 'block-edtor' ),
+	],
 	icon: <MultipleChoiceAnswerIcon />,
 	parent: [ 'crowdsignal-forms/multiple-choice-question' ],
 	edit: EditMultipleChoiceAnswer,

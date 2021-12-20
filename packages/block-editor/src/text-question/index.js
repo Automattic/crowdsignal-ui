@@ -20,6 +20,12 @@ const settings = {
 		'blocks'
 	),
 	category: 'crowdsignal-forms/form',
+	keywords: [
+		__( 'question', 'block-edtor' ),
+		__( 'text', 'block-edtor' ),
+		__( 'open text', 'block-edtor' ),
+		__( 'input', 'block-edtor' ),
+	],
 	icon: <TextQuestionIcon />,
 	edit: EditFreeText,
 	attributes,

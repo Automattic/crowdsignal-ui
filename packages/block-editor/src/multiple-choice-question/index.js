@@ -22,6 +22,15 @@ const settings = {
 		'blocks'
 	),
 	category: 'crowdsignal-forms/form',
+	keywords: [
+		__( 'multiple choice', 'block-edtor' ),
+		__( 'question', 'block-edtor' ),
+		__( 'form', 'block-edtor' ),
+		__( 'quiz', 'block-edtor' ),
+		__( 'poll', 'block-edtor' ),
+		__( 'mc', 'block-edtor' ),
+		__( 'mc question', 'block-edtor' ),
+	],
 	icon: <MultipleChoiceQuestionIcon />,
 	edit: EditMultipleChoiceQuestion,
 	save: () => <InnerBlocks.Content />,
