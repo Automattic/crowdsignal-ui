@@ -41,7 +41,7 @@ const EditMultipleChoiceAnswer = ( props ) => {
 
 	const questionAttributes = useParentAttributes( clientId );
 
-	useClientId( { attributes, setAttributes } );
+	useClientId( props );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 

@@ -4,15 +4,30 @@
 import { useEffect } from '@wordpress/element';
 import { v4 as uuid } from 'uuid';
 
-const useClientId = ( { attributes, setAttributes } ) => {
+/**
+ * A list containing crowdsignal client IDs as keys and block ID's as values.
+ *
+ * @type {Object}
+ */
+const crowdsignalClientIds = {};
+
+const useClientId = ( { attributes, clientId: blockId, setAttributes } ) => {
 	useEffect( () => {
 		if ( attributes.clientId ) {
-			return;
+			if ( ! crowdsignalClientIds[ attributes.clientId ] ) {
+				crowdsignalClientIds[ attributes.clientId ] = blockId;
+			}
+
+			if ( crowdsignalClientIds[ attributes.clientId ] === blockId ) {
+				return;
+			}
 		}
 
-		setAttributes( {
-			clientId: uuid(),
-		} );
+		const clientId = uuid();
+
+		crowdsignalClientIds[ blockId ] = clientId;
+
+		setAttributes( { clientId } );
 	}, [] );
 };
 
