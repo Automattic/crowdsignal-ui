@@ -1,3 +1,5 @@
 export * from './components';
 
-export * from './hooks/use-field';
+export * from './hooks';
+
+export { STORE_NAME } from './data';

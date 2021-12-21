@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { createContext } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -17,8 +17,19 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		[ name ]
 	);
 
-	const handleSubmit = ( event ) => {
+	const { startSubmit } = useDispatch( STORE_NAME );
+
+	const delay = ( ms ) =>
+		new Promise( ( resolve ) => {
+			setTimeout( resolve, ms );
+		} );
+
+	const handleSubmit = async ( event ) => {
 		event.preventDefault();
+
+		startSubmit( name );
+
+		await delay( 5000 );
 
 		onSubmit( data );
 	};
