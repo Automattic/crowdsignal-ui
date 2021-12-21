@@ -19,17 +19,10 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 	const { startSubmit } = useDispatch( STORE_NAME );
 
-	const delay = ( ms ) =>
-		new Promise( ( resolve ) => {
-			setTimeout( resolve, ms );
-		} );
-
-	const handleSubmit = async ( event ) => {
+	const handleSubmit = ( event ) => {
 		event.preventDefault();
 
 		startSubmit( name );
-
-		await delay( 5000 );
 
 		onSubmit( data );
 	};
