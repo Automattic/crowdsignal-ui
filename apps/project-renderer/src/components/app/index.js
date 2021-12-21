@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
+import { useDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -15,7 +16,7 @@ import {
 	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
-import { Form } from '@crowdsignal/form';
+import { Form, STORE_NAME } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
@@ -67,6 +68,9 @@ const App = ( {
 			} );
 	}, [ projectCode, preview ] );
 
+	const { stopSubmit } = useDispatch( STORE_NAME );
+	const formName = `f-${ projectCode }`;
+
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
 	useStylesheet(
 		`${
@@ -114,7 +118,8 @@ const App = ( {
 				// all the setters should be called here: page, responseHash, content and startTime
 			} )
 			// eslint-disable-next-line no-console
-			.catch( ( err ) => console.error( err ) );
+			.catch( ( err ) => console.error( err ) )
+			.finally( () => stopSubmit( formName ) );
 	};
 
 	if ( ! content ) {
@@ -137,7 +142,7 @@ const App = ( {
 	return (
 		<Form
 			className="crowdsignal-forms-form"
-			name={ `f-${ projectCode }` }
+			name={ formName }
 			onSubmit={ handleSubmit }
 		>
 			<ContentWrapper className="crowdsignal-forms-form__content">
