@@ -1,0 +1,10 @@
+.crowdsignal-forms-button-spinner {
+	&__content {
+		opacity: 0;
+	}
+
+	.components-spinner {
+		position: absolute;
+		margin-top: 0;
+	}
+}

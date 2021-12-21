@@ -1,4 +1,5 @@
 export { default as Button } from './button';
+export { default as ButtonSpinner } from './button-spinner';
 export { default as ContentWrapper } from './content-wrapper';
 export { default as FormCheckbox } from './form-checkbox';
 export { default as FormTextarea } from './form-textarea';
