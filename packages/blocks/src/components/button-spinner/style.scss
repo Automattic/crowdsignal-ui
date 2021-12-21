@@ -1,4 +1,6 @@
 .crowdsignal-forms-button-spinner {
+	pointer-events: none;
+
 	&__content {
 		opacity: 0;
 	}
