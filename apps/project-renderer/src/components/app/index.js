@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -16,7 +15,7 @@ import {
 	TextQuestion,
 	renderBlocks,
 } from '@crowdsignal/blocks';
-import { Form, STORE_NAME } from '@crowdsignal/form';
+import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
@@ -68,9 +67,6 @@ const App = ( {
 			} );
 	}, [ projectCode, preview ] );
 
-	const { stopSubmit } = useDispatch( STORE_NAME );
-	const formName = `f-${ projectCode }`;
-
 	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
 	useStylesheet(
 		`${
@@ -93,33 +89,34 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
-		window
-			.fetch(
-				`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
-				{
-					method: 'POST',
-					body: form,
-				}
-			)
-			.then( ( res ) => {
-				if ( ! res.ok ) {
-					throw new Error( res.status );
-				}
+		return (
+			window
+				.fetch(
+					`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
+					{
+						method: 'POST',
+						body: form,
+					}
+				)
+				.then( ( res ) => {
+					if ( ! res.ok ) {
+						throw new Error( res.status );
+					}
 
-				return res.json();
-			} )
-			.then( ( json ) => {
-				if ( ! json || ! json.content ) {
-					throw new Error( 'Empty response' );
-				}
+					return res.json();
+				} )
+				.then( ( json ) => {
+					if ( ! json || ! json.content ) {
+						throw new Error( 'Empty response' );
+					}
 
-				setHasResponded( true );
-				setContent( json.content );
-				// all the setters should be called here: page, responseHash, content and startTime
-			} )
-			// eslint-disable-next-line no-console
-			.catch( ( err ) => console.error( err ) )
-			.finally( () => stopSubmit( formName ) );
+					setHasResponded( true );
+					setContent( json.content );
+					// all the setters should be called here: page, responseHash, content and startTime
+				} )
+				// eslint-disable-next-line no-console
+				.catch( ( err ) => console.error( err ) )
+		);
 	};
 
 	if ( ! content ) {
@@ -142,7 +139,7 @@ const App = ( {
 	return (
 		<Form
 			className="crowdsignal-forms-form"
-			name={ formName }
+			name={ `f-${ projectCode }` }
 			onSubmit={ handleSubmit }
 		>
 			<ContentWrapper className="crowdsignal-forms-form__content">

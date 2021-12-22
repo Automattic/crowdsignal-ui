@@ -17,14 +17,16 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		[ name ]
 	);
 
-	const { startSubmit } = useDispatch( STORE_NAME );
+	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
 
 	const handleSubmit = ( event ) => {
 		event.preventDefault();
 
 		startSubmit( name );
 
-		onSubmit( data );
+		onSubmit( data ).finally( () => {
+			stopSubmit( name );
+		} );
 	};
 
 	return (
