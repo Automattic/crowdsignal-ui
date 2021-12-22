@@ -24,9 +24,7 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 		startSubmit( name );
 
-		onSubmit( data ).finally( () => {
-			stopSubmit( name );
-		} );
+		onSubmit( data ).finally( () => stopSubmit( name ) );
 	};
 
 	return (
