@@ -26,7 +26,6 @@
     "@crowdsignal/http": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
-    "@wordpress/data": "^6.1.4",
     "@wordpress/element": "^4.0.4",
     "@wordpress/i18n": "^4.2.4",
     "lodash": "^4.17.21"
