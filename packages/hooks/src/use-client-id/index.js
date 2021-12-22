@@ -25,7 +25,7 @@ const useClientId = ( { attributes, clientId: blockId, setAttributes } ) => {
 
 		const clientId = uuid();
 
-		crowdsignalClientIds[ blockId ] = clientId;
+		crowdsignalClientIds[ clientId ] = blockId;
 
 		setAttributes( { clientId } );
 	}, [] );
