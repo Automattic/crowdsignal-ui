@@ -15,6 +15,13 @@
 	.wp-block[data-align='full'] {
 		max-width: none;
 	}
+
+	.wp-block-column {
+		> .wp-block {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
 }
 
 html.interface-interface-skeleton__html-container {
