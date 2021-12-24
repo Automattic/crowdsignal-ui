@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { createContext } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -17,10 +17,14 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		[ name ]
 	);
 
+	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
+
 	const handleSubmit = ( event ) => {
 		event.preventDefault();
 
-		onSubmit( data );
+		startSubmit( name );
+
+		onSubmit( data ).finally( () => stopSubmit( name ) );
 	};
 
 	return (

@@ -1,3 +1,3 @@
 export * from './components';
 
-export * from './hooks/use-field';
+export * from './hooks';

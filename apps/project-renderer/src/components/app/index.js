@@ -89,32 +89,34 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
-		window
-			.fetch(
-				`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
-				{
-					method: 'POST',
-					body: form,
-				}
-			)
-			.then( ( res ) => {
-				if ( ! res.ok ) {
-					throw new Error( res.status );
-				}
+		return (
+			window
+				.fetch(
+					`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
+					{
+						method: 'POST',
+						body: form,
+					}
+				)
+				.then( ( res ) => {
+					if ( ! res.ok ) {
+						throw new Error( res.status );
+					}
 
-				return res.json();
-			} )
-			.then( ( json ) => {
-				if ( ! json || ! json.content ) {
-					throw new Error( 'Empty response' );
-				}
+					return res.json();
+				} )
+				.then( ( json ) => {
+					if ( ! json || ! json.content ) {
+						throw new Error( 'Empty response' );
+					}
 
-				setHasResponded( true );
-				setContent( json.content );
-				// all the setters should be called here: page, responseHash, content and startTime
-			} )
-			// eslint-disable-next-line no-console
-			.catch( ( err ) => console.error( err ) );
+					setHasResponded( true );
+					setContent( json.content );
+					// all the setters should be called here: page, responseHash, content and startTime
+				} )
+				// eslint-disable-next-line no-console
+				.catch( ( err ) => console.error( err ) )
+		);
 	};
 
 	if ( ! content ) {
