@@ -1,18 +1,12 @@
 /**
  * External dependencies
  */
-import { keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
 
-const spinAnimation = keyframes`
-	from {
-		transform: rotate(0deg);
-	}
-
-	to {
-		transform: rotate(360deg);
-	}
-`;
+/**
+ * Internal dependencies
+ */
+import { spinAnimation } from '@crowdsignal/styles';
 
 const Spinner = styled.span`
 	width: 1.5em;

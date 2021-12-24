@@ -16,3 +16,13 @@ export const popAnimation = keyframes`
         transform: scale(1);
     }
 `;
+
+export const spinAnimation = keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+`;
