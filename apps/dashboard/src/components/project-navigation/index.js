@@ -20,16 +20,11 @@ const Tab = {
 	RESULTS: 'results',
 };
 
-const ProjectNavigation = ( { activeTab, projectId } ) => {
+const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
-	const [ project, isEditDisabled ] = useSelect(
-		( select ) => {
-			return [
-				select( STORE_NAME ).getProject( projectId ),
-				select( STORE_NAME ).isEditDisabled( projectId ),
-			];
-		},
+	const project = useSelect(
+		( select ) => select( STORE_NAME ).getProject( projectId ),
 		[ projectId ]
 	);
 
@@ -44,7 +39,7 @@ const ProjectNavigation = ( { activeTab, projectId } ) => {
 			<EditablePageHeader
 				onChange={ updateTitle }
 				text={ project?.title || __( 'Untitled Project', 'dashboard' ) }
-				disabled={ isEditDisabled }
+				disabled={ disableTitleEditor }
 			/>
 			<TabNavigation>
 				<TabNavigation.Tab

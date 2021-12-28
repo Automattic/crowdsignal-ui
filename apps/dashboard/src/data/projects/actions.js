@@ -5,7 +5,6 @@ import {
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
-	PROJECT_CONTENT_CHANGE,
 } from '../action-types';
 import { redirect } from '@crowdsignal/router';
 
@@ -14,13 +13,6 @@ import {
 	updateProject as patchProject,
 } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
-
-export function changeProjectContent( project ) {
-	return {
-		type: PROJECT_CONTENT_CHANGE,
-		project,
-	};
-}
 
 export function saveProject() {
 	return {

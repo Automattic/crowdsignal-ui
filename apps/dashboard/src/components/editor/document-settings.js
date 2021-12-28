@@ -1,19 +1,51 @@
 /**
  * External dependencies
  */
+import { parse, serialize } from '@wordpress/blocks';
+import {
+	Button,
+	Dropdown,
+	ExternalLink,
+	PanelBody,
+	PanelRow,
+} from '@wordpress/components';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
-import { __ } from '@wordpress/i18n';
-import { ExternalLink, PanelBody, PanelRow } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { isPublic, getLastUpdatedDate } from '../../util/project';
+import { FormFieldset, FormRadio } from '@crowdsignal/components';
+import { STORE_NAME } from '../../data';
 import { timestampToDate } from '../../util/date';
+import { isPublic, getLastUpdatedDate } from '../../util/project';
 
 const DocumentSettings = ( { project } ) => {
-	const visibiliy = isPublic( project )
+	const { saveAndUpdateProject, saveEditorContent } = useDispatch(
+		STORE_NAME
+	);
+
+	const editorContent = useSelect(
+		( select ) => select( 'core/block-editor' ).getBlocks(),
+		[]
+	);
+
+	const updateProjectVisibility = ( event ) => {
+		if ( event.target.value === 'private' ) {
+			saveAndUpdateProject( project.id, { public: false } );
+			return;
+		}
+
+		// We need to serialize and re-parse blocks before making the request
+		// to keep originalContent prop up to date.
+		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
+			public: true,
+		} );
+	};
+
+	const visibility = isPublic( project )
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
 
@@ -24,7 +56,48 @@ const DocumentSettings = ( { project } ) => {
 			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
 				<PanelRow className="project-visibility">
 					<span>{ __( 'Visibility', 'dashboard' ) }</span>
-					<span>{ visibiliy }</span>
+					<Dropdown
+						popoverProps={ {
+							className: 'editor__project-visibility-popover',
+						} }
+						renderToggle={ ( { isOpen, onToggle } ) => (
+							<Button
+								aria-expanded={ isOpen }
+								onClick={ onToggle }
+								variant="tertiary"
+							>
+								{ visibility }
+							</Button>
+						) }
+						renderContent={ () => (
+							<>
+								<FormFieldset
+									name="project-visibility"
+									inputComponent={ FormRadio }
+									label={ __( 'Public', 'dashboard' ) }
+									explanation={ __(
+										'Visible to everyone',
+										'dashboard'
+									) }
+									onChange={ updateProjectVisibility }
+									value="public"
+									defaultChecked={ isPublic( project ) }
+								/>
+								<FormFieldset
+									name="project-visibility"
+									inputComponent={ FormRadio }
+									label={ __( 'Private', 'dashboard' ) }
+									explanation={ __(
+										'Visible only to you',
+										'dashboard'
+									) }
+									onChange={ updateProjectVisibility }
+									value="private"
+									defaultChecked={ ! isPublic( project ) }
+								/>
+							</>
+						) }
+					/>
 				</PanelRow>
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>

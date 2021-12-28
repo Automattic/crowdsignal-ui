@@ -8,19 +8,3 @@ export const getLastUpdatedProjectId = ( state ) =>
 
 export const getProject = ( state, projectId ) =>
 	get( state, [ 'projects', 'items', projectId ], null );
-
-export const isProjectSaving = ( state ) =>
-	get( state, [ 'projects', 'isSaving' ], false );
-
-export const isProjectPublic = ( state ) =>
-	get(
-		getProject( state, getLastUpdatedProjectId( state ) ),
-		[ 'content', 'public' ],
-		false
-	);
-
-export const isProjectSaved = ( state ) =>
-	get( state, [ 'projects', 'isSaved' ], false );
-
-export const isEditDisabled = ( state ) =>
-	isProjectSaving( state ) && getLastUpdatedProjectId( state ) === 0;

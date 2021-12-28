@@ -54,6 +54,10 @@ html.interface-interface-skeleton__html-container {
 		top: 0;
 	}
 
+	.interface-interface-skeleton__content > .components-notice-list .components-notice {
+		margin: 0;
+	}
+
 	.edit-post-visual-editor {
 		background-color: transparent;
 		position: relative;
@@ -63,6 +67,20 @@ html.interface-interface-skeleton__html-container {
 		padding-left: 0;
 		padding-right: 0;
 		padding-top: 40px;
+	}
+
+	.components-notice > .components-button {
+		align-self: inherit;
+	}
+
+	.components-notice__actions {
+		display: inline-flex;
+		margin-left: 16px;
+
+		.components-button {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
 	}
 
 	.components-panel__header.edit-post-sidebar__panel-tabs ul {
@@ -128,4 +146,9 @@ html.interface-interface-skeleton__html-container {
 	&:last-child {
 		margin-right: 0;
 	}
+}
+
+.editor__project-visibility-popover .components-popover__content {
+	padding: 8px;
+	width: 250px;
 }

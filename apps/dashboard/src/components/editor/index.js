@@ -1,11 +1,10 @@
 /**
  * External dependencies
  */
-import { parse } from '@wordpress/blocks';
-import { useCallback } from '@wordpress/element';
+import { useCallback, useEffect, useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { debounce, get, noop } from 'lodash';
+import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 
 /**
@@ -15,13 +14,14 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
-import { registerBlocks } from './blocks';
+import { hasUnpublishedChanges, isPublic } from '../../util/project';
 import AutoSubmitButton from './auto-submit-button';
+import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
-import { hasUnpublishedChanges } from '../../util/project';
+import { useAutosave } from './use-autosave';
 
 /**
  * Style dependencies
@@ -29,87 +29,65 @@ import { hasUnpublishedChanges } from '../../util/project';
 import './style.scss';
 
 const Editor = ( { projectId } ) => {
-	const [ project, isSaved, isEditDisabled ] = useSelect( ( select ) => {
+	const [ forceDraft, setForceDraft ] = useState( false );
+
+	const { createWarningNotice, removeNotice } = useDispatch( 'core/notices' );
+
+	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
+		const dashboard = select( STORE_NAME );
+
 		return [
-			select( STORE_NAME ).getProject( projectId ),
-			select( STORE_NAME ).isProjectSaved(),
-			select( STORE_NAME ).isEditDisabled(),
+			dashboard.getProject( projectId ),
+			dashboard.isEditorSaving() &&
+				dashboard.getLastUpdatedProjectId() === 0,
 		];
 	} );
 
-	const projectContent = get( project, [ 'content' ], {} );
+	useEffect( () => {
+		if (
+			forceDraft ||
+			! isPublic( project ) ||
+			! hasUnpublishedChanges( project )
+		) {
+			return;
+		}
 
-	const saveDebounceTimeout = projectId ? 5000 : 500;
-
-	// TODO: need to compare draft/public, offer "restore" drafted content
-	const draftedBlocks = get( projectContent, [ 'draft', 'pages', 0 ], [] );
-
-	const displayedBlocks = get(
-		projectContent,
-		[ 'public', 'pages', 0 ],
-		draftedBlocks
-	);
-
-	const { saveAndUpdateProject, changeProjectContent } = useDispatch(
-		STORE_NAME
-	);
-
-	const debounceSave = useCallback(
-		debounce( ( content ) => {
-			try {
-				const blocks = parse( content );
-
-				saveAndUpdateProject( projectId, {
-					content: {
-						draft: {
-							pages: [ [ ...blocks ] ],
+		createWarningNotice(
+			__(
+				'You have unpublished changes for this project, do you want to restore the draft version?',
+				'dashboard'
+			),
+			{
+				id: 'crowdsignal-unpublished-changes-notice',
+				isDismissible: true,
+				actions: [
+					{
+						label: __( 'Restore', 'dashboard' ),
+						onClick: () => {
+							removeNotice(
+								'crowdsignal-unpublished-changes-notice'
+							);
+							setForceDraft( true );
 						},
 					},
-					public: false,
-				} );
-			} catch ( error ) {
-				// TODO: replace this with some nince notice or something
-				// eslint-disable-next-line
-				console.error( 'Failed to save project content.' );
-				// eslint-disable-next-line
-				console.error( error );
+				],
 			}
-		}, saveDebounceTimeout ),
-		[ projectId, project ]
-	);
+		);
+	}, [ createWarningNotice, forceDraft, project, setForceDraft ] );
 
-	const loadEditorContent = useCallback( () => {
-		if ( hasUnpublishedChanges( project ) ) {
-			// eslint-disable-next-line
-			const restore = window.confirm(
-				'You have unpublished changes for this project, do you want to restore the draft version?'
-			);
-			if ( restore ) {
-				return draftedBlocks;
-			}
-		}
-		return displayedBlocks;
-	}, [ displayedBlocks ] );
+	const version = isPublic( project ) && ! forceDraft ? 'public' : 'draft';
+	const content =
+		version === 'public' ? project?.publicContent : project?.draftContent;
+	const blocks = get( content, [ 'pages', 0 ], [] );
+
+	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
+	const saveEditorContent = useAutosave( projectId, version );
 
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
 	);
 	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
 	useStylesheet( '/ui/stable/theme-compatibility/leven-editor.min.css' );
-
-	const handleChangeContent = useCallback(
-		( content ) => {
-			if ( isEditDisabled ) {
-				return;
-			}
-
-			if ( isSaved ) {
-				changeProjectContent( project );
-			}
-			debounceSave( content );
-		},
-		[ debounceSave, isSaved, isEditDisabled ]
-	);
 
 	if ( projectId && null === project ) {
 		// project is being loaded
@@ -127,16 +105,18 @@ const Editor = ( { projectId } ) => {
 
 			<ProjectNavigation
 				activeTab={ ProjectNavigation.Tab.EDITOR }
+				disableTitleEditor={ isEditorDisabled }
 				projectId={ projectId }
 			/>
 
 			<IsolatedBlockEditor
+				key={ `${ projectId }-${ version }` }
 				settings={ editorSettings }
-				onSaveContent={ handleChangeContent }
+				onSaveContent={ saveEditorContent }
 				onLoad={ loadEditorContent }
 				onError={ noop }
 			>
-				<Toolbar projectId={ projectId } />
+				<Toolbar project={ project } />
 				<DocumentSettings project={ project } />
 
 				<AutoSubmitButton />
