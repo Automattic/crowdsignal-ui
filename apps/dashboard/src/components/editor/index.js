@@ -10,7 +10,6 @@ import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line 
 /**
  * Internal dependencies
  */
-import { useStylesheet } from '@crowdsignal/hooks';
 import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
@@ -23,11 +22,6 @@ import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
-
-/**
- * Style dependencies
- */
-import './style.scss';
 
 const Editor = ( { projectId } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -51,12 +45,6 @@ const Editor = ( { projectId } ) => {
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 	const saveEditorContent = useAutosave( projectId, editorView );
-
-	useStylesheet(
-		'https://app.crowdsignal.com/themes/leven/style-editor.css'
-	);
-	useStylesheet( '/ui/stable/theme-compatibility/leven.min.css' );
-	useStylesheet( '/ui/stable/theme-compatibility/leven-editor.min.css' );
 
 	if ( projectId && null === project ) {
 		// project is being loaded

@@ -20,11 +20,6 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
 
-/**
- * Style dependencies
- */
-import './style.scss';
-
 const App = ( {
 	projectCode,
 	page = 0,
@@ -66,15 +61,6 @@ const App = ( {
 				console.log( err );
 			} );
 	}, [ projectCode, preview ] );
-
-	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
-	useStylesheet(
-		`${
-			process.env.NODE_ENV === 'production'
-				? 'https://app.crowdsignal.com'
-				: ''
-		}/ui/stable/theme-compatibility/leven.min.css`
-	);
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
@@ -118,6 +104,16 @@ const App = ( {
 				.catch( ( err ) => console.error( err ) )
 		);
 	};
+
+	useStylesheet( '/ui/stable/theme-compatibility/crowdsignal.css' );
+	// useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
+	// useStylesheet(
+	// 	`${
+	// 		process.env.NODE_ENV === 'production'
+	// 			? 'https://app.crowdsignal.com'
+	// 			: ''
+	// 	}/ui/stable/theme-compatibility/leven.css`
+	// );
 
 	if ( ! content ) {
 		return 'Wait...';

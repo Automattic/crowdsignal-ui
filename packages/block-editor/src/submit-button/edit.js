@@ -9,11 +9,17 @@ import { __ } from '@wordpress/i18n';
  */
 import { Button } from '@crowdsignal/blocks';
 import Sidebar from './sidebar';
+import classnames from 'classnames';
 
 const SubmitButton = ( props ) => {
 	const { attributes, className, onReplace, setAttributes } = props;
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
+
+	const classes = classnames(
+		className,
+		'crowdsignal-forms-submit-button-block'
+	);
 
 	return (
 		<>
@@ -22,7 +28,7 @@ const SubmitButton = ( props ) => {
 			<Button
 				attributes={ attributes }
 				as={ RichText }
-				className={ className }
+				className={ classes }
 				placeholder={ __( 'Submit', 'blocks' ) }
 				multiline={ false }
 				preserveWhiteSpace={ false }

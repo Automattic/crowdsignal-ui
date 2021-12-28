@@ -7,6 +7,7 @@ import { Global } from '@emotion/core';
  * Internal dependencies
  */
 import { Route, Router, Switch } from '@crowdsignal/router';
+import { useStylesheet } from '@crowdsignal/hooks';
 import Masterbar from '../masterbar';
 import Editor from '../editor';
 import FormPreview from '../form-preview';
@@ -22,6 +23,10 @@ const allowedRoutes = /^\/(project)\/.*/i;
 const NotFound = () => <div className="app__not-found">404</div>;
 
 const App = () => {
+	useStylesheet( '/ui/stable/theme-compatibility/crowdsignal-editor.css' );
+	// useStylesheet('https://app.crowdsignal.com/themes/leven/style-editor.css');
+	// useStylesheet( '/ui/stable/theme-compatibility/leven-editor.css' );
+
 	return (
 		<>
 			<Global styles={ pageStyles } />
