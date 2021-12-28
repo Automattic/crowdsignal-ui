@@ -6,12 +6,14 @@ import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
+import { filter } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges, isPublic } from '../../util/project';
+import { unpublishedChangesNotice } from './constants';
 import PublishButton from './publish-button';
 
 /**
@@ -22,13 +24,15 @@ import { ToolbarButton } from './styles/button';
 const Toolbar = ( { project } ) => {
 	const { saveEditorContent } = useDispatch( STORE_NAME );
 
-	const [ editorContent, isSaving, isSaved ] = useSelect(
+	const [ canRestoreDraft, editorContent, isSaving, isSaved ] = useSelect(
 		( select ) => [
+			filter( select( 'core/notices' ).getNotices(), {
+				id: unpublishedChangesNotice,
+			} ).length > 0,
 			select( 'core/block-editor' ).getBlocks(),
 			select( STORE_NAME ).isEditorSaving(),
 			select( STORE_NAME ).isEditorContentSaved(),
-		],
-		[]
+		]
 	);
 
 	const saveProject = () =>
@@ -74,18 +78,19 @@ const Toolbar = ( { project } ) => {
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
 			{ ( ! isPublic( project ) ||
 				! isSaved ||
-				hasUnpublishedChanges( project ) ) && (
-				<ToolbarButton
-					as={ Button }
-					variant="tertiary"
-					onClick={ saveProject }
-					disabled={ isSaving || isSaved }
-				>
-					{ isSaved
-						? __( 'Draft saved', 'dashboard' )
-						: __( 'Save draft', 'dashboard' ) }
-				</ToolbarButton>
-			) }
+				hasUnpublishedChanges( project ) ) &&
+				! canRestoreDraft && (
+					<ToolbarButton
+						as={ Button }
+						variant="tertiary"
+						onClick={ saveProject }
+						disabled={ isSaving || isSaved }
+					>
+						{ isSaved
+							? __( 'Draft saved', 'dashboard' )
+							: __( 'Save draft', 'dashboard' ) }
+					</ToolbarButton>
+				) }
 
 			<ToolbarButton
 				as={ Button }
@@ -99,6 +104,7 @@ const Toolbar = ( { project } ) => {
 
 			<PublishButton
 				project={ project }
+				canRestoreDraft={ canRestoreDraft }
 				isSaving={ isSaving }
 				isSaved={ isSaved }
 				onPublish={ publishProject }

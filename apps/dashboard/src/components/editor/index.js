@@ -17,6 +17,7 @@ import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges, isPublic } from '../../util/project';
 import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
+import { unpublishedChangesNotice } from './constants';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import { editorSettings } from './settings';
@@ -58,30 +59,36 @@ const Editor = ( { projectId } ) => {
 				'dashboard'
 			),
 			{
-				id: 'crowdsignal-unpublished-changes-notice',
+				id: unpublishedChangesNotice,
 				isDismissible: true,
 				actions: [
 					{
 						label: __( 'Restore', 'dashboard' ),
 						onClick: () => {
-							removeNotice(
-								'crowdsignal-unpublished-changes-notice'
-							);
+							removeNotice( unpublishedChangesNotice );
 							setForceDraft( true );
 						},
 					},
 				],
 			}
 		);
-	}, [ createWarningNotice, forceDraft, project, setForceDraft ] );
+	}, [
+		createWarningNotice,
+		forceDraft,
+		project,
+		removeNotice,
+		setForceDraft,
+	] );
 
-	const version = isPublic( project ) && ! forceDraft ? 'public' : 'draft';
+	const editorView = forceDraft ? 'draft' : 'auto';
 	const content =
-		version === 'public' ? project?.publicContent : project?.draftContent;
+		isPublic( project ) && ! forceDraft
+			? project?.publicContent
+			: project?.draftContent;
 	const blocks = get( content, [ 'pages', 0 ], [] );
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
-	const saveEditorContent = useAutosave( projectId, version );
+	const saveEditorContent = useAutosave( projectId, editorView );
 
 	useStylesheet(
 		'https://app.crowdsignal.com/themes/leven/style-editor.css'
@@ -110,7 +117,7 @@ const Editor = ( { projectId } ) => {
 			/>
 
 			<IsolatedBlockEditor
-				key={ `${ projectId }-${ version }` }
+				key={ `${ projectId }-${ editorView }` }
 				settings={ editorSettings }
 				onSaveContent={ saveEditorContent }
 				onLoad={ loadEditorContent }

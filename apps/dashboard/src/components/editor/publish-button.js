@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+
 /**
  * External dependencies
  */
@@ -17,7 +19,13 @@ import { hasUnpublishedChanges, isPublic } from '../../util/project';
  */
 import { PublishButtonNotice, ToolbarButton } from './styles/button';
 
-const PublishButton = ( { isSaved, isSaving, onPublish, project } ) => {
+const PublishButton = ( {
+	canRestoreDraft,
+	isSaved,
+	isSaving,
+	onPublish,
+	project,
+} ) => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
 
 	const currentPageSubmitButtonCount = useSelect( ( select ) =>
@@ -30,12 +38,13 @@ const PublishButton = ( { isSaved, isSaving, onPublish, project } ) => {
 
 	const submitButtonMissing = currentPageSubmitButtonCount === 0;
 
-	if (
+	const isLatestVersion =
 		isPublic( project ) &&
 		! hasUnpublishedChanges( project ) &&
 		isSaved &&
-		! isSaving
-	) {
+		! isSaving;
+
+	if ( canRestoreDraft || isLatestVersion ) {
 		return null;
 	}
 

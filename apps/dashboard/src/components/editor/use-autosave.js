@@ -9,11 +9,12 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
+import { unpublishedChangesNotice } from './constants';
 
 const AUTOSAVE_DEBOUNCE_PERIOD = 5000;
 
 // Do something about the timeout - if no project ID should be 500 ?
-export const useAutosave = ( projectId, version ) => {
+export const useAutosave = ( projectId, editorView ) => {
 	const [ ready, setReady ] = useState( ! projectId );
 
 	const autosave = useRef();
@@ -22,14 +23,15 @@ export const useAutosave = ( projectId, version ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
+	const { removeNotice } = useDispatch( 'core/notices' );
 	const { saveEditorContent, setEditorContentChanged } = useDispatch(
 		STORE_NAME
 	);
 
-	// If projectId or version changes, reset 'ready'
+	// If projectId or editorView changes, reset 'ready'
 	useEffect( () => {
 		setReady( false );
-	}, [ projectId, version ] );
+	}, [ projectId, editorView ] );
 
 	// Clear autosave timer if changes have already been saved
 	useEffect( () => {
@@ -53,6 +55,9 @@ export const useAutosave = ( projectId, version ) => {
 
 			// Mark editor content as changed
 			setEditorContentChanged();
+
+			// Once you start editing, you can't restore the previous draft anymore
+			removeNotice( unpublishedChangesNotice );
 
 			// Clear any previous autosave timers
 			clearTimeout( autosave.current );
