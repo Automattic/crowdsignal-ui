@@ -22,8 +22,9 @@ import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
+import { useStylesheet } from '@crowdsignal/hooks';
 
-const Editor = ( { projectId } ) => {
+const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
 
 	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
@@ -45,6 +46,12 @@ const Editor = ( { projectId } ) => {
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 	const saveEditorContent = useAutosave( projectId, editorView );
+
+	useStylesheet( '/ui/stable/theme-compatibility/base-editor.css' );
+	useStylesheet(
+		`https://app.crowdsignal.com/themes/${ theme }/style-editor.css`
+	);
+	useStylesheet( `/ui/stable/theme-compatibility/${ theme }-editor.css` );
 
 	if ( projectId && null === project ) {
 		// project is being loaded

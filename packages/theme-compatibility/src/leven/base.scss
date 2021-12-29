@@ -1,0 +1,48 @@
+:root {
+	--crowdsignal-forms-button-selected-background-color: #1285ce;
+	--crowdsignal-forms-input-border-color: #ddd;
+	--crowdsignal-forms-question-border-color: #eee;
+	--crowdsignal-forms-question-background-color: #fff;
+	--crowdsignal-forms-submit-button-background-color: #ff302c;
+	--color-text: #444;
+}
+
+body {
+	color: var(--color-text);
+}
+
+.crowdsignal-forms-button {
+	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
+		margin-top: 16px;
+	}
+
+	&.is-selected & {
+		&__button {
+			background-color: var(--crowdsignal-forms-button-selected-background-color);
+		}
+	}
+}
+
+.crowdsignal-forms-question-wrapper {
+	margin-bottom: 64px;
+	margin-top: 64px;
+	border-color: var(--crowdsignal-forms-question-border-color);
+	background-color: var(--crowdsignal-forms-question-background-color);
+}
+
+.crowdsignal-forms-form__content {
+	padding: 64px 0 32px;
+
+	& > *:not(.crowdsignal-forms-question-wrapper) {
+		margin-bottom: 32px;
+	}
+}
+
+.crowdsignal-forms-submit-button-block .crowdsignal-forms-button__button {
+	background-color: var(--crowdsignal-forms-submit-button-background-color);
+}
+
+.crowdsignal-forms-text-input-block input,
+.crowdsignal-forms-text-question-block textarea {
+	border: 1px solid var(--crowdsignal-forms-input-border-color);
+}

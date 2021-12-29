@@ -1,23 +1,10 @@
-@import '~@wordpress/block-library/build-style/style.css';
-
 :root {
-	--crowdsignal-forms-question-border-color: var(--color-neutral-10);
-	--crowdsignal-forms-input-border-color: var(--color-neutral-20);
 	--crowdsignal-forms-button-background-color: var(--color-primary);
 	--crowdsignal-forms-button-selected-background-color: var(--color-primary-dark);
+	--crowdsignal-forms-input-border-color: var(--color-neutral-20);
+	--crowdsignal-forms-question-background-color: var(--color-neutral-0);
+	--crowdsignal-forms-question-border-color: var(--color-neutral-10);
 	--crowdsignal-forms-submit-button-background-color: var(--color-secondary-50);
-}
-
-.wp-block-columns {
-	margin-bottom: 24px;
-
-	.crowdsignal-forms-text-input-block {
-		margin-bottom: 0;
-	}
-}
-
-.wp-block-cover {
-	margin-bottom: 24px;
 }
 
 .crowdsignal-forms-button {
@@ -34,6 +21,7 @@
 }
 
 .crowdsignal-forms-question-wrapper {
+	background-color: var(--crowdsignal-forms-question-background-color);
 	border-color: var(--crowdsignal-forms-question-border-color);
 }
 

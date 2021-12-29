@@ -8,10 +8,12 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
 	mode: 'production',
 	entry: {
-		'crowdsignal': './src/themes/crowdsignal/base.scss',
-		'crowdsignal-editor': './src/themes/crowdsignal/editor.scss',
-		'leven': './src/themes/leven/base.scss',
-		'leven-editor': './src/themes/leven/editor.scss',
+		'base': './src/base/base.scss',
+		'base-editor': './src/base/editor.scss',
+		'crowdsignal': './src/crowdsignal/base.scss',
+		'crowdsignal-editor': './src/crowdsignal/editor.scss',
+		'leven': './src/leven/base.scss',
+		'leven-editor': './src/leven/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),

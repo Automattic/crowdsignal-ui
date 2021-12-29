@@ -26,6 +26,7 @@ const App = ( {
 	preview,
 	respondentId = '',
 	startTime = 0,
+	theme = 'leven',
 } ) => {
 	const [ content, setContent ] = useState( [] );
 	// eslint-disable-next-line
@@ -105,15 +106,15 @@ const App = ( {
 		);
 	};
 
-	useStylesheet( '/ui/stable/theme-compatibility/crowdsignal.css' );
-	// useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
-	// useStylesheet(
-	// 	`${
-	// 		process.env.NODE_ENV === 'production'
-	// 			? 'https://app.crowdsignal.com'
-	// 			: ''
-	// 	}/ui/stable/theme-compatibility/leven.css`
-	// );
+	const baseURL =
+		process.env.NODE_ENV === 'production'
+			? 'https://app.crowdsignal.com'
+			: '';
+	useStylesheet( `${ baseURL }/ui/stable/theme-compatibility/base.css` );
+	useStylesheet( `https://app.crowdsignal.com/themes/${ theme }/style.css` );
+	useStylesheet(
+		`${ baseURL }/ui/stable/theme-compatibility/${ theme }.css`
+	);
 
 	if ( ! content ) {
 		return 'Wait...';
