@@ -87,15 +87,6 @@ const appendInnerBlocks = ( blockName, elements, innerBlocks ) => {
 	}
 
 	switch ( blockName ) {
-		// case 'core/media-text':
-		// 	const container = find(
-		// 		elements[0].children,
-
-		// 		( element ) => element.props.className.indexOf( 'wp-block-media-text__content' ) >= 0
-		// 	);
-
-		// 	container.innerBlocks = innerBlocks;
-		// 	return;
 		case 'core/cover':
 			const container = find(
 				elements[ 0 ].children,
