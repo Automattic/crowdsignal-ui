@@ -74,8 +74,15 @@ const AutoSubmitButton = () => {
 			submitButtonBlocks === 0
 		) {
 			insertBlock(
+				createBlock( 'core/paragraph' ),
+				totalBlocks + 1,
+				'',
+				false
+			);
+
+			insertBlock(
 				createBlock( submitButtonBlock.name ),
-				totalBlocks,
+				totalBlocks + 2,
 				'',
 				false
 			);
