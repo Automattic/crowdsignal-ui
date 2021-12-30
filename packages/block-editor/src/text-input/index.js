@@ -28,6 +28,11 @@ const settings = {
 	icon: <TextInputIcon />,
 	edit: Edit,
 	attributes,
+	example: {
+		attributes: {
+			label: __( 'Name', 'block-editor' ),
+		},
+	},
 };
 
 export default {

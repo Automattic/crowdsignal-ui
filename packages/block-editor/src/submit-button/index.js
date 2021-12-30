@@ -26,6 +26,11 @@ const settings = {
 	icon: <SubmitButtonIcon />,
 	edit: EditSubmitButton,
 	attributes,
+	example: {
+		attributes: {
+			label: __( 'Submit', 'block-editor' ),
+		},
+	},
 };
 
 export default {
