@@ -59,6 +59,37 @@ const settings = {
 			},
 		},
 	],
+	example: {
+		attributes: {
+			question: __( 'What is your favorite food?', 'block-editor' ),
+		},
+		innerBlocks: [
+			{
+				name: 'crowdsignal-forms/multiple-choice-answer',
+				attributes: {
+					label: __( 'Pizza', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/multiple-choice-answer',
+				attributes: {
+					label: __( 'Hamburger', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/multiple-choice-answer',
+				attributes: {
+					label: __( 'Pasta', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/multiple-choice-answer',
+				attributes: {
+					label: __( 'Salad', 'block-editor' ),
+				},
+			},
+		],
+	},
 };
 
 export default {

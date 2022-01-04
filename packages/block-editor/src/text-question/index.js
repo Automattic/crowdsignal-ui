@@ -33,6 +33,11 @@ const settings = {
 		html: false,
 		reusable: false,
 	},
+	example: {
+		attributes: {
+			question: __( 'How does gravity work?', 'block-editor' ),
+		},
+	},
 };
 
 export default {
