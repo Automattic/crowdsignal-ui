@@ -37,10 +37,12 @@
     "webpack-fix-style-only-entries": "^0.6.1"
   },
   "scripts": {
+    "build": "./scripts/build-release.sh",
     "check-licenses": "wp-scripts check-licenses --prod --gpl2",
     "format": "wp-scripts format",
     "lint:js": "wp-scripts lint-js",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "start": "./scripts/build-development.sh",
     "storybook": "start-storybook -p 8000",
     "postinstall": "node ./node_modules/husky/lib/bin install"
   },
