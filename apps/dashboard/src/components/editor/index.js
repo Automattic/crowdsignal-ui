@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { useCallback, useEffect, useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useCallback, useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
@@ -14,14 +14,14 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
-import { hasUnpublishedChanges, isPublic } from '../../util/project';
+import { isPublic } from '../../util/project';
 import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
-import { unpublishedChangesNotice } from './constants';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
+import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
 
 /**
@@ -32,8 +32,6 @@ import './style.scss';
 const Editor = ( { projectId } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
 
-	const { createWarningNotice, removeNotice } = useDispatch( 'core/notices' );
-
 	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
 		const dashboard = select( STORE_NAME );
 
@@ -43,42 +41,6 @@ const Editor = ( { projectId } ) => {
 				dashboard.getLastUpdatedProjectId() === 0,
 		];
 	} );
-
-	useEffect( () => {
-		if (
-			forceDraft ||
-			! isPublic( project ) ||
-			! hasUnpublishedChanges( project )
-		) {
-			return;
-		}
-
-		createWarningNotice(
-			__(
-				'You have unpublished changes for this project, do you want to restore the draft version?',
-				'dashboard'
-			),
-			{
-				id: unpublishedChangesNotice,
-				isDismissible: true,
-				actions: [
-					{
-						label: __( 'Restore', 'dashboard' ),
-						onClick: () => {
-							removeNotice( unpublishedChangesNotice );
-							setForceDraft( true );
-						},
-					},
-				],
-			}
-		);
-	}, [
-		createWarningNotice,
-		forceDraft,
-		project,
-		removeNotice,
-		setForceDraft,
-	] );
 
 	const editorView = forceDraft ? 'draft' : 'auto';
 	const content =
@@ -127,6 +89,13 @@ const Editor = ( { projectId } ) => {
 				<DocumentSettings project={ project } />
 
 				<AutoSubmitButton />
+
+				{ ! forceDraft && (
+					<UnpublishedChangesNotice
+						project={ project }
+						onRestore={ () => setForceDraft( true ) }
+					/>
+				) }
 			</IsolatedBlockEditor>
 		</div>
 	);

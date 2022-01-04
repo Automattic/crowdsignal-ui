@@ -13,8 +13,8 @@ import { filter } from 'lodash';
  */
 import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges, isPublic } from '../../util/project';
-import { unpublishedChangesNotice } from './constants';
 import PublishButton from './publish-button';
+import UnpublishedChangesNotice from './unpublished-changes-notice';
 
 /**
  * Style dependencies
@@ -27,7 +27,7 @@ const Toolbar = ( { project } ) => {
 	const [ canRestoreDraft, editorContent, isSaving, isSaved ] = useSelect(
 		( select ) => [
 			filter( select( 'core/notices' ).getNotices(), {
-				id: unpublishedChangesNotice,
+				id: UnpublishedChangesNotice.ID,
 			} ).length > 0,
 			select( 'core/block-editor' ).getBlocks(),
 			select( STORE_NAME ).isEditorSaving(),

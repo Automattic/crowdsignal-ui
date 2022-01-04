@@ -9,7 +9,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
-import { unpublishedChangesNotice } from './constants';
+import UnpublishedChangesNotice from './unpublished-changes-notice';
 
 const AUTOSAVE_DEBOUNCE_PERIOD = 5000;
 
@@ -57,7 +57,7 @@ export const useAutosave = ( projectId, editorView ) => {
 			setEditorContentChanged();
 
 			// Once you start editing, you can't restore the previous draft anymore
-			removeNotice( unpublishedChangesNotice );
+			removeNotice( UnpublishedChangesNotice.ID );
 
 			// Clear any previous autosave timers
 			clearTimeout( autosave.current );
