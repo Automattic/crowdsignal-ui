@@ -8,6 +8,7 @@
  * Start by naming the resoure the action affects followed by the intent.
  */
 
+export const FIELD_ERROR_SET = 'FIELD_ERROR_SET';
 export const FIELD_VALUE_SET = 'FIELD_VALUE_SET';
 export const FORM_INIT = 'FORM_INIT';
 export const FORM_SUBMIT_START = 'FORM_SUBMIT_START';

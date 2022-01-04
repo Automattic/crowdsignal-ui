@@ -7,6 +7,7 @@ import { combineReducers } from '@wordpress/data';
  * Internal dependencies
  */
 import {
+	FIELD_ERROR_SET,
 	FIELD_VALUE_SET,
 	FORM_INIT,
 	FORM_SUBMIT_START,
@@ -23,6 +24,13 @@ const error = ( state = {}, action ) => {
 		return {
 			...state,
 			[ action.field ]: null,
+		};
+	}
+
+	if ( action.type === FIELD_ERROR_SET ) {
+		return {
+			...state,
+			[ action.field ]: action.error,
 		};
 	}
 
