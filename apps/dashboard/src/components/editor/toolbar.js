@@ -97,7 +97,7 @@ const Toolbar = ( { project } ) => {
 				variant="tertiary"
 				href={ previewURL }
 				target="_blank"
-				disabled={ ! project.id }
+				disabled={ ! project || ! project.id }
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</ToolbarButton>
