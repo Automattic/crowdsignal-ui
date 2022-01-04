@@ -9,10 +9,19 @@ import classnames from 'classnames';
  */
 import { useField } from '@crowdsignal/form';
 import { FormTextarea, QuestionHeader, QuestionWrapper } from '../components';
+import { isNil } from 'lodash';
 
 const TextQuestion = ( { attributes, className } ) => {
-	const { inputProps } = useField( {
+	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
+		validations: [
+			{
+				isValid: ( value ) =>
+					! attributes.mandatory ||
+					( value !== '' && ! isNil( value ) ),
+				message: 'This question is required',
+			},
+		],
 	} );
 
 	const classes = classnames(
@@ -20,6 +29,7 @@ const TextQuestion = ( { attributes, className } ) => {
 		'crowdsignal-forms-text-question-block',
 		{
 			'is-required': attributes.mandatory,
+			'has-error': error,
 		}
 	);
 
@@ -29,7 +39,7 @@ const TextQuestion = ( { attributes, className } ) => {
 				tagName={ QuestionHeader }
 				value={ attributes.question }
 			/>
-
+			{ error && <span>{ error }</span> }
 			<FormTextarea
 				style={ {
 					height: attributes.inputHeight,
