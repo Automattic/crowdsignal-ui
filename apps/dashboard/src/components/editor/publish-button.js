@@ -1,62 +1,50 @@
+/* eslint-disable complexity */
+
 /**
  * External dependencies
  */
 import { Button, Popover } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import { submitButtonBlock } from '@crowdsignal/block-editor';
-import { STORE_NAME } from '../../data';
-import { hasUnpublishedChanges } from '../../util/project';
+import { hasUnpublishedChanges, isPublic } from '../../util/project';
 
 /**
  * Style dependencies
  */
 import { PublishButtonNotice, ToolbarButton } from './styles/button';
 
-const PublishButton = ( { projectId } ) => {
+const PublishButton = ( {
+	canRestoreDraft,
+	isSaved,
+	isSaving,
+	onPublish,
+	project,
+} ) => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
 
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
-
-	const [
-		project,
-		isSaving,
-		isPublic,
-		currentPageSubmitButtonCount,
-	] = useSelect( ( select ) => [
-		select( STORE_NAME ).getProject( projectId ),
-		select( STORE_NAME ).isProjectSaving(),
-		select( STORE_NAME ).isProjectPublic(),
+	const currentPageSubmitButtonCount = useSelect( ( select ) =>
 		select( 'core/block-editor' ).getGlobalBlockCount(
 			submitButtonBlock.name
-		),
-	] );
-
-	const publishProject = () => {
-		const payload = { public: true };
-		saveAndUpdateProject( projectId, {
-			...project,
-			content: {
-				...project.content,
-				public: {
-					...project.content.draft,
-				},
-			},
-			...payload,
-		} );
-	};
+		)
+	);
 
 	const toggleNotice = () => setDisplayNotice( ! displayNotice );
 
-	const isMissingSubmitButton = currentPageSubmitButtonCount === 0;
-	const disabled = isSaving || isMissingSubmitButton;
+	const submitButtonMissing = currentPageSubmitButtonCount === 0;
 
-	if ( isPublic && ! hasUnpublishedChanges( project ) ) {
+	const isLatestVersion =
+		isPublic( project ) &&
+		! hasUnpublishedChanges( project ) &&
+		isSaved &&
+		! isSaving;
+
+	if ( canRestoreDraft || isLatestVersion ) {
 		return null;
 	}
 
@@ -64,17 +52,17 @@ const PublishButton = ( { projectId } ) => {
 		<ToolbarButton
 			as={ Button }
 			className="is-crowdsignal"
-			variant={ isPublic ? 'tertiary' : 'primary' }
-			disabled={ disabled }
-			onClick={ publishProject }
+			variant={ isPublic( project ) ? 'tertiary' : 'primary' }
+			disabled={ isSaving || submitButtonMissing }
+			onClick={ onPublish }
 			onMouseEnter={ toggleNotice }
 			onMouseLeave={ toggleNotice }
 		>
-			{ isPublic
+			{ isPublic( project )
 				? __( 'Update', 'dashboard' )
 				: __( 'Publish', 'dashboard' ) }
 
-			{ displayNotice && isMissingSubmitButton && (
+			{ displayNotice && submitButtonMissing && (
 				<Popover noArrow={ false }>
 					<PublishButtonNotice>
 						{ __(

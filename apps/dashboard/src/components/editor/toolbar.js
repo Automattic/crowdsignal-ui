@@ -1,40 +1,46 @@
 /**
  * External dependencies
  */
+import { parse, serialize } from '@wordpress/blocks';
 import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
+import { filter } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import PublishButton from './publish-button';
 import { STORE_NAME } from '../../data';
+import { hasUnpublishedChanges, isPublic } from '../../util/project';
+import PublishButton from './publish-button';
+import UnpublishedChangesNotice from './unpublished-changes-notice';
 
 /**
  * Style dependencies
  */
 import { ToolbarButton } from './styles/button';
 
-const Toolbar = ( { projectId } ) => {
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
+const Toolbar = ( { project } ) => {
+	const { saveEditorContent } = useDispatch( STORE_NAME );
 
-	const [ project, isSaving, isSaved, isPublic ] = useSelect( ( select ) => {
-		return [
-			select( STORE_NAME ).getProject( projectId ),
-			select( STORE_NAME ).isProjectSaving(),
-			select( STORE_NAME ).isProjectSaved(),
-			select( STORE_NAME ).isProjectPublic(),
-		];
-	} );
+	const [ canRestoreDraft, editorContent, isSaving, isSaved ] = useSelect(
+		( select ) => [
+			filter( select( 'core/notices' ).getNotices(), {
+				id: UnpublishedChangesNotice.ID,
+			} ).length > 0,
+			select( 'core/block-editor' ).getBlocks(),
+			select( STORE_NAME ).isEditorSaving(),
+			select( STORE_NAME ).isEditorContentSaved(),
+		]
+	);
 
-	const syncProject = () => {
-		saveAndUpdateProject( projectId, {
-			...project,
-			public: false,
+	const saveProject = () =>
+		saveEditorContent( project.id, parse( serialize( editorContent ) ) );
+	const publishProject = () =>
+		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
+			public: true,
 		} );
-	};
 
 	const shareHandler = () => {
 		if ( project.permalink ) {
@@ -70,29 +76,41 @@ const Toolbar = ( { projectId } ) => {
 
 	return (
 		<ToolbarSlot className="block-editor__crowdsignal-toolbar">
-			<ToolbarButton
-				as={ Button }
-				variant="tertiary"
-				onClick={ syncProject }
-				disabled={ isSaving || isSaved }
-			>
-				{ isSaved
-					? __( 'Draft saved', 'dashboard' )
-					: __( 'Save draft', 'dashboard' ) }
-			</ToolbarButton>
+			{ ( ! isPublic( project ) ||
+				! isSaved ||
+				hasUnpublishedChanges( project ) ) &&
+				! canRestoreDraft && (
+					<ToolbarButton
+						as={ Button }
+						variant="tertiary"
+						onClick={ saveProject }
+						disabled={ isSaving || isSaved }
+					>
+						{ isSaved
+							? __( 'Draft saved', 'dashboard' )
+							: __( 'Save draft', 'dashboard' ) }
+					</ToolbarButton>
+				) }
+
 			<ToolbarButton
 				as={ Button }
 				variant="tertiary"
 				href={ previewURL }
 				target="_blank"
-				disabled={ ! projectId }
+				disabled={ ! project || ! project.id }
 			>
 				{ __( 'Preview', 'block-editor' ) }
 			</ToolbarButton>
 
-			<PublishButton projectId={ projectId } />
+			<PublishButton
+				project={ project }
+				canRestoreDraft={ canRestoreDraft }
+				isSaving={ isSaving }
+				isSaved={ isSaved }
+				onPublish={ publishProject }
+			/>
 
-			{ isPublic && (
+			{ isPublic( project ) && (
 				<ToolbarButton
 					as={ Button }
 					variant="primary"

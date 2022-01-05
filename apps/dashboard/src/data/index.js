@@ -9,6 +9,8 @@ import { createReduxStore, register } from '@wordpress/data';
 import controls from './controls';
 import * as accountActions from './accounts/actions';
 import * as accountSelectors from './accounts/selectors';
+import * as editorActions from './editor/actions';
+import * as editorSelectors from './editor/selectors';
 import * as pollActions from './polls/actions';
 import pollControls from './polls/controls';
 import * as pollSelectors from './polls/selectors';
@@ -28,6 +30,7 @@ export const STORE_NAME = 'crowdsignal/dashboard';
 const storeConfig = {
 	actions: {
 		...accountActions,
+		...editorActions,
 		...pollActions,
 		...projectActions,
 		...uiActions,
@@ -39,6 +42,7 @@ const storeConfig = {
 	},
 	selectors: {
 		...accountSelectors,
+		...editorSelectors,
 		...pollSelectors,
 		...projectSelectors,
 		...uiSelectors,
