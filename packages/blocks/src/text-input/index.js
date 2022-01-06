@@ -7,7 +7,7 @@ import { RichText } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { FormTextInput } from '../components';
+import { FormInputWrapper, FormTextInput } from '../components';
 import { useField } from '@crowdsignal/form';
 
 const TextInput = ( { attributes } ) => {
@@ -16,11 +16,13 @@ const TextInput = ( { attributes } ) => {
 	} );
 
 	return (
-		<div
+		<FormInputWrapper
 			className="crowdsignal-forms-text-input-block"
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<RichText.Content value={ attributes.label } />
+			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+				<RichText.Content value={ attributes.label } />
+			</FormInputWrapper.Label>
 			<FormTextInput
 				style={ {
 					width: attributes.inputWidth,
@@ -28,7 +30,7 @@ const TextInput = ( { attributes } ) => {
 				} }
 				{ ...inputProps }
 			/>
-		</div>
+		</FormInputWrapper>
 	);
 };
 

@@ -1,0 +1,36 @@
+:root {
+	--crowdsignal-forms-button-background-color: var(--color-primary);
+	--crowdsignal-forms-button-selected-background-color: var(--color-primary-dark);
+	--crowdsignal-forms-input-border-color: var(--color-neutral-20);
+	--crowdsignal-forms-question-background-color: var(--color-neutral-0);
+	--crowdsignal-forms-question-border-color: var(--color-neutral-10);
+	--crowdsignal-forms-submit-button-background-color: var(--color-secondary-50);
+}
+
+.crowdsignal-forms-button {
+	&__button {
+		border-radius: 2px;
+		background-color: var(--crowdsignal-forms-button-background-color);
+	}
+
+	&.is-selected & {
+		&__button {
+			background-color: var(--crowdsignal-forms-button-selected-background-color);
+		}
+	}
+}
+
+.crowdsignal-forms-question-wrapper {
+	background-color: var(--crowdsignal-forms-question-background-color);
+	border-color: var(--crowdsignal-forms-question-border-color);
+}
+
+.crowdsignal-forms-text-input-block input,
+.crowdsignal-forms-text-question-block textarea
+{
+	border: 1px solid var(--crowdsignal-forms-input-border-color);
+}
+
+.crowdsignal-forms-submit-button-block .crowdsignal-forms-button__button {
+	background-color: var(--crowdsignal-forms-submit-button-background-color);
+}

@@ -20,17 +20,13 @@ import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
 import { fetchProjectForm } from '@crowdsignal/rest-api';
 
-/**
- * Style dependencies
- */
-import './style.scss';
-
 const App = ( {
 	projectCode,
 	page = 0,
 	preview,
 	respondentId = '',
 	startTime = 0,
+	theme = 'leven',
 } ) => {
 	const [ content, setContent ] = useState( [] );
 	// eslint-disable-next-line
@@ -66,15 +62,6 @@ const App = ( {
 				console.log( err );
 			} );
 	}, [ projectCode, preview ] );
-
-	useStylesheet( 'https://app.crowdsignal.com/themes/leven/style.css' );
-	useStylesheet(
-		`${
-			process.env.NODE_ENV === 'production'
-				? 'https://app.crowdsignal.com'
-				: ''
-		}/ui/stable/theme-compatibility/leven.min.css`
-	);
 
 	const handleSubmit = ( data ) => {
 		if ( ! data ) {
@@ -118,6 +105,16 @@ const App = ( {
 				.catch( ( err ) => console.error( err ) )
 		);
 	};
+
+	const baseURL =
+		process.env.NODE_ENV === 'production'
+			? 'https://app.crowdsignal.com'
+			: '';
+	useStylesheet( `${ baseURL }/ui/stable/theme-compatibility/base.css` );
+	useStylesheet( `https://app.crowdsignal.com/themes/${ theme }/style.css` );
+	useStylesheet(
+		`${ baseURL }/ui/stable/theme-compatibility/${ theme }.css`
+	);
 
 	if ( ! content ) {
 		return 'Wait...';

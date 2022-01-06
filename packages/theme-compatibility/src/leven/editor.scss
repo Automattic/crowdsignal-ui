@@ -1,5 +1,6 @@
+@import 'base';
+
 .editor .iso-editor .block-editor-writing-flow {
-	font-family: "Crimson Text", sans-serif;
 	font-family: var(--font-base, "Crimson Text", sans-serif);
 	font-size: 18px;
 	font-weight: normal;
@@ -18,11 +19,5 @@
 
 	&[data-type="crowdsignal-forms/multiple-choice-answer"] + :not(.wp-block[data-type="crowdsignal-forms/multiple-choice-answer"]) {
 		margin-top: 32px;
-	}
-}
-
-.crowdsignal-forms-text-input-block {
-	&__wrapper input {
-		padding: 8px;
 	}
 }

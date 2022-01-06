@@ -11,6 +11,7 @@ import { useColorStyles } from '@crowdsignal/styles';
 
 const StyledButtonWrapper = styled.div`
 	display: block;
+	margin-bottom: 16px;
 `;
 
 const StyledButton = styled.button`
@@ -24,12 +25,6 @@ const StyledButton = styled.button`
 
 	&.rich-text {
 		cursor: text;
-	}
-
-	${ StyledButtonWrapper }.is-selected & {
-		background-color: var(
-			--crowdsignal-forms-button-selected-background-color
-		);
 	}
 `;
 

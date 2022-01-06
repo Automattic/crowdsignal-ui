@@ -32,9 +32,13 @@ const StyledButton = styled( Button )`
 const SubmitButton = ( { attributes, className } ) => {
 	const { isSubmitting } = useFormState();
 
-	const classes = classnames( className, {
-		'is-loading': isSubmitting,
-	} );
+	const classes = classnames(
+		className,
+		'crowdsignal-forms-submit-button-block',
+		{
+			'is-loading': isSubmitting,
+		}
+	);
 
 	return (
 		<StyledButton

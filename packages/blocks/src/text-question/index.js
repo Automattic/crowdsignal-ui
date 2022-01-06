@@ -15,9 +15,13 @@ const TextQuestion = ( { attributes, className } ) => {
 		name: `q_${ attributes.clientId }[text]`,
 	} );
 
-	const classes = classnames( className, {
-		'is-required': attributes.mandatory,
-	} );
+	const classes = classnames(
+		className,
+		'crowdsignal-forms-text-question-block',
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>

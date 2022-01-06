@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { FormTextInput } from '@crowdsignal/blocks';
+import { FormInputWrapper, FormTextInput } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
@@ -32,16 +32,18 @@ const EditTextInput = ( props ) => {
 	};
 
 	return (
-		<div
+		<FormInputWrapper
 			className="crowdsignal-forms-text-input-block"
 			style={ { ...useColorStyles( attributes ) } }
 		>
 			<Sidebar { ...props } />
-			<RichText
-				placeholder={ __( 'Enter form label', 'block-editor' ) }
-				onChange={ handleChangeLabel }
-				value={ attributes.label }
-			/>
+			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+				<RichText
+					placeholder={ __( 'Enter form label', 'block-editor' ) }
+					onChange={ handleChangeLabel }
+					value={ attributes.label }
+				/>
+			</FormInputWrapper.Label>
 			<ResizableBox
 				minHeight="40px"
 				showHandle={ isSelected }
@@ -54,7 +56,7 @@ const EditTextInput = ( props ) => {
 			>
 				<FormTextInput.Preview className="crowdsignal-forms-text-input-block__wrapper" />
 			</ResizableBox>
-		</div>
+		</FormInputWrapper>
 	);
 };
 

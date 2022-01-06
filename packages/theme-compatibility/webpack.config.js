@@ -1,31 +1,33 @@
 const path = require( 'path' );
 const FixStyleOnlyEntriesPlugin = require( 'webpack-fix-style-only-entries' );
+const SassConfig = require( '@automattic/calypso-build/webpack/sass' );
+const process = require( 'process' );
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 	mode: 'production',
 	entry: {
-		'leven': './stylesheets/leven.scss',
-		'leven-editor': './stylesheets/leven-editor.scss',
+		'base': './src/base/base.scss',
+		'base-editor': './src/base/editor.scss',
+		'crowdsignal': './src/crowdsignal/base.scss',
+		'crowdsignal-editor': './src/crowdsignal/editor.scss',
+		'leven': './src/leven/base.scss',
+		'leven-editor': './src/leven/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
 	},
 	module: {
 		rules: [
-			{
-				test: /\.scss$/,
-				exclude: /node_modules/,
-				type: 'asset/resource',
-				generator: {
-					filename: '[name].min.css',
-				},
-				use: [
-					'sass-loader',
-				],
-			},
+			SassConfig.loader({})
 		],
 	},
 	plugins: [
 		new FixStyleOnlyEntriesPlugin(),
+		...SassConfig.plugins( {
+			filename: '[name].css',
+			minify: ! isDevelopment,
+		} ),
 	]
 };
