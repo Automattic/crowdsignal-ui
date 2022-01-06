@@ -11,12 +11,7 @@ import { filter, includes, uniq } from 'lodash';
 import { Form } from '../components';
 import { STORE_NAME } from '../data';
 
-export const useField = ( {
-	name: fieldName,
-	type,
-	value,
-	validations = [],
-} ) => {
+export const useField = ( { name: fieldName, type, value, validation } ) => {
 	const { name: formName, registerValidation } = useContext( Form.Context );
 
 	const { setFieldValue, setFieldError } = useDispatch( STORE_NAME );
@@ -27,10 +22,14 @@ export const useField = ( {
 	);
 
 	const validateField = ( fieldValue ) => {
-		const err = validations.find( ( v ) => ! v.isValid( fieldValue ) );
+		if ( ! validation ) {
+			return true;
+		}
+
+		const err = validation( fieldValue );
 
 		if ( err ) {
-			setFieldError( formName, fieldName, err.message );
+			setFieldError( formName, fieldName, err );
 		}
 		return ! err;
 	};
@@ -60,7 +59,7 @@ export const useField = ( {
 				: currentValue || '',
 	};
 
-	if ( validations.length ) {
+	if ( validation ) {
 		registerValidation( fieldName, () => validateField( currentValue ) );
 	}
 

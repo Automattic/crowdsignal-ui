@@ -13,7 +13,6 @@ import { values } from 'lodash';
 const Context = createContext( 'form' );
 
 const Form = ( { children, name, onSubmit, ...props } ) => {
-	//Should I useState here?
 	const validations = {};
 
 	const data = useSelect(
