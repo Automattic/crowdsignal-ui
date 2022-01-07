@@ -31,8 +31,10 @@ const StyledQuestionWrapper = styled.div`
 	}
 
 	${ ErrorMessage.className } {
-		margin-top: -16px;
-		margin-bottom: 8px;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		transform: translateY( calc( 100% + 4px ) );
 	}
 `;
 

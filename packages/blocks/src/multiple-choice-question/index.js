@@ -42,10 +42,10 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 				tagName={ QuestionHeader }
 				value={ attributes.question }
 			/>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 			<Context.Provider value={ attributes }>
 				<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
 			</Context.Provider>
+			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</QuestionWrapper>
 	);
 };

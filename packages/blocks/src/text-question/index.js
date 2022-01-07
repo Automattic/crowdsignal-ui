@@ -41,13 +41,13 @@ const TextQuestion = ( { attributes, className } ) => {
 				tagName={ QuestionHeader }
 				value={ attributes.question }
 			/>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 			<FormTextarea
 				style={ {
 					height: attributes.inputHeight,
 				} }
 				{ ...inputProps }
 			/>
+			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</QuestionWrapper>
 	);
 };
