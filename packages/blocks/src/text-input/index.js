@@ -3,22 +3,32 @@
  */
 import { RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { FormInputWrapper, FormTextInput } from '../components';
+import { ErrorMessage, FormInputWrapper, FormTextInput } from '../components';
 import { useField } from '@crowdsignal/form';
 
 const TextInput = ( { attributes, className } ) => {
-	const { inputProps } = useField( {
+	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
+		validation: ( value ) => {
+			if ( attributes.mandatory && ( value === '' || isNil( value ) ) ) {
+				return 'This field is required';
+			}
+		},
 	} );
 
 	const classes = classnames(
+		className,
 		'crowdsignal-forms-text-input-block',
-		className
+		{
+			'is-required': attributes.mandatory,
+			'is-error': error,
+		}
 	);
 
 	return (
@@ -36,6 +46,7 @@ const TextInput = ( { attributes, className } ) => {
 				} }
 				{ ...inputProps }
 			/>
+			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
 };

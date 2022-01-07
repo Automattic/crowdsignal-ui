@@ -6,6 +6,11 @@ const FormInputWrapper = styled.div`
 
 FormInputWrapper.Label = styled.div`
 	margin-bottom: 4px;
+
+	${ FormInputWrapper.className }.is-required & div::after {
+		display: inline;
+		content: ' *';
+	}
 `;
 
 export default FormInputWrapper;

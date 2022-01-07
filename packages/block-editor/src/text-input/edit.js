@@ -31,9 +31,13 @@ const EditTextInput = ( props ) => {
 			inputWidth: `${ element.offsetWidth }px`,
 		} );
 	};
+
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-text-input-block'
+		'crowdsignal-forms-text-input-block',
+		{
+			'is-required': attributes.mandatory,
+		}
 	);
 
 	return (

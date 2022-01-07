@@ -4,21 +4,35 @@
 import { RichText } from '@wordpress/block-editor';
 import { createContext } from '@wordpress/element';
 import classnames from 'classnames';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { QuestionHeader, QuestionWrapper } from '../components';
+import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
 import { Style } from './constants';
+import { useField } from '@crowdsignal/form';
 
 const Context = createContext();
 
 const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
+	const { error } = useField( {
+		name: `q_${ attributes.clientId }[choice]${
+			attributes.maximumChoices !== 1 ? '[]' : ''
+		}`,
+		validation: ( value ) => {
+			if ( attributes.mandatory && ( value === '' || isNil( value ) ) ) {
+				return 'This question is required';
+			}
+		},
+	} );
+
 	const classes = classnames(
 		'crowdsignal-forms-multiple-choice-question-block',
 		className,
 		{
 			'is-required': attributes.mandatory,
+			'is-error': error,
 		}
 	);
 
@@ -28,7 +42,7 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 				tagName={ QuestionHeader }
 				value={ attributes.question }
 			/>
-
+			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 			<Context.Provider value={ attributes }>
 				<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
 			</Context.Provider>

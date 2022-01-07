@@ -3,13 +3,18 @@
  */
 import { RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import { FormTextarea, QuestionHeader, QuestionWrapper } from '../components';
-import { isNil } from 'lodash';
+import {
+	ErrorMessage,
+	FormTextarea,
+	QuestionHeader,
+	QuestionWrapper,
+} from '../components';
 
 const TextQuestion = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
@@ -36,7 +41,7 @@ const TextQuestion = ( { attributes, className } ) => {
 				tagName={ QuestionHeader }
 				value={ attributes.question }
 			/>
-			{ error && <span>{ error }</span> }
+			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 			<FormTextarea
 				style={ {
 					height: attributes.inputHeight,

@@ -59,7 +59,7 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 				: currentValue || '',
 	};
 
-	if ( validation ) {
+	if ( validation && registerValidation ) {
 		registerValidation( fieldName, () => validateField( currentValue ) );
 	}
 

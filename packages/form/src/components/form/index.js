@@ -25,13 +25,16 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 	const registerValidation = ( fieldName, validation ) =>
 		( validations[ fieldName ] = validation );
 
-	const isValid = () =>
-		values( validations ).every( ( validation ) => validation.call() );
+	const isFormValid = () =>
+		values( validations ).reduce(
+			( isValid, validation ) => validation.call() && isValid,
+			true
+		);
 
 	const handleSubmit = ( event ) => {
 		event.preventDefault();
 
-		if ( ! isValid() ) {
+		if ( ! isFormValid() ) {
 			return;
 		}
 
