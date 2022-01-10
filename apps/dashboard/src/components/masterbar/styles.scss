@@ -3,11 +3,13 @@
 	background: var(--color-secondary-90);
 	box-sizing: border-box;
 	display: flex;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 	height: 64px;
 	justify-content: center;
 	padding: 0;
 	position: relative;
 	width: 100%;
+	-webkit-font-smoothing: antialiased;
 
 	&.is-admin {
 		background: linear-gradient(135deg, var(--color-secondary-90) 10%, var(--color-highlight) 100%);
