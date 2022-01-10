@@ -5,6 +5,7 @@ import { InnerBlocks, RichText } from '@wordpress/block-editor';
 import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { includes, round } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -45,6 +46,8 @@ const PollBlock = ( props ) => {
 	const blockWidth =
 		attributes.align !== 'full' ? `${ attributes.width }%` : 'auto';
 
+	const classes = classnames( 'crowdsignal-forms-poll-block', className );
+
 	return (
 		<EditorWrapper>
 			<Sidebar { ...props } />
@@ -60,7 +63,7 @@ const PollBlock = ( props ) => {
 			>
 				<QuestionWrapper
 					attributes={ attributes }
-					className={ className }
+					className={ classes }
 				>
 					<RichText
 						tagName="h3"
