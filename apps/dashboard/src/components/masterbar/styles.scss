@@ -10,6 +10,7 @@
 	position: relative;
 	width: 100%;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 
 	&.is-admin {
 		background: linear-gradient(135deg, var(--color-secondary-90) 10%, var(--color-highlight) 100%);
