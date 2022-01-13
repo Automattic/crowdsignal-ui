@@ -9,7 +9,7 @@ export const ToolbarButton = styled.button`
 	--wp-admin-theme-color-darker-20: var( --color-primary-70 );
 
 	&:disabled:not( .is-primary ) {
-		background-color: transparent;
+		background-color: transparent !important;
 	}
 `;
 
