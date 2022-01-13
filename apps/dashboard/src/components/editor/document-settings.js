@@ -10,6 +10,7 @@ import {
 	PanelRow,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
@@ -23,6 +24,7 @@ import { timestampToDate } from '../../util/date';
 import { isPublic, getLastUpdatedDate } from '../../util/project';
 
 const DocumentSettings = ( { project } ) => {
+	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const { saveAndUpdateProject, saveEditorContent } = useDispatch(
 		STORE_NAME
 	);
@@ -31,6 +33,10 @@ const DocumentSettings = ( { project } ) => {
 		( select ) => select( 'core/block-editor' ).getBlocks(),
 		[]
 	);
+
+	useEffect( () => {
+		openGeneralSidebar( 'edit-post/document' );
+	}, [] );
 
 	const updateProjectVisibility = ( event ) => {
 		if ( event.target.value === 'private' ) {
