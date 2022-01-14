@@ -4,6 +4,7 @@
 import { RichText } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -31,6 +32,11 @@ const PollAnswer = ( props ) => {
 
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
+	const classes = classnames(
+		'crowdsignal-forms-poll-answer-block',
+		className
+	);
+
 	return (
 		<>
 			<Sidebar { ...props } />
@@ -38,7 +44,7 @@ const PollAnswer = ( props ) => {
 			<Button
 				attributes={ attributes }
 				as={ RichText }
-				className={ className }
+				className={ classes }
 				style={ {
 					width,
 				} }

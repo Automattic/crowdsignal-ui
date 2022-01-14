@@ -4,6 +4,7 @@
 import { RichText } from '@wordpress/block-editor';
 import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -14,7 +15,7 @@ import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
 const EditTextInput = ( props ) => {
-	const { attributes, setAttributes, isSelected } = props;
+	const { attributes, setAttributes, className, isSelected } = props;
 
 	useClientId( props );
 
@@ -30,10 +31,14 @@ const EditTextInput = ( props ) => {
 			inputWidth: `${ element.offsetWidth }px`,
 		} );
 	};
+	const classes = classnames(
+		className,
+		'crowdsignal-forms-text-input-block'
+	);
 
 	return (
 		<FormInputWrapper
-			className="crowdsignal-forms-text-input-block"
+			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
 			<Sidebar { ...props } />
