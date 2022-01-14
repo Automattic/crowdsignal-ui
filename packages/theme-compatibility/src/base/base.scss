@@ -1,13 +1,108 @@
 @import '~@wordpress/block-library/build-style/style.css';
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/mixins";
+
+:root {
+	--wp--style--block-gap: 1em;
+	--crowdsignal-forms-content-padding: 16px;
+
+	@include break-mobile {
+		--crowdsignal-forms-content-padding: 20px;
+	}
+
+	@include break-small {
+		--wp--style--block-gap: 1.4em;
+	}
+
+	@include break-medium {
+		--wp--style--block-gap: 2em;
+	}
+}
 
 .wp-block-columns {
 	margin-bottom: 24px;
 
+	.wp-block-column:not(:last-child) {
+		margin-bottom: 24px;
+	}
+
 	.crowdsignal-forms-text-input-block {
 		margin-bottom: 0;
+	}
+
+	@include break-small {
+		.wp-block-column:not(:last-child) {
+			margin-bottom: 0;
+		}
+	}
+
+	@include break-medium {
+		margin-bottom: 32px;
 	}
 }
 
 .wp-block-cover {
 	margin-bottom: 24px;
+
+	@include break-medium {
+		margin-bottom: 32px;
+	}
+}
+
+.crowdsignal-forms-form__content {
+	padding: var(--crowdsignal-forms-content-padding);
+
+	> *:not(.crowdsignal-forms-question-wrapper) {
+		margin-bottom: 24px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	> .crowdsignal-forms-question-wrapper {
+		margin-bottom: 32px;
+		margin-top: 32px;
+	}
+
+	> .alignfull {
+		width: calc(100% + var(--crowdsignal-forms-content-padding) * 2);
+		max-width: calc(100% + var(--crowdsignal-forms-content-padding) * 2);
+		margin-left: calc(var(--crowdsignal-forms-content-padding) * -1);
+		margin-right: calc(var(--crowdsignal-forms-content-padding) * -1);
+
+		&.wp-block-cover:first-child {
+			margin-top: calc(var(--crowdsignal-forms-content-padding) * -1);
+		}
+	}
+
+	@include break-medium {
+		padding: 64px 0 32px;
+
+		> *:not(.crowdsignal-forms-question-wrapper) {
+			margin-bottom: 32px;
+		}
+
+		> .crowdsignal-forms-question-wrapper {
+			margin-bottom: 64px;
+			margin-top: 64px;
+		}
+
+		> .alignfull {
+			width: inherit;
+			max-width: inherit;
+			margin-left: inherit;
+			margin-right: inherit;
+
+			&.wp-block-cover:first-child {
+				margin-top: -64px;
+			}
+		}
+	}
+}
+
+@include break-medium {
+	.crowdsignal-forms-text-input-block {
+		margin-bottom: 32px;
+	}
 }
