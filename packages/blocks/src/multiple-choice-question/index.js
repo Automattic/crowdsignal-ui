@@ -12,13 +12,13 @@ import { __ } from '@wordpress/i18n';
  */
 import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
 import { Style } from './constants';
-import { useField } from '@crowdsignal/form';
+import { useValidation } from '@crowdsignal/form';
 
 const Context = createContext();
 
 const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
-	const { error } = useField( {
-		name: `q_${ attributes.clientId }[choice]${
+	const { error } = useValidation( {
+		fieldName: `q_${ attributes.clientId }[choice]${
 			attributes.maximumChoices !== 1 ? '[]' : ''
 		}`,
 		validation: ( value ) => {

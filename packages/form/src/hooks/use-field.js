@@ -10,29 +10,19 @@ import { filter, includes, uniq } from 'lodash';
  */
 import { Form } from '../components';
 import { STORE_NAME } from '../data';
+import { useValidation } from './use-validation';
 
 export const useField = ( { name: fieldName, type, value, validation } ) => {
-	const { name: formName, registerValidation } = useContext( Form.Context );
+	const { name: formName } = useContext( Form.Context );
 
-	const { setFieldValue, setFieldError } = useDispatch( STORE_NAME );
+	const { setFieldValue } = useDispatch( STORE_NAME );
 
-	const { error, value: currentValue } = useSelect(
+	const { error, validateField } = useValidation( { fieldName, validation } );
+
+	const { value: currentValue } = useSelect(
 		( select ) => select( STORE_NAME ).getFieldData( formName, fieldName ),
 		[ formName, fieldName ]
 	);
-
-	const validateField = ( fieldValue ) => {
-		if ( ! validation ) {
-			return true;
-		}
-
-		const err = validation( fieldValue );
-
-		if ( err ) {
-			setFieldError( formName, fieldName, err );
-		}
-		return ! err;
-	};
 
 	const onChange = ( event ) => {
 		let newValue = event.target.value;
@@ -58,10 +48,6 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 				? value
 				: currentValue || '',
 	};
-
-	if ( validation && registerValidation ) {
-		registerValidation( fieldName, () => validateField( currentValue ) );
-	}
 
 	if ( type === 'checkbox' ) {
 		inputProps.checked = includes( currentValue, value );
