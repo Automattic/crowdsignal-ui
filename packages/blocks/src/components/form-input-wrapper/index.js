@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { ErrorMessage } from '../index';
+import { ErrorMessage } from '../';
 
 const FormInputWrapper = styled.div`
 	position: relative;

@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { FormInputWrapper } from '../index';
+import { FormInputWrapper } from '../';
 
 const FormTextInputWapper = styled.div`
 	width: 100%;

@@ -4,7 +4,8 @@
 import { RichText } from '@wordpress/block-editor';
 import { createContext } from '@wordpress/element';
 import classnames from 'classnames';
-import { isNil } from 'lodash';
+import { isEmpty } from 'lodash';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -21,8 +22,8 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 			attributes.maximumChoices !== 1 ? '[]' : ''
 		}`,
 		validation: ( value ) => {
-			if ( attributes.mandatory && ( value === '' || isNil( value ) ) ) {
-				return 'This question is required';
+			if ( attributes.mandatory && isEmpty( value ) ) {
+				return __( 'This question is required', 'blocks' );
 			}
 		},
 	} );
