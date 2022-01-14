@@ -1,6 +1,13 @@
+/**
+ * External dependencies
+ */
 import { useDispatch, useSelect } from '@wordpress/data';
-import { STORE_NAME } from '../data';
 import { useContext } from '@wordpress/element';
+
+/**
+ * Internal dependencies
+ */
+import { STORE_NAME } from '../data';
 import { Form } from '../components';
 
 export const useValidation = ( { fieldName, validation } ) => {
