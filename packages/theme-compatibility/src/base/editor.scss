@@ -26,6 +26,18 @@
 		margin-bottom: 64px;
 		margin-top: 64px;
 	}
+
+	.crowdsignal-forms-question-wrapper__content {
+		.block-editor-block-list__layout {
+			display: flex;
+			flex-direction: column;
+
+			.wp-block {
+				margin-left: unset;
+				margin-right: unset;
+			}
+		}
+	}
 }
 
 .editor .iso-editor {

@@ -47,3 +47,7 @@ body {
 .crowdsignal-forms-text-question-block textarea {
 	border: 1px solid var(--crowdsignal-forms-input-border-color);
 }
+
+.wp-block-image {
+	text-align: unset;
+}
