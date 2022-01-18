@@ -27,10 +27,10 @@ export const EditorWrapper = styled.div`
 	max-height: 100%;
 	position: absolute;
 	bottom: 0;
-	left: 0;
+	left: 180px;
 	right: 0;
 	top: 65px;
-	width: 100%;
+	width: calc( 100% - 180px );
 
 	.interface-interface-skeleton__content
 		> .components-notice-list

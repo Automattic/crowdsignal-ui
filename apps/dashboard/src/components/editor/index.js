@@ -20,6 +20,7 @@ import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
 import EditorStylesResolver from './styles-resolver';
+import PageNavigation from './page-navigation';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
@@ -94,6 +95,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				onChangeTitle={ updateEditorTitle }
 				projectId={ projectId }
 			/>
+
+			<PageNavigation projectContent={ content } />
 
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
