@@ -2,27 +2,27 @@
   "name": "@crowdsignal/styles",
   "version": "0.1.0",
   "description": "Crowdsignal.com styling utilities.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
   "keywords": [
     "crowdsignal"
   ],
-  "author": "Automattic Inc.",
   "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/styles/README.md",
-  "license": "GPL-2.0-or-later",
-  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
   },
-  "scripts": {
-  },
   "bugs": {
     "url": "https://github.com/Automattic/crowdsignal-ui/issues"
   },
+  "main": "src/index.js",
   "dependencies": {
     "@automattic/color-studio": "^2.5.0",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
     "@emotion/core": "^10.1.1"
+  },
+  "scripts": {
   }
 }

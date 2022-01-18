@@ -19,7 +19,7 @@
   "dependencies": {
     "@crowdsignal/form": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
-    "@wordpress/block-editor": "^8.0.5",
+    "@wordpress/block-editor": "^8.0.7",
     "@wordpress/element": "^4.0.4",
     "@wordpress/i18n": "^4.2.4",
     "classnames": "^2.2.5",

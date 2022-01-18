@@ -2,13 +2,12 @@
   "name": "@crowdsignal/feedback-widget",
   "version": "1.0.0",
   "description": "Feedback button widget for Crowdsignal.com.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
   "keywords": [
     "crowdsignal"
   ],
-  "author": "Automattic Inc.",
   "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/feedback-widget/README.md",
-  "license": "GPL-2.0-or-later",
-  "main": "src/index.js",
   "browser": true,
   "repository": {
     "type": "git",
@@ -17,15 +16,12 @@
   "bugs": {
     "url": "https://github.com/Automattic/crowdsignal-ui/issues"
   },
-  "scripts": {
-    "build": "calypso-build ./src/index.js",
-    "build:wp": "calypso-build ./src/index.js --env WP"
-  },
+  "main": "src/index.js",
   "dependencies": {
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
-    "@wordpress/components": "^19.0.4",
+    "@wordpress/components": "^19.1.1",
     "@wordpress/element": "^4.0.4",
     "@wordpress/i18n": "^4.2.4",
     "lodash": "^4.17.21"
@@ -33,5 +29,9 @@
   "peerDependencies": {
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27"
+  },
+  "scripts": {
+    "build": "calypso-build ./src/index.js",
+    "build:wp": "calypso-build ./src/index.js --env WP"
   }
 }
