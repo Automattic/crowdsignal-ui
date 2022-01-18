@@ -6,6 +6,7 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
+import { Global } from '@emotion/core';
 
 /**
  * Internal dependencies
@@ -23,6 +24,15 @@ import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
 import { useStylesheet } from '@crowdsignal/hooks';
+
+/**
+ * Style dependencies
+ */
+import {
+	EditorLayout,
+	EditorWrapper,
+	editorGlobalStyles,
+} from './styles/editor';
 
 const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -64,7 +74,9 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	}
 
 	return (
-		<div className="editor">
+		<EditorLayout className="editor">
+			<Global styles={ editorGlobalStyles } />
+
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
 			<ProjectNavigation
@@ -73,7 +85,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				projectId={ projectId }
 			/>
 
-			<IsolatedBlockEditor
+			<EditorWrapper
+				as={ IsolatedBlockEditor }
 				key={ `${ projectId }-${ editorView }` }
 				settings={ editorSettings }
 				onSaveContent={ saveEditorContent }
@@ -91,8 +104,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 						onRestore={ () => setForceDraft( true ) }
 					/>
 				) }
-			</IsolatedBlockEditor>
-		</div>
+			</EditorWrapper>
+		</EditorLayout>
 	);
 };
 
