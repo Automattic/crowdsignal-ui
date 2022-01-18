@@ -58,9 +58,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	const saveEditorContent = useAutosave( projectId, editorView );
 
 	useStylesheet( '/ui/stable/theme-compatibility/base-editor.css' );
-	useStylesheet(
-		`https://app.crowdsignal.com/themes/${ theme }/style-editor.css`
-	);
+	useStylesheet( `/themes/${ theme }/style-editor.css` );
 	useStylesheet( `/ui/stable/theme-compatibility/${ theme }-editor.css` );
 
 	if ( projectId && null === project ) {

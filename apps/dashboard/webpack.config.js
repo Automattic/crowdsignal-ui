@@ -50,6 +50,11 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 					secure: false,
 					target: 'https://app.crowdsignal.com',
 				},
+				'/themes': {
+					changeOrigin: true,
+					secure: false,
+					target: 'https://app.crowdsignal.com',
+				},
 			},
 			before: ( app ) => {
 				app.use(
