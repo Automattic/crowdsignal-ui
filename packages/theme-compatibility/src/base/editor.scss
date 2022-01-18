@@ -66,3 +66,35 @@
 		float: left;
 	}
 }
+
+.crowdsignal-forms-question-wrapper__content .block-editor-block-list__layout {
+	> * {
+		margin-top: 0;
+		margin-bottom: 16px;
+
+		.wp-block.is-selected &:nth-last-child(2),
+		.wp-block.has-child-selected &:nth-last-child(2),
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&[data-type="crowdsignal-forms/multiple-choice-answer"] + :not(.wp-block[data-type="crowdsignal-forms/multiple-choice-answer"]) {
+			margin-top: 32px;
+		}
+
+		&[data-align="left"], &[data-align="right"] {
+			figure {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+
+		.crowdsignal-forms-multiple-choice-answer-block {
+			margin-bottom: 0;
+		}
+
+		.components-resizable-box__container {
+			display: flex;
+		}
+	}
+}

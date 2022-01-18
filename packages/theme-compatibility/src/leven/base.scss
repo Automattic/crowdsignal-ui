@@ -23,10 +23,6 @@ body {
 }
 
 .crowdsignal-forms-button {
-	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
-		margin-top: 16px;
-	}
-
 	&.is-selected & {
 		&__button {
 			background-color: var(--crowdsignal-forms-button-selected-background-color);
