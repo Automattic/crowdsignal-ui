@@ -19,6 +19,7 @@ import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
+import PreviewStylesResolver from './preview-styles-resolver';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
@@ -74,6 +75,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	return (
 		<EditorLayout className="editor">
 			<Global styles={ editorGlobalStyles } />
+			<PreviewStylesResolver theme={ theme } />
 
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
