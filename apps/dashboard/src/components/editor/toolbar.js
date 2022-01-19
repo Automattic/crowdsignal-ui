@@ -41,7 +41,7 @@ const Toolbar = ( { project } ) => {
 	] );
 
 	const saveProject = () =>
-		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
+		saveEditorContent( project?.id, parse( serialize( editorContent ) ), {
 			title: projectTitle,
 		} );
 	const publishProject = () =>
