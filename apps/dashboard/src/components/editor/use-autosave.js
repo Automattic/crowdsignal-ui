@@ -19,8 +19,9 @@ export const useAutosave = ( projectId, editorView ) => {
 
 	const autosave = useRef();
 
-	const [ isEditorContentSaved ] = useSelect( ( select ) => [
+	const [ isEditorContentSaved, getProjectTitle ] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentSaved(),
+		select( STORE_NAME ).getEditorTitle,
 	] );
 
 	const { removeNotice } = useDispatch( 'core/notices' );
@@ -62,9 +63,11 @@ export const useAutosave = ( projectId, editorView ) => {
 			// Clear any previous autosave timers
 			clearTimeout( autosave.current );
 
+			const title = getProjectTitle();
+
 			// Set a new timer
 			autosave.current = setTimeout( () => {
-				saveEditorContent( projectId, parse( content ) );
+				saveEditorContent( projectId, parse( content ), { title } );
 			}, AUTOSAVE_DEBOUNCE_PERIOD );
 		},
 		[ autosave, projectId, ready ]
