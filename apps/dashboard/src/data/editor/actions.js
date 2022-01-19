@@ -6,6 +6,7 @@ import {
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
+	EDITOR_TITLE_SET,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
 
@@ -27,6 +28,10 @@ export function* saveEditorContent( projectId, blocks, options = {} ) {
 		data.publicContent = data.draftContent;
 	}
 
+	if ( options.title ) {
+		data.title = options.title;
+	}
+
 	try {
 		yield saveAndUpdateProject( projectId, data );
 
@@ -35,3 +40,8 @@ export function* saveEditorContent( projectId, blocks, options = {} ) {
 		return { type: EDITOR_CONTENT_SAVE_ERROR };
 	}
 }
+
+export const setEditorTitle = ( title ) => ( {
+	type: EDITOR_TITLE_SET,
+	title,
+} );
