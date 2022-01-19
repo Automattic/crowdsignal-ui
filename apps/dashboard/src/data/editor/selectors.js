@@ -10,4 +10,4 @@ export const isEditorSaving = ( state ) =>
 	get( state, [ 'editor', 'isSaving' ], false );
 
 export const getEditorTitle = ( state ) =>
-	get( state, [ 'editor', 'projectTitle' ], '' );
+	get( state, [ 'editor', 'title' ], '' );
