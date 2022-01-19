@@ -44,7 +44,7 @@ const hasUnsavedChanges = ( state = false, action ) => {
 	return state;
 };
 
-const projectTitle = ( state = '', action ) => {
+const title = ( state = '', action ) => {
 	if ( action.type === EDITOR_TITLE_SET ) {
 		return action.title;
 	}
@@ -59,5 +59,5 @@ const projectTitle = ( state = '', action ) => {
 export default combineReducers( {
 	isSaving,
 	hasUnsavedChanges,
-	projectTitle,
+	title,
 } );
