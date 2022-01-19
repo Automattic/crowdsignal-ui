@@ -30,7 +30,7 @@ export const EditorWrapper = styled.div`
 	left: 0;
 	right: 0;
 	top: 65px;
-	width: calc( 100% - 180px );
+	width: 100%;
 
 	.interface-interface-skeleton__content
 		> .components-notice-list
@@ -63,18 +63,9 @@ export const EditorWrapper = styled.div`
 		}
 	}
 
-	.components-notice > .components-button {
-		align-self: inherit;
-	}
-
-	.components-notice__actions {
-		display: inline-flex;
-		margin-left: 16px;
-
-		.components-button {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
+	.block-editor-block-preview__content > iframe {
+		border: 0;
+		max-width: initial;
 	}
 
 	.components-external-link {
@@ -92,6 +83,20 @@ export const EditorWrapper = styled.div`
 
 		&__icon {
 			margin: 0;
+		}
+	}
+
+	.components-notice > .components-button {
+		align-self: inherit;
+	}
+
+	.components-notice__actions {
+		display: inline-flex;
+		margin-left: 16px;
+
+		.components-button {
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 	}
 

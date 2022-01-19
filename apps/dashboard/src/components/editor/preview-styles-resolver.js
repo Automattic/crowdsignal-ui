@@ -27,7 +27,7 @@ const PreviewStylesResolver = ( { theme } ) => {
 						),
 						( node ) => node.textContent.replace( /\/\*.*\*\//, '' )
 					),
-					'\n'
+					' '
 				)
 			);
 		} );
@@ -40,14 +40,7 @@ const PreviewStylesResolver = ( { theme } ) => {
 	useEffect( () => {
 		updateSettings( {
 			...settings,
-			styles: [
-				{ baseUrl: '/ui/stable/theme-compatibility/base-editor.css' },
-				{ baseUrl: `/themes/${ theme }/style-editor.css` },
-				{
-					baseUrl: `/ui/stable/theme-compatibility/${ theme }-editor.css`,
-				},
-				{ css: inlineRules },
-			],
+			styles: [ { css: inlineRules } ],
 		} );
 	}, [ inlineRules, theme ] );
 
