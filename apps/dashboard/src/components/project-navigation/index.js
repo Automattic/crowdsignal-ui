@@ -21,24 +21,29 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
+	const { setEditorTitle } = useDispatch( STORE_NAME );
 
-	const project = useSelect(
-		( select ) => select( STORE_NAME ).getProject( projectId ),
+	const projectTitle = useSelect(
+		( select ) => select( STORE_NAME ).getEditorTitle(),
 		[ projectId ]
 	);
 
-	const updateTitle = ( title ) =>
-		saveAndUpdateProject( projectId, {
-			name: title,
-			title,
-		} );
+	const { setEditorContentChanged } = useDispatch( STORE_NAME );
+
+	const updateTitle = ( title ) => {
+		if ( title !== projectTitle ) {
+			setEditorTitle( title );
+			setEditorContentChanged();
+		}
+
+		return true;
+	};
 
 	return (
 		<div className="project-navigation">
 			<EditablePageHeader
 				onChange={ updateTitle }
-				text={ project?.title || __( 'Untitled Project', 'dashboard' ) }
+				text={ projectTitle || __( 'Untitled Project', 'dashboard' ) }
 				disabled={ disableTitleEditor }
 			/>
 			<TabNavigation>
