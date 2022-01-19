@@ -24,22 +24,30 @@ import { ToolbarButton } from './styles/button';
 const Toolbar = ( { project } ) => {
 	const { saveEditorContent } = useDispatch( STORE_NAME );
 
-	const [ canRestoreDraft, editorContent, isSaving, isSaved ] = useSelect(
-		( select ) => [
-			filter( select( 'core/notices' ).getNotices(), {
-				id: UnpublishedChangesNotice.ID,
-			} ).length > 0,
-			select( 'core/block-editor' ).getBlocks(),
-			select( STORE_NAME ).isEditorSaving(),
-			select( STORE_NAME ).isEditorContentSaved(),
-		]
-	);
+	const [
+		canRestoreDraft,
+		editorContent,
+		isSaving,
+		isSaved,
+		projectTitle,
+	] = useSelect( ( select ) => [
+		filter( select( 'core/notices' ).getNotices(), {
+			id: UnpublishedChangesNotice.ID,
+		} ).length > 0,
+		select( 'core/block-editor' ).getBlocks(),
+		select( STORE_NAME ).isEditorSaving(),
+		select( STORE_NAME ).isEditorContentSaved(),
+		select( STORE_NAME ).getEditorTitle(),
+	] );
 
 	const saveProject = () =>
-		saveEditorContent( project.id, parse( serialize( editorContent ) ) );
+		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
+			title: projectTitle,
+		} );
 	const publishProject = () =>
 		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
 			public: true,
+			title: projectTitle,
 		} );
 
 	const shareHandler = () => {
