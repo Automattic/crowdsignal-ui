@@ -21,14 +21,14 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
-	const { setEditorTitle } = useDispatch( STORE_NAME );
-
 	const projectTitle = useSelect(
 		( select ) => select( STORE_NAME ).getEditorTitle(),
 		[ projectId ]
 	);
 
-	const { setEditorContentChanged } = useDispatch( STORE_NAME );
+	const { setEditorContentChanged, setEditorTitle } = useDispatch(
+		STORE_NAME
+	);
 
 	const updateTitle = ( title ) => {
 		if ( title !== projectTitle ) {
