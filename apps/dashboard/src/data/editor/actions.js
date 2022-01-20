@@ -19,18 +19,14 @@ export function* saveEditorContent( projectId, blocks, options = {} ) {
 	yield { type: EDITOR_CONTENT_SAVE };
 
 	const data = {
+		...options,
 		draftContent: {
 			pages: [ blocks ],
 		},
 	};
 
 	if ( options.public ) {
-		data.public = true;
 		data.publicContent = data.draftContent;
-	}
-
-	if ( options.title ) {
-		data.title = options.title;
 	}
 
 	try {
