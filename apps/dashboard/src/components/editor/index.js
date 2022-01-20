@@ -23,7 +23,7 @@ import EditorStylesResolver from './styles-resolver';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { useAutosave } from './use-autosave';
+import { useEditorContent } from './use-editor-content';
 
 /**
  * Style dependencies
@@ -55,7 +55,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	const blocks = get( content, [ 'pages', 0 ], [] );
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
-	const saveEditorContent = useAutosave( projectId, editorView );
+
+	const updateEditorContent = useEditorContent( projectId );
 
 	if ( projectId && null === project ) {
 		// project is being loaded
@@ -84,7 +85,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				as={ IsolatedBlockEditor }
 				key={ `${ projectId }-${ editorView }` }
 				settings={ editorSettings }
-				onSaveContent={ saveEditorContent }
+				onSaveContent={ updateEditorContent }
 				onLoad={ loadEditorContent }
 				onError={ noop }
 			>
