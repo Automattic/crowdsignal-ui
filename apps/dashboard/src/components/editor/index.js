@@ -19,12 +19,11 @@ import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
-import PreviewStylesResolver from './preview-styles-resolver';
+import EditorStylesResolver from './styles-resolver';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
-import { useStylesheet } from '@crowdsignal/hooks';
 
 /**
  * Style dependencies
@@ -58,10 +57,6 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 	const saveEditorContent = useAutosave( projectId, editorView );
 
-	useStylesheet( '/ui/stable/theme-compatibility/base-editor.css' );
-	useStylesheet( `/themes/${ theme }/style-editor.css` );
-	useStylesheet( `/ui/stable/theme-compatibility/${ theme }-editor.css` );
-
 	if ( projectId && null === project ) {
 		// project is being loaded
 		return (
@@ -75,7 +70,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	return (
 		<EditorLayout className="editor">
 			<Global styles={ editorGlobalStyles } />
-			<PreviewStylesResolver theme={ theme } />
+			<EditorStylesResolver theme={ theme } />
 
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
