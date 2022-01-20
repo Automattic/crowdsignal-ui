@@ -29,18 +29,22 @@
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
     "@wordpress/blocks": "^11.1.4",
-    "@wordpress/components": "^19.0.4",
+    "@wordpress/components": "^19.1.1",
     "@wordpress/data": "^6.1.4",
     "@wordpress/date": "^4.2.3",
     "@wordpress/element": "^4.0.4",
     "@wordpress/hooks": "^3.2.2",
     "@wordpress/i18n": "^4.2.4",
     "classnames": "^2.2.5",
-    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#a1fa71448efddd02ed645939d284fbe81dfe13a2",
+    "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.9.0",
     "lodash": "^4.17.21",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-plugin-emotion": "^10.0.27",
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {

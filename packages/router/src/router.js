@@ -32,12 +32,10 @@ export const Router = ( { children, allowedRoutes = /.*/i } ) => {
 
 	useEffect( () => {
 		const unsubscribe = history.listen( handleRouteChange );
-		// eslint-disable-next-line @wordpress/no-global-event-listener
 		window.addEventListener( 'click', handleLinkClick );
 
 		return () => {
 			unsubscribe();
-			// eslint-disable-next-line @wordpress/no-global-event-listener
 			window.removeEventListener( 'click', handleLinkClick );
 		};
 	}, [] );

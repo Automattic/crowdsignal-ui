@@ -61,6 +61,10 @@ html.interface-interface-skeleton__html-container {
 		top: 0;
 	}
 
+	.edit-post-visual-editor__content-area .is-desktop-preview {
+		background-color: transparent !important;
+	}
+
 	.interface-interface-skeleton__content > .components-notice-list .components-notice {
 		margin: 0;
 	}

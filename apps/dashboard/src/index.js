@@ -18,7 +18,6 @@ const renderApp = () =>
 		document.getElementById( 'crowdsignal-dashboard' )
 	);
 
-// eslint-disable-next-line @wordpress/no-global-event-listener
 window.addEventListener( 'load', () => {
 	if ( document.body.dataset.ajaxNonce ) {
 		setHostHeader(

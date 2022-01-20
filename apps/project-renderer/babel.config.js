@@ -3,9 +3,5 @@ module.exports = {
 		'@automattic/calypso-build/babel/wordpress-element',
 		'@automattic/calypso-build/babel/default',
 	],
-	plugins: [
-		'@babel/plugin-transform-runtime',
-		'@wordpress/babel-plugin-import-jsx-pragma',
-		'babel-plugin-emotion',
-	],
+	plugins: [ '@babel/plugin-transform-runtime', 'babel-plugin-emotion' ],
 };
