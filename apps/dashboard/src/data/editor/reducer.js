@@ -28,7 +28,10 @@ const isSaving = ( state = false, action ) => {
 };
 
 const hasUnsavedChanges = ( state = false, action ) => {
-	if ( action.type === EDITOR_CONTENT_CHANGED_SET ) {
+	if (
+		action.type === EDITOR_CONTENT_CHANGED_SET ||
+		action.type === EDITOR_TITLE_SET
+	) {
 		return true;
 	}
 
