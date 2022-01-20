@@ -26,14 +26,11 @@ const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
 		[ projectId ]
 	);
 
-	const { setEditorContentChanged, setEditorTitle } = useDispatch(
-		STORE_NAME
-	);
+	const { setEditorTitle } = useDispatch( STORE_NAME );
 
 	const updateTitle = ( title ) => {
 		if ( title !== projectTitle ) {
 			setEditorTitle( title );
-			setEditorContentChanged();
 		}
 
 		return true;
