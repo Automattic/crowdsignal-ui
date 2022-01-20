@@ -11,3 +11,6 @@ export const isEditorSaving = ( state ) =>
 
 export const getEditorTitle = ( state ) =>
 	get( state, [ 'editor', 'title' ], '' );
+
+export const getEditorContent = ( state ) =>
+	get( state, [ 'editor', 'content' ], '' );
