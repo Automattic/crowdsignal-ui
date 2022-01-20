@@ -11,6 +11,7 @@ import {
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
+	EDITOR_CONTENT_UPDATE,
 	EDITOR_TITLE_SET,
 	PROJECT_UPDATE,
 } from '../action-types';
@@ -59,8 +60,17 @@ const title = ( state = '', action ) => {
 	return state;
 };
 
+const content = ( state = '', action ) => {
+	if ( action.type === EDITOR_CONTENT_UPDATE ) {
+		return action.content;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	isSaving,
 	hasUnsavedChanges,
 	title,
+	content,
 } );
