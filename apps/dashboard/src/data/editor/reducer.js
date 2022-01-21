@@ -13,7 +13,6 @@ import {
 	EDITOR_CONTENT_SAVE_SUCCESS,
 	EDITOR_CONTENT_UPDATE,
 	EDITOR_TITLE_SET,
-	PROJECT_UPDATE,
 } from '../action-types';
 
 const isSaving = ( state = false, action ) => {
@@ -51,10 +50,6 @@ const hasUnsavedChanges = ( state = false, action ) => {
 const title = ( state = '', action ) => {
 	if ( action.type === EDITOR_TITLE_SET ) {
 		return action.title;
-	}
-
-	if ( action.type === PROJECT_UPDATE ) {
-		return action.project?.title;
 	}
 
 	return state;
