@@ -57,7 +57,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 
-	const updateEditorContent = useEditorContent( projectId );
+	const updateEditorContent = useEditorContent( projectId, editorView );
 
 	if ( projectId && null === project ) {
 		// project is being loaded
