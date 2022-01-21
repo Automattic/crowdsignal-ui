@@ -7,7 +7,6 @@ import { combineReducers } from '@wordpress/data';
  * Internal dependencies
  */
 import {
-	EDITOR_CONTENT_CHANGED_SET,
 	EDITOR_CONTENT_RESTORE,
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
@@ -31,7 +30,7 @@ const isSaving = ( state = false, action ) => {
 
 const hasUnsavedChanges = ( state = false, action ) => {
 	if (
-		action.type === EDITOR_CONTENT_CHANGED_SET ||
+		action.type === EDITOR_CONTENT_UPDATE ||
 		action.type === EDITOR_TITLE_SET
 	) {
 		return true;

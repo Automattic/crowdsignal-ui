@@ -2,7 +2,6 @@
  * Internal dependencies
  */
 import {
-	EDITOR_CONTENT_CHANGED_SET,
 	EDITOR_CONTENT_RESTORE,
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
@@ -11,10 +10,6 @@ import {
 	EDITOR_TITLE_SET,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
-
-export const setEditorContentChanged = () => ( {
-	type: EDITOR_CONTENT_CHANGED_SET,
-} );
 
 export function* saveEditorContent( projectId, blocks, options = {} ) {
 	yield { type: EDITOR_CONTENT_SAVE };
