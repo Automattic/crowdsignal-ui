@@ -10,7 +10,7 @@ import { debounce } from 'lodash';
  */
 import { STORE_NAME } from '../../data';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { EDITOR_VIEW_DRAFT } from '../../util/editor';
+import { EDITOR_VIEW_DRAFT } from './constants';
 
 // Do something about the timeout - if no project ID should be 500 ?
 export const useEditorContent = ( projectId, editorView ) => {
