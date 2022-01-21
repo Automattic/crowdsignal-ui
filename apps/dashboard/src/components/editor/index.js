@@ -23,6 +23,7 @@ import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useEditorContent } from './use-editor-content';
 import { useStylesheet } from '@crowdsignal/hooks';
+import { EDITOR_VIEW_AUTO, EDITOR_VIEW_DRAFT } from '../../util/editor';
 
 const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -37,7 +38,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 		];
 	} );
 
-	const editorView = forceDraft ? 'draft' : 'auto';
+	const editorView = forceDraft ? EDITOR_VIEW_DRAFT : EDITOR_VIEW_AUTO;
 	const content =
 		isPublic( project ) && ! forceDraft
 			? project?.publicContent
