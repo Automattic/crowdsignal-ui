@@ -3,7 +3,6 @@
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
-import { debounce } from 'lodash';
 
 /**
  * Internal dependencies
@@ -30,7 +29,7 @@ export const useEditorContent = ( projectId, editorView ) => {
 
 	return useCallback(
 		// using debounce here so we don't pound the state synchronization
-		debounce( ( content ) => {
+		( content ) => {
 			// Isolated block editor forces a save as soon as the editor content has loaded.
 			// Ignore the first save and set 'ready' to true.
 			//
@@ -52,7 +51,7 @@ export const useEditorContent = ( projectId, editorView ) => {
 
 			// Update our own state branch
 			updateEditorContent( content );
-		}, 300 ),
+		},
 		[ projectId, ready ]
 	);
 };
