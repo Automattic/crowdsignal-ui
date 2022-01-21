@@ -28,7 +28,6 @@ export function* saveEditorContent( projectId, blocks, options = {} ) {
 
 	try {
 		yield saveAndUpdateProject( projectId, data );
-
 		return { type: EDITOR_CONTENT_SAVE_SUCCESS };
 	} catch ( error ) {
 		return { type: EDITOR_CONTENT_SAVE_ERROR };
