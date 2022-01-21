@@ -3,6 +3,8 @@
  */
 import { get } from 'lodash';
 
+import { getLastUpdatedProjectId } from '../projects/selectors';
+
 export const isEditorContentSaved = ( state ) =>
 	! get( state, [ 'editor', 'hasUnsavedChanges' ], false );
 
@@ -14,3 +16,6 @@ export const getEditorTitle = ( state ) =>
 
 export const getEditorContent = ( state ) =>
 	get( state, [ 'editor', 'content' ], '' );
+
+export const getEditorProjectId = ( state ) =>
+	get( state, [ 'editor', 'projectId' ], getLastUpdatedProjectId( state ) );
