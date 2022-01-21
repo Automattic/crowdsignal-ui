@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useDispatch, useSelect } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -29,7 +30,11 @@ const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
 		[ projectId ]
 	);
 
-	const { setEditorTitle } = useDispatch( STORE_NAME );
+	const { setEditorTitle, updateEditorProjectId } = useDispatch( STORE_NAME );
+
+	useEffect( () => {
+		updateEditorProjectId( projectId );
+	}, [ projectId ] );
 
 	const updateTitle = ( title ) => {
 		if ( title !== projectTitle ) {
