@@ -8,6 +8,7 @@ import { combineReducers } from '@wordpress/data';
  */
 import {
 	EDITOR_CONTENT_CHANGED_SET,
+	EDITOR_CONTENT_RESTORE,
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
@@ -61,7 +62,10 @@ const title = ( state = '', action ) => {
 };
 
 const content = ( state = '', action ) => {
-	if ( action.type === EDITOR_CONTENT_UPDATE ) {
+	if (
+		action.type === EDITOR_CONTENT_UPDATE ||
+		action.type === EDITOR_CONTENT_RESTORE
+	) {
 		return action.content;
 	}
 

@@ -3,6 +3,7 @@
  */
 import {
 	EDITOR_CONTENT_CHANGED_SET,
+	EDITOR_CONTENT_RESTORE,
 	EDITOR_CONTENT_SAVE,
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
@@ -45,5 +46,10 @@ export const setEditorTitle = ( title ) => ( {
 
 export const updateEditorContent = ( content ) => ( {
 	type: EDITOR_CONTENT_UPDATE,
+	content,
+} );
+
+export const restoreEditorContent = ( content ) => ( {
+	type: EDITOR_CONTENT_RESTORE,
 	content,
 } );
