@@ -19,11 +19,9 @@ export const useEditorContent = ( projectId, editorView ) => {
 	);
 
 	const { removeNotice } = useDispatch( 'core/notices' );
-	const {
-		updateEditorContent,
-		restoreEditorContent,
-		setEditorContentChanged,
-	} = useDispatch( STORE_NAME );
+	const { updateEditorContent, restoreEditorContent } = useDispatch(
+		STORE_NAME
+	);
 
 	useEffect( () => {
 		setRestore( editorView === EDITOR_VIEW_DRAFT );
@@ -52,9 +50,6 @@ export const useEditorContent = ( projectId, editorView ) => {
 				setReady( true );
 				return;
 			}
-
-			// Mark editor content as changed
-			setEditorContentChanged();
 
 			// Once you start editing, you can't restore the previous draft anymore
 			removeNotice( UnpublishedChangesNotice.ID );
