@@ -7,6 +7,7 @@ import {
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
 	EDITOR_CONTENT_UPDATE,
+	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_TITLE_SET,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
@@ -47,4 +48,9 @@ export const updateEditorContent = ( content ) => ( {
 export const restoreEditorContent = ( content ) => ( {
 	type: EDITOR_CONTENT_RESTORE,
 	content,
+} );
+
+export const updateEditorProjectId = ( projectId ) => ( {
+	type: EDITOR_PROJECT_ID_UPDATE,
+	projectId: Number( projectId ),
 } );

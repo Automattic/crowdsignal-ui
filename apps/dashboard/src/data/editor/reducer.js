@@ -12,6 +12,7 @@ import {
 	EDITOR_CONTENT_SAVE_ERROR,
 	EDITOR_CONTENT_SAVE_SUCCESS,
 	EDITOR_CONTENT_UPDATE,
+	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_TITLE_SET,
 } from '../action-types';
 
@@ -66,9 +67,18 @@ const content = ( state = '', action ) => {
 	return state;
 };
 
+const projectId = ( state = 0, action ) => {
+	if ( action.type === EDITOR_PROJECT_ID_UPDATE ) {
+		return action.projectId;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	isSaving,
 	hasUnsavedChanges,
 	title,
 	content,
+	projectId,
 } );
