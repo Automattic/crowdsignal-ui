@@ -21,8 +21,11 @@ const Tab = {
 };
 
 const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
-	const projectTitle = useSelect(
-		( select ) => select( STORE_NAME ).getEditorTitle(),
+	const [ editorTitle, projectTitle ] = useSelect(
+		( select ) => [
+			select( STORE_NAME ).getEditorTitle(),
+			select( STORE_NAME ).getProjectTitle( projectId ),
+		],
 		[ projectId ]
 	);
 
@@ -40,7 +43,11 @@ const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
 		<div className="project-navigation">
 			<EditablePageHeader
 				onChange={ updateTitle }
-				text={ projectTitle || __( 'Untitled Project', 'dashboard' ) }
+				text={
+					editorTitle ||
+					projectTitle ||
+					__( 'Untitled Project', 'dashboard' )
+				}
 				disabled={ disableTitleEditor }
 			/>
 			<TabNavigation>
