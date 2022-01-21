@@ -47,7 +47,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 
-	const updateEditorContent = useEditorContent( projectId );
+	const updateEditorContent = useEditorContent( projectId, editorView );
 
 	useStylesheet( '/ui/stable/theme-compatibility/base-editor.css' );
 	useStylesheet(
