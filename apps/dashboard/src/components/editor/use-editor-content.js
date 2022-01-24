@@ -2,46 +2,41 @@
  * External dependencies
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { EDITOR_VIEW_DRAFT } from './constants';
 
-// Do something about the timeout - if no project ID should be 500 ?
 export const useEditorContent = ( projectId, editorView ) => {
 	const [ ready, setReady ] = useState( ! projectId );
-	const [ isRestore, setRestore ] = useState(
-		editorView === EDITOR_VIEW_DRAFT
-	);
+
+	const [ isEditorContentSaved ] = useSelect( ( select ) => [
+		select( STORE_NAME ).isEditorContentSaved(),
+	] );
 
 	const { removeNotice } = useDispatch( 'core/notices' );
-	const { updateEditorContent, restoreEditorContent } = useDispatch(
-		STORE_NAME
-	);
+	const { updateEditorContent } = useDispatch( STORE_NAME );
 
+	// The problem is this timeout only gets triggered once, not on every change!
 	useEffect( () => {
-		setRestore( editorView === EDITOR_VIEW_DRAFT );
-	}, [ editorView ] );
+		if ( isEditorContentSaved ) {
+			return;
+		}
+
+		// Once changes have been made, it's impossible to restore the previous draft
+		removeNotice( UnpublishedChangesNotice.ID );
+	}, [ isEditorContentSaved ] );
 
 	// If projectId or editorView changes, reset 'ready'
 	useEffect( () => {
 		setReady( false );
-	}, [ projectId, editorView, isRestore ] );
+	}, [ projectId, editorView ] );
 
 	return useCallback(
-		// using debounce here so we don't pound the state synchronization
 		( content ) => {
-			// editorView changes via setForceDraft to EDITOR_VIEW_DRAFT, meaning a restore intent
-			if ( isRestore ) {
-				restoreEditorContent( content );
-				setRestore( false );
-				return;
-			}
-
 			// Isolated block editor forces a save as soon as the editor content has loaded.
 			// Ignore the first save and set 'ready' to true.
 			//
@@ -51,12 +46,8 @@ export const useEditorContent = ( projectId, editorView ) => {
 				return;
 			}
 
-			// Once you start editing, you can't restore the previous draft anymore
-			removeNotice( UnpublishedChangesNotice.ID );
-
-			// Update our own state branch
 			updateEditorContent( content );
 		},
-		[ projectId, ready, isRestore ]
+		[ ready ]
 	);
 };

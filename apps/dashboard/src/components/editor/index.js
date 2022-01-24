@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { useCallback, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useCallback, useEffect, useState } from '@wordpress/element';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
@@ -38,6 +38,12 @@ import {
 const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
 
+	const {
+		initalizeEditor,
+		saveEditorChangeset,
+		updateEditorTitle,
+	} = useDispatch( STORE_NAME );
+
 	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
 		const dashboard = select( STORE_NAME );
 
@@ -47,6 +53,12 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				dashboard.getLastUpdatedProjectId() === 0,
 		];
 	} );
+
+	useEffect( () => {
+		initalizeEditor( projectId );
+
+		return () => saveEditorChangeset();
+	}, [] );
 
 	const editorView = forceDraft ? EDITOR_VIEW_DRAFT : EDITOR_VIEW_AUTO;
 	const content =
@@ -79,6 +91,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 			<ProjectNavigation
 				activeTab={ ProjectNavigation.Tab.EDITOR }
 				disableTitleEditor={ isEditorDisabled }
+				onChangeTitle={ updateEditorTitle }
 				projectId={ projectId }
 			/>
 

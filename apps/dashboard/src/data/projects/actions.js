@@ -6,7 +6,6 @@ import {
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
 } from '../action-types';
-import { redirect } from '@crowdsignal/router';
 
 import {
 	createProject,
@@ -43,8 +42,7 @@ export function* saveAndUpdateProject( projectId, project ) {
 			? yield dispatchAsync( patchProject, [ projectId, project ] )
 			: yield dispatchAsync( createProject, [ project ] );
 
-		yield updateProject( response.data.id, response.data );
-		return redirect( `/project/${ response.data.id }` );
+		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
 		// Request failed
 		return saveProjectError( error.message );

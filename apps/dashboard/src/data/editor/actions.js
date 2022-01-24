@@ -1,55 +1,78 @@
 /**
+ * External dependencies
+ */
+import { select } from '@wordpress/data';
+
+/**
  * Internal dependencies
  */
+import { redirect } from '@crowdsignal/router';
 import {
-	EDITOR_CONTENT_RESTORE,
-	EDITOR_CONTENT_SAVE,
-	EDITOR_CONTENT_SAVE_ERROR,
-	EDITOR_CONTENT_SAVE_SUCCESS,
+	EDITOR_AUTOSAVE_TIMER_CANCEL,
+	EDITOR_AUTOSAVE_TIMER_RESET,
+	EDITOR_SAVE,
+	EDITOR_SAVE_ERROR,
+	EDITOR_SAVE_SUCCESS,
 	EDITOR_CONTENT_UPDATE,
+	EDITOR_INIT,
 	EDITOR_PROJECT_ID_UPDATE,
-	EDITOR_TITLE_SET,
+	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
+import { STORE_NAME } from '../';
 
-export function* saveEditorContent( projectId, blocks, options = {} ) {
-	yield { type: EDITOR_CONTENT_SAVE };
-
-	const data = {
-		...options,
-		draftContent: {
-			pages: [ blocks ],
-		},
+const withAutosave = ( actionCreator ) => {
+	return function* ( ...args ) {
+		yield { type: EDITOR_AUTOSAVE_TIMER_RESET };
+		return actionCreator( ...args );
 	};
+};
+
+export const initalizeEditor = ( projectId ) => ( {
+	type: EDITOR_INIT,
+	projectId,
+} );
+
+export const updateEditorProjectID = ( projectId ) => ( {
+	type: EDITOR_PROJECT_ID_UPDATE,
+	projectId,
+} );
+
+export function* saveEditorChangeset( options = {} ) {
+	yield { type: EDITOR_SAVE };
+	yield { type: EDITOR_AUTOSAVE_TIMER_CANCEL };
+
+	const id = select( STORE_NAME ).getEditorProjectId();
+	const data = select( STORE_NAME ).getEditorChangeset();
 
 	if ( options.public ) {
 		data.publicContent = data.draftContent;
+		data.public = true;
 	}
 
 	try {
-		yield saveAndUpdateProject( projectId, data );
-		return { type: EDITOR_CONTENT_SAVE_SUCCESS };
+		yield saveAndUpdateProject( id, data );
+
+		if ( id === 0 ) {
+			const projectId = select( STORE_NAME ).getLastUpdatedProjectId();
+
+			yield updateEditorProjectID( projectId );
+
+			redirect( `/project/${ projectId }` );
+		}
+
+		return { type: EDITOR_SAVE_SUCCESS };
 	} catch ( error ) {
-		return { type: EDITOR_CONTENT_SAVE_ERROR };
+		return { type: EDITOR_SAVE_ERROR };
 	}
 }
 
-export const setEditorTitle = ( title ) => ( {
-	type: EDITOR_TITLE_SET,
-	title,
-} );
-
-export const updateEditorContent = ( content ) => ( {
+export const updateEditorContent = withAutosave( ( content ) => ( {
 	type: EDITOR_CONTENT_UPDATE,
 	content,
-} );
+} ) );
 
-export const restoreEditorContent = ( content ) => ( {
-	type: EDITOR_CONTENT_RESTORE,
-	content,
-} );
-
-export const updateEditorProjectId = ( projectId ) => ( {
-	type: EDITOR_PROJECT_ID_UPDATE,
-	projectId: Number( projectId ),
-} );
+export const updateEditorTitle = withAutosave( ( title ) => ( {
+	type: EDITOR_TITLE_UPDATE,
+	title,
+} ) );

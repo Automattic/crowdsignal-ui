@@ -7,78 +7,85 @@ import { combineReducers } from '@wordpress/data';
  * Internal dependencies
  */
 import {
-	EDITOR_CONTENT_RESTORE,
-	EDITOR_CONTENT_SAVE,
-	EDITOR_CONTENT_SAVE_ERROR,
-	EDITOR_CONTENT_SAVE_SUCCESS,
+	EDITOR_SAVE,
+	EDITOR_SAVE_ERROR,
+	EDITOR_SAVE_SUCCESS,
 	EDITOR_CONTENT_UPDATE,
+	EDITOR_INIT,
 	EDITOR_PROJECT_ID_UPDATE,
-	EDITOR_TITLE_SET,
+	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 
-const isSaving = ( state = false, action ) => {
-	if ( action.type === EDITOR_CONTENT_SAVE ) {
-		return true;
-	}
-
-	if ( action.type === EDITOR_CONTENT_SAVE_SUCCESS ) {
-		return false;
-	}
-
-	return state;
-};
-
-const hasUnsavedChanges = ( state = false, action ) => {
-	if (
-		action.type === EDITOR_CONTENT_UPDATE ||
-		action.type === EDITOR_TITLE_SET
-	) {
-		return true;
-	}
-
-	if (
-		action.type === EDITOR_CONTENT_SAVE ||
-		action.type === EDITOR_CONTENT_SAVE_ERROR
-	) {
-		// If we were to set this on EDITOR_CONTENT_SAVE_SUCCESS
-		// any changes made while the request is going on would be disregarded.
-		return false;
-	}
-
-	return state;
-};
-
-const title = ( state = '', action ) => {
-	if ( action.type === EDITOR_TITLE_SET ) {
-		return action.title;
-	}
-
-	return state;
-};
-
 const content = ( state = '', action ) => {
-	if (
-		action.type === EDITOR_CONTENT_UPDATE ||
-		action.type === EDITOR_CONTENT_RESTORE
-	) {
+	if ( action.type === EDITOR_INIT ) {
+		return '';
+	}
+
+	if ( action.type === EDITOR_CONTENT_UPDATE ) {
 		return action.content;
 	}
 
 	return state;
 };
 
+const hasUnsavedChanges = ( state = false, action ) => {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE ) {
+		return false;
+	}
+
+	if (
+		action.type === EDITOR_CONTENT_UPDATE ||
+		action.type === EDITOR_TITLE_UPDATE ||
+		action.type === EDITOR_SAVE_ERROR
+	) {
+		return true;
+	}
+
+	return state;
+};
+
+const isSaving = ( state = false, action ) => {
+	if ( action.type === EDITOR_SAVE ) {
+		return true;
+	}
+
+	if (
+		action.type === EDITOR_SAVE_SUCCESS ||
+		action.type === EDITOR_SAVE_ERROR
+	) {
+		return false;
+	}
+
+	return state;
+};
+
 const projectId = ( state = 0, action ) => {
-	if ( action.type === EDITOR_PROJECT_ID_UPDATE ) {
+	if (
+		action.type === EDITOR_INIT ||
+		action.type === EDITOR_PROJECT_ID_UPDATE
+	) {
 		return action.projectId;
 	}
 
 	return state;
 };
 
+const title = ( state = '', action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return '';
+	}
+
+	if ( action.type === EDITOR_TITLE_UPDATE ) {
+		return action.title;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
-	isSaving,
-	hasUnsavedChanges,
-	title,
 	content,
+	hasUnsavedChanges,
+	isSaving,
 	projectId,
+	title,
 } );

@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { parse } from '@wordpress/blocks';
 import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -22,33 +21,17 @@ import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { ToolbarButton } from './styles/button';
 
 const Toolbar = ( { project } ) => {
-	const { saveEditorContent } = useDispatch( STORE_NAME );
+	const { saveEditorChangeset } = useDispatch( STORE_NAME );
 
-	const [
-		canRestoreDraft,
-		editorContent,
-		isSaving,
-		isSaved,
-		projectTitle,
-	] = useSelect( ( select ) => [
+	const [ canRestoreDraft, isSaving, isSaved ] = useSelect( ( select ) => [
 		filter( select( 'core/notices' ).getNotices(), {
 			id: UnpublishedChangesNotice.ID,
 		} ).length > 0,
-		select( STORE_NAME ).getEditorContent(),
 		select( STORE_NAME ).isEditorSaving(),
 		select( STORE_NAME ).isEditorContentSaved(),
-		select( STORE_NAME ).getEditorTitle(),
 	] );
 
-	const saveProject = () =>
-		saveEditorContent( project?.id, parse( editorContent ), {
-			title: projectTitle,
-		} );
-	const publishProject = () =>
-		saveEditorContent( project.id, parse( editorContent ), {
-			public: true,
-			title: projectTitle,
-		} );
+	const publishProject = () => saveEditorChangeset( { public: true } );
 
 	const shareHandler = () => {
 		if ( project.permalink ) {
@@ -91,7 +74,7 @@ const Toolbar = ( { project } ) => {
 					<ToolbarButton
 						as={ Button }
 						variant="tertiary"
-						onClick={ saveProject }
+						onClick={ saveEditorChangeset }
 						disabled={ isSaving || isSaved }
 					>
 						{ isSaved

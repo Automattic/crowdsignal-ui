@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { parse, serialize } from '@wordpress/blocks';
 import {
 	Button,
 	Dropdown,
@@ -9,7 +8,7 @@ import {
 	PanelBody,
 	PanelRow,
 } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
@@ -25,13 +24,8 @@ import { isPublic, getLastUpdatedDate } from '../../util/project';
 
 const DocumentSettings = ( { project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const { saveAndUpdateProject, saveEditorContent } = useDispatch(
+	const { saveAndUpdateProject, saveEditorChangeset } = useDispatch(
 		STORE_NAME
-	);
-
-	const editorContent = useSelect(
-		( select ) => select( 'core/block-editor' ).getBlocks(),
-		[]
 	);
 
 	useEffect( () => {
@@ -46,9 +40,7 @@ const DocumentSettings = ( { project } ) => {
 
 		// We need to serialize and re-parse blocks before making the request
 		// to keep originalContent prop up to date.
-		saveEditorContent( project.id, parse( serialize( editorContent ) ), {
-			public: true,
-		} );
+		saveEditorChangeset( { public: true } );
 	};
 
 	const visibility = isPublic( project )

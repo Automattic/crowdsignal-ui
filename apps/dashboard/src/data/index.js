@@ -10,6 +10,7 @@ import controls from './controls';
 import * as accountActions from './accounts/actions';
 import * as accountSelectors from './accounts/selectors';
 import * as editorActions from './editor/actions';
+import editorControls from './editor/controls';
 import * as editorSelectors from './editor/selectors';
 import * as pollActions from './polls/actions';
 import pollControls from './polls/controls';
@@ -38,6 +39,7 @@ const storeConfig = {
 	},
 	controls: {
 		...controls,
+		...editorControls,
 		...pollControls,
 	},
 	selectors: {
