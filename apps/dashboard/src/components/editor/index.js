@@ -6,6 +6,7 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
+import { Global } from '@emotion/core';
 
 /**
  * Internal dependencies
@@ -18,11 +19,20 @@ import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
 import EditorLoadingPlaceholder from './loading-placeholder';
+import EditorStylesResolver from './styles-resolver';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useAutosave } from './use-autosave';
-import { useStylesheet } from '@crowdsignal/hooks';
+
+/**
+ * Style dependencies
+ */
+import {
+	EditorLayout,
+	EditorWrapper,
+	editorGlobalStyles,
+} from './styles/editor';
 
 const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -47,12 +57,6 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
 	const saveEditorContent = useAutosave( projectId, editorView );
 
-	useStylesheet( '/ui/stable/theme-compatibility/base-editor.css' );
-	useStylesheet(
-		`https://app.crowdsignal.com/themes/${ theme }/style-editor.css`
-	);
-	useStylesheet( `/ui/stable/theme-compatibility/${ theme }-editor.css` );
-
 	if ( projectId && null === project ) {
 		// project is being loaded
 		return (
@@ -64,7 +68,10 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	}
 
 	return (
-		<div className="editor">
+		<EditorLayout className="editor">
+			<Global styles={ editorGlobalStyles } />
+			<EditorStylesResolver theme={ theme } />
+
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
 			<ProjectNavigation
@@ -73,7 +80,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				projectId={ projectId }
 			/>
 
-			<IsolatedBlockEditor
+			<EditorWrapper
+				as={ IsolatedBlockEditor }
 				key={ `${ projectId }-${ editorView }` }
 				settings={ editorSettings }
 				onSaveContent={ saveEditorContent }
@@ -91,8 +99,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 						onRestore={ () => setForceDraft( true ) }
 					/>
 				) }
-			</IsolatedBlockEditor>
-		</div>
+			</EditorWrapper>
+		</EditorLayout>
 	);
 };
 
