@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { useCallback, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useCallback, useEffect, useState } from '@wordpress/element';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { get, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
@@ -23,7 +23,8 @@ import EditorStylesResolver from './styles-resolver';
 import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { useAutosave } from './use-autosave';
+import { useEditorContent } from './use-editor-content';
+import { EDITOR_VIEW_AUTO, EDITOR_VIEW_DRAFT } from './constants';
 
 /**
  * Style dependencies
@@ -37,6 +38,12 @@ import {
 const Editor = ( { projectId, theme = 'leven' } ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
 
+	const {
+		initalizeEditor,
+		saveEditorChangeset,
+		updateEditorTitle,
+	} = useDispatch( STORE_NAME );
+
 	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
 		const dashboard = select( STORE_NAME );
 
@@ -47,7 +54,13 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 		];
 	} );
 
-	const editorView = forceDraft ? 'draft' : 'auto';
+	useEffect( () => {
+		initalizeEditor( projectId );
+
+		return () => saveEditorChangeset();
+	}, [] );
+
+	const editorView = forceDraft ? EDITOR_VIEW_DRAFT : EDITOR_VIEW_AUTO;
 	const content =
 		isPublic( project ) && ! forceDraft
 			? project?.publicContent
@@ -55,7 +68,8 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 	const blocks = get( content, [ 'pages', 0 ], [] );
 
 	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
-	const saveEditorContent = useAutosave( projectId, editorView );
+
+	const updateEditorContent = useEditorContent( projectId, editorView );
 
 	if ( projectId && null === project ) {
 		// project is being loaded
@@ -77,6 +91,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 			<ProjectNavigation
 				activeTab={ ProjectNavigation.Tab.EDITOR }
 				disableTitleEditor={ isEditorDisabled }
+				onChangeTitle={ updateEditorTitle }
 				projectId={ projectId }
 			/>
 
@@ -84,7 +99,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 				as={ IsolatedBlockEditor }
 				key={ `${ projectId }-${ editorView }` }
 				settings={ editorSettings }
-				onSaveContent={ saveEditorContent }
+				onSaveContent={ updateEditorContent }
 				onLoad={ loadEditorContent }
 				onError={ noop }
 			>

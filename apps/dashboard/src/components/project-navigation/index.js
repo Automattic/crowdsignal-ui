@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -20,25 +20,29 @@ const Tab = {
 	RESULTS: 'results',
 };
 
-const ProjectNavigation = ( { activeTab, disableTitleEditor, projectId } ) => {
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
-
-	const project = useSelect(
-		( select ) => select( STORE_NAME ).getProject( projectId ),
+const ProjectNavigation = ( {
+	activeTab,
+	disableTitleEditor,
+	onChangeTitle,
+	projectId,
+} ) => {
+	const [ editorTitle, projectTitle ] = useSelect(
+		( select ) => [
+			select( STORE_NAME ).getEditorTitle(),
+			select( STORE_NAME ).getProjectTitle( projectId ),
+		],
 		[ projectId ]
 	);
-
-	const updateTitle = ( title ) =>
-		saveAndUpdateProject( projectId, {
-			name: title,
-			title,
-		} );
 
 	return (
 		<div className="project-navigation">
 			<EditablePageHeader
-				onChange={ updateTitle }
-				text={ project?.title || __( 'Untitled Project', 'dashboard' ) }
+				onChange={ onChangeTitle }
+				text={
+					editorTitle ||
+					projectTitle ||
+					__( 'Untitled Project', 'dashboard' )
+				}
 				disabled={ disableTitleEditor }
 			/>
 			<TabNavigation>
