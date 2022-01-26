@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
 import { map } from 'lodash';
@@ -9,6 +10,7 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import PagePreview from './page-preview';
+import { STORE_NAME } from '../../data';
 
 /**
  * Style dependencies
@@ -19,7 +21,16 @@ import {
 	PageNavigationWrapper,
 } from './styles/page-navigation';
 
-const PageNavigation = ( { projectContent } ) => {
+const PageNavigation = ( { currentPage, projectContent } ) => {
+	const { setEditorCurrentPage, updateEditorPage } = useDispatch(
+		STORE_NAME
+	);
+
+	const handleAddPage = () => {
+		updateEditorPage( projectContent.length, [] );
+		setEditorCurrentPage( projectContent.length );
+	};
+
 	return (
 		<PageNavigationWrapper>
 			<PageNavigationHeader>
@@ -27,15 +38,16 @@ const PageNavigation = ( { projectContent } ) => {
 				{ __( 'Pages', 'dashboard' ) }
 			</PageNavigationHeader>
 
-			{ map( projectContent.pages, ( page, index ) => (
+			{ map( projectContent, ( page, index ) => (
 				<PagePreview
 					key={ `page-${ index }` }
+					isActive={ index === currentPage }
 					page={ page }
 					pageIndex={ index }
 				/>
 			) ) }
 
-			<PageNavigationAddButton>
+			<PageNavigationAddButton onClick={ handleAddPage }>
 				<Icon icon={ plus } />
 			</PageNavigationAddButton>
 		</PageNavigationWrapper>

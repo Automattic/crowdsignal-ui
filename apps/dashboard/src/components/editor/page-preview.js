@@ -2,6 +2,13 @@
  * External dependencies
  */
 import { BlockPreview } from '@wordpress/block-editor';
+import { useDispatch } from '@wordpress/data';
+import classnames from 'classnames';
+
+/**
+ * Internal dependencies
+ */
+import { STORE_NAME } from '../../data';
 
 /**
  * Style dependencies
@@ -12,9 +19,17 @@ import {
 	PagePreviewPageNumber,
 } from './styles/page-preview';
 
-const PagePreview = ( { page, pageIndex } ) => {
+const PagePreview = ( { isActive, page, pageIndex } ) => {
+	const { setEditorCurrentPage } = useDispatch( STORE_NAME );
+
+	const handleSelect = () => setEditorCurrentPage( pageIndex );
+
+	const classes = classnames( {
+		'is-active': isActive,
+	} );
+
 	return (
-		<PagePreviewWrapper className="is-active">
+		<PagePreviewWrapper onClick={ handleSelect } className={ classes }>
 			<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
 
 			<PagePreviewFrame>

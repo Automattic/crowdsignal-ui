@@ -3,6 +3,7 @@
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { isEmpty } from 'lodash';
 
 /**
  * Internal dependencies
@@ -10,17 +11,30 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { STORE_NAME } from '../../data';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 
-export const useEditorContent = ( projectId, editorView ) => {
+export const useEditorContent = ( projectId ) => {
 	const [ ready, setReady ] = useState( ! projectId );
-
-	const [ isEditorContentSaved ] = useSelect( ( select ) => [
-		select( STORE_NAME ).isEditorContentSaved(),
-	] );
+	const [ editorId, setEditorId ] = useState();
 
 	const { removeNotice } = useDispatch( 'core/notices' );
-	const { updateEditorContent } = useDispatch( STORE_NAME );
+	const { forceEditorDraftMode, updateEditorPage } = useDispatch(
+		STORE_NAME
+	);
 
-	// The problem is this timeout only gets triggered once, not on every change!
+	const [
+		currentPage,
+		isEditorContentSaved,
+		projectContent,
+	] = useSelect( ( select ) => [
+		select( STORE_NAME ).getEditorCurrentPage(),
+		select( STORE_NAME ).isEditorContentSaved(),
+		select( STORE_NAME ).getEditorContent(),
+	] );
+
+	useEffect( () => {
+		setEditorId( `crowdsignal-editor-${ projectId }-${ currentPage }` );
+		setReady( false );
+	}, [ projectId, currentPage ] );
+
 	useEffect( () => {
 		if ( isEditorContentSaved ) {
 			return;
@@ -30,13 +44,8 @@ export const useEditorContent = ( projectId, editorView ) => {
 		removeNotice( UnpublishedChangesNotice.ID );
 	}, [ isEditorContentSaved ] );
 
-	// If projectId or editorView changes, reset 'ready'
-	useEffect( () => {
-		setReady( false );
-	}, [ projectId, editorView ] );
-
-	return useCallback(
-		( content ) => {
+	const saveBlocks = useCallback(
+		( blocks ) => {
 			// Isolated block editor forces a save as soon as the editor content has loaded.
 			// Ignore the first save and set 'ready' to true.
 			//
@@ -46,8 +55,25 @@ export const useEditorContent = ( projectId, editorView ) => {
 				return;
 			}
 
-			updateEditorContent( content );
+			updateEditorPage( currentPage, blocks );
 		},
 		[ ready ]
 	);
+
+	const restoreDraftContent = () => {
+		forceEditorDraftMode();
+
+		// Force the editor to reload
+		setEditorId( `${ editorId }*` );
+		setReady( false );
+	};
+
+	return {
+		currentPage,
+		editorId,
+		isLoading: projectId && isEmpty( projectContent ),
+		saveBlocks,
+		projectContent,
+		restoreDraftContent,
+	};
 };

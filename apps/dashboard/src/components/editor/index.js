@@ -1,10 +1,10 @@
 /**
  * External dependencies
  */
-import { useCallback, useEffect, useState } from '@wordpress/element';
+import { useCallback, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { get, noop } from 'lodash';
+import { noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/core';
 
@@ -14,7 +14,6 @@ import { Global } from '@emotion/core';
 import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
-import { isPublic } from '../../util/project';
 import AutoSubmitButton from './auto-submit-button';
 import { registerBlocks } from './blocks';
 import DocumentSettings from './document-settings';
@@ -25,7 +24,6 @@ import { editorSettings } from './settings';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useEditorContent } from './use-editor-content';
-import { EDITOR_VIEW_AUTO, EDITOR_VIEW_DRAFT } from './constants';
 
 /**
  * Style dependencies
@@ -37,23 +35,15 @@ import {
 } from './styles/editor';
 
 const Editor = ( { projectId, theme = 'leven' } ) => {
-	const [ forceDraft, setForceDraft ] = useState( false );
-
 	const {
 		initalizeEditor,
 		saveEditorChangeset,
 		updateEditorTitle,
 	} = useDispatch( STORE_NAME );
 
-	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
-		const dashboard = select( STORE_NAME );
-
-		return [
-			dashboard.getProject( projectId ),
-			dashboard.isEditorSaving() &&
-				dashboard.getLastUpdatedProjectId() === 0,
-		];
-	} );
+	const project = useSelect( ( select ) =>
+		select( STORE_NAME ).getProject( projectId )
+	);
 
 	useEffect( () => {
 		initalizeEditor( projectId );
@@ -61,18 +51,21 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 		return () => saveEditorChangeset();
 	}, [] );
 
-	const editorView = forceDraft ? EDITOR_VIEW_DRAFT : EDITOR_VIEW_AUTO;
-	const content =
-		isPublic( project ) && ! forceDraft
-			? project?.publicContent
-			: project?.draftContent;
-	const blocks = get( content, [ 'pages', 0 ], [] );
+	const {
+		currentPage,
+		editorId,
+		isLoading,
+		projectContent,
+		saveBlocks,
+		restoreDraftContent,
+	} = useEditorContent( projectId );
 
-	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
+	const loadEditorContent = useCallback(
+		() => projectContent[ currentPage ],
+		[ editorId, isLoading ]
+	);
 
-	const updateEditorContent = useEditorContent( projectId, editorView );
-
-	if ( projectId && null === project ) {
+	if ( isLoading ) {
 		// project is being loaded
 		return (
 			<>
@@ -91,18 +84,20 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 
 			<ProjectNavigation
 				activeTab={ ProjectNavigation.Tab.EDITOR }
-				disableTitleEditor={ isEditorDisabled }
 				onChangeTitle={ updateEditorTitle }
 				projectId={ projectId }
 			/>
 
-			<PageNavigation projectContent={ content } />
+			<PageNavigation
+				currentPage={ currentPage }
+				projectContent={ projectContent }
+			/>
 
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
-				key={ `${ projectId }-${ editorView }` }
+				key={ editorId }
 				settings={ editorSettings }
-				onSaveContent={ updateEditorContent }
+				onSaveBlocks={ saveBlocks }
 				onLoad={ loadEditorContent }
 				onError={ noop }
 			>
@@ -111,12 +106,10 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 
 				<AutoSubmitButton />
 
-				{ ! forceDraft && (
-					<UnpublishedChangesNotice
-						project={ project }
-						onRestore={ () => setForceDraft( true ) }
-					/>
-				) }
+				<UnpublishedChangesNotice
+					project={ project }
+					onRestore={ restoreDraftContent }
+				/>
 			</EditorWrapper>
 		</EditorLayout>
 	);

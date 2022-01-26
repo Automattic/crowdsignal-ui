@@ -10,12 +10,15 @@ import { redirect } from '@crowdsignal/router';
 import {
 	EDITOR_AUTOSAVE_TIMER_CANCEL,
 	EDITOR_AUTOSAVE_TIMER_RESET,
+	EDITOR_CHANGESET_RESET,
+	EDITOR_CURRENT_PAGE_SET,
+	EDITOR_MODE_SET,
+	EDITOR_INIT,
+	EDITOR_PAGE_UPDATE,
+	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
-	EDITOR_CONTENT_UPDATE,
-	EDITOR_INIT,
-	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
@@ -31,6 +34,16 @@ const withAutosave = ( actionCreator ) => {
 export const initalizeEditor = ( projectId ) => ( {
 	type: EDITOR_INIT,
 	projectId,
+} );
+
+export const forceEditorDraftMode = () => ( {
+	type: EDITOR_MODE_SET,
+	mode: 'draft',
+} );
+
+export const setEditorCurrentPage = ( page ) => ( {
+	type: EDITOR_CURRENT_PAGE_SET,
+	page,
 } );
 
 export const updateEditorProjectID = ( projectId ) => ( {
@@ -52,7 +65,10 @@ export function* saveEditorChangeset( options = {} ) {
 
 	try {
 		yield saveAndUpdateProject( id, data );
+		yield forceEditorDraftMode();
 
+		// Update editor project ID and redirect to the correct URL
+		// when creating a new project
 		if ( id === 0 ) {
 			const projectId = select( STORE_NAME ).getLastUpdatedProjectId();
 
@@ -61,15 +77,21 @@ export function* saveEditorChangeset( options = {} ) {
 			redirect( `/project/${ projectId }` );
 		}
 
+		// Reset editor state if no changes have been made during the save
+		if ( select( STORE_NAME ).isEditorContentSaved() ) {
+			yield { type: EDITOR_CHANGESET_RESET };
+		}
+
 		return { type: EDITOR_SAVE_SUCCESS };
 	} catch ( error ) {
 		return { type: EDITOR_SAVE_ERROR };
 	}
 }
 
-export const updateEditorContent = withAutosave( ( content ) => ( {
-	type: EDITOR_CONTENT_UPDATE,
-	content,
+export const updateEditorPage = withAutosave( ( page, blocks ) => ( {
+	type: EDITOR_PAGE_UPDATE,
+	page,
+	blocks,
 } ) );
 
 export const updateEditorTitle = withAutosave( ( title ) => ( {

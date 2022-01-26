@@ -1,8 +1,23 @@
 /**
  * External dependencies
  */
-import { parse } from '@wordpress/blocks';
-import { get } from 'lodash';
+import { serialize, parse } from '@wordpress/blocks';
+import { get, isEmpty, map, merge, values } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import { getProject } from '../projects/selectors';
+import { isPublic } from '../../util/project';
+
+export const getEditorProjectId = ( state ) =>
+	get( state, [ 'editor', 'projectId' ], 0 );
+
+export const getEditorMode = ( state ) =>
+	get( state, [ 'editor', 'mode' ], 'auto' );
+
+export const getEditorCurrentPage = ( state ) =>
+	get( state, [ 'editor', 'currentPage' ], 0 );
 
 export const isEditorContentSaved = ( state ) =>
 	! get( state, [ 'editor', 'hasUnsavedChanges' ], false );
@@ -13,18 +28,35 @@ export const isEditorSaving = ( state ) =>
 export const getEditorTitle = ( state ) =>
 	get( state, [ 'editor', 'title' ], '' );
 
-export const getEditorContent = ( state ) =>
-	get( state, [ 'editor', 'content' ], '' );
+export const getEditorContent = ( state ) => {
+	const projectId = getEditorProjectId( state );
 
-export const getEditorProjectId = ( state ) =>
-	get( state, [ 'editor', 'projectId' ], 0 );
+	if ( ! projectId ) {
+		return values( state.editor.content );
+	}
+
+	const project = getProject( state, projectId );
+
+	if ( ! project ) {
+		return [];
+	}
+
+	return merge(
+		isPublic( project ) && getEditorMode( state ) !== 'draft'
+			? project.publicContent.pages
+			: project.draftContent.pages,
+		state.editor.content
+	);
+};
 
 export const getEditorChangeset = ( state ) => {
 	const changeset = {};
 
-	if ( getEditorContent( state ) ) {
+	if ( ! isEmpty( state.editor.content ) ) {
 		changeset.draftContent = {
-			pages: [ parse( getEditorContent( state ) ) ],
+			pages: map( getEditorContent( state ), ( page ) =>
+				parse( serialize( page ) )
+			),
 		};
 	}
 
