@@ -29,42 +29,6 @@
 }
 
 .editor .iso-editor {
-	--wp-admin-theme-color: var(--color-neutral-80);
-	--wp-admin-theme-color-darker-10: var(--color-neutral-90);
-	--wp-admin-theme-color-darker-20: var(--color-neutral-100);
-
-	background-color: transparent;
-	border: 0;
-	color: var(--color-text);
-	flex: 1;
-	max-height: 100%;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	top: 65px;
-
-	.edit-post-layout.interface-interface-skeleton {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		top: 0;
-	}
-
-	.edit-post-visual-editor__content-area .is-desktop-preview {
-		background-color: transparent !important;
-	}
-
-	.interface-interface-skeleton__content > .components-notice-list .components-notice {
-		margin: 0;
-	}
-
-	.edit-post-visual-editor {
-		background-color: transparent;
-		position: relative;
-	}
-
 	.block-editor-writing-flow {
 		line-height: initial;
 	}
