@@ -138,7 +138,7 @@ export const http = ( options ) => {
 	};
 
 	requestOptions.headers = merge(
-		globalHeaders,
+		omit( globalHeaders, requestOptions.skipGlobalHeaders ?? [] ),
 		get( hostHeaders, [ options.host ], {} ),
 		options.headers
 	);
@@ -153,3 +153,6 @@ export const http = ( options ) => {
 		.then( onRequestSuccess )
 		.catch( onRequestFailed );
 };
+
+// export utils
+export * from './util';
