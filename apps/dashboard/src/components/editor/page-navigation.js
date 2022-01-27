@@ -55,7 +55,9 @@ const PageNavigation = ( { currentPage, projectContent } ) => {
 			{ map( projectContent, ( page, index ) => (
 				<PagePreview
 					key={ `page-${ index }` }
-					disablePageActions={ isSaving }
+					disablePageActions={
+						isSaving || projectContent.length === 1
+					}
 					isActive={ index === currentPage }
 					page={ page }
 					pageIndex={ index }
