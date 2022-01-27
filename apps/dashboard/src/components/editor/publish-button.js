@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { submitButtonBlock } from '@crowdsignal/block-editor';
+import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges, isPublic } from '../../util/project';
 
 /**
@@ -28,15 +28,11 @@ const PublishButton = ( {
 } ) => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
 
-	const currentPageSubmitButtonCount = useSelect( ( select ) =>
-		select( 'core/block-editor' ).getGlobalBlockCount(
-			submitButtonBlock.name
-		)
+	const submitButtonsMissing = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorContentMissingSubmitButtons()
 	);
 
 	const toggleNotice = () => setDisplayNotice( ! displayNotice );
-
-	const submitButtonMissing = currentPageSubmitButtonCount === 0;
 
 	const isLatestVersion =
 		isPublic( project ) &&
@@ -53,7 +49,7 @@ const PublishButton = ( {
 			as={ Button }
 			className="is-crowdsignal"
 			variant={ isPublic( project ) ? 'tertiary' : 'primary' }
-			disabled={ isSaving || submitButtonMissing }
+			disabled={ isSaving || submitButtonsMissing }
 			onClick={ onPublish }
 			onMouseEnter={ toggleNotice }
 			onMouseLeave={ toggleNotice }
@@ -62,7 +58,7 @@ const PublishButton = ( {
 				? __( 'Update', 'dashboard' )
 				: __( 'Publish', 'dashboard' ) }
 
-			{ displayNotice && submitButtonMissing && (
+			{ displayNotice && submitButtonsMissing && (
 				<Popover noArrow={ false }>
 					<PublishButtonNotice>
 						{ __(

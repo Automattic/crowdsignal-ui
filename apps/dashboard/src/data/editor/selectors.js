@@ -2,11 +2,12 @@
  * External dependencies
  */
 import { serialize, parse } from '@wordpress/blocks';
-import { get, isEmpty, map, merge, values } from 'lodash';
+import { get, isEmpty, map, merge, some, values } from 'lodash';
 
 /**
  * Internal dependencies
  */
+import { submitButtonBlock } from '@crowdsignal/block-editor';
 import { getProject } from '../projects/selectors';
 import { isPublic } from '../../util/project';
 
@@ -52,6 +53,20 @@ export const getEditorContent = ( state ) => {
 			: content,
 		state.editor.content
 	);
+};
+
+export const isEditorContentMissingSubmitButtons = ( state ) => {
+	const pages = getEditorContent( state );
+
+	const containsSubmitButton = ( blocks ) =>
+		some(
+			blocks,
+			( block ) =>
+				block.name === submitButtonBlock.name ||
+				containsSubmitButton( block.innerBlocks )
+		);
+
+	return some( pages, ( page ) => ! containsSubmitButton( page ) );
 };
 
 export const getEditorChangeset = ( state ) => {
