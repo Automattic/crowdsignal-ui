@@ -3,7 +3,15 @@
  */
 import styled from '@emotion/styled';
 
-export const PagePreviewWrapper = styled.button`
+export const PagePreviewWrapper = styled.div`
+	display: flex;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+`;
+
+export const PagePreviewButton = styled.button`
 	align-items: center;
 	background: transparent;
 	border: 0;
@@ -11,7 +19,6 @@ export const PagePreviewWrapper = styled.button`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	margin-top: 8px;
 	padding: 8px 16px;
 	width: 100%;
 
@@ -50,5 +57,33 @@ export const PagePreviewPageNumber = styled.span`
 
 	${ PagePreviewWrapper }.is-active & {
 		color: var( --color-primary );
+	}
+`;
+
+export const DeleteButton = styled.button`
+	align-items: center;
+	background: var( --color-neutral-80 );
+	border: 0;
+	border-radius: 2px;
+	display: none;
+	justify-content: center;
+	height: 18px;
+	padding: 0;
+	position: absolute;
+	right: 23px;
+	top: 15px;
+	width: 18px;
+	z-index: 100;
+
+	${ PagePreviewWrapper }:hover & {
+		display: flex;
+	}
+
+	&:hover {
+		background-color: var( --color-error );
+	}
+
+	svg {
+		fill: var( --color-text-inverted );
 	}
 `;

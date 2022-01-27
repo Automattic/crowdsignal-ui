@@ -14,6 +14,8 @@ import {
 	EDITOR_CURRENT_PAGE_SET,
 	EDITOR_MODE_SET,
 	EDITOR_INIT,
+	EDITOR_PAGE_INSERT,
+	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
 	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_SAVE,
@@ -88,10 +90,21 @@ export function* saveEditorChangeset( options = {} ) {
 	}
 }
 
+export const insertEditorPage = withAutosave( ( index, blocks ) => ( {
+	type: EDITOR_PAGE_INSERT,
+	index,
+	blocks,
+} ) );
+
 export const updateEditorPage = withAutosave( ( page, blocks ) => ( {
 	type: EDITOR_PAGE_UPDATE,
 	page,
 	blocks,
+} ) );
+
+export const updateEditorPageOrder = withAutosave( ( order ) => ( {
+	type: EDITOR_PAGE_ORDER_UPDATE,
+	order,
 } ) );
 
 export const updateEditorTitle = withAutosave( ( title ) => ( {

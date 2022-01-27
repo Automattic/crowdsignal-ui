@@ -24,6 +24,7 @@ export const PageNavigationHeader = styled.div`
 	color: var( --color-text-subtle );
 	display: flex;
 	font-size: 11px;
+	margin-bottom: 8px;
 	padding: 0 16px;
 	height: 61px;
 	text-transform: uppercase;

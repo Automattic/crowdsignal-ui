@@ -4,7 +4,7 @@
 import { useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
-import { map } from 'lodash';
+import { map, range } from 'lodash';
 
 /**
  * Internal dependencies
@@ -22,13 +22,19 @@ import {
 } from './styles/page-navigation';
 
 const PageNavigation = ( { currentPage, projectContent } ) => {
-	const { setEditorCurrentPage, updateEditorPage } = useDispatch(
+	const { insertEditorPage, updateEditorPageOrder } = useDispatch(
 		STORE_NAME
 	);
 
 	const handleAddPage = () => {
-		updateEditorPage( projectContent.length, [] );
-		setEditorCurrentPage( projectContent.length );
+		insertEditorPage( projectContent.length, [] );
+	};
+
+	const handleDeletePage = ( pageIndex ) => {
+		updateEditorPageOrder( [
+			...range( pageIndex ),
+			...range( pageIndex + 1, projectContent.length ),
+		] );
 	};
 
 	return (
@@ -44,6 +50,7 @@ const PageNavigation = ( { currentPage, projectContent } ) => {
 					isActive={ index === currentPage }
 					page={ page }
 					pageIndex={ index }
+					onDelete={ handleDeletePage }
 				/>
 			) ) }
 

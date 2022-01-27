@@ -41,10 +41,15 @@ export const getEditorContent = ( state ) => {
 		return [];
 	}
 
-	return merge(
+	const content =
 		isPublic( project ) && getEditorMode( state ) !== 'draft'
 			? project.publicContent.pages
-			: project.draftContent.pages,
+			: project.draftContent.pages;
+
+	return merge(
+		state.editor.pageOrder
+			? map( state.editor.pageOrder, ( index ) => content[ index ] )
+			: content,
 		state.editor.content
 	);
 };
@@ -52,7 +57,7 @@ export const getEditorContent = ( state ) => {
 export const getEditorChangeset = ( state ) => {
 	const changeset = {};
 
-	if ( ! isEmpty( state.editor.content ) ) {
+	if ( ! isEmpty( state.editor.content ) || state.editor.pageOrder ) {
 		changeset.draftContent = {
 			pages: map( getEditorContent( state ), ( page ) =>
 				parse( serialize( page ) )
