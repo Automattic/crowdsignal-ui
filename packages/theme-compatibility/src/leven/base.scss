@@ -23,10 +23,6 @@ body {
 }
 
 .crowdsignal-forms-button {
-	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
-		margin-top: 16px;
-	}
-
 	&.is-selected & {
 		&__button {
 			background-color: var(--crowdsignal-forms-button-selected-background-color);
@@ -46,4 +42,8 @@ body {
 .crowdsignal-forms-text-input-block input,
 .crowdsignal-forms-text-question-block textarea {
 	border: 1px solid var(--crowdsignal-forms-input-border-color);
+}
+
+.wp-block-image {
+	text-align: unset;
 }
