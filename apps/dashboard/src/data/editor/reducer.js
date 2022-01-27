@@ -33,7 +33,7 @@ const content = ( state = {}, action ) => {
 	if ( action.type === EDITOR_PAGE_UPDATE ) {
 		return {
 			...state,
-			[ action.page ]: action.blocks,
+			[ action.index ]: action.blocks,
 		};
 	}
 
@@ -152,20 +152,14 @@ const projectId = ( state = 0, action ) => {
  *       hence it needs to be reset when the underlying project updates which isn't necessarily
  *       when there aren't any more changes. Hence the use of EDITOR_SAVE_SUCCESS instead of
  *       EDITOR_CHANGESET_RESET used elsewhere.
+ *       This is also the reason why adding, moving or deleting pages must be disabled during a save.
  *
  * @param  {Array|null} state  Current state.
  * @param  {Object}     action Action object.
  * @return {Array|null}        Updated page order.
  */
 const pageOrder = ( state = null, action ) => {
-	if (
-		action.type === EDITOR_INIT ||
-		// this is still messed up, causing any changes made during
-		// the request to be lost.
-		//
-		// We probably need a separate action to untangle everything on save
-		action.type === EDITOR_SAVE_SUCCESS
-	) {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE_SUCCESS ) {
 		return null;
 	}
 

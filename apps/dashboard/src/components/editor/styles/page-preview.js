@@ -9,6 +9,10 @@ export const PagePreviewWrapper = styled.div`
 	padding: 0;
 	position: relative;
 	width: 100%;
+
+	&:hover {
+		background-color: var( --color-neutral-0 );
+	}
 `;
 
 export const PagePreviewButton = styled.button`
@@ -21,10 +25,6 @@ export const PagePreviewButton = styled.button`
 	justify-content: flex-end;
 	padding: 8px 16px;
 	width: 100%;
-
-	&:hover {
-		background-color: var( --color-neutral-0 );
-	}
 `;
 
 export const PagePreviewFrame = styled.div`

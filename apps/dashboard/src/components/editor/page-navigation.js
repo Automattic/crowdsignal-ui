@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
 import { map, range } from 'lodash';
@@ -22,8 +22,14 @@ import {
 } from './styles/page-navigation';
 
 const PageNavigation = ( { currentPage, projectContent } ) => {
-	const { insertEditorPage, updateEditorPageOrder } = useDispatch(
-		STORE_NAME
+	const {
+		insertEditorPage,
+		setEditorCurrentPage,
+		updateEditorPageOrder,
+	} = useDispatch( STORE_NAME );
+
+	const isSaving = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorSaving()
 	);
 
 	const handleAddPage = () => {
@@ -37,6 +43,8 @@ const PageNavigation = ( { currentPage, projectContent } ) => {
 		] );
 	};
 
+	const handleSelectPage = ( pageIndex ) => setEditorCurrentPage( pageIndex );
+
 	return (
 		<PageNavigationWrapper>
 			<PageNavigationHeader>
@@ -47,14 +55,19 @@ const PageNavigation = ( { currentPage, projectContent } ) => {
 			{ map( projectContent, ( page, index ) => (
 				<PagePreview
 					key={ `page-${ index }` }
+					disablePageActions={ isSaving }
 					isActive={ index === currentPage }
 					page={ page }
 					pageIndex={ index }
+					onSelect={ handleSelectPage }
 					onDelete={ handleDeletePage }
 				/>
 			) ) }
 
-			<PageNavigationAddButton onClick={ handleAddPage }>
+			<PageNavigationAddButton
+				disabled={ isSaving }
+				onClick={ handleAddPage }
+			>
 				<Icon icon={ plus } />
 			</PageNavigationAddButton>
 		</PageNavigationWrapper>

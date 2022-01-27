@@ -96,9 +96,9 @@ export const insertEditorPage = withAutosave( ( index, blocks ) => ( {
 	blocks,
 } ) );
 
-export const updateEditorPage = withAutosave( ( page, blocks ) => ( {
+export const updateEditorPage = withAutosave( ( index, blocks ) => ( {
 	type: EDITOR_PAGE_UPDATE,
-	page,
+	index,
 	blocks,
 } ) );
 
