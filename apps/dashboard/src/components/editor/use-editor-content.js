@@ -16,9 +16,11 @@ export const useEditorContent = ( projectId ) => {
 	const [ editorId, setEditorId ] = useState();
 
 	const { removeNotice } = useDispatch( 'core/notices' );
-	const { forceEditorDraftMode, updateEditorPage } = useDispatch(
-		STORE_NAME
-	);
+	const {
+		forceEditorDraftMode,
+		insertEditorPage,
+		updateEditorPage,
+	} = useDispatch( STORE_NAME );
 
 	const [
 		currentPage,
@@ -29,6 +31,12 @@ export const useEditorContent = ( projectId ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 		select( STORE_NAME ).getEditorContent(),
 	] );
+
+	useEffect( () => {
+		if ( ! projectId ) {
+			insertEditorPage( 0, [] );
+		}
+	}, [ projectId ] );
 
 	useEffect( () => {
 		setEditorId( `crowdsignal-editor-${ projectId }-${ currentPage }` );
