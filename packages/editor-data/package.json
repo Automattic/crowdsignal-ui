@@ -1,0 +1,26 @@
+{
+  "name": "@crowdsignal/editor-data",
+  "version": "0.1.0",
+  "description": "Data layer for the Crowdsignal block editor.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/packages/editor-data/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@crowdsignal/block-editor": "^0.1.0",
+    "@wordpress/blocks": "^11.1.4",
+    "@wordpress/data": "^6.1.4",
+    "@wordpress/hooks": "^3.2.2",
+    "lodash": "^4.17.21"
+  }
+}
