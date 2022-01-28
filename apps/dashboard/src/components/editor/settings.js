@@ -4,6 +4,9 @@
 import { getCategories, setCategories } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
+// test
+import { uploadMedia } from '../../util/media';
+
 setCategories( [
 	{
 		title: __( 'Form', 'dashboard' ),
@@ -42,5 +45,18 @@ export const editorSettings = {
 	editor: {
 		alignWide: true,
 		supportsLayout: false,
+		hasUploadPermissions: true, // not sure what this does, Gutenberg setting.
+		// if allowedMimeTypes is not present or empty, when you click on the MediaUpload handler it will just remove the buttons (????)
+		allowedMimeTypes: [ 'audio' ],
+		// Object must be a valid handler for the file select callback.
+		// NOTE: if mediaUpload is not present, addFilter( 'editor.MediaUpload' ... ) will not work (????)
+		// NOTE: costumize the handler on its own and just use the import here
+		mediaUpload: async ( payload ) => {
+			return await uploadMedia( {
+				...payload,
+				allowedTypes: [ 'image', 'audio' ],
+				additionalData: { global: 1 },
+			} );
+		},
 	},
 };
