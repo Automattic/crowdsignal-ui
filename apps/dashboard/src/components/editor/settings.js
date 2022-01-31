@@ -51,12 +51,6 @@ export const editorSettings = {
 		// Object must be a valid handler for the file select callback.
 		// NOTE: if mediaUpload is not present, addFilter( 'editor.MediaUpload' ... ) will not work (????)
 		// NOTE: costumize the handler on its own and just use the import here
-		mediaUpload: async ( payload ) => {
-			return await uploadMedia( {
-				...payload,
-				allowedTypes: [ 'image', 'audio' ],
-				additionalData: { global: 1 },
-			} );
-		},
+		mediaUpload: uploadMedia,
 	},
 };

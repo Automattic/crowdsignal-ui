@@ -77,6 +77,15 @@ export async function uploadMedia( {
 	onFileChange,
 	wpAllowedMimeTypes = null,
 } ) {
+	// CS customizations
+	additionalData = {
+		...additionalData,
+		// make the upload globally available
+		global: 1,
+	};
+
+	allowedTypes = [ ...allowedTypes, 'image', 'audio' ];
+
 	// Cast filesList to array
 	const files = [ ...filesList ];
 
