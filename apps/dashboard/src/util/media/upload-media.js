@@ -199,11 +199,11 @@ export async function uploadMedia( {
 
 			// use data from response
 			const mediaObject = {
-				...omit( savedMedia.data, [ 'alt_text', 'source_url' ] ),
+				// for now, omit 'id' as that triggers an attempt to retrieve the file from wp/v2/media/{id}
+				...omit( savedMedia.data, [ 'alt_text', 'source_url', 'id' ] ),
 				alt: savedMedia.data.alt_text,
 				caption: get( savedMedia.data, [ 'caption', 'raw' ], '' ),
 				title: savedMedia.data.title.raw,
-				url: savedMedia.data.source_url,
 			};
 
 			setAndUpdateFiles( idx, mediaObject );
