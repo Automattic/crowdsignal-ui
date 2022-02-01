@@ -125,7 +125,7 @@ export async function uploadMedia( {
 			error.message,
 		];
 
-		onError( error );
+		onError( error.message );
 	};
 
 	const validFiles = [];
@@ -221,7 +221,7 @@ export async function uploadMedia( {
 					mediaFile.name
 				);
 			}
-			onError( {
+			triggerError( {
 				code: 'GENERAL',
 				message,
 				file: mediaFile,
