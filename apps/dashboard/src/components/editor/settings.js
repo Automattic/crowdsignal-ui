@@ -19,7 +19,7 @@ export const editorSettings = {
 	iso: {
 		blocks: {
 			disallowBlocks: [
-				'core/audio',
+				// 'core/audio',
 				'core/calendar',
 				'core/cover',
 				'core/embed',
@@ -47,7 +47,7 @@ export const editorSettings = {
 		supportsLayout: false,
 		hasUploadPermissions: true, // not sure what this does, Gutenberg setting.
 		// if allowedMimeTypes is not present or empty, when you click on the MediaUpload handler it will just remove the buttons (????)
-		allowedMimeTypes: [ 'audio' ],
+		allowedMimeTypes: [ 'audio', 'image' ],
 		// Object must be a valid handler for the file select callback.
 		// NOTE: if mediaUpload is not present, addFilter( 'editor.MediaUpload' ... ) will not work (????)
 		// NOTE: costumize the handler on its own and just use the import here
