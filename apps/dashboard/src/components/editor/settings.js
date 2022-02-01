@@ -19,7 +19,7 @@ export const editorSettings = {
 	iso: {
 		blocks: {
 			disallowBlocks: [
-				// 'core/audio',
+				'core/audio',
 				'core/calendar',
 				'core/cover',
 				'core/embed',
