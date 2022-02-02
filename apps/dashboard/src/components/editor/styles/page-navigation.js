@@ -25,7 +25,7 @@ export const PageNavigationHeader = styled.div`
 	display: flex;
 	font-size: 11px;
 	margin-bottom: 8px;
-	padding: 0 16px;
+	padding: 0 16px 0 32px;
 	height: 61px;
 	text-transform: uppercase;
 	width: 100%;

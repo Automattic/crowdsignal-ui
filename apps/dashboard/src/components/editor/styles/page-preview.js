@@ -24,7 +24,7 @@ export const PagePreviewButton = styled.button`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	padding: 8px 16px;
+	padding: 8px 16px 0 32px;
 	width: 100%;
 `;
 
@@ -55,7 +55,7 @@ export const PagePreviewPageNumber = styled.span`
 	display: flex;
 	font-size: 11px;
 	font-weight: bold;
-	justify-content: center;
+	justify-content: flex-start;
 
 	${ PagePreviewWrapper }.is-active & {
 		color: var( --color-primary );
