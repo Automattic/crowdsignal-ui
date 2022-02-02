@@ -15,8 +15,11 @@ export const useValidation = ( { fieldName, validation } ) => {
 
 	const { setFieldError } = useDispatch( STORE_NAME );
 
-	const { error, value } = useSelect(
-		( select ) => select( STORE_NAME ).getFieldData( formName, fieldName ),
+	const { error, value, formData } = useSelect(
+		( select ) => ( {
+			...select( STORE_NAME ).getFieldData( formName, fieldName ),
+			formData: select( STORE_NAME ).getFormData( formName ),
+		} ),
 		[ formName, fieldName ]
 	);
 
@@ -25,7 +28,7 @@ export const useValidation = ( { fieldName, validation } ) => {
 			return true;
 		}
 
-		const err = validation( fieldValue );
+		const err = validation( fieldValue, formData );
 
 		if ( err ) {
 			setFieldError( formName, fieldName, err );

@@ -15,7 +15,7 @@ export const getFieldData = ( state, form, field ) => ( {
 } );
 
 export const getFormData = ( state, form ) =>
-	get( state, [ 'value', form ], null );
+	get( state, [ 'value', form ], {} );
 
 export const isSubmitting = ( state, form ) =>
 	get( state, [ 'submitting', form ], false );
