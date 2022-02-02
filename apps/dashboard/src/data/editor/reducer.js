@@ -58,7 +58,7 @@ const changes = ( state = {}, action ) => {
 		};
 	}
 
-	return false;
+	return state;
 };
 
 /**
