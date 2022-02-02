@@ -89,6 +89,32 @@ const currentPage = ( state = 0, action ) => {
 };
 
 /**
+ * Marks if the current editor poject has been edited.
+ * Not the same as state.editor.changes which tracks yet unsaved changes.
+ *
+ * @param  {boolean} state  App state.
+ * @param  {Object}  action Action object.
+ * @return {boolean}        Edited flag.
+ */
+const edited = ( state = false, action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return false;
+	}
+
+	if (
+		action.type === EDITOR_PAGE_INSERT ||
+		action.type === EDITOR_PAGE_DELETE ||
+		action.type === EDITOR_PAGE_UPDATE ||
+		action.type === EDITOR_PAGE_ORDER_UPDATE ||
+		action.type === EDITOR_TITLE_UPDATE
+	) {
+		return true;
+	}
+
+	return state;
+};
+
+/**
  * True when editor is saving.
  *
  * @param  {boolean} state  App state.
@@ -183,6 +209,7 @@ const title = ( state = '', action ) => {
 export default combineReducers( {
 	changes,
 	currentPage,
+	edited,
 	isSaving,
 	pages,
 	projectId,

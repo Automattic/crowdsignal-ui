@@ -16,15 +16,15 @@ const NOTICE_ID = 'crowdsignal-unpublished-changes-notice';
 const UnpublishedChangesNotice = ( { onRestore, project, version } ) => {
 	const { createWarningNotice, removeNotice } = useDispatch( 'core/notices' );
 
-	const [ isEditorContentSaved ] = useSelect( ( select ) => [
-		select( STORE_NAME ).isEditorContentSaved(),
-	] );
+	const isEditorUnchanged = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorUnchanged()
+	);
 
 	useEffect( () => {
 		if (
 			! isPublic( project ) ||
 			! hasUnpublishedChanges( project ) ||
-			! isEditorContentSaved ||
+			! isEditorUnchanged ||
 			version === 'draft'
 		) {
 			return;

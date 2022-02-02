@@ -62,6 +62,14 @@ export const isEditorContentSaved = ( state ) =>
 	isEmpty( getEditorChanges( state ) );
 
 /**
+ * Returns true if no changes have been made since since the editor was initiated.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       True if project hasn't been edited yet.
+ */
+export const isEditorUnchanged = ( state ) => ! state.editor.edited;
+
+/**
  * Returns true if the editor is currently being saved.
  *
  * @param  {Object}  state App state.
