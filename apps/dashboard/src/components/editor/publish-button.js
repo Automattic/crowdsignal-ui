@@ -28,8 +28,8 @@ const PublishButton = ( {
 } ) => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
 
-	const submitButtonsMissing = useSelect( ( select ) =>
-		select( STORE_NAME ).isEditorContentMissingSubmitButtons()
+	const canPublish = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorContentPublishable()
 	);
 
 	const toggleNotice = () => setDisplayNotice( ! displayNotice );
@@ -49,7 +49,7 @@ const PublishButton = ( {
 			as={ Button }
 			className="is-crowdsignal"
 			variant={ isPublic( project ) ? 'tertiary' : 'primary' }
-			disabled={ isSaving || submitButtonsMissing }
+			disabled={ isSaving || ! canPublish }
 			onClick={ onPublish }
 			onMouseEnter={ toggleNotice }
 			onMouseLeave={ toggleNotice }
@@ -58,7 +58,7 @@ const PublishButton = ( {
 				? __( 'Update', 'dashboard' )
 				: __( 'Publish', 'dashboard' ) }
 
-			{ displayNotice && submitButtonsMissing && (
+			{ displayNotice && ! canPublish && (
 				<Popover noArrow={ false }>
 					<PublishButtonNotice>
 						{ __(

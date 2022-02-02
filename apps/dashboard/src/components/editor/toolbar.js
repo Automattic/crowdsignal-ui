@@ -21,7 +21,7 @@ import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { ToolbarButton } from './styles/button';
 
 const Toolbar = ( { project } ) => {
-	const { saveEditorChangeset } = useDispatch( STORE_NAME );
+	const { saveEditorChanges } = useDispatch( STORE_NAME );
 
 	const [ canRestoreDraft, isSaving, isSaved ] = useSelect( ( select ) => [
 		filter( select( 'core/notices' ).getNotices(), {
@@ -31,7 +31,7 @@ const Toolbar = ( { project } ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
-	const publishProject = () => saveEditorChangeset( { public: true } );
+	const publishProject = () => saveEditorChanges( { public: true } );
 
 	const shareHandler = () => {
 		if ( project.permalink ) {
@@ -74,7 +74,7 @@ const Toolbar = ( { project } ) => {
 					<ToolbarButton
 						as={ Button }
 						variant="tertiary"
-						onClick={ saveEditorChangeset }
+						onClick={ saveEditorChanges }
 						disabled={ isSaving || isSaved }
 					>
 						{ isSaved

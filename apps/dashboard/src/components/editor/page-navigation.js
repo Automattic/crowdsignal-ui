@@ -4,7 +4,7 @@
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
-import { map, range } from 'lodash';
+import { map } from 'lodash';
 
 /**
  * Internal dependencies
@@ -21,26 +21,21 @@ import {
 	PageNavigationWrapper,
 } from './styles/page-navigation';
 
-const PageNavigation = ( { currentPage, projectContent } ) => {
+const PageNavigation = () => {
 	const {
+		deleteEditorPage,
 		insertEditorPage,
 		setEditorCurrentPage,
-		updateEditorPageOrder,
 	} = useDispatch( STORE_NAME );
 
-	const isSaving = useSelect( ( select ) =>
-		select( STORE_NAME ).isEditorSaving()
-	);
+	const [ currentPage, pages ] = useSelect( ( select ) => [
+		select( STORE_NAME ).getEditorCurrentPageIndex(),
+		select( STORE_NAME ).getEditorPages(),
+	] );
 
 	const handleAddPage = () => {
-		insertEditorPage( projectContent.length, [] );
-	};
-
-	const handleDeletePage = ( pageIndex ) => {
-		updateEditorPageOrder( [
-			...range( pageIndex ),
-			...range( pageIndex + 1, projectContent.length ),
-		] );
+		insertEditorPage( pages.length, [] );
+		setEditorCurrentPage( pages.length );
 	};
 
 	const handleSelectPage = ( pageIndex ) => setEditorCurrentPage( pageIndex );
@@ -52,24 +47,19 @@ const PageNavigation = ( { currentPage, projectContent } ) => {
 				{ __( 'Pages', 'dashboard' ) }
 			</PageNavigationHeader>
 
-			{ map( projectContent, ( page, index ) => (
+			{ map( pages, ( page, index ) => (
 				<PagePreview
 					key={ `page-${ index }` }
-					disablePageActions={
-						isSaving || projectContent.length === 1
-					}
+					disablePageActions={ pages.length === 1 }
 					isActive={ index === currentPage }
 					page={ page }
 					pageIndex={ index }
 					onSelect={ handleSelectPage }
-					onDelete={ handleDeletePage }
+					onDelete={ deleteEditorPage }
 				/>
 			) ) }
 
-			<PageNavigationAddButton
-				disabled={ isSaving }
-				onClick={ handleAddPage }
-			>
+			<PageNavigationAddButton onClick={ handleAddPage }>
 				<Icon icon={ plus } />
 			</PageNavigationAddButton>
 		</PageNavigationWrapper>

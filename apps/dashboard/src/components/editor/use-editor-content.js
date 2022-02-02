@@ -3,45 +3,56 @@
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { isEmpty } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
+import { isPublic } from '../../util/project';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 
-export const useEditorContent = ( projectId ) => {
-	const [ ready, setReady ] = useState( ! projectId );
+export const useEditorContent = ( project ) => {
+	const [ forceDraft, setForceDraft ] = useState( false );
+	const [ ready, setReady ] = useState( false );
+
 	const [ editorId, setEditorId ] = useState();
 
 	const { removeNotice } = useDispatch( 'core/notices' );
-	const {
-		forceEditorDraftMode,
-		insertEditorPage,
-		updateEditorPage,
-	} = useDispatch( STORE_NAME );
+
+	const { initializeEditor, updateEditorPage } = useDispatch( STORE_NAME );
 
 	const [
 		currentPage,
+		currentPageContent,
+		editorProjectId,
 		isEditorContentSaved,
-		projectContent,
 	] = useSelect( ( select ) => [
+		select( STORE_NAME ).getEditorCurrentPageIndex(),
 		select( STORE_NAME ).getEditorCurrentPage(),
+		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
-		select( STORE_NAME ).getEditorContent(),
 	] );
 
 	useEffect( () => {
-		if ( ! projectId ) {
-			insertEditorPage( 0, [] );
+		if ( ! project ) {
+			return;
 		}
-	}, [ projectId ] );
+
+		initializeEditor(
+			project.id,
+			project.title,
+			isPublic( project ) && ! forceDraft
+				? project.publicContent.pages
+				: project.draftContent.pages
+		);
+	}, [ forceDraft ] );
 
 	useEffect( () => {
-		setEditorId( `crowdsignal-editor-${ projectId }-${ currentPage }` );
+		setEditorId(
+			`crowdsignal-editor-${ editorProjectId }-${ currentPage }`
+		);
 		setReady( false );
-	}, [ projectId, currentPage ] );
+	}, [ editorProjectId, currentPage ] );
 
 	useEffect( () => {
 		if ( isEditorContentSaved ) {
@@ -51,6 +62,8 @@ export const useEditorContent = ( projectId ) => {
 		// Once changes have been made, it's impossible to restore the previous draft
 		removeNotice( UnpublishedChangesNotice.ID );
 	}, [ isEditorContentSaved ] );
+
+	const loadBlocks = () => currentPageContent;
 
 	const saveBlocks = useCallback(
 		( blocks ) => {
@@ -68,20 +81,19 @@ export const useEditorContent = ( projectId ) => {
 		[ ready ]
 	);
 
-	const restoreDraftContent = () => {
-		forceEditorDraftMode();
+	const restoreDraft = () => {
+		setForceDraft( true );
 
-		// Force the editor to reload
+		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
 		setReady( false );
 	};
 
 	return {
-		currentPage,
 		editorId,
-		isLoading: projectId && isEmpty( projectContent ),
+		loadBlocks,
 		saveBlocks,
-		projectContent,
-		restoreDraftContent,
+		restoreDraft,
+		version: forceDraft ? 'draft' : 'auto',
 	};
 };

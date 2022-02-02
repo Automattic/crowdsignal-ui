@@ -2,110 +2,99 @@
  * External dependencies
  */
 import { combineReducers } from '@wordpress/data';
-import { findIndex, map, reduce } from 'lodash';
+import { filter, map, slice, tap } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import {
-	EDITOR_CHANGESET_RESET,
-	EDITOR_CURRENT_PAGE_SET,
+	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_INIT,
-	EDITOR_MODE_SET,
+	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_INSERT,
 	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
-	EDITOR_PROJECT_ID_UPDATE,
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 
-const content = ( state = {}, action ) => {
-	if (
-		action.type === EDITOR_INIT ||
-		action.type === EDITOR_CHANGESET_RESET
-	) {
+/**
+ * Tracks which project properties have changed since the last save.
+ *
+ * @param  {Object} state  Editor state.
+ * @param  {Object} action Action object.
+ * @return {Object}        Updated properties.
+ */
+const changes = ( state = {}, action ) => {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE ) {
 		return {};
 	}
 
-	if ( action.type === EDITOR_PAGE_UPDATE ) {
+	if ( action.type === EDITOR_SAVE_ERROR ) {
 		return {
 			...state,
-			[ action.index ]: action.blocks,
+			...action.changes,
 		};
-	}
-
-	if ( action.type === EDITOR_PAGE_INSERT ) {
-		return {
-			...state,
-			[ action.index ]: action.blocks,
-		};
-	}
-
-	if ( action.type === EDITOR_PAGE_ORDER_UPDATE ) {
-		return reduce(
-			action.order,
-			( result, fromIndex, toIndex ) => {
-				if ( state[ fromIndex ] ) {
-					result[ toIndex ] = state[ fromIndex ];
-				}
-
-				return result;
-			},
-			{}
-		);
-	}
-
-	return state;
-};
-
-const currentPage = ( state = 0, action ) => {
-	if ( action.type === EDITOR_CURRENT_PAGE_SET ) {
-		return action.page;
-	}
-
-	if ( action.type === EDITOR_PAGE_INSERT ) {
-		return action.index;
-	}
-
-	if ( action.type === EDITOR_PAGE_ORDER_UPDATE ) {
-		const index = findIndex(
-			action.order,
-			( oldIndex ) => oldIndex === state
-		);
-
-		if ( index >= 0 ) {
-			return index;
-		}
-
-		if ( state >= action.order.length ) {
-			return action.order.length - 1;
-		}
-	}
-
-	return state;
-};
-
-const hasUnsavedChanges = ( state = false, action ) => {
-	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE ) {
-		return false;
 	}
 
 	if (
 		action.type === EDITOR_PAGE_INSERT ||
-		action.type === EDITOR_PAGE_ORDER_UPDATE ||
+		action.type === EDITOR_PAGE_DELETE ||
 		action.type === EDITOR_PAGE_UPDATE ||
-		action.type === EDITOR_TITLE_UPDATE ||
-		action.type === EDITOR_SAVE_ERROR
+		action.type === EDITOR_PAGE_ORDER_UPDATE
 	) {
-		return true;
+		return {
+			...state,
+			content: true,
+		};
+	}
+
+	if ( action.type === EDITOR_TITLE_UPDATE ) {
+		return {
+			...state,
+			title: true,
+		};
+	}
+
+	return false;
+};
+
+/**
+ * Currently edited page index.
+ *
+ * @param  {number} state  App state.
+ * @param  {Object} action Action object.
+ * @return {number}        Page index.
+ */
+const currentPage = ( state = 0, action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return 0;
+	}
+
+	if ( action.type === EDITOR_CURRENT_PAGE_INDEX_SET ) {
+		return action.pageIndex;
+	}
+
+	if (
+		action.type === EDITOR_PAGE_DELETE &&
+		action.pageIndex === state &&
+		state > 0
+	) {
+		return state - 1;
 	}
 
 	return state;
 };
 
+/**
+ * True when editor is saving.
+ *
+ * @param  {boolean} state  App state.
+ * @param  {Object}  action Action object.
+ * @return {boolean}        Saving flag.
+ */
 const isSaving = ( state = false, action ) => {
 	if ( action.type === EDITOR_SAVE ) {
 		return true;
@@ -121,23 +110,55 @@ const isSaving = ( state = false, action ) => {
 	return state;
 };
 
-const mode = ( state = 'auto', action ) => {
+/**
+ * Project's pages.
+ *
+ * @param  {Array}  state  App state.
+ * @param  {Object} action Action object.
+ * @return {Array}         Pages.
+ */
+const pages = ( state = [], action ) => {
 	if ( action.type === EDITOR_INIT ) {
-		return 'auto';
+		return action.pages;
 	}
 
-	if ( action.type === EDITOR_MODE_SET ) {
-		return action.mode;
+	if ( action.type === EDITOR_PAGE_INSERT ) {
+		return [
+			...slice( state, 0, action.pageIndex ),
+			action.pageContent,
+			...slice( state, action.pageIndex ),
+		];
+	}
+
+	if ( action.type === EDITOR_PAGE_DELETE && 1 < state.length ) {
+		return filter( state, ( _, index ) => index !== action.pageIndex );
+	}
+
+	if ( action.type === EDITOR_PAGE_UPDATE ) {
+		return tap(
+			[ ...state ],
+			( pageArray ) =>
+				( pageArray[ action.pageIndex ] = action.pageContent )
+		);
+	}
+
+	if ( action.type === EDITOR_PAGE_ORDER_UPDATE ) {
+		return map( action.order, ( originalIndex ) => state[ originalIndex ] );
 	}
 
 	return state;
 };
 
+/**
+ * Project ID of the project that's currently loaded into the editor.
+ * '0' means the a new/non-existing project.
+ *
+ * @param  {number} state  App state.
+ * @param  {Object} action Action object.
+ * @return {number}        Project ID.
+ */
 const projectId = ( state = 0, action ) => {
-	if (
-		action.type === EDITOR_INIT ||
-		action.type === EDITOR_PROJECT_ID_UPDATE
-	) {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE_SUCCESS ) {
 		return action.projectId;
 	}
 
@@ -145,48 +166,14 @@ const projectId = ( state = 0, action ) => {
 };
 
 /**
- * Returns an array which will be used to sort original project content
- * according to any changes that have been made since the last save.
+ * Project title.
  *
- * Note: This affects the original content and NOT the editor changeset (which is already sorted),
- *       hence it needs to be reset when the underlying project updates which isn't necessarily
- *       when there aren't any more changes. Hence the use of EDITOR_SAVE_SUCCESS instead of
- *       EDITOR_CHANGESET_RESET used elsewhere.
- *       This is also the reason why adding, moving or deleting pages must be disabled during a save.
- *
- * @param  {Array|null} state  Current state.
- * @param  {Object}     action Action object.
- * @return {Array|null}        Updated page order.
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Title.
  */
-const pageOrder = ( state = null, action ) => {
-	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE_SUCCESS ) {
-		return null;
-	}
-
-	if ( action.type === EDITOR_PAGE_INSERT && state ) {
-		return [ ...state, action.index ];
-	}
-
-	if ( action.type === EDITOR_PAGE_ORDER_UPDATE ) {
-		if ( ! state ) {
-			return action.order;
-		}
-
-		return map( action.order, ( index ) => state[ index ] );
-	}
-
-	return state;
-};
-
 const title = ( state = '', action ) => {
-	if (
-		action.type === EDITOR_INIT ||
-		action.type === EDITOR_CHANGESET_RESET
-	) {
-		return '';
-	}
-
-	if ( action.type === EDITOR_TITLE_UPDATE ) {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_TITLE_UPDATE ) {
 		return action.title;
 	}
 
@@ -194,12 +181,10 @@ const title = ( state = '', action ) => {
 };
 
 export default combineReducers( {
-	content,
+	changes,
 	currentPage,
-	hasUnsavedChanges,
 	isSaving,
-	mode,
-	pageOrder,
+	pages,
 	projectId,
 	title,
 } );

@@ -13,11 +13,10 @@ import { hasUnpublishedChanges, isPublic } from '../../util/project';
 
 const NOTICE_ID = 'crowdsignal-unpublished-changes-notice';
 
-const UnpublishedChangesNotice = ( { onRestore, project } ) => {
+const UnpublishedChangesNotice = ( { onRestore, project, version } ) => {
 	const { createWarningNotice, removeNotice } = useDispatch( 'core/notices' );
 
-	const [ editorMode, isEditorContentSaved ] = useSelect( ( select ) => [
-		select( STORE_NAME ).getEditorMode(),
+	const [ isEditorContentSaved ] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
@@ -26,7 +25,7 @@ const UnpublishedChangesNotice = ( { onRestore, project } ) => {
 			! isPublic( project ) ||
 			! hasUnpublishedChanges( project ) ||
 			! isEditorContentSaved ||
-			editorMode === 'draft'
+			version === 'draft'
 		) {
 			return;
 		}

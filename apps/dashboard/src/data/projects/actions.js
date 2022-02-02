@@ -2,6 +2,8 @@
  * Internal dependencies
  */
 import {
+	PROJECT_LOAD,
+	PROJECT_LOAD_ERROR,
 	PROJECT_SAVE,
 	PROJECT_SAVE_ERROR,
 	PROJECT_UPDATE,
@@ -12,6 +14,20 @@ import {
 	updateProject as patchProject,
 } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
+
+export function loadProject( projectId ) {
+	return {
+		type: PROJECT_LOAD,
+		projectId,
+	};
+}
+
+export function loadProjectError( projectId ) {
+	return {
+		type: PROJECT_LOAD_ERROR,
+		projectId,
+	};
+}
 
 export function saveProject() {
 	return {
@@ -27,9 +43,10 @@ export function updateProject( projectId, project ) {
 	};
 }
 
-export function saveProjectError( message ) {
+export function saveProjectError( projectId, message ) {
 	return {
 		type: PROJECT_SAVE_ERROR,
+		projectId,
 		message,
 	};
 }

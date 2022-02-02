@@ -2,61 +2,81 @@
  * External dependencies
  */
 import { serialize, parse } from '@wordpress/blocks';
-import { get, isEmpty, map, merge, some, values } from 'lodash';
+import { get, isEmpty, map, some } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { submitButtonBlock } from '@crowdsignal/block-editor';
-import { getProject } from '../projects/selectors';
-import { isPublic } from '../../util/project';
 
-export const getEditorProjectId = ( state ) =>
-	get( state, [ 'editor', 'projectId' ], 0 );
+/**
+ * Returns an object indicating which parts of the project have changed
+ * since the last save.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Changes.
+ */
+export const getEditorChanges = ( state ) => state.editor.changes;
 
-export const getEditorMode = ( state ) =>
-	get( state, [ 'editor', 'mode' ], 'auto' );
+/**
+ * Returns the project ID of the project that's currently loaded into
+ * the editor. 0 if the project doesn't (yet) exist.
+ *
+ * @param  {Object} state App state.
+ * @return {number}       Project ID.
+ */
+export const getEditorProjectId = ( state ) => state.editor.projectId;
 
+/**
+ * Returns an array containing all project pages.
+ *
+ * @param  {Object} state App state.
+ * @return {Array}        Pages.
+ */
+export const getEditorPages = ( state ) => state.editor.pages;
+
+/**
+ * Returns the index of currently edited page.
+ *
+ * @param  {Object} state App state.
+ * @return {number}       Current page index.
+ */
+export const getEditorCurrentPageIndex = ( state ) => state.editor.currentPage;
+
+/**
+ * Returns the currently edited page.
+ *
+ * @param  {Object} state     App state.
+ * @return {Array}            Blocks.
+ */
 export const getEditorCurrentPage = ( state ) =>
-	get( state, [ 'editor', 'currentPage' ], 0 );
+	get( getEditorPages( state ), getEditorCurrentPageIndex( state ) );
 
+/**
+ * Returns true if the editor doesn't contain any unsaved changes.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       True if no changes.
+ */
 export const isEditorContentSaved = ( state ) =>
-	! get( state, [ 'editor', 'hasUnsavedChanges' ], false );
+	isEmpty( getEditorChanges( state ) );
 
-export const isEditorSaving = ( state ) =>
-	get( state, [ 'editor', 'isSaving' ], false );
+/**
+ * Returns true if the editor is currently being saved.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       True when saving.
+ */
+export const isEditorSaving = ( state ) => state.editor.isSaving;
 
-export const getEditorTitle = ( state ) =>
-	get( state, [ 'editor', 'title' ], '' );
-
-export const getEditorContent = ( state ) => {
-	const projectId = getEditorProjectId( state );
-
-	if ( ! projectId ) {
-		return values( state.editor.content );
-	}
-
-	const project = getProject( state, projectId );
-
-	if ( ! project ) {
-		return [];
-	}
-
-	const content =
-		isPublic( project ) && getEditorMode( state ) !== 'draft'
-			? project.publicContent.pages
-			: project.draftContent.pages;
-
-	return merge(
-		state.editor.pageOrder
-			? map( state.editor.pageOrder, ( index ) => content[ index ] )
-			: content,
-		state.editor.content
-	);
-};
-
-export const isEditorContentMissingSubmitButtons = ( state ) => {
-	const pages = getEditorContent( state );
+/**
+ * Returns true if the project in the editor can be published.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       True if the project is valid.
+ */
+export const isEditorContentPublishable = ( state ) => {
+	const pages = getEditorPages( state );
 
 	const containsSubmitButton = ( blocks ) =>
 		some(
@@ -66,23 +86,38 @@ export const isEditorContentMissingSubmitButtons = ( state ) => {
 				containsSubmitButton( block.innerBlocks )
 		);
 
-	return some( pages, ( page ) => ! containsSubmitButton( page ) );
+	return ! some( pages, ( page ) => ! containsSubmitButton( page ) );
 };
 
-export const getEditorChangeset = ( state ) => {
-	const changeset = {};
+/**
+ * Returns the editor project's title.
+ *
+ * @param  {Object} state App state.
+ * @return {string}       Title.
+ */
+export const getEditorTitle = ( state ) => state.editor.title;
 
-	if ( ! isEmpty( state.editor.content ) || state.editor.pageOrder ) {
-		changeset.draftContent = {
-			pages: map( getEditorContent( state ), ( page ) =>
+/**
+ * Returns a partial project containing all the changes made since the last save.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Partial project.
+ */
+export const getEditorUpdatedProjectData = ( state ) => {
+	const changes = getEditorChanges( state );
+	const data = {};
+
+	if ( changes.content ) {
+		data.draftContent = {
+			pages: map( getEditorPages( state ), ( page ) =>
 				parse( serialize( page ) )
 			),
 		};
 	}
 
-	if ( getEditorTitle( state ) ) {
-		changeset.title = getEditorTitle( state );
+	if ( changes.title ) {
+		data.title = getEditorTitle( state );
 	}
 
-	return changeset;
+	return data;
 };
