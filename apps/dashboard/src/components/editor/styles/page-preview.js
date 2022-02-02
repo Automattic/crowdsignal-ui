@@ -20,6 +20,7 @@ export const PagePreviewButton = styled.button`
 	background: transparent;
 	border: 0;
 	box-sizing: border-box;
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;

@@ -36,12 +36,16 @@ export const PageNavigationHeader = styled.div`
 `;
 
 export const PageNavigationAddButton = styled.button`
+	align-items: center;
 	background-color: transparent;
 	box-sizing: border-box;
-	border: 1px solid var( --color-border );
+	border: 1px solid var( --color-text );
 	border-radius: 2px;
 	color: var( --color-text );
+	cursor: pointer;
+	display: flex;
 	height: 40px;
+	justify-content: center;
 	margin: 16px 16px 0 63px;
 	width: 100px;
 `;
