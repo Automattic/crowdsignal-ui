@@ -38,7 +38,7 @@ const PagePreview = ( {
 				<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
 
 				<PagePreviewFrame>
-					<BlockPreview blocks={ page } viewportWidth={ 800 } />
+					<BlockPreview blocks={ page } viewportWidth={ 1200 } />
 				</PagePreviewFrame>
 			</PagePreviewButton>
 
