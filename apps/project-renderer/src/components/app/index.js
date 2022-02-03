@@ -40,6 +40,8 @@ const App = ( {
 
 	const [ errors, setErrors ] = useState( [] );
 
+	const formName = `f-${ projectCode }`;
+
 	useEffect( () => {
 		if ( preview ) {
 			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
@@ -139,7 +141,7 @@ const App = ( {
 	return (
 		<Form
 			className="crowdsignal-forms-form"
-			name={ `f-${ projectCode }` }
+			name={ formName }
 			onSubmit={ handleSubmit }
 		>
 			<ContentWrapper className="crowdsignal-forms-form__content">
