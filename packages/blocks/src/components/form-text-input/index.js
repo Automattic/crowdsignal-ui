@@ -22,7 +22,7 @@ const Input = styled.input`
 	box-sizing: border-box;
 
 	${ FormInputWrapper }.is-error & {
-		border-color: var( --color-error );
+		border: 1px solid var( --color-error ) !important;
 	}
 `;
 
