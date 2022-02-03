@@ -11,12 +11,12 @@ import { Form } from '../components';
 import { STORE_NAME } from '../data';
 
 export const useFormState = () => {
-	const form = useContext( Form.Context );
+	const { name: formName } = useContext( Form.Context );
 
 	return useSelect(
 		( select ) => ( {
-			isSubmitting: select( STORE_NAME ).isSubmitting( form ),
+			isSubmitting: select( STORE_NAME ).isSubmitting( formName ),
 		} ),
-		[ form ]
+		[ formName ]
 	);
 };

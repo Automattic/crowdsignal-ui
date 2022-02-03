@@ -8,10 +8,13 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
+import { values } from 'lodash';
 
 const Context = createContext( 'form' );
 
 const Form = ( { children, name, onSubmit, ...props } ) => {
+	const validations = {};
+
 	const data = useSelect(
 		( select ) => select( STORE_NAME ).getFormData( name ),
 		[ name ]
@@ -19,8 +22,21 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
 
+	const registerValidation = ( fieldName, validation ) =>
+		( validations[ fieldName ] = validation );
+
+	const isFormValid = () =>
+		values( validations ).reduce(
+			( isValid, validation ) => validation.call() && isValid,
+			true
+		);
+
 	const handleSubmit = ( event ) => {
 		event.preventDefault();
+
+		if ( ! isFormValid() ) {
+			return;
+		}
 
 		startSubmit( name );
 
@@ -28,7 +44,7 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 	};
 
 	return (
-		<Context.Provider value={ name }>
+		<Context.Provider value={ { name, registerValidation } }>
 			<form onSubmit={ handleSubmit } { ...props }>
 				{ children }
 			</form>

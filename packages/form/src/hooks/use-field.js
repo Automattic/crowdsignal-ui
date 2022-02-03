@@ -10,33 +10,34 @@ import { filter, includes, uniq } from 'lodash';
  */
 import { Form } from '../components';
 import { STORE_NAME } from '../data';
+import { useValidation } from './use-validation';
 
-export const useField = ( { name: fieldName, type, value } ) => {
-	const form = useContext( Form.Context );
+export const useField = ( { name: fieldName, type, value, validation } ) => {
+	const { name: formName } = useContext( Form.Context );
 
 	const { setFieldValue } = useDispatch( STORE_NAME );
 
-	const { error, value: currentValue } = useSelect(
-		( select ) => select( STORE_NAME ).getFieldData( form, fieldName ),
-		[ form, fieldName ]
+	const { error, validateField } = useValidation( { fieldName, validation } );
+
+	const { value: currentValue } = useSelect(
+		( select ) => select( STORE_NAME ).getFieldData( formName, fieldName ),
+		[ formName, fieldName ]
 	);
 
 	const onChange = ( event ) => {
+		let newValue = event.target.value;
+
 		if ( type === 'checkbox' ) {
-			setFieldValue(
-				form,
-				fieldName,
-				event.target.checked
-					? uniq( [ ...( currentValue || [] ), event.target.value ] )
-					: filter(
-							currentValue || [],
-							( v ) => v !== event.target.value
-					  )
-			);
-			return;
+			newValue = event.target.checked
+				? uniq( [ ...( currentValue || [] ), event.target.value ] )
+				: filter(
+						currentValue || [],
+						( v ) => v !== event.target.value
+				  );
 		}
 
-		setFieldValue( form, fieldName, event.target.value );
+		setFieldValue( formName, fieldName, newValue );
+		validateField( newValue );
 	};
 
 	const inputProps = {

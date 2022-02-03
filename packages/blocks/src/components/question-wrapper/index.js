@@ -8,6 +8,7 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
+import { ErrorMessage } from '../index';
 
 const StyledQuestionWrapper = styled.div`
 	border-style: solid;
@@ -23,6 +24,17 @@ const StyledQuestionWrapper = styled.div`
 
 	&.has-box-shadow {
 		box-shadow: 2px 2px 8px rgba( 0, 0, 0, 0.23 );
+	}
+
+	&.is-error {
+		border-color: var( --color-error );
+	}
+
+	${ ErrorMessage.className } {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		transform: translateY( calc( 100% + 4px ) );
 	}
 `;
 

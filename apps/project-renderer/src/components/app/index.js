@@ -97,8 +97,8 @@ const App = ( {
 						throw new Error( 'Empty response' );
 					}
 
-					setHasResponded( true );
 					setContent( json.content );
+					setHasResponded( true );
 					// all the setters should be called here: page, responseHash, content and startTime
 				} )
 				// eslint-disable-next-line no-console
