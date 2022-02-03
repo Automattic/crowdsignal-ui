@@ -38,6 +38,8 @@ const App = ( {
 
 	const [ hasResponded, setHasResponded ] = useState( false );
 
+	const [ errors, setErrors ] = useState( [] );
+
 	useEffect( () => {
 		if ( preview ) {
 			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
@@ -97,6 +99,7 @@ const App = ( {
 						throw new Error( 'Empty response' );
 					}
 
+					setErrors( json.errors );
 					setContent( json.content );
 					setHasResponded( true );
 					// all the setters should be called here: page, responseHash, content and startTime
@@ -129,7 +132,7 @@ const App = ( {
 			'crowdsignal-forms/text-question': TextQuestion,
 		} );
 
-	if ( hasResponded ) {
+	if ( hasResponded && errors.length === 0 ) {
 		return <ContentWrapper>{ renderContent() }</ContentWrapper>;
 	}
 
