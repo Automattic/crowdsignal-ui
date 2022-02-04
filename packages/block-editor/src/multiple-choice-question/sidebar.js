@@ -12,15 +12,57 @@ import BorderSettings from '../components/border-settings';
 import ColorSettings from '../components/color-settings';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
-	const handleChangeAttribute = ( key ) => ( value ) =>
+	const handleChangeMandatory = ( isMandatory ) => {
 		setAttributes( {
-			[ key ]: value,
+			mandatory: isMandatory,
 		} );
 
-	const handleChangeNumberAttribute = ( key ) => ( value ) =>
+		if ( isMandatory && attributes.minimumChoices < 1 ) {
+			setAttributes( {
+				minimumChoices: 1,
+			} );
+		} else if ( ! isMandatory ) {
+			setAttributes( {
+				minimumChoices: 0,
+			} );
+		}
+	};
+
+	const handleMinChoices = ( value ) => {
+		if ( value < 0 ) {
+			return;
+		}
+
 		setAttributes( {
-			[ key ]: parseInt( value, 10 ),
+			minimumChoices: parseInt( value ),
 		} );
+
+		setAttributes( {
+			mandatory: value >= 1,
+		} );
+
+		if ( value > attributes.maximumChoices ) {
+			setAttributes( {
+				maximumChoices: parseInt( value ),
+			} );
+		}
+	};
+
+	const handleMaxChoices = ( value ) => {
+		if ( value < 1 ) {
+			return;
+		}
+
+		setAttributes( {
+			maximumChoices: parseInt( value ),
+		} );
+
+		if ( value < attributes.minimumChoices ) {
+			setAttributes( {
+				minimumChoices: parseInt( value ),
+			} );
+		}
+	};
 
 	return (
 		<InspectorControls>
@@ -31,7 +73,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<ToggleControl
 					label={ __( 'An answer is required' ) }
 					checked={ attributes.mandatory }
-					onChange={ handleChangeAttribute( 'mandatory' ) }
+					onChange={ handleChangeMandatory }
 				/>
 
 				{ attributes.mandatory && (
@@ -39,9 +81,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 						label={ __( 'Min. choices', 'blocks' ) }
 						type="number"
 						value={ attributes.minimumChoices }
-						onChange={ handleChangeNumberAttribute(
-							'minimumChoices'
-						) }
+						onChange={ handleMinChoices }
 					/>
 				) }
 
@@ -49,7 +89,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'Max. choices', 'blocks' ) }
 					type="number"
 					value={ attributes.maximumChoices }
-					onChange={ handleChangeNumberAttribute( 'maximumChoices' ) }
+					onChange={ handleMaxChoices }
 				/>
 			</PanelBody>
 
