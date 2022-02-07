@@ -12,16 +12,26 @@ import { Form } from '../components';
 import { STORE_NAME } from '../data';
 import { useValidation } from './use-validation';
 
-export const useField = ( { name: fieldName, type, value, validation } ) => {
+export const useField = ( {
+	name: fieldName,
+	fieldClientId,
+	type,
+	value,
+	validation,
+} ) => {
 	const { name: formName } = useContext( Form.Context );
 
 	const { setFieldValue } = useDispatch( STORE_NAME );
 
-	const { error, validateField } = useValidation( { fieldName, validation } );
+	const { error, validateField } = useValidation( {
+		fieldClientId,
+		validation,
+	} );
 
 	const { value: currentValue } = useSelect(
-		( select ) => select( STORE_NAME ).getFieldData( formName, fieldName ),
-		[ formName, fieldName ]
+		( select ) =>
+			select( STORE_NAME ).getFieldData( formName, fieldClientId ),
+		[ formName, fieldClientId ]
 	);
 
 	const onChange = ( event ) => {
@@ -36,7 +46,7 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 				  );
 		}
 
-		setFieldValue( formName, fieldName, newValue );
+		setFieldValue( formName, fieldClientId, newValue );
 		validateField( newValue );
 	};
 

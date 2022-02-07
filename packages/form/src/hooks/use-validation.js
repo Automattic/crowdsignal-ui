@@ -10,17 +10,17 @@ import { useContext } from '@wordpress/element';
 import { STORE_NAME } from '../data';
 import { Form } from '../components';
 
-export const useValidation = ( { fieldName, validation } ) => {
+export const useValidation = ( { fieldClientId, validation } ) => {
 	const { name: formName, registerValidation } = useContext( Form.Context );
 
 	const { setFieldError } = useDispatch( STORE_NAME );
 
 	const { error, value, formData } = useSelect(
 		( select ) => ( {
-			...select( STORE_NAME ).getFieldData( formName, fieldName ),
+			...select( STORE_NAME ).getFieldData( formName, fieldClientId ),
 			formData: select( STORE_NAME ).getFormData( formName ),
 		} ),
-		[ formName, fieldName ]
+		[ formName, fieldClientId ]
 	);
 
 	const validateField = ( fieldValue ) => {
@@ -31,13 +31,13 @@ export const useValidation = ( { fieldName, validation } ) => {
 		const err = validation( fieldValue, formData );
 
 		if ( err ) {
-			setFieldError( formName, fieldName, err );
+			setFieldError( formName, fieldClientId, err );
 		}
 		return ! err;
 	};
 
 	if ( validation && registerValidation ) {
-		registerValidation( fieldName, () => validateField( value ) );
+		registerValidation( fieldClientId, () => validateField( value ) );
 	}
 
 	return {

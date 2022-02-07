@@ -21,6 +21,7 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 		fieldName: `q_${ attributes.clientId }[choice]${
 			attributes.maximumChoices !== 1 ? '[]' : ''
 		}`,
+		fieldClientId: attributes.clientId,
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This question is required', 'blocks' );

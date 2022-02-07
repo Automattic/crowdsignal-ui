@@ -22,8 +22,8 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
 
-	const registerValidation = ( fieldName, validation ) =>
-		( validations[ fieldName ] = validation );
+	const registerValidation = ( fieldClientId, validation ) =>
+		( validations[ fieldClientId ] = validation );
 
 	const isFormValid = () =>
 		values( validations ).reduce(

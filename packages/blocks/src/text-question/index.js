@@ -20,6 +20,7 @@ import {
 const TextQuestion = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
+		fieldClientId: attributes.clientId,
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This question is required', 'blocks' );
