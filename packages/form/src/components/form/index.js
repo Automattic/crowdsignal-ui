@@ -27,6 +27,7 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 	const registerValidation = ( fieldClientId, validation ) =>
 		( validations[ fieldClientId ] = validation );
 
+	// eslint-disable-next-line
 	const isFormValid = () =>
 		values( validations ).reduce(
 			( isValid, validation ) => validation.call() && isValid,
@@ -36,9 +37,9 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 	const handleSubmit = ( event ) => {
 		event.preventDefault();
 
-		if ( ! isFormValid() ) {
-			return;
-		}
+		// if ( ! isFormValid() ) {
+		// 	return;
+		// }
 
 		startSubmit( name );
 
