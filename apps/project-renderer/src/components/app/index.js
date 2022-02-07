@@ -38,7 +38,7 @@ const App = ( {
 
 	const [ hasResponded, setHasResponded ] = useState( false );
 
-	const [ errors, setErrors ] = useState( [] );
+	const [ hasErrors, setHasErrors ] = useState( false );
 
 	const formName = `f-${ projectCode }`;
 
@@ -80,35 +80,32 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
-		return (
-			window
-				.fetch(
-					`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
-					{
-						method: 'POST',
-						body: form,
-					}
-				)
-				.then( ( res ) => {
-					if ( ! res.ok ) {
-						throw new Error( res.status );
-					}
+		return window
+			.fetch(
+				`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
+				{
+					method: 'POST',
+					body: form,
+				}
+			)
+			.then( ( res ) => {
+				if ( ! res.ok ) {
+					throw new Error( res.status );
+				}
 
-					return res.json();
-				} )
-				.then( ( json ) => {
-					if ( ! json || ! json.content ) {
-						throw new Error( 'Empty response' );
-					}
+				return res.json();
+			} )
+			.then( ( json ) => {
+				if ( ! json || ! json.content ) {
+					throw new Error( 'Empty response' );
+				}
 
-					setErrors( json.errors );
-					setContent( json.content );
-					setHasResponded( true );
-					// all the setters should be called here: page, responseHash, content and startTime
-				} )
-				// eslint-disable-next-line no-console
-				.catch( ( err ) => console.error( err ) )
-		);
+				const responseWithErrors = ( json.errors || [] ).length > 0;
+				setHasErrors( responseWithErrors );
+				setContent( json.content );
+				setHasResponded( true );
+				return json;
+			} );
 	};
 
 	const baseURL =
@@ -134,7 +131,7 @@ const App = ( {
 			'crowdsignal-forms/text-question': TextQuestion,
 		} );
 
-	if ( hasResponded && errors.length === 0 ) {
+	if ( hasResponded && ! hasErrors ) {
 		return <ContentWrapper>{ renderContent() }</ContentWrapper>;
 	}
 
