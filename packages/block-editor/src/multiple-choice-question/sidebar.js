@@ -10,46 +10,18 @@ import { __ } from '@wordpress/i18n';
  */
 import BorderSettings from '../components/border-settings';
 import ColorSettings from '../components/color-settings';
+import { isEmpty } from 'lodash';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
 	const handleChangeMandatory = ( isMandatory ) => {
 		setAttributes( {
 			mandatory: isMandatory,
+			minimumChoices: isMandatory ? 1 : 0,
 		} );
-
-		if ( isMandatory && attributes.minimumChoices < 1 ) {
-			setAttributes( {
-				minimumChoices: 1,
-			} );
-		} else if ( ! isMandatory ) {
-			setAttributes( {
-				minimumChoices: 0,
-			} );
-		}
-	};
-
-	const handleMinChoices = ( value ) => {
-		if ( value < 0 ) {
-			return;
-		}
-
-		setAttributes( {
-			minimumChoices: parseInt( value ),
-		} );
-
-		setAttributes( {
-			mandatory: value >= 1,
-		} );
-
-		if ( value > attributes.maximumChoices ) {
-			setAttributes( {
-				maximumChoices: parseInt( value ),
-			} );
-		}
 	};
 
 	const handleMaxChoices = ( value ) => {
-		if ( value < 1 ) {
+		if ( ! isEmpty( value ) && value < 1 ) {
 			return;
 		}
 
@@ -75,15 +47,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					checked={ attributes.mandatory }
 					onChange={ handleChangeMandatory }
 				/>
-
-				{ attributes.mandatory && (
-					<TextControl
-						label={ __( 'Min. choices', 'blocks' ) }
-						type="number"
-						value={ attributes.minimumChoices }
-						onChange={ handleMinChoices }
-					/>
-				) }
 
 				<TextControl
 					label={ __( 'Max. choices', 'blocks' ) }
