@@ -20,7 +20,9 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		[ name ]
 	);
 
-	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
+	const { startSubmit, stopSubmit, setFieldError } = useDispatch(
+		STORE_NAME
+	);
 
 	const registerValidation = ( fieldClientId, validation ) =>
 		( validations[ fieldClientId ] = validation );
@@ -40,7 +42,20 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 		startSubmit( name );
 
-		onSubmit( data ).finally( () => stopSubmit( name ) );
+		onSubmit( data )
+			.then( ( res ) => {
+				// if errors come back from submit, evaluate validation errors
+				( res.errors || [] ).forEach( ( error ) => {
+					if ( error.fieldClientId ) {
+						setFieldError(
+							name,
+							error.fieldClientId,
+							error.message
+						);
+					}
+				} );
+			} )
+			.finally( () => stopSubmit( name ) );
 	};
 
 	return (
