@@ -62,13 +62,33 @@ const parseNodes = ( nodes ) =>
 			name: toLower( node.tagName ),
 			children: parseNodes( node.childNodes ),
 			props: {
-				...attributes,
+				...parseTagProps( toLower( node.tagName ), attributes ),
 				className,
 				style: parseStyles( style ),
 				key: uniqueId( KEY_PREFIX ),
 			},
 		};
 	} );
+
+/**
+ * Parses DOM nodes into an array of objects to be used to create React elements.
+ *
+ * @param  {string} tagName
+ * @param {Object}  props object.
+ * @return {Object}  Props object.
+ */
+const parseTagProps = ( tagName, props ) => {
+	switch ( tagName ) {
+		case 'audio':
+			if (
+				typeof props.controls !== 'undefined' &&
+				props.controls !== false
+			) {
+				props.controls = 'controls';
+			}
+	}
+	return props;
+};
 
 /**
  * Appends the innerBlocks value to the correct element based on the block.
