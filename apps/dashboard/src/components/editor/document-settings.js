@@ -24,7 +24,7 @@ import { isPublic, getLastUpdatedDate } from '../../util/project';
 
 const DocumentSettings = ( { project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const { saveAndUpdateProject, saveEditorChangeset } = useDispatch(
+	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
 		STORE_NAME
 	);
 
@@ -40,7 +40,7 @@ const DocumentSettings = ( { project } ) => {
 
 		// We need to serialize and re-parse blocks before making the request
 		// to keep originalContent prop up to date.
-		saveEditorChangeset( { public: true } );
+		saveEditorChanges( { public: true } );
 	};
 
 	const visibility = isPublic( project )

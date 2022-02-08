@@ -1,78 +1,37 @@
 /**
  * External dependencies
  */
-import { useCallback, useEffect, useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { get, noop } from 'lodash';
-import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
-import { Global } from '@emotion/core';
 
 /**
  * Internal dependencies
  */
 import HeaderMeta from '../header-meta';
-import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
-import { isPublic } from '../../util/project';
-import AutoSubmitButton from './auto-submit-button';
-import { registerBlocks } from './blocks';
-import DocumentSettings from './document-settings';
+import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
-import EditorStylesResolver from './styles-resolver';
-import { editorSettings } from './settings';
-import Toolbar from './toolbar';
-import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { useEditorContent } from './use-editor-content';
-import { EDITOR_VIEW_AUTO, EDITOR_VIEW_DRAFT } from './constants';
 
-/**
- * Style dependencies
- */
-import {
-	EditorLayout,
-	EditorWrapper,
-	editorGlobalStyles,
-} from './styles/editor';
-
-const Editor = ( { projectId, theme = 'leven' } ) => {
-	const [ forceDraft, setForceDraft ] = useState( false );
-
-	const {
-		initalizeEditor,
-		saveEditorChangeset,
-		updateEditorTitle,
-	} = useDispatch( STORE_NAME );
-
-	const [ project, isEditorDisabled ] = useSelect( ( select ) => {
-		const dashboard = select( STORE_NAME );
+const Editor = ( { projectId } ) => {
+	const [ project, isLoading ] = useSelect( ( select ) => {
+		if ( ! projectId ) {
+			return [
+				{
+					draftContent: {
+						pages: [ [] ],
+					},
+				},
+				false,
+			];
+		}
 
 		return [
-			dashboard.getProject( projectId ),
-			dashboard.isEditorSaving() &&
-				dashboard.getLastUpdatedProjectId() === 0,
+			select( STORE_NAME ).getProject( projectId ),
+			select( STORE_NAME ).isProjectLoading( projectId ),
 		];
 	} );
 
-	useEffect( () => {
-		initalizeEditor( projectId );
-
-		return () => saveEditorChangeset();
-	}, [] );
-
-	const editorView = forceDraft ? EDITOR_VIEW_DRAFT : EDITOR_VIEW_AUTO;
-	const content =
-		isPublic( project ) && ! forceDraft
-			? project?.publicContent
-			: project?.draftContent;
-	const blocks = get( content, [ 'pages', 0 ], [] );
-
-	const loadEditorContent = useCallback( () => blocks, [ blocks ] );
-
-	const updateEditorContent = useEditorContent( projectId, editorView );
-
-	if ( projectId && null === project ) {
-		// project is being loaded
+	if ( isLoading ) {
 		return (
 			<>
 				<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
@@ -81,44 +40,7 @@ const Editor = ( { projectId, theme = 'leven' } ) => {
 		);
 	}
 
-	return (
-		<EditorLayout className="editor">
-			<Global styles={ editorGlobalStyles } />
-			<EditorStylesResolver theme={ theme } />
-
-			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
-
-			<ProjectNavigation
-				activeTab={ ProjectNavigation.Tab.EDITOR }
-				disableTitleEditor={ isEditorDisabled }
-				onChangeTitle={ updateEditorTitle }
-				projectId={ projectId }
-			/>
-
-			<EditorWrapper
-				as={ IsolatedBlockEditor }
-				key={ `${ projectId }-${ editorView }` }
-				settings={ editorSettings }
-				onSaveContent={ updateEditorContent }
-				onLoad={ loadEditorContent }
-				onError={ noop }
-			>
-				<Toolbar project={ project } />
-				<DocumentSettings project={ project } />
-
-				<AutoSubmitButton />
-
-				{ ! forceDraft && (
-					<UnpublishedChangesNotice
-						project={ project }
-						onRestore={ () => setForceDraft( true ) }
-					/>
-				) }
-			</EditorWrapper>
-		</EditorLayout>
-	);
+	return <BlockEditor project={ project } />;
 };
-
-registerBlocks();
 
 export default Editor;

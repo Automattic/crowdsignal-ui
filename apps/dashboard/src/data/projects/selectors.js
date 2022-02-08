@@ -9,5 +9,13 @@ export const getLastUpdatedProjectId = ( state ) =>
 export const getProject = ( state, projectId ) =>
 	get( state, [ 'projects', 'items', projectId ], null );
 
+export const getProjectError = ( state, projectId ) =>
+	get( state, [ 'projects', 'error', projectId ] );
+
+export const isProjectLoading = ( state, projectId ) =>
+	state.projects.loading[ projectId ] ||
+	( ! getProject( state, projectId ) &&
+		! getProjectError( state, projectId ) );
+
 export const getProjectTitle = ( state, projectId ) =>
 	get( state, [ 'projects', 'items', projectId, 'title' ], '' );

@@ -8,19 +8,52 @@ import { useDispatch, useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import { STORE_NAME } from '../../data';
+import { isPublic } from '../../util/project';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 
-export const useEditorContent = ( projectId, editorView ) => {
-	const [ ready, setReady ] = useState( ! projectId );
+export const useEditorContent = ( project ) => {
+	const [ forceDraft, setForceDraft ] = useState( false );
+	const [ ready, setReady ] = useState( false );
 
-	const [ isEditorContentSaved ] = useSelect( ( select ) => [
+	const [ editorId, setEditorId ] = useState();
+
+	const { removeNotice } = useDispatch( 'core/notices' );
+
+	const { initializeEditor, updateEditorPage } = useDispatch( STORE_NAME );
+
+	const [
+		currentPage,
+		currentPageContent,
+		editorProjectId,
+		isEditorContentSaved,
+	] = useSelect( ( select ) => [
+		select( STORE_NAME ).getEditorCurrentPageIndex(),
+		select( STORE_NAME ).getEditorCurrentPage(),
+		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
-	const { removeNotice } = useDispatch( 'core/notices' );
-	const { updateEditorContent } = useDispatch( STORE_NAME );
+	useEffect( () => {
+		if ( ! project ) {
+			return;
+		}
 
-	// The problem is this timeout only gets triggered once, not on every change!
+		initializeEditor(
+			project.id,
+			project.title,
+			isPublic( project ) && ! forceDraft
+				? project.publicContent.pages
+				: project.draftContent.pages
+		);
+	}, [ forceDraft ] );
+
+	useEffect( () => {
+		setEditorId(
+			`crowdsignal-editor-${ editorProjectId }-${ currentPage }`
+		);
+		setReady( false );
+	}, [ editorProjectId, currentPage ] );
+
 	useEffect( () => {
 		if ( isEditorContentSaved ) {
 			return;
@@ -30,13 +63,10 @@ export const useEditorContent = ( projectId, editorView ) => {
 		removeNotice( UnpublishedChangesNotice.ID );
 	}, [ isEditorContentSaved ] );
 
-	// If projectId or editorView changes, reset 'ready'
-	useEffect( () => {
-		setReady( false );
-	}, [ projectId, editorView ] );
+	const loadBlocks = () => currentPageContent;
 
-	return useCallback(
-		( content ) => {
+	const saveBlocks = useCallback(
+		( blocks ) => {
 			// Isolated block editor forces a save as soon as the editor content has loaded.
 			// Ignore the first save and set 'ready' to true.
 			//
@@ -46,8 +76,24 @@ export const useEditorContent = ( projectId, editorView ) => {
 				return;
 			}
 
-			updateEditorContent( content );
+			updateEditorPage( currentPage, blocks );
 		},
 		[ ready ]
 	);
+
+	const restoreDraft = () => {
+		setForceDraft( true );
+
+		// Force IsolatedBlockEditor to reload
+		setEditorId( `${ editorId }*` );
+		setReady( false );
+	};
+
+	return {
+		editorId,
+		loadBlocks,
+		saveBlocks,
+		restoreDraft,
+		version: forceDraft ? 'draft' : 'auto',
+	};
 };

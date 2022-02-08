@@ -26,7 +26,7 @@ export default {
 		clearInterval( timer );
 
 		timer = setTimeout( () => {
-			dispatch( STORE_NAME ).saveEditorChangeset();
+			dispatch( STORE_NAME ).saveEditorChanges();
 		}, AUTOSAVE_WAIT_PERIOD );
 
 		return true;

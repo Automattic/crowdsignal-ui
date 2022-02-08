@@ -2,21 +2,31 @@
  * External dependencies
  */
 import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
+import { STORE_NAME } from '../../data';
 import { hasUnpublishedChanges, isPublic } from '../../util/project';
 
 const NOTICE_ID = 'crowdsignal-unpublished-changes-notice';
 
-const UnpublishedChangesNotice = ( { onRestore, project } ) => {
+const UnpublishedChangesNotice = ( { onRestore, project, version } ) => {
 	const { createWarningNotice, removeNotice } = useDispatch( 'core/notices' );
 
+	const isEditorUnchanged = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorUnchanged()
+	);
+
 	useEffect( () => {
-		if ( ! isPublic( project ) || ! hasUnpublishedChanges( project ) ) {
+		if (
+			! isPublic( project ) ||
+			! hasUnpublishedChanges( project ) ||
+			! isEditorUnchanged ||
+			version === 'draft'
+		) {
 			return;
 		}
 
