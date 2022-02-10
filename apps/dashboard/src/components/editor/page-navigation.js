@@ -4,7 +4,8 @@
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
-import { map } from 'lodash';
+import { map, range } from 'lodash';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 /**
  * Internal dependencies
@@ -26,6 +27,7 @@ const PageNavigation = () => {
 		deleteEditorPage,
 		insertEditorPage,
 		setEditorCurrentPage,
+		updateEditorPageOrder,
 	} = useDispatch( STORE_NAME );
 
 	const [ currentPage, pages ] = useSelect( ( select ) => [
@@ -38,6 +40,28 @@ const PageNavigation = () => {
 		setEditorCurrentPage( pages.length );
 	};
 
+	const handleMovePage = ( {
+		source: { index: from },
+		destination: { index: to },
+	} ) => {
+		if ( from < to ) {
+			updateEditorPageOrder( [
+				...range( 0, from ),
+				...range( from + 1, to + 1 ),
+				from,
+				...range( to + 1, pages.length ),
+			] );
+			return;
+		}
+
+		updateEditorPageOrder( [
+			...range( 0, to ),
+			from,
+			...range( to, from ),
+			...range( from + 1, pages.length ),
+		] );
+	};
+
 	const handleSelectPage = ( pageIndex ) => setEditorCurrentPage( pageIndex );
 
 	return (
@@ -47,17 +71,44 @@ const PageNavigation = () => {
 				{ __( 'Pages', 'dashboard' ) }
 			</PageNavigationHeader>
 
-			{ map( pages, ( page, index ) => (
-				<PagePreview
-					key={ `page-${ index }` }
-					disablePageActions={ pages.length === 1 }
-					isActive={ index === currentPage }
-					page={ page }
-					pageIndex={ index }
-					onSelect={ handleSelectPage }
-					onDelete={ deleteEditorPage }
-				/>
-			) ) }
+			<DragDropContext onDragEnd={ handleMovePage }>
+				<Droppable droppableId="crowdsignal/page-navigation">
+					{ ( { droppableProps, innerRef, placeholder } ) => (
+						<div ref={ innerRef } { ...droppableProps }>
+							{ map( pages, ( page, index ) => (
+								<Draggable
+									key={ `page-${ index }` }
+									draggableId={ `page-${ index }` }
+									index={ index }
+								>
+									{ ( provided, snapshot ) => (
+										<PagePreview
+											ref={ provided.innerRef }
+											draggableProps={
+												provided.draggableProps
+											}
+											dragHandleProps={
+												provided.dragHandleProps
+											}
+											disablePageActions={
+												pages.length === 1
+											}
+											isActive={ index === currentPage }
+											isDragging={ snapshot.isDragging }
+											page={ page }
+											pageIndex={ index }
+											onSelect={ handleSelectPage }
+											onDelete={ deleteEditorPage }
+										/>
+									) }
+								</Draggable>
+							) ) }
+
+							{ placeholder }
+						</div>
+					) }
+				</Droppable>
+			</DragDropContext>
 
 			<PageNavigationAddButton onClick={ handleAddPage }>
 				<Icon icon={ plus } />

@@ -2,7 +2,8 @@
  * External dependencies
  */
 import { BlockPreview } from '@wordpress/block-editor';
-import { Icon, trash } from '@wordpress/icons';
+import { forwardRef } from '@wordpress/element';
+import { Icon, handle, trash } from '@wordpress/icons';
 import classnames from 'classnames';
 
 /**
@@ -11,29 +12,48 @@ import classnames from 'classnames';
 import {
 	DeleteButton,
 	PagePreviewButton,
+	PagePreviewDragHandle,
 	PagePreviewFrame,
 	PagePreviewPageNumber,
 	PagePreviewWrapper,
 } from './styles/page-preview';
 
-const PagePreview = ( {
-	disablePageActions,
-	isActive,
-	onDelete,
-	onSelect,
-	page,
-	pageIndex,
-} ) => {
-	const handleSelect = () => onSelect( pageIndex );
+const PagePreview = (
+	{
+		disablePageActions,
+		draggableProps,
+		dragHandleProps,
+		isActive,
+		isDragging,
+		onDelete,
+		onSelect,
+		page,
+		pageIndex,
+	},
+	ref
+) => {
+	const handleSelect = () => {
+		onSelect( pageIndex );
+		return true;
+	};
 
 	const handleDelete = () => onDelete( pageIndex );
 
 	const classes = classnames( {
 		'is-active': isActive,
+		'is-dragging': isDragging,
 	} );
 
 	return (
-		<PagePreviewWrapper className={ classes }>
+		<PagePreviewWrapper
+			ref={ ref }
+			className={ classes }
+			{ ...draggableProps }
+		>
+			<PagePreviewDragHandle { ...dragHandleProps }>
+				<Icon icon={ handle } size={ 12 } />
+			</PagePreviewDragHandle>
+
 			<PagePreviewButton onClick={ handleSelect }>
 				<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
 
@@ -54,4 +74,4 @@ const PagePreview = ( {
 	);
 };
 
-export default PagePreview;
+export default forwardRef( PagePreview );
