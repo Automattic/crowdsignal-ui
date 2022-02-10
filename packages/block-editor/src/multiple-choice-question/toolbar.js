@@ -21,7 +21,7 @@ const multipleChoiceControls = [
 	{
 		icon: MultipleChoiceIcon,
 		title: __( 'Multiple choice', 'block-editor' ),
-		value: 0,
+		value: 2,
 		isActive: ( { maximumChoices } ) => maximumChoices !== 1,
 	},
 ];

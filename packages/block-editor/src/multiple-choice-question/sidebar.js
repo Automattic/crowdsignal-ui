@@ -10,17 +10,31 @@ import { __ } from '@wordpress/i18n';
  */
 import BorderSettings from '../components/border-settings';
 import ColorSettings from '../components/color-settings';
+import { isEmpty } from 'lodash';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
-	const handleChangeAttribute = ( key ) => ( value ) =>
+	const handleChangeMandatory = ( isMandatory ) => {
 		setAttributes( {
-			[ key ]: value,
+			mandatory: isMandatory,
+			minimumChoices: isMandatory ? 1 : 0,
+		} );
+	};
+
+	const handleMaxChoices = ( value ) => {
+		if ( ! isEmpty( value ) && value < 1 ) {
+			return;
+		}
+
+		setAttributes( {
+			maximumChoices: parseInt( value ),
 		} );
 
-	const handleChangeNumberAttribute = ( key ) => ( value ) =>
-		setAttributes( {
-			[ key ]: parseInt( value, 10 ),
-		} );
+		if ( value < attributes.minimumChoices ) {
+			setAttributes( {
+				minimumChoices: parseInt( value ),
+			} );
+		}
+	};
 
 	return (
 		<InspectorControls>
@@ -31,25 +45,14 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<ToggleControl
 					label={ __( 'An answer is required' ) }
 					checked={ attributes.mandatory }
-					onChange={ handleChangeAttribute( 'mandatory' ) }
+					onChange={ handleChangeMandatory }
 				/>
-
-				{ attributes.mandatory && (
-					<TextControl
-						label={ __( 'Min. choices', 'blocks' ) }
-						type="number"
-						value={ attributes.minimumChoices }
-						onChange={ handleChangeNumberAttribute(
-							'minimumChoices'
-						) }
-					/>
-				) }
 
 				<TextControl
 					label={ __( 'Max. choices', 'blocks' ) }
 					type="number"
 					value={ attributes.maximumChoices }
-					onChange={ handleChangeNumberAttribute( 'maximumChoices' ) }
+					onChange={ handleMaxChoices }
 				/>
 			</PanelBody>
 
