@@ -5,6 +5,7 @@ import { BlockPreview } from '@wordpress/block-editor';
 import { forwardRef } from '@wordpress/element';
 import { Icon, trash } from '@wordpress/icons';
 import classnames from 'classnames';
+import { Transition } from 'react-transition-group';
 
 /**
  * Style dependencies
@@ -23,6 +24,7 @@ const PagePreview = (
 		draggableProps,
 		dragHandleProps,
 		isActive,
+		isExpanded,
 		isDragging,
 		label,
 		onDelete,
@@ -39,6 +41,7 @@ const PagePreview = (
 	const classes = classnames( {
 		'is-active': isActive,
 		'is-dragging': isDragging,
+		'is-expanded': isExpanded,
 	} );
 
 	return (
@@ -52,9 +55,16 @@ const PagePreview = (
 					{ label || pageIndex + 1 }
 				</PagePreviewPageNumber>
 
-				<PagePreviewFrame>
-					<BlockPreview blocks={ page } viewportWidth={ 1200 } />
-				</PagePreviewFrame>
+				<Transition in={ isExpanded } timeout={ 300 }>
+					{ ( state ) => (
+						<PagePreviewFrame className={ state }>
+							<BlockPreview
+								blocks={ page }
+								viewportWidth={ 1200 }
+							/>
+						</PagePreviewFrame>
+					) }
+				</Transition>
 			</PagePreviewButton>
 
 			{ ! disablePageActions && (

@@ -2,10 +2,13 @@
  * External dependencies
  */
 import { useDispatch, useSelect } from '@wordpress/data';
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
+import classnames from 'classnames';
 import { map, noop, range, slice } from 'lodash';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Transition } from 'react-transition-group';
 
 /**
  * Internal dependencies
@@ -24,6 +27,8 @@ import {
 } from './styles/page-navigation';
 
 const PageNavigation = () => {
+	const [ expanded, setExpanded ] = useState( true );
+
 	const {
 		deleteEditorPage,
 		insertEditorPage,
@@ -65,11 +70,23 @@ const PageNavigation = () => {
 
 	const handleSelectPage = ( pageIndex ) => setEditorCurrentPage( pageIndex );
 
+	const toggleExpanded = () => setExpanded( ! expanded );
+
+	const classes = classnames( {
+		'is-expanded': expanded,
+	} );
+
 	return (
-		<PageNavigationWrapper>
-			<PageNavigationHeader>
+		<PageNavigationWrapper className={ classes }>
+			<PageNavigationHeader onClick={ toggleExpanded }>
 				<Icon icon={ pagesIcon } />
-				{ __( 'Pages', 'dashboard' ) }
+				<Transition in={ expanded } timeout={ 300 }>
+					{ ( state ) => (
+						<span className={ state }>
+							{ __( 'Pages', 'dashboard' ) }
+						</span>
+					) }
+				</Transition>
 			</PageNavigationHeader>
 
 			<DragDropContext onDragEnd={ handleMovePage }>
@@ -82,6 +99,7 @@ const PageNavigation = () => {
 									disableInteractiveElementBlocking={ true }
 									draggableId={ `page-${ index }` }
 									index={ index }
+									isDragDisabled={ ! expanded }
 								>
 									{ ( provided, snapshot ) => (
 										<PagePreview
@@ -96,6 +114,7 @@ const PageNavigation = () => {
 												pages.length <= 2
 											}
 											isActive={ index === currentPage }
+											isExpanded={ expanded }
 											isDragging={ snapshot.isDragging }
 											page={ page }
 											pageIndex={ index }

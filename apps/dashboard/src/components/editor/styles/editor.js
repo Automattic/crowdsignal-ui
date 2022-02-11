@@ -4,6 +4,11 @@
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
+/**
+ * Internal dependencies
+ */
+import { PageNavigationWrapper } from './page-navigation';
+
 export const editorGlobalStyles = css`
 	html.interface-interface-skeleton__html-container {
 		width: 100% !important;
@@ -27,10 +32,16 @@ export const EditorWrapper = styled.div`
 	max-height: 100%;
 	position: absolute;
 	bottom: 0;
-	left: 180px;
+	left: 88px;
 	right: 0;
 	top: 65px;
-	width: calc( 100% - 180px );
+	transition: left 0.3s, width 0.3s;
+	width: calc( 100% - 88px );
+
+	${ PageNavigationWrapper }.is-expanded + div > & {
+		left: 180px;
+		width: calc( 100% - 180px );
+	}
 
 	.interface-interface-skeleton__content
 		> .components-notice-list
