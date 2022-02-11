@@ -67,7 +67,7 @@ const PagePreview = (
 				</Transition>
 			</PagePreviewButton>
 
-			{ ! disablePageActions && (
+			{ ! disablePageActions && isExpanded && (
 				<DeleteButton
 					disabled={ disablePageActions }
 					onClick={ handleDelete }
