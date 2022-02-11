@@ -3,7 +3,7 @@
  */
 import { BlockPreview } from '@wordpress/block-editor';
 import { forwardRef } from '@wordpress/element';
-import { Icon, handle, trash } from '@wordpress/icons';
+import { Icon, trash } from '@wordpress/icons';
 import classnames from 'classnames';
 
 /**
@@ -12,7 +12,6 @@ import classnames from 'classnames';
 import {
 	DeleteButton,
 	PagePreviewButton,
-	PagePreviewDragHandle,
 	PagePreviewFrame,
 	PagePreviewPageNumber,
 	PagePreviewWrapper,
@@ -32,10 +31,7 @@ const PagePreview = (
 	},
 	ref
 ) => {
-	const handleSelect = () => {
-		onSelect( pageIndex );
-		return true;
-	};
+	const handleSelect = () => onSelect( pageIndex );
 
 	const handleDelete = () => onDelete( pageIndex );
 
@@ -50,11 +46,7 @@ const PagePreview = (
 			className={ classes }
 			{ ...draggableProps }
 		>
-			<PagePreviewDragHandle { ...dragHandleProps }>
-				<Icon icon={ handle } size={ 12 } />
-			</PagePreviewDragHandle>
-
-			<PagePreviewButton onClick={ handleSelect }>
+			<PagePreviewButton onClick={ handleSelect } { ...dragHandleProps }>
 				<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
 
 				<PagePreviewFrame>

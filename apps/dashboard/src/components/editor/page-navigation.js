@@ -78,6 +78,7 @@ const PageNavigation = () => {
 							{ map( pages, ( page, index ) => (
 								<Draggable
 									key={ `page-${ index }` }
+									disableInteractiveElementBlocking={ true }
 									draggableId={ `page-${ index }` }
 									index={ index }
 								>

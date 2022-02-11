@@ -15,21 +15,6 @@ export const PagePreviewWrapper = styled.div`
 	}
 `;
 
-export const PagePreviewDragHandle = styled.div`
-	align-items: center;
-	display: none;
-	padding: 0 5px;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0px;
-	z-index: 10;
-
-	${ PagePreviewWrapper }:hover & {
-		display: flex;
-	}
-`;
-
 export const PagePreviewButton = styled.button`
 	align-items: center;
 	background: transparent;
