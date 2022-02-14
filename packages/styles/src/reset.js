@@ -34,4 +34,8 @@ export const resetStyles = ( { shadowRoot = false } ) => css`
 			Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 			'Segoe UI Symbol';
 	}
+
+	iframe {
+		border: 0;
+	}
 `;

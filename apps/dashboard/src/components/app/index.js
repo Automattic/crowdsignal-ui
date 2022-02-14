@@ -27,7 +27,7 @@ const App = () => {
 			<Global styles={ pageStyles } />
 
 			<Router allowedRoutes={ allowedRoutes }>
-				<Column className="app">
+				<Column className="app wp-embed-responsive">
 					<Masterbar />
 
 					<Column as="main" className="app__content">

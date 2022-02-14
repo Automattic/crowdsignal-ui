@@ -8,6 +8,7 @@ import { useState, useEffect } from '@wordpress/element';
  */
 import {
 	ContentWrapper,
+	CoreEmbed,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	SubmitButton,
@@ -122,6 +123,7 @@ const App = ( {
 
 	const renderContent = () =>
 		renderBlocks( content, {
+			'core/embed': CoreEmbed,
 			'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 			'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
 			'crowdsignal-forms/submit-button': SubmitButton,
@@ -135,7 +137,7 @@ const App = ( {
 
 	return (
 		<Form
-			className="crowdsignal-forms-form"
+			className="crowdsignal-forms-form wp-embed-responsive"
 			name={ `f-${ projectCode }` }
 			onSubmit={ handleSubmit }
 		>
