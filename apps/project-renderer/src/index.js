@@ -2,14 +2,18 @@
  * External dependencies
  */
 import { render } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 
 /**
  * Internal dependencies
  */
+import { embedRequestInterceptor } from '@crowdsignal/rest-api';
 import { StyleProvider } from '@crowdsignal/components';
 import { setHostHeader } from '@crowdsignal/http';
 import { Route, Router } from '@crowdsignal/router';
 import App from './components/app';
+
+apiFetch.use( embedRequestInterceptor );
 
 const renderProject = () => {
 	const container = document.getElementById( 'crowdsignal-project' );
