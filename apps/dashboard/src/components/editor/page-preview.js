@@ -24,6 +24,7 @@ const PagePreview = (
 		dragHandleProps,
 		isActive,
 		isDragging,
+		label,
 		onDelete,
 		onSelect,
 		page,
@@ -47,7 +48,9 @@ const PagePreview = (
 			{ ...draggableProps }
 		>
 			<PagePreviewButton onClick={ handleSelect } { ...dragHandleProps }>
-				<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
+				<PagePreviewPageNumber>
+					{ label || pageIndex + 1 }
+				</PagePreviewPageNumber>
 
 				<PagePreviewFrame>
 					<BlockPreview blocks={ page } viewportWidth={ 1200 } />

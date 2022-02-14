@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { serialize, parse } from '@wordpress/blocks';
-import { get, isEmpty, map, some } from 'lodash';
+import { get, isEmpty, map, slice, some } from 'lodash';
 
 /**
  * Internal dependencies
@@ -42,6 +42,15 @@ export const getEditorPages = ( state ) => state.editor.pages;
  * @return {number}       Current page index.
  */
 export const getEditorCurrentPageIndex = ( state ) => state.editor.currentPage;
+
+/**
+ * Returns true if the page currently being edited is the confirmation page.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       True when editing the confirmation page.
+ */
+export const isEditingConfirmationPage = ( state ) =>
+	getEditorCurrentPageIndex( state ) === getEditorPages( state ).length - 1;
 
 /**
  * Returns the currently edited page.
@@ -94,7 +103,10 @@ export const isEditorContentPublishable = ( state ) => {
 				containsSubmitButton( block.innerBlocks )
 		);
 
-	return ! some( pages, ( page ) => ! containsSubmitButton( page ) );
+	return ! some(
+		slice( pages, 0, -1 ),
+		( page ) => ! containsSubmitButton( page )
+	);
 };
 
 /**
