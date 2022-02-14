@@ -1,3 +1,4 @@
+export * from './embed';
 export * from './feedback';
 export * from './media';
 export * from './poll';
