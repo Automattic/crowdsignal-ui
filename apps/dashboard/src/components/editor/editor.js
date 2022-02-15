@@ -4,7 +4,7 @@
 import { useDispatch } from '@wordpress/data';
 import { useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { map, noop, tap } from 'lodash';
+import { map, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/core';
 
@@ -49,16 +49,22 @@ const Editor = ( { project, theme = 'leven' } ) => {
 	} = useEditorContent( project );
 
 	const settings = useMemo(
-		() =>
-			tap( { ...editorSettings }, ( { iso } ) => {
-				if ( confirmationPage ) {
-					iso.blocks.disallowBlocks = [
-						...iso.blocks.disallowBlocks,
-						...map( crowdsignalBlocks, 'name' ),
-					];
-				}
-			} ),
-		[ editorId ]
+		() => ( {
+			...editorSettings,
+			iso: {
+				...editorSettings.iso,
+				blocks: {
+					...editorSettings.iso.blocks,
+					disallowBlocks: [
+						...editorSettings.iso.blocks.disallowBlocks,
+						...( confirmationPage
+							? map( crowdsignalBlocks, 'name' )
+							: [] ),
+					],
+				},
+			},
+		} ),
+		[ confirmationPage ]
 	);
 
 	return (
