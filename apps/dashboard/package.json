@@ -41,6 +41,7 @@
     "classnames": "^2.2.5",
     "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.9.0",
     "lodash": "^4.17.21",
+    "react-beautiful-dnd": "^13.1.0",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {

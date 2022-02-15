@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { BlockPreview } from '@wordpress/block-editor';
+import { forwardRef } from '@wordpress/element';
 import { Icon, trash } from '@wordpress/icons';
 import classnames from 'classnames';
 
@@ -16,25 +17,36 @@ import {
 	PagePreviewWrapper,
 } from './styles/page-preview';
 
-const PagePreview = ( {
-	disablePageActions,
-	isActive,
-	onDelete,
-	onSelect,
-	page,
-	pageIndex,
-} ) => {
+const PagePreview = (
+	{
+		disablePageActions,
+		draggableProps,
+		dragHandleProps,
+		isActive,
+		isDragging,
+		onDelete,
+		onSelect,
+		page,
+		pageIndex,
+	},
+	ref
+) => {
 	const handleSelect = () => onSelect( pageIndex );
 
 	const handleDelete = () => onDelete( pageIndex );
 
 	const classes = classnames( {
 		'is-active': isActive,
+		'is-dragging': isDragging,
 	} );
 
 	return (
-		<PagePreviewWrapper className={ classes }>
-			<PagePreviewButton onClick={ handleSelect }>
+		<PagePreviewWrapper
+			ref={ ref }
+			className={ classes }
+			{ ...draggableProps }
+		>
+			<PagePreviewButton onClick={ handleSelect } { ...dragHandleProps }>
 				<PagePreviewPageNumber>{ pageIndex + 1 }</PagePreviewPageNumber>
 
 				<PagePreviewFrame>
@@ -54,4 +66,4 @@ const PagePreview = ( {
 	);
 };
 
-export default PagePreview;
+export default forwardRef( PagePreview );

@@ -60,6 +60,10 @@ export const PagePreviewPageNumber = styled.span`
 	${ PagePreviewWrapper }.is-active & {
 		color: var( --color-primary );
 	}
+
+	${ PagePreviewWrapper }.is-dragging & {
+		opacity: 0;
+	}
 `;
 
 export const DeleteButton = styled.button`
