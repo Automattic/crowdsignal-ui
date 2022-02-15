@@ -37,8 +37,8 @@ const PageNavigation = () => {
 	] );
 
 	const handleAddPage = () => {
-		insertEditorPage( pages.length, [] );
-		setEditorCurrentPage( pages.length );
+		insertEditorPage( pages.length - 1, [] );
+		setEditorCurrentPage( pages.length - 1 );
 	};
 
 	const handleMovePage = ( {
