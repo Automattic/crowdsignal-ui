@@ -23,9 +23,16 @@ export const PagePreviewButton = styled.button`
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
-	padding: 8px 16px 0 32px;
+	height: 56px;
+	justify-content: flex-start;
+	padding: 8px 32px;
+	transition: height 0.3s, padding-right 0.3s;
 	width: 100%;
+
+	${ PagePreviewWrapper }.is-expanded & {
+		height: 96px;
+		padding-right: 123px;
+	}
 `;
 
 export const PagePreviewFrame = styled.div`
@@ -35,9 +42,23 @@ export const PagePreviewFrame = styled.div`
 	border-radius: 2px;
 	box-sizing: border-box;
 	height: 80px;
-	position: relative;
+	position: absolute;
+	right: 16px;
+	top: 8px;
 	overflow: hidden;
+	transition: opacity 0.3s, transform 0.3s;
 	width: 100px;
+
+	&.exiting,
+	&.exited {
+		opacity: 0;
+		transform: scale( 0.3 );
+	}
+
+	&.entering,
+	&.entered {
+		opacity: 1;
+	}
 
 	${ PagePreviewWrapper }.is-active & {
 		box-shadow: 0 0 0 2px var( --color-primary );
@@ -50,12 +71,13 @@ export const PagePreviewFrame = styled.div`
 `;
 
 export const PagePreviewPageNumber = styled.span`
-	flex: 1;
 	color: var( --color-text-subtle );
 	display: flex;
+	flex: 1;
 	font-size: 11px;
 	font-weight: bold;
-	justify-content: flex-start;
+	justify-content: center;
+	transition: flex 0.3s;
 
 	${ PagePreviewWrapper }.is-active & {
 		color: var( --color-primary );
@@ -63,6 +85,10 @@ export const PagePreviewPageNumber = styled.span`
 
 	${ PagePreviewWrapper }.is-dragging & {
 		opacity: 0;
+	}
+
+	${ PagePreviewWrapper }.is-expanded & {
+		flex: 0;
 	}
 `;
 
