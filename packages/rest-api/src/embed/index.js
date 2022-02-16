@@ -17,7 +17,16 @@ export const embedRequestInterceptor = ( options, next ) => {
 		const params = new URLSearchParams( queryString );
 		const query = Object.fromEntries( params );
 
-		return fetchEmbedContent( query ).then( ( { data } ) => data );
+		return fetchEmbedContent( query ).then( ( { data } ) => {
+			if ( data.html ) {
+				const doc = document.implementation.createHTMLDocument( '' );
+				doc.body.innerHTML = data.html;
+				const wrapper = doc.querySelector( '[class^="embed-"]' );
+				data.html = wrapper ? wrapper.innerHTML : data.html;
+			}
+
+			return data;
+		} );
 	}
 
 	return next( options );
