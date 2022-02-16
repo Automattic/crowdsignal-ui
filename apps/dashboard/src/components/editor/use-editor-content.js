@@ -51,10 +51,12 @@ export const useEditorContent = ( project ) => {
 
 	useEffect( () => {
 		setEditorId(
-			`crowdsignal-editor-${ editorProjectId }-${ currentPage }`
+			`crowdsignal-editor-${ editorProjectId }-${ currentPage }${
+				confirmationPage ? 'confirm' : ''
+			}`
 		);
 		setReady( false );
-	}, [ editorProjectId, currentPage ] );
+	}, [ editorProjectId, confirmationPage, currentPage ] );
 
 	useEffect( () => {
 		if ( isEditorContentSaved ) {
