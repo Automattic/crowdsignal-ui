@@ -2,14 +2,16 @@
  * External dependencies
  */
 import { useDispatch } from '@wordpress/data';
+import { useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { noop } from 'lodash';
+import { map, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/core';
 
 /**
  * Internal dependencies
  */
+import * as crowdsignalBlocks from '@crowdsignal/block-editor';
 import HeaderMeta from '../header-meta';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
@@ -38,12 +40,32 @@ const Editor = ( { project, theme = 'leven' } ) => {
 	const { updateEditorTitle } = useDispatch( STORE_NAME );
 
 	const {
+		confirmationPage,
 		editorId,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,
 		version,
 	} = useEditorContent( project );
+
+	const settings = useMemo(
+		() => ( {
+			...editorSettings,
+			iso: {
+				...editorSettings.iso,
+				blocks: {
+					...editorSettings.iso.blocks,
+					disallowBlocks: [
+						...editorSettings.iso.blocks.disallowBlocks,
+						...( confirmationPage
+							? map( crowdsignalBlocks, 'name' )
+							: [] ),
+					],
+				},
+			},
+		} ),
+		[ confirmationPage ]
+	);
 
 	return (
 		<EditorLayout className="editor">
@@ -63,7 +85,7 @@ const Editor = ( { project, theme = 'leven' } ) => {
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
 				key={ editorId }
-				settings={ editorSettings }
+				settings={ settings }
 				onSaveBlocks={ saveBlocks }
 				onLoad={ loadBlocks }
 				onError={ noop }

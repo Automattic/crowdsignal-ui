@@ -4,7 +4,7 @@
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Icon, pages as pagesIcon, plus } from '@wordpress/icons';
-import { map, range } from 'lodash';
+import { map, noop, range, slice } from 'lodash';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 /**
@@ -19,6 +19,7 @@ import { STORE_NAME } from '../../data';
 import {
 	PageNavigationAddButton,
 	PageNavigationHeader,
+	PageNavigationSectionHeader,
 	PageNavigationWrapper,
 } from './styles/page-navigation';
 
@@ -36,8 +37,8 @@ const PageNavigation = () => {
 	] );
 
 	const handleAddPage = () => {
-		insertEditorPage( pages.length, [] );
-		setEditorCurrentPage( pages.length );
+		insertEditorPage( pages.length - 1, [] );
+		setEditorCurrentPage( pages.length - 1 );
 	};
 
 	const handleMovePage = ( {
@@ -75,7 +76,7 @@ const PageNavigation = () => {
 				<Droppable droppableId="crowdsignal/page-navigation">
 					{ ( { droppableProps, innerRef, placeholder } ) => (
 						<div ref={ innerRef } { ...droppableProps }>
-							{ map( pages, ( page, index ) => (
+							{ map( slice( pages, 0, -1 ), ( page, index ) => (
 								<Draggable
 									key={ `page-${ index }` }
 									disableInteractiveElementBlocking={ true }
@@ -92,7 +93,7 @@ const PageNavigation = () => {
 												provided.dragHandleProps
 											}
 											disablePageActions={
-												pages.length === 1
+												pages.length <= 2
 											}
 											isActive={ index === currentPage }
 											isDragging={ snapshot.isDragging }
@@ -114,6 +115,20 @@ const PageNavigation = () => {
 			<PageNavigationAddButton onClick={ handleAddPage }>
 				<Icon icon={ plus } />
 			</PageNavigationAddButton>
+
+			<PageNavigationSectionHeader>
+				{ __( 'Confirmation', 'dashboard' ) }
+			</PageNavigationSectionHeader>
+
+			<PagePreview
+				disablePageActions={ true }
+				isActive={ currentPage === pages.length - 1 }
+				label="-"
+				page={ pages[ pages.length - 1 ] }
+				pageIndex={ pages.length - 1 }
+				onDelete={ noop }
+				onSelect={ handleSelectPage }
+			/>
 		</PageNavigationWrapper>
 	);
 };

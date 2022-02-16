@@ -22,11 +22,13 @@ export const useEditorContent = ( project ) => {
 	const { initializeEditor, updateEditorPage } = useDispatch( STORE_NAME );
 
 	const [
+		confirmationPage,
 		currentPage,
 		currentPageContent,
 		editorProjectId,
 		isEditorContentSaved,
 	] = useSelect( ( select ) => [
+		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
@@ -49,10 +51,12 @@ export const useEditorContent = ( project ) => {
 
 	useEffect( () => {
 		setEditorId(
-			`crowdsignal-editor-${ editorProjectId }-${ currentPage }`
+			`crowdsignal-editor-${ editorProjectId }-${ currentPage }${
+				confirmationPage ? 'confirm' : ''
+			}`
 		);
 		setReady( false );
-	}, [ editorProjectId, currentPage ] );
+	}, [ editorProjectId, confirmationPage, currentPage ] );
 
 	useEffect( () => {
 		if ( isEditorContentSaved ) {
@@ -91,6 +95,7 @@ export const useEditorContent = ( project ) => {
 
 	return {
 		editorId,
+		confirmationPage,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,

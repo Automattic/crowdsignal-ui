@@ -49,3 +49,13 @@ export const PageNavigationAddButton = styled.button`
 	margin: 16px 16px 0 63px;
 	width: 100px;
 `;
+
+export const PageNavigationSectionHeader = styled.span`
+	color: var( --color-text-subtle );
+	display: flex;
+	font-size: 11px;
+	margin-top: 32px;
+	padding: 0 16px 0 64px;
+	text-transform: uppercase;
+	width: 100%;
+`;

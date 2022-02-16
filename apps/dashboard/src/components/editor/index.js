@@ -3,6 +3,7 @@
  */
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Internal dependencies
@@ -18,7 +19,25 @@ const Editor = ( { projectId } ) => {
 			return [
 				{
 					draftContent: {
-						pages: [ [] ],
+						pages: [
+							[],
+							[
+								{
+									attributes: {
+										content: __(
+											'Thank you!',
+											'dashboard'
+										),
+										level: 2,
+										textAlign: 'center',
+									},
+									clientId: uuid(),
+									innerBlocks: [],
+									isValid: true,
+									name: 'core/heading',
+								},
+							],
+						],
 					},
 				},
 				false,
