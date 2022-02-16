@@ -1,5 +1,6 @@
 export * from './components';
 
+export { default as CoreEmbed } from './core-embed';
 export { default as MultipleChoiceAnswer } from './multiple-choice-answer';
 export { default as MultipleChoiceQuestion } from './multiple-choice-question';
 export { default as Poll } from './poll';
