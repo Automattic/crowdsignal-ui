@@ -7,6 +7,8 @@ export const PageNavigationWrapper = styled.div`
 	background-color: var( --color-surface );
 	border-right: 1px solid var( --color-border );
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
 		Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol';
@@ -52,11 +54,6 @@ export const PageNavigationHeader = styled.button`
 			width: auto;
 		}
 	}
-
-	span.entered {
-		opacity: 1;
-		width: auto;
-	}
 `;
 
 export const PageNavigationAddButton = styled.button`
@@ -84,8 +81,21 @@ export const PageNavigationSectionHeader = styled.span`
 	color: var( --color-text-subtle );
 	display: flex;
 	font-size: 11px;
-	margin-top: 32px;
+	height: 0;
+	margin-top: 8px;
+	overflow: hidden;
+	opacity: 0;
 	padding: 0 16px 0 64px;
 	text-transform: uppercase;
+	transition: height 0.3s, margin-top: 0.3s, opacity 0.1s;
 	width: 100%;
+
+	&.entered {
+		opacity: 1;
+	}
+
+	${ PageNavigationWrapper }.is-expanded & {
+		height: 20px;
+		margin-top: 32px;
+	}
 `;

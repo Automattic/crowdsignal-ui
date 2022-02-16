@@ -135,14 +135,19 @@ const PageNavigation = () => {
 				<Icon icon={ plus } />
 			</PageNavigationAddButton>
 
-			<PageNavigationSectionHeader>
-				{ __( 'Confirmation', 'dashboard' ) }
-			</PageNavigationSectionHeader>
+			<Transition in={ expanded } timeout={ 300 }>
+				{ ( state ) => (
+					<PageNavigationSectionHeader className={ state }>
+						{ __( 'Confirmation', 'dashboard' ) }
+					</PageNavigationSectionHeader>
+				) }
+			</Transition>
 
 			<PagePreview
 				disablePageActions={ true }
 				isActive={ currentPage === pages.length - 1 }
-				label="-"
+				isExpanded={ expanded }
+				label="CP"
 				page={ pages[ pages.length - 1 ] }
 				pageIndex={ pages.length - 1 }
 				onDelete={ noop }
