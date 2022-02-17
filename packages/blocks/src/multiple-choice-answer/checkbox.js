@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
+import { RawHTML } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -17,7 +17,7 @@ const Checkbox = ( { attributes, className, inputProps } ) => {
 		>
 			<FormCheckbox { ...inputProps } />
 
-			<RichText.Content value={ attributes.label } />
+			<RawHTML>{ attributes.label }</RawHTML>
 		</FormCheckbox.Label>
 	);
 };

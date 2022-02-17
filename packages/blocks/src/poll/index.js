@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
+import { RawHTML } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -21,7 +21,9 @@ const Poll = ( { attributes, className, children } ) => {
 			className={ classes }
 			style={ { width } }
 		>
-			<RichText.Content tagName="h3" value={ attributes.question } />
+			<h3>
+				<RawHTML>{ attributes.question }</RawHTML>
+			</h3>
 
 			<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
 		</QuestionWrapper>

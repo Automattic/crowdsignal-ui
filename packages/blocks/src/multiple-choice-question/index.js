@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
-import { createContext } from '@wordpress/element';
+import { createContext, RawHTML } from '@wordpress/element';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
@@ -39,10 +38,9 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<RichText.Content
-				tagName={ QuestionHeader }
-				value={ attributes.question }
-			/>
+			<QuestionHeader>
+				<RawHTML>{ attributes.question }</RawHTML>
+			</QuestionHeader>
 			<Context.Provider value={ attributes }>
 				<QuestionWrapper.Content>{ children }</QuestionWrapper.Content>
 			</Context.Provider>
