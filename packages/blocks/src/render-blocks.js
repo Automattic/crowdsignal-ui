@@ -44,6 +44,25 @@ const parseStyles = ( styleString ) => {
 /**
  * Parses DOM nodes into an array of objects to be used to create React elements.
  *
+ * @param  {string}  tagName HTML tag
+ * @param  {Object}  props object
+ * @return {Object}  Props object
+ */
+const parseTagProps = ( tagName, props ) => {
+	if ( tagName === 'AUDIO' ) {
+		if (
+			typeof props.controls !== 'undefined' &&
+			props.controls !== false
+		) {
+			props.controls = 'controls';
+		}
+		return props;
+	}
+};
+
+/**
+ * Parses DOM nodes into an array of objects to be used to create React elements.
+ *
  * @param  {HTMLCollection} nodes
  * @return {Array}                Array of objects describing the elements to be created.
  */
@@ -69,26 +88,6 @@ const parseNodes = ( nodes ) =>
 			},
 		};
 	} );
-
-/**
- * Parses DOM nodes into an array of objects to be used to create React elements.
- *
- * @param  {string} tagName
- * @param {Object}  props object.
- * @return {Object}  Props object.
- */
-const parseTagProps = ( tagName, props ) => {
-	switch ( tagName ) {
-		case 'audio':
-			if (
-				typeof props.controls !== 'undefined' &&
-				props.controls !== false
-			) {
-				props.controls = 'controls';
-			}
-	}
-	return props;
-};
 
 /**
  * Appends the innerBlocks value to the correct element based on the block.
