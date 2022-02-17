@@ -56,8 +56,9 @@ const parseTagProps = ( tagName, props ) => {
 		) {
 			props.controls = 'controls';
 		}
-		return props;
 	}
+
+	return props;
 };
 
 /**
