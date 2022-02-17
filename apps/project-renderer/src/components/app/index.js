@@ -101,7 +101,7 @@ const App = ( {
 					setContent( json.content );
 					setHasResponded( json.done );
 					setResponseHash( json.r );
-					setCurrentPage( parseInt( json.p ) );
+					setCurrentPage( parseInt( json.p, 10 ) );
 				} )
 				// eslint-disable-next-line no-console
 				.catch( ( err ) => console.error( err ) )
