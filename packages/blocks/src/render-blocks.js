@@ -62,7 +62,7 @@ const parseNodes = ( nodes ) =>
 			name: toLower( node.tagName ),
 			children: parseNodes( node.childNodes ),
 			props: {
-				...parseTagProps( toLower( node.tagName ), attributes ),
+				...parseTagProps( node.tagName, attributes ),
 				className,
 				style: parseStyles( style ),
 				key: uniqueId( KEY_PREFIX ),
