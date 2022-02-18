@@ -94,9 +94,6 @@ export const PagePreviewPageNumber = styled.span`
 
 export const PagePreviewMoreMenu = styled.div`
 	align-items: center;
-	background: var( --color-surface );
-	border: 1px solid var( --color-text );
-	border-radius: 2px;
 	height: 36px;
 	justify-content: center;
 	padding: 0;
@@ -113,7 +110,19 @@ export const PagePreviewMoreMenu = styled.div`
 		display: flex;
 	}
 
-	&.interface-more-menu-dropdown .components-button {
-		width: 100%;
+	> .components-button {
+		background: var( --color-surface );
+		border: 1px solid var( --color-text );
+		border-radius: 2px;
+	}
+
+	&.interface-more-menu-dropdown {
+		.components-popover__content {
+			min-width: 100px;
+		}
+
+		.components-button {
+			width: 100%;
+		}
 	}
 `;
