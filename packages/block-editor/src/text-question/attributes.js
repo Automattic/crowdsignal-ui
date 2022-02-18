@@ -15,6 +15,10 @@ export default {
 		type: 'string',
 		default: '',
 	},
+	placeholder: {
+		type: 'string',
+		default: '',
+	},
 	// should this be an entry on restrictions?
 	mandatory: {
 		type: 'boolean',

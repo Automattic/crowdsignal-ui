@@ -64,6 +64,7 @@ const EditTextQuestion = ( props ) => {
 					style={ {
 						height: '100%',
 					} }
+					placeholder={ attributes.placeholder }
 				/>
 			</ResizableBox>
 		</QuestionWrapper>

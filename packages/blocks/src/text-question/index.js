@@ -46,6 +46,7 @@ const TextQuestion = ( { attributes, className } ) => {
 				style={ {
 					height: attributes.inputHeight,
 				} }
+				placeholder={ attributes.placeholder }
 				{ ...inputProps }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
