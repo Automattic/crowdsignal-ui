@@ -2,8 +2,9 @@
  * External dependencies
  */
 import { BlockPreview } from '@wordpress/block-editor';
+import { MenuItem } from '@wordpress/components';
 import { forwardRef } from '@wordpress/element';
-import { Icon, trash } from '@wordpress/icons';
+import { MoreMenuDropdown } from '@wordpress/interface';
 import classnames from 'classnames';
 import { Transition } from 'react-transition-group';
 
@@ -11,9 +12,9 @@ import { Transition } from 'react-transition-group';
  * Style dependencies
  */
 import {
-	DeleteButton,
 	PagePreviewButton,
 	PagePreviewFrame,
+	PagePreviewMoreMenu,
 	PagePreviewPageNumber,
 	PagePreviewWrapper,
 } from './styles/page-preview';
@@ -28,6 +29,7 @@ const PagePreview = (
 		isDragging,
 		label,
 		onDelete,
+		onDuplicate,
 		onSelect,
 		page,
 		pageIndex,
@@ -37,6 +39,8 @@ const PagePreview = (
 	const handleSelect = () => onSelect( pageIndex );
 
 	const handleDelete = () => onDelete( pageIndex );
+
+	const handleDuplicate = () => onDuplicate( pageIndex );
 
 	const classes = classnames( {
 		'is-active': isActive,
@@ -68,12 +72,16 @@ const PagePreview = (
 			</PagePreviewButton>
 
 			{ ! disablePageActions && isExpanded && (
-				<DeleteButton
-					disabled={ disablePageActions }
-					onClick={ handleDelete }
-				>
-					<Icon icon={ trash } size={ 12 } />
-				</DeleteButton>
+				<PagePreviewMoreMenu as={ MoreMenuDropdown }>
+					{ () => (
+						<>
+							<MenuItem onClick={ handleDuplicate }>
+								Duplicate
+							</MenuItem>
+							<MenuItem onClick={ handleDelete }>Delete</MenuItem>
+						</>
+					) }
+				</PagePreviewMoreMenu>
 			) }
 		</PagePreviewWrapper>
 	);

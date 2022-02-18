@@ -31,6 +31,7 @@ const PageNavigation = () => {
 
 	const {
 		deleteEditorPage,
+		duplicateEditorPage,
 		insertEditorPage,
 		setEditorCurrentPage,
 		updateEditorPageOrder,
@@ -120,6 +121,7 @@ const PageNavigation = () => {
 											pageIndex={ index }
 											onSelect={ handleSelectPage }
 											onDelete={ deleteEditorPage }
+											onDuplicate={ duplicateEditorPage }
 										/>
 									) }
 								</Draggable>
