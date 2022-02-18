@@ -99,8 +99,9 @@ const App = ( {
 					}
 
 					setContent( json.content );
-					setHasResponded( true );
-					// all the setters should be called here: page, responseHash, content and startTime
+					setHasResponded( json.done );
+					setResponseHash( json.r );
+					setCurrentPage( parseInt( json.p, 10 ) );
 				} )
 				// eslint-disable-next-line no-console
 				.catch( ( err ) => console.error( err ) )
