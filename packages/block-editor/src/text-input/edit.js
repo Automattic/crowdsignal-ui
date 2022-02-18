@@ -63,7 +63,10 @@ const EditTextInput = ( props ) => {
 					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				<FormTextInput.Preview className="crowdsignal-forms-text-input-block__wrapper" />
+				<FormTextInput.Preview
+					placeholder={ attributes.placeholder }
+					className="crowdsignal-forms-text-input-block__wrapper"
+				/>
 			</ResizableBox>
 		</FormInputWrapper>
 	);
