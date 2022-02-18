@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { combineReducers } from '@wordpress/data';
-import { cloneDeep, filter, map, slice, tap } from 'lodash';
+import { filter, map, slice, tap } from 'lodash';
 
 /**
  * Internal dependencies
@@ -20,7 +20,7 @@ import {
 	EDITOR_SAVE_SUCCESS,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
-import { generateClientIds } from '../../util/project';
+import { clonePage } from './util';
 
 /**
  * Tracks which project properties have changed since the last save.
@@ -166,7 +166,7 @@ const pages = ( state = [], action ) => {
 	if ( action.type === EDITOR_PAGE_DUPLICATE ) {
 		return [
 			...slice( state, 0, action.pageIndex ),
-			generateClientIds( cloneDeep( state[ action.pageIndex ] ) ),
+			clonePage( state[ action.pageIndex ] ),
 			...slice( state, action.pageIndex ),
 		];
 	}

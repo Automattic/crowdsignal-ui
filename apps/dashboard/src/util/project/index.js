@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { forEach, get } from 'lodash';
-import { v4 as uuid } from 'uuid';
+import { get } from 'lodash';
 
 const getPublicTimestamp = ( project ) =>
 	get( project, [ 'publicContent', 'timestamp' ], 0 );
@@ -17,12 +16,3 @@ export const getLastUpdatedDate = ( project ) =>
 	Math.max( getPublicTimestamp( project ), getDraftTimestamp( project ) );
 
 export const isPublic = ( project ) => get( project, [ 'public' ], false );
-
-export const generateClientIds = ( blocks ) =>
-	forEach( blocks, ( block ) => {
-		if ( block.attributes.clientId ) {
-			block.attributes.clientId = uuid();
-		}
-
-		generateClientIds( block.innerBlocks );
-	} );
