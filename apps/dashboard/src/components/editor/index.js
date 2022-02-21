@@ -13,7 +13,7 @@ import { STORE_NAME } from '../../data';
 import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
 
-const Editor = ( { projectId } ) => {
+const Editor = ( { projectId, theme } ) => {
 	const [ project, isLoading ] = useSelect( ( select ) => {
 		if ( ! projectId ) {
 			return [
@@ -59,7 +59,7 @@ const Editor = ( { projectId } ) => {
 		);
 	}
 
-	return <BlockEditor project={ project } />;
+	return <BlockEditor project={ project } theme={ theme } />;
 };
 
 export default Editor;

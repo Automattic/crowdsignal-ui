@@ -1,0 +1,48 @@
+.crowdsignal-forms-form {
+	line-height: 1.5;
+
+	&__content {
+		input[type="text"] {
+			min-height: 45px;
+		}
+	}
+}
+
+input, .crowdsignal-forms-question-wrapper {
+	border: 1px solid #CCC;
+}
+
+button, input, select, optgroup, textarea {
+	line-height: initial;
+}
+
+.wp-block-button {
+	&:not(.is-style-squared) .wp-block-button__link {
+		border-radius: 5px;
+	}
+
+	&:not(.is-style-outline) .wp-block-button__link {
+		background: #0073aa;
+	}
+
+	.wp-block-button__link {
+		line-height: 1.8;
+		font-size: 0.88889em;
+		font-weight: bold;
+
+		&:hover {
+			color: white;
+			background: #111;
+			cursor: pointer;
+		}
+
+		&:not(.has-text-color) {
+			color: #fff;
+		}
+	}
+}
+
+.crowdsignal-forms-button__button {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
