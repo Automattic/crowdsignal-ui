@@ -92,30 +92,37 @@ export const PagePreviewPageNumber = styled.span`
 	}
 `;
 
-export const DeleteButton = styled.button`
+export const PagePreviewMoreMenu = styled.div`
 	align-items: center;
-	background: var( --color-neutral-80 );
-	border: 0;
-	border-radius: 2px;
-	display: none;
+	height: 36px;
 	justify-content: center;
-	height: 18px;
 	padding: 0;
 	position: absolute;
+	bottom: 15px;
 	right: 23px;
-	top: 15px;
-	width: 18px;
-	z-index: 100;
+	width: 36px;
 
-	${ PagePreviewWrapper }:hover & {
+	&& {
+		display: none;
+	}
+
+	${ PagePreviewWrapper }:hover && {
 		display: flex;
 	}
 
-	&:hover {
-		background-color: var( --color-error );
+	> .components-button {
+		background: var( --color-surface );
+		border: 1px solid var( --color-text );
+		border-radius: 2px;
 	}
 
-	svg {
-		fill: var( --color-text-inverted );
+	&.interface-more-menu-dropdown {
+		.components-popover__content {
+			min-width: 100px;
+		}
+
+		.components-button {
+			width: 100%;
+		}
 	}
 `;

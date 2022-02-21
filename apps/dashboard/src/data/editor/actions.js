@@ -13,6 +13,7 @@ import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
+	EDITOR_PAGE_DUPLICATE,
 	EDITOR_PAGE_INSERT,
 	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
@@ -84,6 +85,11 @@ export function* saveEditorChanges( options = {} ) {
 
 export const deleteEditorPage = autosave( ( pageIndex ) => ( {
 	type: EDITOR_PAGE_DELETE,
+	pageIndex,
+} ) );
+
+export const duplicateEditorPage = autosave( ( pageIndex ) => ( {
+	type: EDITOR_PAGE_DUPLICATE,
 	pageIndex,
 } ) );
 

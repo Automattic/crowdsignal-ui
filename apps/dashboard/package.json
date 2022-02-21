@@ -39,6 +39,7 @@
     "@wordpress/hooks": "^3.2.2",
     "@wordpress/i18n": "^4.2.4",
     "@wordpress/icons": "^6.1.1",
+    "@wordpress/interface": "^4.1.15",
     "classnames": "^2.2.5",
     "isolated-block-editor": "git://github.com/Automattic/isolated-block-editor.git#2.9.0",
     "lodash": "^4.17.21",

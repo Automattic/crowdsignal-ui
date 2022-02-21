@@ -11,6 +11,7 @@ import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
+	EDITOR_PAGE_DUPLICATE,
 	EDITOR_PAGE_INSERT,
 	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
@@ -19,6 +20,7 @@ import {
 	EDITOR_SAVE_SUCCESS,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
+import { clonePage } from './util';
 
 /**
  * Tracks which project properties have changed since the last save.
@@ -42,6 +44,7 @@ const changes = ( state = {}, action ) => {
 	if (
 		action.type === EDITOR_PAGE_INSERT ||
 		action.type === EDITOR_PAGE_DELETE ||
+		action.type === EDITOR_PAGE_DUPLICATE ||
 		action.type === EDITOR_PAGE_UPDATE ||
 		action.type === EDITOR_PAGE_ORDER_UPDATE
 	) {
@@ -75,6 +78,10 @@ const currentPage = ( state = 0, action ) => {
 
 	if ( action.type === EDITOR_CURRENT_PAGE_INDEX_SET ) {
 		return action.pageIndex;
+	}
+
+	if ( action.type === EDITOR_PAGE_DUPLICATE ) {
+		return action.pageIndex + 1;
 	}
 
 	if (
@@ -152,6 +159,14 @@ const pages = ( state = [], action ) => {
 		return [
 			...slice( state, 0, action.pageIndex ),
 			action.pageContent,
+			...slice( state, action.pageIndex ),
+		];
+	}
+
+	if ( action.type === EDITOR_PAGE_DUPLICATE ) {
+		return [
+			...slice( state, 0, action.pageIndex ),
+			clonePage( state[ action.pageIndex ] ),
 			...slice( state, action.pageIndex ),
 		];
 	}
