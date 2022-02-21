@@ -1,6 +1,23 @@
 @import 'base';
 @import '~isolated-block-editor/build-browser/core.css';
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: var(--color-neutral-40);
+	opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: var(--color-neutral-40);;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: var(--color-neutral-40);
+}
+
+.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
+	color: var(--color-neutral-40);
+}
+
 #crowdsignal-dashboard .block-editor-block-list__layout.is-root-container,
 .block-editor-block-preview__content-iframe .block-editor-block-list__layout.is-root-container {
 	.wp-block {

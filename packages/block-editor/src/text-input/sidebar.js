@@ -41,11 +41,6 @@ export default ( { attributes, setAttributes } ) => {
 					onChange={ handleChangeAttribute( 'mandatory' ) }
 				/>
 				<TextControl
-					label="Placeholder"
-					value={ attributes.placeholder }
-					onChange={ handleChangeAttribute( 'placeholder' ) }
-				/>
-				<TextControl
 					label={ __( 'Input field height', 'block-editor' ) }
 					type="number"
 					value={ attributes.inputHeight }

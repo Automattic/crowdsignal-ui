@@ -39,12 +39,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					type="number"
 					onChange={ handleChangeInputHeight }
 				/>
-
-				<TextControl
-					label="Placeholder"
-					value={ attributes.placeholder }
-					onChange={ handleChangeAttribute( 'placeholder' ) }
-				/>
 			</PanelBody>
 
 			<ColorSettings

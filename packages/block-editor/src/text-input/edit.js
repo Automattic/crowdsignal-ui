@@ -21,6 +21,9 @@ const EditTextInput = ( props ) => {
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
+	const handleChangePlaceholder = ( event ) =>
+		setAttributes( { placeholder: event.target.value } );
+
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' && handle !== 'right' ) {
 			return;
@@ -63,8 +66,10 @@ const EditTextInput = ( props ) => {
 					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				<FormTextInput.Preview
-					placeholder={ attributes.placeholder }
+				<FormTextInput
+					placeholder={ __( 'Enter placeholder', 'block-editor' ) }
+					value={ attributes.placeholder }
+					onChange={ handleChangePlaceholder }
 					className="crowdsignal-forms-text-input-block__wrapper"
 				/>
 			</ResizableBox>
