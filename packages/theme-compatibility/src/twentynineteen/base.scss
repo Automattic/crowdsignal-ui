@@ -1,3 +1,6 @@
+html {
+	font-size: 22px;
+}
 .crowdsignal-forms-form {
 	line-height: 1.5;
 
@@ -26,7 +29,8 @@ button, input, select, optgroup, textarea {
 	}
 
 	.wp-block-button__link {
-		line-height: 1.8;
+		line-height: 1.2;
+		padding: 0.76rem 1rem;
 		font-size: 0.88889em;
 		font-weight: bold;
 

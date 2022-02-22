@@ -9,7 +9,7 @@ h1, h2 {
 .iso-editor .block-editor-writing-flow {
 	font-size: 22px;
 	font-family: "NonBreakingSpaceOverride", "Hoefler Text", Garamond, "Times New Roman", serif;
-	line-height: 1.8;
+	line-height: 1.5;
 	color: #111;
 	-webkit-font-smoothing: antialiased;
 
@@ -17,6 +17,10 @@ h1, h2 {
 		&:before {
 			display: block;
 		}
+	}
+
+	p {
+		line-height: 1.5;
 	}
 }
 
