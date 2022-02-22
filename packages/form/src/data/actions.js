@@ -4,6 +4,7 @@
 import {
 	FIELD_ERROR_SET,
 	FIELD_VALUE_SET,
+	FORM_RESET,
 	FORM_SUBMIT_START,
 	FORM_SUBMIT_STOP,
 } from './action-types';
@@ -29,5 +30,10 @@ export const startSubmit = ( form ) => ( {
 
 export const stopSubmit = ( form ) => ( {
 	type: FORM_SUBMIT_STOP,
+	form,
+} );
+
+export const resetForm = ( form ) => ( {
+	type: FORM_RESET,
 	form,
 } );

@@ -20,7 +20,7 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		[ name ]
 	);
 
-	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
+	const { startSubmit, stopSubmit, resetForm } = useDispatch( STORE_NAME );
 
 	const registerValidation = ( fieldName, validation ) =>
 		( validations[ fieldName ] = validation );
@@ -40,7 +40,9 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 		startSubmit( name );
 
-		onSubmit( data ).finally( () => stopSubmit( name ) );
+		onSubmit( data )
+			.then( () => resetForm( name ) )
+			.finally( () => stopSubmit( name ) );
 	};
 
 	return (
