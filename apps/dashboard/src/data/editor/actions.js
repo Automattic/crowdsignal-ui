@@ -47,15 +47,12 @@ export const setEditorCurrentPage = ( pageIndex ) => ( {
 export function* saveEditorChanges( options = {} ) {
 	const projectId = select( STORE_NAME ).getEditorProjectId();
 	const changes = select( STORE_NAME ).getEditorChanges();
-	const data = select( STORE_NAME ).getEditorUpdatedProjectData();
+	const data = select( STORE_NAME ).getEditorUpdatedProjectData( {
+		public: options.public,
+	} );
 
 	yield { type: EDITOR_SAVE };
 	yield { type: EDITOR_AUTOSAVE_TIMER_CANCEL };
-
-	if ( options.public ) {
-		data.publicContent = data.draftContent;
-		data.public = true;
-	}
 
 	try {
 		yield saveAndUpdateProject( projectId, data );

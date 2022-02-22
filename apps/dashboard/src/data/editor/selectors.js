@@ -120,19 +120,26 @@ export const getEditorTitle = ( state ) => state.editor.title;
 /**
  * Returns a partial project containing all the changes made since the last save.
  *
- * @param  {Object} state App state.
- * @return {Object}       Partial project.
+ * @param  {Object}  state          App state.
+ * @param  {Object}  options        Options.
+ * @param  {boolean} options.public Set to true if the project should include to-be-published changes.
+ * @return {Object}                 Partial project.
  */
-export const getEditorUpdatedProjectData = ( state ) => {
+export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 	const changes = getEditorChanges( state );
 	const data = {};
 
-	if ( changes.content ) {
+	if ( changes.content || options.public ) {
 		data.draftContent = {
 			pages: map( getEditorPages( state ), ( page ) =>
 				parse( serialize( page ) )
 			),
 		};
+	}
+
+	if ( options.public ) {
+		data.publicContent = data.draftContent;
+		data.public = true;
 	}
 
 	if ( changes.title ) {
