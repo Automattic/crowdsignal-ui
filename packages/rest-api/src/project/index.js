@@ -42,3 +42,13 @@ export const fetchProjectForm = ( projectId, query = {} ) =>
 		method: 'GET',
 		query,
 	} );
+
+export const submitProjectForm = ( projectId, formData, query = {} ) =>
+	http( {
+		host: 'https://api.crowdsignal.com',
+		path: `/v4/projects/${ projectId }/form`,
+		method: 'POST',
+		skipGlobalHeaders: [ 'Content-Type' ],
+		body: formData,
+		query,
+	} );

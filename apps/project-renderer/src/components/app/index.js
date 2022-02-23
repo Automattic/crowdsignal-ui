@@ -19,7 +19,7 @@ import {
 import { Form } from '@crowdsignal/form';
 import { useStylesheet } from '@crowdsignal/hooks';
 import { setHostOption } from '@crowdsignal/http';
-import { fetchProjectForm } from '@crowdsignal/rest-api';
+import { fetchProjectForm, submitProjectForm } from '@crowdsignal/rest-api';
 
 const App = ( {
 	projectCode,
@@ -49,7 +49,9 @@ const App = ( {
 			);
 		}
 
-		fetchProjectForm( projectCode, preview ? { preview: true } : {} )
+		const query = preview && { preview };
+
+		fetchProjectForm( projectCode, query )
 			.then( ( res ) => {
 				if ( ! res.data || ! res.data.content ) {
 					throw new Error( 'Empty response' );
@@ -77,23 +79,11 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
-		return (
-			window
-				.fetch(
-					`https://api.crowdsignal.com/v4/projects/${ projectCode }/form`,
-					{
-						method: 'POST',
-						body: form,
-					}
-				)
-				.then( ( res ) => {
-					if ( ! res.ok ) {
-						throw new Error( res.status );
-					}
+		const query = preview && { preview };
 
-					return res.json();
-				} )
-				.then( ( json ) => {
+		return (
+			submitProjectForm( projectCode, form, query )
+				.then( ( { data: json } ) => {
 					if ( ! json || ! json.content ) {
 						throw new Error( 'Empty response' );
 					}
