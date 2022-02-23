@@ -33,7 +33,8 @@ export const stopSubmit = ( form ) => ( {
 	form,
 } );
 
-export const initForm = ( form ) => ( {
+export const initForm = ( form, values ) => ( {
 	type: FORM_INIT,
 	form,
+	values,
 } );
