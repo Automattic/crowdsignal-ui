@@ -44,6 +44,26 @@ const parseStyles = ( styleString ) => {
 /**
  * Parses DOM nodes into an array of objects to be used to create React elements.
  *
+ * @param  {string}  tagName HTML tag
+ * @param  {Object}  props object
+ * @return {Object}  Props object
+ */
+const parseTagProps = ( tagName, props ) => {
+	if ( tagName === 'AUDIO' ) {
+		if (
+			typeof props.controls !== 'undefined' &&
+			props.controls !== false
+		) {
+			props.controls = 'controls';
+		}
+	}
+
+	return props;
+};
+
+/**
+ * Parses DOM nodes into an array of objects to be used to create React elements.
+ *
  * @param  {HTMLCollection} nodes
  * @return {Array}                Array of objects describing the elements to be created.
  */
@@ -62,7 +82,7 @@ const parseNodes = ( nodes ) =>
 			name: toLower( node.tagName ),
 			children: parseNodes( node.childNodes ),
 			props: {
-				...attributes,
+				...parseTagProps( node.tagName, attributes ),
 				className,
 				style: parseStyles( style ),
 				key: uniqueId( KEY_PREFIX ),
