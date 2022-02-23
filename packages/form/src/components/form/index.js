@@ -41,7 +41,7 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 		startSubmit( name );
 
 		onSubmit( data )
-			.then( () => initForm( name ) )
+			.then( () => initForm( name, {} ) )
 			.finally( () => stopSubmit( name ) );
 	};
 
