@@ -10,7 +10,6 @@ import {
 	FIELD_ERROR_SET,
 	FIELD_VALUE_SET,
 	FORM_INIT,
-	FORM_RESET,
 	FORM_SUBMIT_START,
 	FORM_SUBMIT_STOP,
 } from './action-types';
@@ -60,10 +59,6 @@ const value = ( state, action ) => {
 			...state,
 			[ action.field ]: action.value,
 		};
-	}
-
-	if ( action.type === FORM_RESET ) {
-		return {};
 	}
 
 	return state;

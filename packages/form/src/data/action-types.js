@@ -11,6 +11,5 @@
 export const FIELD_ERROR_SET = 'FIELD_ERROR_SET';
 export const FIELD_VALUE_SET = 'FIELD_VALUE_SET';
 export const FORM_INIT = 'FORM_INIT';
-export const FORM_RESET = 'FORM_RESET';
 export const FORM_SUBMIT_START = 'FORM_SUBMIT_START';
 export const FORM_SUBMIT_STOP = 'FORM_SUBMIT_STOP';
