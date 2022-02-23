@@ -40,8 +40,6 @@ const App = ( {
 	const [ hasResponded, setHasResponded ] = useState( false );
 
 	useEffect( () => {
-		const query = {};
-
 		if ( preview ) {
 			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
 			setHostOption(
@@ -49,8 +47,9 @@ const App = ( {
 				'credentials',
 				'include'
 			);
-			query.preview = true;
 		}
+
+		const query = preview && { preview };
 
 		fetchProjectForm( projectCode, query )
 			.then( ( res ) => {
@@ -80,7 +79,7 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
-		const query = preview ? { preview: true } : {};
+		const query = preview && { preview };
 
 		return (
 			submitProjectForm( projectCode, form, query )
