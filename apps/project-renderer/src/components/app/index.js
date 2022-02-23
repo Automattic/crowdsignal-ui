@@ -40,6 +40,8 @@ const App = ( {
 	const [ hasResponded, setHasResponded ] = useState( false );
 
 	useEffect( () => {
+		const query = {};
+
 		if ( preview ) {
 			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
 			setHostOption(
@@ -47,9 +49,10 @@ const App = ( {
 				'credentials',
 				'include'
 			);
+			query.preview = true;
 		}
 
-		fetchProjectForm( projectCode, preview ? { preview: true } : {} )
+		fetchProjectForm( projectCode, query )
 			.then( ( res ) => {
 				if ( ! res.data || ! res.data.content ) {
 					throw new Error( 'Empty response' );
@@ -77,12 +80,10 @@ const App = ( {
 			form.append( key, data[ key ] )
 		);
 
+		const query = preview ? { preview: true } : {};
+
 		return (
-			submitProjectForm(
-				projectCode,
-				form,
-				preview ? { preview: true } : {}
-			)
+			submitProjectForm( projectCode, form, query )
 				.then( ( { data: json } ) => {
 					if ( ! json || ! json.content ) {
 						throw new Error( 'Empty response' );
