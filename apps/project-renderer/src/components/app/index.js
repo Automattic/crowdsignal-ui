@@ -69,15 +69,6 @@ const App = ( {
 			data = {};
 		}
 
-		if ( preview ) {
-			setHostOption( 'https://api.crowdsignal.com', 'mode', 'cors' );
-			setHostOption(
-				'https://api.crowdsignal.com',
-				'credentials',
-				'include'
-			);
-		}
-
 		const form = new window.FormData();
 		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
