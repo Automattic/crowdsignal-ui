@@ -7,6 +7,10 @@ export default {
 		type: 'string',
 		default: '',
 	},
+	placeholder: {
+		type: 'string',
+		default: '',
+	},
 	mandatory: {
 		type: 'boolean',
 		default: false,

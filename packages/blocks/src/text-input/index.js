@@ -45,6 +45,7 @@ const TextInput = ( { attributes, className } ) => {
 					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
 				} }
+				placeholder={ attributes.placeholder }
 				{ ...inputProps }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }

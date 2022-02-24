@@ -24,6 +24,9 @@ const EditTextQuestion = ( props ) => {
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
+	const handleChangePlaceholder = ( event ) =>
+		setAttributes( { placeholder: event.target.value } );
+
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' ) {
 			return;
@@ -48,7 +51,7 @@ const EditTextQuestion = ( props ) => {
 
 			<RichText
 				tagName={ QuestionHeader }
-				placeholder={ __( 'Enter your question', 'blocks' ) }
+				placeholder={ __( 'Enter your question', 'block-editor' ) }
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
 			/>
@@ -60,7 +63,10 @@ const EditTextQuestion = ( props ) => {
 				onResizeStop={ handleResizeInput }
 				showHandle={ isSelected }
 			>
-				<FormTextarea.Preview
+				<FormTextarea
+					placeholder={ __( 'Enter placeholder', 'block-editor' ) }
+					value={ attributes.placeholder }
+					onChange={ handleChangePlaceholder }
 					style={ {
 						height: '100%',
 					} }
