@@ -3,12 +3,12 @@
  */
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { v4 as uuid } from 'uuid';
 
 /**
  * Internal dependencies
  */
 import HeaderMeta from '../header-meta';
+import { blankProjectTemplate } from '../new-project-wizard/templates';
 import { STORE_NAME } from '../../data';
 import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
@@ -16,32 +16,7 @@ import EditorLoadingPlaceholder from './loading-placeholder';
 const Editor = ( { projectId, theme } ) => {
 	const [ project, isLoading ] = useSelect( ( select ) => {
 		if ( ! projectId ) {
-			return [
-				{
-					draftContent: {
-						pages: [
-							[],
-							[
-								{
-									attributes: {
-										content: __(
-											'Thank you!',
-											'dashboard'
-										),
-										level: 2,
-										textAlign: 'center',
-									},
-									clientId: uuid(),
-									innerBlocks: [],
-									isValid: true,
-									name: 'core/heading',
-								},
-							],
-						],
-					},
-				},
-				false,
-			];
+			return [ blankProjectTemplate.project, false ];
 		}
 
 		return [

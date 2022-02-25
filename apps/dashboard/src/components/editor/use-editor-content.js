@@ -36,12 +36,8 @@ export const useEditorContent = ( project ) => {
 	] );
 
 	useEffect( () => {
-		if ( ! project ) {
-			return;
-		}
-
 		initializeEditor(
-			project.id,
+			project.id || 0,
 			project.title,
 			isPublic( project ) && ! forceDraft
 				? project.publicContent.pages
@@ -93,12 +89,21 @@ export const useEditorContent = ( project ) => {
 		setReady( false );
 	};
 
+	const setProjectTemplate = ( projectTemplate ) => {
+		initializeEditor( 0, undefined, projectTemplate.draftContent.pages );
+
+		// Force IsolatedBlockEditor to reload
+		setEditorId( `${ editorId }*` );
+		setReady( false );
+	};
+
 	return {
 		editorId,
 		confirmationPage,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,
+		setProjectTemplate,
 		version: forceDraft ? 'draft' : 'auto',
 	};
 };
