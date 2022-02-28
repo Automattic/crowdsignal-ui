@@ -1,7 +1,16 @@
 /**
  * External dependencies
  */
-import { fromPairs, isUndefined, map, split, trimStart } from 'lodash';
+import {
+	fromPairs,
+	isNumber,
+	isUndefined,
+	keys,
+	map,
+	split,
+	trimStart,
+	zipObject,
+} from 'lodash';
 import RouteParser from 'route-parser';
 
 /**
@@ -82,6 +91,12 @@ export const hasLocalTarget = ( element, includePattern ) => {
  */
 export const matchRoute = ( pattern, path ) => {
 	const route = new RouteParser( pattern );
+	const match = route.match( path );
 
-	return route.match( path );
+	return zipObject(
+		keys( match ),
+		map( match, ( param ) =>
+			isNumber( param ) ? parseInt( param, 10 ) : param
+		)
+	);
 };
