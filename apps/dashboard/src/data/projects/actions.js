@@ -59,9 +59,7 @@ export function* saveAndUpdateProject( projectId, project ) {
 			? yield dispatchAsync( patchProject, [ projectId, project ] )
 			: yield dispatchAsync( createProject, [ project ] );
 
-		yield finishResolution( 'getProject', [
-			response.data.id ? String( response.data.id ) : '0',
-		] );
+		yield finishResolution( 'getProject', [ String( response.data.id ) ] );
 
 		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
