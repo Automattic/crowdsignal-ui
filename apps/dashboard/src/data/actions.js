@@ -9,6 +9,14 @@ export const dispatchAsync = ( apply, args = [] ) => ( {
 	args,
 } );
 
+/**
+ * Action creator allows for custom resolution on resolvers from core store.
+ * See: https://github.com/WordPress/gutenberg/blob/trunk/packages/data/src/redux-store/metadata/actions.js
+ * See: https://unfoldingneurons.com/2020/wordpress-data-store-properties-resolvers
+ *
+ * @param {string} selectorName
+ * @param {Array} args
+ */
 export const finishResolution = ( selectorName, args ) => ( {
 	type: FINISH_RESOLUTION,
 	selectorName,
