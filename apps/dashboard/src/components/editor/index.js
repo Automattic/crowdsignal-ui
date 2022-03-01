@@ -14,16 +14,19 @@ import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
 
 const Editor = ( { projectId, theme } ) => {
-	const [ project, isLoading ] = useSelect( ( select ) => {
-		if ( ! projectId ) {
-			return [ blankProjectTemplate.project, false ];
-		}
+	const [ project, isLoading ] = useSelect(
+		( select ) => {
+			if ( ! projectId ) {
+				return [ blankProjectTemplate.project, false ];
+			}
 
-		return [
-			select( STORE_NAME ).getProject( projectId ),
-			select( STORE_NAME ).isProjectLoading( projectId ),
-		];
-	} );
+			return [
+				select( STORE_NAME ).getProject( projectId ),
+				select( STORE_NAME ).isProjectLoading( projectId ),
+			];
+		},
+		[ projectId ]
+	);
 
 	if ( isLoading ) {
 		return (

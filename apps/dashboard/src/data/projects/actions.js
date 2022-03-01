@@ -13,7 +13,7 @@ import {
 	createProject,
 	updateProject as patchProject,
 } from '@crowdsignal/rest-api';
-import { dispatchAsync } from '../actions';
+import { dispatchAsync, finishResolution } from '../actions';
 
 export function loadProject( projectId ) {
 	return {
@@ -58,6 +58,8 @@ export function* saveAndUpdateProject( projectId, project ) {
 		const response = projectId
 			? yield dispatchAsync( patchProject, [ projectId, project ] )
 			: yield dispatchAsync( createProject, [ project ] );
+
+		yield finishResolution( 'getProject', [ String( response.data.id ) ] );
 
 		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
