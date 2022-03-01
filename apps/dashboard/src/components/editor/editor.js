@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useDispatch } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { map, noop } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
@@ -13,6 +13,7 @@ import { Global } from '@emotion/core';
  */
 import * as crowdsignalBlocks from '@crowdsignal/block-editor';
 import HeaderMeta from '../header-meta';
+import NewProjectWizard from '../new-project-wizard';
 import ProjectNavigation from '../project-navigation';
 import { STORE_NAME } from '../../data';
 import AutoSubmitButton from './auto-submit-button';
@@ -37,6 +38,8 @@ import {
 registerBlocks();
 
 const Editor = ( { project, theme = 'leven' } ) => {
+	const [ showWizard, setShowWizard ] = useState( ! project.id );
+
 	const { updateEditorTitle } = useDispatch( STORE_NAME );
 
 	const {
@@ -45,8 +48,14 @@ const Editor = ( { project, theme = 'leven' } ) => {
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,
+		setProjectTemplate,
 		version,
 	} = useEditorContent( project );
+
+	const handleSelectTemplate = ( projectTemplate ) => {
+		setProjectTemplate( projectTemplate );
+		setShowWizard( false );
+	};
 
 	const settings = useMemo(
 		() => ( {
@@ -79,8 +88,11 @@ const Editor = ( { project, theme = 'leven' } ) => {
 				projectId={ project.id }
 			/>
 
-			<PageNavigation />
+			{ showWizard && (
+				<NewProjectWizard onSelect={ handleSelectTemplate } />
+			) }
 
+			<PageNavigation />
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
 				key={ editorId }

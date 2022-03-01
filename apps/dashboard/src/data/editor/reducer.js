@@ -29,9 +29,18 @@ import { clonePage } from './util';
  * @param  {Object} action Action object.
  * @return {Object}        Updated properties.
  */
+// eslint-disable-next-line complexity
 const changes = ( state = {}, action ) => {
-	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE ) {
+	if ( action.type === EDITOR_SAVE ) {
 		return {};
+	}
+
+	if ( action.type === EDITOR_INIT ) {
+		return action.projectId > 0
+			? {}
+			: {
+					content: true,
+			  };
 	}
 
 	if ( action.type === EDITOR_SAVE_ERROR ) {

@@ -5,6 +5,18 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 
 export const pageStyles = css`
+	@font-face {
+		font-family: Recoleta;
+		font-weight: normal;
+		src: url( 'https://crowdsignal.com/wp-content/themes/a8c/crowd-signal/assets/fonts/recoleta-regular-webfont.woff' );
+	}
+
+	@font-face {
+		font-family: Recoleta;
+		font-weight: bold;
+		src: url( 'https://crowdsignal.com/wp-content/themes/a8c/crowd-signal/assets/fonts/recoleta-bold-webfont.woff' );
+	}
+
 	html {
 		display: table;
 		margin: 0;
