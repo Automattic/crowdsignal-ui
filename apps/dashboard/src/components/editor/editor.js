@@ -56,7 +56,6 @@ const Editor = ( { project, theme = 'leven' } ) => {
 				blocks: {
 					...editorSettings.iso.blocks,
 					disallowBlocks: [
-						...editorSettings.iso.blocks.disallowBlocks,
 						...( confirmationPage
 							? map( crowdsignalBlocks, 'name' )
 							: [] ),
