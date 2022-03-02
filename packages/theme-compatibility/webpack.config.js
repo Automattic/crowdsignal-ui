@@ -16,6 +16,8 @@ module.exports = {
 		'leven-editor': './src/leven/editor.scss',
 		'twentynineteen': './src/twentynineteen/base.scss',
 		'twentynineteen-editor': './src/twentynineteen/editor.scss',
+		'twentytwentytwo': './src/twentytwentytwo/base.scss',
+		'twentytwentytwo-editor': './src/twentytwentytwo/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
