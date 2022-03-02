@@ -5,11 +5,10 @@ import {
 	fromPairs,
 	isNumber,
 	isUndefined,
-	keys,
 	map,
 	split,
 	trimStart,
-	zipObject,
+	mapValues,
 } from 'lodash';
 import RouteParser from 'route-parser';
 
@@ -93,10 +92,7 @@ export const matchRoute = ( pattern, path ) => {
 	const route = new RouteParser( pattern );
 	const match = route.match( path );
 
-	return zipObject(
-		keys( match ),
-		map( match, ( param ) =>
-			isNumber( param ) ? parseInt( param, 10 ) : param
-		)
+	return mapValues( match, ( value ) =>
+		isNumber( value ) ? parseInt( value, 10 ) : value
 	);
 };
