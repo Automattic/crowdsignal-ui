@@ -4,6 +4,7 @@
 import { BlockPreview } from '@wordpress/block-editor';
 import { MenuItem } from '@wordpress/components';
 import { forwardRef } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import { MoreMenuDropdown } from '@wordpress/interface';
 import classnames from 'classnames';
 import { Transition } from 'react-transition-group';
@@ -38,7 +39,21 @@ const PagePreview = (
 ) => {
 	const handleSelect = () => onSelect( pageIndex );
 
-	const handleDelete = () => onDelete( pageIndex );
+	const handleDelete = () => {
+		// eslint-disable-next-line
+		const confirmed = window.confirm(
+			__(
+				'Are you sure you want to delete this page? This action cannot be undone.',
+				'dashboard'
+			)
+		);
+
+		if ( ! confirmed ) {
+			return;
+		}
+
+		onDelete( pageIndex );
+	};
 
 	const handleDuplicate = () => onDuplicate( pageIndex );
 
@@ -76,9 +91,11 @@ const PagePreview = (
 					{ () => (
 						<>
 							<MenuItem onClick={ handleDuplicate }>
-								Duplicate
+								{ __( 'Duplicate', 'dashboard' ) }
 							</MenuItem>
-							<MenuItem onClick={ handleDelete }>Delete</MenuItem>
+							<MenuItem onClick={ handleDelete }>
+								{ __( 'Delete', 'dashboard' ) }
+							</MenuItem>
 						</>
 					) }
 				</PagePreviewMoreMenu>
