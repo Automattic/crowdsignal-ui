@@ -3,10 +3,10 @@
  */
 import {
 	fromPairs,
-	isNumber,
 	isUndefined,
 	map,
 	split,
+	toNumber,
 	trimStart,
 	mapValues,
 } from 'lodash';
@@ -93,6 +93,6 @@ export const matchRoute = ( pattern, path ) => {
 	const match = route.match( path );
 
 	return mapValues( match, ( value ) =>
-		isNumber( value ) ? parseInt( value, 10 ) : value
+		isNaN( toNumber( value ) ) ? value : toNumber( value )
 	);
 };
