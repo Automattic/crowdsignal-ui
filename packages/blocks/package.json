@@ -17,10 +17,10 @@
   },
   "main": "src/index.js",
   "dependencies": {
+    "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/form": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
     "@wordpress/block-editor": "^8.0.7",
-    "@wordpress/components": "^19.1.1",
     "@wordpress/core-data": "^4.0.9",
     "@wordpress/data": "^6.1.4",
     "@wordpress/element": "^4.0.4",

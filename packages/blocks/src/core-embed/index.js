@@ -4,10 +4,14 @@
 import { __, sprintf } from '@wordpress/i18n';
 import { isEmpty } from 'lodash';
 import { renderToString } from '@wordpress/element';
-import { SandBox } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 import classnames from 'classnames';
+
+/**
+ * Internal dependencies
+ */
+import { Sandbox } from '@crowdsignal/components';
 
 const getPhotoHtml = ( photo ) => {
 	const imageUrl = photo.thumbnail_url || photo.url;
@@ -52,7 +56,7 @@ const CoreEmbed = ( { attributes } ) => {
 	return (
 		<figure className={ classes }>
 			<div className="wp-block-embed__wrapper">
-				<SandBox
+				<Sandbox
 					html={ html }
 					scripts={ preview.scripts }
 					title={ iframeTitle }
