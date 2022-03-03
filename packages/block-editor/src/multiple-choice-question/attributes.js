@@ -33,6 +33,7 @@ export default {
 	},
 	borderRadius: {
 		type: 'number',
+		default: '',
 	},
 	boxShadow: {
 		type: 'boolean',
@@ -40,6 +41,7 @@ export default {
 	},
 	borderWidth: {
 		type: 'number',
+		default: '',
 	},
 	gradient: {
 		type: 'string',
