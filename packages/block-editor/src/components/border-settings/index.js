@@ -16,7 +16,7 @@ const BorderSettings = ( { attributes, setAttributes, initialOpen } ) => {
 
 	const handleChangeNumberAttribute = ( key ) => ( value ) =>
 		setAttributes( {
-			[ key ]: parseInt( value, 10 ),
+			[ key ]: parseInt( value ) || value,
 		} );
 
 	return (
