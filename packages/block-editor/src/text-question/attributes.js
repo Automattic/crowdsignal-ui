@@ -33,7 +33,6 @@ export default {
 	},
 	borderRadius: {
 		type: 'number',
-		default: 5,
 	},
 	boxShadow: {
 		type: 'boolean',
@@ -41,7 +40,6 @@ export default {
 	},
 	borderWidth: {
 		type: 'number',
-		default: 1,
 	},
 	fontFamily: {
 		type: 'string',
