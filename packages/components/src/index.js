@@ -10,5 +10,6 @@ export { default as FormTextInput } from './form-text-input';
 export { default as PageHeader } from './page-header';
 export { default as Popover } from './popover';
 export { default as PopoverMenu } from './popover-menu';
+export { default as Sandbox } from './sandbox';
 export { default as StyleProvider } from './style-provider';
 export { default as TabNavigation } from './tab-navigation';
