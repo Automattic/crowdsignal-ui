@@ -22,6 +22,7 @@ export const editorSettings = {
 				'core/buttons',
 				'core/code',
 				'core/columns',
+				'core/embed',
 				'core/group',
 				'core/heading',
 				'core/html',
