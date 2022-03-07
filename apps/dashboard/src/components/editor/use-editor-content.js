@@ -7,8 +7,8 @@ import { useDispatch, useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import { isPublic } from '../../util/project';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 
 export const useEditorContent = ( project ) => {

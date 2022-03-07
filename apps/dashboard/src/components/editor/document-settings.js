@@ -9,6 +9,7 @@ import {
 	PanelRow,
 } from '@wordpress/components';
 import { useDispatch } from '@wordpress/data';
+import { format } from '@wordpress/date';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
@@ -18,9 +19,8 @@ import { DocumentSection } from 'isolated-block-editor';
  * Internal dependencies
  */
 import { FormFieldset, FormRadio } from '@crowdsignal/components';
+import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import { timestampToDate } from '../../util/date';
-import { isPublic, getLastUpdatedDate } from '../../util/project';
 
 const DocumentSettings = ( { project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
@@ -46,8 +46,6 @@ const DocumentSettings = ( { project } ) => {
 	const visibility = isPublic( project )
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
-
-	const currentTimestamp = parseInt( new Date().getTime() / 1000 );
 
 	return (
 		<DocumentSection>
@@ -100,17 +98,20 @@ const DocumentSettings = ( { project } ) => {
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
 					<span>
-						{ timestampToDate(
-							project?.created || currentTimestamp
-						) }
+						{ project
+							? format( 'F j, Y H:i', project.created )
+							: '-' }
 					</span>
 				</PanelRow>
 				<PanelRow className="project-updated-date">
 					<span>{ __( 'Updated', 'dashboard' ) }</span>
 					<span>
-						{ timestampToDate(
-							getLastUpdatedDate( project ) || currentTimestamp
-						) }
+						{ project
+							? format(
+									'F j, Y H:i',
+									getLastUpdatedDate( project )
+							  )
+							: '-' }
 					</span>
 				</PanelRow>
 			</PanelBody>

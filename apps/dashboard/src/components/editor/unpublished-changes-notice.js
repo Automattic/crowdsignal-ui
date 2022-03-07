@@ -8,8 +8,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { hasUnpublishedChanges, isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import { hasUnpublishedChanges, isPublic } from '../../util/project';
 
 const NOTICE_ID = 'crowdsignal-unpublished-changes-notice';
 
