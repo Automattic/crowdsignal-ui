@@ -20,6 +20,8 @@ module.exports = {
 		'twentytwentytwo-editor': './src/twentytwentytwo/editor.scss',
 		'blockbase': './src/blockbase/base.scss',
 		'blockbase-editor': './src/blockbase/editor.scss',
+		'quadrat': './src/quadrat/base.scss',
+		'quadrat-editor': './src/quadrat/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),

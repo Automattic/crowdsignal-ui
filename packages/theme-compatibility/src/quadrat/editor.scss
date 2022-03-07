@@ -1,0 +1,18 @@
+@import 'base';
+
+.block-editor-writing-flow {
+	.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
+		color: var(--custom--placeholder--color);
+
+		&:focus {
+			color: var(--custom--placeholder--color);
+		}
+	}
+}
+
+.editor .iso-editor .block-editor-writing-flow {
+	color: var(--wp--custom--color--foreground);
+	font-family: var(--wp--preset--font-family--dm-sans);
+	font-size: var(--wp--preset--font-size--normal);
+	line-height: var(--wp--custom--body--typography--line-height);
+}
