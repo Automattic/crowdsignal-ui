@@ -14,8 +14,10 @@
 	color: var(--color-neutral-40);
 }
 
-.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
-	color: var(--color-neutral-40);
+.block-editor-writing-flow {
+	.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
+		color: var(--color-neutral-40);
+	}
 }
 
 #crowdsignal-dashboard .block-editor-block-list__layout.is-root-container,

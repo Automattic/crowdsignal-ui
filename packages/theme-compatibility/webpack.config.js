@@ -18,6 +18,8 @@ module.exports = {
 		'twentynineteen-editor': './src/twentynineteen/editor.scss',
 		'twentytwentytwo': './src/twentytwentytwo/base.scss',
 		'twentytwentytwo-editor': './src/twentytwentytwo/editor.scss',
+		'blockbase': './src/blockbase/base.scss',
+		'blockbase-editor': './src/blockbase/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),
