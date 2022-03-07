@@ -3,13 +3,16 @@
  */
 import { __, sprintf } from '@wordpress/i18n';
 import { isEmpty } from 'lodash';
-import { renderToString } from '@wordpress/element';
-import { SandBox } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { renderToString, useEffect, useState } from '@wordpress/element';
 import classnames from 'classnames';
 
-const getPhotoHtml = ( photo ) => {
+/**
+ * Internal dependencies
+ */
+import { Sandbox } from '@crowdsignal/components';
+import { fetchEmbedContent } from '@crowdsignal/rest-api';
+
+const getPhotoHTML = ( photo ) => {
 	const imageUrl = photo.thumbnail_url || photo.url;
 	const photoPreview = (
 		<p>
@@ -22,26 +25,23 @@ const getPhotoHtml = ( photo ) => {
 const CoreEmbed = ( { attributes } ) => {
 	const { url, className, caption, type, providerNameSlug } = attributes;
 
-	const { preview } = useSelect(
-		( select ) => {
-			const embedPreview = select( coreStore ).getEmbedPreview( url );
-			const badEmbedProvider =
-				embedPreview?.html === false &&
-				embedPreview?.type === undefined;
-			const validPreview = !! embedPreview && ! badEmbedProvider;
+	const [ preview, setPreview ] = useState( {} );
 
-			return {
-				preview: validPreview ? embedPreview : {},
-			};
-		},
-		[ url ]
-	);
+	useEffect( () => {
+		fetchEmbedContent( { url } ).then( ( { data } ) => {
+			if ( data?.html === false && data?.type === undefined ) {
+				return;
+			}
+
+			setPreview( data );
+		} );
+	}, [ url ] );
 
 	const classes = classnames( className, 'wp-block-embed', {
 		'is-type-video': 'video' === type,
 	} );
 
-	const html = 'photo' === type ? getPhotoHtml( preview ) : preview.html;
+	const html = 'photo' === type ? getPhotoHTML( preview ) : preview.html;
 
 	const iframeTitle = sprintf(
 		// translators: %s: host providing embed content e.g: www.youtube.com
@@ -52,7 +52,7 @@ const CoreEmbed = ( { attributes } ) => {
 	return (
 		<figure className={ classes }>
 			<div className="wp-block-embed__wrapper">
-				<SandBox
+				<Sandbox
 					html={ html }
 					scripts={ preview.scripts }
 					title={ iframeTitle }

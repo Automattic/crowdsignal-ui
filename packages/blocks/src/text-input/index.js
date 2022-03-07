@@ -1,10 +1,10 @@
 /**
  * External dependencies
  */
-import { RichText } from '@wordpress/block-editor';
+import { RawHTML } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -38,7 +38,7 @@ const TextInput = ( { attributes, className } ) => {
 			style={ { ...useColorStyles( attributes ) } }
 		>
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
-				<RichText.Content value={ attributes.label } />
+				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormTextInput
 				style={ {

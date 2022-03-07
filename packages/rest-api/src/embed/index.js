@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { tap } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import { http } from '@crowdsignal/http';
@@ -9,25 +14,16 @@ export const fetchEmbedContent = ( query ) =>
 		path: `/v4/embed`,
 		method: 'GET',
 		query,
-	} );
+	} ).then( ( response ) =>
+		tap( response, ( { data } ) => {
+			const doc = document.implementation.createHTMLDocument( '' );
+			doc.body.innerHTML = response.data.html;
+			const wrapper = doc.querySelector( '[class^="embed-"]' );
 
-export const embedRequestInterceptor = ( options, next ) => {
-	if ( options?.path.indexOf( '/oembed' ) !== -1 ) {
-		const [ , queryString ] = options.path.split( '?' );
-		const params = new URLSearchParams( queryString );
-		const query = Object.fromEntries( params );
-
-		return fetchEmbedContent( query ).then( ( { data } ) => {
-			if ( data.html ) {
-				const doc = document.implementation.createHTMLDocument( '' );
-				doc.body.innerHTML = data.html;
-				const wrapper = doc.querySelector( '[class^="embed-"]' );
-				data.html = wrapper ? wrapper.innerHTML : data.html;
+			if ( ! data.html || ! wrapper ) {
+				return;
 			}
 
-			return data;
-		} );
-	}
-
-	return next( options );
-};
+			data.html = wrapper.innerHTML;
+		} )
+	);
