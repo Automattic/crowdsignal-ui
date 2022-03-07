@@ -18,6 +18,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@crowdsignal/http": "^0.1.0"
+    "@crowdsignal/http": "^0.1.0",
+    "lodash": "^4.17.21"
   }
 }

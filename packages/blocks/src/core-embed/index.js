@@ -12,7 +12,7 @@ import classnames from 'classnames';
 import { Sandbox } from '@crowdsignal/components';
 import { fetchEmbedContent } from '@crowdsignal/rest-api';
 
-const getPhotoHtml = ( photo ) => {
+const getPhotoHTML = ( photo ) => {
 	const imageUrl = photo.thumbnail_url || photo.url;
 	const photoPreview = (
 		<p>
@@ -41,7 +41,7 @@ const CoreEmbed = ( { attributes } ) => {
 		'is-type-video': 'video' === type,
 	} );
 
-	const html = 'photo' === type ? getPhotoHtml( preview ) : preview.html;
+	const html = 'photo' === type ? getPhotoHTML( preview ) : preview.html;
 
 	const iframeTitle = sprintf(
 		// translators: %s: host providing embed content e.g: www.youtube.com

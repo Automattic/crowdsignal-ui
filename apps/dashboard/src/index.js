@@ -7,12 +7,10 @@ import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies
  */
-import { embedRequestInterceptor } from '@crowdsignal/rest-api';
 import { StyleProvider } from '@crowdsignal/components';
 import { setHostHeader } from '@crowdsignal/http';
+import { fetchEmbedContent } from '@crowdsignal/rest-api';
 import App from './components/app';
-
-apiFetch.use( embedRequestInterceptor );
 
 const renderApp = () =>
 	render(
@@ -32,4 +30,17 @@ window.addEventListener( 'load', () => {
 	}
 
 	renderApp();
+} );
+
+// Intercept Editor's oembed requests
+apiFetch.use( ( options, next ) => {
+	if ( options?.path.indexOf( '/oembed' ) !== -1 ) {
+		const [ , queryString ] = options.path.split( '?' );
+		const params = new URLSearchParams( queryString );
+		const query = Object.fromEntries( params );
+
+		return fetchEmbedContent( query ).then( ( { data } ) => data );
+	}
+
+	return next( options );
 } );
