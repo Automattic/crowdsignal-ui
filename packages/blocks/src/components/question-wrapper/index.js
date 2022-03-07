@@ -11,7 +11,9 @@ import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
 import { ErrorMessage } from '../index';
 
 const StyledQuestionWrapper = styled.div`
+	border-radius: 5px;
 	border-style: solid;
+	border-width: 1px;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
