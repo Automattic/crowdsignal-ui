@@ -23,7 +23,7 @@ export default {
 	},
 	inputHeight: {
 		type: 'number',
-		default: 40,
+		default: '',
 	},
 	inputWidth: {
 		type: 'string',
