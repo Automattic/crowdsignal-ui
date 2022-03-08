@@ -7,35 +7,35 @@ import { map } from 'lodash';
 /**
  * Internal dependencies
  */
+import {
+	ModalHeader,
+	ModalHeaderNote,
+	ModalTemplateGrid,
+	ModalWrapper,
+} from '../modal';
 import TemplatePreview from './template-preview';
 import * as projectTemplates from './templates';
 
 /**
  * Style dependencies
  */
-import {
-	ProjectWizardDialog,
-	ProjectWizardHeader,
-	ProjectWizardHeaderNote,
-	ProjectWizardTemplateGrid,
-	ProjectWizardWrapper,
-} from './styles';
+import { ProjectWizardDialog } from './styles';
 
 const NewProjectWizard = ( { onSelect } ) => {
 	return (
-		<ProjectWizardWrapper>
+		<ModalWrapper>
 			<ProjectWizardDialog id="crowdsignal-new-project-wizard">
-				<ProjectWizardHeader>
+				<ModalHeader>
 					{ __( 'What would you like to build today?', 'dashboard' ) }
-				</ProjectWizardHeader>
-				<ProjectWizardHeaderNote>
+				</ModalHeader>
+				<ModalHeaderNote>
 					{ __(
 						'Pick a template and make it your own or start with a blank page.',
 						'dashboard'
 					) }
-				</ProjectWizardHeaderNote>
+				</ModalHeaderNote>
 
-				<ProjectWizardTemplateGrid>
+				<ModalTemplateGrid>
 					{ map( projectTemplates, ( template ) => (
 						<TemplatePreview
 							key={ template.name }
@@ -43,9 +43,9 @@ const NewProjectWizard = ( { onSelect } ) => {
 							onSelect={ onSelect }
 						/>
 					) ) }
-				</ProjectWizardTemplateGrid>
+				</ModalTemplateGrid>
 			</ProjectWizardDialog>
-		</ProjectWizardWrapper>
+		</ModalWrapper>
 	);
 };
 
