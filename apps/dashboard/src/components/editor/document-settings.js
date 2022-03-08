@@ -8,7 +8,7 @@ import {
 	PanelBody,
 	PanelRow,
 } from '@wordpress/components';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -18,6 +18,7 @@ import { DocumentSection } from 'isolated-block-editor';
 /**
  * Internal dependencies
  */
+
 import { FormFieldset, FormRadio } from '@crowdsignal/components';
 import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
@@ -26,6 +27,10 @@ const DocumentSettings = ( { project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
 		STORE_NAME
+	);
+
+	const canPublish = useSelect( ( select ) =>
+		select( STORE_NAME ).isEditorContentPublishable()
 	);
 
 	useEffect( () => {
@@ -38,8 +43,6 @@ const DocumentSettings = ( { project } ) => {
 			return;
 		}
 
-		// We need to serialize and re-parse blocks before making the request
-		// to keep originalContent prop up to date.
 		saveEditorChanges( { public: true } );
 	};
 
@@ -61,6 +64,9 @@ const DocumentSettings = ( { project } ) => {
 								aria-expanded={ isOpen }
 								onClick={ onToggle }
 								variant="tertiary"
+								disabled={
+									! isPublic( project ) && ! canPublish
+								}
 							>
 								{ visibility }
 							</Button>
@@ -78,6 +84,7 @@ const DocumentSettings = ( { project } ) => {
 									onChange={ updateProjectVisibility }
 									value="public"
 									defaultChecked={ isPublic( project ) }
+									disabled={ ! canPublish }
 								/>
 								<FormFieldset
 									name="project-visibility"
