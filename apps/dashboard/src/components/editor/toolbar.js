@@ -10,8 +10,8 @@ import { filter } from 'lodash';
 /**
  * Internal dependencies
  */
+import { hasUnpublishedChanges, isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import { hasUnpublishedChanges, isPublic } from '../../util/project';
 import PublishButton from './publish-button';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 

@@ -9,6 +9,8 @@
 		"jsdoc/check-line-alignment": [
 			"off"
 		],
+		"jsdoc/require-property-description": "off",
+		"jsdoc/require-returns-description": "off",
 		"jsx-a11y/anchor-has-content": [
 			"off"
 		],
@@ -41,6 +43,9 @@
 			"node": {
 				"paths": ["apps/dashboard/src"]
 			}
+		},
+		"jsdoc": {
+			"mode": "typescript"
 		}
 	}
 }

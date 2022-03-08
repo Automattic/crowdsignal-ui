@@ -26,6 +26,7 @@
     "@crowdsignal/form": "^0.1.0",
     "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/http": "^0.1.0",
+    "@crowdsignal/project": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/router": "^0.1.0",
     "@wordpress/api-fetch": "^5.2.6",
