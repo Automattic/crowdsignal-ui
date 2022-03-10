@@ -41,6 +41,10 @@ export const ThemePreviewButton = styled.button`
 	border-radius: 4px;
 	border: none;
 	padding: 10px 16px;
+
+	&:disabled {
+		cursor: default;
+	}
 `;
 
 export const ThemePreviewImg = styled.img`

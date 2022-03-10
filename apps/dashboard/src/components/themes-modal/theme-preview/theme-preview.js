@@ -19,8 +19,9 @@ import {
 } from './styles';
 
 const ThemePreview = ( { activeTheme, theme, onSelect } ) => {
+	const isActive = theme.slug === activeTheme;
 	const classes = classnames( {
-		'is-active': theme.slug === activeTheme,
+		'is-active': isActive,
 	} );
 
 	return (
@@ -28,6 +29,7 @@ const ThemePreview = ( { activeTheme, theme, onSelect } ) => {
 			<ThemePreviewContent>
 				<ThemePreviewOverlay>
 					<ThemePreviewButton
+						disabled={ isActive }
 						onClick={ () => onSelect( theme.slug ) }
 					>
 						{ __( 'Activate this design', 'dashboard' ) }

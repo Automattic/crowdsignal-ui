@@ -9,22 +9,29 @@ import { map } from 'lodash';
  */
 import {
 	ModalDialog,
+	ModalNavigation,
 	ModalHeader,
 	ModalHeaderNote,
 	ModalWrapper,
 } from '../modal';
-import ThemePreview from './theme-preview/theme-preview';
 import { themes } from './themes';
+import { CloseArrow } from '@crowdsignal/icons';
+import ThemePreview from './theme-preview/theme-preview';
 
 /**
  * Style dependencies
  */
-import { ThemesTemplateGrid } from './styles';
+import { ThemesTemplateGrid, CloseButton } from './styles';
 
-const ThemesModal = ( { activeTheme, onSelect } ) => {
+const ThemesModal = ( { activeTheme, onSelect, onClose } ) => {
 	return (
 		<ModalWrapper>
 			<ModalDialog id="crowdsignal-themes-modal">
+				<ModalNavigation>
+					<CloseButton onClick={ onClose }>
+						<CloseArrow />
+					</CloseButton>
+				</ModalNavigation>
 				<ModalHeader>
 					{ __( 'Pick a design theme', 'dashboard' ) }
 				</ModalHeader>

@@ -28,6 +28,11 @@ export const ModalDialog = styled.div`
 	padding: 40px 60px;
 `;
 
+export const ModalNavigation = styled.div`
+	display: flex;
+	justify-content: flex-end;
+`;
+
 export const ModalHeader = styled.h2`
 	color: var( --color-text );
 	font-family: 'Recoleta';

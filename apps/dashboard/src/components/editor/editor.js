@@ -63,6 +63,10 @@ const Editor = ( { project } ) => {
 		setShowThemesModal( true );
 	};
 
+	const handleCloseThemesModal = () => {
+		setShowThemesModal( false );
+	};
+
 	const handleSelectTheme = ( theme ) => {
 		setProjectTheme( theme );
 		setShowThemesModal( false );
@@ -102,6 +106,7 @@ const Editor = ( { project } ) => {
 				<ThemesModal
 					activeTheme={ project.theme }
 					onSelect={ handleSelectTheme }
+					onClose={ handleCloseThemesModal }
 				/>
 			) }
 
