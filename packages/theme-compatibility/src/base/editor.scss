@@ -57,6 +57,17 @@
 	}
 
 	.crowdsignal-forms-question-wrapper__content {
+
+		&.is-horizontal {
+			display: block; // abort flex to get full width!
+			.block-editor-block-list__layout {
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+		}
+
 		.block-editor-block-list__layout {
 			display: flex;
 			flex-direction: column;
