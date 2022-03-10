@@ -123,6 +123,7 @@ export const getEditorTitle = ( state ) => state.editor.title;
  * @param  {Object}  state          App state.
  * @param  {Object}  options        Options.
  * @param  {boolean} options.public Set to true if the project should include to-be-published changes.
+ * @param  {boolean} options.theme  The public or draft project theme.
  * @return {Object}                 Partial project.
  */
 export const getEditorUpdatedProjectData = ( state, options = {} ) => {
@@ -140,6 +141,10 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 	if ( options.public ) {
 		data.publicContent = data.draftContent;
 		data.public = true;
+	}
+
+	if ( options.theme ) {
+		data.theme = options.theme;
 	}
 
 	if ( changes.title ) {

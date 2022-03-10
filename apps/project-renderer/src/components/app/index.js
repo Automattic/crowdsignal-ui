@@ -27,9 +27,9 @@ const App = ( {
 	preview,
 	respondentId = '',
 	startTime = 0,
-	theme = 'leven',
 } ) => {
 	const [ content, setContent ] = useState( [] );
+	const [ theme, setTheme ] = useState( null );
 	// eslint-disable-next-line
 	const [ startDate, setStartDate ] = useState( startTime );
 	// eslint-disable-next-line
@@ -56,6 +56,9 @@ const App = ( {
 				if ( ! res.data || ! res.data.content ) {
 					throw new Error( 'Empty response' );
 				}
+
+				setTheme( res.data.theme );
+
 				return setContent( res.data.content );
 			} )
 			.catch( ( err ) => {
@@ -98,15 +101,9 @@ const App = ( {
 		);
 	};
 
-	const baseURL =
-		process.env.NODE_ENV === 'production'
-			? 'https://app.crowdsignal.com'
-			: '';
-	useStylesheet( `${ baseURL }/ui/stable/theme-compatibility/base.css` );
+	useStylesheet( `/ui/stable/theme-compatibility/base.css` );
 	useStylesheet( `https://app.crowdsignal.com/themes/${ theme }/style.css` );
-	useStylesheet(
-		`${ baseURL }/ui/stable/theme-compatibility/${ theme }.css`
-	);
+	useStylesheet( `/ui/stable/theme-compatibility/${ theme }.css` );
 
 	if ( ! content ) {
 		return 'Wait...';

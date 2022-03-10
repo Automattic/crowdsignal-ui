@@ -23,7 +23,7 @@ import { FormFieldset, FormRadio } from '@crowdsignal/components';
 import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 
-const DocumentSettings = ( { project } ) => {
+const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
 		STORE_NAME
@@ -125,20 +125,30 @@ const DocumentSettings = ( { project } ) => {
 					</span>
 				</PanelRow>
 			</PanelBody>
-			{ project && (
-				<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
-					<PanelRow>
-						<span>{ __( 'View Project', 'dashboard' ) }</span>
-					</PanelRow>
-					<ExternalLink
-						href={ project.permalink }
-						title={ project.permalink }
-					>
-						<span className="components-external-link__text">
-							{ project.permalink }
-						</span>
-					</ExternalLink>
-				</PanelBody>
+			{ project.id && (
+				<>
+					<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
+						<PanelRow>
+							<span>{ __( 'View Project', 'dashboard' ) }</span>
+						</PanelRow>
+						<ExternalLink
+							href={ project.permalink }
+							title={ project.permalink }
+						>
+							<span className="components-external-link__text">
+								{ project.permalink }
+							</span>
+						</ExternalLink>
+					</PanelBody>
+					<PanelBody title={ __( 'Theme', 'dashboard' ) }>
+						<Button
+							onClick={ onChangeThemeClick }
+							variant="tertiary"
+						>
+							{ __( 'Change Theme', 'dashboard' ) }
+						</Button>
+					</PanelBody>
+				</>
 			) }
 		</DocumentSection>
 	);

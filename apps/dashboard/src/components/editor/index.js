@@ -17,7 +17,10 @@ const Editor = ( { projectId, theme } ) => {
 	const [ project, isLoading ] = useSelect(
 		( select ) => {
 			if ( ! projectId ) {
-				return [ blankProjectTemplate.project, false ];
+				return [
+					{ ...blankProjectTemplate.project, theme: 'leven' },
+					false,
+				];
 			}
 
 			return [

@@ -19,7 +19,11 @@ export const useEditorContent = ( project ) => {
 
 	const { removeNotice } = useDispatch( 'core/notices' );
 
-	const { initializeEditor, updateEditorPage } = useDispatch( STORE_NAME );
+	const {
+		initializeEditor,
+		updateEditorPage,
+		saveEditorChanges,
+	} = useDispatch( STORE_NAME );
 
 	const [
 		confirmationPage,
@@ -97,6 +101,14 @@ export const useEditorContent = ( project ) => {
 		setReady( false );
 	};
 
+	const setProjectTheme = ( theme ) => {
+		project.theme = theme;
+
+		if ( project.id ) {
+			saveEditorChanges( { theme } );
+		}
+	};
+
 	return {
 		editorId,
 		confirmationPage,
@@ -104,6 +116,7 @@ export const useEditorContent = ( project ) => {
 		saveBlocks,
 		restoreDraft,
 		setProjectTemplate,
+		setProjectTheme,
 		version: forceDraft ? 'draft' : 'auto',
 	};
 };

@@ -49,6 +49,7 @@ export function* saveEditorChanges( options = {} ) {
 	const changes = select( STORE_NAME ).getEditorChanges();
 	const data = select( STORE_NAME ).getEditorUpdatedProjectData( {
 		public: options.public,
+		theme: options.theme,
 	} );
 
 	yield { type: EDITOR_SAVE };

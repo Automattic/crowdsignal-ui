@@ -21,6 +21,7 @@ import DocumentSettings from './document-settings';
 import EditorStylesResolver from './styles-resolver';
 import PageNavigation from './page-navigation';
 import { editorSettings } from './settings';
+import ThemesModal from '../themes-modal';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
 import { useEditorContent } from './use-editor-content';
@@ -36,8 +37,9 @@ import {
 
 registerBlocks();
 
-const Editor = ( { project, theme = 'leven' } ) => {
+const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
+	const [ showThemesModal, setShowThemesModal ] = useState( false );
 
 	const { updateEditorTitle } = useDispatch( STORE_NAME );
 
@@ -48,12 +50,22 @@ const Editor = ( { project, theme = 'leven' } ) => {
 		saveBlocks,
 		restoreDraft,
 		setProjectTemplate,
+		setProjectTheme,
 		version,
 	} = useEditorContent( project );
 
 	const handleSelectTemplate = ( projectTemplate ) => {
 		setProjectTemplate( projectTemplate );
 		setShowWizard( false );
+	};
+
+	const handleOpenThemesModal = () => {
+		setShowThemesModal( true );
+	};
+
+	const handleSelectTheme = ( theme ) => {
+		setProjectTheme( theme );
+		setShowThemesModal( false );
 	};
 
 	const settings = useMemo( () => {
@@ -72,7 +84,7 @@ const Editor = ( { project, theme = 'leven' } ) => {
 	return (
 		<EditorLayout className="editor">
 			<Global styles={ editorGlobalStyles } />
-			<EditorStylesResolver theme={ theme } />
+			<EditorStylesResolver theme={ project.theme } />
 
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
@@ -86,6 +98,13 @@ const Editor = ( { project, theme = 'leven' } ) => {
 				<NewProjectWizard onSelect={ handleSelectTemplate } />
 			) }
 
+			{ showThemesModal && (
+				<ThemesModal
+					activeTheme={ project.theme }
+					onSelect={ handleSelectTheme }
+				/>
+			) }
+
 			<PageNavigation />
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
@@ -96,7 +115,10 @@ const Editor = ( { project, theme = 'leven' } ) => {
 				onError={ noop }
 			>
 				<Toolbar project={ project } />
-				<DocumentSettings project={ project } />
+				<DocumentSettings
+					project={ project }
+					onChangeThemeClick={ handleOpenThemesModal }
+				/>
 
 				<AutoSubmitButton />
 
