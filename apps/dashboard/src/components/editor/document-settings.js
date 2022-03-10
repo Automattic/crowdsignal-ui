@@ -29,13 +29,16 @@ const DocumentSettings = ( { project } ) => {
 		STORE_NAME
 	);
 
-	const canPublish = useSelect( ( select ) =>
-		select( STORE_NAME ).isEditorContentPublishable()
-	);
+	const [ canPublish, selectedBlockClientId ] = useSelect( ( select ) => [
+		select( STORE_NAME ).isEditorContentPublishable(),
+		select( 'core/block-editor' ).getSelectedBlockClientId(),
+	] );
 
 	useEffect( () => {
-		openGeneralSidebar( 'edit-post/document' );
-	}, [] );
+		openGeneralSidebar(
+			!! selectedBlockClientId ? 'edit-post/block' : 'edit-post/document'
+		);
+	}, [ selectedBlockClientId ] );
 
 	const updateProjectVisibility = ( event ) => {
 		if ( event.target.value === 'private' ) {
