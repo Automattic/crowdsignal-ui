@@ -26,7 +26,7 @@ const ThemesModal = ( { activeTheme, onSelect } ) => {
 		<ModalWrapper>
 			<ModalDialog id="crowdsignal-themes-modal">
 				<ModalHeader>
-					{ __( 'Pick a design theme?', 'dashboard' ) }
+					{ __( 'Pick a design theme', 'dashboard' ) }
 				</ModalHeader>
 				<ModalHeaderNote>
 					{ __(
