@@ -29,4 +29,7 @@ export default {
 		type: 'string',
 		default: '100%',
 	},
+	validation: {
+		default: null,
+	},
 };
