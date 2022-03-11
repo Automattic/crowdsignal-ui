@@ -22,6 +22,8 @@ import { DocumentSection } from 'isolated-block-editor';
 import { FormFieldset, FormRadio } from '@crowdsignal/components';
 import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
+import { ToolbarButton } from './styles/button';
+import { getTheme } from '../../util/theme/themes';
 
 const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
@@ -52,6 +54,8 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 	const visibility = isPublic( project )
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
+
+	const activeTheme = getTheme( project.theme );
 
 	return (
 		<DocumentSection>
@@ -140,13 +144,31 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 							</span>
 						</ExternalLink>
 					</PanelBody>
-					<PanelBody title={ __( 'Theme', 'dashboard' ) }>
-						<Button
-							onClick={ onChangeThemeClick }
-							variant="tertiary"
-						>
-							{ __( 'Change Theme', 'dashboard' ) }
-						</Button>
+					<PanelBody
+						title={ __( 'Theme', 'dashboard' ) }
+						className="theme-panel"
+					>
+						<PanelRow>
+							<span>
+								{ __( 'Your active theme:', 'dashboard' ) }
+							</span>
+						</PanelRow>
+						<PanelRow>
+							<img
+								src={ activeTheme.image }
+								alt={ activeTheme.name }
+							/>
+						</PanelRow>
+						<PanelRow className="theme-panel__actions">
+							<span>{ activeTheme.name }</span>
+							<ToolbarButton
+								as={ Button }
+								variant="tertiary"
+								onClick={ onChangeThemeClick }
+							>
+								{ __( 'Change Theme', 'dashboard' ) }
+							</ToolbarButton>
+						</PanelRow>
 					</PanelBody>
 				</>
 			) }

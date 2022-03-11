@@ -14,7 +14,7 @@ import {
 	ModalHeaderNote,
 	ModalWrapper,
 } from '../modal';
-import { themes } from './themes';
+import { themes } from '../../util/theme/themes';
 import { CloseArrow } from '@crowdsignal/icons';
 import ThemePreview from './theme-preview/theme-preview';
 

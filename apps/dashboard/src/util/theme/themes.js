@@ -1,3 +1,8 @@
+/**
+ * External dependencies
+ */
+import { find } from 'lodash';
+
 export const themes = [
 	{
 		slug: 'leven',
@@ -30,3 +35,5 @@ export const themes = [
 			'https://i0.wp.com/s2.wp.com/wp-content/themes/pub/quadrat/screenshot.png',
 	},
 ];
+
+export const getTheme = ( theme ) => find( themes, [ 'slug', theme ] );

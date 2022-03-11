@@ -139,6 +139,13 @@ export const EditorWrapper = styled.div`
 		a {
 			color: var( --color-primary-50 );
 		}
+
+		.theme-panel {
+			&__actions {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
 	}
 
 	.editor__project-visibility-popover .components-popover__content {
