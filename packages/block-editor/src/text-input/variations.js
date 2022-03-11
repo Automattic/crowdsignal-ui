@@ -20,5 +20,8 @@ export default [
 			__( 'email', 'block-edtor' ),
 			__( 'e-mail', 'block-edtor' ),
 		],
+
+		isActive: ( blockAttributes, variationAttributes ) =>
+			blockAttributes.title === variationAttributes.title,
 	},
 ];
