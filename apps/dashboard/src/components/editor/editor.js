@@ -4,14 +4,13 @@
 import { useDispatch } from '@wordpress/data';
 import { useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { map, noop } from 'lodash';
+import { cloneDeep, filter, noop, tap } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/core';
 
 /**
  * Internal dependencies
  */
-import * as crowdsignalBlocks from '@crowdsignal/block-editor';
 import HeaderMeta from '../header-meta';
 import NewProjectWizard from '../new-project-wizard';
 import ProjectNavigation from '../project-navigation';
@@ -57,23 +56,18 @@ const Editor = ( { project, theme = 'leven' } ) => {
 		setShowWizard( false );
 	};
 
-	const settings = useMemo(
-		() => ( {
-			...editorSettings,
-			iso: {
-				...editorSettings.iso,
-				blocks: {
-					...editorSettings.iso.blocks,
-					disallowBlocks: [
-						...( confirmationPage
-							? map( crowdsignalBlocks, 'name' )
-							: [] ),
-					],
-				},
-			},
-		} ),
-		[ confirmationPage ]
-	);
+	const settings = useMemo( () => {
+		if ( ! confirmationPage ) {
+			return editorSettings;
+		}
+
+		return tap( cloneDeep( editorSettings ), ( { iso } ) => {
+			iso.blocks.allowBlocks = filter(
+				iso.blocks.allowBlocks,
+				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
+			);
+		} );
+	}, [ confirmationPage ] );
 
 	return (
 		<EditorLayout className="editor">
