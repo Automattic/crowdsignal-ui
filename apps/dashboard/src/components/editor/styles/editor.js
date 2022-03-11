@@ -13,6 +13,13 @@ export const editorGlobalStyles = css`
 	html.interface-interface-skeleton__html-container {
 		width: 100% !important;
 	}
+
+	html.block-editor-block-preview__content-iframe
+		.is-root-container.block-editor-block-list__layout {
+		// Value chosen to match
+		// https://github.com/WordPress/gutenberg/blob/200a5d700e19d9f5978877cd299d582b1480a8d2/packages/block-editor/src/components/block-preview/auto.js#L20
+		max-height: 2000px;
+	}
 `;
 
 export const EditorLayout = styled.div`
