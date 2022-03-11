@@ -12,6 +12,7 @@ export default [
 		attributes: {
 			label: 'Enter email',
 			validation: 'emailValidation',
+			placeholder: 'name@yourgroovydomain.com',
 		},
 
 		keywords: [
