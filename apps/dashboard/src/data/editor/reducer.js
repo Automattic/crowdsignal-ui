@@ -240,11 +240,11 @@ const title = ( state = '', action ) => {
 };
 
 /**
- * Project title.
+ * Project theme.
  *
  * @param  {string} state  App state.
  * @param  {Object} action Action object.
- * @return {string}        Title.
+ * @return {string}        Theme.
  */
 const theme = ( state = '', action ) => {
 	if ( action.type === EDITOR_INIT || action.type === EDITOR_THEME_UPDATE ) {

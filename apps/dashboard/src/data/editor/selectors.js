@@ -131,7 +131,6 @@ export const getEditorTheme = ( state ) => state.editor.theme || 'leven';
  * @param  {Object}  state          App state.
  * @param  {Object}  options        Options.
  * @param  {boolean} options.public Set to true if the project should include to-be-published changes.
- * @param  {boolean} options.theme  The public or draft project theme.
  * @return {Object}                 Partial project.
  */
 export const getEditorUpdatedProjectData = ( state, options = {} ) => {
