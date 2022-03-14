@@ -33,7 +33,7 @@ const EditButtonAnswer = ( {
 		<Button attributes={ attributes } as={ 'div' } className={ className }>
 			<ButtonContent>
 				<RichText
-					placeholder={ __( 'Enter an answer', 'blocks-editor' ) }
+					placeholder={ __( 'Enter an answer', 'block-editor' ) }
 					onChange={ onChange }
 					onReplace={ onReplace }
 					onSplit={ onSplit }
