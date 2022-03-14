@@ -129,7 +129,7 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 					</span>
 				</PanelRow>
 			</PanelBody>
-			{ project.id && (
+			{ project && (
 				<>
 					<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
 						<PanelRow>

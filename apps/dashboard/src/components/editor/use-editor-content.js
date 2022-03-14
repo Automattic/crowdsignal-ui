@@ -102,11 +102,7 @@ export const useEditorContent = ( project ) => {
 	};
 
 	const setProjectTheme = ( theme ) => {
-		project.theme = theme;
-
-		if ( project.id ) {
-			saveEditorChanges( { theme } );
-		}
+		saveEditorChanges( { theme } );
 	};
 
 	return {
