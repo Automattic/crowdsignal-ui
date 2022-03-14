@@ -13,16 +13,18 @@
 }
 
 .editable-page-header__input {
-	background-color: transparent;
-	border: 0;
-	color: var(--color-text);
-	display: inline-flex;
-	font-size: 24px;
-	font-weight: 700;
-	heght: 40px;
-	line-height: 40px;
-	margin: 0;
-	outline: 0;
-	padding: 0;
-	width: 100%;
+	&[type="text"], &[type="text"]:focus {
+		background-color: transparent;
+		border: 0;
+		color: var(--color-text);
+		display: inline-flex;
+		font-size: 24px;
+		font-weight: 700;
+		height: 40px;
+		line-height: 40px;
+		margin: 0;
+		outline: 0;
+		padding: 0;
+		width: 100%;
+	}
 }

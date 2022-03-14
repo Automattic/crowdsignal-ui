@@ -135,6 +135,10 @@ export const EditorWrapper = styled.div`
 				}
 			}
 		}
+
+		a {
+			color: var( --color-primary-50 );
+		}
 	}
 
 	.editor__project-visibility-popover .components-popover__content {

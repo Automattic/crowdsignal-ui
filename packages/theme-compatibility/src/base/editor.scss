@@ -83,6 +83,14 @@
 		margin-right: auto;
 	}
 
+	.components-search-control__input {
+		color: inherit;
+	}
+
+	.block-editor-inserter__panel-title {
+		font-family: inherit;
+	}
+
 	& :where(.wp-block)[data-align=right] > * {
 		float: right;
 	}

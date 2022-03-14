@@ -27,7 +27,7 @@ export default ( { attributes, setAttributes } ) => {
 		} );
 
 	const handleChangeNumericAttribute = ( key ) => ( value ) =>
-		handleChangeAttribute( key )( parseInt( value ) );
+		handleChangeAttribute( key )( parseInt( value ) || '' );
 
 	return (
 		<InspectorControls>
