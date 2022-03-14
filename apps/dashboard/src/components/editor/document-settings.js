@@ -31,7 +31,11 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 		STORE_NAME
 	);
 
-	const [ canPublish, editorTheme, selectedBlockClientId ] = useSelect( ( select ) => [
+	const [
+		canPublish,
+		editorTheme,
+		selectedBlockClientId,
+	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
