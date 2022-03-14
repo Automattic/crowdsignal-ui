@@ -1,0 +1,32 @@
+@import 'base';
+
+.block-editor-writing-flow {
+	.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
+		color: var(--custom--placeholder--color);
+
+		&:focus {
+			color: var(--custom--placeholder--color);
+		}
+	}
+}
+
+.editor .iso-editor .block-editor-writing-flow {
+	color: var(--wp--custom--color--foreground);
+	font-family: var(--wp--preset--font-family--dm-sans);
+	font-size: var(--wp--preset--font-size--normal);
+	line-height: var(--wp--custom--body--typography--line-height);
+}
+
+.block-editor-block-list__insertion-point-indicator,
+.block-editor-default-block-appender .block-editor-inserter__toggle.components-button.has-icon,
+.block-editor-default-block-appender .block-editor-inserter__toggle.components-button.has-icon:hover,
+.block-editor-block-list__insertion-point-inserter .block-editor-inserter__toggle.components-button.has-icon,
+.block-editor-block-list__insertion-point-inserter .block-editor-inserter__toggle.components-button.has-icon:hover,
+{
+	background-color: var(--color-neutral-5);
+	color: var(--color-neutral-100);
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable]):focus::after {
+	box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--color-neutral-5);
+}

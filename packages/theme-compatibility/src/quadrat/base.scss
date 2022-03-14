@@ -1,0 +1,22 @@
+:root{
+	--custom--placeholder--color: #d1c7c7cc;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: var(--custom--placeholder--color);
+	opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: var(--custom--placeholder--color);;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: var(--custom--placeholder--color);
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	--wp--custom--form--padding: 14px 7px;
+}
