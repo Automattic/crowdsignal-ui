@@ -38,7 +38,7 @@ test/
 # Local package.json
 package.json
 
-# Make sure to include a radme file describing the package
+# Make sure to include a README.md file describing the package
 README.md
 
 # Any build settings specific to the package/app
