@@ -19,6 +19,8 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalDialog = styled.div`
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+		Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 	background-color: var( --color-surface );
 	box-shadow: 5px 5px 15px var( --color-shadow );
 	box-sizing: border-box;

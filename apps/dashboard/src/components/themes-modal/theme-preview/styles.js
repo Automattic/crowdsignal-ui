@@ -40,6 +40,7 @@ export const ThemePreviewButton = styled.button`
 	background: var( --color-primary-40 );
 	border-radius: 4px;
 	border: none;
+	cursor: pointer;
 	padding: 10px 16px;
 
 	&:disabled {
