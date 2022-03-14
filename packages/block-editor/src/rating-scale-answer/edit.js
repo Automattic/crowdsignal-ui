@@ -14,11 +14,6 @@ import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attribu
 import EditButtonAnswer from './edit-button';
 import Sidebar from './sidebar';
 
-/**
- * Style dependencies
- */
-import './style.scss';
-
 const EditRatingScaleAnswer = ( props ) => {
 	const { attributes, className, clientId, setAttributes } = props;
 
