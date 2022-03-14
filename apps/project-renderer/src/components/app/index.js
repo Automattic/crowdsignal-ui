@@ -32,7 +32,6 @@ const App = ( {
 } ) => {
 	const [ content, setContent ] = useState( [] );
 	const [ theme, setTheme ] = useState( null );
-	// eslint-disable-next-line
 	const [ startDate, setStartDate ] = useState( startTime );
 	const [ currentPage, setCurrentPage ] = useState( page );
 	const [ responseHash, setResponseHash ] = useState( respondentId );
@@ -58,7 +57,9 @@ const App = ( {
 				}
 
 				setTheme( res.data.theme );
-
+				setStartDate(
+					res.data.startTime || parseInt( Date.now() / 1000, 10 )
+				);
 				return setContent( res.data.content );
 			} )
 			.catch( ( err ) => {
@@ -77,7 +78,7 @@ const App = ( {
 		const form = new window.FormData();
 		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
-		form.append( 'startTime', startDate || parseInt( Date.now() / 1000 ) );
+		form.append( 'startTime', startDate );
 		Object.keys( data ).forEach( ( key ) =>
 			form.append( key, data[ key ] )
 		);
