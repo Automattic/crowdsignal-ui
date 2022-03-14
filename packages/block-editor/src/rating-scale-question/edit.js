@@ -9,10 +9,6 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
-
-/**
- * Style dependencies
- */
 import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
 // import Toolbar from './toolbar';
 import Sidebar from './sidebar';
