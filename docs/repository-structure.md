@@ -57,3 +57,4 @@ yarn workspace @crowdsignal/feedback-widget run build
 ## Dev dependencies
 
 All development dependencies should be added to the root `package.json`. Thanks to `yarn` workspaces they will be available in any package inside the repo.
+
