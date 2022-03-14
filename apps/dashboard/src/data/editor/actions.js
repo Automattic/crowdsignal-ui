@@ -20,6 +20,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
@@ -32,11 +33,12 @@ const autosave = ( actionCreator ) => {
 	};
 };
 
-export const initializeEditor = ( projectId, title, pages ) => ( {
+export const initializeEditor = ( projectId, title, pages, theme ) => ( {
 	type: EDITOR_INIT,
 	projectId,
 	pages,
 	title,
+	theme,
 } );
 
 export const setEditorCurrentPage = ( pageIndex ) => ( {
@@ -49,7 +51,6 @@ export function* saveEditorChanges( options = {} ) {
 	const changes = select( STORE_NAME ).getEditorChanges();
 	const data = select( STORE_NAME ).getEditorUpdatedProjectData( {
 		public: options.public,
-		theme: options.theme,
 	} );
 
 	yield { type: EDITOR_SAVE };
@@ -111,4 +112,9 @@ export const updateEditorPageOrder = autosave( ( order ) => ( {
 export const updateEditorTitle = autosave( ( title ) => ( {
 	type: EDITOR_TITLE_UPDATE,
 	title,
+} ) );
+
+export const updateEditorTheme = autosave( ( theme ) => ( {
+	type: EDITOR_THEME_UPDATE,
+	theme,
 } ) );

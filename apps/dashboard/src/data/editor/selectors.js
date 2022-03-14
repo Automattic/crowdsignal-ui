@@ -118,6 +118,14 @@ export const isEditorContentPublishable = ( state ) => {
 export const getEditorTitle = ( state ) => state.editor.title;
 
 /**
+ * Returns the editor project's theme.
+ *
+ * @param  {Object} state App state.
+ * @return {string}       Theme.
+ */
+export const getEditorTheme = ( state ) => state.editor.theme || 'leven';
+
+/**
  * Returns a partial project containing all the changes made since the last save.
  *
  * @param  {Object}  state          App state.
@@ -143,8 +151,8 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		data.public = true;
 	}
 
-	if ( options.theme ) {
-		data.theme = options.theme;
+	if ( changes.theme || options.public ) {
+		data.theme = getEditorTheme( state );
 	}
 
 	if ( changes.title ) {

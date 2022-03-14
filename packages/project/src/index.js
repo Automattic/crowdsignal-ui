@@ -17,10 +17,12 @@
  * @property {number}                id            Project ID.
  * @property {string}                created       Project creation date.
  * @property {ProjectContent}        draftContent  Project's draft content.
+ * @property {string}                draftTheme    Project's draft theme.
  * @property {string}                name          Project name.
  * @property {string}                permalink     Project URL.
  * @property {boolean}               public        True when project is public.
  * @property {ProjectContent | null} publicContent Project's last published content.
+ * @property {string}                publicTheme   Project's public theme.
  * @property {string}                slug          Project slug.
  * @property {string}                title         Project title.
  */
@@ -47,10 +49,12 @@ export const createProject = () => {
 			pages: [ [] ],
 			timestamp,
 		},
+		draftTheme: 'leven',
 		name: '',
 		permalink: '',
 		public: false,
 		publicContent: null,
+		publicTheme: null,
 		slug: '',
 		title: '',
 	};
@@ -70,7 +74,8 @@ export const getLastUpdatedDate = ( project ) => project.draftContent.timestamp;
  */
 export const hasUnpublishedChanges = ( project ) =>
 	! project.publicContent ||
-	project.publicContent.timestamp < project.draftContent.timestamp;
+	project.publicContent.timestamp < project.draftContent.timestamp ||
+	project.draftTheme !== project.publicTheme;
 
 /**
  * @param  {Project} project Project.

@@ -46,6 +46,7 @@ const Editor = ( { project } ) => {
 	const {
 		confirmationPage,
 		editorId,
+		editorTheme,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,
@@ -88,7 +89,7 @@ const Editor = ( { project } ) => {
 	return (
 		<EditorLayout className="editor">
 			<Global styles={ editorGlobalStyles } />
-			<EditorStylesResolver theme={ project.theme } />
+			<EditorStylesResolver theme={ editorTheme } />
 
 			<HeaderMeta title={ __( 'Edit Project', 'dashboard' ) } />
 
@@ -104,7 +105,7 @@ const Editor = ( { project } ) => {
 
 			{ showThemesModal && (
 				<ThemesModal
-					activeTheme={ project.theme }
+					activeTheme={ editorTheme }
 					onSelect={ handleSelectTheme }
 					onClose={ handleCloseThemesModal }
 				/>

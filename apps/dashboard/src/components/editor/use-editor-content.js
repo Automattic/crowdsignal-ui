@@ -22,7 +22,7 @@ export const useEditorContent = ( project ) => {
 	const {
 		initializeEditor,
 		updateEditorPage,
-		saveEditorChanges,
+		updateEditorTheme,
 	} = useDispatch( STORE_NAME );
 
 	const [
@@ -31,22 +31,24 @@ export const useEditorContent = ( project ) => {
 		currentPageContent,
 		editorProjectId,
 		isEditorContentSaved,
+		editorTheme,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
+		select( STORE_NAME ).getEditorTheme(),
 	] );
 
 	useEffect( () => {
-		initializeEditor(
-			project.id || 0,
-			project.title,
-			isPublic( project ) && ! forceDraft
-				? project.publicContent.pages
-				: project.draftContent.pages
-		);
+		const usePublic = isPublic( project ) && ! forceDraft;
+		const content = usePublic
+			? project.publicContent.pages
+			: project.draftContent.pages;
+		const theme = usePublic ? project.publicTheme : project.draftTheme;
+
+		initializeEditor( project.id || 0, project.title, content, theme );
 	}, [ forceDraft ] );
 
 	useEffect( () => {
@@ -94,7 +96,12 @@ export const useEditorContent = ( project ) => {
 	};
 
 	const setProjectTemplate = ( projectTemplate ) => {
-		initializeEditor( 0, undefined, projectTemplate.draftContent.pages );
+		initializeEditor(
+			0,
+			undefined,
+			projectTemplate.draftContent.pages,
+			editorTheme
+		);
 
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
@@ -102,11 +109,12 @@ export const useEditorContent = ( project ) => {
 	};
 
 	const setProjectTheme = ( theme ) => {
-		saveEditorChanges( { theme } );
+		updateEditorTheme( theme );
 	};
 
 	return {
 		editorId,
+		editorTheme,
 		confirmationPage,
 		loadBlocks,
 		saveBlocks,

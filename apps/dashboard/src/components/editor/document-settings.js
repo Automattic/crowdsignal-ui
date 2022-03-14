@@ -31,8 +31,9 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 		STORE_NAME
 	);
 
-	const [ canPublish, selectedBlockClientId ] = useSelect( ( select ) => [
+	const [ canPublish, editorTheme, selectedBlockClientId ] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
+		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 	] );
 
@@ -55,7 +56,7 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
 
-	const activeTheme = getTheme( project.theme );
+	const activeTheme = getTheme( editorTheme );
 
 	return (
 		<DocumentSection>

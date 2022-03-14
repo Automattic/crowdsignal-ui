@@ -31,8 +31,7 @@ const Toolbar = ( { project } ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
-	const publishProject = () =>
-		saveEditorChanges( { public: true, theme: project.theme } );
+	const publishProject = () => saveEditorChanges( { public: true } );
 
 	const shareHandler = () => {
 		if ( project.permalink ) {
