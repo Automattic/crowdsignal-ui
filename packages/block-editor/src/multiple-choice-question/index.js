@@ -16,20 +16,20 @@ const name = 'crowdsignal-forms/multiple-choice-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Multiple Choice Question', 'blocks' ),
+	title: __( 'Multiple Choice Question', 'block-editor' ),
 	description: __(
 		'Ask a question and offer multiple answer options.',
-		'blocks'
+		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'multiple choice', 'block-edtor' ),
-		__( 'question', 'block-edtor' ),
-		__( 'form', 'block-edtor' ),
-		__( 'quiz', 'block-edtor' ),
-		__( 'poll', 'block-edtor' ),
-		__( 'mc', 'block-edtor' ),
-		__( 'mc question', 'block-edtor' ),
+		__( 'multiple choice', 'block-editor' ),
+		__( 'question', 'block-editor' ),
+		__( 'form', 'block-editor' ),
+		__( 'quiz', 'block-editor' ),
+		__( 'poll', 'block-editor' ),
+		__( 'mc', 'block-editor' ),
+		__( 'mc question', 'block-editor' ),
 	],
 	icon: <MultipleChoiceQuestionIcon />,
 	edit: EditMultipleChoiceQuestion,

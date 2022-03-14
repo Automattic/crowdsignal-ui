@@ -13,15 +13,15 @@ import EditSubmitButton from './edit';
 const name = 'crowdsignal-forms/submit-button';
 
 const settings = {
-	title: __( 'Submit Button', 'blocks' ),
-	description: __( 'Submit the form', 'blocks' ),
+	title: __( 'Submit Button', 'block-editor' ),
+	description: __( 'Submit the form', 'block-editor' ),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'submit', 'block-edtor' ),
-		__( 'button', 'block-edtor' ),
-		__( 'continue', 'block-edtor' ),
-		__( 'next', 'block-edtor' ),
-		__( 'send', 'block-edtor' ),
+		__( 'submit', 'block-editor' ),
+		__( 'button', 'block-editor' ),
+		__( 'continue', 'block-editor' ),
+		__( 'next', 'block-editor' ),
+		__( 'send', 'block-editor' ),
 	],
 	icon: <SubmitButtonIcon />,
 	edit: EditSubmitButton,

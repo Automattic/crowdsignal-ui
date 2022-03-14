@@ -45,7 +45,7 @@ const EditButtonAnswer = ( {
 				{ multipleChoice && <FormCheckbox type="checkbox" /> }
 
 				<RichText
-					placeholder={ __( 'Enter an answer', 'blocks-editor' ) }
+					placeholder={ __( 'Enter an answer', 'block-editor' ) }
 					onChange={ onChange }
 					onReplace={ onReplace }
 					onSplit={ onSplit }

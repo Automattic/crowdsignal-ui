@@ -13,13 +13,16 @@ import EditRatingScaleAnswer from './edit';
 const name = 'crowdsignal-forms/rating-scale-answer';
 
 const settings = {
-	title: __( 'Answer', 'blocks' ),
-	description: __( 'Add more answer options to your question', 'blocks' ),
+	title: __( 'Answer', 'block-editor' ),
+	description: __(
+		'Add more answer options to your question',
+		'block-editor'
+	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'answer', 'block-edtor' ),
-		__( 'option', 'block-edtor' ),
-		__( 'choice', 'block-edtor' ),
+		__( 'answer', 'block-editor' ),
+		__( 'option', 'block-editor' ),
+		__( 'choice', 'block-editor' ),
 	],
 	icon: <MultipleChoiceAnswerIcon />,
 	parent: [ 'crowdsignal-forms/rating-scale-question' ],

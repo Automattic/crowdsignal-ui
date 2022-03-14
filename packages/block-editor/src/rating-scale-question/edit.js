@@ -41,7 +41,7 @@ const EditRatingScaleQuestion = ( props ) => {
 
 			<RichText
 				tagName={ QuestionHeader }
-				placeholder={ __( 'Enter your question', 'blocks' ) }
+				placeholder={ __( 'Enter your question', 'block-editor' ) }
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
 			/>

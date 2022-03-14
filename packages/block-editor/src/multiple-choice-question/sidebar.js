@@ -39,17 +39,17 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 	return (
 		<InspectorControls>
 			<PanelBody
-				title={ __( 'Answer Settings', 'blocks' ) }
+				title={ __( 'Answer Settings', 'block-editor' ) }
 				initialOpen={ true }
 			>
 				<ToggleControl
-					label={ __( 'An answer is required' ) }
+					label={ __( 'An answer is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeMandatory }
 				/>
 
 				<TextControl
-					label={ __( 'Max. choices', 'blocks' ) }
+					label={ __( 'Max. choices', 'block-editor' ) }
 					type="number"
 					value={ attributes.maximumChoices }
 					onChange={ handleMaxChoices }

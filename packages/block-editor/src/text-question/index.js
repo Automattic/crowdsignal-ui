@@ -14,17 +14,17 @@ const name = 'crowdsignal-forms/text-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Text Question', 'blocks' ),
+	title: __( 'Text Question', 'block-editor' ),
 	description: __(
 		'Ask a question and offer an open text field to enter an answer.',
-		'blocks'
+		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'question', 'block-edtor' ),
-		__( 'text', 'block-edtor' ),
-		__( 'open text', 'block-edtor' ),
-		__( 'input', 'block-edtor' ),
+		__( 'question', 'block-editor' ),
+		__( 'text', 'block-editor' ),
+		__( 'open text', 'block-editor' ),
+		__( 'input', 'block-editor' ),
 	],
 	icon: <TextQuestionIcon />,
 	edit: EditFreeText,

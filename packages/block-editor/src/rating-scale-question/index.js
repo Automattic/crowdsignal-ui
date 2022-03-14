@@ -16,20 +16,20 @@ const name = 'crowdsignal-forms/rating-scale-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Rating Question', 'blocks' ),
+	title: __( 'Rating Question', 'block-editor' ),
 	description: __(
 		'Ask a question and offer multiple answer options.',
-		'blocks'
+		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'rating', 'block-edtor' ),
-		__( 'question', 'block-edtor' ),
-		__( 'form', 'block-edtor' ),
-		__( 'quiz', 'block-edtor' ),
-		__( 'poll', 'block-edtor' ),
-		__( 'likert', 'block-edtor' ),
-		__( 'matrix', 'block-edtor' ),
+		__( 'rating', 'block-editor' ),
+		__( 'question', 'block-editor' ),
+		__( 'form', 'block-editor' ),
+		__( 'quiz', 'block-editor' ),
+		__( 'poll', 'block-editor' ),
+		__( 'likert', 'block-editor' ),
+		__( 'matrix', 'block-editor' ),
 	],
 	icon: <MultipleChoiceQuestionIcon />,
 	edit: EditRatingScaleQuestion,
