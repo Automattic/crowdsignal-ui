@@ -1,3 +1,33 @@
 html {
 	font-size: 16px;
 }
+
+body {
+	--wp--preset--color--foreground: #DCDCDE;
+	--wp--preset--color--background: #000;
+	--wp--custom--input--focus--color: #b4b4b4
+}
+
+.crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block {
+	input, textarea {
+		color: var(--wp--preset--color--foreground);
+		background-color: transparent;
+		border-width: 2px;
+		border-style: solid;
+		outline: none;
+
+		&:focus {
+			border-color: var(--wp--custom--input--focus--color);
+		}
+	}
+}
+
+.crowdsignal-forms-button__button {
+	color: var(--wp--preset--color--foreground);
+}
+
+.crowdsignal-forms-question-wrapper {
+	border-radius: 0;
+	border-width: 2px;
+	border-color: var(--wp--preset--color--foreground);
+}
