@@ -5,3 +5,13 @@
 	font-size: var(--wp--preset--font-size--medium);
 	line-height: var(--wp--custom--typography--line-height--normal);
 }
+
+// This is necessary to fix block alignment on previews
+.block-editor-block-preview__content-iframe {
+	body > .is-root-container > .wp-block-cover {
+		// The theme is using !important on a style definition.
+		// To override it we also need !important
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
