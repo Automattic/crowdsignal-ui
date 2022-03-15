@@ -38,7 +38,7 @@ test/
 # Local package.json
 package.json
 
-# Make sure to include a radme file describing the package
+# Make sure to include a README.md file describing the package
 README.md
 
 # Any build settings specific to the package/app
@@ -57,3 +57,4 @@ yarn workspace @crowdsignal/feedback-widget run build
 ## Dev dependencies
 
 All development dependencies should be added to the root `package.json`. Thanks to `yarn` workspaces they will be available in any package inside the repo.
+
