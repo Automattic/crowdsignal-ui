@@ -10,6 +10,8 @@ import { v4 as uuid } from 'uuid';
 import {
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
+	ratingScaleAnswerBlock,
+	ratingScaleQuestionBlock,
 	textInputBlock,
 	textQuestionBlock,
 } from '@crowdsignal/block-editor';
@@ -17,6 +19,8 @@ import {
 const MAPPED_BLOCKS = [
 	multipleChoiceAnswerBlock.name,
 	multipleChoiceQuestionBlock.name,
+	ratingScaleAnswerBlock.name,
+	ratingScaleQuestionBlock.name,
 	textInputBlock.name,
 	textQuestionBlock.name,
 ];
