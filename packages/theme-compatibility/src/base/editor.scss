@@ -45,6 +45,10 @@
 			margin-top: 0;
 			margin-bottom: 0;
 		}
+
+		&:not(:first-child) {
+			margin-left: var(--wp--style--block-gap, 2em);
+		}
 	}
 
 	.crowdsignal-forms-question-wrapper {
