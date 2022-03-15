@@ -32,7 +32,7 @@ const ThemePreview = ( { activeTheme, theme, onSelect } ) => {
 						disabled={ isActive }
 						onClick={ () => onSelect( theme.slug ) }
 					>
-						{ __( 'Activate this design', 'dashboard' ) }
+						{ __( 'Select this design', 'dashboard' ) }
 					</ThemePreviewButton>
 				</ThemePreviewOverlay>
 				<ThemePreviewImg src={ theme.image } />
