@@ -29,7 +29,7 @@ const SubmitButton = ( props ) => {
 		<>
 			<Toolbar { ...props } />
 			<Sidebar { ...props } />
-			<span>{ attributes.alignment }</span>
+
 			<Button
 				attributes={ attributes }
 				as={ RichText }
