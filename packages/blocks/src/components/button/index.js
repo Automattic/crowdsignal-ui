@@ -10,8 +10,16 @@ import classnames from 'classnames';
 import { useColorStyles } from '@crowdsignal/styles';
 
 const StyledButtonWrapper = styled.div`
-	display: block;
+	display: flex;
 	margin-bottom: 16px;
+
+	&.justify-center {
+		justify-content: center;
+	}
+
+	&.justify-right {
+		justify-content: flex-end;
+	}
 `;
 
 const StyledButton = styled.button`

@@ -22,7 +22,7 @@
 
 #crowdsignal-dashboard .block-editor-block-list__layout.is-root-container,
 .block-editor-block-preview__content-iframe .block-editor-block-list__layout.is-root-container {
-	.wp-block {
+	> .wp-block, [data-align] {
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -32,11 +32,11 @@
 		max-width: 720px;
 	}
 
-	.wp-block[data-align='wide'] {
+	[data-align='wide'] {
 		max-width: 1080px;
 	}
 
-	.wp-block[data-align='full'] {
+	[data-align='full'] {
 		max-width: none;
 	}
 

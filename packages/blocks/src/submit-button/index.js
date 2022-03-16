@@ -37,6 +37,8 @@ const SubmitButton = ( { attributes, className } ) => {
 		'crowdsignal-forms-submit-button-block',
 		{
 			'is-loading': isSubmitting,
+			[ `align${ attributes.align }` ]: attributes.align,
+			[ `justify-${ attributes.justification }` ]: attributes.justification,
 		}
 	);
 
