@@ -1,3 +1,23 @@
 html {
 	font-size: 16px;
 }
+
+body {
+	--wp--custom--input--focus--color: #010101;
+}
+
+.crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block {
+	input, textarea {
+		border-width: 1px;
+		border-style: solid;
+		outline: none;
+
+		&:focus {
+			border-color: var(--wp--custom--input--focus--color);
+		}
+	}
+}
+
+.crowdsignal-forms-question-wrapper {
+	border-radius: 0;
+}

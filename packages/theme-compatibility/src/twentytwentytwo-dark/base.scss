@@ -1,0 +1,22 @@
+@import '../twentytwentytwo/base';
+
+body {
+	--wp--preset--color--foreground: #FFF;
+	--wp--preset--color--background: #000;
+	--wp--custom--input--focus--color: #b4b4b4
+}
+
+.crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block {
+	input, textarea {
+		color: var(--wp--preset--color--foreground);
+		background-color: transparent;
+	}
+}
+
+.crowdsignal-forms-button__button {
+	color: var(--wp--preset--color--foreground);
+}
+
+.crowdsignal-forms-question-wrapper {
+	border-color: var(--wp--preset--color--foreground);
+}
