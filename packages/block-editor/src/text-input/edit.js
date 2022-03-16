@@ -73,6 +73,7 @@ const EditTextInput = ( props ) => {
 					className="crowdsignal-forms-text-input-block__wrapper"
 				/>
 			</ResizableBox>
+			<pre>{ JSON.stringify( props, 0, 2 ) }</pre>
 		</FormInputWrapper>
 	);
 };
