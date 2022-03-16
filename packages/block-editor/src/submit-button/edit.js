@@ -3,13 +3,14 @@
  */
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
 import { Button } from '@crowdsignal/blocks';
 import Sidebar from './sidebar';
-import classnames from 'classnames';
+import Toolbar from './toolbar';
 
 const SubmitButton = ( props ) => {
 	const { attributes, className, onReplace, setAttributes } = props;
@@ -18,13 +19,17 @@ const SubmitButton = ( props ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-submit-button-block'
+		'crowdsignal-forms-submit-button-block',
+		{
+			[ `justify-${ attributes.justification }` ]: attributes.justification,
+		}
 	);
 
 	return (
 		<>
+			<Toolbar { ...props } />
 			<Sidebar { ...props } />
-
+			<span>{ attributes.alignment }</span>
 			<Button
 				attributes={ attributes }
 				as={ RichText }

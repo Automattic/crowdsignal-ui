@@ -26,6 +26,9 @@ const settings = {
 	icon: <SubmitButtonIcon />,
 	edit: EditSubmitButton,
 	attributes,
+	supports: {
+		align: [ 'wide', 'full' ],
+	},
 	example: {
 		attributes: {
 			label: __( 'Submit', 'block-editor' ),
