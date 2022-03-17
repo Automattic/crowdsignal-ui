@@ -37,7 +37,7 @@ export const PagePreviewButton = styled.button`
 
 export const PagePreviewFrame = styled.div`
 	background-color: var( --color-surface );
-	background-color: var( --color-page-background );
+	background-color: var( --wp--custom--color--background );
 	border: 1px solid var( --color-border );
 	border-radius: 2px;
 	box-sizing: border-box;
