@@ -111,7 +111,7 @@ const Editor = ( { project } ) => {
 				/>
 			) }
 
-			<PageNavigation />
+			<PageNavigation key={ `nav_${ editorTheme }` } />
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
 				key={ editorId }
