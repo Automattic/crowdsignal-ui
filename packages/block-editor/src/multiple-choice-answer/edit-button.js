@@ -40,6 +40,7 @@ const EditButtonAnswer = ( {
 			style={ {
 				width,
 			} }
+			outline
 		>
 			<ButtonContent>
 				{ multipleChoice && <FormCheckbox type="checkbox" /> }
