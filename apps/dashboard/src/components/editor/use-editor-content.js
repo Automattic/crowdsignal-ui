@@ -19,7 +19,11 @@ export const useEditorContent = ( project ) => {
 
 	const { removeNotice } = useDispatch( 'core/notices' );
 
-	const { initializeEditor, updateEditorPage } = useDispatch( STORE_NAME );
+	const {
+		initializeEditor,
+		updateEditorPage,
+		updateEditorTheme,
+	} = useDispatch( STORE_NAME );
 
 	const [
 		confirmationPage,
@@ -27,22 +31,24 @@ export const useEditorContent = ( project ) => {
 		currentPageContent,
 		editorProjectId,
 		isEditorContentSaved,
+		editorTheme,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
+		select( STORE_NAME ).getEditorTheme(),
 	] );
 
 	useEffect( () => {
-		initializeEditor(
-			project.id || 0,
-			project.title,
-			isPublic( project ) && ! forceDraft
-				? project.publicContent.pages
-				: project.draftContent.pages
-		);
+		const usePublic = isPublic( project ) && ! forceDraft;
+		const content = usePublic
+			? project.publicContent.pages
+			: project.draftContent.pages;
+		const theme = usePublic ? project.publicTheme : project.draftTheme;
+
+		initializeEditor( project.id || 0, project.title, content, theme );
 	}, [ forceDraft ] );
 
 	useEffect( () => {
@@ -90,20 +96,31 @@ export const useEditorContent = ( project ) => {
 	};
 
 	const setProjectTemplate = ( projectTemplate ) => {
-		initializeEditor( 0, undefined, projectTemplate.draftContent.pages );
+		initializeEditor(
+			0,
+			undefined,
+			projectTemplate.draftContent.pages,
+			editorTheme
+		);
 
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
 		setReady( false );
 	};
 
+	const setProjectTheme = ( theme ) => {
+		updateEditorTheme( theme );
+	};
+
 	return {
 		editorId,
+		editorTheme,
 		confirmationPage,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,
 		setProjectTemplate,
+		setProjectTheme,
 		version: forceDraft ? 'draft' : 'auto',
 	};
 };

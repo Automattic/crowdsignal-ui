@@ -22,15 +22,22 @@ import { DocumentSection } from 'isolated-block-editor';
 import { FormFieldset, FormRadio } from '@crowdsignal/components';
 import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
+import { ToolbarButton } from './styles/button';
+import { getTheme } from '../../util/theme/themes';
 
-const DocumentSettings = ( { project } ) => {
+const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
 		STORE_NAME
 	);
 
-	const [ canPublish, selectedBlockClientId ] = useSelect( ( select ) => [
+	const [
+		canPublish,
+		editorTheme,
+		selectedBlockClientId,
+	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
+		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 	] );
 
@@ -52,6 +59,8 @@ const DocumentSettings = ( { project } ) => {
 	const visibility = isPublic( project )
 		? __( 'Public', 'dashboard' )
 		: __( 'Private', 'dashboard' );
+
+	const activeTheme = getTheme( editorTheme );
 
 	return (
 		<DocumentSection>
@@ -126,19 +135,47 @@ const DocumentSettings = ( { project } ) => {
 				</PanelRow>
 			</PanelBody>
 			{ project && (
-				<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
-					<PanelRow>
-						<span>{ __( 'View Project', 'dashboard' ) }</span>
-					</PanelRow>
-					<ExternalLink
-						href={ project.permalink }
-						title={ project.permalink }
+				<>
+					<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
+						<PanelRow>
+							<span>{ __( 'View Project', 'dashboard' ) }</span>
+						</PanelRow>
+						<ExternalLink
+							href={ project.permalink }
+							title={ project.permalink }
+						>
+							<span className="components-external-link__text">
+								{ project.permalink }
+							</span>
+						</ExternalLink>
+					</PanelBody>
+					<PanelBody
+						title={ __( 'Theme', 'dashboard' ) }
+						className="theme-panel"
 					>
-						<span className="components-external-link__text">
-							{ project.permalink }
-						</span>
-					</ExternalLink>
-				</PanelBody>
+						<PanelRow>
+							<span>
+								{ __( 'Your active theme:', 'dashboard' ) }
+							</span>
+						</PanelRow>
+						<PanelRow>
+							<img
+								src={ activeTheme.image }
+								alt={ activeTheme.name }
+							/>
+						</PanelRow>
+						<PanelRow className="theme-panel__actions">
+							<span>{ activeTheme.name }</span>
+							<ToolbarButton
+								as={ Button }
+								variant="tertiary"
+								onClick={ onChangeThemeClick }
+							>
+								{ __( 'Change Theme', 'dashboard' ) }
+							</ToolbarButton>
+						</PanelRow>
+					</PanelBody>
+				</>
 			) }
 		</DocumentSection>
 	);

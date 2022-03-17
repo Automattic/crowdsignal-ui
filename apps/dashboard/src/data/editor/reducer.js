@@ -18,6 +18,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 import { clonePage } from './util';
@@ -67,6 +68,13 @@ const changes = ( state = {}, action ) => {
 		return {
 			...state,
 			title: true,
+		};
+	}
+
+	if ( action.type === EDITOR_THEME_UPDATE ) {
+		return {
+			...state,
+			theme: true,
 		};
 	}
 
@@ -122,7 +130,8 @@ const edited = ( state = false, action ) => {
 		action.type === EDITOR_PAGE_DELETE ||
 		action.type === EDITOR_PAGE_UPDATE ||
 		action.type === EDITOR_PAGE_ORDER_UPDATE ||
-		action.type === EDITOR_TITLE_UPDATE
+		action.type === EDITOR_TITLE_UPDATE ||
+		action.type === EDITOR_THEME_UPDATE
 	) {
 		return true;
 	}
@@ -230,6 +239,21 @@ const title = ( state = '', action ) => {
 	return state;
 };
 
+/**
+ * Project theme.
+ *
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Theme.
+ */
+const theme = ( state = '', action ) => {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_THEME_UPDATE ) {
+		return action.theme;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	changes,
 	currentPage,
@@ -238,4 +262,5 @@ export default combineReducers( {
 	pages,
 	projectId,
 	title,
+	theme,
 } );

@@ -17,7 +17,7 @@ window.__editorAssets = window.__editorAssets || {
 const PreviewStylesResolver = ( { theme } ) => {
 	const stylesheets = {
 		base: '/ui/stable/theme-compatibility/base-editor.css',
-		theme: `/themes/${ theme }/style-editor.css`,
+		theme: `https://app.crowdsignal.com/themes/${ theme }/style-editor.css`,
 		compatibility: `/ui/stable/theme-compatibility/${ theme }-editor.css`,
 	};
 
@@ -48,7 +48,7 @@ const PreviewStylesResolver = ( { theme } ) => {
 		observer.observe( document.head, { childList: true } );
 
 		return () => observer.disconnect();
-	}, [] );
+	}, [ theme ] );
 
 	return null;
 };
