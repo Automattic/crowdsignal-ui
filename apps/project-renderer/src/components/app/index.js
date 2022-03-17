@@ -79,9 +79,13 @@ const App = ( {
 		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
 		form.append( 'startTime', startDate );
-		Object.keys( data ).forEach( ( key ) =>
-			form.append( key, data[ key ] )
-		);
+		Object.keys( data ).forEach( ( key ) => {
+			if ( Array.isArray( data[ key ] ) ) {
+				data[ key ].forEach( ( value ) => form.append( key, value ) );
+			} else {
+				form.append( key, data[ key ] );
+			}
+		} );
 
 		const query = preview && { preview };
 
