@@ -41,6 +41,8 @@ export const editorSettings = {
 
 				'crowdsignal-forms/multiple-choice-question',
 				'crowdsignal-forms/multiple-choice-answer',
+				'crowdsignal-forms/rating-scale-answer',
+				'crowdsignal-forms/rating-scale-question',
 				'crowdsignal-forms/submit-button',
 				'crowdsignal-forms/text-input',
 				'crowdsignal-forms/text-question',

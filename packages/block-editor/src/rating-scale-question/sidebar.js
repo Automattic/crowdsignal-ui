@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -10,7 +10,6 @@ import { __ } from '@wordpress/i18n';
  */
 import BorderSettings from '../components/border-settings';
 import ColorSettings from '../components/color-settings';
-import { isEmpty } from 'lodash';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
 	const handleChangeMandatory = ( isMandatory ) => {
@@ -18,22 +17,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 			mandatory: isMandatory,
 			minimumChoices: isMandatory ? 1 : 0,
 		} );
-	};
-
-	const handleMaxChoices = ( value ) => {
-		if ( ! isEmpty( value ) && value < 1 ) {
-			return;
-		}
-
-		setAttributes( {
-			maximumChoices: parseInt( value ),
-		} );
-
-		if ( value < attributes.minimumChoices ) {
-			setAttributes( {
-				minimumChoices: parseInt( value ),
-			} );
-		}
 	};
 
 	return (
@@ -46,13 +29,6 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'An answer is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeMandatory }
-				/>
-
-				<TextControl
-					label={ __( 'Max. choices', 'block-editor' ) }
-					type="number"
-					value={ attributes.maximumChoices }
-					onChange={ handleMaxChoices }
 				/>
 			</PanelBody>
 

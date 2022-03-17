@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { Button, FormCheckbox } from '@crowdsignal/blocks';
+import { Button } from '@crowdsignal/blocks';
 
 const ButtonContent = styled.div`
 	align-items: center;
@@ -24,26 +24,14 @@ const ButtonContent = styled.div`
 const EditButtonAnswer = ( {
 	attributes,
 	className,
-	multipleChoice,
 	onChange,
 	onReplace,
 	onSplit,
 	onDelete,
 } ) => {
-	const width = attributes.width ? `${ attributes.width }%` : null;
-
 	return (
-		<Button
-			attributes={ attributes }
-			as={ 'div' }
-			className={ className }
-			style={ {
-				width,
-			} }
-		>
+		<Button attributes={ attributes } as={ 'div' } className={ className }>
 			<ButtonContent>
-				{ multipleChoice && <FormCheckbox type="checkbox" /> }
-
 				<RichText
 					placeholder={ __( 'Enter an answer', 'block-editor' ) }
 					onChange={ onChange }

@@ -7,32 +7,32 @@ import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { MultipleChoiceQuestion } from '@crowdsignal/blocks';
+import { RatingScaleQuestion } from '@crowdsignal/blocks';
 import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
-import EditMultipleChoiceQuestion from './edit';
+import EditRatingScaleQuestion from './edit';
 
-const name = 'crowdsignal-forms/multiple-choice-question';
+const name = 'crowdsignal-forms/rating-scale-question';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Multiple Choice Question', 'block-editor' ),
+	title: __( 'Rating Question', 'block-editor' ),
 	description: __(
 		'Ask a question and offer multiple answer options.',
 		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'multiple choice', 'block-editor' ),
+		__( 'rating', 'block-editor' ),
 		__( 'question', 'block-editor' ),
 		__( 'form', 'block-editor' ),
 		__( 'quiz', 'block-editor' ),
 		__( 'poll', 'block-editor' ),
-		__( 'mc', 'block-editor' ),
-		__( 'mc question', 'block-editor' ),
+		__( 'likert', 'block-editor' ),
+		__( 'matrix', 'block-editor' ),
 	],
 	icon: <MultipleChoiceQuestionIcon />,
-	edit: EditMultipleChoiceQuestion,
+	edit: EditRatingScaleQuestion,
 	save: () => <InnerBlocks.Content />,
 	attributes,
 	supports: {
@@ -41,12 +41,12 @@ const settings = {
 	},
 	styles: [
 		{
-			name: MultipleChoiceQuestion.Style.BUTTON,
+			name: RatingScaleQuestion.Style.EMOJI,
 			label: __( 'Buttons', 'block-editor' ),
 			isDefault: true,
 		},
 		{
-			name: MultipleChoiceQuestion.Style.LIST,
+			name: RatingScaleQuestion.Style.TEXT,
 			label: __( 'List', 'block-editor' ),
 		},
 	],
@@ -55,37 +55,31 @@ const settings = {
 			isDefault: true,
 			attributes: {
 				// Force the correct className onto the block by default
-				className: 'is-style-button',
+				className: 'is-style-emoji',
 			},
 		},
 	],
 	example: {
 		attributes: {
-			question: __( 'What is your favorite food?', 'block-editor' ),
+			question: __( 'How did you like the course?', 'block-editor' ),
 		},
 		innerBlocks: [
 			{
-				name: 'crowdsignal-forms/multiple-choice-answer',
+				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
-					label: __( 'Pizza', 'block-editor' ),
+					label: '1',
 				},
 			},
 			{
-				name: 'crowdsignal-forms/multiple-choice-answer',
+				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
-					label: __( 'Hamburger', 'block-editor' ),
+					label: '2',
 				},
 			},
 			{
-				name: 'crowdsignal-forms/multiple-choice-answer',
+				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
-					label: __( 'Pasta', 'block-editor' ),
-				},
-			},
-			{
-				name: 'crowdsignal-forms/multiple-choice-answer',
-				attributes: {
-					label: __( 'Salad', 'block-editor' ),
+					label: '3',
 				},
 			},
 		],

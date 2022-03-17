@@ -21,6 +21,7 @@ const renderProject = () => {
 
 	if ( container.dataset.pid ) {
 		projectProps.projectCode = container.dataset.pid;
+		projectProps.startTime = container.dataset.startdate;
 	}
 
 	return render(

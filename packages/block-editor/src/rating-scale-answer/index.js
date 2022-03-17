@@ -8,9 +8,9 @@ import { __ } from '@wordpress/i18n';
  */
 import { MultipleChoiceAnswerIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
-import EditMultipleChoiceAnswer from './edit';
+import EditRatingScaleAnswer from './edit';
 
-const name = 'crowdsignal-forms/multiple-choice-answer';
+const name = 'crowdsignal-forms/rating-scale-answer';
 
 const settings = {
 	title: __( 'Answer', 'block-editor' ),
@@ -25,8 +25,8 @@ const settings = {
 		__( 'choice', 'block-editor' ),
 	],
 	icon: <MultipleChoiceAnswerIcon />,
-	parent: [ 'crowdsignal-forms/multiple-choice-question' ],
-	edit: EditMultipleChoiceAnswer,
+	parent: [ 'crowdsignal-forms/rating-scale-question' ],
+	edit: EditRatingScaleAnswer,
 	attributes,
 };
 

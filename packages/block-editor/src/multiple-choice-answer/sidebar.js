@@ -36,7 +36,9 @@ const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 
 			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
 				<PanelBody title={ __( 'Width settings', 'block-editor' ) }>
-					<ButtonGroup aria-label={ __( 'Button width' ) }>
+					<ButtonGroup
+						aria-label={ __( 'Button width', 'block-editor' ) }
+					>
 						{ [ 25, 50, 75, 100 ].map( ( width ) => (
 							<Button
 								isSmall
@@ -55,7 +57,7 @@ const Sidebar = ( { attributes, blockStyle, setAttributes } ) => {
 				</PanelBody>
 			) }
 
-			<PanelBody title={ __( 'Style settings' ) }>
+			<PanelBody title={ __( 'Style settings', 'block-editor' ) }>
 				<ToggleControl
 					label={ __(
 						'Sync style settings for all answers',

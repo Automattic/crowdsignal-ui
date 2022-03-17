@@ -56,6 +56,12 @@ const Content = styled.div`
 			margin-bottom: 0;
 		}
 	}
+
+	&.is-horizontal {
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+	}
 `;
 
 const QuestionWrapper = ( {
@@ -91,7 +97,10 @@ const QuestionWrapper = ( {
 const QuestionWrapperContent = ( { className, ...props } ) => {
 	const classes = classnames(
 		'crowdsignal-forms-question-wrapper__content',
-		className
+		className,
+		{
+			'is-horizontal': props.horizontal,
+		}
 	);
 
 	return <Content className={ classes } { ...props } />;

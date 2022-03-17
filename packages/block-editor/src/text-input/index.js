@@ -21,9 +21,9 @@ const settings = {
 	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
-		__( 'form', 'block-edtor' ),
-		__( 'input', 'block-edtor' ),
-		__( 'text input', 'block-edtor' ),
+		__( 'form', 'block-editor' ),
+		__( 'input', 'block-editor' ),
+		__( 'text input', 'block-editor' ),
 	],
 	icon: <TextInputIcon />,
 	edit: Edit,

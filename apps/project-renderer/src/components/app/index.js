@@ -11,6 +11,8 @@ import {
 	CoreEmbed,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
+	RatingScaleAnswer,
+	RatingScaleQuestion,
 	SubmitButton,
 	TextInput,
 	TextQuestion,
@@ -30,11 +32,8 @@ const App = ( {
 } ) => {
 	const [ content, setContent ] = useState( [] );
 	const [ theme, setTheme ] = useState( null );
-	// eslint-disable-next-line
 	const [ startDate, setStartDate ] = useState( startTime );
-	// eslint-disable-next-line
 	const [ currentPage, setCurrentPage ] = useState( page );
-	// eslint-disable-next-line
 	const [ responseHash, setResponseHash ] = useState( respondentId );
 
 	const [ hasResponded, setHasResponded ] = useState( false );
@@ -58,7 +57,9 @@ const App = ( {
 				}
 
 				setTheme( res.data.theme );
-
+				setStartDate(
+					res.data.startTime || parseInt( Date.now() / 1000, 10 )
+				);
 				return setContent( res.data.content );
 			} )
 			.catch( ( err ) => {
@@ -77,7 +78,7 @@ const App = ( {
 		const form = new window.FormData();
 		form.append( 'p', currentPage );
 		form.append( 'r', responseHash );
-		form.append( 'startTime', startDate || parseInt( Date.now() / 1000 ) );
+		form.append( 'startTime', startDate );
 		Object.keys( data ).forEach( ( key ) =>
 			form.append( key, data[ key ] )
 		);
@@ -114,6 +115,8 @@ const App = ( {
 			'core/embed': CoreEmbed,
 			'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
 			'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
+			'crowdsignal-forms/rating-scale-answer': RatingScaleAnswer,
+			'crowdsignal-forms/rating-scale-question': RatingScaleQuestion,
 			'crowdsignal-forms/submit-button': SubmitButton,
 			'crowdsignal-forms/text-input': TextInput,
 			'crowdsignal-forms/text-question': TextQuestion,

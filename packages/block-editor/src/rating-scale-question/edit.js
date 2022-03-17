@@ -9,21 +9,13 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
-
-/**
- * Style dependencies
- */
 import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
-import Toolbar from './toolbar';
+// import Toolbar from './toolbar';
 import Sidebar from './sidebar';
 
-const ALLOWED_ANSWER_BLOCKS = [
-	'core/image',
-	'core/paragraph',
-	'crowdsignal-forms/multiple-choice-answer',
-];
+const ALLOWED_ANSWER_BLOCKS = [ 'crowdsignal-forms/rating-scale-answer' ];
 
-const EditMultipleChoiceQuestion = ( props ) => {
+const EditRatingScaleQuestion = ( props ) => {
 	const { attributes, className, setAttributes } = props;
 
 	useClientId( props );
@@ -31,7 +23,7 @@ const EditMultipleChoiceQuestion = ( props ) => {
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
 	const classes = classnames(
-		'crowdsignal-forms-multiple-choice-question-block',
+		'crowdsignal-forms-rating-scale-question-block',
 		className,
 		{
 			'is-required': attributes.mandatory,
@@ -40,7 +32,7 @@ const EditMultipleChoiceQuestion = ( props ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<Toolbar { ...props } />
+			{ /* <Toolbar { ...props } /> */ }
 			<Sidebar { ...props } />
 
 			<RichText
@@ -49,21 +41,36 @@ const EditMultipleChoiceQuestion = ( props ) => {
 				onChange={ handleChangeQuestion }
 				value={ attributes.question }
 			/>
-			<QuestionWrapper.Content>
+			<QuestionWrapper.Content horizontal>
 				<InnerBlocks
 					template={ [
-						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
-						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
-						[ 'crowdsignal-forms/multiple-choice-answer', {} ],
+						[
+							'crowdsignal-forms/rating-scale-answer',
+							{ label: '1', weight: 1 },
+						],
+						[
+							'crowdsignal-forms/rating-scale-answer',
+							{ label: '2', weight: 2 },
+						],
+						[
+							'crowdsignal-forms/rating-scale-answer',
+							{ label: '3', weight: 3 },
+						],
+						[
+							'crowdsignal-forms/rating-scale-answer',
+							{ label: '4', weight: 4 },
+						],
+						[
+							'crowdsignal-forms/rating-scale-answer',
+							{ label: '5', weight: 5 },
+						],
 					] }
-					templateLock={ false }
+					templateLock={ true }
 					allowedBlocks={ ALLOWED_ANSWER_BLOCKS }
-					orientation="vertical"
-					__experimentalMoverDirection="vertical"
 				/>
 			</QuestionWrapper.Content>
 		</QuestionWrapper>
 	);
 };
 
-export default EditMultipleChoiceQuestion;
+export default EditRatingScaleQuestion;
