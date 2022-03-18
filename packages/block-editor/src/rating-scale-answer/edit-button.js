@@ -30,7 +30,12 @@ const EditButtonAnswer = ( {
 	onDelete,
 } ) => {
 	return (
-		<Button attributes={ attributes } as={ 'div' } className={ className }>
+		<Button
+			attributes={ attributes }
+			as={ 'div' }
+			className={ className }
+			outline
+		>
 			<ButtonContent>
 				<RichText
 					placeholder={ __( 'Enter an answer', 'block-editor' ) }
