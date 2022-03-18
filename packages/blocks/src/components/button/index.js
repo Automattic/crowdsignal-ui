@@ -40,14 +40,18 @@ const Button = ( {
 	attributes,
 	children,
 	className,
+	outline,
 	style = {},
 	...props
 } ) => (
 	<StyledButtonWrapper
 		className={ classnames(
-			'crowdsignal-forms-button',
 			className,
-			'wp-block-button'
+			'crowdsignal-forms-button',
+			'wp-block-button',
+			{
+				'is-style-outline': outline,
+			}
 		) }
 	>
 		<StyledButton

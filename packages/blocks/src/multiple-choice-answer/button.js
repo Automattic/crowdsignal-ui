@@ -39,6 +39,7 @@ const ButtonAnswer = ( {
 			style={ {
 				width,
 			} }
+			outline={ ! inputProps.checked }
 		>
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
