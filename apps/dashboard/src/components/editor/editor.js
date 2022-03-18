@@ -69,7 +69,8 @@ const Editor = ( { project } ) => {
 	};
 
 	const handleSelectTheme = ( theme ) => {
-		setProjectTheme( theme );
+		const autoSave = ! showWizard;
+		setProjectTheme( theme, autoSave );
 		setShowThemesModal( false );
 	};
 

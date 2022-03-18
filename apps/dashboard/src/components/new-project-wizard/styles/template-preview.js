@@ -32,6 +32,7 @@ export const TemplatePreviewFrame = styled.button`
 export const TemplatePreviewName = styled.h3`
 	color: var( --color-text );
 	font-size: 16px;
+	font-family: inherit;
 	font-weight: bold;
 	margin-bottom: 8px;
 `;

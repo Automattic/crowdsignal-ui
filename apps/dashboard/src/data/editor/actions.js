@@ -114,7 +114,7 @@ export const updateEditorTitle = autosave( ( title ) => ( {
 	title,
 } ) );
 
-export const updateEditorTheme = autosave( ( theme ) => ( {
+export const updateEditorTheme = ( theme ) => ( {
 	type: EDITOR_THEME_UPDATE,
 	theme,
-} ) );
+} );

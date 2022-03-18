@@ -23,6 +23,7 @@ export const useEditorContent = ( project ) => {
 		initializeEditor,
 		updateEditorPage,
 		updateEditorTheme,
+		saveEditorChanges,
 	} = useDispatch( STORE_NAME );
 
 	const [
@@ -108,8 +109,12 @@ export const useEditorContent = ( project ) => {
 		setReady( false );
 	};
 
-	const setProjectTheme = ( theme ) => {
+	const setProjectTheme = ( theme, autoSave = true ) => {
 		updateEditorTheme( theme );
+
+		if ( autoSave ) {
+			saveEditorChanges();
+		}
 	};
 
 	return {
