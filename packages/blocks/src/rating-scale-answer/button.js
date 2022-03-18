@@ -32,7 +32,7 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 			as="label"
 			attributes={ attributes }
 			className={ className }
-			outline
+			outline={ ! inputProps.checked }
 		>
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
