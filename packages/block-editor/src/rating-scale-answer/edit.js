@@ -30,8 +30,7 @@ const EditRatingScaleAnswer = ( props ) => {
 		className,
 		{
 			'is-empty': ! attributes.label,
-			'is-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
-			'is-text-button': blockStyle === RatingScaleQuestion.Style.TEXT,
+			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
 		}
 	);
 
