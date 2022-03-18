@@ -8,7 +8,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import { RatingScaleQuestion } from '@crowdsignal/blocks';
-import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
+import { RatingScaleQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRatingScaleQuestion from './edit';
 
@@ -31,7 +31,7 @@ const settings = {
 		__( 'likert', 'block-editor' ),
 		__( 'matrix', 'block-editor' ),
 	],
-	icon: <MultipleChoiceQuestionIcon />,
+	icon: <RatingScaleQuestionIcon />,
 	edit: EditRatingScaleQuestion,
 	save: () => <InnerBlocks.Content />,
 	attributes,
