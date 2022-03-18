@@ -41,13 +41,13 @@ const settings = {
 	},
 	styles: [
 		{
-			name: RatingScaleQuestion.Style.EMOJI,
-			label: __( 'Buttons', 'block-editor' ),
-			isDefault: true,
+			name: RatingScaleQuestion.Style.TEXT,
+			label: __( 'Text Button', 'block-editor' ),
 		},
 		{
-			name: RatingScaleQuestion.Style.TEXT,
-			label: __( 'List', 'block-editor' ),
+			name: RatingScaleQuestion.Style.EMOJI,
+			label: __( 'Emojis', 'block-editor' ),
+			isDefault: true,
 		},
 	],
 	variations: [
