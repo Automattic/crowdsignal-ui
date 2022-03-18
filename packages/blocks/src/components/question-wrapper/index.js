@@ -56,12 +56,6 @@ const Content = styled.div`
 			margin-bottom: 0;
 		}
 	}
-
-	&.is-horizontal {
-		width: 100%;
-		flex-direction: row;
-		justify-content: space-between;
-	}
 `;
 
 const QuestionWrapper = ( {
