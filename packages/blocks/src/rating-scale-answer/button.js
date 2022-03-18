@@ -20,6 +20,10 @@ const ButtonContent = styled.span`
 		position: absolute;
 		left: -999px;
 	}
+
+	.is-style-emoji & {
+		font-size: 32px;
+	}
 `;
 
 const ButtonAnswer = ( { attributes, className, inputProps } ) => {
