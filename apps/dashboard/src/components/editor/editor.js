@@ -100,7 +100,10 @@ const Editor = ( { project } ) => {
 			/>
 
 			{ showWizard && (
-				<NewProjectWizard onSelect={ handleSelectTemplate } />
+				<NewProjectWizard
+					onSelect={ handleSelectTemplate }
+					onChangeThemeClick={ handleOpenThemesModal }
+				/>
 			) }
 
 			{ showThemesModal && (

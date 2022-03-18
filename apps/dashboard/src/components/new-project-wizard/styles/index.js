@@ -13,5 +13,7 @@ import { ModalDialog } from '../../modal';
  * Whenever we need specific styles, we can extend a Modal component and override the styles
  */
 export const ProjectWizardDialog = styled( ModalDialog )`
-	padding: 80px 160px;
+	padding: 72px 60px;
+	flex-direction: row;
+	align-items: flex-end;
 `;
