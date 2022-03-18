@@ -24,7 +24,12 @@ const ButtonContent = styled.span`
 
 const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 	return (
-		<Button as="label" attributes={ attributes } className={ className }>
+		<Button
+			as="label"
+			attributes={ attributes }
+			className={ className }
+			outline
+		>
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
 				<RawHTML>{ attributes.label }</RawHTML>
