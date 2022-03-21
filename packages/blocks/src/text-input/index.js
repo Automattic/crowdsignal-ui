@@ -15,8 +15,6 @@ import { useField } from '@crowdsignal/form';
 import validator from './validations';
 
 const TextInput = ( { attributes, className } ) => {
-	//console.log(validator[attributes.validation]());
-
 	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {

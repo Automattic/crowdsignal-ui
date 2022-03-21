@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import { TextInputIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import Edit from './edit';
-import Variations from './variations';
+import variation from './variations';
 
 const name = 'crowdsignal-forms/text-input';
 
@@ -28,7 +28,7 @@ const settings = {
 	],
 	icon: <TextInputIcon />,
 	edit: Edit,
-	variations: Variations,
+	variations: variation,
 	attributes,
 	example: {
 		attributes: {
