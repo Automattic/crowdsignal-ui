@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { map } from 'lodash';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -13,6 +14,7 @@ import {
 	ModalTemplateGrid,
 	ModalWrapper,
 } from '../modal';
+import { STORE_NAME } from '../../data';
 import ActiveTheme from './active-theme';
 import TemplatePreview from './template-preview';
 import * as projectTemplates from './templates';
@@ -23,6 +25,10 @@ import * as projectTemplates from './templates';
 import { ProjectWizardDialog } from './styles';
 
 const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
+	const editorTheme = useSelect( ( select ) =>
+		select( STORE_NAME ).getEditorTheme()
+	);
+
 	return (
 		<ModalWrapper>
 			<ProjectWizardDialog id="crowdsignal-new-project-wizard">
@@ -46,7 +52,7 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 					<ModalTemplateGrid>
 						{ map( projectTemplates, ( template ) => (
 							<TemplatePreview
-								key={ template.name }
+								key={ `${ editorTheme }_${ template.name }` }
 								template={ template }
 								onSelect={ onSelect }
 							/>
