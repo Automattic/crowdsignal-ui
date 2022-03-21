@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { useEffect } from '@wordpress/element';
+import { useCallback, useEffect } from '@wordpress/element';
 import { map } from 'lodash';
 
 /**
@@ -25,30 +25,33 @@ const PreviewStylesResolver = ( { theme } ) => {
 	useStylesheet( stylesheets.theme );
 	useStylesheet( stylesheets.compatibility );
 
+	const reloadEditorAssets = useCallback( () => {
+		const externalStyles = map(
+			stylesheets,
+			( path, id ) =>
+				`<link id="${ id }" href="${ path }" rel="stylesheet" type="text/css" />`
+		).join( '' );
+
+		const inlineStyles = Array.from( document.head.children )
+			.filter(
+				( node ) =>
+					node.dataset.emotion === 'css' ||
+					node.dataset.emotion === 'css-global'
+			)
+			.map( ( node ) => node.textContent.replace( /\/\*.*\*\//, '' ) )
+			.join( '' );
+
+		window.__editorAssets.styles = `${ externalStyles }<style>${ inlineStyles }</styles>`;
+	}, [ theme ] );
+
 	useEffect( () => {
-		const observer = new window.MutationObserver( () => {
-			const externalStyles = map(
-				stylesheets,
-				( path, id ) =>
-					`<link id="${ id }" href="${ path }" rel="stylesheet" type="text/css" />`
-			).join( '' );
-
-			const inlineStyles = Array.from( document.head.children )
-				.filter(
-					( node ) =>
-						node.dataset.emotion === 'css' ||
-						node.dataset.emotion === 'css-global'
-				)
-				.map( ( node ) => node.textContent.replace( /\/\*.*\*\//, '' ) )
-				.join( '' );
-
-			window.__editorAssets.styles = `${ externalStyles }<style>${ inlineStyles }</styles>`;
-		} );
-
+		const observer = new window.MutationObserver( reloadEditorAssets );
 		observer.observe( document.head, { childList: true } );
 
+		reloadEditorAssets();
+
 		return () => observer.disconnect();
-	}, [ theme ] );
+	}, [ reloadEditorAssets ] );
 
 	return null;
 };
