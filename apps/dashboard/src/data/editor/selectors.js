@@ -145,13 +145,14 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		};
 	}
 
-	if ( options.public ) {
-		data.publicContent = data.draftContent;
-		data.public = true;
+	if ( changes.theme || options.public ) {
+		data.draftTheme = getEditorTheme( state );
 	}
 
-	if ( changes.theme || options.public ) {
-		data.theme = getEditorTheme( state );
+	if ( options.public ) {
+		data.publicContent = data.draftContent;
+		data.publicTheme = data.draftTheme;
+		data.public = true;
 	}
 
 	if ( changes.title ) {
