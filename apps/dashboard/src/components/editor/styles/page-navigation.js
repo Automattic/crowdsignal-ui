@@ -34,7 +34,6 @@ export const PageNavigationHeader = styled.button`
 	cursor: pointer;
 	display: flex;
 	font-size: 11px;
-	margin-bottom: 8px;
 	padding: 0 16px 0 32px;
 	height: 61px;
 	text-transform: uppercase;
@@ -56,6 +55,17 @@ export const PageNavigationHeader = styled.button`
 	}
 `;
 
+export const PageNavigationContent = styled.div`
+	box-sizing: border-box;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding-top: 8px;
+	width: 100%;
+`;
+
 export const PageNavigationAddButton = styled.button`
 	align-items: center;
 	background-color: transparent;
@@ -65,9 +75,9 @@ export const PageNavigationAddButton = styled.button`
 	color: var( --color-text );
 	cursor: pointer;
 	display: flex;
-	height: 40px;
 	justify-content: center;
 	margin: 16px 24px;
+	min-height: 40px;
 	transition: margin 0.3s, width 0.3s;
 	width: 40px;
 
@@ -81,8 +91,8 @@ export const PageNavigationSectionHeader = styled.span`
 	color: var( --color-text-subtle );
 	display: flex;
 	font-size: 11px;
-	height: 0;
 	margin-top: 8px;
+	min-height: 20px;
 	overflow: hidden;
 	opacity: 0;
 	padding: 0 16px 0 64px;
