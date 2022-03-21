@@ -20,7 +20,7 @@ export const themes = [
 		slug: 'twentytwentytwo',
 		name: 'Twenty Twenty-Two',
 		image:
-			'https://i0.wp.com/s2.wp.com/wp-content/themes/pub/twentytwentytwo/screenshot.png',
+			'https://app.crowdsignal.com/themes/twentytwentytwo/screenshot.png',
 	},
 	{
 		slug: 'blockbase',
@@ -33,6 +33,12 @@ export const themes = [
 		name: 'Quadrat',
 		image:
 			'https://i0.wp.com/s2.wp.com/wp-content/themes/pub/quadrat/screenshot.png',
+	},
+	{
+		slug: 'twentytwentytwo-dark',
+		name: 'Twenty Twenty-Two Dark',
+		image:
+			'https://i0.wp.com/s2.wp.com/wp-content/themes/pub/twentytwentytwo/screenshot.png',
 	},
 ];
 
