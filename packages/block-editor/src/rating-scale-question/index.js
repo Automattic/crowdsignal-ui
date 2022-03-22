@@ -43,11 +43,11 @@ const settings = {
 		{
 			name: RatingScaleQuestion.Style.TEXT,
 			label: __( 'Text Button', 'block-editor' ),
+			isDefault: true,
 		},
 		{
 			name: RatingScaleQuestion.Style.EMOJI,
 			label: __( 'Emojis', 'block-editor' ),
-			isDefault: true,
 		},
 	],
 	variations: [
@@ -55,7 +55,7 @@ const settings = {
 			isDefault: true,
 			attributes: {
 				// Force the correct className onto the block by default
-				className: 'is-style-emoji',
+				className: 'is-style-text',
 			},
 		},
 	],
@@ -68,18 +68,24 @@ const settings = {
 				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
 					label: '1',
-				},
-			},
-			{
-				name: 'crowdsignal-forms/rating-scale-answer',
-				attributes: {
-					label: '2',
+					weight: 1,
+					emoji: '😡',
 				},
 			},
 			{
 				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
 					label: '3',
+					weight: 3,
+					emoji: '😐',
+				},
+			},
+			{
+				name: 'crowdsignal-forms/rating-scale-answer',
+				attributes: {
+					label: '5',
+					weight: 5,
+					emoji: '😀',
 				},
 			},
 		],

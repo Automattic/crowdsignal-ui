@@ -21,7 +21,13 @@ const EditRatingScaleAnswer = ( props ) => {
 
 	useClientId( props );
 
-	const handleChangeLabel = ( label ) => setAttributes( { label } );
+	const handleChangeLabel = ( label ) => {
+		if ( blockStyle === RatingScaleQuestion.Style.EMOJI ) {
+			setAttributes( { emoji: label } );
+		} else {
+			setAttributes( { label } );
+		}
+	};
 
 	const blockStyle = getBlockStyle( questionAttributes.className );
 
@@ -31,6 +37,7 @@ const EditRatingScaleAnswer = ( props ) => {
 		{
 			'is-empty': ! attributes.label,
 			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
+			'is-style-text': blockStyle === RatingScaleQuestion.Style.TEXT,
 		}
 	);
 

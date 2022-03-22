@@ -55,23 +55,23 @@ const EditRatingScaleQuestion = ( props ) => {
 					template={ [
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '1', weight: 1 },
+							{ emoji: '😡', label: '1', weight: 1 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '2', weight: 2 },
+							{ emoji: '😕', label: '2', weight: 2 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '3', weight: 3 },
+							{ emoji: '😐', label: '3', weight: 3 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '4', weight: 4 },
+							{ emoji: '🙂', label: '4', weight: 4 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '5', weight: 5 },
+							{ emoji: '😀', label: '5', weight: 5 },
 						],
 					] }
 					templateLock={ true }

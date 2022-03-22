@@ -22,14 +22,15 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 		value: attributes.clientId,
 	} );
 
+	const blockStyle = getBlockStyle( parentQuestion.className );
+
 	const classes = classnames(
 		'crowdsignal-forms-rating-scale-answer-block',
 		className,
 		{
 			'is-selected': inputProps.checked,
-			'is-style-emoji':
-				getBlockStyle( parentQuestion.className ) ===
-				RatingScaleQuestion.Style.EMOJI,
+			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
+			'is-style-text': blockStyle === RatingScaleQuestion.Style.TEXT,
 		}
 	);
 

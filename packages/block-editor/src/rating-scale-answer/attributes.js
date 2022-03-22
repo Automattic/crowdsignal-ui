@@ -11,6 +11,10 @@ export default {
 		type: 'boolean',
 		default: true,
 	},
+	emoji: {
+		type: 'string',
+		default: null,
+	},
 	weight: {
 		type: 'number',
 		default: 0,

@@ -8,7 +8,11 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { Button } from '@crowdsignal/blocks';
+import {
+	Button,
+	RatingScaleQuestion,
+	getBlockStyle,
+} from '@crowdsignal/blocks';
 
 const ButtonContent = styled.div`
 	align-items: center;
@@ -33,6 +37,8 @@ const EditButtonAnswer = ( {
 	onSplit,
 	onDelete,
 } ) => {
+	const blockStyle = getBlockStyle( className );
+
 	return (
 		<Button
 			attributes={ attributes }
@@ -47,7 +53,11 @@ const EditButtonAnswer = ( {
 					onReplace={ onReplace }
 					onSplit={ onSplit }
 					onRemove={ onDelete }
-					value={ attributes.label }
+					value={
+						blockStyle === RatingScaleQuestion.Style.EMOJI
+							? attributes.emoji
+							: attributes.label
+					}
 					multiline={ false }
 					preserveWhiteSpace={ false }
 					allowedFormats={ [] }
