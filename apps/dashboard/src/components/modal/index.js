@@ -3,6 +3,11 @@
  */
 import styled from '@emotion/styled';
 
+/**
+ * Internal dependencies
+ */
+import { CloseArrow } from '@crowdsignal/icons';
+
 export const ModalWrapper = styled.div`
 	align-items: center;
 	background-color: var( --color-backdrop );
@@ -19,6 +24,7 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalDialog = styled.div`
+	position: relative;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
 		Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 	background-color: var( --color-surface );
@@ -31,6 +37,9 @@ export const ModalDialog = styled.div`
 `;
 
 export const ModalNavigation = styled.div`
+	position: absolute;
+	top: 20px;
+	right: 20px;
 	display: flex;
 	justify-content: flex-end;
 `;
@@ -45,8 +54,11 @@ export const ModalHeader = styled.h2`
 
 export const ModalHeaderNote = styled.p`
 	color: var( --color-text-subtle );
-	font-size: 16px;
 	margin-bottom: 40px;
+
+	&&& {
+		font-size: 16px;
+	}
 `;
 
 export const ModalTemplateGrid = styled.div`
@@ -54,3 +66,18 @@ export const ModalTemplateGrid = styled.div`
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 24px;
 `;
+
+const CloseButton = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: none;
+	cursor: pointer;
+`;
+
+export const ModalCloseButton = ( { onClick } ) => (
+	<CloseButton onClick={ onClick }>
+		<CloseArrow />
+	</CloseButton>
+);

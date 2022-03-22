@@ -20,7 +20,7 @@ import UnpublishedChangesNotice from './unpublished-changes-notice';
  */
 import { ToolbarButton } from './styles/button';
 
-const Toolbar = ( { project } ) => {
+const Toolbar = ( { project, onShareClick } ) => {
 	const { saveEditorChanges } = useDispatch( STORE_NAME );
 
 	const [ canRestoreDraft, isSaving, isSaved ] = useSelect( ( select ) => [
@@ -32,33 +32,6 @@ const Toolbar = ( { project } ) => {
 	] );
 
 	const publishProject = () => saveEditorChanges( { public: true } );
-
-	const shareHandler = () => {
-		if ( project.permalink ) {
-			window.navigator.clipboard.writeText( project.permalink ).then(
-				() => {
-					// eslint-disable-next-line
-					window.alert(
-						`Project's public URL ( ${ project.permalink } ) has been copied to clipboard`
-					);
-				},
-				( err ) => {
-					// eslint-disable-next-line
-					window.alert(
-						'Share URL could not be copied to clipboard'
-					);
-					// eslint-disable-next-line
-					console.error( err );
-				}
-			);
-		} else {
-			// eslint-disable-next-line
-			window.alert(
-				'Share URL will is only available for published projects'
-			);
-		}
-		return false;
-	};
 
 	const previewURL =
 		process.env.NODE_ENV !== 'production'
@@ -105,7 +78,7 @@ const Toolbar = ( { project } ) => {
 				<ToolbarButton
 					as={ Button }
 					variant="primary"
-					onClick={ shareHandler }
+					onClick={ onShareClick }
 					disabled={ isSaving }
 				>
 					{ __( 'Share', 'block-editor' ) }
