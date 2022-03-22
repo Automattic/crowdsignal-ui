@@ -21,7 +21,7 @@ const TextInput = ( { attributes, className } ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
 			}
-			if ( attributes.validation ) {
+			if ( attributes.validation && ! isEmpty( value ) ) {
 				return validator[ attributes.validation ]( value );
 			}
 		},

@@ -37,11 +37,15 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 		}
 
 		setFieldValue( formName, fieldName, newValue );
-		validateField( newValue );
+	};
+
+	const onBlur = () => {
+		validateField( currentValue );
 	};
 
 	const inputProps = {
 		name: fieldName,
+		onBlur,
 		onChange,
 		value:
 			type === 'checkbox' || type === 'radio'
