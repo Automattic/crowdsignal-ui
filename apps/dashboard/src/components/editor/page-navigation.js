@@ -21,6 +21,7 @@ import { STORE_NAME } from '../../data';
  */
 import {
 	PageNavigationAddButton,
+	PageNavigationContent,
 	PageNavigationHeader,
 	PageNavigationSectionHeader,
 	PageNavigationWrapper,
@@ -90,71 +91,88 @@ const PageNavigation = () => {
 				</Transition>
 			</PageNavigationHeader>
 
-			<DragDropContext onDragEnd={ handleMovePage }>
-				<Droppable droppableId="crowdsignal/page-navigation">
-					{ ( { droppableProps, innerRef, placeholder } ) => (
-						<div ref={ innerRef } { ...droppableProps }>
-							{ map( slice( pages, 0, -1 ), ( page, index ) => (
-								<Draggable
-									key={ `page-${ index }` }
-									disableInteractiveElementBlocking={ true }
-									draggableId={ `page-${ index }` }
-									index={ index }
-									isDragDisabled={ ! expanded }
-								>
-									{ ( provided, snapshot ) => (
-										<PagePreview
-											ref={ provided.innerRef }
-											draggableProps={
-												provided.draggableProps
+			<PageNavigationContent>
+				<DragDropContext onDragEnd={ handleMovePage }>
+					<Droppable droppableId="crowdsignal/page-navigation">
+						{ ( { droppableProps, innerRef, placeholder } ) => (
+							<div ref={ innerRef } { ...droppableProps }>
+								{ map(
+									slice( pages, 0, -1 ),
+									( page, index ) => (
+										<Draggable
+											key={ `page-${ index }` }
+											disableInteractiveElementBlocking={
+												true
 											}
-											dragHandleProps={
-												provided.dragHandleProps
-											}
-											disablePageActions={
-												pages.length <= 2
-											}
-											isActive={ index === currentPage }
-											isExpanded={ expanded }
-											isDragging={ snapshot.isDragging }
-											page={ page }
-											pageIndex={ index }
-											onSelect={ handleSelectPage }
-											onDelete={ deleteEditorPage }
-											onDuplicate={ duplicateEditorPage }
-										/>
-									) }
-								</Draggable>
-							) ) }
+											draggableId={ `page-${ index }` }
+											index={ index }
+											isDragDisabled={ ! expanded }
+										>
+											{ ( provided, snapshot ) => (
+												<PagePreview
+													ref={ provided.innerRef }
+													draggableProps={
+														provided.draggableProps
+													}
+													dragHandleProps={
+														provided.dragHandleProps
+													}
+													disablePageActions={
+														pages.length <= 2
+													}
+													isActive={
+														index === currentPage
+													}
+													isExpanded={ expanded }
+													isDragging={
+														snapshot.isDragging
+													}
+													page={ page }
+													pageIndex={ index }
+													onSelect={
+														handleSelectPage
+													}
+													onDelete={
+														deleteEditorPage
+													}
+													onDuplicate={
+														duplicateEditorPage
+													}
+												/>
+											) }
+										</Draggable>
+									)
+								) }
 
-							{ placeholder }
-						</div>
+								{ placeholder }
+							</div>
+						) }
+					</Droppable>
+				</DragDropContext>
+
+				<PageNavigationAddButton onClick={ handleAddPage }>
+					<Icon icon={ plus } />
+				</PageNavigationAddButton>
+
+				<Transition in={ expanded } timeout={ 300 }>
+					{ ( state ) => (
+						<PageNavigationSectionHeader className={ state }>
+							{ __( 'Confirmation', 'dashboard' ) }
+						</PageNavigationSectionHeader>
 					) }
-				</Droppable>
-			</DragDropContext>
+				</Transition>
 
-			<PageNavigationAddButton onClick={ handleAddPage }>
-				<Icon icon={ plus } />
-			</PageNavigationAddButton>
-
-			<Transition in={ expanded } timeout={ 300 }>
-				{ ( state ) => (
-					<PageNavigationSectionHeader className={ state }>
-						{ __( 'Confirmation', 'dashboard' ) }
-					</PageNavigationSectionHeader>
-				) }
-			</Transition>
-
-			<PagePreview
-				disablePageActions={ true }
-				isActive={ currentPage === pages.length - 1 }
-				isExpanded={ expanded }
-				label="CP"
-				page={ pages[ pages.length - 1 ] }
-				pageIndex={ pages.length - 1 }
-				onDelete={ noop }
-				onSelect={ handleSelectPage }
-			/>
+				<PagePreview
+					disablePageActions={ true }
+					isActive={ currentPage === pages.length - 1 }
+					isExpanded={ expanded }
+					label={ pages.length }
+					page={ pages[ pages.length - 1 ] }
+					pageIndex={ pages.length - 1 }
+					onDelete={ noop }
+					onSelect={ handleSelectPage }
+				/>
+			</PageNavigationContent>
 		</PageNavigationWrapper>
 	);
 };
