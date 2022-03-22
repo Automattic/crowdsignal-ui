@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
 import { fetchProject } from '@crowdsignal/rest-api';
 import { dispatchAsync } from '../actions';
 import { loadProject, loadProjectError, updateProject } from './actions';
+import { resetDraftContentClientIds } from './util';
 
 function* getProject( projectId ) {
 	if ( ! projectId ) {
@@ -19,8 +20,8 @@ function* getProject( projectId ) {
 
 	try {
 		const response = yield dispatchAsync( fetchProject, [ projectId ] );
-
-		yield updateProject( projectId, response.data );
+		const data = resetDraftContentClientIds( response.data );
+		yield updateProject( projectId, data );
 	} catch ( error ) {
 		yield loadProjectError( projectId, __( 'Failed to load project.' ) );
 	}
