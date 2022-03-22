@@ -4,12 +4,17 @@
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
+import { useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
-import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
+import {
+	QuestionHeader,
+	QuestionWrapper,
+	getBlockStyle,
+} from '@crowdsignal/blocks';
 // import Toolbar from './toolbar';
 import Sidebar from './sidebar';
 
@@ -29,6 +34,10 @@ const EditRatingScaleQuestion = ( props ) => {
 			'is-required': attributes.mandatory,
 		}
 	);
+
+	useEffect( () => {
+		setAttributes( { ratingStyle: getBlockStyle( className ) } );
+	}, [ className ] );
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
