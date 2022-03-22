@@ -19,7 +19,7 @@ import { ShareLinkPreview } from './share-link-preview';
 
 export const ShareLink = ( { link, onCopyLinkClick } ) => (
 	<ShareCard>
-		<ShareCardHeader>Link</ShareCardHeader>
+		<ShareCardHeader>{ __( 'Link', 'dashboard' ) }</ShareCardHeader>
 		<ShareCardContent>
 			<ShareCardContentText>
 				{ __(
