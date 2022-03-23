@@ -42,7 +42,7 @@ const ShareModal = ( { project, onClose } ) => (
 				{ __( 'Share and collect responses', 'dashboard' ) }
 			</ModalHeader>
 			<ModalHeaderNote>
-				{ __( "It's time to collect some signals", 'dashboard' ) }
+				{ __( "It's time to collect some signals.", 'dashboard' ) }
 			</ModalHeaderNote>
 			<ModalTemplateGrid>
 				<ShareLink link={ project.permalink } />
