@@ -1,5 +1,9 @@
 @import 'buttons';
 
+:root {
+	--crowdsignal-forms-button-selected-background-color: #0073aa;
+}
+
 html {
 	font-size: 22px;
 }
@@ -51,4 +55,3 @@ button, input, select, optgroup, textarea {
 .crowdsignal-forms-button__button {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-

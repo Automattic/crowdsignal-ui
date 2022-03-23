@@ -13,10 +13,19 @@ body {
 	}
 }
 
-.crowdsignal-forms-button__button {
-	color: var(--wp--preset--color--foreground);
-}
-
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--wp--preset--color--foreground);
+}
+
+.crowdsignal-forms-button {
+	&__button {
+		color: var(--wp--preset--color--foreground);
+	}
+
+	&.is-style-text.is-style-outline.is-selected &__button,
+	&.is-style-text.is-style-outline.is-selected &__button.wp-block-button__link {
+		background-color: var(--wp--preset--color--primary);
+		border-color: var(--wp--preset--color--primary);
+		color: var(--wp--preset--color--foreground);
+	}
 }

@@ -20,3 +20,16 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	--wp--custom--form--padding: 14px 7px;
 }
+
+.crowdsignal-forms-button {
+	&.is-style-emoji.is-style-outline &__button,
+	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
+		border-color: transparent;
+	}
+	&.is-style-text.is-style-outline.is-selected &__button,
+	&.is-style-text.is-style-outline.is-selected &__button.wp-block-button__link {
+		background-color: var(--wp--preset--color--primary);
+		border-color: var(--wp--preset--color--primary);
+		color: var(--wp--preset--color--background);
+	}
+}

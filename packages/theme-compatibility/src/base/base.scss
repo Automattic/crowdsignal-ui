@@ -6,6 +6,9 @@
 	--wp--style--block-gap: 1em;
 	--crowdsignal-forms-content-padding: 16px;
 
+	--crowdsignal-forms-button-selected-background-color: var(--color-primary-dark);
+	--crowdsignal-forms-button-selected-text-color: var(--color-text-inverted);
+
 	@include break-mobile {
 		--crowdsignal-forms-content-padding: 20px;
 	}
@@ -119,8 +122,15 @@
 		margin-top: 24px;
 	}
 
-	&.is-style-emoji.is-style-outline .crowdsignal-forms-button__button {
+	&.is-style-emoji.is-style-outline &__button,
+	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
 		border-color: transparent;
+	}
+	&.is-style-text.is-style-outline.is-selected &__button,
+	&.is-style-text.is-style-outline.is-selected &__button.wp-block-button__link {
+		background-color: var(--crowdsignal-forms-button-selected-background-color);
+		border-color: var(--crowdsignal-forms-button-selected-background-color);
+		color: var(--crowdsignal-forms-button-selected-text-color);
 	}
 }
 
