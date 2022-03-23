@@ -8,6 +8,8 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import { Button, FormCheckbox } from '../components';
+import RatingScaleQuestion from '../rating-scale-question';
+import { getBlockStyle } from '../util';
 
 const ButtonContent = styled.span`
 	align-items: center;
@@ -20,14 +22,29 @@ const ButtonContent = styled.span`
 		position: absolute;
 		left: -999px;
 	}
+
+	.is-style-emoji & {
+		font-size: 32px;
+	}
 `;
 
 const ButtonAnswer = ( { attributes, className, inputProps } ) => {
+	const blockStyle = getBlockStyle( className );
+
 	return (
-		<Button as="label" attributes={ attributes } className={ className }>
+		<Button
+			as="label"
+			attributes={ attributes }
+			className={ className }
+			outline={ ! inputProps.checked }
+		>
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />
-				<RawHTML>{ attributes.label }</RawHTML>
+				<RawHTML>
+					{ blockStyle === RatingScaleQuestion.Style.EMOJI
+						? attributes.emoji
+						: attributes.label }
+				</RawHTML>
 			</ButtonContent>
 		</Button>
 	);

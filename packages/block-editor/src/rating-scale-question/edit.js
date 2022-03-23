@@ -4,12 +4,17 @@
 import { InnerBlocks, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
+import { useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { useClientId } from '@crowdsignal/hooks';
-import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
+import {
+	QuestionHeader,
+	QuestionWrapper,
+	getBlockStyle,
+} from '@crowdsignal/blocks';
 // import Toolbar from './toolbar';
 import Sidebar from './sidebar';
 
@@ -30,6 +35,10 @@ const EditRatingScaleQuestion = ( props ) => {
 		}
 	);
 
+	useEffect( () => {
+		setAttributes( { ratingStyle: getBlockStyle( className ) } );
+	}, [ className ] );
+
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
 			{ /* <Toolbar { ...props } /> */ }
@@ -46,23 +55,23 @@ const EditRatingScaleQuestion = ( props ) => {
 					template={ [
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '1', weight: 1 },
+							{ emoji: '😡', label: '1', weight: 1 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '2', weight: 2 },
+							{ emoji: '😕', label: '2', weight: 2 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '3', weight: 3 },
+							{ emoji: '😐', label: '3', weight: 3 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '4', weight: 4 },
+							{ emoji: '🙂', label: '4', weight: 4 },
 						],
 						[
 							'crowdsignal-forms/rating-scale-answer',
-							{ label: '5', weight: 5 },
+							{ emoji: '😀', label: '5', weight: 5 },
 						],
 					] }
 					templateLock={ true }

@@ -48,19 +48,13 @@ const Content = styled.div`
 	margin: 0;
 	width: 100%;
 
-	& > *:not( .block-editor-inner-blocks ) {
+	&:not( .is-horizontal ) > *:not( .block-editor-inner-blocks ) {
 		margin-top: 0;
 		margin-bottom: 16px;
 
 		&:last-child {
 			margin-bottom: 0;
 		}
-	}
-
-	&.is-horizontal {
-		width: 100%;
-		flex-direction: row;
-		justify-content: space-between;
 	}
 `;
 

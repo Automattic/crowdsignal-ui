@@ -72,6 +72,12 @@
 		margin-top: 32px;
 	}
 
+	.crowdsignal-forms-question-wrapper__content.is-horizontal {
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
 	> .alignfull {
 		width: calc(100% + var(--crowdsignal-forms-content-padding) * 2);
 		max-width: calc(100% + var(--crowdsignal-forms-content-padding) * 2);
@@ -111,6 +117,10 @@
 .crowdsignal-forms-button {
 	.crowdsignal-forms-multiple-choice-question-block & + *:not(&) {
 		margin-top: 24px;
+	}
+
+	&.is-style-emoji.is-style-outline .crowdsignal-forms-button__button {
+		border-color: transparent;
 	}
 }
 

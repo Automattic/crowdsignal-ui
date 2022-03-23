@@ -10,6 +10,7 @@ import { useContext } from '@wordpress/element';
 import { useField } from '@crowdsignal/form';
 import RatingScaleQuestion from '../rating-scale-question';
 import ButtonAnswer from './button';
+import { getBlockStyle } from '../util';
 
 const RatingScaleAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( RatingScaleQuestion.Context );
@@ -21,11 +22,15 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 		value: attributes.clientId,
 	} );
 
+	const blockStyle = getBlockStyle( parentQuestion.className );
+
 	const classes = classnames(
 		'crowdsignal-forms-rating-scale-answer-block',
 		className,
 		{
 			'is-selected': inputProps.checked,
+			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
+			'is-style-text': blockStyle === RatingScaleQuestion.Style.TEXT,
 		}
 	);
 

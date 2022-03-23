@@ -8,7 +8,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import { RatingScaleQuestion } from '@crowdsignal/blocks';
-import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
+import { RatingScaleQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRatingScaleQuestion from './edit';
 
@@ -31,7 +31,7 @@ const settings = {
 		__( 'likert', 'block-editor' ),
 		__( 'matrix', 'block-editor' ),
 	],
-	icon: <MultipleChoiceQuestionIcon />,
+	icon: <RatingScaleQuestionIcon />,
 	edit: EditRatingScaleQuestion,
 	save: () => <InnerBlocks.Content />,
 	attributes,
@@ -41,13 +41,13 @@ const settings = {
 	},
 	styles: [
 		{
-			name: RatingScaleQuestion.Style.EMOJI,
-			label: __( 'Buttons', 'block-editor' ),
+			name: RatingScaleQuestion.Style.TEXT,
+			label: __( 'Text Button', 'block-editor' ),
 			isDefault: true,
 		},
 		{
-			name: RatingScaleQuestion.Style.TEXT,
-			label: __( 'List', 'block-editor' ),
+			name: RatingScaleQuestion.Style.EMOJI,
+			label: __( 'Emojis', 'block-editor' ),
 		},
 	],
 	variations: [
@@ -55,7 +55,7 @@ const settings = {
 			isDefault: true,
 			attributes: {
 				// Force the correct className onto the block by default
-				className: 'is-style-emoji',
+				className: 'is-style-text',
 			},
 		},
 	],
@@ -68,18 +68,24 @@ const settings = {
 				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
 					label: '1',
-				},
-			},
-			{
-				name: 'crowdsignal-forms/rating-scale-answer',
-				attributes: {
-					label: '2',
+					weight: 1,
+					emoji: '😡',
 				},
 			},
 			{
 				name: 'crowdsignal-forms/rating-scale-answer',
 				attributes: {
 					label: '3',
+					weight: 3,
+					emoji: '😐',
+				},
+			},
+			{
+				name: 'crowdsignal-forms/rating-scale-answer',
+				attributes: {
+					label: '5',
+					weight: 5,
+					emoji: '😀',
 				},
 			},
 		],

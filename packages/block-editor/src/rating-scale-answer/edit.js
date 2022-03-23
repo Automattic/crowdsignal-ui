@@ -7,7 +7,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { getBlockStyle } from '@crowdsignal/blocks';
+import { RatingScaleQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import { useParentAttributes } from '../util/use-parent-attributes';
 import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
@@ -21,7 +21,13 @@ const EditRatingScaleAnswer = ( props ) => {
 
 	useClientId( props );
 
-	const handleChangeLabel = ( label ) => setAttributes( { label } );
+	const handleChangeLabel = ( label ) => {
+		if ( blockStyle === RatingScaleQuestion.Style.EMOJI ) {
+			setAttributes( { emoji: label } );
+		} else {
+			setAttributes( { label } );
+		}
+	};
 
 	const blockStyle = getBlockStyle( questionAttributes.className );
 
@@ -30,12 +36,14 @@ const EditRatingScaleAnswer = ( props ) => {
 		className,
 		{
 			'is-empty': ! attributes.label,
+			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
+			'is-style-text': blockStyle === RatingScaleQuestion.Style.TEXT,
 		}
 	);
 
 	return (
 		<>
-			<Sidebar blockStyle={ blockStyle } { ...props } />
+			<Sidebar { ...props } />
 
 			<EditButtonAnswer
 				attributes={ attributes }

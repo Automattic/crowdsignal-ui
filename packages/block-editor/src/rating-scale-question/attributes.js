@@ -1,3 +1,5 @@
+import { RatingScaleQuestion } from '@crowdsignal/blocks';
+
 export default {
 	clientId: {
 		type: 'string',
@@ -15,6 +17,10 @@ export default {
 	scaleLength: {
 		type: 'number',
 		default: 5,
+	},
+	ratingStyle: {
+		type: 'string',
+		default: RatingScaleQuestion.Style.EMOJI,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
