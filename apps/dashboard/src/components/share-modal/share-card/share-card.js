@@ -18,7 +18,7 @@ export const ShareCardHeader = styled.h1`
 	margin-bottom: 12px;
 `;
 
-export const ShareCardContent = styled.div`
+export const ShareCardBody = styled.div`
 	display: flex;
 	align-items: flex-start;
 	gap: 32px;
@@ -29,12 +29,25 @@ export const ShareCardContent = styled.div`
 	}
 `;
 
+export const ShareCardContent = styled.div`
+	> *:not( :first-child ) {
+		margin-top: 20px;
+	}
+`;
+
 export const ShareCardContentText = styled.p`
 	color: var( --color-neutral-60 );
+	line-height: 1.5;
 	margin: 0;
 
 	&&& {
 		font-size: 12px;
+	}
+
+	a {
+		color: var( --color-primary-50 );
+		text-decoration: underline;
+		text-underline-offset: initial;
 	}
 `;
 
@@ -56,10 +69,24 @@ export const ShareCardButton = styled.button`
 	min-height: 36px;
 	font-size: 13px;
 	font-weight: 400;
-	color: #007cba;
+	line-height: normal;
+	color: var( --color-secondary-40 );
 	border: 1px solid currentColor;
 	border-radius: 2px;
 	background-color: transparent;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
 	flex-shrink: 0;
+
+	&.is-link-copied {
+		border: none;
+		outline: none;
+		cursor: default;
+		pointer-events: none;
+	}
+
+	svg {
+		width: 16px;
+	}
 `;
