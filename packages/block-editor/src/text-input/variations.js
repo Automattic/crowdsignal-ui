@@ -10,9 +10,9 @@ import { EmailInputIcon } from '@crowdsignal/icons';
 
 export default [
 	{
-		name: 'email',
+		name: 'crowdsignal-forms/email-input',
 		isDefault: false,
-		title: __( 'Email Input', 'block-editor' ),
+		title: __( 'Email Input Form', 'block-editor' ),
 		description: __(
 			'An input field for collecting email addresses.',
 			'block-editor'
