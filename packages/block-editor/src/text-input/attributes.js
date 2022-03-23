@@ -30,7 +30,7 @@ export default {
 		default: '100%',
 	},
 	validation: {
-		type: 'string',
+		type: 'array',
 		default: null,
 	},
 };

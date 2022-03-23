@@ -20,7 +20,7 @@ export default [
 		icon: <EmailInputIcon />,
 		attributes: {
 			label: __( 'Enter email', 'block-editor' ),
-			validation: 'emailValidation',
+			validation: [ 'emailValidation' ],
 			placeholder: 'example@domain.com',
 		},
 		keywords: [
