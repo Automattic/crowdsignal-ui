@@ -106,9 +106,15 @@ const App = ( {
 		);
 	};
 
-	useStylesheet( `/ui/stable/theme-compatibility/base.css` );
+	const baseURL =
+		process.env.NODE_ENV === 'production'
+			? 'https://app.crowdsignal.com'
+			: '';
+	useStylesheet( `${ baseURL }/ui/stable/theme-compatibility/base.css` );
 	useStylesheet( `https://app.crowdsignal.com/themes/${ theme }/style.css` );
-	useStylesheet( `/ui/stable/theme-compatibility/${ theme }.css` );
+	useStylesheet(
+		`${ baseURL }/ui/stable/theme-compatibility/${ theme }.css`
+	);
 
 	if ( ! content ) {
 		return 'Wait...';

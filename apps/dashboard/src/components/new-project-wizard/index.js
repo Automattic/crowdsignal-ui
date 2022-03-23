@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { map } from 'lodash';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -13,6 +14,8 @@ import {
 	ModalTemplateGrid,
 	ModalWrapper,
 } from '../modal';
+import { STORE_NAME } from '../../data';
+import ActiveTheme from './active-theme';
 import TemplatePreview from './template-preview';
 import * as projectTemplates from './templates';
 
@@ -21,29 +24,41 @@ import * as projectTemplates from './templates';
  */
 import { ProjectWizardDialog } from './styles';
 
-const NewProjectWizard = ( { onSelect } ) => {
+const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
+	const editorTheme = useSelect( ( select ) =>
+		select( STORE_NAME ).getEditorTheme()
+	);
+
 	return (
 		<ModalWrapper>
 			<ProjectWizardDialog id="crowdsignal-new-project-wizard">
-				<ModalHeader>
-					{ __( 'What would you like to build today?', 'dashboard' ) }
-				</ModalHeader>
-				<ModalHeaderNote>
-					{ __(
-						'Pick a template and make it your own or start with a blank page.',
-						'dashboard'
-					) }
-				</ModalHeaderNote>
+				<div>
+					<ActiveTheme onChangeThemeClick={ onChangeThemeClick } />
+				</div>
+				<div>
+					<ModalHeader>
+						{ __(
+							'What would you like to build today?',
+							'dashboard'
+						) }
+					</ModalHeader>
+					<ModalHeaderNote>
+						{ __(
+							'Pick a template and make it your own or start with a blank page.',
+							'dashboard'
+						) }
+					</ModalHeaderNote>
 
-				<ModalTemplateGrid>
-					{ map( projectTemplates, ( template ) => (
-						<TemplatePreview
-							key={ template.name }
-							template={ template }
-							onSelect={ onSelect }
-						/>
-					) ) }
-				</ModalTemplateGrid>
+					<ModalTemplateGrid>
+						{ map( projectTemplates, ( template ) => (
+							<TemplatePreview
+								key={ `${ editorTheme }_${ template.name }` }
+								template={ template }
+								onSelect={ onSelect }
+							/>
+						) ) }
+					</ModalTemplateGrid>
+				</div>
 			</ProjectWizardDialog>
 		</ModalWrapper>
 	);

@@ -69,7 +69,8 @@ const Editor = ( { project } ) => {
 	};
 
 	const handleSelectTheme = ( theme ) => {
-		setProjectTheme( theme );
+		const autoSave = ! showWizard;
+		setProjectTheme( theme, autoSave );
 		setShowThemesModal( false );
 	};
 
@@ -100,7 +101,10 @@ const Editor = ( { project } ) => {
 			/>
 
 			{ showWizard && (
-				<NewProjectWizard onSelect={ handleSelectTemplate } />
+				<NewProjectWizard
+					onSelect={ handleSelectTemplate }
+					onChangeThemeClick={ handleOpenThemesModal }
+				/>
 			) }
 
 			{ showThemesModal && (

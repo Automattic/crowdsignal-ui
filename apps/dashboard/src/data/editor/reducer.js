@@ -41,6 +41,7 @@ const changes = ( state = {}, action ) => {
 			? {}
 			: {
 					content: true,
+					theme: true,
 			  };
 	}
 
