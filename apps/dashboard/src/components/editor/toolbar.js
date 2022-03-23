@@ -31,7 +31,13 @@ const Toolbar = ( { project, onShareClick } ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
-	const publishProject = () => saveEditorChanges( { public: true } );
+	const publishProject = ( firstPublish = false ) => {
+		saveEditorChanges( { public: true } );
+
+		if ( firstPublish ) {
+			onShareClick();
+		}
+	};
 
 	const previewURL =
 		process.env.NODE_ENV !== 'production'
