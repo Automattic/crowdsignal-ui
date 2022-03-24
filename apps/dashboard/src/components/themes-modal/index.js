@@ -13,24 +13,22 @@ import {
 	ModalHeader,
 	ModalHeaderNote,
 	ModalWrapper,
+	ModalCloseButton,
 } from '../modal';
 import { themes } from '../../util/theme/themes';
-import { CloseArrow } from '@crowdsignal/icons';
 import ThemePreview from './theme-preview/theme-preview';
 
 /**
  * Style dependencies
  */
-import { ThemesTemplateGrid, CloseButton } from './styles';
+import { ThemesTemplateGrid } from './styles';
 
 const ThemesModal = ( { activeTheme, onSelect, onClose } ) => {
 	return (
 		<ModalWrapper>
 			<ModalDialog id="crowdsignal-themes-modal">
 				<ModalNavigation>
-					<CloseButton onClick={ onClose }>
-						<CloseArrow />
-					</CloseButton>
+					<ModalCloseButton onClick={ onClose } />
 				</ModalNavigation>
 				<ModalHeader>
 					{ __( 'Pick a design theme', 'dashboard' ) }

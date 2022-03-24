@@ -1,3 +1,4 @@
+export * from './check-icon';
 export * from './close-arrow';
 export * from './multiple-choice';
 export * from './multiple-choice-answer';

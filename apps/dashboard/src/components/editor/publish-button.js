@@ -40,6 +40,10 @@ const PublishButton = ( {
 		isSaved &&
 		! isSaving;
 
+	const handleOnPublish = () => {
+		onPublish( ! isPublic( project ) );
+	};
+
 	if ( canRestoreDraft || isLatestVersion ) {
 		return null;
 	}
@@ -50,7 +54,7 @@ const PublishButton = ( {
 			className="is-crowdsignal"
 			variant={ isPublic( project ) ? 'tertiary' : 'primary' }
 			disabled={ isSaving || ! canPublish }
-			onClick={ onPublish }
+			onClick={ handleOnPublish }
 			onMouseEnter={ toggleNotice }
 			onMouseLeave={ toggleNotice }
 		>

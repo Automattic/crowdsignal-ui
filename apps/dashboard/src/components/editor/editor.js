@@ -11,20 +11,21 @@ import { Global } from '@emotion/core';
 /**
  * Internal dependencies
  */
-import HeaderMeta from '../header-meta';
-import NewProjectWizard from '../new-project-wizard';
-import ProjectNavigation from '../project-navigation';
-import { STORE_NAME } from '../../data';
-import AutoSubmitButton from './auto-submit-button';
+import { editorSettings } from './settings';
 import { registerBlocks } from './blocks';
+import { STORE_NAME } from '../../data';
+import { useEditorContent } from './use-editor-content';
+import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
 import EditorStylesResolver from './styles-resolver';
+import HeaderMeta from '../header-meta';
+import NewProjectWizard from '../new-project-wizard';
 import PageNavigation from './page-navigation';
-import { editorSettings } from './settings';
+import ProjectNavigation from '../project-navigation';
+import ShareModal from '../share-modal';
 import ThemesModal from '../themes-modal';
 import Toolbar from './toolbar';
 import UnpublishedChangesNotice from './unpublished-changes-notice';
-import { useEditorContent } from './use-editor-content';
 
 /**
  * Style dependencies
@@ -40,6 +41,7 @@ registerBlocks();
 const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
 	const [ showThemesModal, setShowThemesModal ] = useState( false );
+	const [ showShareModal, setShowShareModal ] = useState( false );
 
 	const { updateEditorTitle } = useDispatch( STORE_NAME );
 
@@ -72,6 +74,10 @@ const Editor = ( { project } ) => {
 		const autoSave = ! showWizard;
 		setProjectTheme( theme, autoSave );
 		setShowThemesModal( false );
+	};
+
+	const handleToggleShareModal = () => {
+		setShowShareModal( ! showShareModal );
 	};
 
 	const settings = useMemo( () => {
@@ -115,6 +121,13 @@ const Editor = ( { project } ) => {
 				/>
 			) }
 
+			{ showShareModal && (
+				<ShareModal
+					project={ project }
+					onClose={ handleToggleShareModal }
+				/>
+			) }
+
 			<PageNavigation key={ `nav_${ editorTheme }` } />
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
@@ -124,7 +137,10 @@ const Editor = ( { project } ) => {
 				onLoad={ loadBlocks }
 				onError={ noop }
 			>
-				<Toolbar project={ project } />
+				<Toolbar
+					project={ project }
+					onShareClick={ handleToggleShareModal }
+				/>
 				<DocumentSettings
 					project={ project }
 					onChangeThemeClick={ handleOpenThemesModal }
