@@ -71,6 +71,14 @@ export const isEditorContentSaved = ( state ) =>
 	isEmpty( getEditorChanges( state ) );
 
 /**
+ * Returns the current editor error or an empty string when there isn't any.
+ *
+ * @param  {Object} state App state.
+ * @return {string}       Editor error.
+ */
+export const getEditorError = ( state ) => state.editor.error;
+
+/**
  * Returns true if no changes have been made since since the editor was initiated.
  *
  * @param  {Object}  state App state.
