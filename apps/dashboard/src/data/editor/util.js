@@ -36,3 +36,7 @@ const regenerateClientIds = ( blocks ) =>
 
 export const clonePage = ( blocks ) =>
 	regenerateClientIds( cloneDeep( blocks ) );
+
+export const errors = {
+	SAVE_ERROR: 'save-error',
+};

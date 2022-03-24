@@ -21,7 +21,7 @@ import {
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
-import { clonePage } from './util';
+import { clonePage, errors } from './util';
 
 /**
  * Tracks which project properties have changed since the last save.
@@ -135,6 +135,25 @@ const edited = ( state = false, action ) => {
 		action.type === EDITOR_THEME_UPDATE
 	) {
 		return true;
+	}
+
+	return state;
+};
+
+/**
+ * Flag that gets tagged whenever a save request has failed.
+ *
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Error flag.
+ */
+const error = ( state = '', action ) => {
+	if ( action.type === EDITOR_INIT || action.type === EDITOR_SAVE ) {
+		return '';
+	}
+
+	if ( action.type === EDITOR_SAVE_ERROR ) {
+		return errors.SAVE_ERROR;
 	}
 
 	return state;
@@ -259,6 +278,7 @@ export default combineReducers( {
 	changes,
 	currentPage,
 	edited,
+	error,
 	isSaving,
 	pages,
 	projectId,

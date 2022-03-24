@@ -9,7 +9,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
  */
 import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import UnpublishedChangesNotice from './unpublished-changes-notice';
+import { NOTICE_UNPUBLISHED } from './notice';
 
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -67,7 +67,7 @@ export const useEditorContent = ( project ) => {
 		}
 
 		// Once changes have been made, it's impossible to restore the previous draft
-		removeNotice( UnpublishedChangesNotice.ID );
+		removeNotice( NOTICE_UNPUBLISHED );
 	}, [ isEditorContentSaved ] );
 
 	const loadBlocks = () => currentPageContent;

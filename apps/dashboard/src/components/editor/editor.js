@@ -17,6 +17,7 @@ import { STORE_NAME } from '../../data';
 import { useEditorContent } from './use-editor-content';
 import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
+import EditorNotice from './notice';
 import EditorStylesResolver from './styles-resolver';
 import HeaderMeta from '../header-meta';
 import NewProjectWizard from '../new-project-wizard';
@@ -25,7 +26,6 @@ import ProjectNavigation from '../project-navigation';
 import ShareModal from '../share-modal';
 import ThemesModal from '../themes-modal';
 import Toolbar from './toolbar';
-import UnpublishedChangesNotice from './unpublished-changes-notice';
 
 /**
  * Style dependencies
@@ -148,7 +148,7 @@ const Editor = ( { project } ) => {
 
 				<AutoSubmitButton />
 
-				<UnpublishedChangesNotice
+				<EditorNotice
 					project={ project }
 					onRestore={ restoreDraft }
 					version={ version }

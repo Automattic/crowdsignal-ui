@@ -63,7 +63,9 @@ export function* saveAndUpdateProject( projectId, project ) {
 
 		return updateProject( response.data.id, response.data );
 	} catch ( error ) {
-		// Request failed
-		return saveProjectError( error.message );
+		yield saveProjectError( error.message );
+
+		// Request failed, re-throw error after handling
+		throw error;
 	}
 }
