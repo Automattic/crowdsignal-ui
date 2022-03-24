@@ -25,7 +25,8 @@ const ButtonContent = styled.div`
 	}
 
 	.is-style-emoji & {
-		font-size: 32px;
+		font-size: 200%;
+		line-height: inherit;
 	}
 `;
 

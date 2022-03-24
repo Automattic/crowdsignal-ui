@@ -59,6 +59,9 @@
 	.crowdsignal-forms-question-wrapper__content {
 
 		&.is-horizontal {
+			.block-editor-block-list__block {
+				margin-bottom: unset;
+			}
 			.block-editor-inner-blocks {
 				flex: 1;
 			}
@@ -66,6 +69,10 @@
 				flex-direction: row;
 				justify-content: space-between;
 			}
+		}
+
+		& .crowdsignal-forms-rating-scale-answer-block {
+			margin-bottom: unset;
 		}
 
 		.block-editor-block-list__layout {

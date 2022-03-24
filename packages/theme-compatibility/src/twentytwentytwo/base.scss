@@ -23,6 +23,13 @@ body {
 }
 
 .crowdsignal-forms-button {
+	&.is-style-emoji.is-style-outline &__button,
+	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
+		line-height: 2.5em;
+	}
+
+	&.is-style-emoji.is-style-outline.is-selected &__button,
+	&.is-style-emoji.is-style-outline.is-selected &__button.wp-block-button__link,
 	&.is-style-text.is-style-outline.is-selected &__button,
 	&.is-style-text.is-style-outline.is-selected &__button.wp-block-button__link {
 		background-color: var(--wp--preset--color--primary);
