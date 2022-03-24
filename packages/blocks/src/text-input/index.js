@@ -22,9 +22,11 @@ const TextInput = ( { attributes, className } ) => {
 				return __( 'This field is required', 'blocks' );
 			}
 			if ( attributes.validation && ! isEmpty( value ) ) {
-				for ( let i = 0; i < attributes.validation.length; i++ ) {
-					return validator[ attributes.validation[ i ] ]( value );
-				}
+				return attributes.validation.reduce(
+					( errorMsg, validatorKey ) =>
+						errorMsg || validator[ validatorKey ]( value ),
+					null
+				);
 			}
 		},
 	} );
