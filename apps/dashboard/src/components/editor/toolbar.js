@@ -13,7 +13,7 @@ import { filter } from 'lodash';
 import { hasUnpublishedChanges, isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import PublishButton from './publish-button';
-import UnpublishedChangesNotice from './unpublished-changes-notice';
+import { NOTICE_UNPUBLISHED } from './notice';
 
 /**
  * Style dependencies
@@ -25,7 +25,7 @@ const Toolbar = ( { project, onShareClick } ) => {
 
 	const [ canRestoreDraft, isSaving, isSaved ] = useSelect( ( select ) => [
 		filter( select( 'core/notices' ).getNotices(), {
-			id: UnpublishedChangesNotice.ID,
+			id: NOTICE_UNPUBLISHED,
 		} ).length > 0,
 		select( STORE_NAME ).isEditorSaving(),
 		select( STORE_NAME ).isEditorContentSaved(),
