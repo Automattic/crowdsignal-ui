@@ -29,6 +29,11 @@ body {
 			background-color: var(--crowdsignal-forms-button-selected-background-color);
 		}
 	}
+
+	&.is-style-emoji.is-style-outline &__button,
+	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
+		padding: calc( .667em * 0.5 ) calc( 1.333em * 0.25 );
+	}
 }
 
 .crowdsignal-forms-question-wrapper {

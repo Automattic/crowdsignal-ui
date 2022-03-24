@@ -24,7 +24,8 @@ const ButtonContent = styled.span`
 	}
 
 	.is-style-emoji & {
-		font-size: 32px;
+		font-size: 200%;
+		line-height: inherit;
 	}
 `;
 
@@ -36,7 +37,7 @@ const ButtonAnswer = ( { attributes, className, inputProps } ) => {
 			as="label"
 			attributes={ attributes }
 			className={ className }
-			outline={ ! inputProps.checked }
+			outline
 		>
 			<ButtonContent>
 				<FormCheckbox { ...inputProps } />

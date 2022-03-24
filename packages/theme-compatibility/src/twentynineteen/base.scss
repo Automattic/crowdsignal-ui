@@ -1,5 +1,9 @@
 @import 'buttons';
 
+:root {
+	--crowdsignal-forms-button-selected-background-color: #0073aa;
+}
+
 html {
 	font-size: 22px;
 }
@@ -48,7 +52,18 @@ button, input, select, optgroup, textarea {
 	}
 }
 
+.crowdsignal-forms-button {
+	&.is-style-emoji.is-style-outline &__button,
+	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
+		border-color: transparent;
+	}
+	&.is-style-emoji.is-style-outline.is-selected &__button,
+	&.is-style-emoji.is-style-outline.is-selected &__button.wp-block-button__link {
+		background-color: var(--crowdsignal-forms-button-selected-background-color);
+		border-color: var(--crowdsignal-forms-button-selected-background-color);
+	}
+}
+
 .crowdsignal-forms-button__button {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-
