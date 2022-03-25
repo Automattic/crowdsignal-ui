@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { EmailInputIcon } from '@crowdsignal/icons';
+import { EmailInputIcon, URLInputIcon } from '@crowdsignal/icons';
 
 export default [
 	{
@@ -37,10 +37,10 @@ export default [
 		isDefault: false,
 		title: __( 'URL Input Form', 'block-editor' ),
 		description: __(
-			'An input field for collecting URLs.',
+			'An input field for collecting and validating website addresses.',
 			'block-editor'
 		),
-		icon: <EmailInputIcon />,
+		icon: <URLInputIcon />,
 		attributes: {
 			label: __( 'Enter url', 'block-editor' ),
 			validation: [ 'urlValidation' ],
