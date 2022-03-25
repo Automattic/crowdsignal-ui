@@ -2,7 +2,8 @@
 @import "~@wordpress/base-styles/mixins";
 
 body {
-	--crowdsignal-forms-button-selected-background-color: #1285ce;
+	--wp--preset--color--primary: #1285ce;
+
 	--crowdsignal-forms-input-border-color: #ddd;
 	--crowdsignal-forms-question-border-color: #eee;
 	--crowdsignal-forms-question-background-color: #fff;
@@ -20,19 +21,6 @@ body {
 		.wp-block-column:not(:last-child)  {
 			margin-bottom: 0;
 		}
-	}
-}
-
-.crowdsignal-forms-button {
-	&.is-selected & {
-		&__button {
-			background-color: var(--crowdsignal-forms-button-selected-background-color);
-		}
-	}
-
-	&.is-style-emoji.is-style-outline &__button,
-	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
-		padding: calc( .667em * 0.5 ) calc( 1.333em * 0.25 );
 	}
 }
 
