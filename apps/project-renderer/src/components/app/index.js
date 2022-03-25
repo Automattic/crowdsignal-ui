@@ -49,9 +49,7 @@ const App = ( {
 			);
 		}
 
-		let query = preview && { preview };
-
-		query = { ...query, page: currentPage };
+		const query = preview && { preview };
 
 		fetchProjectForm( projectCode, query )
 			.then( ( res ) => {
