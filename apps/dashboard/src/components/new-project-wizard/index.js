@@ -22,7 +22,7 @@ import * as projectTemplates from './templates';
 /**
  * Style dependencies
  */
-import { ProjectWizardDialog } from './styles';
+import { BackButton, ProjectWizardDialog } from './styles';
 
 const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 	const editorTheme = useSelect( ( select ) =>
@@ -32,6 +32,10 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 	return (
 		<ModalWrapper>
 			<ProjectWizardDialog id="crowdsignal-new-project-wizard">
+				<BackButton href="/dashboard">
+					{ __( 'Back to dashboard', 'dashboard' ) }
+				</BackButton>
+
 				<div>
 					<ActiveTheme onChangeThemeClick={ onChangeThemeClick } />
 				</div>
