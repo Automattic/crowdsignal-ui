@@ -3,7 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 import styled from '@emotion/styled';
-import { v4 as uuid } from 'uuid';
+
+/**
+ * Internal dependencies
+ */
+import { createTemplate } from './create-template';
 
 const BlankProjectPreviewWrapper = styled.div`
 	align-items: center;
@@ -22,37 +26,28 @@ const BlankProjectStartButton = styled.div`
 	padding: 8px 32px;
 `;
 
-export const blankProjectTemplate = {
-	name: __( 'Empty Canvas', 'dashboard' ),
-	description: __(
-		'Setup your own form structure and design from scratch.',
-		'dashboard'
-	),
-	project: {
-		draftContent: {
-			pages: [
-				[],
-				[
-					{
-						attributes: {
-							content: __( 'Thank you!', 'dashboard' ),
-							level: 2,
-							textAlign: 'center',
-						},
-						clientId: uuid(),
-						innerBlocks: [],
-						isValid: true,
-						name: 'core/heading',
-					},
-				],
-			],
-		},
-	},
-	preview: () => (
+export const blankProjectTemplate = createTemplate(
+	__( 'Empty Canvas', 'dashboard' ),
+	__( 'Setup your own form structure and design from scratch.', 'dashboard' ),
+	[
+		[],
+		[
+			{
+				name: 'core/heading',
+				attributes: {
+					content: __( 'Thank you!', 'dashboard' ),
+					level: 2,
+					textAlign: 'center',
+				},
+				innerBlocks: [],
+			},
+		],
+	],
+	() => (
 		<BlankProjectPreviewWrapper>
 			<BlankProjectStartButton>
 				{ __( 'Start from scratch', 'dashboard' ) }
 			</BlankProjectStartButton>
 		</BlankProjectPreviewWrapper>
-	),
-};
+	)
+);
