@@ -17,3 +17,19 @@ export const ProjectWizardDialog = styled( ModalDialog )`
 	flex-direction: row;
 	align-items: flex-end;
 `;
+
+export const BackButton = styled.a`
+	color: var( --color-text-subtle );
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
+		Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+	font-size: 14px;
+	padding: 16px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	text-decoration: none;
+
+	&:hover {
+		color: var( --color-text-subtle );
+	}
+`;
