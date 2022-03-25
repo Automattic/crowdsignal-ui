@@ -9,7 +9,7 @@ import { v4 as uuid } from 'uuid';
  *
  * @type {Object}
  */
-const crowdsignalClientIds = {};
+let crowdsignalClientIds = {};
 
 const useClientId = ( { attributes, clientId: blockId, setAttributes } ) => {
 	useEffect( () => {
@@ -29,6 +29,10 @@ const useClientId = ( { attributes, clientId: blockId, setAttributes } ) => {
 
 		setAttributes( { clientId } );
 	}, [] );
+};
+
+useClientId.resetRegistry = () => {
+	crowdsignalClientIds = {};
 };
 
 export default useClientId;
