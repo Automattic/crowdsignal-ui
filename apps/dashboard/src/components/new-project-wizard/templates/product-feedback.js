@@ -11,7 +11,7 @@ import { createTemplate } from './create-template';
 export const productFeedbackTemplate = createTemplate(
 	__( 'Product Feedback', 'dashboard' ),
 	__(
-		'Idenfity areas for improvement and measure customer satisfaction.',
+		'Identify areas for improvement and measure customer satisfaction.',
 		'dashboard'
 	),
 	[
