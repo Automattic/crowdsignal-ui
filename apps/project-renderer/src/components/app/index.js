@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
+import classnames from 'classnames';
 
 /**
  * Internal dependencies
@@ -48,7 +49,9 @@ const App = ( {
 			);
 		}
 
-		const query = preview && { preview };
+		let query = preview && { preview };
+
+		query = { ...query, page: currentPage };
 
 		fetchProjectForm( projectCode, query )
 			.then( ( res ) => {
@@ -132,17 +135,29 @@ const App = ( {
 			'crowdsignal-forms/text-question': TextQuestion,
 		} );
 
+	const contentClasses = classnames(
+		'wp-embed-responsive',
+		'crowdsignal-content',
+		{
+			'crowdsignal-forms-form__content': ! hasResponded,
+		}
+	);
+
 	if ( hasResponded ) {
-		return <ContentWrapper>{ renderContent() }</ContentWrapper>;
+		return (
+			<ContentWrapper className={ contentClasses }>
+				{ renderContent() }
+			</ContentWrapper>
+		);
 	}
 
 	return (
 		<Form
-			className="crowdsignal-forms-form wp-embed-responsive"
+			className="crowdsignal-forms-form"
 			name={ `f-${ projectCode }` }
 			onSubmit={ handleSubmit }
 		>
-			<ContentWrapper className="crowdsignal-forms-form__content">
+			<ContentWrapper className={ contentClasses }>
 				{ renderContent() }
 			</ContentWrapper>
 		</Form>

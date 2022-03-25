@@ -47,13 +47,13 @@
 		}
 
 		&:not(:first-child) {
-			margin-left: var(--wp--style--block-gap, 2em);
+			margin-left: var(--cs--style--block-gap);
 		}
 	}
 
 	.crowdsignal-forms-question-wrapper {
-		margin-bottom: 64px;
-		margin-top: 64px;
+		margin-bottom: var(--cs--style--block-gap-big);
+		margin-top: var(--cs--style--block-gap-big);
 	}
 
 	.crowdsignal-forms-question-wrapper__content {
@@ -90,12 +90,11 @@
 .editor .iso-editor {
 	.block-editor-writing-flow {
 		line-height: initial;
+		padding: 0;
 	}
 
 	.block-editor-block-list__layout.is-root-container {
-		padding-left: 0;
-		padding-right: 0;
-		padding-top: 40px;
+		padding: var(--cs--content-padding-top) var(--cs--content-padding-horizontal) var(--cs--content-padding-bottom);
 	}
 
 	// Fix isolated-block-editor's misalignment of list blocks
@@ -120,11 +119,15 @@
 	& :where(.wp-block)[data-align=left] > * {
 		float: left;
 	}
+
+	& :where(.wp-block)[data-align=full]:first-child {
+		margin-top: var(--cs--block--alignfull-margin-top);
+	}
 }
 
 .crowdsignal-forms-question-wrapper__content .block-editor-block-list__layout > * {
 		margin-top: 0;
-		margin-bottom: 16px;
+		margin-bottom: var(--cs--style--block-gap-small);
 
 	.wp-block.is-selected &:nth-last-child(2),
 	.wp-block.has-child-selected &:nth-last-child(2),
@@ -133,7 +136,7 @@
 	}
 
 	&[data-type="crowdsignal-forms/multiple-choice-answer"] + :not(.wp-block[data-type="crowdsignal-forms/multiple-choice-answer"]) {
-		margin-top: 32px;
+		margin-top: var(--cs--style--block-gap);
 	}
 
 	&[data-align="left"], &[data-align="right"] {
