@@ -31,4 +31,27 @@ export default [
 		isActive: ( blockAttributes, variationAttributes ) =>
 			blockAttributes.title === variationAttributes.title,
 	},
+
+	{
+		name: 'crowdsignal-forms/url-input',
+		isDefault: false,
+		title: __( 'URL Input Form', 'block-editor' ),
+		description: __(
+			'An input field for collecting URLs.',
+			'block-editor'
+		),
+		icon: <EmailInputIcon />,
+		attributes: {
+			label: __( 'Enter url', 'block-editor' ),
+			validation: [ 'urlValidation' ],
+			placeholder: 'https://example.com',
+		},
+		keywords: [
+			__( 'url input', 'block-editor' ),
+			__( 'url', 'block-editor' ),
+			__( 'web address', 'block-editor' ),
+		],
+		isActive: ( blockAttributes, variationAttributes ) =>
+			blockAttributes.title === variationAttributes.title,
+	},
 ];

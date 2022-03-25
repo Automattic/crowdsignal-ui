@@ -8,4 +8,14 @@ export default {
 			return 'Please enter a valid email address.';
 		}
 	},
+
+	urlValidation: ( value ) => {
+		if (
+			! value.match(
+				/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi
+			)
+		) {
+			return 'Please enter a valid url.';
+		}
+	},
 };
