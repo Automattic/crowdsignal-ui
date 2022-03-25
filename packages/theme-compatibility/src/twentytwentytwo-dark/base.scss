@@ -18,3 +18,9 @@ body {
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--wp--preset--color--foreground);
 }
+
+.crowdsignal-forms-button {
+	&__button {
+		color: var(--wp--preset--color--foreground);
+	}
+}
