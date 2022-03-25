@@ -12,6 +12,7 @@ import { isEmpty } from 'lodash';
 import { useColorStyles } from '@crowdsignal/styles';
 import { ErrorMessage, FormInputWrapper, FormTextInput } from '../components';
 import { useField } from '@crowdsignal/form';
+import validator from './validations';
 
 const TextInput = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
@@ -19,6 +20,13 @@ const TextInput = ( { attributes, className } ) => {
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
+			}
+			if ( attributes.validation && ! isEmpty( value ) ) {
+				return attributes.validation.reduce(
+					( errorMsg, validatorKey ) =>
+						errorMsg || validator[ validatorKey ]( value ),
+					null
+				);
 			}
 		},
 	} );

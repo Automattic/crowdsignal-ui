@@ -29,4 +29,8 @@ export default {
 		type: 'string',
 		default: '100%',
 	},
+	validation: {
+		type: 'array',
+		default: null,
+	},
 };
