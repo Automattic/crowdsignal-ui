@@ -2,6 +2,10 @@
 @import "~@wordpress/base-styles/breakpoints";
 @import "~@wordpress/base-styles/mixins";
 
+html {
+	font-size: var(--wp--preset--font-size--normal, 16px);
+}
+
 body {
 	//Fallback for themes without those WP variables
 	--wp--preset--color--primary: var(--color-primary-dark);
@@ -20,6 +24,7 @@ body {
 
 	--cs--style--answer--selected--background: var(--wp--preset--color--primary);
 	--cs--style--answer--selected--color: var(--wp--preset--color--background);
+	--cs--style--answer--emoji--font-size: var(--wp--preset--font-size--normal);
 
 	@include break-mobile {
 		--cs--content-padding-top: 20px;
@@ -105,11 +110,14 @@ body {
 	&.is-style-emoji {
 		.crowdsignal-forms-button__button {
 			&, &.wp-block-button__link {
-				&, &:hover{
+				&, &:hover {
 					display: flex;
 					border-color: transparent;
-					padding: calc(.667em * 0.5) calc(1.333em * 0.5);
-					line-height: 2.5em;
+					padding: 12px;
+					line-height: 1;
+					font-size: calc(var(--cs--style--answer--emoji--font-size) * 2);
+					font-weight: normal;
+					letter-spacing: initial;
 				}
 			}
 		}

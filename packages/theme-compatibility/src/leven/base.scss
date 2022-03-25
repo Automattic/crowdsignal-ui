@@ -1,6 +1,10 @@
 @import "~@wordpress/base-styles/breakpoints";
 @import "~@wordpress/base-styles/mixins";
 
+:root {
+	--wp--preset--font-size--normal: 18px;
+}
+
 body {
 	--wp--preset--color--primary: #1285ce;
 

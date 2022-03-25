@@ -23,11 +23,6 @@ const ButtonContent = styled.div`
 		flex: 1;
 		text-align: left;
 	}
-
-	.is-style-emoji & {
-		font-size: 200%;
-		line-height: inherit;
-	}
 `;
 
 const EditButtonAnswer = ( {

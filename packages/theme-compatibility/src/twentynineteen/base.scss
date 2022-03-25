@@ -1,12 +1,13 @@
 @import 'buttons';
 
+:root {
+	--wp--preset--font-size--normal: 22px;
+}
+
 body {
 	--wp--preset--color--primary: #0073aa;
 }
 
-html {
-	font-size: 22px;
-}
 .crowdsignal-forms-form {
 	line-height: 1.5;
 
