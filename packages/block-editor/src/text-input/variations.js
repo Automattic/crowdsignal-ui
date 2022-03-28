@@ -42,7 +42,7 @@ export default [
 		),
 		icon: <URLInputIcon />,
 		attributes: {
-			label: __( 'Enter url', 'block-editor' ),
+			label: __( 'Enter URL', 'block-editor' ),
 			validation: [ 'urlValidation' ],
 			placeholder: 'https://example.com',
 		},
