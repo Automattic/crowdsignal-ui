@@ -7,6 +7,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import { useClientId } from '@crowdsignal/hooks';
 import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { NOTICE_UNPUBLISHED } from './notice';
@@ -93,7 +94,9 @@ export const useEditorContent = ( project ) => {
 
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
+
 		setReady( false );
+		useClientId.resetRegistry();
 	};
 
 	const setProjectTemplate = ( projectTemplate ) => {
