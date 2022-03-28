@@ -1,7 +1,7 @@
 @import "~@wordpress/base-styles/breakpoints";
 @import "~@wordpress/base-styles/mixins";
 
-:root {
+body {
 	--crowdsignal-forms-button-selected-background-color: #1285ce;
 	--crowdsignal-forms-input-border-color: #ddd;
 	--crowdsignal-forms-question-border-color: #eee;

@@ -1,5 +1,5 @@
 /* Buttons styles */
-.crowdsignal-forms-form__content .wp-block-button .wp-block-button__link {
+.crowdsignal-content .wp-block-button .wp-block-button__link {
 	transition: background 150ms ease-in-out;
 	border-width: 2px;
 	border-style: solid;
@@ -13,58 +13,58 @@
 	outline: none;
 }
 
-.crowdsignal-forms-form__content .wp-block-button .wp-block-button__link:not(.has-background) {
+.crowdsignal-content .wp-block-button .wp-block-button__link:not(.has-background) {
 	background-color: #0073aa;
 	border-color: currentColor;
 }
 
-.crowdsignal-forms-form__content .wp-block-button .wp-block-button__link:not(.has-text-color) {
+.crowdsignal-content .wp-block-button .wp-block-button__link:not(.has-text-color) {
 	color: white;
 }
 
-.crowdsignal-forms-form__content .wp-block-button .wp-block-button__link:hover {
+.crowdsignal-content .wp-block-button .wp-block-button__link:hover {
 	color: white;
 	background: #111;
 	cursor: pointer;
 }
 
-.crowdsignal-forms-form__content .wp-block-button .wp-block-button__link:focus {
+.crowdsignal-content .wp-block-button .wp-block-button__link:focus {
 	color: white;
 	background: #111;
 	outline: thin dotted;
 	outline-offset: -4px;
 }
 
-.crowdsignal-forms-form__content .wp-block-button:not(.is-style-squared) .wp-block-button__link {
+.crowdsignal-content .wp-block-button:not(.is-style-squared) .wp-block-button__link {
 	border-radius: 5px;
 }
 
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link,
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:focus,
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:active {
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link,
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:focus,
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:active {
 	transition: all 150ms ease-in-out;
 	border-width: 2px;
 	border-style: solid;
 }
 
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:not(.has-background),
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:focus:not(.has-background),
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:active:not(.has-background) {
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:not(.has-background),
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:focus:not(.has-background),
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:active:not(.has-background) {
 	background: transparent;
 }
 
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color),
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:focus:not(.has-text-color),
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:active:not(.has-text-color) {
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color),
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:focus:not(.has-text-color),
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:active:not(.has-text-color) {
 	color: #0073aa;
 	border-color: currentColor;
 }
 
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:hover {
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:hover {
 	color: white;
 	border-color: #111;
 }
 
-.crowdsignal-forms-form__content .wp-block-button.is-style-outline .wp-block-button__link:hover:not(.has-background) {
+.crowdsignal-content .wp-block-button.is-style-outline .wp-block-button__link:hover:not(.has-background) {
 	color: #111;
 }
