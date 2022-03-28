@@ -1,8 +1,12 @@
-html {
-	font-size: 16px;
+:root {
+	--wp--preset--font-size--normal: 18px;
 }
 
 body {
+	--wp--preset--font-size--small: 0.88rem;
+	--wp--preset--font-size--medium: 1rem;
+	--wp--preset--font-size--large: 1.55rem;
+	--wp--preset--font-size--x-large: clamp(1.55rem, 3vw, 2.25rem);
 	--wp--custom--input--focus--color: #010101;
 }
 
@@ -20,20 +24,4 @@ body {
 
 .crowdsignal-forms-question-wrapper {
 	border-radius: 0;
-}
-
-.crowdsignal-forms-button {
-	&.is-style-emoji.is-style-outline &__button,
-	&.is-style-emoji.is-style-outline &__button.wp-block-button__link {
-		line-height: 2.5em;
-	}
-
-	&.is-style-emoji.is-style-outline.is-selected &__button,
-	&.is-style-emoji.is-style-outline.is-selected &__button.wp-block-button__link,
-	&.is-style-text.is-style-outline.is-selected &__button,
-	&.is-style-text.is-style-outline.is-selected &__button.wp-block-button__link {
-		background-color: var(--wp--preset--color--primary);
-		border-color: var(--wp--preset--color--primary);
-		color: var(--wp--preset--color--background);
-	}
 }
