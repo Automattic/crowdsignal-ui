@@ -61,6 +61,7 @@ export const editorSettings = {
 			navigation: true,
 			toc: false,
 		},
+		moreMenu: false,
 	},
 	editor: {
 		alignWide: true,
