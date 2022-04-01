@@ -29,7 +29,7 @@ export default [
 			__( 'e-mail', 'block-editor' ),
 		],
 		isActive: ( blockAttributes, variationAttributes ) =>
-			blockAttributes.title === variationAttributes.title,
+			blockAttributes.label === variationAttributes.label,
 	},
 
 	{
@@ -52,6 +52,6 @@ export default [
 			__( 'web address', 'block-editor' ),
 		],
 		isActive: ( blockAttributes, variationAttributes ) =>
-			blockAttributes.title === variationAttributes.title,
+			blockAttributes.label === variationAttributes.label,
 	},
 ];
