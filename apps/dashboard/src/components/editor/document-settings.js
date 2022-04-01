@@ -29,9 +29,7 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 	const { openGeneralSidebar, setIsInserterOpened } = useDispatch(
 		'isolated/editor'
 	);
-	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
-		STORE_NAME
-	);
+	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const [
 		canPublish,
@@ -63,7 +61,7 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 			return;
 		}
 
-		saveEditorChanges( { public: true } );
+		saveAndUpdateProject( project.id, { public: true } );
 	};
 
 	const visibility = isPublic( project )

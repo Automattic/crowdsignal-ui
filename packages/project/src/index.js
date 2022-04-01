@@ -22,7 +22,7 @@
  * @property {string}                permalink     Project URL.
  * @property {boolean}               public        True when project is public.
  * @property {ProjectContent | null} publicContent Project's last published content.
- * @property {string}                publicTheme   Project's public theme.
+ * @property {string | null}         publicTheme   Project's public theme.
  * @property {string}                slug          Project slug.
  * @property {string}                title         Project title.
  */
