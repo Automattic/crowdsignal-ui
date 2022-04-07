@@ -13,7 +13,7 @@ import { blankProjectTemplate } from '../new-project-wizard/templates';
 import { STORE_NAME } from '../../data';
 import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
-import { trackEditorLoaded } from '../../util/tracking';
+import { trackEditorLoad } from '../../util/tracking';
 
 const Editor = ( { projectId } ) => {
 	const [ project, isLoading ] = useSelect(
@@ -36,7 +36,7 @@ const Editor = ( { projectId } ) => {
 	);
 
 	useEffect( () => {
-		trackEditorLoaded( currentUser, projectId );
+		trackEditorLoad( currentUser, projectId );
 	}, [ currentUser ] );
 
 	if ( isLoading ) {

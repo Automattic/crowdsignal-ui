@@ -11,7 +11,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { NOTICE_UNPUBLISHED } from './notice';
-import { trackThemeChanged } from '../../util/tracking';
+import { trackThemeChange } from '../../util/tracking';
 
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -122,7 +122,7 @@ export const useEditorContent = ( project ) => {
 			saveEditorChanges();
 		}
 
-		trackThemeChanged( currentUser, theme, project.id );
+		trackThemeChange( currentUser, theme, project.id );
 	};
 
 	return {

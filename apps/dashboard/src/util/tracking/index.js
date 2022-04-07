@@ -21,7 +21,7 @@ export const trackEvent = ( user, event, properties ) => {
 	] );
 };
 
-export const trackEditorLoaded = ( user, projectId ) => {
+export const trackEditorLoad = ( user, projectId ) => {
 	const EDITOR_LOADED_KEY = 'editor_last_loaded_date';
 	const lastEditorLoad =
 		Number( localStorage.getItem( EDITOR_LOADED_KEY ) ) || 0;
@@ -36,7 +36,7 @@ export const trackEditorLoaded = ( user, projectId ) => {
 	}
 };
 
-export const trackThemeChanged = ( user, theme, projectId ) => {
+export const trackThemeChange = ( user, theme, projectId ) => {
 	trackEvent( user, 'crowdsignal_nex_theme_change', {
 		theme,
 		project_id: projectId,
