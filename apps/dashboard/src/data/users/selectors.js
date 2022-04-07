@@ -6,7 +6,11 @@ import { get, includes } from 'lodash';
 /**
  * Internal dependencies
  */
-import { getAccountSignalCount, getAccountType } from '../accounts/selectors';
+import {
+	getAccountSignalCount,
+	getAccountType,
+	getAccountPartnerUserId,
+} from '../accounts/selectors';
 
 export const getUserAccountId = ( state, userId ) =>
 	get( state, [ 'users', userId, 'account' ], 0 );
@@ -16,6 +20,9 @@ export const getUserAccountType = ( state, userId ) =>
 
 export const getUserSignalCount = ( state, userId ) =>
 	getAccountSignalCount( state, getUserAccountId( state, userId ) );
+
+export const getUserPartnerId = ( state, userId ) =>
+	getAccountPartnerUserId( state, getUserAccountId( state, userId ) );
 
 export const getUserProfile = ( state, userId ) =>
 	get( state, [ 'users', userId, 'profile' ], {} );
@@ -47,6 +54,7 @@ export const getUser = ( state, userId ) => {
 
 	return {
 		userId,
+		partnerUserId: getUserPartnerId( state, userId ),
 		accountType: getUserAccountType( state, userId ),
 		profile: getUserProfile( state, userId ),
 		signalCount: getUserSignalCount( state, userId ),

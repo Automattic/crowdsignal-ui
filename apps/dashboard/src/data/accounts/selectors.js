@@ -11,3 +11,6 @@ export const getAccountDomain = ( state, accountId ) =>
 
 export const getAccountSignalCount = ( state, accountId ) =>
 	get( state, [ 'accounts', accountId, 'signalCount' ], 0 );
+
+export const getAccountPartnerUserId = ( state, accountId ) =>
+	get( state, [ 'accounts', accountId, 'partnerUserId' ], 0 );

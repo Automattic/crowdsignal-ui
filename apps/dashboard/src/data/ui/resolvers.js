@@ -29,6 +29,7 @@ function* getCurrentUser() {
 
 		yield updateAccount(
 			account.id,
+			account.partnerUserId,
 			account.type,
 			account.users,
 			account.domain,

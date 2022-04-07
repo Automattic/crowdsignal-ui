@@ -6,7 +6,11 @@ export const trackEvent = ( user, event, properties ) => {
 	}
 
 	window._tkq = window._tkq || [];
-	window._tkq.push( [ 'identifyUser', user.userId, user.profile.username ] );
+	window._tkq.push( [
+		'identifyUser',
+		user.partnerUserId,
+		user.profile.username,
+	] );
 	window._tkq.push( [
 		'recordEvent',
 		event,

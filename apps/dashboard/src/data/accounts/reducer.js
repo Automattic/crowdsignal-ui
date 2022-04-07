@@ -41,6 +41,14 @@ const signalLimit = ( state = 0, action ) => {
 	return state;
 };
 
+const partnerUserId = ( state = 0, action ) => {
+	if ( action.type === ACCOUNT_UPDATE ) {
+		return action.partnerUserId;
+	}
+
+	return state;
+};
+
 const signalCount = ( state = 0, action ) => {
 	if ( action.type === ACCOUNT_SIGNAL_COUNT_UPDATE ) {
 		return action.count;
@@ -56,6 +64,7 @@ export default keyedReducer(
 		signalCount,
 		signalLimit,
 		type,
+		partnerUserId,
 		users,
 	} )
 );
