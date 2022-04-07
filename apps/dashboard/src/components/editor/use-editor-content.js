@@ -11,6 +11,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { NOTICE_UNPUBLISHED } from './notice';
+import { trackThemeChanged } from '../../util/tracking';
 
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -34,6 +35,7 @@ export const useEditorContent = ( project ) => {
 		editorProjectId,
 		isEditorContentSaved,
 		editorTheme,
+		currentUser,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
@@ -41,6 +43,7 @@ export const useEditorContent = ( project ) => {
 		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
 		select( STORE_NAME ).getEditorTheme(),
+		select( STORE_NAME ).getCurrentUser(),
 	] );
 
 	useEffect( () => {
@@ -118,6 +121,8 @@ export const useEditorContent = ( project ) => {
 		if ( autoSave ) {
 			saveEditorChanges();
 		}
+
+		trackThemeChanged( currentUser, theme, project.id );
 	};
 
 	return {

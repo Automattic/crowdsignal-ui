@@ -46,6 +46,7 @@ export const getUser = ( state, userId ) => {
 	}
 
 	return {
+		userId,
 		accountType: getUserAccountType( state, userId ),
 		profile: getUserProfile( state, userId ),
 		signalCount: getUserSignalCount( state, userId ),

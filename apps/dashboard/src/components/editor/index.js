@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+import { useSelect } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -12,6 +13,7 @@ import { blankProjectTemplate } from '../new-project-wizard/templates';
 import { STORE_NAME } from '../../data';
 import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
+import { trackEditorLoaded } from '../../util/tracking';
 
 const Editor = ( { projectId } ) => {
 	const [ project, isLoading ] = useSelect(
@@ -27,6 +29,15 @@ const Editor = ( { projectId } ) => {
 		},
 		[ projectId ]
 	);
+
+	const currentUser = useSelect(
+		( select ) => select( STORE_NAME ).getCurrentUser(),
+		[]
+	);
+
+	useEffect( () => {
+		trackEditorLoaded( currentUser, projectId );
+	}, [ currentUser ] );
 
 	if ( isLoading ) {
 		return (
