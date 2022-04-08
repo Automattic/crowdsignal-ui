@@ -41,7 +41,7 @@ const Results = ( { projectId } ) => {
 					/>
 
 					<IFrame
-						src={ `/surveys/${ projectId }/report/overview` }
+						src={ `/surveys/${ projectId }/report/overview${ window.location.search }` }
 						width="100%"
 					/>
 				</>
