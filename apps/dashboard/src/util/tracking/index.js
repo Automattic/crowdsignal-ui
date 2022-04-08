@@ -29,7 +29,7 @@ export const trackEditorLoad = ( user, projectId ) => {
 	const currentDate = new Date().setHours( 0, 0, 0, 0 );
 
 	if ( user && lastEditorLoadDate < currentDate ) {
-		trackEvent( user, 'crowdsignal_nex_editor_load', {
+		trackEvent( user, 'crowdsignal_project_editor_load', {
 			project_id: projectId,
 		} );
 		localStorage.setItem( EDITOR_LOADED_KEY, currentDate );
@@ -37,7 +37,7 @@ export const trackEditorLoad = ( user, projectId ) => {
 };
 
 export const trackThemeChange = ( user, theme, projectId ) => {
-	trackEvent( user, 'crowdsignal_nex_theme_change', {
+	trackEvent( user, 'crowdsignal_project_theme_change', {
 		theme,
 		project_id: projectId,
 	} );
