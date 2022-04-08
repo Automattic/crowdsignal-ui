@@ -25,9 +25,6 @@ const Results = ( { projectId } ) => {
 
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
-	const queryString = window.location.toString().split( '?' )[ 1 ];
-	const params = queryString ? `?${ queryString }` : '';
-
 	const updateProjectTitle = ( title ) =>
 		saveAndUpdateProject( projectId, { title } );
 
@@ -44,7 +41,7 @@ const Results = ( { projectId } ) => {
 					/>
 
 					<IFrame
-						src={ `/surveys/${ projectId }/report/overview${ params }` }
+						src={ `/surveys/${ projectId }/report/overview${ window.location.search }` }
 						width="100%"
 					/>
 				</>
