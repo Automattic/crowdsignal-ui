@@ -39,6 +39,8 @@ const CoreEmbed = ( { attributes } ) => {
 
 	const classes = classnames( className, 'wp-block-embed', {
 		'is-type-video': 'video' === type,
+		alignfull: attributes.align === 'full',
+		alignwide: attributes.align === 'wide',
 	} );
 
 	const html = 'photo' === type ? getPhotoHTML( preview ) : preview.html;
