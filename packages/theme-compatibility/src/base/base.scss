@@ -104,6 +104,14 @@ body {
 			margin-top: var(--cs--block--alignfull-margin-top);
 		}
 	}
+
+	> .alignright {
+		float: right;
+	}
+
+	> .alignleft {
+		float: left;
+	}
 }
 
 .crowdsignal-forms-button.wp-block-button.is-style-outline {

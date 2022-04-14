@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { isEmpty } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { renderToString, useEffect, useState } from '@wordpress/element';
 import classnames from 'classnames';
 
@@ -39,6 +39,7 @@ const CoreEmbed = ( { attributes } ) => {
 
 	const classes = classnames( className, 'wp-block-embed', {
 		'is-type-video': 'video' === type,
+		[ `align${ attributes.align }` ]: ! isNil( attributes.align ),
 	} );
 
 	const html = 'photo' === type ? getPhotoHTML( preview ) : preview.html;
