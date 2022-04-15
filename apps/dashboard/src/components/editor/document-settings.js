@@ -26,7 +26,9 @@ import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
 
 const DocumentSettings = ( { project, onChangeThemeClick } ) => {
-	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
+	const { openGeneralSidebar, setIsInserterOpened } = useDispatch(
+		'isolated/editor'
+	);
 	const { saveAndUpdateProject, saveEditorChanges } = useDispatch(
 		STORE_NAME
 	);
@@ -40,6 +42,14 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 	] );
+
+	useEffect( () => {
+		if ( project.id ) {
+			return;
+		}
+
+		setIsInserterOpened( true );
+	}, [] );
 
 	useEffect( () => {
 		openGeneralSidebar(
