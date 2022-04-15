@@ -110,6 +110,10 @@ const currentPage = ( state = 0, action ) => {
 		return state - 1;
 	}
 
+	if ( action.type === EDITOR_PAGE_ORDER_UPDATE ) {
+		return action.order.indexOf( state );
+	}
+
 	return state;
 };
 
