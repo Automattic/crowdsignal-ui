@@ -11,7 +11,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import { isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { NOTICE_UNPUBLISHED } from './notice';
-import { trackThemeChange } from '../../util/tracking';
+import { trackContentInsert, trackThemeChange } from '../../util/tracking';
 
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
@@ -109,6 +109,10 @@ export const useEditorContent = ( project ) => {
 			projectTemplate.draftContent.pages,
 			editorTheme
 		);
+
+		if ( projectTemplate.draftContent.pages[ 0 ].length ) {
+			trackContentInsert( currentUser );
+		}
 
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
