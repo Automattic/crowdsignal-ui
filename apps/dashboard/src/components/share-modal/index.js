@@ -32,37 +32,44 @@ const SharedModalFooterNote = styled.div`
 	padding: 160px 0;
 `;
 
-const ShareModal = ( { project, onClose } ) => (
-	<ModalWrapper>
-		<ShareModalDialog id="crowdsignal-share-modal">
-			<ModalNavigation>
-				<ModalCloseButton onClick={ onClose } />
-			</ModalNavigation>
-			<ModalHeader>
-				{ __( 'Share and collect responses', 'dashboard' ) }
-			</ModalHeader>
-			<ModalHeaderNote>
-				{ __( "It's time to collect some signals.", 'dashboard' ) }
-			</ModalHeaderNote>
-			<ModalTemplateGrid>
-				<ShareLink link={ project.permalink } />
-			</ModalTemplateGrid>
-			<SharedModalFooterNote>
-				<span>
-					{ __(
-						'More channels for sharing and embedding your forms are coming soon.',
-						'dashboard'
-					) }
-				</span>
-				<span>
-					{ __(
-						'Thank you for using this beta version!',
-						'dashboard'
-					) }
-				</span>
-			</SharedModalFooterNote>
-		</ShareModalDialog>
-	</ModalWrapper>
-);
+const ShareModal = ( { project, onClose } ) => {
+	const onWrapperClickHandler = ( event ) => {
+		if ( event.target === event.currentTarget ) {
+			onClose();
+		}
+	};
+	return (
+		<ModalWrapper onClick={ onWrapperClickHandler }>
+			<ShareModalDialog id="crowdsignal-share-modal">
+				<ModalNavigation>
+					<ModalCloseButton onClick={ onClose } />
+				</ModalNavigation>
+				<ModalHeader>
+					{ __( 'Share and collect responses', 'dashboard' ) }
+				</ModalHeader>
+				<ModalHeaderNote>
+					{ __( "It's time to collect some signals.", 'dashboard' ) }
+				</ModalHeaderNote>
+				<ModalTemplateGrid>
+					<ShareLink link={ project.permalink } />
+				</ModalTemplateGrid>
+				<SharedModalFooterNote>
+					<span>
+						{ __(
+							'More channels for sharing and embedding your forms are coming soon.',
+							'dashboard'
+						) }
+					</span>
+					<span>
+						{ __(
+							'Thank you for using this beta version!',
+							'dashboard'
+						) }
+					</span>
+				</SharedModalFooterNote>
+			</ShareModalDialog>
+		</ModalWrapper>
+	);
+};
 
 export default ShareModal;
