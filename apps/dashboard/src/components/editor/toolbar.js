@@ -31,10 +31,24 @@ const Toolbar = ( { project, onShareClick } ) => {
 		select( STORE_NAME ).isEditorContentSaved(),
 	] );
 
-	const publishProject = ( firstPublish = false ) => {
+	const publishProject = () => {
+		if ( hasUnpublishedChanges( project ) && project.publicContent ) {
+			// eslint-disable-next-line
+			const confirmed = window.confirm(
+				__(
+					'Warning! This project was already published. Deleting or changing questions or form blocks may cause the loss of existing responses. Are you sure you want to proceed?',
+					'dashboard'
+				)
+			);
+
+			if ( ! confirmed ) {
+				return;
+			}
+		}
+
 		saveEditorChanges( { public: true } );
 
-		if ( firstPublish ) {
+		if ( ! isPublic( project ) ) {
 			onShareClick();
 		}
 	};
