@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { select } from '@wordpress/data';
+import { isEmpty, dropRight, every } from 'lodash';
 
 /**
  * Internal dependencies
@@ -25,6 +26,7 @@ import {
 } from '../action-types';
 import { saveAndUpdateProject } from '../projects/actions';
 import { STORE_NAME } from '../';
+import { trackContentInsert } from '../../util/tracking';
 
 const autosave = ( actionCreator ) => {
 	return function* ( ...args ) {
@@ -98,11 +100,23 @@ export const insertEditorPage = autosave( ( pageIndex, pageContent ) => ( {
 	pageContent,
 } ) );
 
-export const updateEditorPage = autosave( ( pageIndex, pageContent ) => ( {
-	type: EDITOR_PAGE_UPDATE,
-	pageIndex,
-	pageContent,
-} ) );
+export const updateEditorPage = autosave( ( pageIndex, pageContent ) => {
+	const editorPages = select( STORE_NAME ).getEditorPages();
+	const currentUser = select( STORE_NAME ).getCurrentUser();
+	const allPagesEmpty = every( dropRight( editorPages ), ( page ) =>
+		isEmpty( page )
+	);
+
+	if ( allPagesEmpty && ! isEmpty( pageContent ) ) {
+		trackContentInsert( currentUser );
+	}
+
+	return {
+		type: EDITOR_PAGE_UPDATE,
+		pageIndex,
+		pageContent,
+	};
+} );
 
 export const updateEditorPageOrder = autosave( ( order ) => ( {
 	type: EDITOR_PAGE_ORDER_UPDATE,

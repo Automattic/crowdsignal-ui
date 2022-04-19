@@ -36,6 +36,10 @@ export const trackEditorLoad = ( user, projectId ) => {
 	}
 };
 
+export const trackContentInsert = ( user ) => {
+	trackEvent( user, 'crowdsignal_project_editor_content_insert' );
+};
+
 export const trackThemeChange = ( user, theme, projectId ) => {
 	trackEvent( user, 'crowdsignal_project_theme_change', {
 		theme,
