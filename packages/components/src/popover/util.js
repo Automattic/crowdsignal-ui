@@ -16,7 +16,7 @@ export const getPopoverOffset = ( position, popover, context ) => {
 	switch ( lowerCase( position ) ) {
 		case 'top right':
 			return {
-				bottom: window.innerHeight - context.top + POPOVER_OFFSET,
+				bottom: window.innerHeight - contextBox.top + POPOVER_OFFSET,
 				left: contextBox.left,
 			};
 

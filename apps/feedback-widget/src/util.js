@@ -89,5 +89,9 @@ export const getPopoverPosition = ( position ) => {
 		return x === 'left' ? 'center right' : 'center left';
 	}
 
-	return 'auto';
+	if ( y === 'bottom' ) {
+		return x === 'left' ? 'top right' : 'top left';
+	}
+
+	return x === 'left' ? 'bottom right' : 'bottom left';
 };
