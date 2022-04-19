@@ -16,6 +16,8 @@ const Tab = ( { children, href, isSelected, isDisabled, ...props } ) => {
 			<ButtonComponent
 				className="tab-navigation__button"
 				href={ href }
+				onMouseEnter
+				onMouseLeave
 				{ ...props }
 			>
 				{ children }

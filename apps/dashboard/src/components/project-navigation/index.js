@@ -2,6 +2,8 @@
  * External dependencies
  */
 import { useSelect } from '@wordpress/data';
+import { useState } from '@wordpress/element';
+import { Popover } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -19,13 +21,13 @@ const Tab = {
 	EDITOR: 'editor',
 	RESULTS: 'results',
 };
-
 const ProjectNavigation = ( {
 	activeTab,
 	disableTitleEditor,
 	onChangeTitle,
 	projectId,
 } ) => {
+	const [ displayNotice, setDisplayNotice ] = useState( false );
 	const [ editorTitle, projectTitle ] = useSelect(
 		( select ) => [
 			select( STORE_NAME ).getEditorTitle(),
@@ -33,6 +35,7 @@ const ProjectNavigation = ( {
 		],
 		[ projectId ]
 	);
+	const toggleNotice = () => setDisplayNotice( ! displayNotice );
 
 	return (
 		<div className="project-navigation">
@@ -56,8 +59,17 @@ const ProjectNavigation = ( {
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.RESULTS }
 					isDisabled={ ! projectId }
+					onMouseEnter={ toggleNotice }
+					onMouseLeave={ toggleNotice }
 					href={ `/project/${ projectId }/results` }
 				>
+					{ displayNotice ? (
+						<Popover noArrow={ false }>
+							{ __(
+								'Please save draft or publish project before viewing results'
+							) }
+						</Popover>
+					) : null }
 					{ __( 'Results', 'dashboard' ) }
 				</TabNavigation.Tab>
 			</TabNavigation>
