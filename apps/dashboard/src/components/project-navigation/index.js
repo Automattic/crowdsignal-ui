@@ -35,7 +35,7 @@ const ProjectNavigation = ( {
 		],
 		[ projectId ]
 	);
-	const toggleNotice = () => setDisplayNotice( ! displayNotice );
+	// const toggleNotice = () => setDisplayNotice( ! displayNotice );
 
 	return (
 		<div className="project-navigation">
@@ -59,17 +59,17 @@ const ProjectNavigation = ( {
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.RESULTS }
 					isDisabled={ ! projectId }
-					onMouseEnter={ toggleNotice }
-					onMouseLeave={ toggleNotice }
+					onMouseEnter={ () => setDisplayNotice( true ) }
+					onMouseLeave={ () => setDisplayNotice( false ) }
 					href={ `/project/${ projectId }/results` }
 				>
-					{ displayNotice ? (
+					{ displayNotice && (
 						<Popover noArrow={ false }>
 							{ __(
 								'Please save draft or publish project before viewing results'
 							) }
 						</Popover>
-					) : null }
+					) }
 					{ __( 'Results', 'dashboard' ) }
 				</TabNavigation.Tab>
 			</TabNavigation>
