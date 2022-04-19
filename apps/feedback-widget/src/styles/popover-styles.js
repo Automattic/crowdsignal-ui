@@ -35,6 +35,7 @@ export const Popover = styled.div(
 			flex-direction: column;
 			height: ${ height || 'auto' };
 			max-height: 480px;
+			line-height: initial;
 			outline: 0;
 			overflow-y: scroll;
 			padding: 24px;
