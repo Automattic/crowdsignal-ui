@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { render } from '@wordpress/element';
+import { render, unmountComponentAtNode } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -9,7 +9,7 @@ import { render } from '@wordpress/element';
 import { StyleProvider } from '@crowdsignal/components';
 import FeedbackWidget from './widget';
 
-const renderWidget = ( surveyId ) => {
+const renderWidget = ( surveyId, settings = {} ) => {
 	const wrapperElement = document.createElement( 'div' );
 	document.body.appendChild( wrapperElement );
 
@@ -21,10 +21,15 @@ const renderWidget = ( surveyId ) => {
 			namespace="feedback-widget"
 			container={ shadowRoot }
 		>
-			<FeedbackWidget surveyId={ surveyId } />
+			<FeedbackWidget surveyId={ surveyId } settings={ settings } />
 		</StyleProvider>,
 		shadowRoot
 	);
+
+	return () => {
+		unmountComponentAtNode( wrapperElement );
+		wrapperElement.remove();
+	};
 };
 
 export default renderWidget;

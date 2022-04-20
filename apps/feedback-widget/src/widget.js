@@ -8,6 +8,7 @@ import {
 	useRef,
 	useState,
 } from '@wordpress/element';
+import { merge } from 'lodash';
 
 /**
  * Internal dependencies
@@ -28,7 +29,7 @@ import { ToggleMode } from './constants';
  */
 import { PopoverWrapper } from './styles/popover-styles';
 
-const settings = {
+const defaultSettings = {
 	emailRequired: false,
 	position: 'center right',
 	style: {},
@@ -44,20 +45,22 @@ const settings = {
 	showBranding: false,
 };
 
-const FeedbackWidget = ( { surveyId } ) => {
+const FeedbackWidget = ( { settings, surveyId } ) => {
 	const [ active, setActive ] = useState( false );
 	const [ _, setSurvey ] = useState( null );
 	const [ position, setPosition ] = useState( {} );
 
 	const toggle = useRef( null );
 
+	const widgetSettings = merge( defaultSettings, settings );
+
 	const updatePosition = useCallback( () => {
-		const [ y ] = settings.position.split( ' ' );
+		const [ y ] = widgetSettings.position.split( ' ' );
 
 		setPosition(
 			adjustFrameOffset(
 				getTogglePosition(
-					settings.position,
+					widgetSettings.position,
 					toggle.current.offsetWidth,
 					y === 'center'
 						? toggle.current.offsetWidth
@@ -104,7 +107,7 @@ const FeedbackWidget = ( { surveyId } ) => {
 					isOpen={ active }
 					onClick={ handleToggle }
 					onToggle={ updatePosition }
-					settings={ settings }
+					settings={ widgetSettings }
 				/>
 			</PopoverWrapper>
 
@@ -112,9 +115,12 @@ const FeedbackWidget = ( { surveyId } ) => {
 				isVisible={ active }
 				context={ toggle }
 				onClose={ handleClose }
-				position={ getPopoverPosition( settings.position ) }
+				position={ getPopoverPosition( widgetSettings.position ) }
 			>
-				<FeedbackPopover surveyId={ surveyId } settings={ settings } />
+				<FeedbackPopover
+					surveyId={ surveyId }
+					settings={ widgetSettings }
+				/>
 			</Popover>
 		</>
 	);
