@@ -17,6 +17,7 @@ import { STORE_NAME } from '../../data';
 import { useEditorContent } from './use-editor-content';
 import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
+import EditorFeedbackButton from './feedback-button';
 import EditorNotice from './notice';
 import EditorStylesResolver from './styles-resolver';
 import HeaderMeta from '../header-meta';
@@ -154,6 +155,8 @@ const Editor = ( { project } ) => {
 					version={ version }
 				/>
 			</EditorWrapper>
+
+			<EditorFeedbackButton />
 		</EditorLayout>
 	);
 };
