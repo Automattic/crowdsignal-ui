@@ -45,3 +45,7 @@ body {
 .wp-block-image {
 	text-align: unset;
 }
+
+.crowdsignal-forms-button.wp-block-button .wp-block-button__link {
+	line-height: normal;
+}
