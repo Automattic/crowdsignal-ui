@@ -58,8 +58,8 @@ const Editor = ( { project } ) => {
 		version,
 	} = useEditorContent( project );
 
-	const handleSelectTemplate = ( projectTemplate ) => {
-		setProjectTemplate( projectTemplate );
+	const handleSelectTemplate = ( template ) => {
+		setProjectTemplate( template );
 		setShowWizard( false );
 	};
 

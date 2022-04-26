@@ -24,6 +24,7 @@ export const useEditorContent = ( project ) => {
 	const {
 		initializeEditor,
 		updateEditorPage,
+		updateEditorTemplate,
 		updateEditorTheme,
 		saveEditorChanges,
 	} = useDispatch( STORE_NAME );
@@ -102,15 +103,12 @@ export const useEditorContent = ( project ) => {
 		useClientId.resetRegistry();
 	};
 
-	const setProjectTemplate = ( projectTemplate ) => {
-		initializeEditor(
-			0,
-			undefined,
-			projectTemplate.draftContent.pages,
-			editorTheme
-		);
+	const setProjectTemplate = ( template ) => {
+		const pages = template.project.draftContent.pages;
+		initializeEditor( 0, undefined, pages, editorTheme );
+		updateEditorTemplate( template.name );
 
-		if ( projectTemplate.draftContent.pages[ 0 ].length ) {
+		if ( pages[ 0 ].length ) {
 			trackContentInsert( currentUser );
 		}
 

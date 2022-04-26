@@ -14,7 +14,7 @@ import {
 } from './styles/template-preview';
 
 const TemplatePreview = ( { onSelect, template } ) => {
-	const handleSelect = () => onSelect( template.project );
+	const handleSelect = () => onSelect( template );
 
 	const PreviewComponent = template.preview;
 
