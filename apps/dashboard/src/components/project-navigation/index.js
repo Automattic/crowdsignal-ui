@@ -2,12 +2,17 @@
  * External dependencies
  */
 import { useSelect } from '@wordpress/data';
+import { useState, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { EditablePageHeader, TabNavigation } from '@crowdsignal/components';
+import {
+	EditablePageHeader,
+	TabNavigation,
+	PopoverNotice,
+} from '@crowdsignal/components';
 import { STORE_NAME } from '../../data';
 
 /**
@@ -26,6 +31,8 @@ const ProjectNavigation = ( {
 	onChangeTitle,
 	projectId,
 } ) => {
+	const [ displayNotice, setDisplayNotice ] = useState( false );
+	const noteSpan = useRef();
 	const [ editorTitle, projectTitle ] = useSelect(
 		( select ) => [
 			select( STORE_NAME ).getEditorTitle(),
@@ -45,6 +52,7 @@ const ProjectNavigation = ( {
 				}
 				disabled={ disableTitleEditor }
 			/>
+
 			<TabNavigation>
 				<TabNavigation.Tab
 					isSelected={ activeTab === Tab.EDITOR }
@@ -53,13 +61,30 @@ const ProjectNavigation = ( {
 				>
 					{ __( 'Editor', 'dashboard' ) }
 				</TabNavigation.Tab>
-				<TabNavigation.Tab
-					isSelected={ activeTab === Tab.RESULTS }
-					isDisabled={ ! projectId }
-					href={ `/project/${ projectId }/results` }
+
+				<span
+					ref={ noteSpan }
+					onMouseEnter={ () => setDisplayNotice( true ) }
+					onMouseLeave={ () => setDisplayNotice( false ) }
 				>
-					{ __( 'Results', 'dashboard' ) }
-				</TabNavigation.Tab>
+					<PopoverNotice
+						context={ noteSpan }
+						onClose={ () => setDisplayNotice( false ) }
+						isVisible={ displayNotice && ! projectId }
+						position={ 'bottom left' }
+					>
+						{ __(
+							'Please save draft or publish project to view results'
+						) }
+					</PopoverNotice>
+					<TabNavigation.Tab
+						isSelected={ activeTab === Tab.RESULTS }
+						isDisabled={ ! projectId }
+						href={ `/project/${ projectId }/results` }
+					>
+						{ __( 'Results', 'dashboard' ) }
+					</TabNavigation.Tab>
+				</span>
 			</TabNavigation>
 		</div>
 	);

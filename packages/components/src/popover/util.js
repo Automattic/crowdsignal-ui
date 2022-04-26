@@ -52,7 +52,11 @@ export const getPopoverOffset = ( position, popover, context ) => {
 		case 'auto':
 		default:
 			return {
-				right: window.innerWidth - contextBox.left - contextBox.width,
+				right:
+					window.innerWidth -
+					contextBox.left -
+					contextBox.width / 2 -
+					17,
 				top: contextBox.top + contextBox.height + POPOVER_OFFSET,
 			};
 	}
