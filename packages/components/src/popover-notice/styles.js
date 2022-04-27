@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-	padding: 3px 5px 3px;
+	padding: 4px;
 	position: relative;
 	width: fit-content;
 	z-index: 100;

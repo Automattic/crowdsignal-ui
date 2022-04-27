@@ -56,7 +56,7 @@ export const getPopoverOffset = ( position, popover, context ) => {
 					window.innerWidth -
 					contextBox.left -
 					contextBox.width / 2 -
-					17,
+					17, //add offset to compensate for tooltip arrow position
 				top: contextBox.top + contextBox.height + POPOVER_OFFSET,
 			};
 	}

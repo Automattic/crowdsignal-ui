@@ -32,7 +32,7 @@ const ProjectNavigation = ( {
 	projectId,
 } ) => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
-	const noteSpan = useRef();
+	const noteRef = useRef();
 	const [ editorTitle, projectTitle ] = useSelect(
 		( select ) => [
 			select( STORE_NAME ).getEditorTitle(),
@@ -62,30 +62,25 @@ const ProjectNavigation = ( {
 					{ __( 'Editor', 'dashboard' ) }
 				</TabNavigation.Tab>
 
-				<span
-					ref={ noteSpan }
+				<TabNavigation.Tab
+					ref={ noteRef }
 					onMouseEnter={ () => setDisplayNotice( true ) }
 					onMouseLeave={ () => setDisplayNotice( false ) }
+					isSelected={ activeTab === Tab.RESULTS }
+					isDisabled={ ! projectId }
+					href={ `/project/${ projectId }/results` }
 				>
-					<PopoverNotice
-						context={ noteSpan }
-						onClose={ () => setDisplayNotice( false ) }
-						isVisible={ displayNotice && ! projectId }
-						position={ 'bottom left' }
-					>
-						{ __(
-							'Please save draft or publish project to view results'
-						) }
-					</PopoverNotice>
-					<TabNavigation.Tab
-						isSelected={ activeTab === Tab.RESULTS }
-						isDisabled={ ! projectId }
-						href={ `/project/${ projectId }/results` }
-					>
-						{ __( 'Results', 'dashboard' ) }
-					</TabNavigation.Tab>
-				</span>
+					{ __( 'Results', 'dashboard' ) }
+				</TabNavigation.Tab>
 			</TabNavigation>
+			<PopoverNotice
+				context={ noteRef }
+				onClose={ () => setDisplayNotice( false ) }
+				isVisible={ displayNotice && ! projectId }
+				position={ 'bottom left' }
+			>
+				{ __( 'Please save draft or publish project to view results' ) }
+			</PopoverNotice>
 		</div>
 	);
 };
