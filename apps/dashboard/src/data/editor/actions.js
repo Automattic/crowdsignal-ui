@@ -21,6 +21,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
@@ -54,6 +55,10 @@ export function* saveEditorChanges( options = {} ) {
 	const data = select( STORE_NAME ).getEditorUpdatedProjectData( {
 		public: options.public,
 	} );
+
+	if ( projectId === 0 ) {
+		data.template = select( STORE_NAME ).getEditorTemplate();
+	}
 
 	yield { type: EDITOR_SAVE };
 	yield { type: EDITOR_AUTOSAVE_TIMER_CANCEL };
@@ -131,4 +136,9 @@ export const updateEditorTitle = autosave( ( title ) => ( {
 export const updateEditorTheme = ( theme ) => ( {
 	type: EDITOR_THEME_UPDATE,
 	theme,
+} );
+
+export const updateEditorTemplate = ( template ) => ( {
+	type: EDITOR_TEMPLATE_UPDATE,
+	template,
 } );

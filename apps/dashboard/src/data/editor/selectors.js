@@ -134,6 +134,14 @@ export const getEditorTitle = ( state ) => state.editor.title;
 export const getEditorTheme = ( state ) => state.editor.theme || 'leven';
 
 /**
+ * Returns the editor project's theme.
+ *
+ * @param  {Object} state App state.
+ * @return {string}       Theme.
+ */
+export const getEditorTemplate = ( state ) => state.editor.template;
+
+/**
  * Returns a partial project containing all the changes made since the last save.
  *
  * @param  {Object}  state          App state.

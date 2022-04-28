@@ -18,6 +18,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
@@ -278,6 +279,21 @@ const theme = ( state = '', action ) => {
 	return state;
 };
 
+/**
+ * Project template.
+ *
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Template.
+ */
+const template = ( state = '', action ) => {
+	if ( action.type === EDITOR_TEMPLATE_UPDATE ) {
+		return action.template;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	changes,
 	currentPage,
@@ -286,6 +302,7 @@ export default combineReducers( {
 	isSaving,
 	pages,
 	projectId,
-	title,
+	template,
 	theme,
+	title,
 } );
