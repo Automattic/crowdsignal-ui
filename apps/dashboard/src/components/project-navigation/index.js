@@ -79,7 +79,10 @@ const ProjectNavigation = ( {
 				isVisible={ displayNotice && ! projectId }
 				position={ 'bottom left' }
 			>
-				{ __( 'Please save draft or publish project to view results' ) }
+				{ __(
+					'Please save draft or publish project to view results',
+					'dashboard'
+				) }
 			</PopoverNotice>
 		</div>
 	);
