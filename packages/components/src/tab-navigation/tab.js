@@ -2,8 +2,20 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import { forwardRef } from '@wordpress/element';
 
-const Tab = ( { children, href, isSelected, isDisabled, ...props } ) => {
+const Tab = (
+	{
+		children,
+		href,
+		isSelected,
+		isDisabled,
+		onMouseEnter,
+		onMouseLeave,
+		...props
+	},
+	ref
+) => {
 	const ButtonComponent = href ? 'a' : 'button';
 
 	const classes = classnames( 'tab-navigation__item', {
@@ -12,7 +24,12 @@ const Tab = ( { children, href, isSelected, isDisabled, ...props } ) => {
 	} );
 
 	return (
-		<li className={ classes }>
+		<li
+			ref={ ref }
+			className={ classes }
+			onMouseEnter={ onMouseEnter }
+			onMouseLeave={ onMouseLeave }
+		>
 			<ButtonComponent
 				className="tab-navigation__button"
 				href={ href }
@@ -24,4 +41,4 @@ const Tab = ( { children, href, isSelected, isDisabled, ...props } ) => {
 	);
 };
 
-export default Tab;
+export default forwardRef( Tab );
