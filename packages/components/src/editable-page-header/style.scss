@@ -6,6 +6,7 @@
 		opacity: 0.5;
 		cursor: not-allowed;
 	}
+
 }
 
 .editable-page-header__form {
@@ -27,4 +28,8 @@
 		padding: 0;
 		width: 100%;
 	}
+}
+
+.editable-page-header__button {
+	margin-left: 8px;
 }

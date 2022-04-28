@@ -7,6 +7,7 @@ import { useEffect, useState } from '@wordpress/element';
  * Internal dependencies
  */
 import PageHeader from '../page-header';
+import Button from '../button';
 import Form from './form';
 
 /**
@@ -29,24 +30,39 @@ const EditablePageHeader = ( { onChange, text, disabled } ) => {
 	};
 	const hideForm = () => setActive( false );
 
+	const [ showButton, setShowButton ] = useState( false );
+
 	const classes = classnames( 'editable-page-header', {
 		'is-disabled': disabled,
 	} );
 
 	return (
-		<div className={ classes }>
-			{ ! active && (
-				<PageHeader onClick={ showForm }>{ text }</PageHeader>
-			) }
-
-			{ active && (
-				<Form
-					value={ text }
-					onChange={ onChange }
-					onCancel={ hideForm }
-				/>
-			) }
-		</div>
+		<>
+			<div
+				className={ classes }
+				onMouseEnter={ () => setShowButton( true ) }
+				onMouseLeave={ () => setShowButton( false ) }
+			>
+				{ ! active && (
+					<PageHeader onClick={ showForm }>{ text }</PageHeader>
+				) }
+				{ ! active && showButton && (
+					<Button
+						className="editable-page-header__button"
+						onClick={ showForm }
+					>
+						Edit
+					</Button>
+				) }
+				{ active && (
+					<Form
+						value={ text }
+						onChange={ onChange }
+						onCancel={ hideForm }
+					/>
+				) }
+			</div>
+		</>
 	);
 };
 
