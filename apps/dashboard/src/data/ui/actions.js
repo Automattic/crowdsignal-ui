@@ -8,6 +8,7 @@ import { uniqueId } from 'lodash';
  */
 import {
 	CURRENT_USER_UPDATE,
+	LAST_SELECTED_THEME_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
 } from '../action-types';
@@ -54,4 +55,9 @@ export const infoNotice = ( message, { id, ...options } ) =>
 export const updateCurrentUser = ( userId ) => ( {
 	type: CURRENT_USER_UPDATE,
 	userId,
+} );
+
+export const updateLastPublishedTheme = ( lastPublishedTheme ) => ( {
+	type: LAST_SELECTED_THEME_UPDATE,
+	lastPublishedTheme,
 } );

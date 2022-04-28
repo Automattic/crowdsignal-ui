@@ -131,7 +131,8 @@ export const getEditorTitle = ( state ) => state.editor.title;
  * @param  {Object} state App state.
  * @return {string}       Theme.
  */
-export const getEditorTheme = ( state ) => state.editor.theme || 'leven';
+export const getEditorTheme = ( state ) =>
+	state.editor.theme || state.ui.lastPublishedTheme;
 
 /**
  * Returns the editor project's theme.
