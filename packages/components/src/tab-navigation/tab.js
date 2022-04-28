@@ -4,7 +4,18 @@
 import classnames from 'classnames';
 import { forwardRef } from '@wordpress/element';
 
-const Tab = ( { children, href, isSelected, isDisabled, ...props }, ref ) => {
+const Tab = (
+	{
+		children,
+		href,
+		isSelected,
+		isDisabled,
+		onMouseEnter,
+		onMouseLeave,
+		...props
+	},
+	ref
+) => {
 	const ButtonComponent = href ? 'a' : 'button';
 
 	const classes = classnames( 'tab-navigation__item', {
@@ -16,8 +27,8 @@ const Tab = ( { children, href, isSelected, isDisabled, ...props }, ref ) => {
 		<li
 			ref={ ref }
 			className={ classes }
-			onMouseEnter={ () => {} }
-			onMouseLeave={ () => {} }
+			onMouseEnter={ onMouseEnter }
+			onMouseLeave={ onMouseLeave }
 		>
 			<ButtonComponent
 				className="tab-navigation__button"

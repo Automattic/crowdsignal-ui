@@ -7,6 +7,7 @@ Component for displaying a popover message on an element
 ```javascript
 import { useRef, useState } from '@wordpress/element';
 import { PopoverNotice } from '@crowdsignal/components';
+import { __ } from '@wordpress/i18n';
 
 const Menu () => {
 	const [ displayNotice, setDisplayNotice ] = useState( false );
@@ -22,7 +23,7 @@ const Menu () => {
 			</button>
 
 			<PopoverNotice
-						context={ noteFef }
+						context={ noteRef }
 						onClose={ hideNote) }
 						isVisible={ setActive }
 						position={ 'bottom left' }
