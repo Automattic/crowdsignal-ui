@@ -177,3 +177,12 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 
 	return data;
 };
+
+/**
+ * Returns whether the inserter should be displayed after the editor (re-)loads.
+ *
+ * @param  {Object}  state App state.
+ * @return {boolean}       Flag signifying if the inserter should be shown.
+ */
+export const showInserter = ( state ) =>
+	getEditorProjectId( state ) === 0 && state.editor.isPristine;
