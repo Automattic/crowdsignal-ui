@@ -51,7 +51,7 @@ const EditablePageHeader = ( { onChange, text, disabled } ) => {
 						className="editable-page-header__button"
 						onClick={ showForm }
 					>
-						Edit
+						__( { ( 'Edit', 'dashboard' ) } )
 					</Button>
 				) }
 				{ active && (
