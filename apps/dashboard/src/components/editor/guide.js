@@ -164,7 +164,12 @@ const EditorGuide = ( { onFinish } ) => {
 					),
 				},
 				{
-					// image: <img src="" />,
+					image: (
+						<img
+							src="https://app.crowdsignal.com/images/guide/onboarding-change_theme.png"
+							alt={ __( 'Change the theme design', 'dashboard' ) }
+						/>
+					),
 					content: (
 						<EditorGuidePageContent>
 							<EditorGuideHeading>
@@ -180,7 +185,15 @@ const EditorGuide = ( { onFinish } ) => {
 					),
 				},
 				{
-					// image: <img src="" />,
+					image: (
+						<img
+							src="https://app.crowdsignal.com/images/guide/onboarding-publish_share.png"
+							alt={ __(
+								'Publish & share your project',
+								'dashboard'
+							) }
+						/>
+					),
 					content: (
 						<EditorGuidePageContent>
 							<EditorGuideHeading>
@@ -199,7 +212,12 @@ const EditorGuide = ( { onFinish } ) => {
 					),
 				},
 				{
-					// image: <img src="" />,
+					image: (
+						<img
+							src="https://app.crowdsignal.com/images/guide/onboarding-finished.png"
+							alt={ __( 'Guide finished', 'dashboard' ) }
+						/>
+					),
 					content: (
 						<EditorGuidePageContent>
 							<EditorGuideHeading>
