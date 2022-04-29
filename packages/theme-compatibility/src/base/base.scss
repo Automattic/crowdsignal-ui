@@ -83,6 +83,18 @@ body {
 		margin-top: var(--cs--style--block-gap);
 	}
 
+	// On base/editor.scss we're removing top and bottom margins
+	// from all blocks inside wp-block-column. Adding this to keep
+	// consistency between the editor and the renderer
+	.wp-block-columns {
+		.wp-block-column {
+			> * {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+
 	> .crowdsignal-forms-question-wrapper {
 		margin-bottom: var(--cs--style--block-gap-big);
 		margin-top: var(--cs--style--block-gap-big);
