@@ -46,7 +46,7 @@ const Editor = ( { project } ) => {
 	const [ showShareModal, setShowShareModal ] = useState( false );
 
 	const [ showEditorGuide, setShowEditorGuide ] = useState(
-		document.cookie.indexOf( 'hide_editor_guide=1;' ) === -1
+		document.cookie.indexOf( 'hide_editor_guide=1' ) === -1
 	);
 
 	const { updateEditorTitle } = useDispatch( STORE_NAME );

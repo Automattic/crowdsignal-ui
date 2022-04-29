@@ -38,7 +38,8 @@ export const EditorGuideWrapper = styled.div`
 			}
 		}
 
-		.components-button.components-guide__forward-button {
+		.components-button.components-guide__forward-button,
+		.components-button.components-guide__finish-button {
 			background-color: var( --color-primary );
 			box-shadow: 0;
 			color: var( --color-text-inverted );
