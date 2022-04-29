@@ -1,6 +1,6 @@
 # Editable Page Header
 
-Renders a page header which can be edited in place.
+Renders a page header that can be edited in place.
 
 ## Usage
 
