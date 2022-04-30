@@ -63,6 +63,13 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 						path.resolve( __dirname, '../../packages/theme-compatibility/dist' )
 					)
 				);
+
+				app.use(
+					'/gutenberg',
+					express.static(
+						path.resolve( __dirname, '../../lib/gutenberg/build' )
+					)
+				);
 			},
 			historyApiFallback: true,
 		},
