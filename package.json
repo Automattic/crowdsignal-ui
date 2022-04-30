@@ -68,8 +68,7 @@
       "yarn lint:js"
     ],
     "packages/*/package.json": [
-      "yarn lint:pkg-json",
-      "yarn check-licenses"
+      "yarn lint:pkg-json"
     ]
   }
 }
