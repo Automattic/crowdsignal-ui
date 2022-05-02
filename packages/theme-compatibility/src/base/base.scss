@@ -53,8 +53,20 @@ body {
 		margin-bottom: var(--cs--style--block-gap);
 	}
 
-	.crowdsignal-forms-text-input-block {
+	.crowdsignal-forms-question-wrapper, .crowdsignal-forms-text-input-block {
+		margin-top: 0;
 		margin-bottom: 0;
+	}
+
+	.wp-block-column {
+		> * {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		> * + * {
+			margin-top: var(--cs--style--block-gap);
+		}
 	}
 
 	@include break-small {
@@ -65,6 +77,8 @@ body {
 }
 
 .wp-block-image {
+	line-height: 0;
+
 	.alignleft, .alignright {
 		margin-top: 0;
 		margin-bottom: 0;
@@ -81,18 +95,6 @@ body {
 
 	> * + * {
 		margin-top: var(--cs--style--block-gap);
-	}
-
-	// On base/editor.scss we're removing top and bottom margins
-	// from all blocks inside wp-block-column. Adding this to keep
-	// consistency between the editor and the renderer
-	.wp-block-columns {
-		.wp-block-column {
-			> * {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-		}
 	}
 
 	> .crowdsignal-forms-question-wrapper {
