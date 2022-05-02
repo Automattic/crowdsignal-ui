@@ -9,7 +9,7 @@ import { omit } from 'lodash';
  */
 import {
 	CURRENT_USER_UPDATE,
-	LAST_SELECTED_THEME_UPDATE,
+	LAST_PUBLISHED_THEME_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
 } from '../action-types';
@@ -43,7 +43,7 @@ const notices = ( state = {}, action ) => {
 };
 
 const lastPublishedTheme = ( state = 'leven', action ) => {
-	if ( action.type === LAST_SELECTED_THEME_UPDATE ) {
+	if ( action.type === LAST_PUBLISHED_THEME_UPDATE ) {
 		return action.lastPublishedTheme;
 	}
 
