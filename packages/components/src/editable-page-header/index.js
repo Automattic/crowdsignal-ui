@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -51,7 +52,7 @@ const EditablePageHeader = ( { onChange, text, disabled } ) => {
 						className="editable-page-header__button"
 						onClick={ showForm }
 					>
-						__( { ( 'Edit', 'dashboard' ) } )
+						{ __( 'Edit', 'dashboard' ) }
 					</Button>
 				) }
 				{ active && (
