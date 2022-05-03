@@ -40,20 +40,11 @@
 		max-width: none;
 	}
 
-	.wp-block-column {
-		> .wp-block {
-			margin-top: 0;
-			margin-bottom: 0;
+	> .wp-block {
+		 > .crowdsignal-forms-question-wrapper {
+			margin-bottom: var(--cs--style--block-gap-big);
+			margin-top: var(--cs--style--block-gap-big);
 		}
-
-		&:not(:first-child) {
-			margin-left: var(--cs--style--block-gap);
-		}
-	}
-
-	.crowdsignal-forms-question-wrapper {
-		margin-bottom: var(--cs--style--block-gap-big);
-		margin-top: var(--cs--style--block-gap-big);
 	}
 
 	.crowdsignal-forms-question-wrapper__content {
@@ -71,7 +62,7 @@
 			}
 		}
 
-		& .crowdsignal-forms-rating-scale-answer-block {
+		.crowdsignal-forms-rating-scale-answer-block {
 			margin-bottom: unset;
 		}
 

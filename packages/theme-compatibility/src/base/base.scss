@@ -53,8 +53,20 @@ body {
 		margin-bottom: var(--cs--style--block-gap);
 	}
 
-	.crowdsignal-forms-text-input-block {
+	.crowdsignal-forms-question-wrapper, .crowdsignal-forms-text-input-block {
+		margin-top: 0;
 		margin-bottom: 0;
+	}
+
+	.wp-block-column {
+		> * {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		> * + * {
+			margin-top: var(--cs--style--block-gap);
+		}
 	}
 
 	@include break-small {
@@ -65,6 +77,8 @@ body {
 }
 
 .wp-block-image {
+	line-height: 0;
+
 	.alignleft, .alignright {
 		margin-top: 0;
 		margin-bottom: 0;
@@ -92,6 +106,10 @@ body {
 		width: 100%;
 		flex-direction: row;
 		justify-content: space-between;
+
+		.crowdsignal-forms-rating-scale-answer-block {
+			margin-bottom: unset;
+		}
 	}
 
 	> .alignfull {
