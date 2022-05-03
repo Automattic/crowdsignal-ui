@@ -9,6 +9,7 @@ import { omit } from 'lodash';
  */
 import {
 	CURRENT_USER_UPDATE,
+	LAST_PUBLISHED_THEME_UPDATE,
 	NOTICE_CREATE,
 	NOTICE_REMOVE,
 } from '../action-types';
@@ -41,7 +42,16 @@ const notices = ( state = {}, action ) => {
 	return state;
 };
 
+const lastPublishedTheme = ( state = 'leven', action ) => {
+	if ( action.type === LAST_PUBLISHED_THEME_UPDATE ) {
+		return action.lastPublishedTheme;
+	}
+
+	return state;
+};
+
 export default combineReducers( {
 	currentUserId,
 	notices,
+	lastPublishedTheme,
 } );

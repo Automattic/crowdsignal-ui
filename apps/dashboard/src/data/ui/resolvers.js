@@ -9,7 +9,7 @@ import {
 	updateUserCapabilities,
 	updateUserProfile,
 } from '../users/actions';
-import { updateCurrentUser } from '../ui/actions';
+import { updateCurrentUser, updateLastPublishedTheme } from '../ui/actions';
 
 function* getCurrentUser() {
 	try {
@@ -21,6 +21,7 @@ function* getCurrentUser() {
 			id: userId,
 			profile,
 			signalCount,
+			lastPublishedTheme,
 		} = response.data;
 
 		yield updateUserAccount( userId, account.id );
@@ -39,6 +40,7 @@ function* getCurrentUser() {
 		yield updateAccountSignalCount( signalCount.count );
 
 		yield updateCurrentUser( userId );
+		yield updateLastPublishedTheme( lastPublishedTheme );
 	} catch ( error ) {
 		// The user is not logged in, no action required
 	}
