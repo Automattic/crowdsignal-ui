@@ -106,6 +106,10 @@ body {
 		width: 100%;
 		flex-direction: row;
 		justify-content: space-between;
+
+		.crowdsignal-forms-rating-scale-answer-block {
+			margin-bottom: unset;
+		}
 	}
 
 	> .alignfull {
