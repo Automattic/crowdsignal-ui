@@ -1,5 +1,6 @@
 export * from './check-icon';
 export * from './close-arrow';
+export * from './drag-handle';
 export * from './multiple-choice';
 export * from './multiple-choice-answer';
 export * from './multiple-choice-question';

@@ -11,7 +11,7 @@ import { RatingScaleQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import { useParentAttributes } from '../util/use-parent-attributes';
 import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
-import EditButtonAnswer from './edit-button';
+import EditButtonAnswer from '../components/edit-button';
 import Sidebar from './sidebar';
 
 const EditRatingScaleAnswer = ( props ) => {
@@ -41,11 +41,17 @@ const EditRatingScaleAnswer = ( props ) => {
 		}
 	);
 
+	const value =
+		blockStyle === RatingScaleQuestion.Style.EMOJI
+			? attributes.emoji
+			: attributes.label;
+
 	return (
 		<>
 			<Sidebar { ...props } />
 
 			<EditButtonAnswer
+				value={ value }
 				attributes={ attributes }
 				className={ classes }
 				onChange={ handleChangeLabel }

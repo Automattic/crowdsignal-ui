@@ -13,7 +13,7 @@ import { MultipleChoiceQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import { useParentAttributes } from '../util/use-parent-attributes';
 import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
-import EditButtonAnswer from './edit-button';
+import EditButtonAnswer from '../components/edit-button';
 import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
 

@@ -8,11 +8,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import {
-	Button,
-	RatingScaleQuestion,
-	getBlockStyle,
-} from '@crowdsignal/blocks';
+import { Button, FormCheckbox } from '@crowdsignal/blocks';
 
 const ButtonContent = styled.div`
 	align-items: center;
@@ -26,34 +22,37 @@ const ButtonContent = styled.div`
 `;
 
 const EditButtonAnswer = ( {
+	value,
 	attributes,
 	className,
+	multipleChoice,
 	onChange,
 	onReplace,
 	onSplit,
 	onDelete,
 } ) => {
-	const blockStyle = getBlockStyle( className );
+	const width = attributes.width ? `${ attributes.width }%` : null;
 
 	return (
 		<Button
 			attributes={ attributes }
 			as={ 'div' }
 			className={ className }
+			style={ {
+				width,
+			} }
 			outline
 		>
 			<ButtonContent>
+				{ multipleChoice && <FormCheckbox type="checkbox" /> }
+
 				<RichText
 					placeholder={ __( 'Enter an answer', 'block-editor' ) }
 					onChange={ onChange }
 					onReplace={ onReplace }
 					onSplit={ onSplit }
 					onRemove={ onDelete }
-					value={
-						blockStyle === RatingScaleQuestion.Style.EMOJI
-							? attributes.emoji
-							: attributes.label
-					}
+					value={ value || attributes.label }
 					multiline={ false }
 					preserveWhiteSpace={ false }
 					allowedFormats={ [] }

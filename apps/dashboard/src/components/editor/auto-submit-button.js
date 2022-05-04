@@ -12,6 +12,8 @@ import { flatten, includes, map } from 'lodash';
 import {
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
+	rankingAnswerBlock,
+	rankingQuestionBlock,
 	ratingScaleQuestionBlock,
 	textQuestionBlock,
 	textInputBlock,
@@ -22,6 +24,8 @@ const FORM_BLOCKS = map(
 	[
 		multipleChoiceAnswerBlock,
 		multipleChoiceQuestionBlock,
+		rankingAnswerBlock,
+		rankingQuestionBlock,
 		ratingScaleQuestionBlock,
 		textQuestionBlock,
 		textInputBlock,
