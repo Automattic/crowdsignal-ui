@@ -41,9 +41,9 @@
     "@wordpress/hooks": "^3.6.0",
     "@wordpress/i18n": "^4.6.0",
     "@wordpress/icons": "^8.2.0",
-    "@wordpress/interface": "^4.4.0",
+    "@wordpress/interface": "4.4.0",
     "classnames": "^2.2.5",
-    "isolated-block-editor": "https://github.com/Automattic/isolated-block-editor.git#83e3a02ccd16d4c5611f266d64d0b2b7d0114efd",
+    "isolated-block-editor": "https://github.com/Automattic/isolated-block-editor.git#2.12.1",
     "lodash": "^4.17.21",
     "react-beautiful-dnd": "^13.1.0",
     "react-helmet": "^6.1.0",
@@ -55,14 +55,15 @@
     "@babel/plugin-transform-runtime": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "babel-plugin-emotion": "^10.0.27",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-bundle-analyzer": "^4.5.0"
   },
   "peerDependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1"
   },
   "scripts": {
-    "build": "calypso-build ./src/index.js",
+    "build": "calypso-build ./src/index.js --env WP",
     "start": "webpack serve --env WP"
   }
 }
