@@ -21,3 +21,8 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	--wp--custom--form--padding: 14px 7px;
 }
+
+.crowdsignal-forms-question-wrapper {
+	color: var(--wp--custom--color--foreground);
+	background-color: var(--wp--custom--color--background);
+}

@@ -164,3 +164,7 @@ body {
 		}
 	}
 }
+
+.wp-block-cover:not(.is-light) {
+	color: var(--wp--preset--color--background);
+}
