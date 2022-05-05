@@ -10,8 +10,8 @@ import { useContext } from '@wordpress/element';
 import { useField } from '@crowdsignal/form';
 import MultipleChoiceQuestion from '../multiple-choice-question';
 import { getBlockStyle } from '../util';
-import ButtonAnswer from './button';
-import CheckboxAnswer from './checkbox';
+import ButtonAnswer from '../components/button-answer';
+import CheckboxAnswer from '../components/checkbox-answer';
 
 const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
@@ -57,7 +57,10 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 			className={ classes }
 			inputProps={ inputProps }
 			isMultiSelect={ isMultiSelect }
-		/>
+			showCheckmark
+		>
+			{ attributes.label }
+		</ButtonAnswer>
 	);
 };
 

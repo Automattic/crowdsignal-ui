@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { Button, FormCheckbox } from '../components';
+import { Button, FormCheckbox } from '../index';
 import Checkmark from './checkmark';
 
 const ButtonContent = styled.span`
@@ -25,9 +25,11 @@ const ButtonContent = styled.span`
 
 const ButtonAnswer = ( {
 	attributes,
+	children,
 	className,
 	inputProps,
 	isMultiSelect,
+	showCheckmark,
 } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
@@ -42,14 +44,14 @@ const ButtonAnswer = ( {
 			outline
 		>
 			<ButtonContent>
-				<FormCheckbox { ...inputProps } />
-
-				<RawHTML>{ attributes.label }</RawHTML>
-
-				<Checkmark
-					isMultiSelect={ isMultiSelect }
-					isSelected={ inputProps.checked }
-				/>
+				{ inputProps && <FormCheckbox { ...inputProps } /> }
+				<RawHTML>{ children }</RawHTML>
+				{ showCheckmark && (
+					<Checkmark
+						isMultiSelect={ isMultiSelect }
+						isSelected={ inputProps.checked }
+					/>
+				) }
 			</ButtonContent>
 		</Button>
 	);

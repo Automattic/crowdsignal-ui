@@ -172,6 +172,7 @@ body {
 .crowdsignal-forms-ranking-answer-block {
 	display: flex;
 	align-items: center;
+	margin-bottom: var(--cs--style--block-gap-small);
 
 	.crowdsignal-forms-button {
 		margin-bottom: 0;
