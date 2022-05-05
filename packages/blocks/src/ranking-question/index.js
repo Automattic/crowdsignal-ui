@@ -22,6 +22,11 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 	} );
 
 	const handleMoveAnswer = ( { source, destination } ) => {
+		// dropped outside the list
+		if ( ! destination ) {
+			return;
+		}
+
 		const [ removed ] = children.splice( source.index, 1 );
 		children.splice( destination.index, 0, removed );
 		onSort( children );
