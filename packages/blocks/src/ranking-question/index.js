@@ -3,44 +3,33 @@
  */
 import { createContext, RawHTML } from '@wordpress/element';
 import classnames from 'classnames';
-import { isEmpty, map } from 'lodash';
-import { __ } from '@wordpress/i18n';
+import { map } from 'lodash';
 import { cloneElement } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 /**
  * Internal dependencies
  */
-import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
-import { useValidation } from '@crowdsignal/form';
+import { QuestionHeader, QuestionWrapper } from '../components';
+import { useField } from '@crowdsignal/form';
 
 const Context = createContext();
 
 const RankingQuestion = ( { attributes, children, className } ) => {
-	const { error } = useValidation( {
-		fieldName: `q_${ attributes.clientId }[ranking]`,
-		validation: ( value ) => {
-			if ( attributes.mandatory && isEmpty( value ) ) {
-				return __( 'This question is required', 'blocks' );
-			}
-		},
+	const { onSort } = useField( {
+		name: `q_${ attributes.clientId }[ranking]`,
+		initialValue: map( children, 'props.attributes.clientId' ),
 	} );
 
-	const handleMovePage = ( {
-		source: { index: from },
-		destination: { index: to },
-	} ) => {
-		const [ removed ] = children.splice( from, 1 );
-		children.splice( to, 0, removed );
+	const handleMoveAnswer = ( { source, destination } ) => {
+		const [ removed ] = children.splice( source.index, 1 );
+		children.splice( destination.index, 0, removed );
+		onSort( children );
 	};
 
 	const classes = classnames(
 		'crowdsignal-forms-ranking-question-block',
-		className,
-		{
-			'is-required': attributes.mandatory,
-			'is-error': error,
-		}
+		className
 	);
 
 	return (
@@ -50,7 +39,7 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 			</QuestionHeader>
 			<Context.Provider value={ attributes }>
 				<QuestionWrapper.Content>
-					<DragDropContext onDragEnd={ handleMovePage }>
+					<DragDropContext onDragEnd={ handleMoveAnswer }>
 						<Droppable droppableId="crowdsignal/ranking-question">
 							{ ( { droppableProps, innerRef, placeholder } ) => (
 								<div ref={ innerRef } { ...droppableProps }>
@@ -81,7 +70,6 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 					</DragDropContext>
 				</QuestionWrapper.Content>
 			</Context.Provider>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</QuestionWrapper>
 	);
 };
