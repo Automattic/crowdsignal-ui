@@ -54,6 +54,7 @@
   },
   "scripts": {
     "build": "./scripts/build-release.sh",
+    "build-gutenberg": "./scripts/build-gutenberg.sh",
     "check-licenses": "wp-scripts check-licenses --prod --gpl2",
     "check-types": "tsc",
     "format": "wp-scripts format",
