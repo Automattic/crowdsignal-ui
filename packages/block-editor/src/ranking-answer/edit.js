@@ -36,7 +36,7 @@ const EditRankingAnswer = ( props ) => {
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
-	const handleSplit = ( label ) => {
+	const handleSplit = ( label ) =>
 		createBlock( 'crowdsignal-forms/ranking-answer', {
 			...attributes,
 			clientId:
@@ -45,7 +45,6 @@ const EditRankingAnswer = ( props ) => {
 					: undefined,
 			label,
 		} );
-	};
 
 	const handleDelete = () => {
 		if ( answersCount <= 2 ) {
