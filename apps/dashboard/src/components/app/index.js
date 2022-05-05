@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { Global } from '@emotion/core';
+import { Global } from '@emotion/react';
 
 /**
  * Internal dependencies
