@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { keyframes } from '@emotion/core';
+import { keyframes } from '@emotion/react';
 
 export const popAnimation = keyframes`
     0% {

@@ -58,8 +58,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {
-    "@emotion/core": "^10.1.1",
-    "@emotion/styled": "^10.0.27"
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1"
   },
   "scripts": {
     "build": "calypso-build ./src/index.js",

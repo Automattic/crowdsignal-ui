@@ -27,7 +27,7 @@
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@emotion/core": "^10.1.1",
-    "@emotion/styled": "^10.0.27"
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1"
   }
 }
