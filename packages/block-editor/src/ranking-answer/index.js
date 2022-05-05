@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { RatingScaleQuestionIcon } from '@crowdsignal/icons';
+import { RankingQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRankingAnswer from './edit';
 
@@ -24,7 +24,7 @@ const settings = {
 		__( 'option', 'block-editor' ),
 		__( 'choice', 'block-editor' ),
 	],
-	icon: <RatingScaleQuestionIcon />, //TODO: Set correct icon
+	icon: <RankingQuestionIcon />,
 	parent: [ 'crowdsignal-forms/ranking-question' ],
 	edit: EditRankingAnswer,
 	attributes,

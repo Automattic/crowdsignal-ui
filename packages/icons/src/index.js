@@ -5,6 +5,7 @@ export * from './multiple-choice';
 export * from './multiple-choice-answer';
 export * from './multiple-choice-question';
 export * from './rating-scale-question';
+export * from './ranking-question';
 export * from './single-choice';
 export * from './submit-button';
 export * from './text-input';

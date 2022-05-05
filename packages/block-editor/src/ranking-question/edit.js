@@ -23,15 +23,11 @@ const EditRakingQuestionBlock = ( props ) => {
 
 	const classes = classnames(
 		'crowdsignal-forms-ranking-question-block',
-		className,
-		{
-			'is-required': attributes.mandatory,
-		}
+		className
 	);
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
-			{ /*<Toolbar { ...props } />*/ }
 			<Sidebar { ...props } />
 
 			<RichText

@@ -7,7 +7,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
+import { RankingQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRakingQuestionBlock from './edit';
 
@@ -28,7 +28,7 @@ const settings = {
 		__( 'quiz', 'block-editor' ),
 		__( 'poll', 'block-editor' ),
 	],
-	icon: <MultipleChoiceQuestionIcon />, //TODO: Set correct icon
+	icon: <RankingQuestionIcon />,
 	edit: EditRakingQuestionBlock,
 	save: () => <InnerBlocks.Content />,
 	attributes,
@@ -36,37 +36,40 @@ const settings = {
 		html: false,
 		reusable: false,
 	},
-	// example: {
-	// 	attributes: {
-	// 		question: __( 'What is your favorite food?', 'block-editor' ),
-	// 	},
-	// 	innerBlocks: [
-	// 		{
-	// 			name: 'crowdsignal-forms/multiple-choice-answer',
-	// 			attributes: {
-	// 				label: __( 'Pizza', 'block-editor' ),
-	// 			},
-	// 		},
-	// 		{
-	// 			name: 'crowdsignal-forms/multiple-choice-answer',
-	// 			attributes: {
-	// 				label: __( 'Hamburger', 'block-editor' ),
-	// 			},
-	// 		},
-	// 		{
-	// 			name: 'crowdsignal-forms/multiple-choice-answer',
-	// 			attributes: {
-	// 				label: __( 'Pasta', 'block-editor' ),
-	// 			},
-	// 		},
-	// 		{
-	// 			name: 'crowdsignal-forms/multiple-choice-answer',
-	// 			attributes: {
-	// 				label: __( 'Salad', 'block-editor' ),
-	// 			},
-	// 		},
-	// 	],
-	// },
+	example: {
+		attributes: {
+			question: __(
+				'Rank the following cities, starting with your most favorite',
+				'block-editor'
+			),
+		},
+		innerBlocks: [
+			{
+				name: 'crowdsignal-forms/ranking-answer',
+				attributes: {
+					label: __( 'Belin', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/ranking-answer',
+				attributes: {
+					label: __( 'New York City', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/ranking-answer',
+				attributes: {
+					label: __( 'London', 'block-editor' ),
+				},
+			},
+			{
+				name: 'crowdsignal-forms/ranking-answer',
+				attributes: {
+					label: __( 'Tokyo', 'block-editor' ),
+				},
+			},
+		],
+	},
 };
 
 export default {
