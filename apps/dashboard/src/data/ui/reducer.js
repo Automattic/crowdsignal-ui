@@ -43,7 +43,10 @@ const notices = ( state = {}, action ) => {
 };
 
 const lastPublishedTheme = ( state = 'leven', action ) => {
-	if ( action.type === LAST_PUBLISHED_THEME_UPDATE ) {
+	if (
+		action.type === LAST_PUBLISHED_THEME_UPDATE &&
+		action.lastPublishedTheme
+	) {
 		return action.lastPublishedTheme;
 	}
 
