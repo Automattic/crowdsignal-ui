@@ -25,7 +25,7 @@ const renderProject = () => {
 	}
 
 	return render(
-		<StyleProvider reset>
+		<StyleProvider reset namespace="crowdsignal">
 			<Router>
 				<Route
 					path="/:projectCode"
