@@ -14,10 +14,6 @@ function getWebpackConfig( env, { entry, ...argv } ) {
 		output: {
 			...baseConfig.output,
 		},
-		externals: {
-			react: 'React',
-			'react-dom': 'ReactDOM',
-		},
 		plugins: [
 			...baseConfig.plugins.map( ( plugin ) => {
 				if ( plugin.constructor.name !== 'DefinePlugin' ) {
