@@ -187,6 +187,30 @@ const isSaving = ( state = false, action ) => {
 };
 
 /**
+ * Tracks whether the user has interacted with the editor since it was laoded.
+ * Used for triggering behaviors like displaying the inserter for new projects.
+ *
+ * @param  {boolean} state  App state.
+ * @param  {Object}  action Action object.
+ * @return {boolean}         Pristine flag.
+ */
+const isPristine = ( state = false, action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return true;
+	}
+
+	if (
+		action.type === EDITOR_CURRENT_PAGE_INDEX_SET ||
+		action.type === EDITOR_PAGE_UPDATE ||
+		action.type === EDITOR_SAVE
+	) {
+		return false;
+	}
+
+	return state;
+};
+
+/**
  * Project's pages.
  *
  * @param  {Array}  state  App state.
@@ -300,6 +324,7 @@ export default combineReducers( {
 	edited,
 	error,
 	isSaving,
+	isPristine,
 	pages,
 	projectId,
 	template,

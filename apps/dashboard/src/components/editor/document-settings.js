@@ -25,7 +25,7 @@ import { STORE_NAME } from '../../data';
 import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
 
-const DocumentSettings = ( { project, onChangeThemeClick } ) => {
+const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	const { openGeneralSidebar, setIsInserterOpened } = useDispatch(
 		'isolated/editor'
 	);
@@ -35,19 +35,21 @@ const DocumentSettings = ( { project, onChangeThemeClick } ) => {
 		canPublish,
 		editorTheme,
 		selectedBlockClientId,
+		showInserter,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
+		select( STORE_NAME ).showInserter(),
 	] );
 
 	useEffect( () => {
-		if ( project.id ) {
+		if ( ! showInserter ) {
 			return;
 		}
 
 		setIsInserterOpened( true );
-	}, [] );
+	}, [ showInserter ] );
 
 	useEffect( () => {
 		openGeneralSidebar(
