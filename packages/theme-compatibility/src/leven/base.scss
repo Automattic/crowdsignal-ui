@@ -31,6 +31,12 @@ body {
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--crowdsignal-forms-question-border-color);
 	background-color: var(--crowdsignal-forms-question-background-color);
+
+	.wp-block-cover & {
+		h3:not(.has-text-color) {
+			color: var( --color-text );
+		}
+	}
 }
 
 .crowdsignal-forms-submit-button-block .crowdsignal-forms-button__button {

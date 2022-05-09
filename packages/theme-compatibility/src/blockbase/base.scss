@@ -6,4 +6,6 @@
 	border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--color--primary);
 	border-radius: var(--wp--custom--form--border--radius);
 	box-shadow: var(--wp--custom--form--color--box-shadow);
+	color: var(--wp--preset--color--foreground);
+	background-color: var(--wp--preset--color--background);
 }
