@@ -21,14 +21,14 @@
     "@crowdsignal/components": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
-    "@wordpress/components": "^19.1.1",
-    "@wordpress/element": "^4.0.4",
-    "@wordpress/i18n": "^4.2.4",
+    "@wordpress/components": "^19.8.0",
+    "@wordpress/element": "^4.4.0",
+    "@wordpress/i18n": "^4.6.0",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@emotion/core": "^10.1.1",
-    "@emotion/styled": "^10.0.27"
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1"
   },
   "scripts": {
     "build": "calypso-build ./src/index.js",

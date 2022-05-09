@@ -21,7 +21,7 @@
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@emotion/core": "^10.1.1"
+    "@emotion/react": "^11.9.0"
   },
   "scripts": {
   }

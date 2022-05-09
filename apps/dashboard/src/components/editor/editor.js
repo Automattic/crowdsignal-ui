@@ -6,7 +6,7 @@ import { useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { cloneDeep, filter, noop, tap } from 'lodash';
 import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
-import { Global } from '@emotion/core';
+import { Global } from '@emotion/react';
 
 /**
  * Internal dependencies

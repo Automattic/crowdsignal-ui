@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { CacheProvider, Global } from '@emotion/core';
+import { CacheProvider, Global } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { useState } from '@wordpress/element';
 

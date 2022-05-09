@@ -14,7 +14,7 @@ import App from './components/app';
 
 const renderApp = () =>
 	render(
-		<StyleProvider reset>
+		<StyleProvider reset namespace="crowdsignal">
 			<App />
 		</StyleProvider>,
 		document.getElementById( 'crowdsignal-dashboard' )

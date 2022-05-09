@@ -19,15 +19,15 @@
   "dependencies": {
     "@crowdsignal/hooks": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
-    "@wordpress/compose": "^5.0.6",
-    "@wordpress/element": "^4.0.4",
-    "@wordpress/i18n": "^4.2.4",
+    "@wordpress/compose": "^5.4.0",
+    "@wordpress/element": "^4.4.0",
+    "@wordpress/i18n": "^4.6.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@emotion/cache": "^10.0.29",
-    "@emotion/core": "^10.1.1",
-    "@emotion/styled": "^10.0.27"
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1"
   }
 }
