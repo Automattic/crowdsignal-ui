@@ -2,25 +2,20 @@
  * External dependencies
  */
 import { useEffect } from '@wordpress/element';
-import { Guide } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
+import { Guide } from '@crowdsignal/components';
 import { STORE_NAME } from '../../data';
 import { trackEvent } from '../../util/tracking';
 
 /**
  * Style dependencies
  */
-import {
-	EditorGuideHeading,
-	EditorGuidePageContent,
-	EditorGuideText,
-	EditorGuideWrapper,
-} from './styles/guide';
+import { EditorGuideWrapper } from './styles/guide';
 
 const EditorGuide = ( { onFinish } ) => {
 	const currentUser = useSelect( ( select ) =>
@@ -51,20 +46,20 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __(
 									'Welcome to the new Crowdsignal!',
 									'dashboard'
 								) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Take this showrt, interactive tour to lear the basics of the new Crowdsignal editor.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -75,17 +70,17 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __( 'Everything is a block', 'dashboard' ) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'In the Crowdsignal Editor, questions, from fields, images, and videos are all blocks.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -96,17 +91,17 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __( 'Adding a new block', 'dashboard' ) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Click + to open the inserter. Then click the block you want to add, like a question block.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -120,20 +115,20 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __(
 									'Click a block to change it',
 									'dashboard'
 								) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Use the toolbar to change the appearance of the selected block. Try making it bold.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -147,20 +142,20 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __(
 									'Add and reorder pages as you like',
 									'dashboard'
 								) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Just make sure every page has at least one submit button, which you can relabel.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -171,17 +166,17 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __( 'Change the theme design', 'dashboard' ) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Choose one of several themes using the right sidebar, to make the page yours.',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -195,20 +190,20 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __(
 									'Publish & share your project',
 									'dashboard'
 								) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									'Publish your project and share the link to collect responses!',
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 				{
@@ -219,17 +214,17 @@ const EditorGuide = ( { onFinish } ) => {
 						/>
 					),
 					content: (
-						<EditorGuidePageContent>
-							<EditorGuideHeading>
+						<>
+							<Guide.Header>
 								{ __( 'Congratulations!', 'dashboard' ) }
-							</EditorGuideHeading>
-							<EditorGuideText>
+							</Guide.Header>
+							<Guide.Text>
 								{ __(
 									`You've learned the basics of the new editor. Now it's time to watch responses coming in on your results page.`,
 									'dashboard'
 								) }
-							</EditorGuideText>
-						</EditorGuidePageContent>
+							</Guide.Text>
+						</>
 					),
 				},
 			] }

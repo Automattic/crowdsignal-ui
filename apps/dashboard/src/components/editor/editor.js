@@ -170,7 +170,7 @@ const Editor = ( { project } ) => {
 				/>
 			</EditorWrapper>
 
-			{ showEditorGuide && (
+			{ ! showWizard && showEditorGuide && (
 				<EditorGuide onFinish={ handleCloseWelcomeGuide } />
 			) }
 			{ ! showEditorGuide && <EditorFeedbackButton /> }
