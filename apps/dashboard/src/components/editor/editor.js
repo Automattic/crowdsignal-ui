@@ -18,6 +18,7 @@ import { useEditorContent } from './use-editor-content';
 import AutoSubmitButton from './auto-submit-button';
 import DocumentSettings from './document-settings';
 import EditorFeedbackButton from './feedback-button';
+import EditorGuide from './guide';
 import EditorNotice from './notice';
 import EditorStylesResolver from './styles-resolver';
 import HeaderMeta from '../header-meta';
@@ -43,6 +44,10 @@ const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
 	const [ showThemesModal, setShowThemesModal ] = useState( false );
 	const [ showShareModal, setShowShareModal ] = useState( false );
+
+	const [ showEditorGuide, setShowEditorGuide ] = useState(
+		document.cookie.indexOf( 'hide_editor_guide=1' ) === -1
+	);
 
 	const { updateEditorTitle } = useDispatch( STORE_NAME );
 
@@ -79,6 +84,15 @@ const Editor = ( { project } ) => {
 
 	const handleToggleShareModal = () => {
 		setShowShareModal( ! showShareModal );
+	};
+
+	const handleCloseWelcomeGuide = () => {
+		const expirationDate = new Date(
+			new Date().getTime() + 356 * 24 * 60 * 60 * 1000
+		).toGMTString();
+		document.cookie = `hide_editor_guide=1; expires=${ expirationDate }`;
+
+		setShowEditorGuide( false );
 	};
 
 	const settings = useMemo( () => {
@@ -156,7 +170,10 @@ const Editor = ( { project } ) => {
 				/>
 			</EditorWrapper>
 
-			<EditorFeedbackButton />
+			{ ! showWizard && showEditorGuide && (
+				<EditorGuide onFinish={ handleCloseWelcomeGuide } />
+			) }
+			{ ! showEditorGuide && <EditorFeedbackButton /> }
 		</EditorLayout>
 	);
 };
