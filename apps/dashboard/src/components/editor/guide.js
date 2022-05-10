@@ -40,7 +40,7 @@ const EditorGuide = ( { onFinish } ) => {
 						<img
 							src="https://app.crowdsignal.com/images/guide/onboarding-welcome.png"
 							alt={ __(
-								'Welcome to the new Crowdsignal',
+								'Welcome to the new Crowdsignal editor!',
 								'dashboard'
 							) }
 						/>
@@ -49,13 +49,13 @@ const EditorGuide = ( { onFinish } ) => {
 						<>
 							<Guide.Header>
 								{ __(
-									'Welcome to the new Crowdsignal!',
+									'Welcome to the new Crowdsignal editor!',
 									'dashboard'
 								) }
 							</Guide.Header>
 							<Guide.Text>
 								{ __(
-									'Take this showrt, interactive tour to lear the basics of the new Crowdsignal editor.',
+									'Take this short, interactive tour to learn the basics of the new Crowdsignal editor.',
 									'dashboard'
 								) }
 							</Guide.Text>
