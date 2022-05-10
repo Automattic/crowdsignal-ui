@@ -25,7 +25,6 @@ export const productFeedbackTemplate = createTemplate(
 			},
 			{
 				name: 'core/columns',
-				isValid: true,
 				attributes: {
 					isStackedOnMobile: true,
 				},
