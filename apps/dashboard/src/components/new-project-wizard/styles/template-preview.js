@@ -45,11 +45,14 @@ export const TemplatePreviewName = styled.h3`
 	font-size: 16px;
 	font-family: inherit;
 	font-weight: bold;
+	line-height: 1.5em;
+	margin-top: 0;
 	margin-bottom: 8px;
 `;
 
 export const TemplatePreviewDescription = styled.p`
 	color: var( --color-text-subtle );
 	font-size: 16px;
+	line-height: 1.5em;
 	margin: 0;
 `;
