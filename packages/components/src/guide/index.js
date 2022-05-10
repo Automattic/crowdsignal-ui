@@ -3,6 +3,7 @@
  */
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { Icon, close } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -15,6 +16,7 @@ import PageNavigation from './page-navigation';
  * Style dependencies
  */
 import {
+	GuideCloseButton,
 	GuidePage,
 	GuideWrapper,
 	PageHeader,
@@ -28,6 +30,10 @@ const Guide = ( { className, onFinish, pages } ) => {
 
 	return (
 		<GuideWrapper as={ Dialog } className={ className }>
+			<GuideCloseButton onClick={ onFinish }>
+				<Icon icon={ close } />
+			</GuideCloseButton>
+
 			<GuidePage>
 				{ pages[ currentPage ].image }
 

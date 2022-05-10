@@ -6,6 +6,24 @@ import styled from '@emotion/styled';
 export const GuideWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+	position: relative;
+`;
+
+export const GuideCloseButton = styled.button`
+	background-color: var( --color-surface );
+	border: 0;
+	box-sizing: border-box;
+	height: 32px;
+	padding: 4px;
+	opacity: 0.3;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 32px;
+
+	&:hover {
+		opacity: 1;
+	}
 `;
 
 export const GuidePage = styled.div`
