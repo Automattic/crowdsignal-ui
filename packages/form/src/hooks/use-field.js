@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { useContext } from '@wordpress/element';
+import { useContext, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { filter, includes, uniq } from 'lodash';
+import { filter, includes, map, uniq } from 'lodash';
 
 /**
  * Internal dependencies
@@ -12,13 +12,16 @@ import { Form } from '../components';
 import { STORE_NAME } from '../data';
 import { useValidation } from './use-validation';
 
-export const useField = ( { name: fieldName, type, value, validation } ) => {
+export const useField = ( {
+	name: fieldName,
+	type,
+	value,
+	validation,
+	initialValue,
+} ) => {
 	const { name: formName } = useContext( Form.Context );
-
 	const { setFieldValue } = useDispatch( STORE_NAME );
-
 	const { error, validateField } = useValidation( { fieldName, validation } );
-
 	const { value: currentValue } = useSelect(
 		( select ) => select( STORE_NAME ).getFieldData( formName, fieldName ),
 		[ formName, fieldName ]
@@ -43,6 +46,11 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 		validateField( currentValue );
 	};
 
+	const onSort = ( items ) => {
+		const values = map( items, ( item ) => item.props.attributes.clientId );
+		setFieldValue( formName, fieldName, values );
+	};
+
 	const inputProps = {
 		name: fieldName,
 		onBlur,
@@ -63,8 +71,15 @@ export const useField = ( { name: fieldName, type, value, validation } ) => {
 		inputProps.type = type;
 	}
 
+	useEffect( () => {
+		if ( initialValue ) {
+			setFieldValue( formName, fieldName, initialValue );
+		}
+	}, [] );
+
 	return {
 		error,
 		inputProps,
+		onSort,
 	};
 };

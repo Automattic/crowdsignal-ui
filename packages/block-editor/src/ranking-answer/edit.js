@@ -1,28 +1,21 @@
 /**
  * External dependencies
  */
-import { createBlock } from '@wordpress/blocks';
 import { compose } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
 import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
-import { MultipleChoiceQuestion, getBlockStyle } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
-import { useParentAttributes } from '../util/use-parent-attributes';
 import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
 import EditButtonAnswer from '../components/edit-button';
-import EditCheckboxAnswer from './edit-checkbox';
 import Sidebar from './sidebar';
+import { createBlock } from '@wordpress/blocks';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { DragHandle } from '@crowdsignal/icons';
 
-/**
- * Style dependencies
- */
-import './style.scss';
-
-const EditMultipleChoiceAnswer = ( props ) => {
+const EditRankingAnswer = ( props ) => {
 	const { attributes, className, clientId, onReplace, setAttributes } = props;
 
 	const { removeBlock } = useDispatch( 'core/block-editor' );
@@ -39,14 +32,12 @@ const EditMultipleChoiceAnswer = ( props ) => {
 		[ clientId ]
 	);
 
-	const questionAttributes = useParentAttributes( clientId );
-
 	useClientId( props );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
 	const handleSplit = ( label ) =>
-		createBlock( 'crowdsignal-forms/multiple-choice-answer', {
+		createBlock( 'crowdsignal-forms/ranking-answer', {
 			...attributes,
 			clientId:
 				label && attributes.label.indexOf( label ) === 0
@@ -63,10 +54,8 @@ const EditMultipleChoiceAnswer = ( props ) => {
 		removeBlock( clientId );
 	};
 
-	const blockStyle = getBlockStyle( questionAttributes.className );
-
 	const classes = classnames(
-		'crowdsignal-forms-multiple-choice-answer-block',
+		'crowdsignal-forms-ranking-answer-block',
 		className,
 		{
 			'is-empty': ! attributes.label,
@@ -74,32 +63,17 @@ const EditMultipleChoiceAnswer = ( props ) => {
 	);
 
 	return (
-		<>
-			<Sidebar blockStyle={ blockStyle } { ...props } />
-
-			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
-				<EditCheckboxAnswer
-					attributes={ attributes }
-					className={ classes }
-					multipleChoice={ questionAttributes.maximumChoices !== 1 }
-					onChange={ handleChangeLabel }
-					onReplace={ onReplace }
-					onSplit={ handleSplit }
-				/>
-			) }
-
-			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
-				<EditButtonAnswer
-					attributes={ attributes }
-					className={ classes }
-					multipleChoice={ questionAttributes.maximumChoices !== 1 }
-					onChange={ handleChangeLabel }
-					onReplace={ onReplace }
-					onSplit={ handleSplit }
-					onDelete={ handleDelete }
-				/>
-			) }
-		</>
+		<div className={ classes }>
+			<Sidebar { ...props } />
+			<DragHandle />
+			<EditButtonAnswer
+				attributes={ attributes }
+				onChange={ handleChangeLabel }
+				onSplit={ handleSplit }
+				onDelete={ handleDelete }
+				onReplace={ onReplace }
+			/>
+		</div>
 	);
 };
 
@@ -110,4 +84,4 @@ export default compose(
 		'textColor',
 		'width',
 	] )
-)( EditMultipleChoiceAnswer );
+)( EditRankingAnswer );

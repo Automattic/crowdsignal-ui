@@ -9,7 +9,7 @@ import { useContext } from '@wordpress/element';
  */
 import { useField } from '@crowdsignal/form';
 import RatingScaleQuestion from '../rating-scale-question';
-import ButtonAnswer from './button';
+import ButtonAnswer from '../components/button-answer';
 import { getBlockStyle } from '../util';
 
 const RatingScaleAnswer = ( { attributes, className } ) => {
@@ -44,7 +44,11 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 			className={ classes }
 			inputProps={ inputProps }
 			isMultiSelect={ false }
-		/>
+		>
+			{ blockStyle === RatingScaleQuestion.Style.EMOJI
+				? attributes.emoji
+				: attributes.label }
+		</ButtonAnswer>
 	);
 };
 

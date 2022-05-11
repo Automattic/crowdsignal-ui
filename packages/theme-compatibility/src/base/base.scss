@@ -168,3 +168,18 @@ body {
 .wp-block-cover:not(.is-light) {
 	color: var(--wp--preset--color--background);
 }
+
+.crowdsignal-forms-ranking-answer-block {
+	display: flex;
+	align-items: center;
+	margin-bottom: var(--cs--style--block-gap-small);
+
+	.crowdsignal-forms-button {
+		margin-bottom: 0;
+		flex-grow: 1;
+
+		&__button {
+			flex-grow: 1;
+		}
+	}
+}

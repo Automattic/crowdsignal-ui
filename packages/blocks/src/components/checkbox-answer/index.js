@@ -7,9 +7,9 @@ import { RawHTML } from '@wordpress/element';
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import FormCheckbox from '../components/form-checkbox';
+import FormCheckbox from '../form-checkbox';
 
-const Checkbox = ( { attributes, className, inputProps } ) => {
+const CheckboxAnswer = ( { attributes, className, inputProps } ) => {
 	return (
 		<FormCheckbox.Label
 			className={ className }
@@ -22,4 +22,4 @@ const Checkbox = ( { attributes, className, inputProps } ) => {
 	);
 };
 
-export default Checkbox;
+export default CheckboxAnswer;

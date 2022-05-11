@@ -10,6 +10,8 @@ import { v4 as uuid } from 'uuid';
 import {
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
+	rankingAnswerBlock,
+	rankingQuestionBlock,
 	ratingScaleAnswerBlock,
 	ratingScaleQuestionBlock,
 	textInputBlock,
@@ -19,6 +21,8 @@ import {
 const MAPPED_BLOCKS = [
 	multipleChoiceAnswerBlock.name,
 	multipleChoiceQuestionBlock.name,
+	rankingAnswerBlock.name,
+	rankingQuestionBlock.name,
 	ratingScaleAnswerBlock.name,
 	ratingScaleQuestionBlock.name,
 	textInputBlock.name,
