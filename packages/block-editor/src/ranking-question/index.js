@@ -47,7 +47,7 @@ const settings = {
 			{
 				name: 'crowdsignal-forms/ranking-answer',
 				attributes: {
-					label: __( 'Belin', 'block-editor' ),
+					label: __( 'Berlin', 'block-editor' ),
 				},
 			},
 			{
