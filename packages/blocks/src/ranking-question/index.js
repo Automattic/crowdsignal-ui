@@ -17,7 +17,7 @@ const Context = createContext();
 
 const RankingQuestion = ( { attributes, children, className } ) => {
 	const { onSort } = useField( {
-		name: `q_${ attributes.clientId }[ranking]`,
+		name: `q_${ attributes.clientId }[ranking][]`,
 		initialValue: map( children, 'props.attributes.clientId' ),
 	} );
 
