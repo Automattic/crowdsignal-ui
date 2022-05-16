@@ -48,6 +48,7 @@ body {
 
 .wp-block-columns {
 	margin-bottom: var(--cs--style--block-gap);
+	gap: var(--cs--style--block-gap);
 
 	.wp-block-column:not(:last-child) {
 		margin-bottom: var(--cs--style--block-gap);
