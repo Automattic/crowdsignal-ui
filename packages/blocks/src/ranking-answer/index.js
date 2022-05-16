@@ -24,13 +24,9 @@ const RankingAnswer = ( { attributes, className, draggable } ) => {
 			className={ classes }
 			ref={ draggable.innerRef }
 			{ ...draggable.draggableProps }
+			{ ...draggable.dragHandleProps }
 		>
-			<span
-				{ ...draggable.dragHandleProps }
-				style={ { display: 'flex' } }
-			>
-				<DragHandle />
-			</span>
+			<DragHandle />
 			<ButtonAnswer
 				attributes={ attributes }
 				className={ { 'is-selected': draggable.isDragging } }
