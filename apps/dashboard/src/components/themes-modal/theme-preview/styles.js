@@ -4,7 +4,6 @@
 import styled from '@emotion/styled';
 
 export const ThemePreviewWrapper = styled.div`
-	max-width: 360px;
 	display: flex;
 	flex-direction: column;
 `;
