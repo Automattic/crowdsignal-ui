@@ -17,11 +17,22 @@ export const TemplatePreviewFrame = styled.button`
 	border-radius: 2px;
 	box-sizing: border-box;
 	cursor: pointer;
-	height: 250px;
 	margin-bottom: 16px;
+	padding: 0;
 	position: relative;
 	overflow: hidden;
 	width: 100%;
+
+	&::before {
+		content: '';
+		display: block;
+		float: left;
+		padding: 67% 0 0;
+	}
+
+	.block-editor-block-preview__container {
+		position: absolute;
+	}
 
 	.block-editor-block-preview__content > iframe {
 		border: 0;
@@ -34,11 +45,14 @@ export const TemplatePreviewName = styled.h3`
 	font-size: 16px;
 	font-family: inherit;
 	font-weight: bold;
+	line-height: 1.5em;
+	margin-top: 0;
 	margin-bottom: 8px;
 `;
 
 export const TemplatePreviewDescription = styled.p`
 	color: var( --color-text-subtle );
 	font-size: 16px;
+	line-height: 1.5em;
 	margin: 0;
 `;

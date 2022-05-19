@@ -16,6 +16,13 @@ export const ProjectWizardDialog = styled( ModalDialog )`
 	padding: 72px 60px;
 	flex-direction: row;
 	align-items: flex-end;
+	height: 100%;
+`;
+
+export const ProjectWizardContent = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 `;
 
 export const BackButton = styled.a`

@@ -70,6 +70,7 @@ export const ModalTemplateGrid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 24px;
+	overflow-y: auto;
 `;
 
 const CloseButton = styled.button`

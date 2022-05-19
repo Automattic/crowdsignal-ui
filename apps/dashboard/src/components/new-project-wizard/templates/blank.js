@@ -24,6 +24,7 @@ const BlankProjectStartButton = styled.div`
 	box-sizing: border-box;
 	background-color: var( --color-surface );
 	padding: 8px 32px;
+	margin: 0 8px;
 `;
 
 export const blankProjectTemplate = createTemplate(

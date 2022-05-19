@@ -22,7 +22,11 @@ import * as projectTemplates from './templates';
 /**
  * Style dependencies
  */
-import { BackButton, ProjectWizardDialog } from './styles';
+import {
+	BackButton,
+	ProjectWizardDialog,
+	ProjectWizardContent,
+} from './styles';
 
 const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 	const editorTheme = useSelect( ( select ) =>
@@ -39,7 +43,7 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 				<div>
 					<ActiveTheme onChangeThemeClick={ onChangeThemeClick } />
 				</div>
-				<div>
+				<ProjectWizardContent>
 					<ModalHeader>
 						{ __(
 							'What would you like to build today?',
@@ -62,7 +66,7 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 							/>
 						) ) }
 					</ModalTemplateGrid>
-				</div>
+				</ProjectWizardContent>
 			</ProjectWizardDialog>
 		</ModalWrapper>
 	);
