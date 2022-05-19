@@ -76,7 +76,7 @@ const EditorGuide = ( { onFinish } ) => {
 							</Guide.Header>
 							<Guide.Text>
 								{ __(
-									'In the Crowdsignal Editor, questions, from fields, images, and videos are all blocks.',
+									'In the Crowdsignal Editor, questions, form fields, images, and videos are all blocks.',
 									'dashboard'
 								) }
 							</Guide.Text>
