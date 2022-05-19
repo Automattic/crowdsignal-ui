@@ -3,6 +3,11 @@
  */
 import styled from '@emotion/styled';
 
+/**
+ * Internal dependencies
+ */
+import { Button } from '../button/styles';
+
 export const GuideWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -10,19 +15,20 @@ export const GuideWrapper = styled.div`
 `;
 
 export const GuideCloseButton = styled.button`
-	background-color: var( --color-surface );
+	background-color: var( --color-text-subtle );
 	border: 0;
 	box-sizing: border-box;
+	fill: var( --color-text-inverted );
 	height: 32px;
 	padding: 4px;
-	opacity: 0.3;
+	opacity: 0.35;
 	position: absolute;
 	top: 8px;
 	right: 8px;
 	width: 32px;
 
 	&:hover {
-		opacity: 1;
+		opacity: 0.75;
 	}
 `;
 
@@ -48,12 +54,6 @@ export const PageContent = styled.div`
 export const PageText = styled.p`
 	font-size: 14px;
 	line-height: 24px;
-`;
-
-export const GuideFooter = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	padding: 32px;
 `;
 
 export const PageNavigationWrapper = styled.div`
@@ -83,5 +83,19 @@ export const PageIndicatorButton = styled.button`
 
 	&.is-active > svg {
 		fill: var( --color-primary );
+	}
+`;
+
+export const GuideFooter = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	padding: 32px;
+
+	${ Button }:not(${ PageIndicatorButton }) {
+		margin-right: 12px;
+
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 `;
