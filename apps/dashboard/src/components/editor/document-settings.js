@@ -26,35 +26,25 @@ import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
 
 const DocumentSettings = ( { onChangeThemeClick, project } ) => {
-	const { openGeneralSidebar, setIsInserterOpened } = useDispatch(
-		'isolated/editor'
-	);
+	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
 
 	const [
 		canPublish,
 		editorTheme,
 		selectedBlockClientId,
-		showInserter,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
-		select( STORE_NAME ).showInserter(),
 	] );
 
 	useEffect( () => {
-		if ( ! showInserter ) {
+		if ( ! selectedBlockClientId ) {
 			return;
 		}
 
-		setIsInserterOpened( true );
-	}, [ showInserter ] );
-
-	useEffect( () => {
-		openGeneralSidebar(
-			!! selectedBlockClientId ? 'edit-post/block' : 'edit-post/document'
-		);
+		openGeneralSidebar( 'edit-post/block' );
 	}, [ selectedBlockClientId ] );
 
 	const updateProjectVisibility = ( event ) => {
