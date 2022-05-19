@@ -49,6 +49,7 @@ const EditablePageHeader = ( { onChange, text, disabled } ) => {
 				) }
 				{ ! active && showButton && (
 					<Button
+						borderless
 						className="editable-page-header__button"
 						onClick={ showForm }
 					>

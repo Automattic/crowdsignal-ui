@@ -3,6 +3,7 @@
  */
 import { forwardRef } from '@wordpress/element';
 import { omit } from 'lodash';
+import classnames from 'classnames';
 
 /**
  * Style dependencies
@@ -10,9 +11,29 @@ import { omit } from 'lodash';
 import { Button } from './styles.js';
 
 const ButtonComponent = (
-	{ children, className, disabled, ...props },
+	{
+		borderless,
+		children,
+		className,
+		compact,
+		disabled,
+		highlight,
+		large,
+		primary,
+		scary,
+		...props
+	},
 	ref
 ) => {
+	const classes = classnames( className, {
+		'is-borderless': borderless,
+		'is-compact': compact,
+		'is-highlight': highlight,
+		'is-large': large,
+		'is-primary': primary,
+		'is-scary': scary,
+	} );
+
 	if ( props.href && ! disabled ) {
 		const rel = props.target
 			? ( props.rel || '' ).replace( /noopener|noreferrer/g, '' ) +
@@ -25,7 +46,7 @@ const ButtonComponent = (
 				ref={ ref }
 				{ ...props }
 				rel={ rel }
-				className={ className }
+				className={ classes }
 			>
 				{ children }
 			</Button>
@@ -39,12 +60,14 @@ const ButtonComponent = (
 			ref={ ref }
 			type="button"
 			{ ...buttonProps }
-			className={ className }
+			className={ classes }
 			disabled={ disabled }
 		>
 			{ children }
 		</Button>
 	);
 };
+
+ButtonComponent.className = Button;
 
 export default forwardRef( ButtonComponent );
