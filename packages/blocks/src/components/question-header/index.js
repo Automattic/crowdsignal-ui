@@ -18,7 +18,7 @@ const QuestionHeader = styled.h3`
 	}
 
 	${ QuestionWrapper.className }.is-required &::after {
-		display: 'inline';
+		display: inline;
 		content: ' *';
 	}
 `;
