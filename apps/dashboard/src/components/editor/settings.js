@@ -9,9 +9,10 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import * as blocks from '@crowdsignal/block-editor';
-
-// test
 import { uploadMedia } from '../../util/media';
+
+// Disable experimental gallery block version
+window.wp.galleryBlockV2Enabled = false;
 
 setCategories( [
 	{
