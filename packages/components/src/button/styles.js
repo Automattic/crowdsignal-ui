@@ -2,146 +2,150 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-/**
- * Internal dependencies
- */
-import { color } from '@crowdsignal/styles';
-
-const baseButton = css`
+export const Button = styled.button`
 	align-items: center;
-	background-color: ${ color( 'neutral', 0 ) };
-	border-color: ${ color( 'border' ) };
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px 1px 2px;
+	background-color: var( --color-neutral-0 );
+	border: 0;
+	border-radius: 2px;
 	box-sizing: border-box;
 	cursor: pointer;
 	color: var( --color-text );
 	display: inline-flex;
-	font-size: 14px;
-	height: 32px;
+	font-size: 13px;
+	font-weight: normal;
+	height: 36px;
 	justify-content: center;
 	line-height: 24px;
 	outline: 0;
-	padding: 3px 15px 2px;
+	padding: 6px 12px;
 	position: relative;
 	text-align: center;
-	transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
+	transition: box-shadow 0.1s linear;
 	white-space: nowrap;
 	width: fit-content;
 
 	&:hover {
-		border-color: ${ color( 'text' ) };
+		border-color: var( --color-text );
 	}
 
 	&:disabled,
 	&:disabled:hover {
-		background-color: ${ color( 'surface' ) };
-		color: ${ color( 'text-subtle' ) };
+		background-color: var( --color-surface );
+		color: var( --color-text-subtle );
+	}
+
+	&.is-scary {
+		background-color: var( --color-error );
+		border-color: var( --color-error-dark );
+		color: var( --color-text-inverted );
+
+		&:hover {
+			background-color: var( --color-error-dark );
+		}
+
+		&:disabled,
+		&:disabled:hover {
+			background-color: var( --color-error-10 );
+			border-color: var( --color-error-20 );
+		}
+	}
+
+	&.is-highlight {
+		background-color: var( --color-highlight );
+		border-color: var( --color-highlight-dark );
+		color: var( --color-text-inverted );
+
+		&:hover {
+			background-color: var( --color-highlight-dark );
+		}
+
+		&:disabled,
+		&:disabled:hover {
+			background-color: var( --color-highlight-10 );
+			border-color: var( --color-highlight-20 );
+		}
+	}
+
+	&.is-secondary {
+		background-color: var( --color-secondary );
+		border-color: var( --color-secondary-dark );
+		color: var( --color-text-inverted );
+
+		&:hover {
+			background-color: var( --color-secondary-dark );
+		}
+
+		&:disabled,
+		&:disabled:hover {
+			background-color: var( --color-secondary-10 );
+			border-color: var( --color-secondary-20 );
+		}
+	}
+
+	&.is-primary {
+		background-color: var( --color-primary );
+		color: var( --color-text-inverted );
+
+		&:hover {
+			background-color: var( --color-primary-dark );
+		}
+
+		&:disabled,
+		&:disabled:hover {
+			background-color: var( --color-primary-10 );
+			border-color: var( --color-primary-20 );
+		}
+	}
+
+	&.is-borderless {
+		background-color: transparent;
+		padding-left: 6px;
+		padding-right: 6px;
+
+		&:hover {
+			box-shadow: inset 0 0 0 1px var( --color-text );
+		}
+
+		&.is-error {
+			color: var( --color-error );
+
+			&:hover {
+				box-shadow: inset 0 0 0 1px var( --color-error );
+			}
+		}
+
+		&.is-highlight {
+			color: var( --color-highlight );
+
+			&:hover {
+				box-shadow: inset 0 0 0 1px var( --color-highlight );
+			}
+		}
+
+		&.is-secondary {
+			color: var( --color-secondary );
+
+			&:hover {
+				box-shadow: inset 0 0 0 1px var( --color-secondary );
+			}
+		}
+
+		&.is-primary {
+			color: var( --color-primary );
+
+			&:hover {
+				box-shadow: inset 0 0 0 1px var( --color-primary );
+			}
+		}
+	}
+
+	&.is-compact {
+	}
+
+	&.is-large {
+		font-size: 12px;
+		height: 45px;
+		padding: 9px 30px;
 	}
 `;
-
-const borderlessButton = css`
-	border: 0;
-	background-color: transparent;
-`;
-
-const primaryButton = ( isBorderless ) => css`
-	background-color: ${ color( 'primary' ) };
-	border-color: ${ color( 'primary', 'dark' ) };
-	color: ${ isBorderless ? color( 'primary' ) : color( 'text-inverted' ) };
-
-	&:hover {
-		background-color: ${ color( 'primary', 'light' ) };
-	}
-
-	&:disabled,
-	&:disabled:hover {
-		background-color: ${ color( 'primary', 10 ) };
-		border-color: ${ color( 'primary', 20 ) };
-	}
-`;
-
-const secondaryButton = ( isBorderless ) => css`
-	background-color: ${ color( 'secondary' ) };
-	border-color: ${ color( 'secondary', 'dark' ) };
-	color: ${ isBorderless ? color( 'secondary' ) : color( 'text-inverted' ) };
-
-	&:hover {
-		background-color: ${ color( 'secondary', 'light' ) };
-	}
-
-	&:disabled,
-	&:disabled:hover {
-		background-color: ${ color( 'secondary', 10 ) };
-		border-color: ${ color( 'secondary', 20 ) };
-	}
-`;
-
-const highlightButton = ( isBorderless ) => css`
-	background-color: ${ color( 'highlight' ) };
-	border-color: ${ color( 'highlight', 'dark' ) };
-	color: ${ isBorderless ? color( 'highlight' ) : color( 'text-inverted' ) };
-
-	&:hover {
-		background-color: ${ color( 'highlight', 'light' ) };
-	}
-
-	&:disabled,
-	&:disabled:hover {
-		background-color: ${ color( 'highlight', 10 ) };
-		border-color: ${ color( 'highlight', 20 ) };
-	}
-`;
-
-const scaryButton = ( isBorderless ) => css`
-	background-color: ${ color( 'error' ) };
-	border-color: ${ color( 'error', 'dark' ) };
-	color: ${ isBorderless ? color( 'error' ) : color( 'text-inverted' ) };
-
-	&:hover {
-		background-color: ${ color( 'error', 'light' ) };
-	}
-
-	&:disabled,
-	&:disabled:hover {
-		background-color: ${ color( 'error', 10 ) };
-		border-color: ${ color( 'error', 20 ) };
-	}
-`;
-
-const compactButton = () => css``;
-
-const largeButton = () => css`
-	font-size: 12px;
-	height: 45px;
-	padding: 9px 30px;
-`;
-
-export const Button = styled.button(
-	( {
-		borderless,
-		compact,
-		highlight,
-		large,
-		primary,
-		scary,
-		secondary,
-	} ) => {
-		return css`
-			${ baseButton };
-
-			${ scary && scaryButton( borderless ) };
-			${ highlight && highlightButton( borderless ) };
-			${ secondary && secondaryButton( borderless ) };
-			${ primary && primaryButton( borderless ) };
-
-			${ borderless && borderlessButton };
-
-			${ compact && compactButton( borderless ) };
-			${ large && largeButton( borderless ) };
-		`;
-	}
-);
