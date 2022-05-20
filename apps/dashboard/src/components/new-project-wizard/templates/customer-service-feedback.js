@@ -10,7 +10,7 @@ import { createTemplate } from './create-template';
 
 export const customerServiceFeedbackTemplate = createTemplate(
 	__( 'Customer Service Feedback', 'dashboard' ),
-	__( 'Understand the impact or your latest customer interactions.' ),
+	__( 'Understand the impact of your latest customer interactions.' ),
 	[
 		[
 			{
