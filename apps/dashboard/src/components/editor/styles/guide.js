@@ -4,7 +4,7 @@
 import styled from '@emotion/styled';
 
 export const EditorGuideWrapper = styled.div`
-	height: 470px;
+	height: 475px;
 	max-width: 345px;
 	position: absolute;
 	left: 20px;
