@@ -7,6 +7,10 @@ export default {
 		type: 'string',
 		default: null,
 	},
+	multipleChoice: {
+		type: 'boolean',
+		default: true,
+	},
 	columns: {
 		type: 'array',
 		default: [

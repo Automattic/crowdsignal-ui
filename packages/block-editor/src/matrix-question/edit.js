@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
-import { Fragment, useRef } from '@wordpress/element';
+import { Fragment, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { v4 as uuid } from 'uuid';
 import { filter, join, map, noop, slice, tap, trim, times } from 'lodash';
@@ -17,17 +17,25 @@ import {
 	QuestionWrapper,
 } from '@crowdsignal/blocks';
 import Sidebar from './sidebar';
+import Toolbar from './toolbar';
 
 const shiftLabelFocus = ( wrapper, type, index ) =>
-	tap(
-		wrapper.querySelectorAll(
-			`.crowdsignal-forms-matrix-block__${ type }-label [role=textbox]`
-		)[ index ],
-		( input ) => input && input.focus()
+	setTimeout(
+		() =>
+			tap(
+				wrapper.querySelectorAll(
+					`.crowdsignal-forms-matrix-block__${ type }-label [role=textbox]`
+				)[ index ],
+				( input ) => input && input.focus()
+			),
+		0
 	);
 
 const EditMatrix = ( props ) => {
 	const { attributes, setAttributes } = props;
+
+	const [ currentColumn, setCurrentColumn ] = useState( null );
+	const [ currentRow, setCurrentRow ] = useState( null );
 
 	const tableWrapper = useRef();
 
@@ -44,7 +52,7 @@ const EditMatrix = ( props ) => {
 		} );
 
 	const handleNewLabel = ( type, insertAt ) => () => {
-		if ( insertAt < attributes[ type ].length ) {
+		if ( insertAt <= attributes[ type ].length ) {
 			setAttributes( {
 				[ type ]: [
 					...slice( attributes[ type ], 0, insertAt ),
@@ -66,6 +74,9 @@ const EditMatrix = ( props ) => {
 			trim( type, 's' ),
 			Math.min( insertAt, attributes[ type ].length )
 		);
+
+		setCurrentRow( type === 'rows' ? insertAt : null );
+		setCurrentColumn( type === 'rows' ? null : insertAt );
 	};
 
 	const handleRemoveLabel = ( type, index ) => () => {
@@ -75,6 +86,9 @@ const EditMatrix = ( props ) => {
 			Math.max( index - 1, 0 )
 		);
 
+		setCurrentRow( type === 'rows' ? Math.max( index - 1, 0 ) : null );
+		setCurrentColumn( type === 'rows' ? null : Math.max( index - 1, 0 ) );
+
 		setAttributes( {
 			[ type ]: filter(
 				attributes[ type ],
@@ -83,6 +97,16 @@ const EditMatrix = ( props ) => {
 					item !== attributes[ type ][ index ]
 			),
 		} );
+	};
+
+	const handleChangeCurrentColumn = ( index ) => () => {
+		setCurrentRow( null );
+		setCurrentColumn( index );
+	};
+
+	const handleChangeCurrentRow = ( index ) => () => {
+		setCurrentColumn( null );
+		setCurrentRow( index );
 	};
 
 	const tableStyles = {
@@ -98,6 +122,13 @@ const EditMatrix = ( props ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes }>
+			<Toolbar
+				currentColumn={ currentColumn }
+				currentRow={ currentRow }
+				addLabel={ handleNewLabel }
+				removeLabel={ handleRemoveLabel }
+				{ ...props }
+			/>
 			<Sidebar { ...props } />
 
 			<RichText
@@ -114,6 +145,7 @@ const EditMatrix = ( props ) => {
 					<MatrixQuestion.Cell
 						key={ column.clientId }
 						className="crowdsignal-forms-matrix-block__column-label"
+						onClick={ handleChangeCurrentColumn( index ) }
 					>
 						<RichText
 							placeholder={ __( 'Column', 'block-editor' ) }
@@ -128,7 +160,10 @@ const EditMatrix = ( props ) => {
 
 				{ map( attributes.rows, ( row, index ) => (
 					<Fragment key={ row.clientId }>
-						<MatrixQuestion.Cell className="crowdsignal-forms-matrix-block__row-label">
+						<MatrixQuestion.Cell
+							className="crowdsignal-forms-matrix-block__row-label"
+							onClick={ handleChangeCurrentRow( index ) }
+						>
 							<RichText
 								placeholder={ __( 'Rows', 'block-editor' ) }
 								onChange={ handleChangeLabel( 'rows', index ) }
@@ -141,7 +176,13 @@ const EditMatrix = ( props ) => {
 
 						{ times( attributes.columns.length, ( n ) => (
 							<MatrixQuestion.Cell key={ n }>
-								<FormCheckbox />
+								<FormCheckbox
+									type={
+										attributes.multipleChoice
+											? 'checkbox'
+											: 'radio'
+									}
+								/>
 							</MatrixQuestion.Cell>
 						) ) }
 					</Fragment>
