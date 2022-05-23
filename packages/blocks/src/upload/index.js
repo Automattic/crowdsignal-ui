@@ -13,7 +13,7 @@ import { useField } from '@crowdsignal/form';
 
 const UploadBlock = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
-		name: `q_${ attributes.clientId }[upload]`,
+		name: `q_${ attributes.clientId }_upload`,
 		type: 'file',
 	} );
 

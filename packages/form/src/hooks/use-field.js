@@ -38,7 +38,7 @@ export const useField = ( {
 						( v ) => v !== event.target.value
 				  );
 		} else if ( type === 'file' ) {
-			newValue = event.target.files[ 0 ];
+			newValue = event.target.files;
 		}
 
 		setFieldValue( formName, fieldName, newValue );
