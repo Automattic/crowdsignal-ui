@@ -6,10 +6,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { PollAnswer } from '@crowdsignal/blocks';
 import attributes from './attributes';
 import EditPollAnswer from './edit';
-
-const name = 'crowdsignal-forms/poll-answer';
 
 const settings = {
 	title: __( 'Poll Answer', 'blocks' ),
@@ -21,6 +20,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: PollAnswer.BlockName,
 	settings,
 };

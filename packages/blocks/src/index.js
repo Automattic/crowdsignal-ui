@@ -1,17 +1,45 @@
+import CoreEmbed from './core-embed';
+import MultipleChoiceAnswer from './multiple-choice-answer';
+import MultipleChoiceQuestion from './multiple-choice-question';
+import Poll from './poll';
+import PollAnswer from './poll-answer';
+import RankingAnswer from './ranking-answer';
+import RankingQuestion from './ranking-question';
+import RatingScaleAnswer from './rating-scale-answer';
+import RatingScaleQuestion from './rating-scale-question';
+import SubmitButton from './submit-button';
+import TextInput from './text-input';
+import TextQuestion from './text-question';
+
 export * from './components';
 
-export { default as CoreEmbed } from './core-embed';
-export { default as MultipleChoiceAnswer } from './multiple-choice-answer';
-export { default as MultipleChoiceQuestion } from './multiple-choice-question';
-export { default as Poll } from './poll';
-export { default as PollAnswer } from './poll-answer';
-export { default as RankingAnswer } from './ranking-answer';
-export { default as RankingQuestion } from './ranking-question';
-export { default as RatingScaleAnswer } from './rating-scale-answer';
-export { default as RatingScaleQuestion } from './rating-scale-question';
-export { default as SubmitButton } from './submit-button';
-export { default as TextInput } from './text-input';
-export { default as TextQuestion } from './text-question';
+export {
+	CoreEmbed,
+	MultipleChoiceAnswer,
+	MultipleChoiceQuestion,
+	Poll,
+	PollAnswer,
+	RankingAnswer,
+	RankingQuestion,
+	RatingScaleAnswer,
+	RatingScaleQuestion,
+	SubmitButton,
+	TextInput,
+	TextQuestion,
+};
+
+export const projectBlocks = [
+	CoreEmbed,
+	MultipleChoiceAnswer,
+	MultipleChoiceQuestion,
+	RankingAnswer,
+	RankingQuestion,
+	RatingScaleAnswer,
+	RatingScaleQuestion,
+	SubmitButton,
+	TextInput,
+	TextQuestion,
+];
 
 export { renderBlocks } from './render-blocks';
 

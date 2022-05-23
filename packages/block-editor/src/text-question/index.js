@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { TextQuestion } from '@crowdsignal/blocks';
 import { TextQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditFreeText from './edit';
-
-const name = 'crowdsignal-forms/text-question';
 
 const settings = {
 	apiVersion: 1,
@@ -41,6 +40,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: TextQuestion.BlockName,
 	settings,
 };

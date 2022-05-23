@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { MultipleChoiceAnswer } from '@crowdsignal/blocks';
 import { MultipleChoiceAnswerIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditMultipleChoiceAnswer from './edit';
-
-const name = 'crowdsignal-forms/multiple-choice-answer';
 
 const settings = {
 	title: __( 'Answer', 'block-editor' ),
@@ -31,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: MultipleChoiceAnswer.BlockName,
 	settings,
 };
