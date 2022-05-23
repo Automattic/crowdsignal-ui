@@ -17,6 +17,13 @@ import { MediaUploader } from './media-upload';
 
 export const registerBlocks = () =>
 	forEach( blocks, ( block ) => {
+		if (
+			process.env.NODE_ENV === 'production' &&
+			block.name === 'crowdsignal-forms/matrix-question'
+		) {
+			return;
+		}
+
 		registerBlockType( block.name, block.settings );
 	} );
 
