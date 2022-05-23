@@ -47,7 +47,9 @@ export default ( props ) => {
 				placeholder={ __( 'Choose file', 'blocks' ) }
 				multiline={ false }
 				preserveWhiteSpace={ false }
-				onChange={ handleChangeAttribute }
+				onChange={ ( value ) =>
+					handleChangeAttribute( 'buttonLabel' )( value )
+				}
 				onReplace={ onReplace }
 				value={ attributes.buttonLabel }
 				allowedFormats={ [] }
