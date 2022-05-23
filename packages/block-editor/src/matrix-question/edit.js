@@ -16,6 +16,7 @@ import {
 	QuestionHeader,
 	QuestionWrapper,
 } from '@crowdsignal/blocks';
+import Sidebar from './sidebar';
 
 const shiftLabelFocus = ( wrapper, type, index ) =>
 	tap(
@@ -25,7 +26,9 @@ const shiftLabelFocus = ( wrapper, type, index ) =>
 		( input ) => input && input.focus()
 	);
 
-const EditMatrix = ( { attributes, setAttributes } ) => {
+const EditMatrix = ( props ) => {
+	const { attributes, setAttributes } = props;
+
 	const tableWrapper = useRef();
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
@@ -95,6 +98,8 @@ const EditMatrix = ( { attributes, setAttributes } ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes }>
+			<Sidebar { ...props } />
+
 			<RichText
 				tagName={ QuestionHeader }
 				placeholder={ __( 'Enter your question', 'block-editor' ) }
