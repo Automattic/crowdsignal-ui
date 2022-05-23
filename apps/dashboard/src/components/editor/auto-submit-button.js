@@ -19,6 +19,7 @@ import {
 	textQuestionBlock,
 	textInputBlock,
 	submitButtonBlock,
+	uploadBlock,
 } from '@crowdsignal/block-editor';
 
 const FORM_BLOCKS = map(
@@ -31,6 +32,7 @@ const FORM_BLOCKS = map(
 		ratingScaleQuestionBlock,
 		textQuestionBlock,
 		textInputBlock,
+		uploadBlock,
 	],
 	'name'
 );

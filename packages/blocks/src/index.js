@@ -11,6 +11,7 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
+import UploadBlock from './upload';
 
 export * from './components';
 
@@ -28,6 +29,7 @@ export {
 	SubmitButton,
 	TextInput,
 	TextQuestion,
+	UploadBlock,
 };
 
 export const projectBlocks = [
@@ -42,6 +44,7 @@ export const projectBlocks = [
 	SubmitButton,
 	TextInput,
 	TextQuestion,
+	UploadBlock,
 ];
 
 export { renderBlocks } from './render-blocks';

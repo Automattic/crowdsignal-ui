@@ -37,6 +37,8 @@ export const useField = ( {
 						currentValue || [],
 						( v ) => v !== event.target.value
 				  );
+		} else if ( type === 'file' ) {
+			newValue = event.target.files[ 0 ];
 		}
 
 		setFieldValue( formName, fieldName, newValue );
@@ -51,24 +53,28 @@ export const useField = ( {
 		setFieldValue( formName, fieldName, values );
 	};
 
+	const fieldValue =
+		type === 'checkbox' || type === 'radio' ? value : currentValue || '';
+
 	const inputProps = {
 		name: fieldName,
+		type,
 		onBlur,
 		onChange,
-		value:
-			type === 'checkbox' || type === 'radio'
-				? value
-				: currentValue || '',
 	};
 
 	if ( type === 'checkbox' ) {
 		inputProps.checked = includes( currentValue, value );
-		inputProps.type = type;
+		inputProps.value = fieldValue;
 	}
 
 	if ( type === 'radio' ) {
 		inputProps.checked = currentValue === value;
-		inputProps.type = type;
+		inputProps.value = fieldValue;
+	}
+
+	if ( ( type = 'file' ) ) {
+		inputProps.filename = fieldValue;
 	}
 
 	useEffect( () => {
