@@ -52,7 +52,13 @@ const MatrixQuestion = ( { attributes } ) => {
 
 						{ times( attributes.columns.length, ( n ) => (
 							<MatrixCell key={ n }>
-								<FormCheckbox />
+								<FormCheckbox
+									type={
+										attributes.multipleChoice
+											? 'checkbox'
+											: 'radio'
+									}
+								/>
 							</MatrixCell>
 						) ) }
 					</Fragment>
