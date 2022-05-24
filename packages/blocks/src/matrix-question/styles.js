@@ -19,11 +19,11 @@ export const MatrixCell = styled.div`
 	padding: 16px;
 	text-align: center;
 
-	&.crowdsignal-forms-matrix-block__column-label {
+	&.crowdsignal-forms-matrix-question-block__column-label {
 		border-top-width: 1px;
 	}
 
-	&.crowdsignal-forms-matrix-block__row-label {
+	&.crowdsignal-forms-matrix-question-block__row-label {
 		border-left-width: 1px;
 	}
 `;
