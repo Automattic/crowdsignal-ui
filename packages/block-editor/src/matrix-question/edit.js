@@ -2,10 +2,16 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
-import { Fragment, useRef, useState } from '@wordpress/element';
+import {
+	Fragment,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { v4 as uuid } from 'uuid';
-import { filter, join, map, noop, slice, tap, trim, times } from 'lodash';
+import classnames from 'classnames';
+import { filter, join, map, noop, slice, some, tap, trim, times } from 'lodash';
 
 /**
  * Internal dependencies
@@ -16,15 +22,26 @@ import {
 	QuestionHeader,
 	QuestionWrapper,
 } from '@crowdsignal/blocks';
+import { useBlur } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 import Toolbar from './toolbar';
+
+/**
+ * Style dependencies
+ */
+import { Label } from './styles';
+
+const getParentNodes = ( node, parentNodes = [] ) =>
+	node
+		? getParentNodes( node.parentElement, [ node, ...parentNodes ] )
+		: parentNodes;
 
 const shiftLabelFocus = ( wrapper, type, index ) =>
 	setTimeout(
 		() =>
 			tap(
 				wrapper.querySelectorAll(
-					`.crowdsignal-forms-matrix-block__${ type }-label [role=textbox]`
+					`.crowdsignal-forms-matrix-question-block__${ type }-label [role=textbox]`
 				)[ index ],
 				( input ) => input && input.focus()
 			),
@@ -37,7 +54,38 @@ const EditMatrix = ( props ) => {
 	const [ currentColumn, setCurrentColumn ] = useState( null );
 	const [ currentRow, setCurrentRow ] = useState( null );
 
+	const [ tableVars, setTableVars ] = useState( null );
+
 	const tableWrapper = useRef();
+
+	useLayoutEffect( () => {
+		const container = tableWrapper.current.getBoundingClientRect();
+
+		setTableVars( {
+			'--crowdsignal-forms-matrix-question-block-table-width': `${
+				parseInt( container.width, 10 ) - 6
+			}px`,
+			'--crowdsignal-forms-matrix-question-block-table-height': `${
+				parseInt( container.height, 10 ) - 6
+			}px`,
+		} );
+	}, [ currentColumn, currentRow, attributes.columns, attributes.rows ] );
+
+	useBlur(
+		( clickEvent ) => {
+			if (
+				some( getParentNodes( clickEvent.target ), ( element ) =>
+					element.classList.contains( 'block-editor-block-toolbar' )
+				)
+			) {
+				return;
+			}
+
+			setCurrentColumn( null );
+			setCurrentRow( null );
+		},
+		[ tableWrapper ]
+	);
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
@@ -118,6 +166,7 @@ const EditMatrix = ( props ) => {
 			times( attributes.rows.length + 1, () => '1fr' ),
 			' '
 		),
+		...tableVars,
 	};
 
 	return (
@@ -141,52 +190,90 @@ const EditMatrix = ( props ) => {
 			<MatrixQuestion.Table ref={ tableWrapper } style={ tableStyles }>
 				<MatrixQuestion.Cell />
 
-				{ map( attributes.columns, ( column, index ) => (
-					<MatrixQuestion.Cell
-						key={ column.clientId }
-						className="crowdsignal-forms-matrix-block__column-label"
-						onClick={ handleChangeCurrentColumn( index ) }
-					>
-						<RichText
-							placeholder={ __( 'Column', 'block-editor' ) }
-							onChange={ handleChangeLabel( 'columns', index ) }
-							onRemove={ handleRemoveLabel( 'columns', index ) }
-							onReplace={ noop }
-							onSplit={ handleNewLabel( 'columns', index + 1 ) }
-							value={ column.label }
-						/>
-					</MatrixQuestion.Cell>
-				) ) }
+				{ map( attributes.columns, ( column, index ) => {
+					const classes = classnames(
+						'crowdsignal-forms-matrix-question-block__column-label',
+						{
+							'is-active': index === currentColumn,
+						}
+					);
 
-				{ map( attributes.rows, ( row, index ) => (
-					<Fragment key={ row.clientId }>
+					return (
 						<MatrixQuestion.Cell
-							className="crowdsignal-forms-matrix-block__row-label"
-							onClick={ handleChangeCurrentRow( index ) }
+							as={ Label }
+							key={ column.clientId }
+							className={ classes }
+							onClick={ handleChangeCurrentColumn( index ) }
 						>
 							<RichText
-								placeholder={ __( 'Rows', 'block-editor' ) }
-								onChange={ handleChangeLabel( 'rows', index ) }
-								onRemove={ handleRemoveLabel( 'rows', index ) }
+								placeholder={ __( 'Column', 'block-editor' ) }
+								onChange={ handleChangeLabel(
+									'columns',
+									index
+								) }
+								onRemove={ handleRemoveLabel(
+									'columns',
+									index
+								) }
 								onReplace={ noop }
-								onSplit={ handleNewLabel( 'rows', index + 1 ) }
-								value={ row.label }
+								onSplit={ handleNewLabel(
+									'columns',
+									index + 1
+								) }
+								value={ column.label }
 							/>
 						</MatrixQuestion.Cell>
+					);
+				} ) }
 
-						{ times( attributes.columns.length, ( n ) => (
-							<MatrixQuestion.Cell key={ n }>
-								<FormCheckbox
-									type={
-										attributes.multipleChoice
-											? 'checkbox'
-											: 'radio'
-									}
+				{ map( attributes.rows, ( row, index ) => {
+					const classes = classnames(
+						'crowdsignal-forms-matrix-question-block__row-label',
+						{
+							'is-active': index === currentRow,
+						}
+					);
+
+					return (
+						<Fragment key={ row.clientId }>
+							<MatrixQuestion.Cell
+								as={ Label }
+								className={ classes }
+								onClick={ handleChangeCurrentRow( index ) }
+							>
+								<RichText
+									placeholder={ __( 'Rows', 'block-editor' ) }
+									onChange={ handleChangeLabel(
+										'rows',
+										index
+									) }
+									onRemove={ handleRemoveLabel(
+										'rows',
+										index
+									) }
+									onReplace={ noop }
+									onSplit={ handleNewLabel(
+										'rows',
+										index + 1
+									) }
+									value={ row.label }
 								/>
 							</MatrixQuestion.Cell>
-						) ) }
-					</Fragment>
-				) ) }
+
+							{ times( attributes.columns.length, ( n ) => (
+								<MatrixQuestion.Cell key={ n }>
+									<FormCheckbox
+										type={
+											attributes.multipleChoice
+												? 'checkbox'
+												: 'radio'
+										}
+									/>
+								</MatrixQuestion.Cell>
+							) ) }
+						</Fragment>
+					);
+				} ) }
 			</MatrixQuestion.Table>
 		</QuestionWrapper>
 	);
