@@ -35,7 +35,7 @@ const useBlur = ( onBlur, elements = [] ) => {
 				return;
 			}
 
-			onBlur();
+			onBlur( event );
 		},
 		[ onBlur, ...elements ]
 	);
