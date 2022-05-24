@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { Fragment, RawHTML } from '@wordpress/element';
+import classnames from 'classnames';
 import { join, map, times } from 'lodash';
 
 /**
@@ -14,7 +15,15 @@ import { FormCheckbox, QuestionHeader, QuestionWrapper } from '../components';
  */
 import { MatrixCell, MatrixTable } from './styles';
 
-const MatrixQuestion = ( { attributes } ) => {
+const MatrixQuestion = ( { attributes, className } ) => {
+	const classes = classnames(
+		'crowdsignal-forms-matrix-question-block',
+		className,
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
+
 	const tableStyles = {
 		gridTemplateColumns: join(
 			times( attributes.columns.length + 1, () => '1fr' ),
@@ -27,7 +36,7 @@ const MatrixQuestion = ( { attributes } ) => {
 	};
 
 	return (
-		<QuestionWrapper attributes={ attributes }>
+		<QuestionWrapper attributes={ attributes } className={ classes }>
 			<QuestionHeader>
 				<RawHTML>{ attributes.question }</RawHTML>
 			</QuestionHeader>
