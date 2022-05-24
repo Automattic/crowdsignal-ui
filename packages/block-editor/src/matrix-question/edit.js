@@ -49,7 +49,7 @@ const shiftLabelFocus = ( wrapper, type, index ) =>
 	);
 
 const EditMatrix = ( props ) => {
-	const { attributes, setAttributes } = props;
+	const { attributes, className, setAttributes } = props;
 
 	const [ currentColumn, setCurrentColumn ] = useState( null );
 	const [ currentRow, setCurrentRow ] = useState( null );
@@ -157,6 +157,14 @@ const EditMatrix = ( props ) => {
 		setCurrentRow( index );
 	};
 
+	const blockClasses = classnames(
+		'crowdsignal-forms-matrix-question-block',
+		className,
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
+
 	const tableStyles = {
 		gridTemplateColumns: join(
 			times( attributes.columns.length + 1, () => '1fr' ),
@@ -170,7 +178,7 @@ const EditMatrix = ( props ) => {
 	};
 
 	return (
-		<QuestionWrapper attributes={ attributes }>
+		<QuestionWrapper attributes={ attributes } className={ blockClasses }>
 			<Toolbar
 				currentColumn={ currentColumn }
 				currentRow={ currentRow }
