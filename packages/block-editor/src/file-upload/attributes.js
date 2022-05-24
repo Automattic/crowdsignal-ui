@@ -16,13 +16,21 @@ export default {
 		type: 'string',
 		default: __( 'Choose file', 'block-editor' ),
 	},
-	description: {
+	message: {
 		type: 'string',
 		default: '',
 	},
 	mandatory: {
 		type: 'boolean',
 		default: false,
+	},
+	allowedTypes: {
+		type: 'array',
+		default: [ 'pdf' ],
+	},
+	fileSizeLimit: {
+		type: 'number',
+		default: 5242880,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {

@@ -37,7 +37,7 @@ const StyledButton = styled.button`
 `;
 
 const Button = ( {
-	attributes,
+	attributes = {},
 	children,
 	className,
 	outline,
@@ -66,5 +66,7 @@ const Button = ( {
 		</StyledButton>
 	</StyledButtonWrapper>
 );
+
+Button.Wrapper = StyledButtonWrapper;
 
 export default Button;

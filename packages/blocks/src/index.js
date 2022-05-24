@@ -11,12 +11,13 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
-import UploadBlock from './upload';
+import FileUpload from './file-upload';
 
 export * from './components';
 
 export {
 	CoreEmbed,
+	FileUpload,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
@@ -29,11 +30,11 @@ export {
 	SubmitButton,
 	TextInput,
 	TextQuestion,
-	UploadBlock,
 };
 
 export const projectBlocks = [
 	CoreEmbed,
+	FileUpload,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
@@ -44,7 +45,6 @@ export const projectBlocks = [
 	SubmitButton,
 	TextInput,
 	TextQuestion,
-	UploadBlock,
 ];
 
 export { renderBlocks } from './render-blocks';

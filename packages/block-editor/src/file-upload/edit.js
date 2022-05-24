@@ -8,7 +8,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { Button, FormInputWrapper } from '@crowdsignal/blocks';
+import { FormInputWrapper, FileInput } from '@crowdsignal/blocks';
 import Sidebar from './sidebar';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useClientId } from '@crowdsignal/hooks';
@@ -21,9 +21,13 @@ export default ( props ) => {
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( { [ key ]: value } );
 
-	const classes = classnames( className, 'crowdsignal-forms-upload-block', {
-		[ `justify-${ attributes.justification }` ]: attributes.justification,
-	} );
+	const classes = classnames(
+		className,
+		'crowdsignal-forms-file-upload-block',
+		{
+			'is-required': attributes.mandatory,
+		}
+	);
 
 	return (
 		<FormInputWrapper
@@ -34,26 +38,29 @@ export default ( props ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-upload-block__label">
 				<RichText
 					placeholder={ __( 'Enter form label', 'block-editor' ) }
-					onChange={ ( value ) =>
-						handleChangeAttribute( 'label' )( value )
-					}
+					onChange={ handleChangeAttribute( 'label' ) }
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<Button
+			<FileInput.Button
 				attributes={ attributes }
 				as={ RichText }
 				className={ classes }
 				placeholder={ __( 'Choose file', 'blocks' ) }
 				multiline={ false }
 				preserveWhiteSpace={ false }
-				onChange={ ( value ) =>
-					handleChangeAttribute( 'buttonLabel' )( value )
-				}
+				onChange={ handleChangeAttribute( 'buttonLabel' ) }
 				onReplace={ onReplace }
 				value={ attributes.buttonLabel }
 				allowedFormats={ [] }
 				withoutInteractiveFormatting
+				outline
+			/>
+			<FileInput.Message
+				as={ RichText }
+				value={ attributes.message }
+				onChange={ handleChangeAttribute( 'message' ) }
+				preserveWhiteSpace={ false }
 			/>
 		</FormInputWrapper>
 	);
