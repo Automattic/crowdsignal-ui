@@ -16,6 +16,7 @@ export const MatrixCell = styled.div`
 	box-sizing: border-box;
 	display: inline-flex;
 	justify-content: center;
+	min-width: 0;
 	padding: 16px;
 	text-align: center;
 
