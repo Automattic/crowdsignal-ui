@@ -26,7 +26,7 @@ export default {
 	},
 	allowedTypes: {
 		type: 'array',
-		default: [ 'pdf' ],
+		default: [ 'pdf', 'jpg', 'jpeg', 'png', 'svg', ' mp4' ],
 	},
 	fileSizeLimit: {
 		type: 'number',

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { filter } from 'lodash';
+import { filter, isArray } from 'lodash';
 import { InspectorControls } from '@wordpress/block-editor';
 
 /**
@@ -19,13 +19,14 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 
 	const handleChangeAllowedFiles = ( extension ) => ( value ) => {
 		let allowedTypes = [ ...attributes.allowedTypes ];
+		const extensions = isArray( extension ) ? extension : [ extension ];
 
 		if ( value ) {
-			allowedTypes.push( extension );
+			allowedTypes = [ ...allowedTypes, ...extensions ];
 		} else {
 			allowedTypes = filter(
 				allowedTypes,
-				( type ) => type !== extension
+				( type ) => ! extension.includes( type )
 			);
 		}
 
@@ -65,7 +66,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<ToggleControl
 					label=".jpg"
 					checked={ attributes.allowedTypes.includes( 'jpg' ) }
-					onChange={ handleChangeAllowedFiles( 'jpg' ) }
+					onChange={ handleChangeAllowedFiles( [ 'jpg', 'jpeg' ] ) }
 				/>
 				<ToggleControl
 					label=".png"
