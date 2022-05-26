@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { RawHTML } from '@wordpress/element';
 import classnames from 'classnames';
 
@@ -10,7 +11,6 @@ import classnames from 'classnames';
 import { ErrorMessage, FileInput, FormInputWrapper } from '../components';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useField } from '@crowdsignal/form';
-import { __ } from '@wordpress/i18n';
 
 const UploadBlock = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
