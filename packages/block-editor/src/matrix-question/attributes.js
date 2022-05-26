@@ -17,37 +17,11 @@ export default {
 	},
 	columns: {
 		type: 'array',
-		default: [
-			{
-				clientId: 'a',
-				label: 'A',
-			},
-			{
-				clientId: 'b',
-				label: 'B',
-			},
-			{
-				clientId: 'c',
-				label: 'C',
-			},
-		],
+		default: [ {}, {}, {} ],
 	},
 	rows: {
 		type: 'array',
-		default: [
-			{
-				clientId: 'd',
-				label: '1',
-			},
-			{
-				clientId: 'e',
-				label: '2',
-			},
-			{
-				clientId: 'f',
-				label: '3',
-			},
-		],
+		default: [ {}, {}, {} ],
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
