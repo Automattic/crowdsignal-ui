@@ -75,8 +75,15 @@ const EditMatrix = ( props ) => {
 	useBlur(
 		( clickEvent ) => {
 			if (
-				some( getParentNodes( clickEvent.target ), ( element ) =>
-					element.classList.contains( 'block-editor-block-toolbar' )
+				some(
+					getParentNodes( clickEvent.target ),
+					( element ) =>
+						element.classList.contains(
+							'block-editor-block-toolbar'
+						) ||
+						element.classList.contains(
+							'crowdsignal-forms-matrix-question-block__toolbar-dropdown'
+						)
 				)
 			) {
 				return;
