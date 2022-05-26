@@ -13,9 +13,9 @@ import EditMatrix from './edit';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Matrix Question', 'blocks' ),
-	description: __( 'Enter the matrix', 'blocks' ),
-	category: 'crowdsignal-forms',
+	title: __( 'Matrix Question', 'block-editor' ),
+	description: __( 'Enter the matrix', 'block-editor' ),
+	category: 'crowdsignal-forms/form',
 	edit: EditMatrix,
 	icon: <MatrixQuestionIcon />,
 	attributes,
