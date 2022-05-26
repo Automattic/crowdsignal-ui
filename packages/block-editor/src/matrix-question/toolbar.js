@@ -93,25 +93,22 @@ const MatrixQuestionToolbar = ( {
 			  ];
 
 	return (
-		<>
-			<BlockControls>
-				<Toolbar controls={ multipleChoiceToolbar } />
-			</BlockControls>
+		<BlockControls group="other">
+			<Toolbar controls={ multipleChoiceToolbar } />
+
 			{ ( currentColumn !== null || currentRow !== null ) && (
-				<BlockControls group="other">
-					<ToolbarDropdownMenu
-						hasArrowIndicator
-						icon={ table }
-						label={ __( 'Edit matrix size', 'block-editor' ) }
-						controls={ tableControls }
-						popoverProps={ {
-							className:
-								'crowdsignal-forms-matrix-question-block__toolbar-dropdown',
-						} }
-					/>
-				</BlockControls>
+				<ToolbarDropdownMenu
+					hasArrowIndicator
+					icon={ table }
+					label={ __( 'Edit matrix size', 'block-editor' ) }
+					controls={ tableControls }
+					popoverProps={ {
+						className:
+							'crowdsignal-forms-matrix-question-block__toolbar-dropdown',
+					} }
+				/>
 			) }
-		</>
+		</BlockControls>
 	);
 };
 
