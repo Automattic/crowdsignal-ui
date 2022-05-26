@@ -54,6 +54,7 @@ const FileInput = ( { inputProps, attributes } ) => {
 	};
 
 	const handleFileRemove = () => {
+		inputFile.current.value = '';
 		// This will remove all selected files.
 		// It doesn't seem easy to manage files individually on an input file field.
 		// Since we only support single files ATM, this is not a problem.
