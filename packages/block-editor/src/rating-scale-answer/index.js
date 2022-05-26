@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { RatingScaleAnswer } from '@crowdsignal/blocks';
 import { RatingScaleQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRatingScaleAnswer from './edit';
-
-const name = 'crowdsignal-forms/rating-scale-answer';
 
 const settings = {
 	title: __( 'Answer', 'block-editor' ),
@@ -31,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: RatingScaleAnswer.blockName,
 	settings,
 };

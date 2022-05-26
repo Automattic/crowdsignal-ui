@@ -6,12 +6,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { TextInput } from '@crowdsignal/blocks';
 import { TextInputIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import Edit from './edit';
 import variation from './variations';
-
-const name = 'crowdsignal-forms/text-input';
 
 const settings = {
 	apiVersion: 1,
@@ -38,6 +37,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: TextInput.blockName,
 	settings,
 };

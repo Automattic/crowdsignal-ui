@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { RankingAnswer } from '@crowdsignal/blocks';
 import { RankingQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRankingAnswer from './edit';
-
-const name = 'crowdsignal-forms/ranking-answer';
 
 const settings = {
 	title: __( 'Answer', 'block-editor' ),
@@ -31,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: RankingAnswer.blockName,
 	settings,
 };

@@ -7,11 +7,10 @@ import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
+import { RankingQuestion } from '@crowdsignal/blocks';
 import { RankingQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRakingQuestionBlock from './edit';
-
-const name = 'crowdsignal-forms/ranking-question';
 
 const settings = {
 	apiVersion: 1,
@@ -73,6 +72,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: RankingQuestion.blockName,
 	settings,
 };

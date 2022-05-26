@@ -55,4 +55,6 @@ const SubmitButton = ( { attributes, className } ) => {
 	);
 };
 
+SubmitButton.blockName = 'crowdsignal-forms/submit-button';
+
 export default SubmitButton;

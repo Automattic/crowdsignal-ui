@@ -12,8 +12,6 @@ import { RatingScaleQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditRatingScaleQuestion from './edit';
 
-const name = 'crowdsignal-forms/rating-scale-question';
-
 const settings = {
 	apiVersion: 1,
 	title: __( 'Rating Question', 'block-editor' ),
@@ -93,6 +91,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: RatingScaleQuestion.blockName,
 	settings,
 };

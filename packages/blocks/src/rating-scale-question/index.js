@@ -52,5 +52,6 @@ const RatingScaleQuestion = ( { attributes, children, className } ) => {
 
 RatingScaleQuestion.Context = Context;
 RatingScaleQuestion.Style = Style;
+RatingScaleQuestion.blockName = 'crowdsignal-forms/rating-scale-question';
 
 export default RatingScaleQuestion;

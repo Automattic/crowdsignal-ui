@@ -6,11 +6,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { SubmitButton } from '@crowdsignal/blocks';
 import { SubmitButtonIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditSubmitButton from './edit';
-
-const name = 'crowdsignal-forms/submit-button';
 
 const settings = {
 	title: __( 'Submit Button', 'block-editor' ),
@@ -37,6 +36,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: SubmitButton.blockName,
 	settings,
 };

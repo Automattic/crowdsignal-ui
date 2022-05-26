@@ -38,4 +38,6 @@ const RankingAnswer = ( { attributes, className, draggable } ) => {
 	);
 };
 
+RankingAnswer.blockName = 'crowdsignal-forms/ranking-answer';
+
 export default RankingAnswer;

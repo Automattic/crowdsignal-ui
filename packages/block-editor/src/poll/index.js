@@ -7,10 +7,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { Poll } from '@crowdsignal/blocks';
 import attributes from './attributes';
 import EditPoll from './edit';
-
-const name = 'crowdsignal-forms/poll';
 
 const settings = {
 	apiVersion: 1,
@@ -31,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: Poll.blockName,
 	settings,
 };

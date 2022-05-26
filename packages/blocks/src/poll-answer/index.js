@@ -25,4 +25,6 @@ const PollAnswer = ( { attributes, className } ) => {
 	);
 };
 
+PollAnswer.blockName = 'crowdsignal-forms/poll-answer';
+
 export default PollAnswer;

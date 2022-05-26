@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useState, useEffect } from '@wordpress/element';
+import { reduce } from 'lodash';
 import classnames from 'classnames';
 
 /**
@@ -9,16 +10,7 @@ import classnames from 'classnames';
  */
 import {
 	ContentWrapper,
-	CoreEmbed,
-	MultipleChoiceAnswer,
-	MultipleChoiceQuestion,
-	RankingAnswer,
-	RankingQuestion,
-	RatingScaleAnswer,
-	RatingScaleQuestion,
-	SubmitButton,
-	TextInput,
-	TextQuestion,
+	projectBlocks,
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
@@ -124,19 +116,13 @@ const App = ( {
 		return 'Wait...';
 	}
 
-	const renderContent = () =>
-		renderBlocks( content, {
-			'core/embed': CoreEmbed,
-			'crowdsignal-forms/multiple-choice-answer': MultipleChoiceAnswer,
-			'crowdsignal-forms/multiple-choice-question': MultipleChoiceQuestion,
-			'crowdsignal-forms/ranking-answer': RankingAnswer,
-			'crowdsignal-forms/ranking-question': RankingQuestion,
-			'crowdsignal-forms/rating-scale-answer': RatingScaleAnswer,
-			'crowdsignal-forms/rating-scale-question': RatingScaleQuestion,
-			'crowdsignal-forms/submit-button': SubmitButton,
-			'crowdsignal-forms/text-input': TextInput,
-			'crowdsignal-forms/text-question': TextQuestion,
-		} );
+	const blockMap = reduce(
+		projectBlocks,
+		( list, block ) => ( { ...list, [ block.blockName ]: block } ),
+		{}
+	);
+
+	const renderContent = () => renderBlocks( content, blockMap );
 
 	const contentClasses = classnames(
 		'wp-embed-responsive',

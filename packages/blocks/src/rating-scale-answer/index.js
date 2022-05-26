@@ -52,4 +52,6 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 	);
 };
 
+RatingScaleAnswer.blockName = 'crowdsignal-forms/rating-scale-answer';
+
 export default RatingScaleAnswer;

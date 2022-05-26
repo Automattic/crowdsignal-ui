@@ -12,8 +12,6 @@ import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditMultipleChoiceQuestion from './edit';
 
-const name = 'crowdsignal-forms/multiple-choice-question';
-
 const settings = {
 	apiVersion: 1,
 	title: __( 'Multiple Choice Question', 'block-editor' ),
@@ -93,6 +91,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: MultipleChoiceQuestion.blockName,
 	settings,
 };

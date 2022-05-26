@@ -64,4 +64,6 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	);
 };
 
+MultipleChoiceAnswer.blockName = 'crowdsignal-forms/multiple-choice-answer';
+
 export default MultipleChoiceAnswer;
