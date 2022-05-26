@@ -1,14 +1,17 @@
 /**
  * External dependencies
  */
-import { Fragment, RawHTML } from '@wordpress/element';
+import { RawHTML } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import { join, map, times } from 'lodash';
+import { filter, first, isEmpty, join, map, times } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { FormCheckbox, QuestionHeader, QuestionWrapper } from '../components';
+import { useValidation } from '@crowdsignal/form';
+import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
+import Row from './row';
 
 /**
  * Style dependencies
@@ -16,11 +19,30 @@ import { FormCheckbox, QuestionHeader, QuestionWrapper } from '../components';
 import { MatrixCell, MatrixTable } from './styles';
 
 const MatrixQuestion = ( { attributes, className } ) => {
+	const errors = filter(
+		map( attributes.rows, ( row ) => {
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			const { error } = useValidation( {
+				fieldName: `q_${ attributes.clientId }[${ row.clientId }]${
+					attributes.multipleChoice ? '[]' : ''
+				}`,
+				validation: ( value ) => {
+					if ( attributes.mandatory && isEmpty( value ) ) {
+						return __( 'This question is required', 'blocks' );
+					}
+				},
+			} );
+
+			return error;
+		} )
+	);
+
 	const classes = classnames(
 		'crowdsignal-forms-matrix-question-block',
 		className,
 		{
 			'is-required': attributes.mandatory,
+			'is-error': ! isEmpty( errors ),
 		}
 	);
 
@@ -47,32 +69,26 @@ const MatrixQuestion = ( { attributes, className } ) => {
 				{ map( attributes.columns, ( column ) => (
 					<MatrixCell
 						key={ column.clientId }
-						className="crowdsignal-forms-matrix-block__column-label"
+						className="crowdsignal-forms-matrix-question-block__column-label"
 					>
 						<RawHTML>{ column.label }</RawHTML>
 					</MatrixCell>
 				) ) }
 
 				{ map( attributes.rows, ( row ) => (
-					<Fragment key={ row.clientId }>
-						<MatrixCell className="crowdsignal-forms-matrix-block__row-label">
-							<RawHTML>{ row.label }</RawHTML>
-						</MatrixCell>
-
-						{ times( attributes.columns.length, ( n ) => (
-							<MatrixCell key={ n }>
-								<FormCheckbox
-									type={
-										attributes.multipleChoice
-											? 'checkbox'
-											: 'radio'
-									}
-								/>
-							</MatrixCell>
-						) ) }
-					</Fragment>
+					<Row
+						key={ row.clientId }
+						questionClientId={ attributes.clientId }
+						row={ row }
+						columns={ attributes.columns }
+						multipleChoice={ attributes.multipleChoice }
+					/>
 				) ) }
 			</MatrixTable>
+
+			{ ! isEmpty( errors ) && (
+				<ErrorMessage>{ first( errors ) }</ErrorMessage>
+			) }
 		</QuestionWrapper>
 	);
 };

@@ -4,6 +4,7 @@
 import { RichText } from '@wordpress/block-editor';
 import {
 	Fragment,
+	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState,
@@ -22,7 +23,7 @@ import {
 	QuestionHeader,
 	QuestionWrapper,
 } from '@crowdsignal/blocks';
-import { useBlur } from '@crowdsignal/hooks';
+import { useBlur, useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 import Toolbar from './toolbar';
 
@@ -86,6 +87,27 @@ const EditMatrix = ( props ) => {
 		},
 		[ tableWrapper ]
 	);
+
+	useClientId( props );
+	useEffect( () => {
+		if (
+			! some( attributes.columns, ( column ) => ! column.clientId ) &&
+			! some( attributes.rows, ( row ) => ! row.clientId )
+		) {
+			return;
+		}
+
+		setAttributes( {
+			columns: map( attributes.columns, ( column ) => ( {
+				...column,
+				clientId: column.clientId || uuid(),
+			} ) ),
+			rows: map( attributes.rows, ( row ) => ( {
+				...row,
+				clientId: row.clientId || uuid(),
+			} ) ),
+		} );
+	}, [] );
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
@@ -250,7 +272,7 @@ const EditMatrix = ( props ) => {
 								onClick={ handleChangeCurrentRow( index ) }
 							>
 								<RichText
-									placeholder={ __( 'Rows', 'block-editor' ) }
+									placeholder={ __( 'Row', 'block-editor' ) }
 									onChange={ handleChangeLabel(
 										'rows',
 										index
