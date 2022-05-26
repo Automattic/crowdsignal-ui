@@ -31,6 +31,10 @@ const CheckboxWrapper = styled.div`
 	transform: translateY( 1px );
 	width: 1em;
 
+	&:last-child {
+		margin-right: 0;
+	}
+
 	.crowdsignal-forms-button & {
 		transform: none;
 	}

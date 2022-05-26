@@ -1,4 +1,5 @@
 import CoreEmbed from './core-embed';
+import MatrixQuestion from './matrix-question';
 import MultipleChoiceAnswer from './multiple-choice-answer';
 import MultipleChoiceQuestion from './multiple-choice-question';
 import Poll from './poll';
@@ -15,6 +16,7 @@ export * from './components';
 
 export {
 	CoreEmbed,
+	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	Poll,
@@ -30,6 +32,7 @@ export {
 
 export const projectBlocks = [
 	CoreEmbed,
+	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
 	RankingAnswer,

@@ -1,3 +1,4 @@
+export { default as matrixQuestionBlock } from './matrix-question';
 export { default as multipleChoiceAnswerBlock } from './multiple-choice-answer';
 export { default as multipleChoiceQuestionBlock } from './multiple-choice-question';
 export { default as rankingAnswerBlock } from './ranking-answer';
