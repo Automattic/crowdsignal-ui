@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { map } from 'lodash';
 import { useRef } from '@wordpress/element';
 import styled from '@emotion/styled';
@@ -26,12 +26,12 @@ const FileInputButton = styled( Button )`
 
 const FileInputMessage = styled.span`
 	padding: 10px 16px;
-	border: 1px solid #818181;
+	border: 1px solid var( --color-neutral-40 );
 	border-radius: 2px;
 	font-weight: 400;
 	font-size: 13px;
 	line-height: 150%;
-	color: #818181;
+	color: var( --color-neutral-40 );
 `;
 
 const FileInputFile = styled( FileInputMessage )`
@@ -61,6 +61,16 @@ const FileInput = ( { inputProps, attributes } ) => {
 		onChange( { target: { value: null } } );
 	};
 
+	let outputMessage = attributes.message;
+
+	if ( ! attributes.message ) {
+		outputMessage = sprintf(
+			// translators: %s: allowed file types e.g: pdf, jpg, png
+			__( 'Supported file formats: %s - max. size 5 mb', 'blocks' ),
+			attributes.allowedTypes.join( ', ' )
+		);
+	}
+
 	return (
 		<FileInputWrapper>
 			<input { ...inputProps } ref={ inputFile } />
@@ -77,7 +87,7 @@ const FileInput = ( { inputProps, attributes } ) => {
 					</FileInputFile>
 				) ) }
 			{ ! files.length && (
-				<FileInputMessage>{ attributes.message }</FileInputMessage>
+				<FileInputMessage>{ outputMessage }</FileInputMessage>
 			) }
 		</FileInputWrapper>
 	);

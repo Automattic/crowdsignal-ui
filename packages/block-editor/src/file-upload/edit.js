@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { RichText } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import classnames from 'classnames';
 
 /**
@@ -27,6 +27,12 @@ export default ( props ) => {
 		{
 			'is-required': attributes.mandatory,
 		}
+	);
+
+	const messagePlaceholder = sprintf(
+		// translators: %s: allowed file types e.g: pdf, jpg, png
+		__( 'Supported file formats: %s - max. size 5 mb', 'block-editor' ),
+		attributes.allowedTypes.join( ', ' )
 	);
 
 	return (
@@ -58,6 +64,7 @@ export default ( props ) => {
 			/>
 			<FileInput.Message
 				as={ RichText }
+				placeholder={ messagePlaceholder }
 				value={ attributes.message }
 				onChange={ handleChangeAttribute( 'message' ) }
 				preserveWhiteSpace={ false }

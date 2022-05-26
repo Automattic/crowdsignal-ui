@@ -18,7 +18,6 @@ export default {
 	},
 	message: {
 		type: 'string',
-		default: '',
 	},
 	mandatory: {
 		type: 'boolean',
@@ -26,7 +25,7 @@ export default {
 	},
 	allowedTypes: {
 		type: 'array',
-		default: [ 'pdf', 'jpg', 'jpeg', 'png', 'svg', ' mp4' ],
+		default: [ 'pdf', 'jpg', 'jpeg', 'png', 'svg', 'mp4' ],
 	},
 	fileSizeLimit: {
 		type: 'number',
