@@ -31,3 +31,22 @@ export const Label = styled.div`
 		width: var( --crowdsignal-forms-matrix-question-block-table-width );
 	}
 `;
+
+export const PlaceholderForm = styled.form`
+	align-items: flex-end;
+	display: flex;
+	flex-direction: row;
+`;
+
+export const PlaceholderInput = styled.div`
+	margin-right: 8px;
+	width: 112px;
+
+	input[type='number'] {
+		height: 36px;
+	}
+
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+`;

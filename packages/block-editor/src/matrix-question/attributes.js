@@ -17,11 +17,11 @@ export default {
 	},
 	columns: {
 		type: 'array',
-		default: [ {}, {}, {} ],
+		default: [],
 	},
 	rows: {
 		type: 'array',
-		default: [ {}, {}, {} ],
+		default: [],
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {

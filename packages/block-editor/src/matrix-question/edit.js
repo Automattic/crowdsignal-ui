@@ -4,7 +4,6 @@
 import { RichText } from '@wordpress/block-editor';
 import {
 	Fragment,
-	useEffect,
 	useLayoutEffect,
 	useRef,
 	useState,
@@ -12,7 +11,18 @@ import {
 import { __ } from '@wordpress/i18n';
 import { v4 as uuid } from 'uuid';
 import classnames from 'classnames';
-import { filter, join, map, noop, slice, some, tap, trim, times } from 'lodash';
+import {
+	filter,
+	isEmpty,
+	join,
+	map,
+	noop,
+	slice,
+	some,
+	tap,
+	trim,
+	times,
+} from 'lodash';
 
 /**
  * Internal dependencies
@@ -24,6 +34,7 @@ import {
 	QuestionWrapper,
 } from '@crowdsignal/blocks';
 import { useBlur, useClientId } from '@crowdsignal/hooks';
+import MatrixQuestionPlaceholder from './placeholder';
 import Sidebar from './sidebar';
 import Toolbar from './toolbar';
 
@@ -59,7 +70,13 @@ const EditMatrix = ( props ) => {
 
 	const tableWrapper = useRef();
 
+	useClientId( props );
+
 	useLayoutEffect( () => {
+		if ( isEmpty( attributes.columns ) || isEmpty( attributes.rows ) ) {
+			return;
+		}
+
 		const container = tableWrapper.current.getBoundingClientRect();
 
 		setTableVars( {
@@ -87,27 +104,6 @@ const EditMatrix = ( props ) => {
 		},
 		[ tableWrapper ]
 	);
-
-	useClientId( props );
-	useEffect( () => {
-		if (
-			! some( attributes.columns, ( column ) => ! column.clientId ) &&
-			! some( attributes.rows, ( row ) => ! row.clientId )
-		) {
-			return;
-		}
-
-		setAttributes( {
-			columns: map( attributes.columns, ( column ) => ( {
-				...column,
-				clientId: column.clientId || uuid(),
-			} ) ),
-			rows: map( attributes.rows, ( row ) => ( {
-				...row,
-				clientId: row.clientId || uuid(),
-			} ) ),
-		} );
-	}, [] );
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
@@ -198,6 +194,10 @@ const EditMatrix = ( props ) => {
 		),
 		...tableVars,
 	};
+
+	if ( isEmpty( attributes.columns ) || isEmpty( attributes.rows ) ) {
+		return <MatrixQuestionPlaceholder { ...props } />;
+	}
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ blockClasses }>
