@@ -10,6 +10,7 @@ import { flatten, includes, map } from 'lodash';
  * Internal dependencies
  */
 import {
+	matrixQuestionBlock,
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
 	rankingAnswerBlock,
@@ -22,6 +23,7 @@ import {
 
 const FORM_BLOCKS = map(
 	[
+		matrixQuestionBlock,
 		multipleChoiceAnswerBlock,
 		multipleChoiceQuestionBlock,
 		rankingAnswerBlock,
