@@ -28,7 +28,8 @@ const settings = {
 	edit: Upload,
 	attributes,
 	supports: {
-		align: [ 'wide', 'full' ],
+		html: false,
+		reusable: false,
 	},
 	example: {
 		attributes: {
