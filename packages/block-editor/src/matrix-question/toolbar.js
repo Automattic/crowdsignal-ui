@@ -55,58 +55,62 @@ const MatrixQuestionToolbar = ( {
 		} )
 	);
 
-	const tableControls = [
-		{
-			icon: tableRowBefore,
-			title: __( 'Insert row before' ),
-			isDisabled: currentRow === null,
-			onClick: addLabel( 'rows', currentRow ),
-		},
-		{
-			icon: tableRowAfter,
-			title: __( 'Insert row after' ),
-			isDisabled: currentRow === null,
-			onClick: addLabel( 'rows', currentRow + 1 ),
-		},
-		{
-			icon: tableRowDelete,
-			title: __( 'Delete row' ),
-			isDisabled: currentRow === null,
-			onClick: removeLabel( 'rows', currentRow ),
-		},
-		{
-			icon: tableColumnBefore,
-			title: __( 'Insert column before' ),
-			isDisabled: currentColumn === null,
-			onClick: addLabel( 'columns', currentColumn ),
-		},
-		{
-			icon: tableColumnAfter,
-			title: __( 'Insert column after' ),
-			isDisabled: currentColumn === null,
-			onClick: addLabel( 'columns', currentColumn + 1 ),
-		},
-		{
-			icon: tableColumnDelete,
-			title: __( 'Delete column' ),
-			isDisabled: currentColumn === null,
-			onClick: removeLabel( 'columns', currentColumn ),
-		},
-	];
+	const tableControls =
+		currentRow !== null
+			? [
+					{
+						icon: tableRowBefore,
+						title: __( 'Insert row before' ),
+						onClick: addLabel( 'rows', currentRow ),
+					},
+					{
+						icon: tableRowAfter,
+						title: __( 'Insert row after' ),
+						onClick: addLabel( 'rows', currentRow + 1 ),
+					},
+					{
+						icon: tableRowDelete,
+						title: __( 'Delete row' ),
+						onClick: removeLabel( 'rows', currentRow ),
+					},
+			  ]
+			: [
+					{
+						icon: tableColumnBefore,
+						title: __( 'Insert column before' ),
+						onClick: addLabel( 'columns', currentColumn ),
+					},
+					{
+						icon: tableColumnAfter,
+						title: __( 'Insert column after' ),
+						onClick: addLabel( 'columns', currentColumn + 1 ),
+					},
+					{
+						icon: tableColumnDelete,
+						title: __( 'Delete column' ),
+						onClick: removeLabel( 'columns', currentColumn ),
+					},
+			  ];
 
 	return (
 		<>
 			<BlockControls>
 				<Toolbar controls={ multipleChoiceToolbar } />
 			</BlockControls>
-			<BlockControls group="other">
-				<ToolbarDropdownMenu
-					hasArrowIndicator
-					icon={ table }
-					label={ __( 'Edit matrix size', 'block-editor' ) }
-					controls={ tableControls }
-				/>
-			</BlockControls>
+			{ ( currentColumn !== null || currentRow !== null ) && (
+				<BlockControls group="other">
+					<ToolbarDropdownMenu
+						hasArrowIndicator
+						icon={ table }
+						label={ __( 'Edit matrix size', 'block-editor' ) }
+						controls={ tableControls }
+						popoverProps={ {
+							className:
+								'crowdsignal-forms-matrix-question-block__toolbar-dropdown',
+						} }
+					/>
+				</BlockControls>
+			) }
 		</>
 	);
 };
