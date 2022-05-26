@@ -160,7 +160,7 @@ export const EditorWrapper = styled.div`
 			}
 
 			.file-size-limit-hint {
-				color: #757575;
+				color: var( --color-neutral-40 );
 			}
 		}
 	}
