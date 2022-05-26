@@ -13,7 +13,7 @@ import Upload from './edit';
 const name = 'crowdsignal-forms/upload-block';
 
 const settings = {
-	title: __( 'File Upload Form', 'block-editor' ),
+	title: __( 'Upload File Form', 'block-editor' ),
 	description: __(
 		'Allow people to file-upload and share a file with you.',
 		'block-editor'
@@ -23,6 +23,7 @@ const settings = {
 		__( 'upload', 'block-editor' ),
 		__( 'file', 'block-editor' ),
 		__( 'form', 'block-editor' ),
+		__( 'attachment', 'block-editor' ),
 	],
 	icon: <FileUploadIcon />,
 	edit: Upload,
