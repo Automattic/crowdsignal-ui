@@ -13,6 +13,7 @@ export const Label = styled.div`
 		content: '';
 		display: block;
 		height: var( --crowdsignal-forms-matrix-question-block-table-height );
+		pointer-events: none;
 		position: absolute;
 		top: 2px;
 		left: 2px;
@@ -25,6 +26,7 @@ export const Label = styled.div`
 		content: '';
 		display: block;
 		height: calc( 100% - 4px );
+		pointer-events: none;
 		position: absolute;
 		top: 2px;
 		left: 2px;
