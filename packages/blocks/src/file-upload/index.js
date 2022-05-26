@@ -12,7 +12,7 @@ import { ErrorMessage, FileInput, FormInputWrapper } from '../components';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useField } from '@crowdsignal/form';
 
-const UploadBlock = ( { attributes, className } ) => {
+const FileUpload = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }_upload`,
 		type: 'file',
@@ -64,6 +64,6 @@ const UploadBlock = ( { attributes, className } ) => {
 	);
 };
 
-UploadBlock.blockName = 'crowdsignal-forms/upload-block';
+FileUpload.blockName = 'crowdsignal-forms/file-upload-block';
 
-export default UploadBlock;
+export default FileUpload;

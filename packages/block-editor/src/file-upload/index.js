@@ -9,8 +9,7 @@ import { __ } from '@wordpress/i18n';
 import { FileUploadIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import Upload from './edit';
-
-const name = 'crowdsignal-forms/upload-block';
+import { FileUpload } from '@crowdsignal/blocks';
 
 const settings = {
 	title: __( 'Upload File Form', 'block-editor' ),
@@ -45,6 +44,6 @@ const settings = {
 };
 
 export default {
-	name,
+	name: FileUpload.blockName,
 	settings,
 };
