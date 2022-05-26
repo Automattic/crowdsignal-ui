@@ -188,14 +188,18 @@ const EditMatrix = ( props ) => {
 	);
 
 	const tableStyles = {
-		gridTemplateColumns: join(
-			times( attributes.columns.length + 1, () => '1fr' ),
-			' '
-		),
-		gridTemplateRows: join(
-			times( attributes.rows.length + 1, () => '1fr' ),
-			' '
-		),
+		gridTemplateColumns:
+			'auto ' +
+			join(
+				times( attributes.columns.length, () => '1fr' ),
+				' '
+			),
+		gridTemplateRows:
+			'auto ' +
+			join(
+				times( attributes.rows.length, () => '1fr' ),
+				' '
+			),
 		...tableVars,
 	};
 
