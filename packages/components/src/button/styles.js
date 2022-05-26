@@ -102,6 +102,7 @@ export const Button = styled.button`
 		background-color: transparent;
 		padding-left: 6px;
 		padding-right: 6px;
+		box-shadow: inset 0 0 0 1px var( --color-text );
 
 		&:hover {
 			box-shadow: inset 0 0 0 1px var( --color-text );
