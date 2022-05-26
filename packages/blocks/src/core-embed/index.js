@@ -65,6 +65,6 @@ const CoreEmbed = ( { attributes } ) => {
 	);
 };
 
-CoreEmbed.BlockName = 'core/embed';
+CoreEmbed.blockName = 'core/embed';
 
 export default CoreEmbed;

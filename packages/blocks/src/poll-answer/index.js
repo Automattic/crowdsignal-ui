@@ -25,6 +25,6 @@ const PollAnswer = ( { attributes, className } ) => {
 	);
 };
 
-PollAnswer.BlockName = 'crowdsignal-forms/poll-answer';
+PollAnswer.blockName = 'crowdsignal-forms/poll-answer';
 
 export default PollAnswer;

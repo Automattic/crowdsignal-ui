@@ -91,6 +91,6 @@ const settings = {
 };
 
 export default {
-	name: MultipleChoiceQuestion.BlockName,
+	name: MultipleChoiceQuestion.blockName,
 	settings,
 };

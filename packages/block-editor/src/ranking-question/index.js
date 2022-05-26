@@ -72,6 +72,6 @@ const settings = {
 };
 
 export default {
-	name: RankingQuestion.BlockName,
+	name: RankingQuestion.blockName,
 	settings,
 };

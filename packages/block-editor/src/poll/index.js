@@ -30,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name: Poll.BlockName,
+	name: Poll.blockName,
 	settings,
 };

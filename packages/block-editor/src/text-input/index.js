@@ -37,6 +37,6 @@ const settings = {
 };
 
 export default {
-	name: TextInput.BlockName,
+	name: TextInput.blockName,
 	settings,
 };

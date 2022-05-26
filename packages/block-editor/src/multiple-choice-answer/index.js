@@ -30,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name: MultipleChoiceAnswer.BlockName,
+	name: MultipleChoiceAnswer.blockName,
 	settings,
 };

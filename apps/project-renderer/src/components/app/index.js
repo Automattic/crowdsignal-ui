@@ -118,7 +118,7 @@ const App = ( {
 
 	const blockMap = reduce(
 		projectBlocks,
-		( list, block ) => ( { ...list, [ block.BlockName ]: block } ),
+		( list, block ) => ( { ...list, [ block.blockName ]: block } ),
 		{}
 	);
 

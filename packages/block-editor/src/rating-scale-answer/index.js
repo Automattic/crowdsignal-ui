@@ -30,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name: RatingScaleAnswer.BlockName,
+	name: RatingScaleAnswer.blockName,
 	settings,
 };

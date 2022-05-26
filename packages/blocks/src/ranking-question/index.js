@@ -80,6 +80,6 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 };
 
 RankingQuestion.Context = Context;
-RankingQuestion.BlockName = 'crowdsignal-forms/ranking-question';
+RankingQuestion.blockName = 'crowdsignal-forms/ranking-question';
 
 export default RankingQuestion;

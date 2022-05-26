@@ -54,6 +54,6 @@ const TextQuestion = ( { attributes, className } ) => {
 	);
 };
 
-TextQuestion.BlockName = 'crowdsignal-forms/text-question';
+TextQuestion.blockName = 'crowdsignal-forms/text-question';
 
 export default TextQuestion;

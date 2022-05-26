@@ -40,6 +40,6 @@ const settings = {
 };
 
 export default {
-	name: TextQuestion.BlockName,
+	name: TextQuestion.blockName,
 	settings,
 };

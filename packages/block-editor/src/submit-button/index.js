@@ -36,6 +36,6 @@ const settings = {
 };
 
 export default {
-	name: SubmitButton.BlockName,
+	name: SubmitButton.blockName,
 	settings,
 };

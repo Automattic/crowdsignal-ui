@@ -30,6 +30,6 @@ const settings = {
 };
 
 export default {
-	name: RankingAnswer.BlockName,
+	name: RankingAnswer.blockName,
 	settings,
 };

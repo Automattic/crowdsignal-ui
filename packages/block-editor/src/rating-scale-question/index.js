@@ -91,6 +91,6 @@ const settings = {
 };
 
 export default {
-	name: RatingScaleQuestion.BlockName,
+	name: RatingScaleQuestion.blockName,
 	settings,
 };

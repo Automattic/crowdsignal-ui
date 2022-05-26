@@ -20,6 +20,6 @@ const settings = {
 };
 
 export default {
-	name: PollAnswer.BlockName,
+	name: PollAnswer.blockName,
 	settings,
 };

@@ -61,6 +61,6 @@ const TextInput = ( { attributes, className } ) => {
 	);
 };
 
-TextInput.BlockName = 'crowdsignal-forms/text-input';
+TextInput.blockName = 'crowdsignal-forms/text-input';
 
 export default TextInput;

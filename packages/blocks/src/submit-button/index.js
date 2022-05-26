@@ -55,6 +55,6 @@ const SubmitButton = ( { attributes, className } ) => {
 	);
 };
 
-SubmitButton.BlockName = 'crowdsignal-forms/submit-button';
+SubmitButton.blockName = 'crowdsignal-forms/submit-button';
 
 export default SubmitButton;

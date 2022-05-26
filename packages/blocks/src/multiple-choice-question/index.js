@@ -51,6 +51,6 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 
 MultipleChoiceQuestion.Context = Context;
 MultipleChoiceQuestion.Style = Style;
-MultipleChoiceQuestion.BlockName = 'crowdsignal-forms/multiple-choice-question';
+MultipleChoiceQuestion.blockName = 'crowdsignal-forms/multiple-choice-question';
 
 export default MultipleChoiceQuestion;

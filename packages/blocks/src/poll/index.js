@@ -30,6 +30,6 @@ const Poll = ( { attributes, className, children } ) => {
 	);
 };
 
-Poll.BlockName = 'crowdsignal-forms/poll';
+Poll.blockName = 'crowdsignal-forms/poll';
 
 export default Poll;
