@@ -39,7 +39,9 @@ export const useField = ( {
 				  );
 		} else if ( type === 'file' ) {
 			newValue = event.target.files;
+			setFieldValue( formName, fieldName, newValue );
 			validateField( newValue );
+			return;
 		}
 
 		setFieldValue( formName, fieldName, newValue );

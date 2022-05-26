@@ -17,19 +17,22 @@ const UploadBlock = ( { attributes, className } ) => {
 		name: `q_${ attributes.clientId }_upload`,
 		type: 'file',
 		validation: ( files ) => {
-			if ( attributes.mandatory && files.length === 0 ) {
+			if ( attributes.mandatory && ( ! files || files.length === 0 ) ) {
 				return __( 'This field is required', 'blocks' );
 			}
 
-			if ( files[ 0 ].size > attributes.fileSizeLimit ) {
+			if ( files && files[ 0 ].size > attributes.fileSizeLimit ) {
 				return __(
 					'File size limit exceeded. Max allowed size is 5MB',
 					'blocks'
 				);
 			}
 
-			const extension = files[ 0 ].name.split( '.' ).pop();
-			if ( ! attributes.allowedTypes.includes( extension ) ) {
+			const extension = files && files[ 0 ].name.split( '.' ).pop();
+			if (
+				extension &&
+				! attributes.allowedTypes.includes( extension )
+			) {
 				return __(
 					'File type not allowed. Please choose another file',
 					'blocks'
