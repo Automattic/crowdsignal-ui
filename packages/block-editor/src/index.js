@@ -1,4 +1,4 @@
-export { default as fileUploadBlock } from './file-upload';
+export { default as fileInputBlock } from './file-input';
 export { default as matrixQuestionBlock } from './matrix-question';
 export { default as multipleChoiceAnswerBlock } from './multiple-choice-answer';
 export { default as multipleChoiceQuestionBlock } from './multiple-choice-question';

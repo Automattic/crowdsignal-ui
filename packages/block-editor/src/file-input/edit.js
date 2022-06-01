@@ -8,7 +8,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { FormInputWrapper, FileInput } from '@crowdsignal/blocks';
+import { FormInputWrapper, FormFileInput } from '@crowdsignal/blocks';
 import Sidebar from './sidebar';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useClientId } from '@crowdsignal/hooks';
@@ -23,7 +23,7 @@ export default ( props ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-file-upload-block',
+		'crowdsignal-forms-file-input-block',
 		{
 			'is-required': attributes.mandatory,
 		}
@@ -41,14 +41,14 @@ export default ( props ) => {
 			style={ { ...useColorStyles( attributes ) } }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-upload-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-file-input-block__label">
 				<RichText
 					placeholder={ __( 'Enter form label', 'block-editor' ) }
 					onChange={ handleChangeAttribute( 'label' ) }
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FileInput.Button
+			<FormFileInput.Button
 				attributes={ attributes }
 				as={ RichText }
 				className={ classes }
@@ -62,7 +62,7 @@ export default ( props ) => {
 				withoutInteractiveFormatting
 				outline
 			/>
-			<FileInput.Message
+			<FormFileInput.Message
 				as={ RichText }
 				placeholder={ messagePlaceholder }
 				value={ attributes.message }

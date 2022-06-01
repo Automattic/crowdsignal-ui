@@ -8,11 +8,11 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { ErrorMessage, FileInput, FormInputWrapper } from '../components';
+import { ErrorMessage, FormFileInput, FormInputWrapper } from '../components';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useField } from '@crowdsignal/form';
 
-const FileUpload = ( { attributes, className } ) => {
+const FileInput = ( { attributes, className } ) => {
 	const { inputProps, error } = useField( {
 		name: `q_${ attributes.clientId }_upload`,
 		type: 'file',
@@ -43,7 +43,7 @@ const FileUpload = ( { attributes, className } ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-file-upload-block',
+		'crowdsignal-forms-file-input-block',
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
@@ -55,15 +55,18 @@ const FileUpload = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-upload-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-file-input-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<FileInput attributes={ attributes } inputProps={ inputProps } />
+			<FormFileInput
+				attributes={ attributes }
+				inputProps={ inputProps }
+			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
 };
 
-FileUpload.blockName = 'crowdsignal-forms/file-upload-block';
+FileInput.blockName = 'crowdsignal-forms/file-input';
 
-export default FileUpload;
+export default FileInput;

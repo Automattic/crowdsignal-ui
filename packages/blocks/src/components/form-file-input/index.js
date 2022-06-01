@@ -44,7 +44,7 @@ const FileInputFileRemove = styled.a`
 	display: block;
 `;
 
-const FileInput = ( { inputProps, attributes } ) => {
+const FormFileInput = ( { inputProps, attributes } ) => {
 	const { files, onChange } = inputProps;
 	const inputFile = useRef( null );
 
@@ -94,8 +94,8 @@ const FileInput = ( { inputProps, attributes } ) => {
 	);
 };
 
-FileInput.Wrapper = FileInputWrapper;
-FileInput.Button = FileInputButton;
-FileInput.Message = FileInputMessage;
+FormFileInput.Wrapper = FileInputWrapper;
+FormFileInput.Button = FileInputButton;
+FormFileInput.Message = FileInputMessage;
 
-export default FileInput;
+export default FormFileInput;

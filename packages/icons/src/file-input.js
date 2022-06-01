@@ -1,4 +1,4 @@
-export const FileUploadIcon = () => (
+export const FileInputIcon = () => (
 	<svg
 		width="24"
 		height="24"

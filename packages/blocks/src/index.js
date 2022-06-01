@@ -1,4 +1,5 @@
 import CoreEmbed from './core-embed';
+import FileInput from './file-input';
 import MatrixQuestion from './matrix-question';
 import MultipleChoiceAnswer from './multiple-choice-answer';
 import MultipleChoiceQuestion from './multiple-choice-question';
@@ -11,13 +12,12 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
-import FileUpload from './file-upload';
 
 export * from './components';
 
 export {
 	CoreEmbed,
-	FileUpload,
+	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
@@ -34,7 +34,7 @@ export {
 
 export const projectBlocks = [
 	CoreEmbed,
-	FileUpload,
+	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,

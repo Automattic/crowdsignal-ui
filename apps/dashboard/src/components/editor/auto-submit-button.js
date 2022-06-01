@@ -10,6 +10,7 @@ import { flatten, includes, map } from 'lodash';
  * Internal dependencies
  */
 import {
+	fileInputBlock,
 	matrixQuestionBlock,
 	multipleChoiceAnswerBlock,
 	multipleChoiceQuestionBlock,
@@ -19,11 +20,11 @@ import {
 	textQuestionBlock,
 	textInputBlock,
 	submitButtonBlock,
-	fileUploadBlock,
 } from '@crowdsignal/block-editor';
 
 const FORM_BLOCKS = map(
 	[
+		fileInputBlock,
 		matrixQuestionBlock,
 		multipleChoiceAnswerBlock,
 		multipleChoiceQuestionBlock,
@@ -32,7 +33,6 @@ const FORM_BLOCKS = map(
 		ratingScaleQuestionBlock,
 		textQuestionBlock,
 		textInputBlock,
-		fileUploadBlock,
 	],
 	'name'
 );

@@ -6,15 +6,15 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { FileUploadIcon } from '@crowdsignal/icons';
+import { FileInputIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
-import Upload from './edit';
-import { FileUpload } from '@crowdsignal/blocks';
+import Edit from './edit';
+import { FileInput } from '@crowdsignal/blocks';
 
 const settings = {
 	title: __( 'Upload File Form', 'block-editor' ),
 	description: __(
-		'Allow people to file-upload and share a file with you.',
+		'Allow people to upload and share a file with you.',
 		'block-editor'
 	),
 	category: 'crowdsignal-forms/form',
@@ -24,8 +24,8 @@ const settings = {
 		__( 'form', 'block-editor' ),
 		__( 'attachment', 'block-editor' ),
 	],
-	icon: <FileUploadIcon />,
-	edit: Upload,
+	icon: <FileInputIcon />,
+	edit: Edit,
 	attributes,
 	supports: {
 		html: false,
@@ -44,6 +44,6 @@ const settings = {
 };
 
 export default {
-	name: FileUpload.blockName,
+	name: FileInput.blockName,
 	settings,
 };
