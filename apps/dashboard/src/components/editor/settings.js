@@ -57,7 +57,7 @@ export const editorSettings = {
 			inspector: true,
 		},
 		toolbar: {
-			documentInspector: __( 'Document', 'dashboard' ),
+			documentInspector: __( 'Project', 'dashboard' ),
 			inspector: true,
 			navigation: true,
 			toc: false,
