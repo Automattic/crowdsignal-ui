@@ -153,16 +153,6 @@ export const EditorWrapper = styled.div`
 				justify-content: space-between;
 			}
 		}
-
-		.file-format-panel {
-			.components-toggle-control {
-				margin-bottom: 8px;
-			}
-
-			.file-size-limit-hint {
-				color: var( --color-neutral-40 );
-			}
-		}
 	}
 
 	.editor__project-visibility-popover .components-popover__content {
