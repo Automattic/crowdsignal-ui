@@ -43,7 +43,6 @@ const EditTextQuestion = ( props ) => {
 		'crowdsignal-forms-text-question-block',
 		{
 			'is-required': attributes.mandatory,
-			[ `justify-${ attributes.justification }` ]: attributes.justification,
 		}
 	);
 

@@ -24,10 +24,7 @@ const EditRakingQuestionBlock = ( props ) => {
 
 	const classes = classnames(
 		'crowdsignal-forms-ranking-question-block',
-		className,
-		{
-			[ `justify-${ attributes.justification }` ]: attributes.justification,
-		}
+		className
 	);
 
 	return (
