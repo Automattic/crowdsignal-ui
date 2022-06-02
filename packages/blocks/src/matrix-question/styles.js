@@ -10,7 +10,7 @@ export const MatrixTable = styled.div`
 
 export const MatrixCell = styled.div`
 	align-items: center;
-	border: 1px solid;
+	border: 1px solid var( --crowdsignal-forms-question-border-color );
 	border-top-width: 0;
 	border-left-width: 0;
 	box-sizing: border-box;

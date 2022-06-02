@@ -2,7 +2,11 @@
  * External dependencies
  */
 import { PanelBody, ToggleControl } from '@wordpress/components';
-import { InspectorControls } from '@wordpress/block-editor';
+import {
+	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+	__experimentalPanelColorGradientSettings as PanelColorGradientSettings,
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -12,9 +16,9 @@ import BorderSettings from '../components/border-settings';
 import ColorSettings from '../components/color-settings';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
-	const handleChangeMandatory = ( mandatory ) =>
+	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
-			mandatory,
+			[ key ]: value,
 		} );
 
 	return (
@@ -26,7 +30,7 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<ToggleControl
 					label={ __( 'An answer is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
-					onChange={ handleChangeMandatory }
+					onChange={ handleChangeAttribute( 'mandatory' ) }
 				/>
 			</PanelBody>
 
@@ -39,6 +43,20 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				initialOpen={ false }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
+			/>
+
+			<PanelColorGradientSettings
+				title={ __( 'Table border', 'block-editor' ) }
+				initialOpen={ false }
+				settings={ [
+					{
+						label: __( 'Border color', 'block-editor' ),
+						colorValue: attributes.tableBorderColor,
+						onColorChange: handleChangeAttribute(
+							'tableBorderColor'
+						),
+					},
+				] }
 			/>
 		</InspectorControls>
 	);
