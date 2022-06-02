@@ -23,8 +23,20 @@ export default {
 		type: 'array',
 		default: [],
 	},
+	tableBorderColor: {
+		type: 'string',
+	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
+		type: 'string',
+	},
+	borderColor: {
+		type: 'string',
+	},
+	borderRadius: {
+		type: 'string',
+	},
+	borderWidth: {
 		type: 'string',
 	},
 	gradient: {

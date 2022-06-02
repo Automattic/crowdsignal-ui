@@ -47,6 +47,8 @@ const MatrixQuestion = ( { attributes, className } ) => {
 	);
 
 	const tableStyles = {
+		'--crowdsignal-forms-question-border-color':
+			attributes.tableBorderColor,
 		gridTemplateColumns:
 			'auto ' +
 			join(

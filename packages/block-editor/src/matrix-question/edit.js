@@ -191,6 +191,8 @@ const EditMatrix = ( props ) => {
 	);
 
 	const tableStyles = {
+		'--crowdsignal-forms-question-border-color':
+			attributes.tableBorderColor,
 		gridTemplateColumns:
 			'auto ' +
 			join(
