@@ -48,4 +48,7 @@ export default {
 	width: {
 		type: 'number',
 	},
+	justification: {
+		type: 'string',
+	},
 };
