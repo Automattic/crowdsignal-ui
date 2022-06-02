@@ -10,7 +10,11 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 /**
  * Internal dependencies
  */
-import { QuestionHeader, QuestionWrapper } from '../components';
+import {
+	QuestionHeader,
+	QuestionWrapper,
+	JustificationWrapper,
+} from '../components';
 import { useField } from '@crowdsignal/form';
 
 const Context = createContext();
@@ -34,48 +38,57 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 
 	const classes = classnames(
 		'crowdsignal-forms-ranking-question-block',
-		className
+		className,
+		{
+			[ `align${ attributes.align }` ]: attributes.align,
+		}
 	);
 
 	return (
-		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<QuestionHeader>
-				<RawHTML>{ attributes.question }</RawHTML>
-			</QuestionHeader>
-			<Context.Provider value={ attributes }>
-				<QuestionWrapper.Content>
-					<DragDropContext onDragEnd={ handleMoveAnswer }>
-						<Droppable droppableId="crowdsignal/ranking-question">
-							{ ( { droppableProps, innerRef, placeholder } ) => (
-								<div ref={ innerRef } { ...droppableProps }>
-									{ map( children, ( child, index ) => (
-										<Draggable
-											key={ `answer-${ index }` }
-											disableInteractiveElementBlocking={
-												true
-											}
-											draggableId={ `answer-${ index }` }
-											index={ index }
-										>
-											{ ( provided, snapshot ) =>
-												cloneElement( child, {
-													draggable: {
-														...provided,
-														isDragging:
-															snapshot.isDragging,
-													},
-												} )
-											}
-										</Draggable>
-									) ) }
-									{ placeholder }
-								</div>
-							) }
-						</Droppable>
-					</DragDropContext>
-				</QuestionWrapper.Content>
-			</Context.Provider>
-		</QuestionWrapper>
+		<JustificationWrapper justification={ attributes.justification }>
+			<QuestionWrapper attributes={ attributes } className={ classes }>
+				<QuestionHeader>
+					<RawHTML>{ attributes.question }</RawHTML>
+				</QuestionHeader>
+				<Context.Provider value={ attributes }>
+					<QuestionWrapper.Content>
+						<DragDropContext onDragEnd={ handleMoveAnswer }>
+							<Droppable droppableId="crowdsignal/ranking-question">
+								{ ( {
+									droppableProps,
+									innerRef,
+									placeholder,
+								} ) => (
+									<div ref={ innerRef } { ...droppableProps }>
+										{ map( children, ( child, index ) => (
+											<Draggable
+												key={ `answer-${ index }` }
+												disableInteractiveElementBlocking={
+													true
+												}
+												draggableId={ `answer-${ index }` }
+												index={ index }
+											>
+												{ ( provided, snapshot ) =>
+													cloneElement( child, {
+														draggable: {
+															...provided,
+															isDragging:
+																snapshot.isDragging,
+														},
+													} )
+												}
+											</Draggable>
+										) ) }
+										{ placeholder }
+									</div>
+								) }
+							</Droppable>
+						</DragDropContext>
+					</QuestionWrapper.Content>
+				</Context.Provider>
+			</QuestionWrapper>
+		</JustificationWrapper>
 	);
 };
 
