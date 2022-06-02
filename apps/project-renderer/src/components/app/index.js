@@ -77,6 +77,9 @@ const App = ( {
 		Object.keys( data ).forEach( ( key ) => {
 			if ( Array.isArray( data[ key ] ) ) {
 				data[ key ].forEach( ( value ) => form.append( key, value ) );
+			} else if ( data[ key ] instanceof window.FileList ) {
+				// TODO: figure out how to work with multiple files
+				form.append( key, data[ key ][ 0 ] );
 			} else {
 				form.append( key, data[ key ] );
 			}

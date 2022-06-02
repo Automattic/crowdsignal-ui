@@ -2,6 +2,7 @@ export * from './check-icon';
 export * from './checkbox-input';
 export * from './close-arrow';
 export * from './drag-handle';
+export * from './file-input';
 export * from './matrix-question';
 export * from './multiple-choice';
 export * from './multiple-choice-answer';
