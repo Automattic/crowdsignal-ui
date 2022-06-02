@@ -16,6 +16,7 @@ import {
 } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
+import Toolbar from '../ranking-question/toolbar';
 
 const EditTextQuestion = ( props ) => {
 	const { attributes, className, isSelected, setAttributes } = props;
@@ -42,12 +43,14 @@ const EditTextQuestion = ( props ) => {
 		'crowdsignal-forms-text-question-block',
 		{
 			'is-required': attributes.mandatory,
+			[ `justify-${ attributes.justification }` ]: attributes.justification,
 		}
 	);
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
 			<Sidebar { ...props } />
+			<Toolbar { ...props } />
 
 			<RichText
 				tagName={ QuestionHeader }
