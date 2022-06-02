@@ -35,6 +35,7 @@ const EditMultipleChoiceQuestion = ( props ) => {
 		className,
 		{
 			'is-required': attributes.mandatory,
+			[ `justify-${ attributes.justification }` ]: attributes.justification,
 		}
 	);
 

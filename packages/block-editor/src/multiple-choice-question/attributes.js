@@ -49,4 +49,7 @@ export default {
 	textColor: {
 		type: 'string',
 	},
+	justification: {
+		type: 'string',
+	},
 };

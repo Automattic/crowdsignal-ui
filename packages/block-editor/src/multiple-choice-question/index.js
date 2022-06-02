@@ -36,6 +36,7 @@ const settings = {
 	supports: {
 		html: false,
 		reusable: false,
+		align: [ 'wide', 'full' ],
 	},
 	styles: [
 		{
@@ -87,6 +88,11 @@ const settings = {
 				},
 			},
 		],
+	},
+	getEditWrapperProps( { justification } ) {
+		return {
+			'data-justify': justification,
+		};
 	},
 };
 
