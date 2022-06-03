@@ -1,4 +1,5 @@
 import CoreEmbed from './core-embed';
+import DropdownInput from './dropdown-input';
 import FileInput from './file-input';
 import MatrixQuestion from './matrix-question';
 import MultipleChoiceAnswer from './multiple-choice-answer';
@@ -17,6 +18,7 @@ export * from './components';
 
 export {
 	CoreEmbed,
+	DropdownInput,
 	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
@@ -34,6 +36,7 @@ export {
 
 export const projectBlocks = [
 	CoreEmbed,
+	DropdownInput,
 	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
