@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { createContext, RawHTML } from '@wordpress/element';
+import { createContext, RawHTML, useMemo } from '@wordpress/element';
 import classnames from 'classnames';
-import { map } from 'lodash';
+import { filter, map } from 'lodash';
 import { cloneElement } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -20,9 +20,14 @@ import { useField } from '@crowdsignal/form';
 const Context = createContext();
 
 const RankingQuestion = ( { attributes, children, className } ) => {
+	const answers = useMemo(
+		() => filter( children, ( { props } ) => !! props.attributes.label ),
+		[ children ]
+	);
+
 	const { onSort } = useField( {
 		name: `q_${ attributes.clientId }[ranking][]`,
-		initialValue: map( children, 'props.attributes.clientId' ),
+		initialValue: map( answers, 'props.attributes.clientId' ),
 	} );
 
 	const handleMoveAnswer = ( { source, destination } ) => {
@@ -31,9 +36,9 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 			return;
 		}
 
-		const [ removed ] = children.splice( source.index, 1 );
-		children.splice( destination.index, 0, removed );
-		onSort( children );
+		const [ removed ] = answers.splice( source.index, 1 );
+		answers.splice( destination.index, 0, removed );
+		onSort( answers );
 	};
 
 	const classes = classnames(
@@ -60,7 +65,7 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 									placeholder,
 								} ) => (
 									<div ref={ innerRef } { ...droppableProps }>
-										{ map( children, ( child, index ) => (
+										{ map( answers, ( child, index ) => (
 											<Draggable
 												key={ `answer-${ index }` }
 												disableInteractiveElementBlocking={
