@@ -22,32 +22,34 @@ setCategories( [
 	...getCategories(),
 ] );
 
+const enabledBlocks = [
+	'core/buttons',
+	'core/code',
+	'core/columns',
+	'core/embed',
+	'core/group',
+	'core/heading',
+	'core/html',
+	'core/image',
+	'core/list',
+	'core/paragraph',
+	'core/preformatted',
+	'core/pullquote',
+	'core/quote',
+	'core/row',
+	'core/separator',
+	'core/spacer',
+	'core/table',
+	'core/verse',
+	'core/video',
+	...map( blocks, ( block ) => block.name ),
+];
+
 export const editorSettings = {
 	iso: {
 		blocks: {
-			allowBlocks: [
-				'core/buttons',
-				'core/code',
-				'core/columns',
-				'core/embed',
-				'core/group',
-				'core/heading',
-				'core/html',
-				'core/image',
-				'core/list',
-				'core/paragraph',
-				'core/preformatted',
-				'core/pullquote',
-				'core/quote',
-				'core/row',
-				'core/separator',
-				'core/spacer',
-				'core/table',
-				'core/verse',
-				'core/video',
-
-				...map( blocks, ( block ) => block.name ),
-			],
+			allowBlocks: enabledBlocks,
+			disallowBlock: null,
 		},
 		defaultPreferences: {
 			fixedToolbar: false,
@@ -66,6 +68,7 @@ export const editorSettings = {
 	},
 	editor: {
 		alignWide: true,
+		allowedBlockTypes: enabledBlocks,
 		supportsLayout: false,
 		hasUploadPermissions: true, // not sure what this does, Gutenberg setting.
 		// if allowedMimeTypes is not present or empty, when you click on the MediaUpload handler it will just remove the buttons (????)
