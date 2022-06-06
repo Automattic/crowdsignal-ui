@@ -100,11 +100,12 @@ const Editor = ( { project } ) => {
 			return editorSettings;
 		}
 
-		return tap( cloneDeep( editorSettings ), ( { iso } ) => {
+		return tap( cloneDeep( editorSettings ), ( { editor, iso } ) => {
 			iso.blocks.allowBlocks = filter(
 				iso.blocks.allowBlocks,
 				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
 			);
+			editor.allowedBlockTypes = iso.blocks.allowBlocks;
 		} );
 	}, [ confirmationPage ] );
 
