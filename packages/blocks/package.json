@@ -22,6 +22,7 @@
     "@crowdsignal/icons": "^0.1.0",
     "@crowdsignal/rest-api": "^0.1.0",
     "@crowdsignal/styles": "^0.1.0",
+    "@headlessui/react": "^1.6.4",
     "@wordpress/element": "^4.4.0",
     "@wordpress/i18n": "^4.6.0",
     "classnames": "^2.2.5",

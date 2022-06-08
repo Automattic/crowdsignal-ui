@@ -15,6 +15,11 @@ body {
 	--cs--style--block-gap: var(--wp--style--block-gap);
 	--cs--style--block-gap-big: calc(var(--wp--style--block-gap) * 2);
 	--cs--style--block-gap-small: calc(var(--wp--style--block-gap) / 2);
+
+	--cs--style--border-width-regular: 1px;
+	--cs--style--border-width-thick: 2px;
+	--cs--style--border-radius: 0;
+
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
 	--cs--content-padding-horizontal: 16px;
@@ -43,6 +48,15 @@ body {
 		--cs--content-padding-horizontal: 0;
 		--cs--block--alignfull-width: unset;
 		--cs--block--alignfull-margin: unset;
+	}
+}
+
+.dropdown-input-component {
+	&__options {
+		background-color: var(--wp--preset--color--background);
+		border-color: var(--wp--preset--color--primary);
+		border-width: var(--cs--style--border-width-thick);
+		border-radius: var(--cs--style--border-radius);
 	}
 }
 

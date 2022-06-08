@@ -8,6 +8,7 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
+import { forwardRef } from '@wordpress/element';
 
 const StyledButtonWrapper = styled.div`
 	display: flex;
@@ -42,6 +43,7 @@ const Button = ( {
 	className,
 	outline,
 	style = {},
+	fRef,
 	...props
 } ) => (
 	<StyledButtonWrapper
@@ -55,6 +57,7 @@ const Button = ( {
 		) }
 	>
 		<StyledButton
+			ref={ fRef }
 			className="crowdsignal-forms-button__button wp-block-button__link"
 			style={ {
 				...useColorStyles( attributes ),
@@ -69,4 +72,6 @@ const Button = ( {
 
 Button.Wrapper = StyledButtonWrapper;
 
-export default Button;
+export default forwardRef( ( props, ref ) => (
+	<Button fRef={ ref } { ...props } />
+) );

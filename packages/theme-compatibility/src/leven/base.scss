@@ -6,7 +6,7 @@
 }
 
 body {
-	--wp--preset--color--primary: #1285ce;
+	--wp--preset--color--primary: #ff302c;
 
 	--crowdsignal-forms-input-border-color: #ddd;
 	--crowdsignal-forms-question-border-color: #eee;
@@ -14,6 +14,8 @@ body {
 	--crowdsignal-forms-submit-button-background-color: #ff302c;
 	--color-text: #444;
 	--wp--custom--color--background: #f7f7f6;
+
+	--cs--style--border-radius: 9px;
 }
 
 body {
@@ -25,6 +27,12 @@ body {
 		.wp-block-column:not(:last-child)  {
 			margin-bottom: 0;
 		}
+	}
+}
+
+.dropdown-input-component {
+	&__options {
+		border-color: var(--wp--preset--color--primary);
 	}
 }
 

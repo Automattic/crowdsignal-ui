@@ -16,6 +16,10 @@ export default {
 		type: 'string',
 		default: __( 'Choose an option', 'block-editor' ),
 	},
+	options: {
+		type: 'array',
+		default: [],
+	},
 	mandatory: {
 		type: 'boolean',
 		default: false,
