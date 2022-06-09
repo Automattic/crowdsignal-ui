@@ -14,6 +14,7 @@ import classnames from 'classnames';
 import { DropdownOption } from './option';
 import { DropdownPlaceholder } from './placeholder';
 import { changeFocus } from '../util/change-focus';
+import { ChevronDownIcon } from '@crowdsignal/icons';
 import { FormDropdownInput, FormInputWrapper } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import { useClientId } from '@crowdsignal/hooks';
@@ -141,6 +142,7 @@ export default ( props ) => {
 						allowedFormats={ [] }
 						multiline={ false }
 					/>
+					<ChevronDownIcon />
 				</FormDropdownInput.Button>
 				{ isSelected && (
 					<FormDropdownInput.Options ref={ optionsWrapper }>

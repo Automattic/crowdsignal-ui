@@ -19,6 +19,8 @@ body {
 	--cs--style--border-width-regular: 1px;
 	--cs--style--border-width-thick: 2px;
 	--cs--style--border-radius: 0;
+	--cs--style--button-font-size: 1.2125em;
+	--cs--style--button-font-weight: 700;
 
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
@@ -48,15 +50,6 @@ body {
 		--cs--content-padding-horizontal: 0;
 		--cs--block--alignfull-width: unset;
 		--cs--block--alignfull-margin: unset;
-	}
-}
-
-.dropdown-input-component {
-	&__options {
-		background-color: var(--wp--preset--color--background);
-		border-color: var(--wp--preset--color--primary);
-		border-width: var(--cs--style--border-width-thick);
-		border-radius: var(--cs--style--border-radius);
 	}
 }
 
@@ -224,6 +217,41 @@ body {
 		&__button {
 			flex-grow: 1;
 			cursor: inherit;
+		}
+	}
+}
+
+.dropdown-input-component {
+	&__button {
+		svg path {
+			stroke: currentColor;
+		}
+	}
+
+	&__options {
+		background-color: var(--wp--preset--color--background);
+		border-color: var(--wp--preset--color--primary);
+		border-width: var(--cs--style--border-width-thick);
+		border-radius: var(--cs--style--border-radius);
+	}
+
+	&__option {
+		color: var(--wp--preset--color--primary);
+		font-size: var(--cs--style--button-font-size);
+		font-weight: var(--cs--style--button-font-weight);
+
+		&.placeholder {
+			opacity: 0.5;
+		}
+
+		&.selected {
+			background-color: var(--wp--preset--color--primary);
+		}
+
+		&.active {
+			&:before {
+				background-color: var(--wp--preset--color--primary);
+			}
 		}
 	}
 }
