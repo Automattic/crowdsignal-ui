@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { RawHTML, useState } from '@wordpress/element';
+import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
@@ -18,10 +18,14 @@ import {
 import { useField } from '@crowdsignal/form';
 
 const DropdownInput = ( { attributes, className } ) => {
-	const { error } = useField( {
+	const {
+		error,
+		inputProps: { onChange, value },
+	} = useField( {
 		name: `q_${ attributes.clientId }[choice]`,
-		validation: ( value ) => {
-			if ( attributes.mandatory && isEmpty( value ) ) {
+		type: 'dropdown',
+		validation: ( val ) => {
+			if ( attributes.mandatory && isEmpty( val ) ) {
 				return __( 'This field is required', 'blocks' );
 			}
 		},
@@ -36,12 +40,6 @@ const DropdownInput = ( { attributes, className } ) => {
 		}
 	);
 
-	const [ selectedOption, setSelectedOption ] = useState( null );
-
-	const test = ( value ) => {
-		setSelectedOption( value );
-	};
-
 	return (
 		<FormInputWrapper
 			className={ classes }
@@ -53,8 +51,8 @@ const DropdownInput = ( { attributes, className } ) => {
 			<FormDropdownInput
 				buttonLabel={ attributes.buttonLabel }
 				options={ attributes.options }
-				onChange={ test }
-				value={ selectedOption }
+				onChange={ onChange }
+				value={ value }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

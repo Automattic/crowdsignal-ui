@@ -4,6 +4,7 @@
 import { Listbox } from '@headlessui/react';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
+import { find } from 'lodash';
 
 /**
  * Internal dependencies
@@ -72,19 +73,22 @@ const StyledListOption = withClassName(
 );
 
 const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
-	const _options = [ buttonLabel, ...options ];
+	const _options = [ { clientId: '', label: buttonLabel }, ...options ];
+
+	const getButtonText = ( selectedValue ) =>
+		find( _options, ( { clientId } ) => clientId === selectedValue ).label;
 
 	return (
 		<Listbox as={ StyledListBox } value={ value } onChange={ onChange }>
 			<Listbox.Button as={ StyledListButton } outline>
-				{ value || buttonLabel }
+				{ getButtonText( value ) }
 			</Listbox.Button>
 			<Listbox.Options as={ StyledListOptions }>
 				{ _options.map( ( option, index ) => (
 					<Listbox.Option
 						as={ StyledListOption }
 						key={ index }
-						value={ option }
+						value={ option.clientId }
 						className={ ( { active, selected } ) =>
 							classnames( {
 								active,
@@ -92,7 +96,7 @@ const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
 							} )
 						}
 					>
-						{ option }
+						{ option.label }
 					</Listbox.Option>
 				) ) }
 			</Listbox.Options>

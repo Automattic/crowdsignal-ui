@@ -5,6 +5,7 @@ import { RichText } from '@wordpress/block-editor';
 import { useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { map, split, trim } from 'lodash';
+import { v4 as uuid } from 'uuid';
 import classnames from 'classnames';
 
 /**
@@ -47,14 +48,33 @@ export default ( props ) => {
 
 	const handleSingleValue = ( index, value, cursorToEnd ) => {
 		const options = [ ...attributes.options ];
-		options[ index ] = value;
+
+		options[ index ] = {
+			clientId: options[ index ]?.clientId || uuid(),
+			label: value,
+		};
+
 		setAttributes( { options } );
 		focusOption( index, cursorToEnd );
 	};
 
 	const handleMultiValues = ( index, array ) => {
 		const options = [ ...attributes.options ];
-		options.splice( index, 1, ...array );
+
+		if ( options[ index ] ) {
+			options[ index ] = {
+				...options[ index ],
+				label: array.shift(),
+			};
+			index++;
+		}
+
+		options.splice(
+			index,
+			0,
+			...map( array, ( value ) => ( { clientId: uuid(), label: value } ) )
+		);
+
 		setAttributes( { options } );
 		focusOption( index + array.length - 1, true );
 	};
@@ -80,7 +100,9 @@ export default ( props ) => {
 			return;
 		}
 
-		const splitValue = attributes.options[ index ].slice( value.length );
+		const splitValue = attributes.options[ index ].label.slice(
+			value.length
+		);
 		handleMultiValues( index, [ value, splitValue ] );
 	};
 
@@ -125,8 +147,8 @@ export default ( props ) => {
 						{ attributes.options.length ? (
 							map( attributes.options, ( option, index ) => (
 								<DropdownOption
-									key={ index }
-									value={ option }
+									key={ option.clientId }
+									value={ option.label }
 									onChange={ handleChangeOption( index ) }
 									onRemove={ handleDeleteOption( index ) }
 									onSplit={ handleSplitOption( index ) }
