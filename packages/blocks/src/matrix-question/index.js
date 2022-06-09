@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { RawHTML } from '@wordpress/element';
+import { RawHTML, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { filter, first, isEmpty, join, map, times } from 'lodash';
@@ -24,8 +24,17 @@ import Row from './row';
 import { MatrixCell, MatrixTable } from './styles';
 
 const MatrixQuestion = ( { attributes, className } ) => {
+	const rows = useMemo(
+		() => filter( attributes.rows, ( row ) => !! row.label ),
+		[]
+	);
+	const columns = useMemo(
+		() => filter( attributes.columns, ( column ) => !! column.label ),
+		[]
+	);
+
 	const errors = filter(
-		map( attributes.rows, ( row ) => {
+		map( rows, ( row ) => {
 			// eslint-disable-next-line react-hooks/rules-of-hooks
 			const { error } = useValidation( {
 				fieldName: `q_${ attributes.clientId }[${ row.clientId }]${
@@ -58,13 +67,13 @@ const MatrixQuestion = ( { attributes, className } ) => {
 		gridTemplateColumns:
 			'auto ' +
 			join(
-				times( attributes.columns.length, () => '1fr' ),
+				times( columns.length, () => '1fr' ),
 				' '
 			),
 		gridTemplateRows:
 			'auto ' +
 			join(
-				times( attributes.rows.length, () => '1fr' ),
+				times( rows.length, () => '1fr' ),
 				' '
 			),
 	};
@@ -79,7 +88,7 @@ const MatrixQuestion = ( { attributes, className } ) => {
 				<MatrixTable style={ tableStyles }>
 					<MatrixCell />
 
-					{ map( attributes.columns, ( column ) => (
+					{ map( columns, ( column ) => (
 						<MatrixCell
 							key={ column.clientId }
 							className="crowdsignal-forms-matrix-question-block__column-label"
@@ -88,12 +97,12 @@ const MatrixQuestion = ( { attributes, className } ) => {
 						</MatrixCell>
 					) ) }
 
-					{ map( attributes.rows, ( row ) => (
+					{ map( rows, ( row ) => (
 						<Row
 							key={ row.clientId }
 							questionClientId={ attributes.clientId }
 							row={ row }
-							columns={ attributes.columns }
+							columns={ columns }
 							multipleChoice={ attributes.multipleChoice }
 						/>
 					) ) }

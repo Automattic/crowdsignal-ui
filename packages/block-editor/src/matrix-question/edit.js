@@ -5,6 +5,7 @@ import { RichText } from '@wordpress/block-editor';
 import {
 	Fragment,
 	useLayoutEffect,
+	useMemo,
 	useRef,
 	useState,
 } from '@wordpress/element';
@@ -61,7 +62,7 @@ const shiftLabelFocus = ( wrapper, type, index ) =>
 	);
 
 const EditMatrix = ( props ) => {
-	const { attributes, className, setAttributes } = props;
+	const { attributes, className, isSelected, setAttributes } = props;
 
 	const [ currentColumn, setCurrentColumn ] = useState( null );
 	const [ currentRow, setCurrentRow ] = useState( null );
@@ -72,8 +73,21 @@ const EditMatrix = ( props ) => {
 
 	useClientId( props );
 
+	const columns = useMemo(
+		() =>
+			filter(
+				attributes.columns,
+				( column ) => isSelected || !! column.label
+			),
+		[ attributes.columns, isSelected ]
+	);
+	const rows = useMemo(
+		() => filter( attributes.rows, ( row ) => isSelected || !! row.label ),
+		[ attributes.rows, isSelected ]
+	);
+
 	useLayoutEffect( () => {
-		if ( isEmpty( attributes.columns ) || isEmpty( attributes.rows ) ) {
+		if ( isEmpty( columns ) || isEmpty( rows ) ) {
 			return;
 		}
 
@@ -87,7 +101,7 @@ const EditMatrix = ( props ) => {
 				parseInt( container.height, 10 ) - 6
 			}px`,
 		} );
-	}, [ currentColumn, currentRow, attributes.columns, attributes.rows ] );
+	}, [ currentColumn, currentRow, columns, rows ] );
 
 	useBlur(
 		( clickEvent ) => {
@@ -196,13 +210,13 @@ const EditMatrix = ( props ) => {
 		gridTemplateColumns:
 			'auto ' +
 			join(
-				times( attributes.columns.length, () => '1fr' ),
+				times( columns.length, () => '1fr' ),
 				' '
 			),
 		gridTemplateRows:
 			'auto ' +
 			join(
-				times( attributes.rows.length, () => '1fr' ),
+				times( rows.length, () => '1fr' ),
 				' '
 			),
 		...tableVars,
@@ -233,7 +247,7 @@ const EditMatrix = ( props ) => {
 			<MatrixQuestion.Table ref={ tableWrapper } style={ tableStyles }>
 				<MatrixQuestion.Cell />
 
-				{ map( attributes.columns, ( column, index ) => {
+				{ map( columns, ( column, index ) => {
 					const classes = classnames(
 						'crowdsignal-forms-matrix-question-block__column-label',
 						{
@@ -269,7 +283,7 @@ const EditMatrix = ( props ) => {
 					);
 				} ) }
 
-				{ map( attributes.rows, ( row, index ) => {
+				{ map( rows, ( row, index ) => {
 					const classes = classnames(
 						'crowdsignal-forms-matrix-question-block__row-label',
 						{
@@ -306,8 +320,8 @@ const EditMatrix = ( props ) => {
 								/>
 							</MatrixQuestion.Cell>
 
-							{ times( attributes.columns.length, ( n ) => (
-								<MatrixQuestion.Cell key={ n }>
+							{ map( columns, ( column ) => (
+								<MatrixQuestion.Cell key={ column.clientId }>
 									<FormCheckbox
 										type={
 											attributes.multipleChoice
