@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { Listbox } from '@headlessui/react';
-import { forwardRef } from '@wordpress/element';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
 
@@ -10,16 +9,7 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import { Button } from '../index';
-
-//should live in another file
-const withClassName = ( Component, hocClassName ) =>
-	forwardRef( ( { className, ...props }, ref ) => (
-		<Component
-			ref={ ref }
-			className={ classnames( hocClassName, className ) }
-			{ ...props }
-		/>
-	) );
+import { withClassName } from '../../util';
 
 const BASE_CSS_CLASS = 'dropdown-input-component';
 
