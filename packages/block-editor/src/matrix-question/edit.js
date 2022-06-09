@@ -285,7 +285,10 @@ const EditMatrix = ( props ) => {
 								onClick={ handleChangeCurrentRow( index ) }
 							>
 								<RichText
-									placeholder={ __( 'Row', 'block-editor' ) }
+									placeholder={ __(
+										'Enter row label',
+										'block-editor'
+									) }
 									onChange={ handleChangeLabel(
 										'rows',
 										index
