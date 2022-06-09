@@ -167,6 +167,10 @@ const EditMatrix = ( props ) => {
 	};
 
 	const handleRemoveLabel = ( type, index ) => () => {
+		if ( attributes[ type ].length <= 2 ) {
+			return;
+		}
+
 		shiftLabelFocus(
 			tableWrapper.current,
 			trim( type, 's' ),
@@ -179,9 +183,7 @@ const EditMatrix = ( props ) => {
 		setAttributes( {
 			[ type ]: filter(
 				attributes[ type ],
-				( item ) =>
-					attributes[ type ].length <= 2 ||
-					item !== attributes[ type ][ index ]
+				( item ) => item !== attributes[ type ][ index ]
 			),
 		} );
 	};
@@ -194,6 +196,25 @@ const EditMatrix = ( props ) => {
 	const handleChangeCurrentRow = ( index ) => () => {
 		setCurrentColumn( null );
 		setCurrentRow( index );
+	};
+
+	const handleKeyDown = ( event ) => {
+		if (
+			event.keyCode !== 8 ||
+			some( getParentNodes( event.target ), ( element ) =>
+				element.matches( '[role=textbox]' )
+			)
+		) {
+			return;
+		}
+
+		if ( currentColumn !== null ) {
+			handleRemoveLabel( 'columns', currentColumn )();
+		}
+
+		if ( currentRow !== null ) {
+			handleRemoveLabel( 'rows', currentRow )();
+		}
 	};
 
 	const blockClasses = classnames(
@@ -227,7 +248,12 @@ const EditMatrix = ( props ) => {
 	}
 
 	return (
-		<QuestionWrapper attributes={ attributes } className={ blockClasses }>
+		<QuestionWrapper
+			attributes={ attributes }
+			className={ blockClasses }
+			onKeyDown={ handleKeyDown }
+			tabIndex="-1"
+		>
 			<Toolbar
 				currentColumn={ currentColumn }
 				currentRow={ currentRow }
