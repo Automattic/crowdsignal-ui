@@ -6,14 +6,17 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { FileInputIcon } from '@crowdsignal/icons';
+import { MultipleChoiceQuestionIcon } from '@crowdsignal/icons';
+import { DropdownInput } from '@crowdsignal/blocks';
 import attributes from './attributes';
 import Edit from './edit';
-import { DropdownInput } from '@crowdsignal/blocks';
 
 const settings = {
 	title: __( 'Dropdown Input Form', 'block-editor' ),
-	description: __( 'TBD', 'block-editor' ),
+	description: __(
+		'Allows people to select an option from a list',
+		'block-editor'
+	),
 	category: 'crowdsignal-forms/form',
 	keywords: [
 		__( 'dropdown', 'block-editor' ),
@@ -22,7 +25,7 @@ const settings = {
 		__( 'select', 'block-editor' ),
 		__( 'form', 'block-editor' ),
 	],
-	icon: <FileInputIcon />, //FIXME
+	icon: <MultipleChoiceQuestionIcon />,
 	edit: Edit,
 	attributes,
 	supports: {
@@ -30,16 +33,12 @@ const settings = {
 		reusable: false,
 		//TODO: add alignment options
 	},
-	// example: {
-	// 	attributes: {
-	// 		label: __( 'Upload your application files:', 'block-editor' ),
-	// 		buttonLabel: __( 'Choose File', 'block-editor' ),
-	// 		message: __(
-	// 			'Supported file formats: pdf, png, jpg, mp4 - max. size 5 mb',
-	// 			'block-editor'
-	// 		),
-	// 	},
-	// },
+	example: {
+		attributes: {
+			label: __( 'Choose your country:', 'block-editor' ),
+			buttonLabel: __( 'Select an option', 'block-editor' ),
+		},
+	},
 };
 
 export default {

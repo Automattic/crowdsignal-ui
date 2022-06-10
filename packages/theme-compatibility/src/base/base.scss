@@ -18,9 +18,12 @@ body {
 
 	--cs--style--border-width-regular: 1px;
 	--cs--style--border-width-thick: 2px;
-	--cs--style--border-radius: 0;
-	--cs--style--button-font-size: 1.2125em;
-	--cs--style--button-font-weight: 700;
+
+	--cs--style--button--background: var(--wp--preset--color--background);
+	--cs--style--button--foreground: var(--wp--preset--color--primary);
+	--cs--style--button--font-size: var(--wp--preset--font-size--normal);
+	--cs--style--button--font-weight: 400;
+	--cs--style--button--border-radius: 0;
 
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
@@ -222,36 +225,42 @@ body {
 }
 
 .dropdown-input-component {
-	&__button {
-		svg path {
-			stroke: currentColor;
+	.dropdown-input-component__button.is-style-outline {
+		button.crowdsignal-forms-button__button {
+			color: var(--cs--style--button--foreground);
+			background: var(--cs--style--button--background);
 		}
 	}
 
 	&__options {
-		background-color: var(--wp--preset--color--background);
-		border-color: var(--wp--preset--color--primary);
+		color: var(--cs--style--button--foreground);
+		background: var(--cs--style--button--background);
+		border-color: currentColor;
 		border-width: var(--cs--style--border-width-thick);
-		border-radius: var(--cs--style--border-radius);
+		border-radius: var(--cs--style--button--border-radius);
 	}
 
 	&__option {
-		color: var(--wp--preset--color--primary);
-		font-size: var(--cs--style--button-font-size);
-		font-weight: var(--cs--style--button-font-weight);
+		font-size: var(--cs--style--button--font-size);
+		font-weight: var(--cs--style--button--font-weight);
 
 		&.placeholder {
 			opacity: 0.5;
 		}
 
 		&.selected {
-			background-color: var(--wp--preset--color--primary);
+			background: var(--cs--style--button--foreground);
 		}
 
 		&.active {
 			&:before {
-				background-color: var(--wp--preset--color--primary);
+				background: var(--cs--style--button--foreground);
 			}
 		}
+	}
+
+	svg path {
+		stroke: currentColor;
+		fill: none;
 	}
 }

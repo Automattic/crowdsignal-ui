@@ -16,7 +16,6 @@ import { DropdownPlaceholder } from './placeholder';
 import { changeFocus } from '../util/change-focus';
 import { ChevronDownIcon } from '@crowdsignal/icons';
 import { FormDropdownInput, FormInputWrapper } from '@crowdsignal/blocks';
-import { useColorStyles } from '@crowdsignal/styles';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
 
@@ -120,11 +119,14 @@ export default ( props ) => {
 		focusOption( Math.max( index - 1, 0 ), true );
 	};
 
+	const styles = {
+		'--cs--style--button--foreground': attributes.textColor,
+		'--cs--style--button--background':
+			attributes.backgroundColor || attributes.gradient,
+	};
+
 	return (
-		<FormInputWrapper
-			className={ classes }
-			style={ { ...useColorStyles( attributes ) } }
-		>
+		<FormInputWrapper className={ classes } style={ { ...styles } }>
 			<Sidebar { ...props } />
 			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
 				<RichText

@@ -12,6 +12,7 @@ import { find } from 'lodash';
 import { Button } from '../index';
 import { withClassName } from '../../util';
 import { CheckIcon, ChevronDownIcon } from '@crowdsignal/icons';
+import { useMemo } from '@wordpress/element';
 
 const BASE_CSS_CLASS = 'dropdown-input-component';
 
@@ -53,14 +54,16 @@ const StyledListButton = withClassName(
 const StyledListOptions = withClassName(
 	styled.div`
 		width: 100%;
+		max-height: 210px;
+		overflow: auto;
 		position: absolute;
 		top: 0;
 		z-index: 1000;
 		background-color: white;
 		border: 1px solid var( --color-neutral-90 );
+		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
-		overflow: hidden;
 	`,
 	`${ BASE_CSS_CLASS }__options`
 );
@@ -110,7 +113,10 @@ const StyledListOption = withClassName(
 );
 
 const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
-	const _options = [ { clientId: '', label: buttonLabel }, ...options ];
+	const _options = useMemo(
+		() => [ { clientId: '', label: buttonLabel }, ...options ],
+		[]
+	);
 
 	const getButtonText = ( selectedValue ) =>
 		find( _options, ( { clientId } ) => clientId === selectedValue ).label;

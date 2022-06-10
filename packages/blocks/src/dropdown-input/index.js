@@ -9,7 +9,6 @@ import { isEmpty } from 'lodash';
 /**
  * Internal dependencies
  */
-import { useColorStyles } from '@crowdsignal/styles';
 import {
 	ErrorMessage,
 	FormDropdownInput,
@@ -40,11 +39,14 @@ const DropdownInput = ( { attributes, className } ) => {
 		}
 	);
 
+	const styles = {
+		'--cs--style--button--foreground': attributes.textColor,
+		'--cs--style--button--background':
+			attributes.backgroundColor || attributes.gradient,
+	};
+
 	return (
-		<FormInputWrapper
-			className={ classes }
-			style={ { ...useColorStyles( attributes ) } }
-		>
+		<FormInputWrapper className={ classes } style={ { ...styles } }>
 			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
