@@ -15,10 +15,6 @@ const RankingAnswer = ( { attributes, className, draggable } ) => {
 		className
 	);
 
-	if ( ! attributes.label ) {
-		return null;
-	}
-
 	return (
 		<div
 			className={ classes }
