@@ -15,6 +15,7 @@ import Sidebar from './sidebar';
  * Style dependencies
  */
 import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
+import Toolbar from './toolbar';
 
 const EditRakingQuestionBlock = ( props ) => {
 	const { attributes, className, setAttributes } = props;
@@ -29,6 +30,7 @@ const EditRakingQuestionBlock = ( props ) => {
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
 			<Sidebar { ...props } />
+			<Toolbar { ...props } />
 
 			<RichText
 				tagName={ QuestionHeader }

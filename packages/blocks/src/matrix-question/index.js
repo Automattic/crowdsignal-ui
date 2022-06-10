@@ -10,7 +10,12 @@ import { filter, first, isEmpty, join, map, times } from 'lodash';
  * Internal dependencies
  */
 import { useValidation } from '@crowdsignal/form';
-import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
+import {
+	ErrorMessage,
+	JustificationWrapper,
+	QuestionHeader,
+	QuestionWrapper,
+} from '../components';
 import Row from './row';
 
 /**
@@ -43,6 +48,7 @@ const MatrixQuestion = ( { attributes, className } ) => {
 		{
 			'is-required': attributes.mandatory,
 			'is-error': ! isEmpty( errors ),
+			[ `align${ attributes.align }` ]: attributes.align,
 		}
 	);
 
@@ -64,38 +70,40 @@ const MatrixQuestion = ( { attributes, className } ) => {
 	};
 
 	return (
-		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<QuestionHeader>
-				<RawHTML>{ attributes.question }</RawHTML>
-			</QuestionHeader>
+		<JustificationWrapper justification={ attributes.justification }>
+			<QuestionWrapper attributes={ attributes } className={ classes }>
+				<QuestionHeader>
+					<RawHTML>{ attributes.question }</RawHTML>
+				</QuestionHeader>
 
-			<MatrixTable style={ tableStyles }>
-				<MatrixCell />
+				<MatrixTable style={ tableStyles }>
+					<MatrixCell />
 
-				{ map( attributes.columns, ( column ) => (
-					<MatrixCell
-						key={ column.clientId }
-						className="crowdsignal-forms-matrix-question-block__column-label"
-					>
-						<RawHTML>{ column.label }</RawHTML>
-					</MatrixCell>
-				) ) }
+					{ map( attributes.columns, ( column ) => (
+						<MatrixCell
+							key={ column.clientId }
+							className="crowdsignal-forms-matrix-question-block__column-label"
+						>
+							<RawHTML>{ column.label }</RawHTML>
+						</MatrixCell>
+					) ) }
 
-				{ map( attributes.rows, ( row ) => (
-					<Row
-						key={ row.clientId }
-						questionClientId={ attributes.clientId }
-						row={ row }
-						columns={ attributes.columns }
-						multipleChoice={ attributes.multipleChoice }
-					/>
-				) ) }
-			</MatrixTable>
+					{ map( attributes.rows, ( row ) => (
+						<Row
+							key={ row.clientId }
+							questionClientId={ attributes.clientId }
+							row={ row }
+							columns={ attributes.columns }
+							multipleChoice={ attributes.multipleChoice }
+						/>
+					) ) }
+				</MatrixTable>
 
-			{ ! isEmpty( errors ) && (
-				<ErrorMessage>{ first( errors ) }</ErrorMessage>
-			) }
-		</QuestionWrapper>
+				{ ! isEmpty( errors ) && (
+					<ErrorMessage>{ first( errors ) }</ErrorMessage>
+				) }
+			</QuestionWrapper>
+		</JustificationWrapper>
 	);
 };
 

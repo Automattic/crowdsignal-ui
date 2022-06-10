@@ -10,7 +10,6 @@ import { ErrorMessage } from '../';
 
 const FormInputWrapper = styled.div`
 	position: relative;
-	margin-bottom: 24px;
 
 	${ ErrorMessage.className } {
 		position: absolute;

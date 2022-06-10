@@ -9,7 +9,12 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { ErrorMessage, QuestionHeader, QuestionWrapper } from '../components';
+import {
+	ErrorMessage,
+	JustificationWrapper,
+	QuestionHeader,
+	QuestionWrapper,
+} from '../components';
 import { Style } from './constants';
 import { useValidation } from '@crowdsignal/form';
 
@@ -32,21 +37,24 @@ const RatingScaleQuestion = ( { attributes, children, className } ) => {
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
+			[ `align${ attributes.align }` ]: attributes.align,
 		}
 	);
 
 	return (
-		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<QuestionHeader>
-				<RawHTML>{ attributes.question }</RawHTML>
-			</QuestionHeader>
-			<Context.Provider value={ attributes }>
-				<QuestionWrapper.Content horizontal>
-					{ children }
-				</QuestionWrapper.Content>
-			</Context.Provider>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
-		</QuestionWrapper>
+		<JustificationWrapper justification={ attributes.justification }>
+			<QuestionWrapper attributes={ attributes } className={ classes }>
+				<QuestionHeader>
+					<RawHTML>{ attributes.question }</RawHTML>
+				</QuestionHeader>
+				<Context.Provider value={ attributes }>
+					<QuestionWrapper.Content horizontal>
+						{ children }
+					</QuestionWrapper.Content>
+				</Context.Provider>
+				{ error && <ErrorMessage>{ error }</ErrorMessage> }
+			</QuestionWrapper>
+		</JustificationWrapper>
 	);
 };
 

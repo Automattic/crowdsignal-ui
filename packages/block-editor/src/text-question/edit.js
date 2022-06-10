@@ -16,6 +16,7 @@ import {
 } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
+import Toolbar from '../ranking-question/toolbar';
 
 const EditTextQuestion = ( props ) => {
 	const { attributes, className, isSelected, setAttributes } = props;
@@ -48,6 +49,7 @@ const EditTextQuestion = ( props ) => {
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
 			<Sidebar { ...props } />
+			<Toolbar { ...props } />
 
 			<RichText
 				tagName={ QuestionHeader }

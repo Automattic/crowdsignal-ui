@@ -31,11 +31,17 @@ const settings = {
 	supports: {
 		html: false,
 		reusable: false,
+		align: [ 'wide', 'full' ],
 	},
 	example: {
 		attributes: {
 			question: __( 'How does gravity work?', 'block-editor' ),
 		},
+	},
+	getEditWrapperProps( { justification } ) {
+		return {
+			'data-justify': justification,
+		};
 	},
 };
 

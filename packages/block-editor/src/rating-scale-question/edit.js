@@ -15,7 +15,7 @@ import {
 	QuestionWrapper,
 	getBlockStyle,
 } from '@crowdsignal/blocks';
-// import Toolbar from './toolbar';
+import Toolbar from './toolbar';
 import Sidebar from './sidebar';
 
 const ALLOWED_ANSWER_BLOCKS = [ 'crowdsignal-forms/rating-scale-answer' ];
@@ -41,7 +41,7 @@ const EditRatingScaleQuestion = ( props ) => {
 
 	return (
 		<QuestionWrapper attributes={ attributes } className={ classes }>
-			{ /* <Toolbar { ...props } /> */ }
+			<Toolbar { ...props } />
 			<Sidebar { ...props } />
 
 			<RichText

@@ -19,6 +19,7 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import { CheckboxInputIcon, RadioInputIcon } from '@crowdsignal/icons';
+import { JustificationControl } from '../util/justification-control';
 
 const multipleChoiceControls = [
 	{
@@ -93,22 +94,30 @@ const MatrixQuestionToolbar = ( {
 			  ];
 
 	return (
-		<BlockControls group="other">
-			<Toolbar controls={ multipleChoiceToolbar } />
+		<>
+			<JustificationControl
+				justification={ attributes.justification }
+				onChange={ ( value ) => {
+					setAttributes( { justification: value } );
+				} }
+			/>
+			<BlockControls group="other">
+				<Toolbar controls={ multipleChoiceToolbar } />
 
-			{ ( currentColumn !== null || currentRow !== null ) && (
-				<ToolbarDropdownMenu
-					hasArrowIndicator
-					icon={ table }
-					label={ __( 'Edit matrix size', 'block-editor' ) }
-					controls={ tableControls }
-					popoverProps={ {
-						className:
-							'crowdsignal-forms-matrix-question-block__toolbar-dropdown',
-					} }
-				/>
-			) }
-		</BlockControls>
+				{ ( currentColumn !== null || currentRow !== null ) && (
+					<ToolbarDropdownMenu
+						hasArrowIndicator
+						icon={ table }
+						label={ __( 'Edit matrix size', 'block-editor' ) }
+						controls={ tableControls }
+						popoverProps={ {
+							className:
+								'crowdsignal-forms-matrix-question-block__toolbar-dropdown',
+						} }
+					/>
+				) }
+			</BlockControls>
+		</>
 	);
 };
 

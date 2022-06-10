@@ -13,6 +13,7 @@ import { useField } from '@crowdsignal/form';
 import {
 	ErrorMessage,
 	FormTextarea,
+	JustificationWrapper,
 	QuestionHeader,
 	QuestionWrapper,
 } from '../components';
@@ -33,24 +34,27 @@ const TextQuestion = ( { attributes, className } ) => {
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
+			[ `align${ attributes.align }` ]: attributes.align,
 		}
 	);
 
 	return (
-		<QuestionWrapper attributes={ attributes } className={ classes }>
-			<QuestionHeader>
-				<RawHTML>{ attributes.question }</RawHTML>
-			</QuestionHeader>
+		<JustificationWrapper justification={ attributes.justification }>
+			<QuestionWrapper attributes={ attributes } className={ classes }>
+				<QuestionHeader>
+					<RawHTML>{ attributes.question }</RawHTML>
+				</QuestionHeader>
 
-			<FormTextarea
-				style={ {
-					height: attributes.inputHeight,
-				} }
-				placeholder={ attributes.placeholder }
-				{ ...inputProps }
-			/>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
-		</QuestionWrapper>
+				<FormTextarea
+					style={ {
+						height: attributes.inputHeight,
+					} }
+					placeholder={ attributes.placeholder }
+					{ ...inputProps }
+				/>
+				{ error && <ErrorMessage>{ error }</ErrorMessage> }
+			</QuestionWrapper>
+		</JustificationWrapper>
 	);
 };
 

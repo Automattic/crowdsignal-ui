@@ -10,6 +10,7 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import { MultipleChoiceIcon, SingleChoiceIcon } from '@crowdsignal/icons';
+import { JustificationControl } from '../util/justification-control';
 
 const multipleChoiceControls = [
 	{
@@ -40,9 +41,17 @@ const MultipleChoiceQuestionToolbar = ( { attributes, setAttributes } ) => {
 	);
 
 	return (
-		<BlockControls>
-			<Toolbar controls={ multipleChoiceToolbar } />
-		</BlockControls>
+		<>
+			<JustificationControl
+				justification={ attributes.justification }
+				onChange={ ( value ) => {
+					setAttributes( { justification: value } );
+				} }
+			/>
+			<BlockControls>
+				<Toolbar controls={ multipleChoiceToolbar } />
+			</BlockControls>
+		</>
 	);
 };
 

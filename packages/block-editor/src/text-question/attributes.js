@@ -60,4 +60,7 @@ export default {
 		type: 'number',
 		default: 100,
 	},
+	justification: {
+		type: 'string',
+	},
 };
