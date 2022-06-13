@@ -14,7 +14,7 @@ import { withClassName } from '../../util';
 import { CheckIcon, ChevronDownIcon } from '@crowdsignal/icons';
 import { useMemo } from '@wordpress/element';
 
-const BASE_CSS_CLASS = 'dropdown-input-component';
+const BASE_CSS_CLASS = 'crowdsignal-forms-dropdown-input';
 
 const StyledListBox = withClassName(
 	styled.div`
@@ -26,7 +26,9 @@ const StyledListBox = withClassName(
 
 const StyledListButton = withClassName(
 	styled( Button )`
+		max-width: 400px;
 		margin-bottom: 0;
+		white-space: nowrap;
 
 		&&& {
 			button {
@@ -41,6 +43,11 @@ const StyledListButton = withClassName(
 			align-items: center;
 			justify-content: flex-start;
 
+			span {
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
 			svg {
 				position: absolute;
 				right: 8px;
@@ -53,7 +60,7 @@ const StyledListButton = withClassName(
 
 const StyledListOptions = withClassName(
 	styled.div`
-		width: 100%;
+		max-width: 400px;
 		max-height: 210px;
 		overflow: auto;
 		position: absolute;
@@ -78,6 +85,13 @@ const StyledListOption = withClassName(
 	styled.div`
 		padding: 8px 12px;
 		line-height: 1.3;
+
+		span {
+			display: block;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
 		&.active {
 			position: relative;
@@ -124,7 +138,9 @@ const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
 	return (
 		<Listbox as={ StyledListBox } value={ value } onChange={ onChange }>
 			<Listbox.Button as={ StyledListButton } outline>
-				<span>{ getButtonText( value ) }</span>
+				<span title={ getButtonText( value ) }>
+					{ getButtonText( value ) }
+				</span>
 				<ChevronDownIcon />
 			</Listbox.Button>
 			<Listbox.Options as={ StyledListOptions }>
@@ -133,6 +149,7 @@ const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
 						as={ StyledListOption }
 						key={ index }
 						value={ option.clientId }
+						title={ option.label }
 						className={ ( { active, selected } ) =>
 							classnames( {
 								active,
