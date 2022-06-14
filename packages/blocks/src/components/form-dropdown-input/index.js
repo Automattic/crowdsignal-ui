@@ -32,7 +32,8 @@ const StyledListButton = withClassName(
 
 		&&& {
 			button {
-				padding: 8px 36px 8px 12px;
+				min-height: 40px;
+				padding: 4px 36px 4px 12px;
 			}
 		}
 
@@ -60,6 +61,7 @@ const StyledListButton = withClassName(
 
 const StyledListOptions = withClassName(
 	styled.div`
+		width: 100%;
 		max-width: 400px;
 		max-height: 210px;
 		overflow: auto;
@@ -83,7 +85,7 @@ const StyledEditorListOptions = styled( StyledListOptions )`
 
 const StyledListOption = withClassName(
 	styled.div`
-		padding: 8px 12px;
+		padding: 4px 12px;
 		line-height: 1.3;
 
 		> span {
