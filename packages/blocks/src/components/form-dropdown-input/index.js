@@ -86,7 +86,7 @@ const StyledListOption = withClassName(
 		padding: 8px 12px;
 		line-height: 1.3;
 
-		span {
+		> span {
 			display: block;
 			white-space: nowrap;
 			overflow: hidden;
