@@ -18,6 +18,8 @@ const BASE_CSS_CLASS = 'crowdsignal-forms-dropdown-input';
 
 const StyledListBox = withClassName(
 	styled.div`
+		min-width: ${ ( props ) => props.width ?? '240px' };
+		max-width: ${ ( props ) => props.width ?? '400px' };
 		display: inline-block;
 		position: relative;
 	`,
@@ -26,7 +28,7 @@ const StyledListBox = withClassName(
 
 const StyledListButton = withClassName(
 	styled( Button )`
-		max-width: 400px;
+		width: 100%;
 		margin-bottom: 0;
 		white-space: nowrap;
 
@@ -39,8 +41,8 @@ const StyledListButton = withClassName(
 
 		button {
 			position: relative;
-			min-width: 240px;
 			display: flex;
+			flex: 1;
 			align-items: center;
 			justify-content: flex-start;
 
@@ -62,7 +64,6 @@ const StyledListButton = withClassName(
 const StyledListOptions = withClassName(
 	styled.div`
 		width: 100%;
-		max-width: 400px;
 		max-height: 210px;
 		overflow: auto;
 		position: absolute;
@@ -128,7 +129,13 @@ const StyledListOption = withClassName(
 	`${ BASE_CSS_CLASS }__option`
 );
 
-const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
+const FormDropdownInput = ( {
+	buttonLabel,
+	onChange,
+	options,
+	value,
+	width,
+} ) => {
 	const _options = useMemo(
 		() => [ { clientId: '', label: buttonLabel }, ...options ],
 		[]
@@ -138,7 +145,12 @@ const FormDropdownInput = ( { buttonLabel, onChange, options, value } ) => {
 		find( _options, ( { clientId } ) => clientId === selectedValue ).label;
 
 	return (
-		<Listbox as={ StyledListBox } value={ value } onChange={ onChange }>
+		<Listbox
+			as={ StyledListBox }
+			value={ value }
+			onChange={ onChange }
+			width={ width }
+		>
 			<Listbox.Button as={ StyledListButton } outline>
 				<span title={ getButtonText( value ) }>
 					{ getButtonText( value ) }

@@ -135,7 +135,7 @@ export default ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDropdownInput.Wrapper>
+			<FormDropdownInput.Wrapper width={ attributes.inputWidth }>
 				<FormDropdownInput.Button outline>
 					<RichText
 						placeholder={ __( 'Choose an option', 'blocks' ) }

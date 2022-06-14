@@ -34,4 +34,7 @@ export default {
 	textColor: {
 		type: 'string',
 	},
+	inputWidth: {
+		type: 'string',
+	},
 };
