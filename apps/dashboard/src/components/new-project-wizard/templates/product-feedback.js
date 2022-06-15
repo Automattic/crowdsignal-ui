@@ -141,7 +141,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/rating-scale-question',
 				attributes: {
-					clientId: '74a541f2-e67a-4a5d-925e-fbbed058853c',
 					question:
 						'What emoji describes best your experience with ACME?',
 					mandatory: false,
@@ -156,7 +155,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/rating-scale-answer',
 						attributes: {
-							clientId: 'c93cc3ad-a4a0-45e3-8137-8f92f8f202e2',
 							label: '1',
 							shareSiblingAttributes: true,
 							emoji: '😡',
@@ -167,7 +165,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/rating-scale-answer',
 						attributes: {
-							clientId: '041d2750-a0bc-4e15-aee4-2e09f42f796a',
 							label: '2',
 							shareSiblingAttributes: true,
 							emoji: '😕',
@@ -178,7 +175,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/rating-scale-answer',
 						attributes: {
-							clientId: '6f9dd260-54b4-4ee3-80c4-c0015394acf9',
 							label: '3',
 							shareSiblingAttributes: true,
 							emoji: '😐',
@@ -189,7 +185,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/rating-scale-answer',
 						attributes: {
-							clientId: '7d0a494c-61c0-4616-973a-05629d09a0a0',
 							label: '4',
 							shareSiblingAttributes: true,
 							emoji: '🙂',
@@ -200,7 +195,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/rating-scale-answer',
 						attributes: {
-							clientId: 'c7b49246-d1a0-45ab-81b8-fdc6c71db32d',
 							label: '5',
 							shareSiblingAttributes: true,
 							emoji: '😀',
@@ -222,7 +216,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/multiple-choice-question',
 				attributes: {
-					clientId: '73f8eebc-610a-42ee-b8bd-580def4ab113',
 					question:
 						'How would you feel if you could no longer use ACME?',
 					mandatory: false,
@@ -238,7 +231,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'd9474826-55f1-4a17-ae3b-91a16856a5e4',
 							label: 'Very disappointed',
 							shareSiblingAttributes: true,
 						},
@@ -247,7 +239,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'e9d3ab12-0aa0-41b7-ab4d-cd78a2b3b359',
 							label: 'Somewhat disappointed',
 							shareSiblingAttributes: true,
 						},
@@ -256,7 +247,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'c0da8b7f-c24b-4cba-91a8-6f4c350a4229',
 							label: 'Not disappointed',
 							shareSiblingAttributes: true,
 						},
@@ -265,7 +255,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'd41f2813-6ac2-4f40-9f76-d7f167297abc',
 							label: 'I no longer use it',
 							shareSiblingAttributes: true,
 						},
@@ -276,7 +265,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/text-question',
 				attributes: {
-					clientId: '1300b581-cc02-42e3-92d8-e40a343d54de',
 					restrictions: [],
 					question:
 						'What would you likely use as an alternative if ACME were no longer available?',
@@ -311,7 +299,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/multiple-choice-question',
 				attributes: {
-					clientId: 'a82b8ba1-753d-4402-8ee0-7ec311dbdc94',
 					question:
 						'How main times did you use ACME in the last week?',
 					mandatory: false,
@@ -327,7 +314,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'eba1e876-9397-4e0c-ad1c-d691621b1dd6',
 							label: 'Once',
 							shareSiblingAttributes: true,
 						},
@@ -336,7 +322,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: '6b42abce-8725-427c-85e7-4c4b6b6b6bbc',
 							label: 'Twice',
 							shareSiblingAttributes: true,
 						},
@@ -345,7 +330,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: '26bbf873-2418-44c8-8cb2-dd409c24a9a3',
 							label: '3 or more times',
 							shareSiblingAttributes: true,
 						},
@@ -354,7 +338,6 @@ export const productFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							clientId: 'd4a59133-843c-4f2f-a1c1-431c5b96d105',
 							label: 'Every day',
 							shareSiblingAttributes: true,
 						},
@@ -365,7 +348,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/text-question',
 				attributes: {
-					clientId: '8fc3ef97-7de1-4658-a302-ec019a5249e2',
 					restrictions: [],
 					question:
 						'Describe how you’re currently using ACME in a few words.',
@@ -383,7 +365,6 @@ export const productFeedbackTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/text-question',
 				attributes: {
-					clientId: '47d823dd-873d-42a7-bb94-d6d829052209',
 					restrictions: [],
 					question: 'Have you encountered any problems?',
 					note: '',
