@@ -1,4 +1,3 @@
-const path = require( 'path' );
 const webpack = require( 'webpack' );
 const getBaseConfig = require( '@automattic/calypso-build/webpack.config.js' );
 
@@ -22,6 +21,12 @@ module.exports = ( { config } ) => {
 				},
 			],
 		},
-		resolve: baseConfig.resolve,
+		resolve: {
+			...baseConfig.resolve,
+			fallback: {
+				...baseConfig.resolve.fallback,
+				path: require.resolve( 'path-browserify' ),
+			},
+		},
 	} );
 }

@@ -10,7 +10,7 @@ import StyleProvider from '../packages/components/src/style-provider';
 
 export const decorators = [
 	( Story ) => (
-		<StyleProvider reset>
+		<StyleProvider reset namespace="crowdsignal">
 			<Story />
 		</StyleProvider>
 	),

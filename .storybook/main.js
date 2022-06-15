@@ -8,4 +8,7 @@ module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
+	features: {
+		emotionAlias: true,
+	},
 };
