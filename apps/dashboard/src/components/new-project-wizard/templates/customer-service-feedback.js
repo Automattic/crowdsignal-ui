@@ -155,7 +155,7 @@ export const customerServiceFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							label: 'Neither satisifed nor dissatisfied',
+							label: 'Neither satisfied nor dissatisfied',
 							shareSiblingAttributes: true,
 						},
 						innerBlocks: [],
@@ -394,7 +394,7 @@ export const customerServiceFeedbackTemplate = createTemplate(
 					{
 						name: 'crowdsignal-forms/multiple-choice-answer',
 						attributes: {
-							label: 'Neither satisifed nor dissatisfied',
+							label: 'Neither satisfied nor dissatisfied',
 							shareSiblingAttributes: true,
 						},
 						innerBlocks: [],
