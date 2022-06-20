@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { useEffect } from '@wordpress/element';
+
+/**
  * Internal dependencies
  */
 import ProjectFormPage from './page';
@@ -7,6 +12,23 @@ import { useProjectData } from './use-project-data';
 
 const ProjectForm = ( props ) => {
 	const { pageContent, submitPage, theme } = useProjectData( props );
+
+	useEffect( () => {
+		const observer = new window.ResizeObserver( () => {
+			window.parent.postMessage(
+				{
+					type: 'crowdsignal-forms-project-page-loaded',
+					projectCode: props.projectCode,
+					pageHeight: document.body.offsetHeight,
+				},
+				'*'
+			);
+		} );
+
+		observer.observe( document.body );
+
+		return () => observer.unobserve( document.body );
+	}, [] );
 
 	if ( ! pageContent ) {
 		return 'Wait...';
