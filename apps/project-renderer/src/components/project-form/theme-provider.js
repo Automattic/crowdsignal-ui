@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { Fragment } from '@wordpress/element';
+import { Fragment, useEffect, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -20,9 +20,22 @@ import { useStylesheet } from '@crowdsignal/hooks';
  */
 
 const ProjectFormThemeProvider = ( { children, theme } ) => {
+	const [ loading, setLoading ] = useState( true );
+
+	// It's extremely tricky to detect when the stylesheets have actually loaded
+	// so we just wait 100ms before rendering the content.
+	// Note this only applies in the development environment.
+	useEffect( () => {
+		setTimeout( () => setLoading( false ), 100 );
+	}, [] );
+
 	useStylesheet( `/ui/stable/theme-compatibility/base.css` );
 	useStylesheet( `https://app.crowdsignal.com/themes/${ theme }/style.css` );
 	useStylesheet( `/ui/stable/theme-compatibility/${ theme }.css` );
+
+	if ( loading ) {
+		return null;
+	}
 
 	return <>{ children }</>;
 };
