@@ -15,6 +15,16 @@ body {
 	--cs--style--block-gap: var(--wp--style--block-gap);
 	--cs--style--block-gap-big: calc(var(--wp--style--block-gap) * 2);
 	--cs--style--block-gap-small: calc(var(--wp--style--block-gap) / 2);
+
+	--cs--style--border-width-regular: 1px;
+	--cs--style--border-width-thick: 2px;
+
+	--cs--style--button--background: var(--wp--preset--color--background);
+	--cs--style--button--foreground: var(--wp--preset--color--primary);
+	--cs--style--button--font-size: var(--wp--preset--font-size--normal);
+	--cs--style--button--font-weight: 400;
+	--cs--style--button--border-radius: 0;
+
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
 	--cs--content-padding-horizontal: 16px;
@@ -211,5 +221,48 @@ body {
 			flex-grow: 1;
 			cursor: inherit;
 		}
+	}
+}
+
+.crowdsignal-forms-dropdown-input {
+	.crowdsignal-forms-dropdown-input__button.is-style-outline {
+		button.crowdsignal-forms-button__button {
+			font-size: var(--cs--style--button--font-size);
+			font-weight: var(--cs--style--button--font-weight);
+			color: var(--cs--style--button--foreground);
+			background: var(--cs--style--button--background);
+		}
+	}
+
+	&__options {
+		color: var(--cs--style--button--foreground);
+		background: var(--cs--style--button--background);
+		border-color: currentColor;
+		border-width: var(--cs--style--border-width-thick);
+		border-radius: var(--cs--style--button--border-radius);
+	}
+
+	&__option {
+		font-size: var(--cs--style--button--font-size);
+		font-weight: var(--cs--style--button--font-weight);
+
+		&.placeholder {
+			opacity: 0.5;
+		}
+
+		&.selected {
+			background: var(--cs--style--button--foreground);
+		}
+
+		&.active {
+			&:before {
+				background: var(--cs--style--button--foreground);
+			}
+		}
+	}
+
+	svg path {
+		stroke: currentColor;
+		fill: none;
 	}
 }

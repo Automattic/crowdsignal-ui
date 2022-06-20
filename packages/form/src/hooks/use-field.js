@@ -28,7 +28,7 @@ export const useField = ( {
 	);
 
 	const onChange = ( event ) => {
-		let newValue = event.target.value;
+		let newValue = event?.target?.value;
 
 		if ( type === 'checkbox' ) {
 			newValue = event.target.checked
@@ -39,12 +39,15 @@ export const useField = ( {
 				  );
 		} else if ( type === 'file' ) {
 			newValue = event.target.files;
-			setFieldValue( formName, fieldName, newValue );
-			validateField( newValue );
-			return;
+		} else if ( type === 'dropdown' ) {
+			newValue = event;
 		}
 
 		setFieldValue( formName, fieldName, newValue );
+
+		if ( [ 'file', 'dropdown' ].includes( type ) ) {
+			validateField( newValue );
+		}
 	};
 
 	const onBlur = () => {
@@ -65,7 +68,7 @@ export const useField = ( {
 		onChange,
 	};
 
-	if ( includes( [ 'checkbox', 'radio' ], type ) ) {
+	if ( includes( [ 'checkbox', 'radio', 'dropdown' ], type ) ) {
 		inputProps.onBlur = onBlur;
 		inputProps.value = fieldValue;
 	}

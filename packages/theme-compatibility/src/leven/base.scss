@@ -6,14 +6,16 @@
 }
 
 body {
-	--wp--preset--color--primary: #1285ce;
+	--wp--preset--color--primary: #ff302c;
+	--wp--preset--color--background: #f7f7f6;
 
 	--crowdsignal-forms-input-border-color: #ddd;
 	--crowdsignal-forms-question-border-color: #eee;
 	--crowdsignal-forms-question-background-color: #fff;
 	--crowdsignal-forms-submit-button-background-color: #ff302c;
 	--color-text: #444;
-	--wp--custom--color--background: #f7f7f6;
+
+	--cs--style--button--border-radius: 9px;
 }
 
 body {
