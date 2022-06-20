@@ -55,6 +55,7 @@ const DropdownInput = ( { attributes, className } ) => {
 				options={ attributes.options }
 				onChange={ onChange }
 				value={ value }
+				width={ attributes.inputWidth }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
