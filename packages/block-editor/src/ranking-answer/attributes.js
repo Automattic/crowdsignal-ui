@@ -21,4 +21,7 @@ export default {
 	textColor: {
 		type: 'string',
 	},
+	textAlign: {
+		type: 'string',
+	},
 };

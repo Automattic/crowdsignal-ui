@@ -11,6 +11,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import { withSharedSiblingAttributes } from '../util/with-shared-sibling-attributes';
 import EditButtonAnswer from '../components/edit-button';
 import Sidebar from './sidebar';
+import Toolbar from './toolbar';
 import { createBlock } from '@wordpress/blocks';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { DragHandle } from '@crowdsignal/icons';
@@ -64,6 +65,7 @@ const EditRankingAnswer = ( props ) => {
 
 	return (
 		<div className={ classes }>
+			<Toolbar { ...props } />
 			<Sidebar { ...props } />
 			<DragHandle />
 			<EditButtonAnswer

@@ -21,6 +21,14 @@ const ButtonContent = styled.span`
 		position: absolute;
 		left: -999px;
 	}
+
+	${ Button.Wrapper }.text-align-center & {
+		justify-content: center;
+	}
+
+	${ Button.Wrapper }.text-align-right & {
+		justify-content: flex-end;
+	}
 `;
 
 const ButtonAnswer = ( {

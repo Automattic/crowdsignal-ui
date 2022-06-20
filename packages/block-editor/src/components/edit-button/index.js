@@ -19,6 +19,14 @@ const ButtonContent = styled.div`
 		flex: 1;
 		text-align: left;
 	}
+
+	${ Button.Wrapper }.text-align-center & .rich-text {
+		text-align: center;
+	}
+
+	${ Button.Wrapper }.text-align-right & .rich-text {
+		text-align: right;
+	}
 `;
 
 const EditButtonAnswer = ( {
@@ -30,6 +38,14 @@ const EditButtonAnswer = ( {
 	onReplace,
 	onSplit,
 	onDelete,
+	allowedFormats = [
+		'core/bold',
+		'core/italic',
+		'core/code',
+		'core/strikethrough',
+		'core/subscript',
+		'core/superscript',
+	],
 } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
 
@@ -55,7 +71,7 @@ const EditButtonAnswer = ( {
 					value={ value || attributes.label }
 					multiline={ false }
 					preserveWhiteSpace={ false }
-					allowedFormats={ [] }
+					allowedFormats={ allowedFormats }
 					withoutInteractiveFormatting
 				/>
 			</ButtonContent>
