@@ -9,7 +9,7 @@ import { render } from '@wordpress/element';
 import { StyleProvider } from '@crowdsignal/components';
 import { setHostHeader } from '@crowdsignal/http';
 import { Route, Router } from '@crowdsignal/router';
-import App from './components/app';
+import ProjectForm from './components/project-form';
 
 const renderProject = () => {
 	const container = document.getElementById( 'crowdsignal-project' );
@@ -29,7 +29,7 @@ const renderProject = () => {
 			<Router>
 				<Route
 					path="/:projectCode"
-					component={ App }
+					component={ ProjectForm }
 					{ ...projectProps }
 				/>
 			</Router>
