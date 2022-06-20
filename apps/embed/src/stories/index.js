@@ -16,6 +16,6 @@ const wrapperStyles = {
 
 export const Default = () => (
 	<div style={ wrapperStyles }>
-		<crowdsignal-embed src="https://crowdsignal.localhost:9001/7BFDFE6EC482F4A3" />
+		<crowdsignal-embed src="https://crowdsignal.localhost:9001/B2A9100BBAB921D0?preview=true" />
 	</div>
 );
