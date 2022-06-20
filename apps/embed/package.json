@@ -1,0 +1,23 @@
+{
+  "name": "@crowdsignal/embed",
+  "version": "0.1.0",
+  "description": "Embed Crowdsignal.com content on third party sites.",
+  "author": "Automattic Inc.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "crowdsignal"
+  ],
+  "homepage": "https://github.com/Automattic/crowdsignal-ui/tree/HEAD/apps/embed/README.md",
+  "browser": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Automattic/crowdsignal-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Automattic/crowdsignal-ui/issues"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "build": "calypso-build ./src/index.js"
+  }
+}
