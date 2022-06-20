@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { useLayoutEffect, useRef } from '@wordpress/element';
 import { map, zipObject } from 'lodash';
 import classnames from 'classnames';
 
@@ -17,6 +18,19 @@ import { Form } from '@crowdsignal/form';
 const blockMap = zipObject( map( projectBlocks, 'blockName' ), projectBlocks );
 
 const ProjectPage = ( { blocks, onSubmit, projectCode } ) => {
+	const formWrapper = useRef( null );
+
+	useLayoutEffect( () => {
+		window.parent.postMessage(
+			{
+				type: 'crowdsignal-forms-project-page-loaded',
+				projectCode,
+				pageHeight: document.body.offsetHeight,
+			},
+			'*'
+		);
+	}, [ blocks ] );
+
 	const classes = classnames( 'wp-embed-responsive', 'crowdsignal-content', {
 		'crowdsignal-forms-form__content': !! onSubmit,
 	} );
@@ -31,6 +45,7 @@ const ProjectPage = ( { blocks, onSubmit, projectCode } ) => {
 
 	return (
 		<Form
+			ref={ formWrapper }
 			className="crowdsignal-forms-form"
 			name={ `f-${ projectCode }` }
 			onSubmit={ onSubmit }

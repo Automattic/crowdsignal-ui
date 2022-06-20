@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { createContext } from '@wordpress/element';
+import { createContext, forwardRef } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 
 /**
@@ -12,7 +12,7 @@ import { values } from 'lodash';
 
 const Context = createContext( 'form' );
 
-const Form = ( { children, name, onSubmit, ...props } ) => {
+const Form = forwardRef( ( { children, name, onSubmit, ...props }, ref ) => {
 	const validations = {};
 
 	const data = useSelect(
@@ -47,12 +47,12 @@ const Form = ( { children, name, onSubmit, ...props } ) => {
 
 	return (
 		<Context.Provider value={ { name, registerValidation } }>
-			<form onSubmit={ handleSubmit } { ...props }>
+			<form ref={ ref } onSubmit={ handleSubmit } { ...props }>
 				{ children }
 			</form>
 		</Context.Provider>
 	);
-};
+} );
 
 Form.Context = Context;
 
