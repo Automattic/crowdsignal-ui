@@ -26,6 +26,7 @@ const enabledBlocks = [
 	'core/buttons',
 	'core/code',
 	'core/columns',
+	'core/cover',
 	'core/embed',
 	'core/group',
 	'core/heading',
