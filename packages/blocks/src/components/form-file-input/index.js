@@ -48,8 +48,7 @@ const FileInputFileRemove = styled.a`
 	display: block;
 `;
 
-const FormFileInput = ( { inputProps, attributes } ) => {
-	const { files, onChange } = inputProps;
+const FormFileInput = ( { attributes, files, onChange } ) => {
 	const inputFile = useRef( null );
 
 	const handleFileInputClick = ( event ) => {
@@ -63,7 +62,7 @@ const FormFileInput = ( { inputProps, attributes } ) => {
 		// It doesn't seem easy to manage files individually on an input file field.
 		// Since we only support single files ATM, this is not a problem.
 		// We'll need to figure out how to handle this to add support for multiple files
-		onChange( { target: { value: null } } );
+		onChange( { target: { files: null } } );
 	};
 
 	let outputMessage = attributes.message;
@@ -78,7 +77,7 @@ const FormFileInput = ( { inputProps, attributes } ) => {
 
 	return (
 		<FileInputWrapper>
-			<input { ...inputProps } ref={ inputFile } />
+			<input type="file" onChange={ onChange } ref={ inputFile } />
 			<FileInputButton onClick={ handleFileInputClick } outline>
 				{ attributes.buttonLabel }
 			</FileInputButton>

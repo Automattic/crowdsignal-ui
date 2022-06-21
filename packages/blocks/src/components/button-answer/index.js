@@ -35,11 +35,14 @@ const ButtonAnswer = ( {
 	attributes,
 	children,
 	className,
-	inputProps,
 	isMultiSelect,
+	isSelected,
+	onChange,
 	showCheckmark,
+	value,
 } ) => {
 	const width = attributes.width ? `${ attributes.width }%` : null;
+	const type = isMultiSelect ? 'checkbox' : 'radio';
 
 	return (
 		<Button
@@ -52,12 +55,18 @@ const ButtonAnswer = ( {
 			outline
 		>
 			<ButtonContent>
-				{ inputProps && <FormCheckbox { ...inputProps } /> }
+				<FormCheckbox
+					checked={ isSelected }
+					isMultiSelect={ isMultiSelect }
+					onChange={ onChange }
+					type={ type }
+					value={ value }
+				/>
 				<RawHTML>{ children }</RawHTML>
 				{ showCheckmark && (
 					<Checkmark
 						isMultiSelect={ isMultiSelect }
-						isSelected={ inputProps.checked }
+						isSelected={ isSelected }
 					/>
 				) }
 			</ButtonContent>

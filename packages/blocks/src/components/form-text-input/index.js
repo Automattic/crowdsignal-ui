@@ -26,8 +26,14 @@ const Input = styled.input`
 	}
 `;
 
-const FormTextInput = ( { style = {}, ...props } ) => (
-	<Input type="text" style={ { ...style } } { ...props } />
+const FormTextInput = ( { value, onChange, style = {}, ...props } ) => (
+	<Input
+		type="text"
+		value={ value }
+		onChange={ onChange }
+		style={ { ...style } }
+		{ ...props }
+	/>
 );
 
 FormTextInput.Preview = ( { className, ...props } ) => (

@@ -15,8 +15,8 @@ import { useField } from '@crowdsignal/form';
 import validator from './validations';
 
 const TextInput = ( { attributes, className } ) => {
-	const { inputProps, error } = useField( {
-		name: `q_${ attributes.clientId }[text]`,
+	const { error, fieldValue, onUpdate } = useField( {
+		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -49,12 +49,13 @@ const TextInput = ( { attributes, className } ) => {
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormTextInput
+				value={ fieldValue }
+				placeholder={ attributes.placeholder }
+				onChange={ ( event ) => onUpdate( event.target.value ) }
 				style={ {
 					width: attributes.inputWidth,
 					height: `${ attributes.inputHeight }px`,
 				} }
-				placeholder={ attributes.placeholder }
-				{ ...inputProps }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

@@ -94,15 +94,28 @@ const CheckboxInput = styled.input`
 	width: 1px;
 `;
 
-const FormCheckbox = ( { className, ...props } ) => {
+const FormCheckbox = ( {
+	checked,
+	className,
+	onChange,
+	type = 'checkbox',
+	value,
+	...props
+} ) => {
 	const classes = classnames( className, {
-		'is-selected': props.checked,
-		'is-radio': props.type === 'radio',
+		'is-selected': checked,
+		'is-radio': type === 'radio',
 	} );
 
 	return (
 		<CheckboxWrapper className={ classes }>
-			<CheckboxInput type="checkbox" { ...props } />
+			<CheckboxInput
+				type={ type }
+				checked={ checked }
+				value={ value }
+				onChange={ onChange }
+				{ ...props }
+			/>
 		</CheckboxWrapper>
 	);
 };

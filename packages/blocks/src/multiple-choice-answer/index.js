@@ -15,22 +15,24 @@ import CheckboxAnswer from '../components/checkbox-answer';
 
 const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
-
 	const isMultiSelect = parentQuestion.maximumChoices !== 1;
 
-	const { inputProps } = useField( {
-		name: `q_${ parentQuestion.clientId }[choice]${
+	const { fieldValue, onUpdate } = useField( {
+		fieldName: `q_${ parentQuestion.clientId }[choice]${
 			isMultiSelect ? '[]' : ''
 		}`,
-		type: isMultiSelect ? 'checkbox' : 'radio',
-		value: attributes.clientId,
+		isMultiSelect,
 	} );
+
+	const isSelected = isMultiSelect
+		? fieldValue.includes( attributes.clientId )
+		: fieldValue === attributes.clientId;
 
 	const classes = classnames(
 		'crowdsignal-forms-multiple-choice-answer-block',
 		className,
 		{
-			'is-selected': inputProps.checked,
+			'is-selected': isSelected,
 		}
 	);
 
@@ -46,7 +48,12 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 			<CheckboxAnswer
 				attributes={ attributes }
 				className={ classes }
-				inputProps={ inputProps }
+				isMultiSelect={ isMultiSelect }
+				isSelected={ isSelected }
+				onChange={ ( event ) =>
+					onUpdate( event.target.value, isSelected )
+				}
+				value={ attributes.clientId }
 			/>
 		);
 	}
@@ -55,8 +62,10 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 		<ButtonAnswer
 			attributes={ attributes }
 			className={ classes }
-			inputProps={ inputProps }
 			isMultiSelect={ isMultiSelect }
+			isSelected={ isSelected }
+			onChange={ ( event ) => onUpdate( event.target.value, isSelected ) }
+			value={ attributes.clientId }
 			showCheckmark
 		>
 			{ attributes.label }
