@@ -19,7 +19,7 @@ import {
 } from '../components';
 
 const TextQuestion = ( { attributes, className } ) => {
-	const { error, fieldValue, onUpdate } = useField( {
+	const { error, fieldValue, onChange } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
@@ -50,7 +50,7 @@ const TextQuestion = ( { attributes, className } ) => {
 				</QuestionHeader>
 
 				<FormTextarea
-					onChange={ ( event ) => onUpdate( event.target.value ) }
+					onChange={ onChange }
 					placeholder={ attributes.placeholder }
 					style={ style }
 					value={ fieldValue }

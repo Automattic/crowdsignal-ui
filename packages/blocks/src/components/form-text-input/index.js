@@ -26,12 +26,12 @@ const Input = styled.input`
 	}
 `;
 
-const FormTextInput = ( { value, onChange, style = {}, ...props } ) => (
+const FormTextInput = ( { onChange, style = {}, value, ...props } ) => (
 	<Input
+		onChange={ ( event ) => onChange( event.target.value ) }
+		style={ { ...style } }
 		type="text"
 		value={ value }
-		onChange={ onChange }
-		style={ { ...style } }
 		{ ...props }
 	/>
 );

@@ -13,7 +13,7 @@ import { useColorStyles } from '@crowdsignal/styles';
 import { useField } from '@crowdsignal/form';
 
 const FileInput = ( { attributes, className } ) => {
-	const { error, fieldValue, onUpdate } = useField( {
+	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }_upload`,
 		validation: ( files ) => {
 			if ( attributes.mandatory && ( ! files || files.length === 0 ) ) {
@@ -60,7 +60,7 @@ const FileInput = ( { attributes, className } ) => {
 			<FormFileInput
 				attributes={ attributes }
 				files={ fieldValue }
-				onChange={ ( event ) => onUpdate( event.target.files ) }
+				onChange={ onChange }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

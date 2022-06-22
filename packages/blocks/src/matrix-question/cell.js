@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { filter, uniq } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
@@ -10,25 +15,35 @@ import { FormCheckbox } from '../components';
 import { MatrixCell } from './styles';
 
 const Cell = ( { column, multipleChoice, questionClientId, row } ) => {
-	const { fieldValue, onUpdate } = useField( {
+	const { fieldValue, onChange } = useField( {
 		fieldName: `q_${ questionClientId }[${ row.clientId }]${
 			multipleChoice ? '[]' : ''
 		}`,
-		isMultiSelect: multipleChoice,
+		defaultValue: multipleChoice ? [] : '',
 	} );
 
 	const isSelected = multipleChoice
 		? fieldValue.includes( column.clientId )
 		: fieldValue === column.clientId;
 
+	const onChangeHandler = ( value ) => {
+		let newValue = value;
+
+		if ( multipleChoice ) {
+			newValue = ! isSelected
+				? uniq( [ ...fieldValue, value ] )
+				: filter( fieldValue, ( v ) => v !== value );
+		}
+
+		onChange( newValue );
+	};
+
 	return (
 		<MatrixCell as="label">
 			<FormCheckbox
 				checked={ isSelected }
 				isMultiSelect={ multipleChoice }
-				onChange={ ( event ) =>
-					onUpdate( event.target.value, isSelected )
-				}
+				onChange={ onChangeHandler }
 				type={ multipleChoice ? 'checkbox' : 'radio' }
 				value={ column.clientId }
 			/>

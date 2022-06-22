@@ -3,7 +3,7 @@
  */
 import { useContext, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { filter, isNil, uniq } from 'lodash';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,9 +13,9 @@ import { STORE_NAME } from '../data';
 import { useValidation } from './use-validation';
 
 export const useField = ( {
+	defaultValue = '',
 	fieldName,
 	initialValue,
-	isMultiSelect,
 	validation,
 	defaultValue,
 } ) => {
@@ -40,22 +40,14 @@ export const useField = ( {
 		}
 	}, [] );
 
-	const onUpdate = ( value, isSelected ) => {
-		let newValue = value;
-
-		if ( isMultiSelect ) {
-			newValue = ! isSelected
-				? uniq( [ ...fieldValue, value ] )
-				: filter( fieldValue, ( v ) => v !== value );
-		}
-
-		setFieldValue( formName, fieldName, newValue );
-		validateField( newValue );
+	const onChange = ( value ) => {
+		setFieldValue( formName, fieldName, value );
+		validateField( value );
 	};
 
 	return {
 		error,
 		fieldValue,
-		onUpdate,
+		onChange,
 	};
 };

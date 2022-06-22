@@ -16,7 +16,7 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( RatingScaleQuestion.Context );
 
 	// fixing the input array-ish as rating, solve the ID on backend
-	const { fieldValue, onUpdate } = useField( {
+	const { fieldValue, onChange } = useField( {
 		fieldName: `q_${ parentQuestion.clientId }[rating]`,
 	} );
 
@@ -43,7 +43,7 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 			className={ classes }
 			isMultiSelect={ false }
 			isSelected={ isSelected }
-			onChange={ ( event ) => onUpdate( event.target.value, isSelected ) }
+			onChange={ onChange }
 			value={ attributes.clientId }
 		>
 			{ blockStyle === RatingScaleQuestion.Style.EMOJI

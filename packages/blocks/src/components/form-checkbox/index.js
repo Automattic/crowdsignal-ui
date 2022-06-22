@@ -110,10 +110,10 @@ const FormCheckbox = ( {
 	return (
 		<CheckboxWrapper className={ classes }>
 			<CheckboxInput
-				type={ type }
 				checked={ checked }
+				onChange={ ( event ) => onChange( event.target.value ) }
+				type={ type }
 				value={ value }
-				onChange={ onChange }
 				{ ...props }
 			/>
 		</CheckboxWrapper>

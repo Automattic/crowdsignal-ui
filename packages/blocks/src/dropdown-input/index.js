@@ -18,7 +18,7 @@ import { useField } from '@crowdsignal/form';
 
 const DropdownInput = ( { attributes, className } ) => {
 	const multipleChoice = attributes.maximumChoices > 1;
-	const { error, onUpdate, fieldValue } = useField( {
+	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[choice]${
 			multipleChoice ? '[]' : ''
 		}`,
@@ -57,7 +57,7 @@ const DropdownInput = ( { attributes, className } ) => {
 			<FormDropdownInput
 				buttonLabel={ attributes.buttonLabel || defaultButtonLabel }
 				options={ attributes.options }
-				onChange={ onUpdate }
+				onChange={ onChange }
 				value={ fieldValue }
 				width={ attributes.inputWidth }
 				multipleChoice={ multipleChoice }

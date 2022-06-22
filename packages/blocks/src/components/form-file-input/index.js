@@ -62,7 +62,7 @@ const FormFileInput = ( { attributes, files, onChange } ) => {
 		// It doesn't seem easy to manage files individually on an input file field.
 		// Since we only support single files ATM, this is not a problem.
 		// We'll need to figure out how to handle this to add support for multiple files
-		onChange( { target: { files: null } } );
+		onChange( null );
 	};
 
 	let outputMessage = attributes.message;
@@ -77,7 +77,11 @@ const FormFileInput = ( { attributes, files, onChange } ) => {
 
 	return (
 		<FileInputWrapper>
-			<input type="file" onChange={ onChange } ref={ inputFile } />
+			<input
+				onChange={ ( event ) => onChange( event.target.files ) }
+				ref={ inputFile }
+				type="file"
+			/>
 			<FileInputButton onClick={ handleFileInputClick } outline>
 				{ attributes.buttonLabel }
 			</FileInputButton>

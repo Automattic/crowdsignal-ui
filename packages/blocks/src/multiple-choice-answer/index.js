@@ -3,6 +3,7 @@
  */
 import classnames from 'classnames';
 import { useContext } from '@wordpress/element';
+import { filter, uniq } from 'lodash';
 
 /**
  * Internal dependencies
@@ -17,16 +18,28 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
 	const isMultiSelect = parentQuestion.maximumChoices !== 1;
 
-	const { fieldValue, onUpdate } = useField( {
+	const { fieldValue, onChange } = useField( {
 		fieldName: `q_${ parentQuestion.clientId }[choice]${
 			isMultiSelect ? '[]' : ''
 		}`,
-		isMultiSelect,
+		defaultValue: isMultiSelect ? [] : '',
 	} );
 
 	const isSelected = isMultiSelect
 		? fieldValue.includes( attributes.clientId )
 		: fieldValue === attributes.clientId;
+
+	const onChangeHandler = ( value ) => {
+		let newValue = value;
+
+		if ( isMultiSelect ) {
+			newValue = ! isSelected
+				? uniq( [ ...fieldValue, value ] )
+				: filter( fieldValue, ( v ) => v !== value );
+		}
+
+		onChange( newValue );
+	};
 
 	const classes = classnames(
 		'crowdsignal-forms-multiple-choice-answer-block',
@@ -50,9 +63,7 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 				className={ classes }
 				isMultiSelect={ isMultiSelect }
 				isSelected={ isSelected }
-				onChange={ ( event ) =>
-					onUpdate( event.target.value, isSelected )
-				}
+				onChange={ onChangeHandler }
 				value={ attributes.clientId }
 			/>
 		);
@@ -64,7 +75,7 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 			className={ classes }
 			isMultiSelect={ isMultiSelect }
 			isSelected={ isSelected }
-			onChange={ ( event ) => onUpdate( event.target.value, isSelected ) }
+			onChange={ onChangeHandler }
 			value={ attributes.clientId }
 			showCheckmark
 		>
