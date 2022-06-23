@@ -1,8 +1,3 @@
-/**
- * External dependencies
- */
-import { __ } from '@wordpress/i18n';
-
 export default {
 	clientId: {
 		type: 'string',
@@ -14,7 +9,7 @@ export default {
 	},
 	buttonLabel: {
 		type: 'string',
-		default: __( 'Choose an option', 'block-editor' ),
+		default: '',
 	},
 	options: {
 		type: 'array',

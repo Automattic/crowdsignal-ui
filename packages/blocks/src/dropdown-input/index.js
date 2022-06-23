@@ -17,13 +17,16 @@ import {
 import { useField } from '@crowdsignal/form';
 
 const DropdownInput = ( { attributes, className } ) => {
+	const { multipleChoice } = attributes;
 	const {
 		error,
 		inputProps: { onChange, value },
 	} = useField( {
-		name: `q_${ attributes.clientId }[choice]`,
+		name: `q_${ attributes.clientId }[choice]${
+			multipleChoice ? '[]' : ''
+		}`,
 		type: 'dropdown',
-		defaultValue: attributes.multipleChoice ? [] : '',
+		defaultValue: multipleChoice ? [] : '',
 		validation: ( val ) => {
 			if ( attributes.mandatory && isEmpty( val ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -46,7 +49,7 @@ const DropdownInput = ( { attributes, className } ) => {
 			attributes.backgroundColor || attributes.gradient,
 	};
 
-	const defaultButtonLabel = attributes.multipleChoice
+	const defaultButtonLabel = multipleChoice
 		? __( 'Choose the options', 'blocks' )
 		: __( 'Choose an option', 'blocks' );
 
@@ -61,7 +64,7 @@ const DropdownInput = ( { attributes, className } ) => {
 				onChange={ onChange }
 				value={ value }
 				width={ attributes.inputWidth }
-				multipleChoice={ attributes.multipleChoice }
+				multipleChoice={ multipleChoice }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
