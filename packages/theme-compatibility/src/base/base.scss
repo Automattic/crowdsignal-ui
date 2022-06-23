@@ -234,7 +234,7 @@ body {
 		}
 	}
 
-	&__options {
+	.crowdsignal-forms-dropdown-input__options {
 		color: var(--cs--style--button--foreground);
 		background: var(--cs--style--button--background);
 		border-color: currentColor;
@@ -242,7 +242,7 @@ body {
 		border-radius: var(--cs--style--button--border-radius);
 	}
 
-	&__option {
+	.crowdsignal-forms-dropdown-input__option {
 		font-size: var(--cs--style--button--font-size);
 		font-weight: var(--cs--style--button--font-weight);
 

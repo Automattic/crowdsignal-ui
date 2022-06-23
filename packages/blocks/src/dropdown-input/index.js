@@ -23,6 +23,7 @@ const DropdownInput = ( { attributes, className } ) => {
 	} = useField( {
 		name: `q_${ attributes.clientId }[choice]`,
 		type: 'dropdown',
+		defaultValue: attributes.multipleChoice ? [] : '',
 		validation: ( val ) => {
 			if ( attributes.mandatory && isEmpty( val ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -45,17 +46,22 @@ const DropdownInput = ( { attributes, className } ) => {
 			attributes.backgroundColor || attributes.gradient,
 	};
 
+	const defaultButtonLabel = attributes.multipleChoice
+		? __( 'Choose the options', 'blocks' )
+		: __( 'Choose an option', 'blocks' );
+
 	return (
 		<FormInputWrapper className={ classes } style={ { ...styles } }>
 			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormDropdownInput
-				buttonLabel={ attributes.buttonLabel }
+				buttonLabel={ attributes.buttonLabel || defaultButtonLabel }
 				options={ attributes.options }
 				onChange={ onChange }
 				value={ value }
 				width={ attributes.inputWidth }
+				multipleChoice={ attributes.multipleChoice }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
