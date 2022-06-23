@@ -127,8 +127,8 @@ export default ( props ) => {
 	};
 
 	const buttonPlaceholder = attributes.multipleChoice
-		? __( 'Choose the options', 'blocks' )
-		: __( 'Choose an option', 'blocks' );
+		? __( 'Choose multiple options', 'blocks' )
+		: __( 'Choose one option', 'blocks' );
 
 	return (
 		<FormInputWrapper className={ classes } style={ { ...styles } }>
