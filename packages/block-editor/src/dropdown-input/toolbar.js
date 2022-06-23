@@ -9,17 +9,20 @@ import { map } from 'lodash';
 /**
  * Internal dependencies
  */
-import { MultipleChoiceIcon, SingleChoiceIcon } from '@crowdsignal/icons';
+import {
+	MultipleChoiceDropdownIcon,
+	SingleChoiceDropdownIcon,
+} from '@crowdsignal/icons';
 
 const multipleChoiceControls = [
 	{
-		icon: SingleChoiceIcon,
+		icon: SingleChoiceDropdownIcon,
 		title: __( 'Single choice', 'block-editor' ),
 		value: false,
 		isActive: ( multipleChoice ) => ! multipleChoice,
 	},
 	{
-		icon: MultipleChoiceIcon,
+		icon: MultipleChoiceDropdownIcon,
 		title: __( 'Multiple choice', 'block-editor' ),
 		value: true,
 		isActive: ( multipleChoice ) => multipleChoice,
