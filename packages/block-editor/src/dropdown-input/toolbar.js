@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { BlockControls } from '@wordpress/block-editor';
-import { Toolbar } from '@wordpress/components';
+import { ToolbarGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { map } from 'lodash';
 
@@ -44,7 +44,7 @@ const MultipleChoiceQuestionToolbar = ( { attributes, setAttributes } ) => {
 
 	return (
 		<BlockControls>
-			<Toolbar controls={ multipleChoiceToolbar } />
+			<ToolbarGroup controls={ multipleChoiceToolbar } />
 		</BlockControls>
 	);
 };
