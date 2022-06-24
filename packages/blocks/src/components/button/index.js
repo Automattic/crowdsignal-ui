@@ -53,6 +53,7 @@ const Button = ( {
 			'wp-block-button',
 			{
 				'is-style-outline': outline,
+				[ `text-align-${ attributes.textAlign }` ]: attributes.textAlign,
 			}
 		) }
 	>
@@ -70,8 +71,10 @@ const Button = ( {
 	</StyledButtonWrapper>
 );
 
-Button.Wrapper = StyledButtonWrapper;
-
-export default forwardRef( ( props, ref ) => (
+const ForwardingRefButton = forwardRef( ( props, ref ) => (
 	<Button fRef={ ref } { ...props } />
 ) );
+
+ForwardingRefButton.Wrapper = StyledButtonWrapper;
+
+export default ForwardingRefButton;
