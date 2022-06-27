@@ -71,9 +71,12 @@ export const useField = ( {
 
 	const inputProps = {
 		name: fieldName,
-		type,
 		onChange,
 	};
+
+	if ( type ) {
+		inputProps.type = type;
+	}
 
 	if ( includes( [ 'checkbox', 'radio', 'dropdown' ], type ) ) {
 		inputProps.onBlur = onBlur;

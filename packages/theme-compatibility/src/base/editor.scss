@@ -1,6 +1,10 @@
 @import 'base';
 @import '~isolated-block-editor/build-browser/core.css';
 
+html {
+	--cs--preset--font-size--normal: var(--wp--preset--font-size--normal, 16px);
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: var(--color-neutral-40);
 	opacity: 1; /* Firefox */
@@ -116,6 +120,10 @@
 	.block-editor-writing-flow {
 		line-height: initial;
 		padding: 0;
+
+		&.editor-styles-wrapper {
+			font-size: var(--cs--preset--font-size--normal);
+		}
 	}
 
 	.block-editor-block-list__layout.is-root-container {
