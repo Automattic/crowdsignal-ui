@@ -87,6 +87,7 @@ const StyledEditorListOptions = styled( StyledListOptions )`
 
 const StyledListOption = withClassName(
 	styled.div`
+		cursor: pointer;
 		padding: 4px 12px;
 		line-height: 1.3;
 
@@ -126,12 +127,18 @@ const StyledListOption = withClassName(
 				}
 			}
 		}
+
+		&.disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
 	`,
 	`${ BASE_CSS_CLASS }__option`
 );
 
 const FormDropdownInput = ( {
 	buttonLabel,
+	maxChoices,
 	multipleChoice,
 	onChange,
 	options,
@@ -165,6 +172,14 @@ const FormDropdownInput = ( {
 			.label;
 	};
 
+	const isDisabled = ( option ) => {
+		if ( ! multipleChoice || value.includes( option.clientId ) ) {
+			return false;
+		}
+
+		return option.clientId === '' || value.length >= maxChoices;
+	};
+
 	return (
 		<Listbox
 			as={ StyledListBox }
@@ -183,14 +198,15 @@ const FormDropdownInput = ( {
 				{ _options.map( ( option, index ) => (
 					<Listbox.Option
 						as={ StyledListOption }
-						disabled={ multipleChoice && option.clientId === '' }
+						disabled={ isDisabled( option ) }
 						key={ index }
 						value={ option.clientId }
 						title={ option.label }
-						className={ ( { active, selected } ) =>
+						className={ ( { active, selected, disabled } ) =>
 							classnames( {
 								active,
 								selected,
+								disabled,
 								placeholder: option.clientId === '',
 							} )
 						}

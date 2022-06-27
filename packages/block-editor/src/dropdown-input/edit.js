@@ -126,9 +126,10 @@ export default ( props ) => {
 			attributes.backgroundColor || attributes.gradient,
 	};
 
-	const buttonPlaceholder = attributes.multipleChoice
-		? __( 'Choose multiple options', 'blocks' )
-		: __( 'Choose one option', 'blocks' );
+	const buttonPlaceholder =
+		attributes.maximumChoices > 1
+			? __( 'Choose multiple options', 'blocks' )
+			: __( 'Choose one option', 'blocks' );
 
 	return (
 		<FormInputWrapper className={ classes } style={ { ...styles } }>

@@ -18,14 +18,14 @@ const multipleChoiceControls = [
 	{
 		icon: SingleChoiceDropdownIcon,
 		title: __( 'Single choice', 'block-editor' ),
-		value: false,
-		isActive: ( multipleChoice ) => ! multipleChoice,
+		value: 1,
+		isActive: ( maximumChoices ) => maximumChoices === 1,
 	},
 	{
 		icon: MultipleChoiceDropdownIcon,
 		title: __( 'Multiple choice', 'block-editor' ),
-		value: true,
-		isActive: ( multipleChoice ) => multipleChoice,
+		value: 2,
+		isActive: ( maximumChoices ) => maximumChoices !== 1,
 	},
 ];
 
@@ -34,10 +34,10 @@ const MultipleChoiceQuestionToolbar = ( { attributes, setAttributes } ) => {
 		multipleChoiceControls,
 		( { isActive, ...button } ) => ( {
 			...button,
-			isActive: isActive( attributes.multipleChoice ),
+			isActive: isActive( attributes.maximumChoices ),
 			onClick: () =>
 				setAttributes( {
-					multipleChoice: button.value,
+					maximumChoices: button.value,
 				} ),
 		} )
 	);

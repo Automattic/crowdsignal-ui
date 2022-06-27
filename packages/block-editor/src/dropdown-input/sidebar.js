@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { InspectorControls } from '@wordpress/block-editor';
+import { isEmpty } from 'lodash';
 
 /**
  * Internal dependencies
@@ -17,20 +18,32 @@ import {
 	Flex,
 	FlexItem,
 	PanelBody,
+	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
 
 const Sidebar = ( { attributes, setAttributes } ) => {
 	const widthOptions = [ '25%', '50%', '75%', '100%' ];
 
-	const handleChangeAttribute = ( key ) => ( value ) =>
-		setAttributes( {
-			[ key ]: value,
-		} );
-
 	const handleChangeInputWidth = ( value ) => {
 		setAttributes( {
 			inputWidth: value,
+		} );
+	};
+
+	const handleChangeMandatory = ( isMandatory ) => {
+		setAttributes( {
+			mandatory: isMandatory,
+		} );
+	};
+
+	const handleMaxChoices = ( value ) => {
+		if ( ! isEmpty( value ) && value < 1 ) {
+			return;
+		}
+
+		setAttributes( {
+			maximumChoices: parseInt( value ),
 		} );
 	};
 
@@ -43,7 +56,13 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				<ToggleControl
 					label={ __( 'The answer is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
-					onChange={ handleChangeAttribute( 'mandatory' ) }
+					onChange={ handleChangeMandatory }
+				/>
+				<TextControl
+					label={ __( 'Max. choices', 'block-editor' ) }
+					type="number"
+					value={ attributes.maximumChoices }
+					onChange={ handleMaxChoices }
 				/>
 				<Flex style={ { marginBottom: '12px' } }>
 					<FlexItem>{ __( 'Field Width', 'block-editor' ) }</FlexItem>

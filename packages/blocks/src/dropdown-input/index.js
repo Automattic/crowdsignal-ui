@@ -17,7 +17,7 @@ import {
 import { useField } from '@crowdsignal/form';
 
 const DropdownInput = ( { attributes, className } ) => {
-	const { multipleChoice } = attributes;
+	const multipleChoice = attributes.maximumChoices > 1;
 	const {
 		error,
 		inputProps: { onChange, value },
@@ -65,6 +65,7 @@ const DropdownInput = ( { attributes, className } ) => {
 				value={ value }
 				width={ attributes.inputWidth }
 				multipleChoice={ multipleChoice }
+				maxChoices={ attributes.maximumChoices }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

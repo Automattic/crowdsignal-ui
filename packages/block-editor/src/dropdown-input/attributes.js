@@ -19,9 +19,9 @@ export default {
 		type: 'boolean',
 		default: false,
 	},
-	multipleChoice: {
-		type: 'boolean',
-		default: false,
+	maximumChoices: {
+		type: 'number',
+		default: 1,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
