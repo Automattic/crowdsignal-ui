@@ -150,6 +150,7 @@ export default ( props ) => {
 						onChange={ handleChangeAttribute( 'buttonLabel' ) }
 						allowedFormats={ [] }
 						multiline={ false }
+						disableLineBreaks={ true }
 					/>
 					<ChevronDownIcon />
 				</FormDropdownInput.Button>
