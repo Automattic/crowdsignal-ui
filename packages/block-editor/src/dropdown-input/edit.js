@@ -18,6 +18,7 @@ import { ChevronDownIcon } from '@crowdsignal/icons';
 import { FormDropdownInput, FormInputWrapper } from '@crowdsignal/blocks';
 import { useClientId } from '@crowdsignal/hooks';
 import Sidebar from './sidebar';
+import Toolbar from './toolbar';
 
 export default ( props ) => {
 	const { attributes, className, isSelected, setAttributes } = props;
@@ -125,9 +126,15 @@ export default ( props ) => {
 			attributes.backgroundColor || attributes.gradient,
 	};
 
+	const buttonPlaceholder =
+		attributes.maximumChoices > 1
+			? __( 'Choose multiple options', 'blocks' )
+			: __( 'Choose one option', 'blocks' );
+
 	return (
 		<FormInputWrapper className={ classes } style={ { ...styles } }>
 			<Sidebar { ...props } />
+			<Toolbar { ...props } />
 			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
 				<RichText
 					placeholder={ __( 'Enter form label', 'block-editor' ) }
@@ -138,11 +145,12 @@ export default ( props ) => {
 			<FormDropdownInput.Wrapper width={ attributes.inputWidth }>
 				<FormDropdownInput.Button outline>
 					<RichText
-						placeholder={ __( 'Choose an option', 'blocks' ) }
+						placeholder={ buttonPlaceholder }
 						value={ attributes.buttonLabel }
 						onChange={ handleChangeAttribute( 'buttonLabel' ) }
 						allowedFormats={ [] }
 						multiline={ false }
+						disableLineBreaks={ true }
 					/>
 					<ChevronDownIcon />
 				</FormDropdownInput.Button>

@@ -1,8 +1,3 @@
-/**
- * External dependencies
- */
-import { __ } from '@wordpress/i18n';
-
 export default {
 	clientId: {
 		type: 'string',
@@ -14,7 +9,7 @@ export default {
 	},
 	buttonLabel: {
 		type: 'string',
-		default: __( 'Choose an option', 'block-editor' ),
+		default: '',
 	},
 	options: {
 		type: 'array',
@@ -23,6 +18,10 @@ export default {
 	mandatory: {
 		type: 'boolean',
 		default: false,
+	},
+	maximumChoices: {
+		type: 'number',
+		default: 1,
 	},
 	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {

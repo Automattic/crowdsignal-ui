@@ -1,0 +1,15 @@
+export const MultipleChoiceDropdownIcon = () => (
+	<svg
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<path
+			fillRule="evenodd"
+			clipRule="evenodd"
+			d="M8.75704 3.42469L5.90397 7.26176L3.90723 5.77707L4.80225 4.57336L5.59528 5.16302L7.55333 2.52966L8.75704 3.42469ZM20 6.24999H11V4.74999H20V6.24999ZM20 12.75H11V11.25H20V12.75ZM11 19H20V17.5H11V19ZM5.90397 20.2618L8.75704 16.4247L7.55333 15.5297L5.59528 18.163L4.80225 17.5734L3.90723 18.7771L5.90397 20.2618Z"
+		/>
+	</svg>
+);

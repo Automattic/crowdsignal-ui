@@ -4,7 +4,8 @@
 import { Listbox } from '@headlessui/react';
 import classnames from 'classnames';
 import styled from '@emotion/styled';
-import { find } from 'lodash';
+import { find, isArray } from 'lodash';
+import { _n, sprintf } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -86,6 +87,7 @@ const StyledEditorListOptions = styled( StyledListOptions )`
 
 const StyledListOption = withClassName(
 	styled.div`
+		cursor: pointer;
 		padding: 4px 12px;
 		line-height: 1.3;
 
@@ -125,12 +127,19 @@ const StyledListOption = withClassName(
 				}
 			}
 		}
+
+		&.disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
 	`,
 	`${ BASE_CSS_CLASS }__option`
 );
 
 const FormDropdownInput = ( {
 	buttonLabel,
+	maxChoices,
+	multipleChoice,
 	onChange,
 	options,
 	value,
@@ -141,8 +150,35 @@ const FormDropdownInput = ( {
 		[]
 	);
 
-	const getButtonText = ( selectedValue ) =>
-		find( _options, ( { clientId } ) => clientId === selectedValue ).label;
+	const getButtonText = ( selectedValue ) => {
+		if ( isArray( selectedValue ) ) {
+			if ( selectedValue.length >= 1 ) {
+				return sprintf(
+					/* translators: %d: number of selected options. */
+					_n(
+						'%d option selected',
+						'%d options selected',
+						selectedValue.length,
+						'blocks'
+					),
+					selectedValue.length
+				);
+			}
+
+			return buttonLabel;
+		}
+
+		return find( _options, ( { clientId } ) => clientId === selectedValue )
+			.label;
+	};
+
+	const isDisabled = ( option ) => {
+		if ( ! multipleChoice || value.includes( option.clientId ) ) {
+			return false;
+		}
+
+		return option.clientId === '' || value.length >= maxChoices;
+	};
 
 	return (
 		<Listbox
@@ -150,6 +186,7 @@ const FormDropdownInput = ( {
 			value={ value }
 			onChange={ onChange }
 			width={ width }
+			multiple={ multipleChoice }
 		>
 			<Listbox.Button as={ StyledListButton } outline>
 				<span title={ getButtonText( value ) }>
@@ -161,13 +198,15 @@ const FormDropdownInput = ( {
 				{ _options.map( ( option, index ) => (
 					<Listbox.Option
 						as={ StyledListOption }
+						disabled={ isDisabled( option ) }
 						key={ index }
 						value={ option.clientId }
 						title={ option.label }
-						className={ ( { active, selected } ) =>
+						className={ ( { active, selected, disabled } ) =>
 							classnames( {
 								active,
 								selected,
+								disabled,
 								placeholder: option.clientId === '',
 							} )
 						}
