@@ -25,6 +25,9 @@ body {
 	--cs--style--button--font-weight: 400;
 	--cs--style--button--border-radius: 0;
 
+	--cs--style--dropdown--padding-top-bottom: 4px;
+	--cs--style--dropdown--line-height: normal;
+
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
 	--cs--content-padding-horizontal: 16px;
@@ -202,6 +205,10 @@ body {
 			}
 		}
 	}
+
+	.wp-block-button__link {
+		border: 2px solid currentColor;
+	}
 }
 
 .wp-block-cover:not(.is-light) {
@@ -225,16 +232,19 @@ body {
 }
 
 .crowdsignal-forms-dropdown-input {
-	.crowdsignal-forms-dropdown-input__button.is-style-outline {
+	& &__button.is-style-outline {
 		button.crowdsignal-forms-button__button {
 			font-size: var(--cs--style--button--font-size);
 			font-weight: var(--cs--style--button--font-weight);
 			color: var(--cs--style--button--foreground);
 			background: var(--cs--style--button--background);
+			padding-top: var(--cs--style--dropdown--padding-top-bottom);
+			padding-bottom: var(--cs--style--dropdown--padding-top-bottom);
+			line-height: var(--cs--style--dropdown--line-height);
 		}
 	}
 
-	.crowdsignal-forms-dropdown-input__options {
+	& &__options {
 		color: var(--cs--style--button--foreground);
 		background: var(--cs--style--button--background);
 		border-color: currentColor;
@@ -242,9 +252,11 @@ body {
 		border-radius: var(--cs--style--button--border-radius);
 	}
 
-	.crowdsignal-forms-dropdown-input__option {
+	& &__option {
 		font-size: var(--cs--style--button--font-size);
 		font-weight: var(--cs--style--button--font-weight);
+		padding-top: var(--cs--style--dropdown--padding-top-bottom);
+		padding-bottom: var(--cs--style--dropdown--padding-top-bottom);
 
 		&.placeholder {
 			opacity: 0.5;

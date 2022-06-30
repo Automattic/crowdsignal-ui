@@ -20,9 +20,29 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	--wp--custom--form--padding: 14px 7px;
+	--cs--style--dropdown--padding-top-bottom: 14px;
 }
 
 .crowdsignal-forms-question-wrapper {
 	color: var(--wp--custom--color--foreground);
 	background-color: var(--wp--preset--color--background);
+}
+
+.crowdsignal-forms-dropdown-input {
+	& &__button.is-style-outline {
+		button.crowdsignal-forms-button__button {
+			border-width: 2px;
+
+			&:hover, &:focus {
+				padding: var(--cs--style--dropdown--padding-top-bottom) 36px var(--cs--style--dropdown--padding-top-bottom) 12px;
+				border-width: 2px;
+			}
+		}
+	}
+
+	& &__option {
+		&.selected {
+			color: var(--wp--custom--color--background);
+		}
+	}
 }
