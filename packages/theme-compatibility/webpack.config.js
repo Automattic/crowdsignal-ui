@@ -24,6 +24,8 @@ module.exports = {
 		'blockbase-editor': './src/blockbase/editor.scss',
 		'quadrat': './src/quadrat/base.scss',
 		'quadrat-editor': './src/quadrat/editor.scss',
+		'p2': './src/p2/base.scss',
+		'p2-editor': './src/p2/editor.scss',
 	},
 	output: {
 		path: path.resolve( __dirname, 'dist' ),

@@ -14,7 +14,9 @@ const QuestionHeader = styled.h3`
 	font-size: 1.8em;
 
 	> div {
-		display: inline;
+		display: inline-flex;
+		align-items: center;
+		white-space: break-spaces;
 	}
 
 	${ QuestionWrapper.className }.is-required &::after {

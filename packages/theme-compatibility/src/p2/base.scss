@@ -1,0 +1,86 @@
+body {
+	--cs--style--button--background: var(--p2-color-white);
+	--cs--style--button--foreground: var(--p2-color-link);
+	--cs--style--button--border-radius: 20px;
+	--cs--style--dropdown--padding-top-bottom: 8px;
+	--cs--style--answer--selected--background: var(--p2-color-link) ;
+	--cs--style--answer--selected--color: var(--p2-color-white);
+}
+
+body h1:not(.entry-title) + *,
+.crowdsignal-content:not(.is-editing) h1:not(.entry-title) + * {
+	margin-block-start: var( --wp--style--block-gap ) !important;
+}
+
+a {
+	color: var(--p2-color-link);
+	text-decoration: underline;
+}
+
+.crowdsignal-forms-text-input-block input,
+.crowdsignal-forms-text-question-block textarea {
+	border: 1px solid var(--p2-color-border);
+}
+
+.crowdsignal-forms-question-wrapper {
+	border-color: var(--p2-color-border);
+	background-color: var(--p2-color-background-very-light);
+}
+
+.crowdsignal-forms-file-input-block {
+	.crowdsignal-forms-file-input__message {
+		border-color: var(--p2-color-border);
+		background-color: var(--color-neutral-0);
+	}
+}
+
+.crowdsignal-forms-button.wp-block-button {
+	&.is-style-outline {
+		.wp-block-button__link {
+			font-size: 1rem;
+			line-height: normal;
+			background-color: var(--p2-color-white);
+		}
+	}
+
+	&:not(.is-style-outline) {
+		.wp-block-button__link {
+			font-size: 1rem;
+		}
+	}
+}
+
+.crowdsignal-content {
+	.crowdsignal-forms-question-wrapper h3 {
+		margin-top: 0;
+		margin-bottom: 32px;
+		font-size: 1.8em;
+	}
+}
+
+.crowdsignal-forms-button.wp-block-button.is-style-outline .wp-block-button__link {
+	border-width: 0;
+}
+
+.crowdsignal-forms-dropdown-input {
+	& &__button button {
+		padding: 10px 24px;
+	}
+
+	& &__options {
+		border-width: 1px;
+	}
+}
+
+.crowdsignal-forms-dropdown-input {
+	& &__button.is-style-outline {
+		button.crowdsignal-forms-button__button {
+			padding-left: 24px;
+			padding-right: 36px;
+		}
+	}
+
+	& &__options {
+		border-width: 1px;
+	}
+}

@@ -14,7 +14,7 @@ export const ModalWrapper = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
-	padding: 100px;
+	padding: 50px;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -36,6 +36,7 @@ export const ModalDialog = styled.div`
 	flex-direction: column;
 	width: 90%;
 	max-width: 1600px;
+	max-height: 100%;
 	padding: 40px 60px;
 `;
 
