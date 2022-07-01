@@ -16,6 +16,10 @@ window.wp.galleryBlockV2Enabled = false;
 
 setCategories( [
 	{
+		title: __( 'Question', 'dashboard' ),
+		slug: 'crowdsignal-forms/question',
+	},
+	{
 		title: __( 'Form', 'dashboard' ),
 		slug: 'crowdsignal-forms/form',
 	},

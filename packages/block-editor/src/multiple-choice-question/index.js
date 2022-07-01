@@ -19,7 +19,7 @@ const settings = {
 		'Ask a question and offer multiple answer options.',
 		'block-editor'
 	),
-	category: 'crowdsignal-forms/form',
+	category: 'crowdsignal-forms/question',
 	keywords: [
 		__( 'multiple choice', 'block-editor' ),
 		__( 'question', 'block-editor' ),

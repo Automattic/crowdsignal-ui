@@ -18,7 +18,7 @@ const settings = {
 		'Ask a question and offer an open text field to enter an answer.',
 		'block-editor'
 	),
-	category: 'crowdsignal-forms/form',
+	category: 'crowdsignal-forms/question',
 	keywords: [
 		__( 'question', 'block-editor' ),
 		__( 'text', 'block-editor' ),

@@ -18,7 +18,7 @@ const settings = {
 		'Create a multiple choice grid of questions and answers.',
 		'block-editor'
 	),
-	category: 'crowdsignal-forms/form',
+	category: 'crowdsignal-forms/question',
 	keywords: [
 		__( 'multiple choice grid', 'block-editor' ),
 		__( 'matrix', 'block-editor' ),

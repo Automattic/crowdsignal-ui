@@ -17,7 +17,7 @@ const settings = {
 		'Add more answer options to your question',
 		'block-editor'
 	),
-	category: 'crowdsignal-forms/form',
+	category: 'crowdsignal-forms/question',
 	keywords: [
 		__( 'answer', 'block-editor' ),
 		__( 'option', 'block-editor' ),
