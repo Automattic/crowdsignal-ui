@@ -1,0 +1,94 @@
+body {
+	--cs--style--button--background: var(--p2-color-white);
+	--cs--style--button--foreground: var(--p2-color-link);
+	--cs--style--button--border-radius: 20px;
+	--cs--style--dropdown--padding-top-bottom: 13px;
+	--cs--style--answer--selected--background: var(--p2-color-link) ;
+	--cs--style--answer--selected--color: var(--p2-color-white);
+}
+
+.crowdsignal-content,
+.editor-styles-wrapper {
+	h1:not(.entry-title) + * {
+		margin-block-start: var(--wp--style--block-gap) !important;
+	}
+}
+
+a {
+	color: var(--p2-color-link);
+	text-decoration: underline;
+}
+
+input, textarea {
+	font-family: inherit;
+}
+
+.crowdsignal-forms-text-input-block input,
+.crowdsignal-forms-text-question-block textarea {
+	border: 1px solid var(--p2-color-border);
+	padding: 12px 8px;
+	border-radius: 2px;
+}
+
+.crowdsignal-forms-question-wrapper {
+	border-color: var(--p2-color-border);
+	background-color: var(--p2-color-white);
+}
+
+.crowdsignal-forms-file-input-block {
+	.crowdsignal-forms-file-input__message {
+		border-color: var(--p2-color-border);
+		background-color: var(--color-neutral-0);
+	}
+}
+
+.crowdsignal-forms-button.wp-block-button {
+	&.is-style-outline {
+		.wp-block-button__link {
+			font-size: 1rem;
+			line-height: normal;
+			background-color: var(--p2-color-white);
+		}
+	}
+
+	&:not(.is-style-outline) {
+		.wp-block-button__link {
+			font-size: 1rem;
+		}
+	}
+}
+
+.crowdsignal-content {
+	.crowdsignal-forms-question-wrapper h3 {
+		margin-top: 0;
+		margin-bottom: 32px;
+		font-size: 1.8em;
+	}
+}
+
+.crowdsignal-forms-button.wp-block-button.is-style-outline .wp-block-button__link {
+	border-width: 0;
+}
+
+.crowdsignal-forms-dropdown-input {
+	& &__button.is-style-outline {
+		button.crowdsignal-forms-button__button {
+			padding-left: 24px;
+			padding-right: 36px;
+
+			svg {
+				right: 20px;
+			}
+		}
+	}
+
+	& &__options {
+		border-width: 1px;
+	}
+}
+
+.crowdsignal-forms-rating-scale-answer-block.wp-block-button {
+	&.is-style-outline.is-style-emoji .wp-block-button__link {
+		box-shadow: 0 0 0 1px var(--p2-color-border) inset;
+	}
+}

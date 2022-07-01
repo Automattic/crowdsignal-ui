@@ -40,6 +40,11 @@ export const themes = [
 		image:
 			'https://i0.wp.com/s2.wp.com/wp-content/themes/pub/twentytwentytwo/screenshot.png',
 	},
+	{
+		slug: 'p2',
+		name: 'P2',
+		image: 'https://app.crowdsignal.com/themes/p2/screenshot.png',
+	},
 ];
 
 export const getTheme = ( theme ) => find( themes, [ 'slug', theme ] );

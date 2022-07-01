@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
+import { withClassName } from '../../util';
 import Button from '../button';
 
 const FileInputWrapper = styled.div`
@@ -24,15 +25,18 @@ const FileInputButton = styled( Button )`
 	margin-top: 16px;
 `;
 
-const FileInputMessage = styled.span`
-	padding: 10px 16px;
-	border: 1px solid var( --color-neutral-40 );
-	border-radius: 2px;
-	font-weight: 400;
-	font-size: 13px;
-	line-height: 150%;
-	color: var( --color-neutral-40 );
-`;
+const FileInputMessage = withClassName(
+	styled.span`
+		padding: 10px 16px;
+		border: 1px solid var( --color-neutral-40 );
+		border-radius: 2px;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 150%;
+		color: var( --color-neutral-40 );
+	`,
+	'crowdsignal-forms-file-input__message'
+);
 
 const FileInputFile = styled( FileInputMessage )`
 	display: flex;
