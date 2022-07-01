@@ -211,8 +211,22 @@ body {
 	}
 }
 
-.wp-block-cover:not(.is-light) {
-	color: var(--wp--preset--color--background);
+.wp-block-cover,
+.wp-block-cover-image {
+	&:not(.is-light) {
+		color: var(--wp--preset--color--background);
+	}
+
+	.wp-block-cover__inner-container {
+		> * {
+			&:not( .alignwide ):not( .alignfull ):not( .alignleft ):not( .alignright ):not( .justify ):not( .wp-block-separator ) {
+				max-width: 720px;
+			}
+		}
+		> * + * {
+			margin-top: var(--wp--style--block-gap);
+		}
+	}
 }
 
 .crowdsignal-forms-ranking-answer-block {
