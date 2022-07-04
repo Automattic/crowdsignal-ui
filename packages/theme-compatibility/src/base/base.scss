@@ -292,3 +292,25 @@ body {
 		fill: none;
 	}
 }
+
+.crowdsignal-new-project-wizard {
+	width: 100%;
+	padding: 60px 40px 40px;
+
+	@include break-wide {
+		width: 90%;
+		padding: 72px 60px;
+	}
+
+	&__grid {
+		grid-template-columns: 1fr;
+
+		@include break-large {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@include break-wide {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
+}

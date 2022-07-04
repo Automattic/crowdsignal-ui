@@ -10,20 +10,24 @@ import styled from '@emotion/styled';
  */
 import { getTheme } from '../../util/theme/themes';
 import { STORE_NAME } from '../../data';
+import { ModalButton } from '../modal';
 
 const ActiveThemeWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-right: 40px;
 	font-size: 16px;
 	color: var( --color-neutral-60 );
+
+	> :first-of-type {
+		text-align: center;
+	}
 
 	> *:not( :last-child ) {
 		margin-bottom: 12px;
 	}
 
 	img {
-		width: 150px;
+		width: 160px;
 		height: 112px;
 		object-fit: cover;
 	}
@@ -31,14 +35,6 @@ const ActiveThemeWrapper = styled.div`
 
 const ActiveThemeHeader = styled.span`
 	font-weight: 700;
-`;
-
-const ChangeThemeButton = styled.button`
-	font-size: 14px;
-	background-color: transparent;
-	border: 1px solid var( --color-neutral-10 );
-	border-radius: 2px;
-	padding: 12px;
 `;
 
 const ActiveTheme = ( { onChangeThemeClick } ) => {
@@ -55,9 +51,9 @@ const ActiveTheme = ( { onChangeThemeClick } ) => {
 			</ActiveThemeHeader>
 			<img src={ activeTheme.image } alt={ activeTheme.name } />
 			<span>{ activeTheme.name }</span>
-			<ChangeThemeButton onClick={ onChangeThemeClick }>
+			<ModalButton onClick={ onChangeThemeClick }>
 				{ __( 'Change Theme', 'dashboard' ) }
-			</ChangeThemeButton>
+			</ModalButton>
 		</ActiveThemeWrapper>
 	);
 };

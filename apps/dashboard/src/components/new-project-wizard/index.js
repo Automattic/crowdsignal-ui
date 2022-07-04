@@ -34,8 +34,11 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 	);
 
 	return (
-		<ModalWrapper>
-			<ProjectWizardDialog id="crowdsignal-new-project-wizard">
+		<ModalWrapper className="crowdsignal-modal-wrapper">
+			<ProjectWizardDialog
+				id="crowdsignal-new-project-wizard"
+				className="crowdsignal-new-project-wizard"
+			>
 				<BackButton href="/dashboard">
 					{ __( 'Back to dashboard', 'dashboard' ) }
 				</BackButton>
@@ -57,7 +60,7 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 						) }
 					</ModalHeaderNote>
 
-					<ModalTemplateGrid>
+					<ModalTemplateGrid className="crowdsignal-new-project-wizard__grid">
 						{ map( projectTemplates, ( template ) => (
 							<TemplatePreview
 								key={ `${ editorTheme }_${ template.name }` }

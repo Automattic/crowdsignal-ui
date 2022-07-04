@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
  * Internal dependencies
  */
 import { createTemplate } from './create-template';
+import { ModalButton } from '../../modal';
 
 const BlankProjectPreviewWrapper = styled.div`
 	align-items: center;
@@ -16,15 +17,6 @@ const BlankProjectPreviewWrapper = styled.div`
 	height: 100%;
 	justify-content: center;
 	width: 100%;
-`;
-
-const BlankProjectStartButton = styled.div`
-	border: 1px solid var( --color-border );
-	border-radius: 2px;
-	box-sizing: border-box;
-	background-color: var( --color-surface );
-	padding: 8px 32px;
-	margin: 0 8px;
 `;
 
 export const blankProjectTemplate = createTemplate(
@@ -46,9 +38,9 @@ export const blankProjectTemplate = createTemplate(
 	],
 	() => (
 		<BlankProjectPreviewWrapper>
-			<BlankProjectStartButton>
+			<ModalButton>
 				{ __( 'Start from scratch', 'dashboard' ) }
-			</BlankProjectStartButton>
+			</ModalButton>
 		</BlankProjectPreviewWrapper>
 	)
 );

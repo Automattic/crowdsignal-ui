@@ -17,6 +17,7 @@ export const ProjectWizardDialog = styled( ModalDialog )`
 	flex-direction: row;
 	align-items: flex-end;
 	height: 100%;
+	gap: 32px;
 `;
 
 export const ProjectWizardContent = styled.div`
