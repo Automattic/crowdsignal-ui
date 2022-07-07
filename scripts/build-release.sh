@@ -7,6 +7,7 @@ TARGET_DIR="$PROJECT_DIR/dist"
 
 APPS=(
 	"dashboard"
+	"embed"
 	"project-renderer"
 )
 
