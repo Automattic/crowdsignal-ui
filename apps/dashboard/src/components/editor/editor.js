@@ -13,6 +13,7 @@ import { Global } from '@emotion/react';
  */
 import { editorSettings } from './settings';
 import { registerBlocks } from './blocks';
+import { registerPatterns } from './patterns';
 import { STORE_NAME } from '../../data';
 import { useEditorContent } from './use-editor-content';
 import AutoSubmitButton from './auto-submit-button';
@@ -96,11 +97,13 @@ const Editor = ( { project } ) => {
 	};
 
 	const settings = useMemo( () => {
+		const newSettings = registerPatterns( editorSettings );
+
 		if ( ! confirmationPage ) {
-			return editorSettings;
+			return newSettings;
 		}
 
-		return tap( cloneDeep( editorSettings ), ( { editor, iso } ) => {
+		return tap( cloneDeep( newSettings ), ( { editor, iso } ) => {
 			iso.blocks.allowBlocks = filter(
 				iso.blocks.allowBlocks,
 				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
