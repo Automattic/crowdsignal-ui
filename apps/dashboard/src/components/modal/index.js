@@ -70,7 +70,7 @@ export const ModalHeaderNote = styled.p`
 export const ModalTemplateGrid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 24px;
+	grid-gap: 40px 24px;
 	overflow-y: auto;
 `;
 

@@ -4,6 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { map } from 'lodash';
 import { useSelect } from '@wordpress/data';
+import { chevronLeft, Icon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -39,8 +40,12 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 				id="crowdsignal-new-project-wizard"
 				className="crowdsignal-new-project-wizard"
 			>
-				<BackButton href="/dashboard">
-					{ __( 'Back to dashboard', 'dashboard' ) }
+				<BackButton
+					href="/dashboard"
+					className="crowdsignal-modal-wrapper__back-button"
+				>
+					<Icon icon={ chevronLeft } />
+					{ __( 'Back', 'dashboard' ) }
 				</BackButton>
 
 				<div>

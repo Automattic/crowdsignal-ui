@@ -18,10 +18,6 @@ const ActiveThemeWrapper = styled.div`
 	font-size: 16px;
 	color: var( --color-neutral-60 );
 
-	> :first-of-type {
-		text-align: center;
-	}
-
 	> *:not( :last-child ) {
 		margin-bottom: 12px;
 	}
