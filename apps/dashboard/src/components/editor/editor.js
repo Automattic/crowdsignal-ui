@@ -40,6 +40,7 @@ import {
 } from './styles/editor';
 
 registerBlocks();
+const baseSettings = registerPatterns( editorSettings );
 
 const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
@@ -97,13 +98,11 @@ const Editor = ( { project } ) => {
 	};
 
 	const settings = useMemo( () => {
-		const newSettings = registerPatterns( editorSettings );
-
 		if ( ! confirmationPage ) {
-			return newSettings;
+			return baseSettings;
 		}
 
-		return tap( cloneDeep( newSettings ), ( { editor, iso } ) => {
+		return tap( cloneDeep( baseSettings ), ( { editor, iso } ) => {
 			iso.blocks.allowBlocks = filter(
 				iso.blocks.allowBlocks,
 				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )

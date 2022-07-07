@@ -1,12 +1,14 @@
+/**
+ * Internal dependencies
+ */
 import { CATEGORY_NAMES } from './categories';
-import { serialize } from '@wordpress/blocks';
 
 const SIMPLE_CONTACT_FORM_01 = {
 	name: 'simple-contact-form-01',
 	title: 'Simple Contact Form',
 	description: 'A simple contact form',
 	categories: [ CATEGORY_NAMES.CONTACT_FORMS ],
-	content: serialize( [
+	content: [
 		{
 			name: 'crowdsignal-forms/text-input',
 			attributes: {
@@ -29,7 +31,7 @@ const SIMPLE_CONTACT_FORM_01 = {
 			},
 			innerBlocks: [],
 		},
-	] ),
+	],
 };
 
 export default [ SIMPLE_CONTACT_FORM_01 ];
