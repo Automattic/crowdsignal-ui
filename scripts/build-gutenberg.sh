@@ -7,4 +7,4 @@ git submodule init && git submodule update
 cd lib/gutenberg
 
 # Install & build Gutenberg
-npm install && npm run build
+npm ci && npm run build
