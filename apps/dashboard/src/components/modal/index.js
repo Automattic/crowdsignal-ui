@@ -14,7 +14,7 @@ export const ModalWrapper = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;
-	padding: 50px;
+	padding: 50px 50px 70px;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -70,8 +70,16 @@ export const ModalHeaderNote = styled.p`
 export const ModalTemplateGrid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 24px;
+	grid-gap: 40px 24px;
 	overflow-y: auto;
+`;
+
+export const ModalButton = styled.button`
+	font-size: 14px;
+	background-color: transparent;
+	border: 1px solid var( --color-neutral-10 );
+	border-radius: 2px;
+	padding: 12px;
 `;
 
 const CloseButton = styled.button`

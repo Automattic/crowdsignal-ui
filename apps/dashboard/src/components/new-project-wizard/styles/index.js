@@ -17,6 +17,7 @@ export const ProjectWizardDialog = styled( ModalDialog )`
 	flex-direction: row;
 	align-items: flex-end;
 	height: 100%;
+	gap: 40px;
 `;
 
 export const ProjectWizardContent = styled.div`
@@ -33,8 +34,11 @@ export const BackButton = styled.a`
 	padding: 16px;
 	position: absolute;
 	top: 10px;
-	right: 10px;
+	left: 10px;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	line-height: 1;
 
 	&:hover {
 		color: var( --color-text-subtle );
