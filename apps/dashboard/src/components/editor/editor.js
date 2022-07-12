@@ -13,6 +13,7 @@ import { Global } from '@emotion/react';
  */
 import { editorSettings } from './settings';
 import { registerBlocks } from './blocks';
+import { registerPatterns } from './patterns';
 import { STORE_NAME } from '../../data';
 import { useEditorContent } from './use-editor-content';
 import AutoSubmitButton from './auto-submit-button';
@@ -39,6 +40,7 @@ import {
 } from './styles/editor';
 
 registerBlocks();
+const baseSettings = registerPatterns( editorSettings );
 
 const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
@@ -97,10 +99,10 @@ const Editor = ( { project } ) => {
 
 	const settings = useMemo( () => {
 		if ( ! confirmationPage ) {
-			return editorSettings;
+			return baseSettings;
 		}
 
-		return tap( cloneDeep( editorSettings ), ( { editor, iso } ) => {
+		return tap( cloneDeep( baseSettings ), ( { editor, iso } ) => {
 			iso.blocks.allowBlocks = filter(
 				iso.blocks.allowBlocks,
 				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
