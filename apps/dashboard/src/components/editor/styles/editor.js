@@ -23,9 +23,9 @@ export const editorGlobalStyles = css`
 `;
 
 export const EditorLayout = styled.div`
-	--wp-admin-theme-color: var( --color-neutral-80 );
-	--wp-admin-theme-color-darker-10: var( --color-neutral-90 );
-	--wp-admin-theme-color-darker-20: var( --color-neutral-100 );
+	--wp-admin-theme-color: var( --color-primary-50 );
+	--wp-admin-theme-color-darker-10: var( --color-primary-60 );
+	--wp-admin-theme-color-darker-20: var( --color-primary-70 );
 
 	flex: 1;
 	position: relative;
