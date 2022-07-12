@@ -19,8 +19,8 @@ import {
 } from '../components';
 
 const TextQuestion = ( { attributes, className } ) => {
-	const { inputProps, error } = useField( {
-		name: `q_${ attributes.clientId }[text]`,
+	const { error, fieldValue, onChange } = useField( {
+		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This question is required', 'blocks' );
@@ -38,6 +38,10 @@ const TextQuestion = ( { attributes, className } ) => {
 		}
 	);
 
+	const style = {
+		height: attributes.inputHeight,
+	};
+
 	return (
 		<JustificationWrapper justification={ attributes.justification }>
 			<QuestionWrapper attributes={ attributes } className={ classes }>
@@ -46,11 +50,10 @@ const TextQuestion = ( { attributes, className } ) => {
 				</QuestionHeader>
 
 				<FormTextarea
-					style={ {
-						height: attributes.inputHeight,
-					} }
+					onChange={ onChange }
 					placeholder={ attributes.placeholder }
-					{ ...inputProps }
+					style={ style }
+					value={ fieldValue }
 				/>
 				{ error && <ErrorMessage>{ error }</ErrorMessage> }
 			</QuestionWrapper>

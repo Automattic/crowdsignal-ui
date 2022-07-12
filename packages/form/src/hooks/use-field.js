@@ -3,7 +3,7 @@
  */
 import { useContext, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { filter, includes, isNil, map, uniq } from 'lodash';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,83 +13,25 @@ import { STORE_NAME } from '../data';
 import { useValidation } from './use-validation';
 
 export const useField = ( {
-	name: fieldName,
-	type,
-	value,
-	validation,
+	defaultValue = '',
+	fieldName,
 	initialValue,
-	defaultValue,
+	validation,
 } ) => {
 	const { name: formName } = useContext( Form.Context );
 	const { setFieldValue } = useDispatch( STORE_NAME );
 	const { error, validateField } = useValidation( { fieldName, validation } );
-	const currentValue = useSelect(
+	const fieldValue = useSelect(
 		( select ) => {
-			const fieldValue = select( STORE_NAME ).getFieldValue(
+			const value = select( STORE_NAME ).getFieldValue(
 				formName,
 				fieldName
 			);
-			return ! isNil( fieldValue ) ? fieldValue : defaultValue;
+
+			return ! isNil( value ) ? value : defaultValue;
 		},
 		[ formName, fieldName ]
 	);
-
-	const onChange = ( event ) => {
-		let newValue = event?.target?.value;
-
-		if ( type === 'checkbox' ) {
-			newValue = event.target.checked
-				? uniq( [ ...( currentValue || [] ), event.target.value ] )
-				: filter(
-						currentValue || [],
-						( v ) => v !== event.target.value
-				  );
-		} else if ( type === 'file' ) {
-			newValue = event.target.files;
-		} else if ( type === 'dropdown' ) {
-			newValue = event;
-		}
-
-		setFieldValue( formName, fieldName, newValue );
-
-		if ( [ 'file', 'dropdown' ].includes( type ) ) {
-			validateField( newValue );
-		}
-	};
-
-	const onBlur = () => {
-		validateField( currentValue );
-	};
-
-	const onSort = ( items ) => {
-		const values = map( items, ( item ) => item.props.attributes.clientId );
-		setFieldValue( formName, fieldName, values );
-	};
-
-	const fieldValue =
-		type === 'checkbox' || type === 'radio' ? value : currentValue || '';
-
-	const inputProps = {
-		name: fieldName,
-		onChange,
-	};
-
-	if ( type ) {
-		inputProps.type = type;
-	}
-
-	if ( includes( [ 'checkbox', 'radio', 'dropdown' ], type ) ) {
-		inputProps.onBlur = onBlur;
-		inputProps.value = fieldValue;
-	}
-
-	if ( type === 'checkbox' ) {
-		inputProps.checked = includes( currentValue, value );
-	} else if ( type === 'radio' ) {
-		inputProps.checked = currentValue === value;
-	} else if ( type === 'file' ) {
-		inputProps.files = currentValue || [];
-	}
 
 	useEffect( () => {
 		if ( initialValue ) {
@@ -97,9 +39,14 @@ export const useField = ( {
 		}
 	}, [] );
 
+	const onChange = ( value ) => {
+		setFieldValue( formName, fieldName, value );
+		validateField( value );
+	};
+
 	return {
 		error,
-		inputProps,
-		onSort,
+		fieldValue,
+		onChange,
 	};
 };

@@ -16,13 +16,22 @@ const FormTextarePreviewWrapper = styled.div`
 	width: 100%;
 `;
 
-const FormTextarea = styled.textarea`
+const Textarea = styled.textarea`
 	border-style: solid;
 	border-width: 1px;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 8px;
 `;
+
+const FormTextarea = ( { onChange, style, value, ...props } ) => (
+	<Textarea
+		onChange={ ( event ) => onChange( event.target.value ) }
+		style={ style }
+		value={ value }
+		{ ...props }
+	/>
+);
 
 FormTextarea.Preview = ( { style, ...props } ) => (
 	<FormTextarePreviewWrapper>

@@ -25,8 +25,8 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 		[ children ]
 	);
 
-	const { onSort } = useField( {
-		name: `q_${ attributes.clientId }[ranking][]`,
+	const { onChange } = useField( {
+		fieldName: `q_${ attributes.clientId }[ranking][]`,
 		initialValue: map( answers, 'props.attributes.clientId' ),
 	} );
 
@@ -38,7 +38,7 @@ const RankingQuestion = ( { attributes, children, className } ) => {
 
 		const [ removed ] = answers.splice( source.index, 1 );
 		answers.splice( destination.index, 0, removed );
-		onSort( answers );
+		onChange( map( answers, 'props.attributes.clientId' ) );
 	};
 
 	const classes = classnames(

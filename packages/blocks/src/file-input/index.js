@@ -13,9 +13,8 @@ import { useColorStyles } from '@crowdsignal/styles';
 import { useField } from '@crowdsignal/form';
 
 const FileInput = ( { attributes, className } ) => {
-	const { inputProps, error } = useField( {
-		name: `q_${ attributes.clientId }_upload`,
-		type: 'file',
+	const { error, onChange, fieldValue } = useField( {
+		fieldName: `q_${ attributes.clientId }_upload`,
 		validation: ( files ) => {
 			if ( attributes.mandatory && ( ! files || files.length === 0 ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -60,7 +59,8 @@ const FileInput = ( { attributes, className } ) => {
 			</FormInputWrapper.Label>
 			<FormFileInput
 				attributes={ attributes }
-				inputProps={ inputProps }
+				files={ fieldValue }
+				onChange={ onChange }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

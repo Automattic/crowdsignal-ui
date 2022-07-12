@@ -16,19 +16,18 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( RatingScaleQuestion.Context );
 
 	// fixing the input array-ish as rating, solve the ID on backend
-	const { inputProps } = useField( {
-		name: `q_${ parentQuestion.clientId }[rating]`,
-		type: 'radio',
-		value: attributes.clientId,
+	const { fieldValue, onChange } = useField( {
+		fieldName: `q_${ parentQuestion.clientId }[rating]`,
 	} );
 
+	const isSelected = fieldValue === attributes.clientId;
 	const blockStyle = getBlockStyle( parentQuestion.className );
 
 	const classes = classnames(
 		'crowdsignal-forms-rating-scale-answer-block',
 		className,
 		{
-			'is-selected': inputProps.checked,
+			'is-selected': isSelected,
 			'is-style-emoji': blockStyle === RatingScaleQuestion.Style.EMOJI,
 			'is-style-text': blockStyle === RatingScaleQuestion.Style.TEXT,
 		}
@@ -42,8 +41,10 @@ const RatingScaleAnswer = ( { attributes, className } ) => {
 		<ButtonAnswer
 			attributes={ attributes }
 			className={ classes }
-			inputProps={ inputProps }
 			isMultiSelect={ false }
+			isSelected={ isSelected }
+			onChange={ onChange }
+			value={ attributes.clientId }
 		>
 			{ blockStyle === RatingScaleQuestion.Style.EMOJI
 				? attributes.emoji

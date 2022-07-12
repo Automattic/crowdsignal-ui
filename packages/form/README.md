@@ -32,13 +32,13 @@ const MyForm = () => {
 import { useField } from '@crowdsignal/form';
 
 const TextInput = () => {
-	const { error, inputProps } = useField( {
+	const { error, onChange, fieldValue } = useField( {
 		name: 'example',
 	} );
 
 	return (
 		<div className="text-input">
-			<input className="text-input__input" { ...inputProps } />
+			<input className="text-input__input" onChange={ onChange } value={ fieldValue } />
 			{ error && ( <span className="text-input__error">{ error }</span> ) }
 		</div>
 	);

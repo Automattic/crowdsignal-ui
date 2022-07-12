@@ -3,6 +3,7 @@
  */
 import classnames from 'classnames';
 import { useContext } from '@wordpress/element';
+import { filter, uniq } from 'lodash';
 
 /**
  * Internal dependencies
@@ -15,22 +16,36 @@ import CheckboxAnswer from '../components/checkbox-answer';
 
 const MultipleChoiceAnswer = ( { attributes, className } ) => {
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
-
 	const isMultiSelect = parentQuestion.maximumChoices !== 1;
 
-	const { inputProps } = useField( {
-		name: `q_${ parentQuestion.clientId }[choice]${
+	const { fieldValue, onChange } = useField( {
+		fieldName: `q_${ parentQuestion.clientId }[choice]${
 			isMultiSelect ? '[]' : ''
 		}`,
-		type: isMultiSelect ? 'checkbox' : 'radio',
-		value: attributes.clientId,
+		defaultValue: isMultiSelect ? [] : '',
 	} );
+
+	const isSelected = isMultiSelect
+		? fieldValue.includes( attributes.clientId )
+		: fieldValue === attributes.clientId;
+
+	const onChangeHandler = ( value ) => {
+		let newValue = value;
+
+		if ( isMultiSelect ) {
+			newValue = ! isSelected
+				? uniq( [ ...fieldValue, value ] )
+				: filter( fieldValue, ( v ) => v !== value );
+		}
+
+		onChange( newValue );
+	};
 
 	const classes = classnames(
 		'crowdsignal-forms-multiple-choice-answer-block',
 		className,
 		{
-			'is-selected': inputProps.checked,
+			'is-selected': isSelected,
 		}
 	);
 
@@ -46,7 +61,10 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 			<CheckboxAnswer
 				attributes={ attributes }
 				className={ classes }
-				inputProps={ inputProps }
+				isMultiSelect={ isMultiSelect }
+				isSelected={ isSelected }
+				onChange={ onChangeHandler }
+				value={ attributes.clientId }
 			/>
 		);
 	}
@@ -55,8 +73,10 @@ const MultipleChoiceAnswer = ( { attributes, className } ) => {
 		<ButtonAnswer
 			attributes={ attributes }
 			className={ classes }
-			inputProps={ inputProps }
 			isMultiSelect={ isMultiSelect }
+			isSelected={ isSelected }
+			onChange={ onChangeHandler }
+			value={ attributes.clientId }
 			showCheckmark
 		>
 			{ attributes.label }
