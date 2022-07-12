@@ -17,7 +17,6 @@ export const useField = ( {
 	fieldName,
 	initialValue,
 	validation,
-	defaultValue,
 } ) => {
 	const { name: formName } = useContext( Form.Context );
 	const { setFieldValue } = useDispatch( STORE_NAME );
