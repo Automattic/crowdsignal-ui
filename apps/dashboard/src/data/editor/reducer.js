@@ -9,7 +9,7 @@ import { filter, map, slice, tap } from 'lodash';
  */
 import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
-	EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
+	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
@@ -81,7 +81,7 @@ const changes = ( state = {}, action ) => {
 		};
 	}
 
-	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE ) {
+	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_UPDATE ) {
 		return {
 			...state,
 			embedCard: true,
@@ -165,10 +165,10 @@ const embedCard = ( state = {}, action ) => {
 		return action.embedCard;
 	}
 
-	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE ) {
+	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_UPDATE ) {
 		return {
 			...state,
-			size: action.size,
+			viewport: action.viewport,
 		};
 	}
 

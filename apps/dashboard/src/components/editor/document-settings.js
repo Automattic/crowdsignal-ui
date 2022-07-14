@@ -28,10 +28,9 @@ import { getTheme } from '../../util/theme/themes';
 
 const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const {
-		saveAndUpdateProject,
-		updateEditorEmbedCardViewportSize,
-	} = useDispatch( STORE_NAME );
+	const { saveAndUpdateProject, updateEditorEmbedCardViewport } = useDispatch(
+		STORE_NAME
+	);
 
 	const [
 		canPublish,
@@ -62,9 +61,9 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		saveAndUpdateProject( project.id, { public: true } );
 	};
 
-	const updateEmbedViewportSize = ( key ) => ( value ) => {
-		updateEditorEmbedCardViewportSize( {
-			...( embedCardSettings.size || {} ),
+	const updateEmbedViewport = ( key ) => ( value ) => {
+		updateEditorEmbedCardViewport( {
+			...( embedCardSettings.viewport || {} ),
 			[ key ]: parseInt( value, 10 ),
 		} );
 	};
@@ -192,14 +191,18 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						<PanelRow className="with-gap">
 							<UnitControl
 								label={ __( 'Width', 'dashboard' ) }
-								value={ embedCardSettings.size?.width || '' }
-								onChange={ updateEmbedViewportSize( 'width' ) }
+								value={
+									embedCardSettings.viewport?.width || ''
+								}
+								onChange={ updateEmbedViewport( 'width' ) }
 								units={ 'px' }
 							/>
 							<UnitControl
 								label={ __( 'Height', 'dashboard' ) }
-								value={ embedCardSettings.size?.height || '' }
-								onChange={ updateEmbedViewportSize( 'height' ) }
+								value={
+									embedCardSettings.viewport?.height || ''
+								}
+								onChange={ updateEmbedViewport( 'height' ) }
 								units={ 'px' }
 							/>
 						</PanelRow>

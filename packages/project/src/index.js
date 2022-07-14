@@ -14,9 +14,9 @@
 /**
  * @typedef {Partial<Object>} ProjectEmbedCardSettings
  *
- * @property {Object} size        Embed card size settings.
- * @property {number} size.width  Embed card viewport width.
- * @property {number} size.height Embed card viewport height.
+ * @property {Object} viewport        Embed card viewport settings.
+ * @property {number} viewport.width  Embed card viewport width.
+ * @property {number} viewport.height Embed card viewport height.
  */
 
 /**

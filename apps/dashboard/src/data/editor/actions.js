@@ -12,7 +12,7 @@ import {
 	EDITOR_AUTOSAVE_TIMER_CANCEL,
 	EDITOR_AUTOSAVE_TIMER_RESET,
 	EDITOR_CURRENT_PAGE_INDEX_SET,
-	EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
+	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
@@ -148,7 +148,7 @@ export const updateEditorTemplate = ( template ) => ( {
 	template,
 } );
 
-export const updateEditorEmbedCardViewportSize = ( size ) => ( {
-	type: EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
-	size,
+export const updateEditorEmbedCardViewport = ( viewport ) => ( {
+	type: EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
+	viewport,
 } );
