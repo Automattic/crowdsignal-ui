@@ -18,7 +18,7 @@ import {
 	SharedCardLink,
 	ShareCardContent,
 } from '../share-card/share-card';
-import { ShareLinkPreview } from '../share-link/share-link-preview';
+import { ShareEmbedPreview } from './share-embed-preview';
 import { CheckIcon } from '@crowdsignal/icons';
 
 const getEmbedCodeSnippet = ( projectUrl ) =>
@@ -73,7 +73,7 @@ export const ShareEmbed = ( { link } ) => {
 						) }
 					</ShareCardContentText>
 				</ShareCardContent>
-				<ShareLinkPreview />
+				<ShareEmbedPreview />
 			</ShareCardBody>
 			<ShareCardFooter>
 				<SharedCardLink />
