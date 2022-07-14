@@ -12,6 +12,7 @@ import {
 	EDITOR_AUTOSAVE_TIMER_CANCEL,
 	EDITOR_AUTOSAVE_TIMER_RESET,
 	EDITOR_CURRENT_PAGE_INDEX_SET,
+	EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
@@ -36,12 +37,16 @@ const autosave = ( actionCreator ) => {
 	};
 };
 
-export const initializeEditor = ( projectId, title, pages, theme ) => ( {
+export const initializeEditor = (
+	projectId,
+	{ embedCard, pages, theme, title }
+) => ( {
 	type: EDITOR_INIT,
 	projectId,
+	embedCard,
 	pages,
-	title,
 	theme,
+	title,
 } );
 
 export const setEditorCurrentPage = ( pageIndex ) => ( {
@@ -141,4 +146,9 @@ export const updateEditorTheme = ( theme ) => ( {
 export const updateEditorTemplate = ( template ) => ( {
 	type: EDITOR_TEMPLATE_UPDATE,
 	template,
+} );
+
+export const updateEditorEmbedCardViewportSize = ( size ) => ( {
+	type: EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
+	size,
 } );

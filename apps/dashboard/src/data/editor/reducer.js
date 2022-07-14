@@ -9,6 +9,7 @@ import { filter, map, slice, tap } from 'lodash';
  */
 import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
+	EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE,
 	EDITOR_INIT,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
@@ -80,6 +81,13 @@ const changes = ( state = {}, action ) => {
 		};
 	}
 
+	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE ) {
+		return {
+			...state,
+			embedCard: true,
+		};
+	}
+
 	return state;
 };
 
@@ -140,6 +148,28 @@ const edited = ( state = false, action ) => {
 		action.type === EDITOR_THEME_UPDATE
 	) {
 		return true;
+	}
+
+	return state;
+};
+
+/**
+ * Tracks settings for the project's embed card.
+ *
+ * @param  {Object} state  App state.
+ * @param  {Object} action Action object.
+ * @return {Object}        Updated embed card settings.
+ */
+const embedCard = ( state = {}, action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return action.embedCard;
+	}
+
+	if ( action.type === EDITOR_EMBED_CARD_VIEWPORT_SIZE_UPDATE ) {
+		return {
+			...state,
+			size: action.size,
+		};
 	}
 
 	return state;
@@ -322,6 +352,7 @@ export default combineReducers( {
 	changes,
 	currentPage,
 	edited,
+	embedCard,
 	error,
 	isSaving,
 	isPristine,

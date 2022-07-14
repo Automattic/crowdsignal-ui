@@ -13,6 +13,13 @@ import { STORE_NAME } from '../../data';
 import { NOTICE_UNPUBLISHED } from './notice';
 import { trackContentInsert, trackThemeChange } from '../../util/tracking';
 
+const getEditorProjectData = ( project, draft = true ) => ( {
+	title: project.title,
+	pages: draft ? project.publicContent.pages : project.draftContent.pages,
+	theme: draft ? project.publicTheme : project.draftTheme,
+	embedCard: draft ? project.publicEmbedCard : project.draftEmbedCard,
+} );
+
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
 	const [ ready, setReady ] = useState( false );
@@ -48,13 +55,10 @@ export const useEditorContent = ( project ) => {
 	] );
 
 	useEffect( () => {
-		const usePublic = isPublic( project ) && ! forceDraft;
-		const content = usePublic
-			? project.publicContent.pages
-			: project.draftContent.pages;
-		const theme = usePublic ? project.publicTheme : project.draftTheme;
-
-		initializeEditor( project.id || 0, project.title, content, theme );
+		initializeEditor(
+			project.id || 0,
+			getEditorProjectData( project, ! isPublic( project ) || forceDraft )
+		);
 	}, [ forceDraft ] );
 
 	useEffect( () => {
@@ -105,7 +109,7 @@ export const useEditorContent = ( project ) => {
 
 	const setProjectTemplate = ( template ) => {
 		const pages = template.project.draftContent.pages;
-		initializeEditor( 0, undefined, pages, editorTheme );
+		initializeEditor( 0, { pages, theme: editorTheme } );
 		updateEditorTemplate( template.name );
 
 		if ( pages[ 0 ].length ) {
