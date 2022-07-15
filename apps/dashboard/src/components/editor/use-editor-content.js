@@ -15,9 +15,9 @@ import { trackContentInsert, trackThemeChange } from '../../util/tracking';
 
 const getEditorProjectData = ( project, draft = true ) => ( {
 	title: project.title,
-	pages: draft ? project.publicContent.pages : project.draftContent.pages,
-	theme: draft ? project.publicTheme : project.draftTheme,
-	embedCard: draft ? project.publicEmbedCard : project.draftEmbedCard,
+	pages: draft ? project.draftContent.pages : project.publicContent.pages,
+	theme: draft ? project.draftTheme : project.publicTheme,
+	embedCard: draft ? project.draftEmbedCard : project.publicEmbedCard,
 } );
 
 export const useEditorContent = ( project ) => {
