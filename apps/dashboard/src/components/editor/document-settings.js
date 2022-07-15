@@ -41,7 +41,7 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
-		select( STORE_NAME ).getEditorEmbedCardSettings(),
+		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
 	] );
 
 	useEffect( () => {

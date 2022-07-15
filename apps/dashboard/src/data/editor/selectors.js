@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { serialize, parse } from '@wordpress/blocks';
-import { get, isEmpty, map, slice, some } from 'lodash';
+import { get, isEmpty, map, pickBy, slice, some } from 'lodash';
 
 /**
  * Internal dependencies
@@ -148,8 +148,7 @@ export const getEditorTemplate = ( state ) => state.editor.template;
  * @param  {Object} state App state.
  * @return {Object}       Embed card settings object.
  */
-export const getEditorEmbedCardSettings = ( state ) =>
-	state.editor.embedCard || {};
+export const getEditorEmbedCardSettings = ( state ) => state.editor.embedCard;
 
 /**
  * Returns a partial project containing all the changes made since the last save.
@@ -190,7 +189,7 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		data.title = getEditorTitle( state );
 	}
 
-	return data;
+	return pickBy( data, ( item ) => item !== null );
 };
 
 /**
