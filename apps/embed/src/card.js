@@ -3,7 +3,12 @@
  */
 class CrowdsignalCard extends window.HTMLElement {
 	/**
-	 * Reference to the main iframe
+	 * Wrapper container reference
+	 */
+	#wrapper;
+
+	/**
+	 * iframe reference.
 	 */
 	#frame;
 
@@ -21,17 +26,8 @@ class CrowdsignalCard extends window.HTMLElement {
 			this.getAttribute( 'viewport-height', 10 )
 		);
 
-		const wrapper = document.createElement( 'div' );
-		wrapper.style.width = '100%';
-		wrapper.style.maxWidth = `${ viewportWidth }px`;
-		this.shadowRoot.appendChild( wrapper );
-
-		// Measure the wrapper width after it mounts to determine the scale factor
-		const scale = wrapper.offsetWidth / viewportWidth;
-
-		wrapper.style.width = `${ Math.floor( viewportWidth * scale ) }px`;
-		wrapper.style.height = `${ Math.floor( viewportHeight * scale ) }px`;
-		wrapper.style.position = 'relative';
+		this.#wrapper = document.createElement( 'div' );
+		this.shadowRoot.appendChild( this.#wrapper );
 
 		this.#frame = document.createElement( 'iframe' );
 		this.#frame.src = this.getAttribute( 'src' );
@@ -39,13 +35,50 @@ class CrowdsignalCard extends window.HTMLElement {
 		this.#frame.setAttribute( 'frameBorder', '0' );
 		this.#frame.scrolling = 'no';
 
+		this.#wrapper.appendChild( this.#frame );
+
+		this.#resizeViewport( viewportWidth || 1000, viewportHeight || 600 );
+
+		window.addEventListener( 'message', ( event ) => {
+			if ( this.getAttribute( 'src' ).indexOf( event.origin ) !== 0 ) {
+				return;
+			}
+
+			if ( event.data.type === 'crowdsignal-forms-project-embed-card' ) {
+				if (
+					!! event.data.embedCardSettings.viewport &&
+					! viewportWidth &&
+					! viewportHeight
+				) {
+					this.#resizeViewport(
+						event.data.embedCardSettings.viewport.width,
+						event.data.embedCardSettings.viewport.height
+					);
+				}
+			}
+		} );
+	}
+
+	#resizeViewport( viewportWidth, viewportHeight ) {
+		this.#wrapper.style.width = '100%';
+		this.#wrapper.style.maxWidth = `${ viewportWidth }px`;
+
+		// Measure the wrapper width after it mounts to determine the scale factor
+		const scale = this.#wrapper.offsetWidth / viewportWidth;
+
+		this.#wrapper.style.width = `${ Math.floor(
+			viewportWidth * scale
+		) }px`;
+		this.#wrapper.style.height = `${ Math.floor(
+			viewportHeight * scale
+		) }px`;
+		this.#wrapper.style.position = 'relative';
+
 		this.#frame.style.maxWidth = null;
 		this.#frame.style.width = `${ viewportWidth }px`;
 		this.#frame.style.height = `${ viewportHeight }px`;
 		this.#frame.style.transform = `scale(${ scale })`;
 		this.#frame.style.transformOrigin = 'top left';
-
-		wrapper.appendChild( this.#frame );
 	}
 }
 
