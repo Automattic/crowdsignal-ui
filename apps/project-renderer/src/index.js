@@ -46,5 +46,15 @@ window.addEventListener( 'load', () => {
 		);
 	}
 
+	if ( !! window.embedCardSettings ) {
+		window.parent.postMessage(
+			{
+				type: 'crowdsignal-forms-project-embed-card',
+				embedCardSettings: window.embedCardSettings,
+			},
+			'*'
+		);
+	}
+
 	renderProject();
 } );
