@@ -26,11 +26,14 @@ class CrowdsignalCard extends window.HTMLElement {
 			this.getAttribute( 'viewport-height', 10 )
 		);
 
+		const embedUrl = new window.URL( this.getAttribute( 'src' ) );
+		embedUrl.searchParams.append( 'iframe', 1 );
+
 		this.#wrapper = document.createElement( 'div' );
 		this.shadowRoot.appendChild( this.#wrapper );
 
 		this.#frame = document.createElement( 'iframe' );
-		this.#frame.src = this.getAttribute( 'src' );
+		this.#frame.src = embedUrl.toString();
 
 		this.#frame.setAttribute( 'frameBorder', '0' );
 		this.#frame.scrolling = 'no';
