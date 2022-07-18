@@ -12,19 +12,29 @@
  */
 
 /**
+ * @typedef {Partial<Object>} ProjectEmbedCardSettings
+ *
+ * @property {Object} viewport        Embed card viewport settings.
+ * @property {number} viewport.width  Embed card viewport width.
+ * @property {number} viewport.height Embed card viewport height.
+ */
+
+/**
  * @typedef {Object} Project
  *
- * @property {number}                id            Project ID.
- * @property {string}                created       Project creation date.
- * @property {ProjectContent}        draftContent  Project's draft content.
- * @property {string}                draftTheme    Project's draft theme.
- * @property {string}                name          Project name.
- * @property {string}                permalink     Project URL.
- * @property {boolean}               public        True when project is public.
- * @property {ProjectContent | null} publicContent Project's last published content.
- * @property {string | null}         publicTheme   Project's public theme.
- * @property {string}                slug          Project slug.
- * @property {string}                title         Project title.
+ * @property {number}                   id              Project ID.
+ * @property {string}                   created         Project creation date.
+ * @property {ProjectContent}           draftContent    Project's draft content.
+ * @property {ProjectEmbedCardSettings} draftEmbedCard  Project's draft embed card settings.
+ * @property {string}                   draftTheme      Project's draft theme.
+ * @property {string}                   name            Project name.
+ * @property {string}                   permalink       Project URL.
+ * @property {boolean}                  public          True when project is public.
+ * @property {ProjectContent | null}    publicContent   Project's last published content.
+ * @property {ProjectEmbedCardSettings} publicEmbedCard Project's public embed card settings.
+ * @property {string | null}            publicTheme     Project's public theme.
+ * @property {string}                   slug            Project slug.
+ * @property {string}                   title           Project title.
  */
 
 /**
@@ -49,11 +59,13 @@ export const createProject = () => {
 			pages: [ [] ],
 			timestamp,
 		},
+		draftEmbedCard: {},
 		draftTheme: 'leven',
 		name: '',
 		permalink: '',
 		public: false,
 		publicContent: null,
+		publicEmbedCard: {},
 		publicTheme: null,
 		slug: '',
 		title: '',

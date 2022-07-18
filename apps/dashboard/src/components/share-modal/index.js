@@ -17,6 +17,8 @@ import {
 	ModalCloseButton,
 } from '../modal';
 import { ShareLink } from './share-link/share-link';
+import { ShareEmbed } from './share-embed/share-embed';
+import { ShareEmbedCard } from './share-embed/share-embed-card';
 
 const ShareModalDialog = styled( ModalDialog )`
 	max-width: 1350px;
@@ -52,6 +54,8 @@ const ShareModal = ( { project, onClose } ) => {
 				</ModalHeaderNote>
 				<ModalTemplateGrid>
 					<ShareLink link={ project.permalink } />
+					<ShareEmbedCard link={ project.permalink } />
+					<ShareEmbed link={ project.permalink } />
 				</ModalTemplateGrid>
 				<SharedModalFooterNote>
 					<span>

@@ -7,6 +7,7 @@ import {
 	ExternalLink,
 	PanelBody,
 	PanelRow,
+	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
@@ -27,16 +28,20 @@ import { getTheme } from '../../util/theme/themes';
 
 const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const { saveAndUpdateProject } = useDispatch( STORE_NAME );
+	const { saveAndUpdateProject, updateEditorEmbedCardViewport } = useDispatch(
+		STORE_NAME
+	);
 
 	const [
 		canPublish,
 		editorTheme,
 		selectedBlockClientId,
+		embedCardSettings,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
+		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
 	] );
 
 	useEffect( () => {
@@ -54,6 +59,13 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		}
 
 		saveAndUpdateProject( project.id, { public: true } );
+	};
+
+	const updateEmbedViewport = ( key ) => ( value ) => {
+		updateEditorEmbedCardViewport( {
+			...( embedCardSettings.viewport || {} ),
+			[ key ]: parseInt( value, 10 ),
+		} );
 	};
 
 	const visibility = isPublic( project )
@@ -173,6 +185,26 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 							>
 								{ __( 'Change Theme', 'dashboard' ) }
 							</ToolbarButton>
+						</PanelRow>
+					</PanelBody>
+					<PanelBody title={ __( 'Embed Card', 'dashboard' ) }>
+						<PanelRow className="with-gap">
+							<UnitControl
+								label={ __( 'Width', 'dashboard' ) }
+								value={
+									embedCardSettings.viewport?.width || ''
+								}
+								onChange={ updateEmbedViewport( 'width' ) }
+								units={ 'px' }
+							/>
+							<UnitControl
+								label={ __( 'Height', 'dashboard' ) }
+								value={
+									embedCardSettings.viewport?.height || ''
+								}
+								onChange={ updateEmbedViewport( 'height' ) }
+								units={ 'px' }
+							/>
 						</PanelRow>
 					</PanelBody>
 				</>

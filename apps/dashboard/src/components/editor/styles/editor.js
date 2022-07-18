@@ -153,6 +153,10 @@ export const EditorWrapper = styled.div`
 				justify-content: space-between;
 			}
 		}
+
+		.components-panel__row.with-gap {
+			gap: 16px;
+		}
 	}
 
 	.editor__project-visibility-popover .components-popover__content {
