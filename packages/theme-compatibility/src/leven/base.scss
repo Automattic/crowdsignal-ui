@@ -46,9 +46,11 @@ body {
 	background-color: var(--crowdsignal-forms-submit-button-background-color);
 }
 
-.crowdsignal-forms-text-input-block input,
-.crowdsignal-forms-text-question-block textarea {
-	border: 1px solid var(--crowdsignal-forms-input-border-color);
+.crowdsignal-forms-text-input-block,
+.crowdsignal-forms-text-question-block {
+	input, textarea {
+		border: 1px solid var(--crowdsignal-forms-input-border-color);
+	}
 }
 
 .wp-block-image {

@@ -10,11 +10,18 @@ import { isEmpty } from 'lodash';
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { ErrorMessage, FormInputWrapper, FormTextInput } from '../components';
+import {
+	ErrorMessage,
+	FormInputWrapper,
+	FormTextarea,
+	FormTextInput,
+} from '../components';
 import { useField } from '@crowdsignal/form';
 import validator from './validations';
 
 const TextInput = ( { attributes, className } ) => {
+	const MULTILINE_THRESHOLD = 70;
+
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
@@ -48,15 +55,26 @@ const TextInput = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<FormTextInput
-				onChange={ onChange }
-				placeholder={ attributes.placeholder }
-				style={ {
-					width: attributes.inputWidth,
-					height: `${ attributes.inputHeight }px`,
-				} }
-				value={ fieldValue }
-			/>
+			{ attributes.inputHeight < MULTILINE_THRESHOLD ? (
+				<FormTextInput
+					onChange={ onChange }
+					placeholder={ attributes.placeholder }
+					style={ {
+						width: attributes.inputWidth,
+						height: `${ attributes.inputHeight }px`,
+					} }
+					value={ fieldValue }
+				/>
+			) : (
+				<FormTextarea
+					onChange={ onChange }
+					placeholder={ attributes.placeholder }
+					style={ {
+						height: `${ attributes.inputHeight }px`,
+					} }
+					value={ fieldValue }
+				/>
+			) }
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
