@@ -26,12 +26,9 @@ export default ( { currentPage, settings, totalPages } ) => {
 	}
 
 	const { showBackButton, showPagination, showProgress } = settings;
-	const navClasses = classnames( {
-		'no-padding': ! showBackButton && ! showPagination && totalPages > 5,
-	} );
 
 	return (
-		<NavBar className={ navClasses }>
+		<NavBar>
 			<NavContent>
 				<Filler>
 					{ showBackButton && (
