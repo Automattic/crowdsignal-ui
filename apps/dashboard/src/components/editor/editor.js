@@ -5,12 +5,13 @@ import { useDispatch } from '@wordpress/data';
 import { useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { cloneDeep, filter, noop, tap } from 'lodash';
-import IsolatedBlockEditor from 'isolated-block-editor'; // eslint-disable-line import/default
+import IsolatedBlockEditor, { EditorHeadingSlot } from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/react';
 
 /**
  * Internal dependencies
  */
+import { NavigationBar } from '@crowdsignal/components';
 import { editorSettings } from './settings';
 import { registerBlocks } from './blocks';
 import { registerPatterns } from './patterns';
@@ -63,6 +64,9 @@ const Editor = ( { project } ) => {
 		setProjectTemplate,
 		setProjectTheme,
 		version,
+		currentPage,
+		totalPages,
+		navigationSettings,
 	} = useEditorContent( project );
 
 	const handleSelectTemplate = ( template ) => {
@@ -163,6 +167,13 @@ const Editor = ( { project } ) => {
 					project={ project }
 					onChangeThemeClick={ handleOpenThemesModal }
 				/>
+				<EditorHeadingSlot>
+					<NavigationBar
+						currentPage={ currentPage }
+						settings={ navigationSettings }
+						totalPages={ totalPages - 1 }
+					/>
+				</EditorHeadingSlot>
 
 				<AutoSubmitButton />
 
