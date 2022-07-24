@@ -25,8 +25,8 @@ const EditTextQuestion = ( props ) => {
 
 	const handleChangeQuestion = ( question ) => setAttributes( { question } );
 
-	const handleChangePlaceholder = ( event ) =>
-		setAttributes( { placeholder: event.target.value } );
+	const handleChangePlaceholder = ( placeholder ) =>
+		setAttributes( { placeholder } );
 
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' ) {
