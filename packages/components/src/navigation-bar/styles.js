@@ -12,9 +12,10 @@ export const NavBar = styled.div`
 	font-size: 13px;
 	line-height: 1;
 	background-color: var( --cs--style--color--brackground, white );
-	box-shadow: 0 2px 5px 0 rgba( 0, 0, 0, 0.3 );
 	display: flex;
 	flex-direction: column;
+	filter: drop-shadow( 0 0 6px rgba( 0, 0, 0, 0.02 ) )
+		drop-shadow( 0 2px 4px rgba( 0, 0, 0, 0.08 ) );
 `;
 
 export const NavContent = styled.div`
@@ -37,6 +38,15 @@ export const BackButton = styled.a`
 	text-decoration: none;
 	display: flex;
 	align-items: center;
+
+	&[disabled] {
+		opacity: 0.5;
+		cursor: not-allowed;
+
+		&:hover {
+			color: inherit;
+		}
+	}
 
 	svg path {
 		fill: currentColor;
@@ -74,7 +84,7 @@ export const Dash = styled.div`
 
 export const LinearProgressBar = styled.div`
 	width: ${ ( props ) =>
-		`${ ( ( props.currentPage + 1 ) * 100 ) / props.totalPages }%` };
+		`${ ( props.currentPage * 100 ) / props.totalPages }%` };
 	height: 4px;
 	background-color: var( --cs--style--color--primary, #ccc );
 	transition: width 0.5s ease;

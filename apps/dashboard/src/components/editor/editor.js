@@ -52,7 +52,9 @@ const Editor = ( { project } ) => {
 		document.cookie.indexOf( 'hide_editor_guide=1' ) === -1
 	);
 
-	const { updateEditorTitle } = useDispatch( STORE_NAME );
+	const { updateEditorTitle, setEditorCurrentPage } = useDispatch(
+		STORE_NAME
+	);
 
 	const {
 		confirmationPage,
@@ -169,9 +171,10 @@ const Editor = ( { project } ) => {
 				/>
 				<EditorHeadingSlot>
 					<NavigationBar
-						currentPage={ currentPage }
+						currentPageIndex={ currentPage }
+						onBackButtonClick={ setEditorCurrentPage }
 						settings={ navigationSettings }
-						totalPages={ totalPages - 1 }
+						totalPages={ totalPages }
 					/>
 				</EditorHeadingSlot>
 

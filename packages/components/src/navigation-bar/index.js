@@ -20,31 +20,52 @@ import {
 	Pagination,
 } from './styles';
 
-export default ( { currentPage, settings, totalPages } ) => {
-	if ( every( values( settings ), ( value ) => ! value ) ) {
+export default ( {
+	currentPageIndex,
+	onBackButtonClick,
+	settings,
+	totalPages,
+} ) => {
+	const { showBackButton, showPagination, showProgress } = settings;
+	const currentPage = currentPageIndex + 1;
+	const pages = totalPages - 1; //Ignore confirmation page
+
+	const handleBackButtonClick = () => {
+		if ( currentPageIndex <= 0 ) {
+			return;
+		}
+
+		onBackButtonClick( currentPageIndex - 1 );
+	};
+
+	if (
+		every( values( settings ), ( value ) => ! value ) ||
+		currentPage > pages
+	) {
 		return null;
 	}
-
-	const { showBackButton, showPagination, showProgress } = settings;
 
 	return (
 		<NavBar>
 			<NavContent>
 				<Filler>
 					{ showBackButton && (
-						<BackButton>
+						<BackButton
+							disabled={ currentPageIndex === 0 }
+							onClick={ handleBackButtonClick }
+						>
 							<Icon icon={ chevronLeft } />
 							{ __( 'Back', 'components' ) }
 						</BackButton>
 					) }
 				</Filler>
-				{ showProgress && totalPages <= 5 && (
+				{ showProgress && pages <= 5 && (
 					<DashedProgressBar>
-						{ times( totalPages, ( i ) => (
+						{ times( pages, ( i ) => (
 							<Dash
 								key={ i }
 								className={ classnames( {
-									active: currentPage === i,
+									active: currentPageIndex === i,
 								} ) }
 							/>
 						) ) }
@@ -56,17 +77,17 @@ export default ( { currentPage, settings, totalPages } ) => {
 							{ sprintf(
 								// translators: %1$s: Current page number, %2$s: Total number of pages
 								__( 'Page %1$s of %2$s', 'components' ),
-								currentPage + 1,
-								totalPages
+								currentPage,
+								pages
 							) }
 						</Pagination>
 					) }
 				</Filler>
 			</NavContent>
-			{ showProgress && totalPages > 5 && (
+			{ showProgress && pages > 5 && (
 				<LinearProgressBar
 					currentPage={ currentPage }
-					totalPages={ totalPages }
+					totalPages={ pages }
 				/>
 			) }
 		</NavBar>
