@@ -13,14 +13,13 @@ import {
 	FormInputWrapper,
 	FormTextarea,
 	FormTextInput,
+	TextInput,
 } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
 const EditTextInput = ( props ) => {
-	const MULTILINE_THRESHOLD = 70;
-
 	const { attributes, setAttributes, className, isSelected } = props;
 
 	useClientId( props );
@@ -72,7 +71,7 @@ const EditTextInput = ( props ) => {
 					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				{ attributes.inputHeight < MULTILINE_THRESHOLD ? (
+				{ attributes.inputHeight < TextInput.MULTILINE_THRESHOLD ? (
 					<FormTextInput
 						placeholder={ __(
 							'Enter placeholder',
@@ -93,6 +92,7 @@ const EditTextInput = ( props ) => {
 						style={ {
 							height: '100%',
 						} }
+						className="crowdsignal-forms-text-input-block__wrapper"
 					/>
 				) }
 			</ResizableBox>

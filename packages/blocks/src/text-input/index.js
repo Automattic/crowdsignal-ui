@@ -19,9 +19,9 @@ import {
 import { useField } from '@crowdsignal/form';
 import validator from './validations';
 
-const TextInput = ( { attributes, className } ) => {
-	const MULTILINE_THRESHOLD = 70;
+const MULTILINE_THRESHOLD = 70;
 
+const TextInput = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
@@ -81,5 +81,6 @@ const TextInput = ( { attributes, className } ) => {
 };
 
 TextInput.blockName = 'crowdsignal-forms/text-input';
+TextInput.MULTILINE_THRESHOLD = MULTILINE_THRESHOLD;
 
 export default TextInput;

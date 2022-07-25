@@ -17,8 +17,6 @@ const FormTextarePreviewWrapper = styled.div`
 `;
 
 const Textarea = styled.textarea`
-	//border-style: solid;
-	//border-width: 1px;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 8px;
