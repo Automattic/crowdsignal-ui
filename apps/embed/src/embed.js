@@ -9,7 +9,11 @@ class CrowdsignalEmbed extends window.HTMLElement {
 
 	connectedCallback() {
 		this.#frame = document.createElement( 'iframe' );
-		this.#frame.src = this.getAttribute( 'src' );
+
+		const embedUrl = new window.URL( this.getAttribute( 'src' ) );
+		embedUrl.searchParams.append( 'iframe', 1 );
+
+		this.#frame.src = embedUrl.toString();
 
 		this.#frame.setAttribute( 'frameBorder', '0' );
 
