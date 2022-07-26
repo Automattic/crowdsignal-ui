@@ -7,12 +7,6 @@ class CrowdsignalEmbed extends window.HTMLElement {
 	 */
 	#frame;
 
-	constructor() {
-		super();
-
-		this.attachShadow( { mode: 'open' } );
-	}
-
 	connectedCallback() {
 		this.#frame = document.createElement( 'iframe' );
 		this.#frame.src = this.getAttribute( 'src' );
@@ -22,7 +16,7 @@ class CrowdsignalEmbed extends window.HTMLElement {
 		this.#frame.width = '100%';
 		this.#frame.scrolling = 'no';
 
-		this.shadowRoot.appendChild( this.#frame );
+		this.appendChild( this.#frame );
 
 		window.addEventListener( 'message', ( event ) => {
 			if ( this.getAttribute( 'src' ).indexOf( event.origin ) !== 0 ) {
