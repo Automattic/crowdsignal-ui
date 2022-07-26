@@ -12,12 +12,6 @@ class CrowdsignalCard extends window.HTMLElement {
 	 */
 	#frame;
 
-	constructor() {
-		super();
-
-		this.attachShadow( { mode: 'open' } );
-	}
-
 	connectedCallback() {
 		const viewportWidth = parseInt(
 			this.getAttribute( 'viewport-width', 10 )
@@ -30,7 +24,7 @@ class CrowdsignalCard extends window.HTMLElement {
 		embedUrl.searchParams.append( 'iframe', 1 );
 
 		this.#wrapper = document.createElement( 'div' );
-		this.shadowRoot.appendChild( this.#wrapper );
+		this.appendChild( this.#wrapper );
 
 		this.#frame = document.createElement( 'iframe' );
 		this.#frame.src = embedUrl.toString();
