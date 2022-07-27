@@ -51,7 +51,7 @@ jobs:
       #     NODE_ENV: production
 
       - name: Build release
-        run: ./build-release.sh
+        run: ./scripts/build-release.sh
 
       - name: Pack
         run: |
