@@ -20,7 +20,7 @@ const Form = forwardRef( ( { children, name, onSubmit, ...props }, ref ) => {
 		[ name ]
 	);
 
-	const { startSubmit, stopSubmit, initForm } = useDispatch( STORE_NAME );
+	const { startSubmit, stopSubmit } = useDispatch( STORE_NAME );
 
 	const registerValidation = ( fieldName, validation ) =>
 		( validations[ fieldName ] = validation );
@@ -40,9 +40,7 @@ const Form = forwardRef( ( { children, name, onSubmit, ...props }, ref ) => {
 
 		startSubmit( name );
 
-		onSubmit( data )
-			.then( () => initForm( name, {} ) )
-			.finally( () => stopSubmit( name ) );
+		onSubmit( data ).finally( () => stopSubmit( name ) );
 	};
 
 	return (

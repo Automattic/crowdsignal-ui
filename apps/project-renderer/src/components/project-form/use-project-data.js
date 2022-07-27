@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
+import { isNil } from 'lodash';
 
 /**
  * Internal dependencies
@@ -14,7 +15,9 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 	const [ startDate, setStartDate ] = useState();
 	const [ responseHash, setResponseHash ] = useState();
 	const [ currentPage, setCurrentPage ] = useState( 0 );
+	const [ totalPages, setTotalPages ] = useState( 1 );
 	const [ pageContent, setPageContent ] = useState();
+	const [ navigationSettings, setNavigationSettings ] = useState( {} );
 	const [ isCompleted, setIsCompleted ] = useState( false );
 
 	useEffect( () => {
@@ -28,17 +31,27 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 		}
 
 		const query = preview && { preview };
+		fetchProject( projectCode, query );
+	}, [ projectCode, preview ] );
 
-		fetchProjectForm( projectCode, query )
+	const fetchProject = ( code, query ) => {
+		fetchProjectForm( code, query )
 			.then( ( res ) => {
 				if ( ! res.data || ! res.data.content ) {
 					throw new Error( 'Empty response' );
 				}
 
 				setTheme( res.data.theme );
+				setNavigationSettings( res.data.navigation );
+				setTotalPages( res.data.totalPages );
 				setStartDate(
 					res.data.startTime || Math.round( Date.now() / 1000 )
 				);
+
+				if ( ! isNil( query.page ) ) {
+					setCurrentPage( query.page );
+				}
+
 				return setPageContent( res.data.content );
 			} )
 			.catch( ( err ) => {
@@ -47,7 +60,7 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 				// eslint-disable-next-line
 				console.log( err );
 			} );
-	}, [ projectCode, preview ] );
+	};
 
 	const handleSubmit = useCallback(
 		( data ) => {
@@ -96,7 +109,11 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 
 	return {
 		pageContent,
+		currentPage,
+		totalPages,
 		submitPage: ! isCompleted && handleSubmit,
+		fetchProject,
 		theme,
+		navigationSettings,
 	};
 };

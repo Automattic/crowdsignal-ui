@@ -11,7 +11,15 @@ import ProjectFormThemeProvider from './theme-provider';
 import { useProjectData } from './use-project-data';
 
 const ProjectForm = ( props ) => {
-	const { pageContent, submitPage, theme } = useProjectData( props );
+	const {
+		currentPage,
+		navigationSettings,
+		pageContent,
+		submitPage,
+		fetchProject,
+		theme,
+		totalPages,
+	} = useProjectData( props );
 
 	useEffect( () => {
 		const observer = new window.ResizeObserver( () => {
@@ -30,6 +38,10 @@ const ProjectForm = ( props ) => {
 		return () => observer.unobserve( document.body );
 	}, [] );
 
+	const handleNavigateBack = ( page ) => {
+		fetchProject( props.projectCode, { preview: props.preview, page } );
+	};
+
 	if ( ! pageContent ) {
 		return 'Wait...';
 	}
@@ -38,8 +50,12 @@ const ProjectForm = ( props ) => {
 		<ProjectFormThemeProvider theme={ theme }>
 			<ProjectFormPage
 				blocks={ pageContent }
+				currentPage={ currentPage }
+				navigation={ navigationSettings }
+				onNavigateBack={ handleNavigateBack }
 				onSubmit={ submitPage }
 				projectCode={ props.projectCode }
+				totalPages={ totalPages }
 			/>
 		</ProjectFormThemeProvider>
 	);

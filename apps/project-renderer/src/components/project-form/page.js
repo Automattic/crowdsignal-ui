@@ -13,10 +13,19 @@ import {
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
+import { NavigationBar } from '@crowdsignal/components';
 
 const blockMap = zipObject( map( projectBlocks, 'blockName' ), projectBlocks );
 
-const ProjectPage = ( { blocks, onSubmit, projectCode } ) => {
+const ProjectPage = ( {
+	blocks,
+	currentPage,
+	navigation,
+	onNavigateBack,
+	onSubmit,
+	projectCode,
+	totalPages,
+} ) => {
 	const classes = classnames( 'wp-embed-responsive', 'crowdsignal-content', {
 		'crowdsignal-forms-form__content': !! onSubmit,
 	} );
@@ -35,6 +44,12 @@ const ProjectPage = ( { blocks, onSubmit, projectCode } ) => {
 			name={ `f-${ projectCode }` }
 			onSubmit={ onSubmit }
 		>
+			<NavigationBar
+				currentPageIndex={ currentPage }
+				onBackButtonClick={ onNavigateBack }
+				settings={ navigation }
+				totalPages={ totalPages }
+			/>
 			<ContentWrapper className={ classes }>
 				{ renderBlocks( blocks, blockMap ) }
 			</ContentWrapper>
