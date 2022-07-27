@@ -34,22 +34,19 @@ jobs:
         with:
           ref: ${{ github.event.inputs.buildBranch }}
 
-      - name: Fork
-        run: git checkout -b build
-
       - name: Install YARN
         run: npm install yarn
 
       - name: Install dependencies
         run: yarn install
 
-      - name: Build Gutenberg
-        run: ./scripts/build-gutenberg.sh
-        env:
-          NODE_ENV: production
+      # - name: Build Gutenberg
+      #   run: ./scripts/build-gutenberg.sh
+      #   env:
+      #     NODE_ENV: production
 
       - name: Build release
-        run: ./build-release.sh
+        run: ./scripts/build-release.sh
 
       - name: Pack
         run: |
