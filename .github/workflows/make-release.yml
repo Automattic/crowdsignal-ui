@@ -39,8 +39,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-        env:
-          NODE_ENV: production
 
       # - name: Build Gutenberg
       #   run: ./scripts/build-gutenberg.sh
