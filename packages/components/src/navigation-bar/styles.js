@@ -39,15 +39,6 @@ export const BackButton = styled.a`
 	display: flex;
 	align-items: center;
 
-	&[disabled] {
-		opacity: 0.5;
-		cursor: not-allowed;
-
-		&:hover {
-			color: inherit;
-		}
-	}
-
 	svg path {
 		fill: currentColor;
 	}
@@ -59,6 +50,7 @@ export const Pagination = styled.span`
 	align-items: center;
 	justify-content: flex-end;
 	flex: 1;
+	padding-right: 8px;
 `;
 
 export const DashedProgressBar = styled.div`

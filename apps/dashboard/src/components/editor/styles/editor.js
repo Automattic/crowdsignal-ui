@@ -164,3 +164,12 @@ export const EditorWrapper = styled.div`
 		width: 250px;
 	}
 `;
+
+export const ToggleControlHint = styled.span`
+	display: block;
+	font-size: 12px;
+	font-weight: 400;
+	margin-left: 48px;
+	margin-top: -4px;
+	color: var( --color-neutral-40 );
+`;

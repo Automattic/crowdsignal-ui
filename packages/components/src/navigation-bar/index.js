@@ -49,11 +49,8 @@ export default ( {
 		<NavBar>
 			<NavContent>
 				<Filler>
-					{ showBackButton && (
-						<BackButton
-							disabled={ currentPageIndex === 0 }
-							onClick={ handleBackButtonClick }
-						>
+					{ showBackButton && currentPageIndex !== 0 && (
+						<BackButton onClick={ handleBackButtonClick }>
 							<Icon icon={ chevronLeft } />
 							{ __( 'Back', 'components' ) }
 						</BackButton>

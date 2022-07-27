@@ -27,6 +27,11 @@ import { STORE_NAME } from '../../data';
 import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
 
+/**
+ * Styles
+ */
+import { ToggleControlHint } from './styles/editor';
+
 const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
 	const {
@@ -41,12 +46,14 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		selectedBlockClientId,
 		embedCardSettings,
 		navigationSettings,
+		currentPageIndex,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
 		select( STORE_NAME ).getEditorNavigationSettings(),
+		select( STORE_NAME ).getEditorCurrentPageIndex(),
 	] );
 
 	useEffect( () => {
@@ -244,6 +251,15 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 								'showBackButton'
 							) }
 						/>
+						{ currentPageIndex === 0 &&
+							navigationSettings.showBackButton && (
+								<ToggleControlHint>
+									{ __(
+										"Button doesn't show on page one.",
+										'dashboard'
+									) }
+								</ToggleControlHint>
+							) }
 					</PanelBody>
 				</>
 			) }
