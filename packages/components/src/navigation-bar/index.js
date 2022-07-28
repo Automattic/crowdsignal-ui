@@ -46,11 +46,14 @@ export default ( {
 	}
 
 	return (
-		<NavBar>
+		<NavBar className="crowdsignal-navigation-bar">
 			<NavContent>
 				<Filler>
 					{ showBackButton && currentPageIndex !== 0 && (
-						<BackButton onClick={ handleBackButtonClick }>
+						<BackButton
+							className="crowdsignal-navigation-bar__back-button"
+							onClick={ handleBackButtonClick }
+						>
 							<Icon icon={ chevronLeft } />
 							{ __( 'Back', 'components' ) }
 						</BackButton>

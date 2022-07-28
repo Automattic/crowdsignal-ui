@@ -8,6 +8,8 @@ body {
 
 	--cs--style--answer--selected--color: var(--wp--preset--color--foreground);
 	--cs--style--dropdown--padding-top-bottom: 8px;
+	--cs--style--color--background: var(--wp--preset--color--background);
+
 }
 
 .crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block {
@@ -42,6 +44,17 @@ body {
 	& &__options {
 		border-width: 1px;
 		border-color: var(--wp--custom--input--border--color);
+		color: var(--wp--preset--color--foreground);
+	}
+}
+
+.crowdsignal-navigation-bar {
+	//Adding this hack to increase the selector specificity without using 'important'
+	&.crowdsignal-navigation-bar {
+		filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.06)) drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
+	}
+
+	& &__back-button {
 		color: var(--wp--preset--color--foreground);
 	}
 }
