@@ -11,7 +11,7 @@ export const NavBar = styled.div`
 	min-height: 4px;
 	font-size: 13px;
 	line-height: 1;
-	background-color: var( --cs--style--color--brackground, white );
+	background-color: var( --cs--style--color--background, white );
 	display: flex;
 	flex-direction: column;
 	filter: drop-shadow( 0 0 6px rgba( 0, 0, 0, 0.02 ) )
