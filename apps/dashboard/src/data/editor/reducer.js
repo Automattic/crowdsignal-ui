@@ -11,6 +11,7 @@ import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	EDITOR_INIT,
+	EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
 	EDITOR_PAGE_INSERT,
@@ -85,6 +86,13 @@ const changes = ( state = {}, action ) => {
 		return {
 			...state,
 			embedCard: true,
+		};
+	}
+
+	if ( action.type === EDITOR_NAVIGATION_SETTINGS_UPDATE ) {
+		return {
+			...state,
+			navigation: true,
 		};
 	}
 
@@ -241,6 +249,24 @@ const isPristine = ( state = false, action ) => {
 };
 
 /**
+ * Project title.
+ *
+ * @param  {Object} state  App state.
+ * @param  {Object} action Action object.
+ * @return {Object}        Navigation Settings.
+ */
+const navigation = ( state = null, action ) => {
+	if (
+		action.type === EDITOR_INIT ||
+		action.type === EDITOR_NAVIGATION_SETTINGS_UPDATE
+	) {
+		return action.navigation;
+	}
+
+	return state;
+};
+
+/**
  * Project's pages.
  *
  * @param  {Array}  state  App state.
@@ -356,6 +382,7 @@ export default combineReducers( {
 	error,
 	isSaving,
 	isPristine,
+	navigation,
 	pages,
 	projectId,
 	template,

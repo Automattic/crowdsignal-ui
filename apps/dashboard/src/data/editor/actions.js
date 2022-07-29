@@ -14,6 +14,7 @@ import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	EDITOR_INIT,
+	EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	EDITOR_PAGE_DELETE,
 	EDITOR_PAGE_DUPLICATE,
 	EDITOR_PAGE_INSERT,
@@ -39,11 +40,12 @@ const autosave = ( actionCreator ) => {
 
 export const initializeEditor = (
 	projectId,
-	{ embedCard, pages, theme, title }
+	{ embedCard, navigation, pages, theme, title }
 ) => ( {
 	type: EDITOR_INIT,
 	projectId,
 	embedCard,
+	navigation,
 	pages,
 	theme,
 	title,
@@ -151,4 +153,9 @@ export const updateEditorTemplate = ( template ) => ( {
 export const updateEditorEmbedCardViewport = ( viewport ) => ( {
 	type: EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	viewport,
+} );
+
+export const updateEditorNavigationSettings = ( navigation ) => ( {
+	type: EDITOR_NAVIGATION_SETTINGS_UPDATE,
+	navigation,
 } );

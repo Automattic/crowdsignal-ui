@@ -18,6 +18,7 @@ const getEditorProjectData = ( project, draft = true ) => ( {
 	pages: draft ? project.draftContent.pages : project.publicContent.pages,
 	theme: draft ? project.draftTheme : project.publicTheme,
 	embedCard: draft ? project.draftEmbedCard : project.publicEmbedCard,
+	navigation: draft ? project.draftNavigation : project.publicNavigation,
 } );
 
 export const useEditorContent = ( project ) => {
@@ -39,18 +40,22 @@ export const useEditorContent = ( project ) => {
 	const [
 		confirmationPage,
 		currentPage,
+		totalPages,
 		currentPageContent,
 		editorProjectId,
 		isEditorContentSaved,
 		editorTheme,
+		navigationSettings,
 		currentUser,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
+		select( STORE_NAME ).getEditorPages().length,
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).isEditorContentSaved(),
 		select( STORE_NAME ).getEditorTheme(),
+		select( STORE_NAME ).getEditorNavigationSettings(),
 		select( STORE_NAME ).getCurrentUser(),
 	] );
 
@@ -135,6 +140,9 @@ export const useEditorContent = ( project ) => {
 		editorId,
 		editorTheme,
 		confirmationPage,
+		currentPage,
+		totalPages,
+		navigationSettings,
 		loadBlocks,
 		saveBlocks,
 		restoreDraft,

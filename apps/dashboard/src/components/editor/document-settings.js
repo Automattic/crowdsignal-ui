@@ -8,6 +8,7 @@ import {
 	PanelBody,
 	PanelRow,
 	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
+	ToggleControl,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
@@ -26,22 +27,33 @@ import { STORE_NAME } from '../../data';
 import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
 
+/**
+ * Styles
+ */
+import { ToggleControlHint } from './styles/editor';
+
 const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	const { openGeneralSidebar } = useDispatch( 'isolated/editor' );
-	const { saveAndUpdateProject, updateEditorEmbedCardViewport } = useDispatch(
-		STORE_NAME
-	);
+	const {
+		saveAndUpdateProject,
+		updateEditorEmbedCardViewport,
+		updateEditorNavigationSettings,
+	} = useDispatch( STORE_NAME );
 
 	const [
 		canPublish,
 		editorTheme,
 		selectedBlockClientId,
 		embedCardSettings,
+		navigationSettings,
+		currentPageIndex,
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
+		select( STORE_NAME ).getEditorNavigationSettings(),
+		select( STORE_NAME ).getEditorCurrentPageIndex(),
 	] );
 
 	useEffect( () => {
@@ -65,6 +77,13 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		updateEditorEmbedCardViewport( {
 			...( embedCardSettings.viewport || {} ),
 			[ key ]: parseInt( value, 10 ),
+		} );
+	};
+
+	const updateNavigationSettings = ( property ) => ( value ) => {
+		updateEditorNavigationSettings( {
+			...navigationSettings,
+			[ property ]: value,
 		} );
 	};
 
@@ -206,6 +225,41 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 								units={ 'px' }
 							/>
 						</PanelRow>
+					</PanelBody>
+					<PanelBody title={ __( 'Navigation', 'dashboard' ) }>
+						<ToggleControl
+							label={ __( 'Show pagination', 'dashboard' ) }
+							checked={ navigationSettings.showPagination }
+							onChange={ updateNavigationSettings(
+								'showPagination'
+							) }
+						/>
+						<ToggleControl
+							label={ __(
+								'Show progress indicator',
+								'dashboard'
+							) }
+							checked={ navigationSettings.showProgress }
+							onChange={ updateNavigationSettings(
+								'showProgress'
+							) }
+						/>
+						<ToggleControl
+							label={ __( 'Show back button', 'dashboard' ) }
+							checked={ navigationSettings.showBackButton }
+							onChange={ updateNavigationSettings(
+								'showBackButton'
+							) }
+						/>
+						{ currentPageIndex === 0 &&
+							navigationSettings.showBackButton && (
+								<ToggleControlHint>
+									{ __(
+										"Button doesn't show on page one.",
+										'dashboard'
+									) }
+								</ToggleControlHint>
+							) }
 					</PanelBody>
 				</>
 			) }

@@ -22,19 +22,21 @@
 /**
  * @typedef {Object} Project
  *
- * @property {number}                   id              Project ID.
- * @property {string}                   created         Project creation date.
- * @property {ProjectContent}           draftContent    Project's draft content.
- * @property {ProjectEmbedCardSettings} draftEmbedCard  Project's draft embed card settings.
- * @property {string}                   draftTheme      Project's draft theme.
- * @property {string}                   name            Project name.
- * @property {string}                   permalink       Project URL.
- * @property {boolean}                  public          True when project is public.
- * @property {ProjectContent | null}    publicContent   Project's last published content.
- * @property {ProjectEmbedCardSettings} publicEmbedCard Project's public embed card settings.
- * @property {string | null}            publicTheme     Project's public theme.
- * @property {string}                   slug            Project slug.
- * @property {string}                   title           Project title.
+ * @property {number}                   id               Project ID.
+ * @property {string}                   created          Project creation date.
+ * @property {ProjectContent}           draftContent     Project's draft content.
+ * @property {ProjectEmbedCardSettings} draftEmbedCard   Project's draft embed card settings.
+ * @property {Object}                   draftNavigation  Project's draft navigation settings.
+ * @property {string}                   draftTheme       Project's draft theme.
+ * @property {string}                   name             Project name.
+ * @property {string}                   permalink        Project URL.
+ * @property {boolean}                  public           True when project is public.
+ * @property {ProjectContent | null}    publicContent    Project's last published content.
+ * @property {ProjectEmbedCardSettings} publicEmbedCard  Project's public embed card settings.
+ * @property {Object}                   publicNavigation Project's draft navigation settings.
+ * @property {string | null}            publicTheme      Project's public theme.
+ * @property {string}                   slug             Project slug.
+ * @property {string}                   title            Project title.
  */
 
 /**
@@ -43,6 +45,8 @@
  *   publicContent: Partial<ProjectContent>
  * }>} PartialProject
  */
+
+import { isEqual } from 'lodash';
 
 /**
  * Creates an eempty project instance.
@@ -60,12 +64,14 @@ export const createProject = () => {
 			timestamp,
 		},
 		draftEmbedCard: {},
+		draftNavigation: {},
 		draftTheme: 'leven',
 		name: '',
 		permalink: '',
 		public: false,
 		publicContent: null,
 		publicEmbedCard: {},
+		publicNavigation: {},
 		publicTheme: null,
 		slug: '',
 		title: '',
@@ -87,7 +93,8 @@ export const getLastUpdatedDate = ( project ) => project.draftContent.timestamp;
 export const hasUnpublishedChanges = ( project ) =>
 	! project.publicContent ||
 	project.publicContent.timestamp < project.draftContent.timestamp ||
-	project.draftTheme !== project.publicTheme;
+	project.draftTheme !== project.publicTheme ||
+	! isEqual( project.draftNavigation, project.publicNavigation );
 
 /**
  * @param  {Project} project Project.

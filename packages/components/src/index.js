@@ -8,6 +8,7 @@ export { default as FormLabel } from './form/form-label';
 export { default as FormSettingExplanation } from './form/form-setting-explanation';
 export { default as FormTextInput } from './form-text-input';
 export { default as Guide } from './guide';
+export { default as NavigationBar } from './navigation-bar';
 export { default as PageHeader } from './page-header';
 export { default as Popover } from './popover';
 export { default as PopoverMenu } from './popover-menu';

@@ -151,6 +151,19 @@ export const getEditorTemplate = ( state ) => state.editor.template;
 export const getEditorEmbedCardSettings = ( state ) => state.editor.embedCard;
 
 /**
+ * Returns the navigation settings for the project currently in the editor.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Navigation settings object.
+ */
+export const getEditorNavigationSettings = ( state ) =>
+	state.editor.navigation || {
+		showPagination: false,
+		showProgress: false,
+		showBackButton: false,
+	};
+
+/**
  * Returns a partial project containing all the changes made since the last save.
  *
  * @param  {Object}  state          App state.
@@ -158,6 +171,7 @@ export const getEditorEmbedCardSettings = ( state ) => state.editor.embedCard;
  * @param  {boolean} options.public Set to true if the project should include to-be-published changes.
  * @return {Object}                 Partial project.
  */
+// eslint-disable-next-line complexity
 export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 	const changes = getEditorChanges( state );
 	const data = {};
@@ -178,10 +192,15 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		data.draftEmbedCard = getEditorEmbedCardSettings( state );
 	}
 
+	if ( changes.navigation || options.public ) {
+		data.draftNavigation = getEditorNavigationSettings( state );
+	}
+
 	if ( options.public ) {
 		data.publicContent = data.draftContent;
 		data.publicTheme = data.draftTheme;
 		data.publicEmbedCard = data.draftEmbedCard;
+		data.publicNavigation = data.draftNavigation;
 		data.public = true;
 	}
 
