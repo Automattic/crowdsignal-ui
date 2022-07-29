@@ -8,8 +8,8 @@ import { __ } from '@wordpress/i18n';
  */
 import { createTemplate } from './create-template';
 
-export const joblistingApplicationFlowTemplate = createTemplate(
-	__( 'Joblisting – Application Flow', 'dashboard' ),
+export const jobListingApplicationFlowTemplate = createTemplate(
+	__( 'Job Listing – Application Flow', 'dashboard' ),
 	__( 'Description' ),
 	[
 		[
