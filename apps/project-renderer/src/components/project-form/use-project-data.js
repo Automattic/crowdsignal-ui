@@ -42,11 +42,14 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 				}
 
 				setTheme( res.data.theme );
-				setNavigationSettings( res.data.navigation );
 				setTotalPages( res.data.totalPages );
 				setStartDate(
 					res.data.startTime || Math.round( Date.now() / 1000 )
 				);
+
+				if ( res.data.navigation ) {
+					setNavigationSettings( res.data.navigation );
+				}
 
 				if ( ! isNil( query.page ) ) {
 					setCurrentPage( query.page );
