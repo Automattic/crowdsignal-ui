@@ -9,7 +9,12 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { FormInputWrapper, FormTextInput } from '@crowdsignal/blocks';
+import {
+	FormInputWrapper,
+	FormTextarea,
+	FormTextInput,
+	TextInput,
+} from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
@@ -66,12 +71,30 @@ const EditTextInput = ( props ) => {
 					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				<FormTextInput
-					placeholder={ __( 'Enter placeholder', 'block-editor' ) }
-					value={ attributes.placeholder }
-					onChange={ handleChangePlaceholder }
-					className="crowdsignal-forms-text-input-block__wrapper"
-				/>
+				{ attributes.inputHeight < TextInput.MULTILINE_THRESHOLD ? (
+					<FormTextInput
+						placeholder={ __(
+							'Enter placeholder',
+							'block-editor'
+						) }
+						value={ attributes.placeholder }
+						onChange={ handleChangePlaceholder }
+						className="crowdsignal-forms-text-input-block__wrapper"
+					/>
+				) : (
+					<FormTextarea
+						placeholder={ __(
+							'Enter placeholder',
+							'block-editor'
+						) }
+						value={ attributes.placeholder }
+						onChange={ handleChangePlaceholder }
+						style={ {
+							height: '100%',
+						} }
+						className="crowdsignal-forms-text-input-block__wrapper"
+					/>
+				) }
 			</ResizableBox>
 		</FormInputWrapper>
 	);

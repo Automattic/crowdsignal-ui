@@ -23,11 +23,13 @@ input, textarea {
 	font-family: inherit;
 }
 
-.crowdsignal-forms-text-input-block input,
-.crowdsignal-forms-text-question-block textarea {
-	border: 1px solid var(--p2-color-border);
-	padding: 12px 8px;
-	border-radius: 2px;
+.crowdsignal-forms-text-input-block,
+.crowdsignal-forms-text-question-block {
+	input, textarea {
+		border: 1px solid var(--p2-color-border);
+		padding: 12px 8px;
+		border-radius: 2px;
+	}
 }
 
 .crowdsignal-forms-question-wrapper {
