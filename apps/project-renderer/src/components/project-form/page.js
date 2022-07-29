@@ -41,7 +41,7 @@ const ProjectPage = ( {
 	return (
 		<Form
 			className="crowdsignal-forms-form"
-			name={ `f-${ projectCode }` }
+			name={ `f-${ projectCode }-${ currentPage }` }
 			onSubmit={ onSubmit }
 		>
 			<NavigationBar
