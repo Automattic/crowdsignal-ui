@@ -39,7 +39,10 @@ const ProjectForm = ( props ) => {
 	}, [] );
 
 	const handleNavigateBack = ( page ) => {
-		fetchProject( props.projectCode, { preview: props.preview, page } );
+		fetchProject( props.projectCode, {
+			preview: props.preview || false,
+			page,
+		} );
 	};
 
 	if ( ! pageContent ) {
