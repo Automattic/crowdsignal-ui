@@ -38,6 +38,7 @@ export const BackButton = styled.a`
 	text-decoration: none;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 
 	svg path {
 		fill: currentColor;
