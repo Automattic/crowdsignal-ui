@@ -168,7 +168,7 @@ const edited = ( state = false, action ) => {
  * @param  {Object} action Action object.
  * @return {Object}        Updated embed card settings.
  */
-const embedCard = ( state = {}, action ) => {
+const embedCard = ( state = null, action ) => {
 	if ( action.type === EDITOR_INIT ) {
 		return action.embedCard;
 	}
