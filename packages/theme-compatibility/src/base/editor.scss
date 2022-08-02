@@ -47,8 +47,11 @@ html {
 
 	[data-align='full'] {
 		max-width: none;
-		margin-left: var(--cs--style--block-gap);
-		margin-right: var(--cs--style--block-gap);
+
+		&[data-type^='crowdsignal'][data-type$='question'] {
+			margin-left: var(--cs--style--block-gap);
+			margin-right: var(--cs--style--block-gap);
+		}
 
 		> .crowdsignal-forms-question-wrapper {
 			width: 100%
@@ -151,12 +154,6 @@ html {
 
 	& :where(.wp-block)[data-align=left] > * {
 		float: left;
-	}
-
-	.is-root-container {
-		> .wp-block[data-align=full]:first-child {
-			margin-top: var(--cs--block--alignfull-margin-top);
-		}
 	}
 }
 

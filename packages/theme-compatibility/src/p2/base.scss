@@ -67,6 +67,18 @@ input, textarea {
 		margin-bottom: 32px;
 		font-size: 1.8em;
 	}
+
+	&:not(.is-editing) {
+		*.alignfull, *.alignwide {
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	*.wp-block-columns {
+		gap: var( --wp--style--block-gap, 2em );
+	}
 }
 
 .crowdsignal-forms-button.wp-block-button.is-style-outline .wp-block-button__link {

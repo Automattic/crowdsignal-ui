@@ -15,6 +15,10 @@
 	font-family: var(--wp--preset--font-family--dm-sans);
 	font-size: var(--wp--preset--font-size--normal);
 	line-height: var(--wp--custom--body--typography--line-height);
+
+	.is-root-container .wp-block[data-align="full"] {
+		--wp--custom--gap--horizontal: 0;
+	}
 }
 
 .block-editor-block-list__insertion-point-indicator,

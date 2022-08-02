@@ -14,3 +14,8 @@
 .wp-block-button.is-style-outline .wp-block-button__link {
 	padding: 14px 16px;
 }
+
+.wp-block > [data-block] {
+	margin-top: 0;
+	margin-bottom: 0;
+}
