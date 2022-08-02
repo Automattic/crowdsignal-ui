@@ -22,6 +22,9 @@ import { ShareEmbedCard } from './share-embed/share-embed-card';
 
 const ShareModalDialog = styled( ModalDialog )`
 	max-width: 1350px;
+	height: 95%;
+	max-height: 800px;
+	min-height: 550px;
 `;
 
 const SharedModalFooterNote = styled.div`
@@ -31,7 +34,8 @@ const SharedModalFooterNote = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 160px 0;
+	justify-content: center;
+	flex-grow: 1;
 `;
 
 const ShareModal = ( { project, onClose } ) => {

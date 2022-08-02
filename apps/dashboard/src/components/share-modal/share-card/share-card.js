@@ -23,6 +23,7 @@ export const ShareCardBody = styled.div`
 	align-items: flex-start;
 	gap: 32px;
 	margin-bottom: 32px;
+	flex-grow: 1;
 
 	> * {
 		flex: 1;
@@ -63,6 +64,7 @@ export const SharedCardLink = styled.span`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	flex-grow: 1;
+	white-space: nowrap;
 `;
 
 export const ShareCardButton = styled.button`
