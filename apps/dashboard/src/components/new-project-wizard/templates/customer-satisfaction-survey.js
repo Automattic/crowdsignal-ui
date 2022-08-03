@@ -10,7 +10,9 @@ import { createTemplate } from './create-template';
 
 export const CustomerSatisfactionSurveyTemplate = createTemplate(
 	__( 'Customer Satisfaction Survey', 'dashboard' ),
-	__( 'Description' ),
+	__(
+		'Collect qualitative and quantitative data about your customer’s experiences.'
+	),
 	[
 		[
 			{
@@ -30,11 +32,7 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 					{
 						name: 'core/columns',
 						isValid: true,
-						attributes: {
-							verticalAlignment: 'center',
-							isStackedOnMobile: true,
-							align: 'wide',
-						},
+						attributes: { isStackedOnMobile: true, align: 'wide' },
 						innerBlocks: [
 							{
 								name: 'core/column',
@@ -45,15 +43,18 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 										name: 'core/image',
 										isValid: true,
 										attributes: {
+											align: 'right',
 											url:
 												'https://images.unsplash.com/photo-1562790879-dfde82829db0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
 											alt: '',
 											caption: '',
+											width: 418,
+											height: 522,
 											sizeSlug: 'large',
 										},
 										innerBlocks: [],
 										originalContent:
-											'<figure class="wp-block-image size-large"><img src="https://images.unsplash.com/photo-1562790879-dfde82829db0?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=928&amp;q=80" alt=""/></figure>',
+											'<figure class="wp-block-image alignright size-large is-resized"><img src="https://images.unsplash.com/photo-1562790879-dfde82829db0?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=928&amp;q=80" alt="" width="418" height="522"/></figure>',
 										validationIssues: [],
 									},
 								],
@@ -64,7 +65,7 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 							{
 								name: 'core/column',
 								isValid: true,
-								attributes: { verticalAlignment: 'center' },
+								attributes: { verticalAlignment: 'bottom' },
 								innerBlocks: [
 									{
 										name:
@@ -152,12 +153,12 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 									},
 								],
 								originalContent:
-									'<div class="wp-block-column is-vertically-aligned-center"></div>',
+									'<div class="wp-block-column is-vertically-aligned-bottom"></div>',
 								validationIssues: [],
 							},
 						],
 						originalContent:
-							'<div class="wp-block-columns alignwide are-vertically-aligned-center">\n\n</div>',
+							'<div class="wp-block-columns alignwide">\n\n</div>',
 						validationIssues: [],
 					},
 					{
@@ -224,16 +225,12 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 					{
 						name: 'core/columns',
 						isValid: true,
-						attributes: {
-							verticalAlignment: 'center',
-							isStackedOnMobile: true,
-							align: 'wide',
-						},
+						attributes: { isStackedOnMobile: true, align: 'wide' },
 						innerBlocks: [
 							{
 								name: 'core/column',
 								isValid: true,
-								attributes: { verticalAlignment: 'center' },
+								attributes: { verticalAlignment: 'top' },
 								innerBlocks: [
 									{
 										name: 'crowdsignal-forms/text-question',
@@ -241,7 +238,7 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 										attributes: {
 											restrictions: [],
 											question:
-												'Tell us a bit more about why:',
+												'Tell us a more about why:',
 											note: '',
 											placeholder: '',
 											mandatory: false,
@@ -257,13 +254,13 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 									},
 								],
 								originalContent:
-									'<div class="wp-block-column is-vertically-aligned-center"></div>',
+									'<div class="wp-block-column is-vertically-aligned-top"></div>',
 								validationIssues: [],
 							},
 							{
 								name: 'core/column',
 								isValid: true,
-								attributes: { verticalAlignment: 'center' },
+								attributes: { verticalAlignment: 'top' },
 								innerBlocks: [
 									{
 										name: 'core/image',
@@ -273,23 +270,23 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 												'https://images.unsplash.com/photo-1612639267275-7c4ae6a12d84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80',
 											alt: '',
 											caption: '',
-											width: 445,
-											height: 622,
+											width: 382,
+											height: 534,
 											sizeSlug: 'large',
 										},
 										innerBlocks: [],
 										originalContent:
-											'<figure class="wp-block-image size-large is-resized"><img src="https://images.unsplash.com/photo-1612639267275-7c4ae6a12d84?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=830&amp;q=80" alt="" width="445" height="622"/></figure>',
+											'<figure class="wp-block-image size-large is-resized"><img src="https://images.unsplash.com/photo-1612639267275-7c4ae6a12d84?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=830&amp;q=80" alt="" width="382" height="534"/></figure>',
 										validationIssues: [],
 									},
 								],
 								originalContent:
-									'<div class="wp-block-column is-vertically-aligned-center"></div>',
+									'<div class="wp-block-column is-vertically-aligned-top"></div>',
 								validationIssues: [],
 							},
 						],
 						originalContent:
-							'<div class="wp-block-columns alignwide are-vertically-aligned-center">\n\n</div>',
+							'<div class="wp-block-columns alignwide">\n\n</div>',
 						validationIssues: [],
 					},
 					{
@@ -379,17 +376,18 @@ export const CustomerSatisfactionSurveyTemplate = createTemplate(
 										name: 'core/image',
 										isValid: true,
 										attributes: {
+											align: 'right',
 											url:
 												'https://images.unsplash.com/photo-1559703248-dcaaec9fab78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
 											alt: '',
 											caption: '',
-											width: 521,
-											height: 650,
+											width: 453,
+											height: 565,
 											sizeSlug: 'large',
 										},
 										innerBlocks: [],
 										originalContent:
-											'<figure class="wp-block-image size-large is-resized"><img src="https://images.unsplash.com/photo-1559703248-dcaaec9fab78?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=928&amp;q=80" alt="" width="521" height="650"/></figure>',
+											'<figure class="wp-block-image alignright size-large is-resized"><img src="https://images.unsplash.com/photo-1559703248-dcaaec9fab78?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=928&amp;q=80" alt="" width="453" height="565"/></figure>',
 										validationIssues: [],
 									},
 								],

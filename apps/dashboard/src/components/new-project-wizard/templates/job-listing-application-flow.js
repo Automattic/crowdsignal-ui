@@ -9,8 +9,10 @@ import { __ } from '@wordpress/i18n';
 import { createTemplate } from './create-template';
 
 export const jobListingApplicationFlowTemplate = createTemplate(
-	__( 'Job Listing – Application Flow', 'dashboard' ),
-	__( 'Description' ),
+	__( 'Job Listing – Application Form', 'dashboard' ),
+	__(
+		'Use a job listing form template to publish your offering and receive applications.'
+	),
 	[
 		[
 			{
@@ -24,9 +26,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -49,10 +49,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/paragraph',
 				isValid: true,
-				attributes: {
-					content: '<em>Remote</em>',
-					dropCap: false,
-				},
+				attributes: { content: '<em>Remote</em>', dropCap: false },
 				innerBlocks: [],
 				originalContent: '<p><em>Remote</em></p>',
 				validationIssues: [],
@@ -226,9 +223,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '50px',
-				},
+				attributes: { height: '50px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -275,9 +270,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '50px',
-				},
+				attributes: { height: '50px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -361,9 +354,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '50px',
-				},
+				attributes: { height: '50px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -372,9 +363,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/submit-button',
 				isValid: true,
-				attributes: {
-					label: 'Apply now',
-				},
+				attributes: { label: 'Apply now' },
 				innerBlocks: [],
 				originalContent: '',
 				validationIssues: [],
@@ -392,9 +381,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -404,10 +391,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/heading',
 				isValid: true,
-				attributes: {
-					content: 'Apply for the Job',
-					level: 3,
-				},
+				attributes: { content: 'Apply for the Job', level: 3 },
 				innerBlocks: [],
 				originalContent: '<h3>Apply for the Job</h3>',
 				validationIssues: [],
@@ -415,9 +399,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '10px',
-				},
+				attributes: { height: '10px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:10px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -502,9 +484,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '50px',
-				},
+				attributes: { height: '50px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -527,9 +507,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '24px',
-				},
+				attributes: { height: '24px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -552,9 +530,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '50px',
-				},
+				attributes: { height: '50px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -563,9 +539,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/submit-button',
 				isValid: true,
-				attributes: {
-					label: 'Next',
-				},
+				attributes: { label: 'Next' },
 				innerBlocks: [],
 				originalContent: '',
 				validationIssues: [],
@@ -583,9 +557,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -641,9 +613,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/submit-button',
 				isValid: true,
-				attributes: {
-					label: 'Next',
-				},
+				attributes: { label: 'Next' },
 				innerBlocks: [],
 				originalContent: '',
 				validationIssues: [],
@@ -661,9 +631,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -719,10 +687,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/paragraph',
 				isValid: true,
-				attributes: {
-					content: '',
-					dropCap: false,
-				},
+				attributes: { content: '', dropCap: false },
 				innerBlocks: [],
 				originalContent: '<p></p>',
 				validationIssues: [],
@@ -730,9 +695,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/submit-button',
 				isValid: true,
-				attributes: {
-					label: 'Next',
-				},
+				attributes: { label: 'Next' },
 				innerBlocks: [],
 				originalContent: '',
 				validationIssues: [],
@@ -750,9 +713,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -781,10 +742,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/paragraph',
 				isValid: true,
-				attributes: {
-					content: '',
-					dropCap: false,
-				},
+				attributes: { content: '', dropCap: false },
 				innerBlocks: [],
 				originalContent: '<p></p>',
 				validationIssues: [],
@@ -792,9 +750,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'crowdsignal-forms/submit-button',
 				isValid: true,
-				attributes: {
-					label: 'Submit Application',
-				},
+				attributes: { label: 'Submit Application' },
 				innerBlocks: [],
 				originalContent: '',
 				validationIssues: [],
@@ -812,9 +768,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 					caption: '',
 					width: 200,
 					height: 67,
-					style: {
-						color: [],
-					},
+					style: { color: [] },
 				},
 				innerBlocks: [],
 				originalContent:
@@ -824,9 +778,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '180px',
-				},
+				attributes: { height: '180px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:180px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -848,9 +800,7 @@ export const jobListingApplicationFlowTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '250px',
-				},
+				attributes: { height: '250px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:250px" aria-hidden="true" class="wp-block-spacer"></div>',

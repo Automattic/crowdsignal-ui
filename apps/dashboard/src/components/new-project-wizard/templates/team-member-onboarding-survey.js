@@ -10,7 +10,9 @@ import { createTemplate } from './create-template';
 
 export const teamMemberOnboardingSurveyTemplate = createTemplate(
 	__( 'Team Member Onboarding Survey', 'dashboard' ),
-	__( 'Description' ),
+	__(
+		'Understand the experience of your new hires quickly and improve your onboarding programs.'
+	),
 	[
 		[
 			{
@@ -27,7 +29,7 @@ export const teamMemberOnboardingSurveyTemplate = createTemplate(
 								name: 'core/image',
 								isValid: true,
 								attributes: {
-									align: 'full',
+									align: 'wide',
 									url:
 										'https://i0.wp.com/files.polldaddy.com/200166b459f7fad09e8dcaafaf8dd54c-62e2e3c3e5912.png',
 									alt: 'image 124',
@@ -40,7 +42,7 @@ export const teamMemberOnboardingSurveyTemplate = createTemplate(
 								},
 								innerBlocks: [],
 								originalContent:
-									'<figure class="wp-block-image alignfull size-full is-style-default"><a href="https://i0.wp.com/files.polldaddy.com/200166b459f7fad09e8dcaafaf8dd54c-62e2e3c3e5912.png"><img src="https://i0.wp.com/files.polldaddy.com/200166b459f7fad09e8dcaafaf8dd54c-62e2e3c3e5912.png" alt="image 124"/></a></figure>',
+									'<figure class="wp-block-image alignwide size-full is-style-default"><a href="https://i0.wp.com/files.polldaddy.com/200166b459f7fad09e8dcaafaf8dd54c-62e2e3c3e5912.png"><img src="https://i0.wp.com/files.polldaddy.com/200166b459f7fad09e8dcaafaf8dd54c-62e2e3c3e5912.png" alt="image 124"/></a></figure>',
 								validationIssues: [],
 							},
 						],

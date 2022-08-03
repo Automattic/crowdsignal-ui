@@ -9,24 +9,19 @@ import { __ } from '@wordpress/i18n';
 import { createTemplate } from './create-template';
 
 export const eventTicketRegistrationTemplate = createTemplate(
-	__( 'Event Ticket Registration', 'dashboard' ),
-	__( 'Description' ),
+	__( 'Event Registration Form', 'dashboard' ),
+	__( 'Share an RSVP form with your guests to sign up for your event.' ),
 	[
 		[
 			{
 				name: 'core/columns',
 				isValid: true,
-				attributes: {
-					isStackedOnMobile: true,
-					align: 'full',
-				},
+				attributes: { isStackedOnMobile: true, align: 'wide' },
 				innerBlocks: [
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '66%',
-						},
+						attributes: { width: '66%' },
 						innerBlocks: [
 							{
 								name: 'core/cover',
@@ -83,9 +78,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '4px',
-								},
+								attributes: { height: '4px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:4px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -94,25 +87,21 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/heading',
 								isValid: true,
-								attributes: {
-									content: '<strong>WordCamp</strong>',
-									level: 2,
-								},
+								attributes: { content: 'WordCamp', level: 2 },
 								innerBlocks: [],
-								originalContent:
-									'<h2><strong>WordCamp</strong></h2>',
+								originalContent: '<h2>WordCamp</h2>',
 								validationIssues: [],
 							},
 							{
 								name: 'core/paragraph',
 								isValid: true,
 								attributes: {
-									content: 'Organized by: AUTOMATTIC INC',
+									content: 'Hosted by: Automattic Inc',
 									dropCap: false,
 								},
 								innerBlocks: [],
 								originalContent:
-									'<p>Organized by: AUTOMATTIC INC</p>',
+									'<p>Hosted by: Automattic Inc</p>',
 								validationIssues: [],
 							},
 							{
@@ -129,51 +118,34 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '8px',
-								},
+								attributes: { height: '77px' },
 								innerBlocks: [],
 								originalContent:
-									'<div style="height:8px" aria-hidden="true" class="wp-block-spacer"></div>',
+									'<div style="height:77px" aria-hidden="true" class="wp-block-spacer"></div>',
 								validationIssues: [],
 							},
 							{
 								name: 'crowdsignal-forms/submit-button',
 								isValid: true,
-								attributes: {
-									label: 'Reserve your Ticket',
-								},
+								attributes: { label: 'Reserve your Ticket' },
 								innerBlocks: [],
 								originalContent: '',
 								validationIssues: [],
 							},
-							{
-								name: 'core/spacer',
-								isValid: true,
-								attributes: {
-									height: '24px',
-								},
-								innerBlocks: [],
-								originalContent:
-									'<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>',
-								validationIssues: [],
-							},
 						],
 						originalContent:
-							'<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:34%">\n\n\n\n\n\n\n\n\n\n\n\n</div>',
+							'<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:34%">\n\n\n\n\n\n\n\n\n\n</div>',
 						validationIssues: [],
 					},
 				],
 				originalContent:
-					'<div class="wp-block-columns alignfull">\n\n</div>',
+					'<div class="wp-block-columns alignwide">\n\n</div>',
 				validationIssues: [],
 			},
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '20px',
-				},
+				attributes: { height: '20px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -182,24 +154,17 @@ export const eventTicketRegistrationTemplate = createTemplate(
 			{
 				name: 'core/columns',
 				isValid: true,
-				attributes: {
-					isStackedOnMobile: true,
-					align: 'full',
-				},
+				attributes: { isStackedOnMobile: true, align: 'wide' },
 				innerBlocks: [
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '',
-						},
+						attributes: { width: '' },
 						innerBlocks: [
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '100px',
-								},
+								attributes: { height: '100px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -212,20 +177,17 @@ export const eventTicketRegistrationTemplate = createTemplate(
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '48%',
-						},
+						attributes: { width: '46%' },
 						innerBlocks: [
 							{
 								name: 'core/heading',
 								isValid: true,
 								attributes: {
-									content: '<strong>About WordCamp</strong>',
+									content: 'About WordCamp',
 									level: 5,
 								},
 								innerBlocks: [],
-								originalContent:
-									'<h5><strong>About WordCamp</strong></h5>',
+								originalContent: '<h5>About WordCamp</h5>',
 								validationIssues: [],
 							},
 							{
@@ -245,13 +207,12 @@ export const eventTicketRegistrationTemplate = createTemplate(
 								name: 'core/heading',
 								isValid: true,
 								attributes: {
-									content:
-										'<strong>But\u2026 what is WordPress</strong>',
+									content: 'But\u2026 what is WordPress',
 									level: 6,
 								},
 								innerBlocks: [],
 								originalContent:
-									'<h6><strong>But\u2026 what is WordPress</strong></h6>',
+									'<h6>But\u2026 what is WordPress</h6>',
 								validationIssues: [],
 							},
 							{
@@ -284,13 +245,12 @@ export const eventTicketRegistrationTemplate = createTemplate(
 								name: 'core/heading',
 								isValid: true,
 								attributes: {
-									content:
-										'<strong>What to do at a WordCamp</strong>',
+									content: 'What to do at a WordCamp',
 									level: 6,
 								},
 								innerBlocks: [],
 								originalContent:
-									'<h6><strong>What to do at a WordCamp</strong></h6>',
+									'<h6>What to do at a WordCamp</h6>',
 								validationIssues: [],
 							},
 							{
@@ -349,13 +309,12 @@ export const eventTicketRegistrationTemplate = createTemplate(
 								name: 'core/heading',
 								isValid: true,
 								attributes: {
-									content:
-										'<strong>An event for all levels</strong>',
+									content: 'An event for all levels',
 									level: 6,
 								},
 								innerBlocks: [],
 								originalContent:
-									'<h6><strong>An event for all levels</strong></h6>',
+									'<h6>An event for all levels</h6>',
 								validationIssues: [],
 							},
 							{
@@ -400,9 +359,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '16px',
-								},
+								attributes: { height: '16px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:16px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -411,9 +368,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'crowdsignal-forms/submit-button',
 								isValid: true,
-								attributes: {
-									label: 'Reserve your Ticket',
-								},
+								attributes: { label: 'Reserve your Ticket' },
 								innerBlocks: [],
 								originalContent: '',
 								validationIssues: [],
@@ -421,9 +376,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '40px',
-								},
+								attributes: { height: '40px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -450,23 +403,27 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							},
 						],
 						originalContent:
-							'<div class="wp-block-column" style="flex-basis:48%">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</div>',
+							'<div class="wp-block-column" style="flex-basis:46%">\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</div>',
 						validationIssues: [],
 					},
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '33.5%',
-						},
+						attributes: { width: '2%' },
+						innerBlocks: [],
+						originalContent:
+							'<div class="wp-block-column" style="flex-basis:2%"></div>',
+						validationIssues: [],
+					},
+					{
+						name: 'core/column',
+						isValid: true,
+						attributes: { width: '33.5%' },
 						innerBlocks: [
 							{
 								name: 'core/heading',
 								isValid: true,
-								attributes: {
-									content: 'Date:',
-									level: 5,
-								},
+								attributes: { content: 'Date:', level: 5 },
 								innerBlocks: [],
 								originalContent: '<h5>Date:</h5>',
 								validationIssues: [],
@@ -486,10 +443,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/heading',
 								isValid: true,
-								attributes: {
-									content: 'Location:',
-									level: 5,
-								},
+								attributes: { content: 'Location:', level: 5 },
 								innerBlocks: [],
 								originalContent: '<h5>Location:</h5>',
 								validationIssues: [],
@@ -527,15 +481,13 @@ export const eventTicketRegistrationTemplate = createTemplate(
 					},
 				],
 				originalContent:
-					'<div class="wp-block-columns alignfull">\n\n\n\n</div>',
+					'<div class="wp-block-columns alignwide">\n\n\n\n\n\n</div>',
 				validationIssues: [],
 			},
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '100px',
-				},
+				attributes: { height: '100px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -546,9 +498,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 			{
 				name: 'core/spacer',
 				isValid: true,
-				attributes: {
-					height: '40px',
-				},
+				attributes: { height: '40px' },
 				innerBlocks: [],
 				originalContent:
 					'<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -557,24 +507,17 @@ export const eventTicketRegistrationTemplate = createTemplate(
 			{
 				name: 'core/columns',
 				isValid: true,
-				attributes: {
-					isStackedOnMobile: true,
-					align: 'full',
-				},
+				attributes: { isStackedOnMobile: true, align: 'full' },
 				innerBlocks: [
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '',
-						},
+						attributes: { width: '' },
 						innerBlocks: [
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '100px',
-								},
+								attributes: { height: '100px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -587,9 +530,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '48%',
-						},
+						attributes: { width: '48%' },
 						innerBlocks: [
 							{
 								name: 'core/heading',
@@ -605,9 +546,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/columns',
 								isValid: true,
-								attributes: {
-									isStackedOnMobile: true,
-								},
+								attributes: { isStackedOnMobile: true },
 								innerBlocks: [
 									{
 										name: 'core/column',
@@ -652,9 +591,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 											{
 												name: 'core/spacer',
 												isValid: true,
-												attributes: {
-													height: '8px',
-												},
+												attributes: { height: '8px' },
 												innerBlocks: [],
 												originalContent:
 													'<div style="height:8px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -731,9 +668,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '16px',
-								},
+								attributes: { height: '16px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:16px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -742,9 +677,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'crowdsignal-forms/submit-button',
 								isValid: true,
-								attributes: {
-									label: 'Submit Reservation',
-								},
+								attributes: { label: 'Submit Reservation' },
 								innerBlocks: [],
 								originalContent: '',
 								validationIssues: [],
@@ -752,9 +685,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '24px',
-								},
+								attributes: { height: '24px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -768,16 +699,12 @@ export const eventTicketRegistrationTemplate = createTemplate(
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: {
-							width: '33.5%',
-						},
+						attributes: { width: '33.5%' },
 						innerBlocks: [
 							{
 								name: 'core/spacer',
 								isValid: true,
-								attributes: {
-									height: '64px',
-								},
+								attributes: { height: '64px' },
 								innerBlocks: [],
 								originalContent:
 									'<div style="height:64px" aria-hidden="true" class="wp-block-spacer"></div>',
@@ -786,10 +713,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/heading',
 								isValid: true,
-								attributes: {
-									content: 'Date:',
-									level: 5,
-								},
+								attributes: { content: 'Date:', level: 5 },
 								innerBlocks: [],
 								originalContent: '<h5>Date:</h5>',
 								validationIssues: [],
@@ -809,10 +733,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 							{
 								name: 'core/heading',
 								isValid: true,
-								attributes: {
-									content: 'Location:',
-									level: 5,
-								},
+								attributes: { content: 'Location:', level: 5 },
 								innerBlocks: [],
 								originalContent: '<h5>Location:</h5>',
 								validationIssues: [],
