@@ -55,7 +55,7 @@ export const ShareCardContentText = styled.p`
 export const ShareCardFooter = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 32px;
+	gap: 16px;
 `;
 
 export const SharedCardLink = styled.span`
@@ -65,30 +65,4 @@ export const SharedCardLink = styled.span`
 	text-overflow: ellipsis;
 	flex-grow: 1;
 	white-space: nowrap;
-`;
-
-export const ShareCardButton = styled.button`
-	min-height: 36px;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: normal;
-	color: var( --color-secondary-40 );
-	border: 1px solid currentColor;
-	border-radius: 2px;
-	background-color: transparent;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	flex-shrink: 0;
-
-	&.is-link-copied {
-		border: none;
-		outline: none;
-		cursor: default;
-		pointer-events: none;
-	}
-
-	svg {
-		width: 16px;
-	}
 `;
