@@ -21,10 +21,18 @@ import { ShareEmbed } from './share-embed/share-embed';
 import { ShareEmbedCard } from './share-embed/share-embed-card';
 
 const ShareModalDialog = styled( ModalDialog )`
+	width: 100%;
 	max-width: 1350px;
 	height: 95%;
 	max-height: 800px;
 	min-height: 550px;
+	overflow: auto;
+	padding: 40px;
+`;
+
+const ShareModalGrid = styled( ModalTemplateGrid )`
+	overflow: unset;
+	margin-bottom: 40px;
 `;
 
 const SharedModalFooterNote = styled.div`
@@ -46,7 +54,10 @@ const ShareModal = ( { project, onClose } ) => {
 	};
 	return (
 		<ModalWrapper onClick={ onWrapperClickHandler }>
-			<ShareModalDialog id="crowdsignal-share-modal">
+			<ShareModalDialog
+				id="crowdsignal-share-modal"
+				className="crowdsignal-share-modal"
+			>
 				<ModalNavigation>
 					<ModalCloseButton onClick={ onClose } />
 				</ModalNavigation>
@@ -56,11 +67,11 @@ const ShareModal = ( { project, onClose } ) => {
 				<ModalHeaderNote>
 					{ __( "It's time to collect some signals.", 'dashboard' ) }
 				</ModalHeaderNote>
-				<ModalTemplateGrid>
+				<ShareModalGrid className="crowdsignal-share-modal__grid">
 					<ShareLink link={ project.permalink } />
 					<ShareEmbedCard link={ project.permalink } />
 					<ShareEmbed link={ project.permalink } />
-				</ModalTemplateGrid>
+				</ShareModalGrid>
 				<SharedModalFooterNote>
 					<span>
 						{ __(
