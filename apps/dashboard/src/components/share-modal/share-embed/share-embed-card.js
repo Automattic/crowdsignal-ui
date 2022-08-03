@@ -2,15 +2,12 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import classnames from 'classnames';
 
 /**
  * Internal dependencies
  */
 import {
 	ShareCard,
-	ShareCardButton,
 	ShareCardBody,
 	ShareCardContentText,
 	ShareCardFooter,
@@ -18,58 +15,43 @@ import {
 	SharedCardLink,
 	ShareCardContent,
 } from '../share-card/share-card';
+import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedCardPreview } from './share-embed-card-preview';
-import { CheckIcon } from '@crowdsignal/icons';
+import { createInterpolateElement } from '@wordpress/element';
 
 const getEmbedCodeSnippet = ( projectUrl ) =>
 	'<script type="text/javascript" src="https://app.crowdsignal.com/embed.js" async></script>\n' +
 	`<crowdsignal-card src="${ projectUrl }"></crowdsignal-card>`;
 
+const docsURL =
+	'https://crowdsignal.com/support/embed-your-survey-or-form-via-an-embed-iframe-or-an-embed-card/?embed-iframe#h2-embed-card';
+
 export const ShareEmbedCard = ( { link } ) => {
-	const [ linkCopied, setLinkCopied ] = useState( false );
-
-	const classes = classnames( {
-		'is-link-copied': linkCopied,
-	} );
-
-	const handleCopyShareLink = () => {
-		if ( link ) {
-			window.navigator.clipboard
-				.writeText( getEmbedCodeSnippet( link ) )
-				.then(
-					() => {
-						setLinkCopied( true );
-						setTimeout( () => setLinkCopied( false ), 3000 );
-					},
-					( err ) => {
-						// eslint-disable-next-line
-						window.alert(
-							'The embed code snippet could not be copied to clipboard'
-						);
-						// eslint-disable-next-line
-						console.error( err );
-					}
-				);
-		} else {
-			// eslint-disable-next-line
-			window.alert(
-				'The embed code snippet is only available for published projects'
-			);
-		}
-		return false;
-	};
-
 	return (
 		<ShareCard>
 			<ShareCardHeader>
 				{ __( 'Embed Card', 'dashboard' ) }
+				<a href={ docsURL } target="_blank" rel="noreferrer">
+					{ __( 'Lean More', 'dashboard' ) }
+				</a>
 			</ShareCardHeader>
 			<ShareCardBody>
 				<ShareCardContent>
 					<ShareCardContentText>
-						{ __(
-							'Embed your form or survey onto your website using a card with a fixed format.',
-							'dashboard'
+						{ createInterpolateElement(
+							__(
+								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via a card with a fixed format.',
+								'dashboard'
+							),
+							{
+								a: (
+									<a
+										href={ docsURL }
+										target="_blank"
+										rel="noopener noreferrer"
+									/>
+								),
+							}
 						) }
 					</ShareCardContentText>
 				</ShareCardContent>
@@ -78,19 +60,18 @@ export const ShareEmbedCard = ( { link } ) => {
 			<ShareCardFooter>
 				<SharedCardLink />
 				<ShareCardButton
-					onClick={ handleCopyShareLink }
-					className={ classes }
-				>
-					{ ! linkCopied && __( 'Copy code snippet', 'dashboard' ) }
-					{ linkCopied && (
-						<>
-							<CheckIcon />
-							<span>
-								{ __( 'Code snippet copied!', 'dashboard' ) }
-							</span>
-						</>
+					contentCopiedText={ __( 'Link copied!', 'dashboard' ) }
+					defaultText={ __( 'Copy WordPress Link', 'dashboard' ) }
+					shareContent={ `${ link }?type=card` }
+				/>
+				<ShareCardButton
+					contentCopiedText={ __(
+						'Code snippet copied!',
+						'dashboard'
 					) }
-				</ShareCardButton>
+					defaultText={ __( 'Copy JS Code Snippet', 'dashboard' ) }
+					shareContent={ getEmbedCodeSnippet( link ) }
+				/>
 			</ShareCardFooter>
 		</ShareCard>
 	);
