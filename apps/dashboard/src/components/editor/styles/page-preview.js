@@ -103,7 +103,7 @@ export const PagePreviewMoreMenu = styled.div`
 	width: 36px;
 
 	&& {
-		display: none;
+		//display: none;
 	}
 
 	${ PagePreviewWrapper }:hover && {
@@ -123,6 +123,14 @@ export const PagePreviewMoreMenu = styled.div`
 
 		.components-button {
 			width: 100%;
+		}
+
+		.components-menu-item__button {
+			width: 120px;
+		}
+
+		.components-menu-item__item {
+			min-width: unset;
 		}
 	}
 `;
