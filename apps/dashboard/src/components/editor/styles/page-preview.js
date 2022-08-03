@@ -124,5 +124,9 @@ export const PagePreviewMoreMenu = styled.div`
 		.components-button {
 			width: 100%;
 		}
+
+		.components-menu-item__button {
+			width: 120px;
+		}
 	}
 `;
