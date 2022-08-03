@@ -103,7 +103,7 @@ export const PagePreviewMoreMenu = styled.div`
 	width: 36px;
 
 	&& {
-		//display: none;
+		display: none;
 	}
 
 	${ PagePreviewWrapper }:hover && {
