@@ -17,23 +17,41 @@ import {
 } from '../share-card/share-card';
 import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedPreview } from './share-embed-preview';
+import { createInterpolateElement } from '@wordpress/element';
 
 const getEmbedCodeSnippet = ( projectUrl ) =>
 	'<script type="text/javascript" src="https://app.crowdsignal.com/embed.js" async></script>\n' +
 	`<crowdsignal-embed src="${ projectUrl }"></crowdsignal-embed>`;
+
+const docsURL =
+	'https://crowdsignal.com/support/embed-your-survey-or-form-via-an-embed-iframe-or-an-embed-card/?embed-iframe#h2-embed-iframe';
 
 export const ShareEmbed = ( { link } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
 				{ __( 'Embed iFrame', 'dashboard' ) }
+				<a href={ docsURL } target="_blank" rel="noreferrer">
+					{ __( 'Lean More', 'dashboard' ) }
+				</a>
 			</ShareCardHeader>
 			<ShareCardBody>
 				<ShareCardContent>
 					<ShareCardContentText>
-						{ __(
-							'Embed your form via a responsive iFrame. Your form will expand and responsively adjust to the available space on your page.',
-							'dashboard'
+						{ createInterpolateElement(
+							__(
+								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via responsive iFrame.',
+								'dashboard'
+							),
+							{
+								a: (
+									<a
+										href={ docsURL }
+										target="_blank"
+										rel="noopener noreferrer"
+									/>
+								),
+							}
 						) }
 					</ShareCardContentText>
 				</ShareCardContent>
@@ -42,15 +60,12 @@ export const ShareEmbed = ( { link } ) => {
 			<ShareCardFooter>
 				<SharedCardLink />
 				<ShareCardButton
-					defaultText={ __( 'Copy embed link', 'dashboard' ) }
-					contentCopiedText={ __(
-						'Embed link copied!',
-						'dashboard'
-					) }
+					defaultText={ __( 'Copy WordPress Link', 'dashboard' ) }
+					contentCopiedText={ __( 'Link copied!', 'dashboard' ) }
 					shareContent={ link }
 				/>
 				<ShareCardButton
-					defaultText={ __( 'Copy Javascript Code', 'dashboard' ) }
+					defaultText={ __( 'Copy JS Code Snippet', 'dashboard' ) }
 					contentCopiedText={ __(
 						'Code snippet copied!',
 						'dashboard'

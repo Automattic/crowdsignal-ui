@@ -21,27 +21,16 @@ import { ShareLinkPreview } from './share-link-preview';
 export const ShareLink = ( { link } ) => {
 	return (
 		<ShareCard>
-			<ShareCardHeader>{ __( 'Link', 'dashboard' ) }</ShareCardHeader>
+			<ShareCardHeader>
+				{ __( 'Link - Full Page', 'dashboard' ) }
+			</ShareCardHeader>
 			<ShareCardBody>
 				<ShareCardContent>
 					<ShareCardContentText>
 						{ __(
-							'Share your form or survey via a link.',
+							'Share your form via a link, and present it on its own page.',
 							'dashboard'
 						) }
-					</ShareCardContentText>
-					<ShareCardContentText>
-						<span>
-							{ __( '(Customize the link with ', 'dashboard' ) }
-						</span>
-						<a
-							href="https://crowdsignal.com/support/domain-mapping/"
-							target="_blank"
-							rel="noreferrer"
-						>
-							{ __( 'your own domain', 'dashboard' ) }
-						</a>
-						<span>.)</span>
 					</ShareCardContentText>
 				</ShareCardContent>
 				<ShareLinkPreview />

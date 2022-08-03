@@ -9,13 +9,28 @@ export const ShareCard = styled.div`
 	flex-direction: column;
 	padding: 16px;
 	border: 1px solid var( --color-border );
+
+	a {
+		color: var( --wp-admin-theme-color );
+		text-decoration: underline;
+		text-underline-offset: initial;
+	}
 `;
 
 export const ShareCardHeader = styled.h1`
+	position: relative;
 	font-size: 16px;
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 12px;
+
+	a {
+		position: absolute;
+		right: 0;
+		font-size: 11px;
+		text-decoration: none;
+		font-weight: normal;
+	}
 `;
 
 export const ShareCardBody = styled.div`
@@ -43,12 +58,6 @@ export const ShareCardContentText = styled.p`
 
 	&&& {
 		font-size: 12px;
-	}
-
-	a {
-		color: var( --color-primary-50 );
-		text-decoration: underline;
-		text-underline-offset: initial;
 	}
 `;
 

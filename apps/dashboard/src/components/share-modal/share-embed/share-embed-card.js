@@ -17,23 +17,41 @@ import {
 } from '../share-card/share-card';
 import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedCardPreview } from './share-embed-card-preview';
+import { createInterpolateElement } from '@wordpress/element';
 
 const getEmbedCodeSnippet = ( projectUrl ) =>
 	'<script type="text/javascript" src="https://app.crowdsignal.com/embed.js" async></script>\n' +
 	`<crowdsignal-card src="${ projectUrl }"></crowdsignal-card>`;
+
+const docsURL =
+	'https://crowdsignal.com/support/embed-your-survey-or-form-via-an-embed-iframe-or-an-embed-card/?embed-iframe#h2-embed-card';
 
 export const ShareEmbedCard = ( { link } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
 				{ __( 'Embed Card', 'dashboard' ) }
+				<a href={ docsURL } target="_blank" rel="noreferrer">
+					{ __( 'Lean More', 'dashboard' ) }
+				</a>
 			</ShareCardHeader>
 			<ShareCardBody>
 				<ShareCardContent>
 					<ShareCardContentText>
-						{ __(
-							'Embed your form or survey onto your website using a card with a fixed format.',
-							'dashboard'
+						{ createInterpolateElement(
+							__(
+								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via a card with a fixed format.',
+								'dashboard'
+							),
+							{
+								a: (
+									<a
+										href={ docsURL }
+										target="_blank"
+										rel="noopener noreferrer"
+									/>
+								),
+							}
 						) }
 					</ShareCardContentText>
 				</ShareCardContent>
@@ -42,11 +60,8 @@ export const ShareEmbedCard = ( { link } ) => {
 			<ShareCardFooter>
 				<SharedCardLink />
 				<ShareCardButton
-					contentCopiedText={ __(
-						'Embed link copied!',
-						'dashboard'
-					) }
-					defaultText={ __( 'Copy Embed Link', 'dashboard' ) }
+					contentCopiedText={ __( 'Link copied!', 'dashboard' ) }
+					defaultText={ __( 'Copy WordPress Link', 'dashboard' ) }
 					shareContent={ `${ link }?type=card` }
 				/>
 				<ShareCardButton
@@ -54,7 +69,7 @@ export const ShareEmbedCard = ( { link } ) => {
 						'Code snippet copied!',
 						'dashboard'
 					) }
-					defaultText={ __( 'Copy Javascript Code', 'dashboard' ) }
+					defaultText={ __( 'Copy JS Code Snippet', 'dashboard' ) }
 					shareContent={ getEmbedCodeSnippet( link ) }
 				/>
 			</ShareCardFooter>
