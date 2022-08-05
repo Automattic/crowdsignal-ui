@@ -21,7 +21,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 					{
 						name: 'core/column',
 						isValid: true,
-						attributes: { width: '66%' },
+						attributes: { width: '60%' },
 						innerBlocks: [
 							{
 								name: 'core/cover',
@@ -72,7 +72,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 						isValid: true,
 						attributes: {
 							verticalAlignment: 'bottom',
-							width: '34%',
+							width: '40%',
 						},
 						innerBlocks: [
 							{
