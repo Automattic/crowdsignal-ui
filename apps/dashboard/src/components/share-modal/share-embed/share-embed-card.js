@@ -32,7 +32,7 @@ export const ShareEmbedCard = ( { link } ) => {
 			<ShareCardHeader>
 				{ __( 'Embed Card', 'dashboard' ) }
 				<a href={ docsURL } target="_blank" rel="noreferrer">
-					{ __( 'Lean More', 'dashboard' ) }
+					{ __( 'Learn More', 'dashboard' ) }
 				</a>
 			</ShareCardHeader>
 			<ShareCardBody>
