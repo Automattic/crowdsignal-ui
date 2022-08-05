@@ -74,12 +74,18 @@ export const ModalTemplateGrid = styled.div`
 	overflow-y: auto;
 `;
 
-export const ModalButton = styled.button`
+export const ModalButton = styled.a`
 	font-size: 14px;
 	background-color: transparent;
 	border: 1px solid var( --color-neutral-10 );
 	border-radius: 2px;
 	padding: 12px;
+	text-align: center;
+	color: var( --color-text );
+
+	&:hover {
+		color: var( --color-text );
+	}
 `;
 
 const CloseButton = styled.button`

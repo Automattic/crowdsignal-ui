@@ -1,13 +1,19 @@
 /**
  * External dependencies
  */
-import { startsWith } from 'lodash';
+import { each, startsWith } from 'lodash';
 import { v4 as uuid } from 'uuid';
 
 const addBlockMetadata = ( blocks ) => {
 	return blocks.map( ( block ) => {
 		if ( startsWith( block.name, 'crowdsignal-forms/' ) ) {
 			block.attributes.clientId = uuid();
+		}
+
+		if ( startsWith( block.name, 'crowdsignal-forms/dropdown-input' ) ) {
+			each( block.attributes.options, ( o ) => {
+				o.clientId = uuid();
+			} );
 		}
 
 		return {
