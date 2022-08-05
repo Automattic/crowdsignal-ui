@@ -35,13 +35,17 @@ export const ShareCardHeader = styled.h1`
 
 export const ShareCardBody = styled.div`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 32px;
 	margin-bottom: 32px;
 	flex-grow: 1;
 
 	> * {
 		flex: 1;
+	}
+
+	svg {
+		height: 200px;
 	}
 `;
 
