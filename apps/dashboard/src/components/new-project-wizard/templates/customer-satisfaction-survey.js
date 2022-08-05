@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { createTemplate } from './create-template';
 
-export const CustomerSatisfactionSurveyTemplate = createTemplate(
+export const customerSatisfactionSurveyTemplate = createTemplate(
 	__( 'Customer Satisfaction Survey', 'dashboard' ),
 	__(
 		'Collect qualitative and quantitative data about your customer’s experiences.'
