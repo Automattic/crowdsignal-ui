@@ -18,7 +18,7 @@ import {
 import { STORE_NAME } from '../../data';
 import ActiveTheme from './active-theme';
 import TemplatePreview from './template-preview';
-import * as projectTemplates from './templates';
+import projectTemplates from './templates';
 
 /**
  * Style dependencies

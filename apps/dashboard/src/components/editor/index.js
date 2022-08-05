@@ -9,7 +9,7 @@ import { useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import HeaderMeta from '../header-meta';
-import { blankProjectTemplate } from '../new-project-wizard/templates';
+import { blankProjectTemplate } from '../new-project-wizard/templates/blank';
 import { STORE_NAME } from '../../data';
 import BlockEditor from './editor';
 import EditorLoadingPlaceholder from './loading-placeholder';
