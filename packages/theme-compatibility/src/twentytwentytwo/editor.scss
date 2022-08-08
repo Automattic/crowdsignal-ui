@@ -6,7 +6,7 @@
 	line-height: var(--wp--custom--typography--line-height--normal);
 
 	.is-root-container .wp-block[data-align="full"] {
-		--wp--custom--spacing--outer: 0;
+		--wp--custom--spacing--outer: calc(-1 * var(--cs--style--block-gap));
 	}
 }
 

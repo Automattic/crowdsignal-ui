@@ -34,9 +34,6 @@ body {
 	--cs--content-padding-top: 16px;
 	--cs--content-padding-bottom: 16px;
 	--cs--content-padding-horizontal: 16px;
-	--cs--block--alignfull-width: calc(100% + var(--cs--content-padding-horizontal) * 2);
-	--cs--block--alignfull-margin: calc(var(--cs--content-padding-horizontal) * -1);
-	--cs--block--alignfull-margin-top: calc(var(--cs--content-padding-top) * -1);
 
 	--cs--style--answer--selected--background: var(--wp--preset--color--primary);
 	--cs--style--answer--selected--color: var(--wp--preset--color--background);
@@ -57,8 +54,6 @@ body {
 		--cs--content-padding-top: 64px;
 		--cs--content-padding-bottom: 80px;
 		--cs--content-padding-horizontal: 0;
-		--cs--block--alignfull-width: unset;
-		--cs--block--alignfull-margin: unset;
 	}
 }
 
@@ -90,6 +85,7 @@ body {
 
 .wp-block-image {
 	line-height: 0;
+	margin: 0;
 
 	.alignleft, .alignright {
 		margin-top: 0;
@@ -133,17 +129,6 @@ body {
 		}
 	}
 
-	> .alignfull {
-		width: var(--cs--block--alignfull-width);
-		max-width: var(--cs--block--alignfull-width);
-		margin-left: var(--cs--block--alignfull-margin);
-		margin-right: var(--cs--block--alignfull-margin);
-
-		&.wp-block-cover:first-child {
-			margin-top: var(--cs--block--alignfull-margin-top);
-		}
-	}
-
 	> .alignright {
 		float: right;
 	}
@@ -178,6 +163,12 @@ body {
 				margin-top: unset;
 			}
 		}
+	}
+
+	.wp-block-columns.alignfull {
+		max-width: none;
+		margin-left: var(--cs--style--block-gap);
+		margin-right: var(--cs--style--block-gap);
 	}
 }
 

@@ -46,12 +46,10 @@ html {
 	}
 
 	[data-align='full'] {
+		width: unset;
 		max-width: none;
-
-		&[data-type^='crowdsignal'][data-type$='question'] {
-			margin-left: var(--cs--style--block-gap);
-			margin-right: var(--cs--style--block-gap);
-		}
+		margin-left: var(--cs--style--block-gap);
+		margin-right: var(--cs--style--block-gap);
 
 		> .crowdsignal-forms-question-wrapper {
 			width: 100%
