@@ -29,6 +29,12 @@ h1, h2 {
 	p {
 		line-height: 1.5;
 	}
+
+	.wp-block[data-align="full"] {
+		width:100%;
+		max-width: unset;
+		left: unset;
+	}
 }
 
 

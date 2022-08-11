@@ -3,4 +3,8 @@
 .editor .iso-editor .block-editor-writing-flow {
 	font-size: var(--wp--preset--font-size--normal);
 	line-height: var(--wp--custom--body--typography--line-height);
+
+	.is-root-container .wp-block[data-align="full"] {
+		--wp--custom--gap--horizontal: calc(-1 * var(--cs--style--block-gap));
+	}
 }

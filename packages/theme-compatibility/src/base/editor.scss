@@ -46,6 +46,7 @@ html {
 	}
 
 	[data-align='full'] {
+		width: unset;
 		max-width: none;
 		margin-left: var(--cs--style--block-gap);
 		margin-right: var(--cs--style--block-gap);
@@ -151,12 +152,6 @@ html {
 
 	& :where(.wp-block)[data-align=left] > * {
 		float: left;
-	}
-
-	.is-root-container {
-		> .wp-block[data-align=full]:first-child {
-			margin-top: var(--cs--block--alignfull-margin-top);
-		}
 	}
 }
 
