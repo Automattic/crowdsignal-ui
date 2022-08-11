@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useDispatch } from '@wordpress/data';
-import { useMemo, useState } from '@wordpress/element';
+import { useEffect, useMemo, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { cloneDeep, filter, noop, tap } from 'lodash';
 import IsolatedBlockEditor, { EditorHeadingSlot } from 'isolated-block-editor'; // eslint-disable-line import/default
@@ -55,6 +55,9 @@ const Editor = ( { project } ) => {
 	const { updateEditorTitle, setEditorCurrentPage } = useDispatch(
 		STORE_NAME
 	);
+
+	const { updateSettings } = useDispatch( 'core/block-editor' );
+	const { updateEditorSettings } = useDispatch( 'core/editor' );
 
 	const {
 		confirmationPage,
@@ -116,6 +119,11 @@ const Editor = ( { project } ) => {
 			editor.allowedBlockTypes = iso.blocks.allowBlocks;
 		} );
 	}, [ confirmationPage ] );
+
+	useEffect( () => {
+		updateSettings( settings.editor );
+		updateEditorSettings( settings.editor );
+	}, [ settings ] );
 
 	return (
 		<EditorLayout className="editor">
