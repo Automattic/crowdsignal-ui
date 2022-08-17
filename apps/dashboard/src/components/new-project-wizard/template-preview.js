@@ -26,7 +26,7 @@ const TemplatePreview = ( { onSelect, template } ) => {
 				{ ! PreviewComponent && (
 					<BlockPreview
 						blocks={ template.project.draftContent.pages[ 0 ] }
-						viewportWidth={ 1200 }
+						viewportWidth={ 1380 }
 					/>
 				) }
 			</TemplatePreviewFrame>

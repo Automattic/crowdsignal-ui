@@ -16,7 +16,7 @@ export const eventTicketRegistrationTemplate = createTemplate(
 			{
 				name: 'core/columns',
 				isValid: true,
-				attributes: { isStackedOnMobile: true, align: 'wide' },
+				attributes: { isStackedOnMobile: true, align: 'full' },
 				innerBlocks: [
 					{
 						name: 'core/column',
