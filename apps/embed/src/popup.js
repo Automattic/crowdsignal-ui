@@ -22,6 +22,10 @@ class CrowdsignalPopup extends window.HTMLElement {
 			this.ownerDocument.body.className.indexOf( 'wp-block-embed' ) !==
 			-1;
 
+		if ( this.#getPopupClosedCookie() ) {
+			return;
+		}
+
 		if ( isWpEditor ) {
 			this.#showPlaceholder();
 		} else {
@@ -36,10 +40,14 @@ class CrowdsignalPopup extends window.HTMLElement {
 				return;
 			}
 
-			if ( event.data.type === 'crowdsignal-forms-project-page-loaded' ) {
+			if (
+				event.data.type === 'crowdsignal-forms-project-page-loaded' &&
+				event.data.pageHeight > 0
+			) {
 				this.#wrapper.style.height = `${
 					event.data.pageHeight + 12
 				}px`;
+				this.#wrapper.style.bottom = '20px';
 			}
 		} );
 	}
@@ -74,6 +82,11 @@ class CrowdsignalPopup extends window.HTMLElement {
 					margin-right: 16px;
 				}
 
+				.crowdsignal-web-popup-placeholder .placeholder--icon img {
+					width: 36px;
+					height: 36px;
+				}
+
 				.crowdsignal-web-popup-placeholder h3 {
 					font-size: 24px;
 					font-weight: 400;
@@ -87,13 +100,16 @@ class CrowdsignalPopup extends window.HTMLElement {
 			<div class="crowdsignal-web-popup-placeholder" style="">
 				<div class="placeholder--header">
 					<span class="placeholder--icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm.5 16c0 .3-.2.5-.5.5H5c-.3 0-.5-.2-.5-.5V9.8l4.7-5.3H19c.3 0 .5.2.5.5v14zm-6-9.5L16 12l-2.5 2.8 1.1 1L18 12l-3.5-3.5-1 1zm-3 0l-1-1L6 12l3.5 3.8 1.1-1L8 12l2.5-2.5z"></path></svg>
+						<img src="https://crowdsignal.wordpress.com/wp-content/themes/a8c/crowd-signal/assets/images/logo-dots.svg" alt="Crowdsignal">
 					</span>
-					<h3>Crowdsignal Wep Popup</h3>
+					<h3>Crowdsignal Popup</h3>
 				</div>
-				<p>On a live page the project content will be shown as a popup</p>
+				<p>
+					Your embedded popup will appear on page load. Click on Preview to test it.<br/>
+					This placeholder block will not be visible. You can place it anywhere on this page.
+				</p>
 				<p class="placeholder--text">
-					<span>Project URL: </span>
+					<span>Crowdsignal Project URL: </span>
 					<a>${ projectURL }</a>
 				</p>
 			</div>
@@ -108,12 +124,13 @@ class CrowdsignalPopup extends window.HTMLElement {
 				.crowdsignal-web-popup__wrapper {
 					width: 400px;
 					max-height: 90vh;
-					min-height: 250px;
+					height: 0;
 					position: fixed;
 					left: 20px;
-					bottom: 20px;
+					bottom: -30px;
 					z-index: 1000;
 					padding-top: 12px;
+					transition: height 1s ease, bottom 0.3s linear;
 				}
 
 				.crowdsignal-web-popup__close-button {
@@ -154,6 +171,7 @@ class CrowdsignalPopup extends window.HTMLElement {
 
 		this.#closeButton.addEventListener( 'click', () => {
 			this.#wrapper.style.display = 'none';
+			this.#setPopupClosedCookie();
 		} );
 
 		this.#wrapper.appendChild( this.#closeButton );
@@ -168,6 +186,21 @@ class CrowdsignalPopup extends window.HTMLElement {
 		this.#frame.setAttribute( 'frameBorder', '0' );
 
 		this.#wrapper.appendChild( this.#frame );
+	}
+
+	#setPopupClosedCookie() {
+		const id = this.getAttribute( 'id' );
+		const expireDays = 30;
+		const expires = new Date();
+		expires.setTime( expires.getTime() + expireDays * 24 * 60 * 60 * 1000 );
+		document.cookie = `cs-popup-closed-${ id }=true; expires=${ expires.toUTCString() }; Secure`;
+	}
+
+	#getPopupClosedCookie() {
+		const id = this.getAttribute( 'id' );
+		return document.cookie
+			.split( '; ' )
+			.find( ( row ) => row.startsWith( `cs-popup-closed-${ id }` ) );
 	}
 }
 

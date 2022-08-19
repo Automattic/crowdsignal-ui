@@ -19,14 +19,14 @@ import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedPopupPreview } from './share-embed-popup-preview';
 import { createInterpolateElement } from '@wordpress/element';
 
-const getEmbedCodeSnippet = ( projectUrl ) =>
+const getEmbedCodeSnippet = ( projectUrl, projectId ) =>
 	'<script type="text/javascript" src="https://app.crowdsignal.com/embed.js" async></script>\n' +
-	`<crowdsignal-popup src="${ projectUrl }"></crowdsignal-popup>`;
+	`<crowdsignal-popup src="${ projectUrl }" id="${ projectId }"></crowdsignal-popup>`;
 
 const docsURL =
 	'https://crowdsignal.com/support/embed-your-survey-or-form-via-an-embed-iframe-or-an-embed-card/?embed-iframe#h2-embed-popup';
 
-export const ShareEmbedPopup = ( { link } ) => {
+export const ShareEmbedPopup = ( { link, projectId } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
@@ -70,7 +70,7 @@ export const ShareEmbedPopup = ( { link } ) => {
 						'dashboard'
 					) }
 					defaultText={ __( 'Copy JS Code Snippet', 'dashboard' ) }
-					shareContent={ getEmbedCodeSnippet( link ) }
+					shareContent={ getEmbedCodeSnippet( link, projectId ) }
 				/>
 			</ShareCardFooter>
 		</ShareCard>
