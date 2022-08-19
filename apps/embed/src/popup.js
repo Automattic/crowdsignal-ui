@@ -48,6 +48,12 @@ class CrowdsignalPopup extends window.HTMLElement {
 					event.data.pageHeight + 12
 				}px`;
 				this.#wrapper.style.bottom = '20px';
+
+				// We want the animation to play only on the first load
+				// Need to add some timeout here to wait the first animation to play
+				setTimeout( () => {
+					this.#wrapper.style.transition = 'unset';
+				}, 2000 );
 			}
 		} );
 	}
