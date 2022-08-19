@@ -23,6 +23,10 @@ const ProjectForm = ( props ) => {
 
 	useEffect( () => {
 		const observer = new window.ResizeObserver( () => {
+			if ( ! pageContent ) {
+				return;
+			}
+
 			window.parent.postMessage(
 				{
 					type: 'crowdsignal-forms-project-page-loaded',
@@ -36,7 +40,7 @@ const ProjectForm = ( props ) => {
 		observer.observe( document.body );
 
 		return () => observer.unobserve( document.body );
-	}, [] );
+	}, [ pageContent ] );
 
 	const handleNavigateBack = ( page ) => {
 		fetchProject( props.projectCode, {
