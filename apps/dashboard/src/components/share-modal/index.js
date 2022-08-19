@@ -60,10 +60,7 @@ const ShareModal = ( { project, onClose } ) => {
 					<ShareLink link={ project.permalink } />
 					<ShareEmbedCard link={ project.permalink } />
 					<ShareEmbed link={ project.permalink } />
-					<ShareEmbedPopup
-						link={ project.permalink }
-						projectId={ project.id }
-					/>
+					<ShareEmbedPopup link={ project.permalink } />
 				</ShareModalGrid>
 			</ShareModalDialog>
 		</ModalWrapper>
