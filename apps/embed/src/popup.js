@@ -17,14 +17,15 @@ class CrowdsignalPopup extends window.HTMLElement {
 	 */
 	#frame;
 
+	/**
+	 * Reference to the project code
+	 */
+	#projectCode;
+
 	connectedCallback() {
 		const isWpEditor =
 			this.ownerDocument.body.className.indexOf( 'wp-block-embed' ) !==
 			-1;
-
-		if ( this.#getPopupClosedCookie() ) {
-			return;
-		}
 
 		if ( isWpEditor ) {
 			this.#showPlaceholder();
@@ -42,12 +43,13 @@ class CrowdsignalPopup extends window.HTMLElement {
 
 			if (
 				event.data.type === 'crowdsignal-forms-project-page-loaded' &&
-				event.data.pageHeight > 0
+				event.data.pageHeight > 0 &&
+				! this.#getPopupClosedCookie( event.data.projectCode )
 			) {
-				this.#wrapper.style.height = `${
-					event.data.pageHeight + 12
-				}px`;
+				const height = event.data.pageHeight + 12;
+				this.#wrapper.style.height = `${ height }px`;
 				this.#wrapper.style.bottom = '20px';
+				this.#projectCode = event.data.projectCode;
 
 				// We want the animation to play only on the first load
 				// Need to add some timeout here to wait the first animation to play
@@ -195,18 +197,20 @@ class CrowdsignalPopup extends window.HTMLElement {
 	}
 
 	#setPopupClosedCookie() {
-		const id = this.getAttribute( 'id' );
 		const expireDays = 30;
 		const expires = new Date();
 		expires.setTime( expires.getTime() + expireDays * 24 * 60 * 60 * 1000 );
-		document.cookie = `cs-popup-closed-${ id }=true; expires=${ expires.toUTCString() }; Secure`;
+		document.cookie = `cs-popup-closed-${
+			this.#projectCode
+		}=true; expires=${ expires.toUTCString() }; Secure`;
 	}
 
-	#getPopupClosedCookie() {
-		const id = this.getAttribute( 'id' );
+	#getPopupClosedCookie( projectCode ) {
 		return document.cookie
 			.split( '; ' )
-			.find( ( row ) => row.startsWith( `cs-popup-closed-${ id }` ) );
+			.find( ( row ) =>
+				row.startsWith( `cs-popup-closed-${ projectCode }` )
+			);
 	}
 }
 
