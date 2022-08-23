@@ -11,6 +11,8 @@ import {
 	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 	ToggleControl,
 } from '@wordpress/components';
+// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
 import { useEffect, useState } from '@wordpress/element';
@@ -127,8 +129,12 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 								{ visibility }
 							</Button>
 						) }
-						renderContent={ () => (
+						renderContent={ ( e ) => (
 							<>
+								<InspectorPopoverHeader
+									title={ __( 'Visibility', 'dashboard' ) }
+									onClose={ e.onToggle }
+								/>
 								<FormFieldset
 									name="project-visibility"
 									inputComponent={ FormRadio }
@@ -159,32 +165,35 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 					/>
 				</PanelRow>
 
-				<PanelRow className="project-visibility">
-					<span>{ __( 'URL', 'dashboard' ) }</span>
+				<PanelRow className="project-permalink">
+					<span className="edit-project-slug">
+						{ __( 'URL', 'dashboard' ) }
+					</span>
 					<Dropdown
 						popoverProps={ {
-							className: 'editor__project-visibility-popover',
+							className: 'editor__project-permalink-dropdown',
 						} }
 						renderToggle={ ( { isOpen, onToggle } ) => (
-							<span>
-								<Button
-									aria-expanded={ isOpen }
-									onClick={ onToggle }
-									variant="tertiary"
-									disabled={
-										! isPublic( project ) && ! canPublish
-									}
-								>
-									{ ! canPublish
-										? 'Pending'
-										: project.permalink }
-								</Button>
-							</span>
+							<Button
+								className="project-permalink-button"
+								aria-expanded={ isOpen }
+								onClick={ onToggle }
+								variant="tertiary"
+								disabled={
+									! isPublic( project ) && ! canPublish
+								}
+							>
+								{ ! canPublish ? 'Pending' : project.permalink }
+							</Button>
 						) }
-						renderContent={ () => (
+						renderContent={ ( e ) => (
 							<>
+								<InspectorPopoverHeader
+									title={ __( 'URL', 'dashboard' ) }
+									onClose={ e.onToggle }
+								/>
 								<FormFieldset
-									name="project-url"
+									name="project-permalink-popover"
 									inputComponent={ TextControl }
 									label={ __( 'Permalink', 'dashboard' ) }
 									explanation={ __(

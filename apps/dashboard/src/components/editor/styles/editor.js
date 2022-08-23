@@ -131,7 +131,7 @@ export const EditorWrapper = styled.div`
 	.iso-sidebar {
 		.project-visibility,
 		.project-created-date,
-		.project-url,
+		.project-permalink,
 		.project-updated-date {
 			span {
 				&:first-child {
@@ -163,6 +163,26 @@ export const EditorWrapper = styled.div`
 	.editor__project-visibility-popover .components-popover__content {
 		padding: 8px;
 		width: 238px;
+	}
+	. project-permalink {
+		justify-content: flex-start;
+		width: 100%;
+		.edit-project-slug span {
+			display: block;
+			flex-shrink: 0;
+			width: 45%;
+		}
+		.editor__project-permalink-dropdown {
+			padding: 8px;
+			width: auto;
+			margin-left: -100px;
+			display: inline-block;
+		}
+		.project-permalink-button {
+			height: auto;
+			word-break: break-word;
+			text-align: left;
+		}
 	}
 `;
 
