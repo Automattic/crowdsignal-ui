@@ -129,20 +129,24 @@ class CrowdsignalPopup extends window.HTMLElement {
 			<style>
 				.crowdsignal-web-popup__wrapper {
 					width: 400px;
+					max-width: 100%;
 					max-height: 90vh;
 					height: 0;
 					position: fixed;
-					left: 20px;
+					left: 0;
 					bottom: -30px;
 					z-index: 1000;
 					padding-top: 12px;
+					padding-left: 20px;
+					padding-right: 20px;
+					box-sizing: border-box;
 					transition: height 1s ease, bottom 0.3s linear;
 				}
 
 				.crowdsignal-web-popup__close-button {
 					position: absolute;
 					top: 0;
-					right: 0;
+					right: 20px;
 					z-index: 1;
 					width: 24px;
 					height: 24px;
