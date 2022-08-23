@@ -131,6 +131,7 @@ export const EditorWrapper = styled.div`
 	.iso-sidebar {
 		.project-visibility,
 		.project-created-date,
+		.project-url,
 		.project-updated-date {
 			span {
 				&:first-child {
@@ -161,7 +162,7 @@ export const EditorWrapper = styled.div`
 
 	.editor__project-visibility-popover .components-popover__content {
 		padding: 8px;
-		width: 250px;
+		width: 238px;
 	}
 `;
 

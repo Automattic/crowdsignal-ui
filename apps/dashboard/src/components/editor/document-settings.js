@@ -6,13 +6,14 @@ import {
 	Dropdown,
 	ExternalLink,
 	PanelBody,
+	TextControl,
 	PanelRow,
 	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 	ToggleControl,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
@@ -93,9 +94,21 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 
 	const activeTheme = getTheme( editorTheme );
 
+	//I'm quite sure this is not the right way
+	const [ newSlug, setnewSlug ] = useState( '' );
+	// console.log( project );
+	const updatePermalink = ( value ) => {
+		setnewSlug( value );
+	};
+
+	const updateSlug = () => {
+		project.slug = newSlug;
+		saveAndUpdateProject( project.id, project );
+	};
+
 	return (
 		<DocumentSection>
-			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
+			<PanelBody title={ __( 'Summary', 'dashboard' ) }>
 				<PanelRow className="project-visibility">
 					<span>{ __( 'Visibility', 'dashboard' ) }</span>
 					<Dropdown
@@ -145,6 +158,55 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						) }
 					/>
 				</PanelRow>
+
+				<PanelRow className="project-visibility">
+					<span>{ __( 'URL', 'dashboard' ) }</span>
+					<Dropdown
+						popoverProps={ {
+							className: 'editor__project-visibility-popover',
+						} }
+						renderToggle={ ( { isOpen, onToggle } ) => (
+							<span>
+								<Button
+									aria-expanded={ isOpen }
+									onClick={ onToggle }
+									variant="tertiary"
+									disabled={
+										! isPublic( project ) && ! canPublish
+									}
+								>
+									{ ! canPublish
+										? 'Pending'
+										: project.permalink }
+								</Button>
+							</span>
+						) }
+						renderContent={ () => (
+							<>
+								<FormFieldset
+									name="project-url"
+									inputComponent={ TextControl }
+									label={ __( 'Permalink', 'dashboard' ) }
+									explanation={ __(
+										'The last part of the URL',
+										'dashboard'
+									) }
+									value={ newSlug ? newSlug : project.slug }
+									onChange={ updatePermalink }
+									disabled={ ! canPublish }
+								/>
+								<Button onClick={ updateSlug } label="clicky!">
+									clicky!
+								</Button>
+								{ __( 'View Project', 'dashboard' ) }
+								<ExternalLink href={ project.permalink }>
+									{ project.permalink }
+								</ExternalLink>
+							</>
+						) }
+					/>
+				</PanelRow>
+
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
 					<span>
@@ -167,19 +229,6 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 			</PanelBody>
 			{ project && (
 				<>
-					<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
-						<PanelRow>
-							<span>{ __( 'View Project', 'dashboard' ) }</span>
-						</PanelRow>
-						<ExternalLink
-							href={ project.permalink }
-							title={ project.permalink }
-						>
-							<span className="components-external-link__text">
-								{ project.permalink }
-							</span>
-						</ExternalLink>
-					</PanelBody>
 					<PanelBody
 						title={ __( 'Theme', 'dashboard' ) }
 						className="theme-panel"
