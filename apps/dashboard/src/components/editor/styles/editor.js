@@ -164,25 +164,27 @@ export const EditorWrapper = styled.div`
 		padding: 8px;
 		width: 238px;
 	}
-	. project-permalink {
-		justify-content: flex-start;
-		width: 100%;
-		.edit-project-slug span {
-			display: block;
-			flex-shrink: 0;
-			width: 45%;
-		}
-		.editor__project-permalink-dropdown {
-			padding: 8px;
-			width: auto;
-			margin-left: -100px;
-			display: inline-block;
-		}
-		.project-permalink-button {
-			height: auto;
+
+	.edit-project-slug span {
+		display: block;
+		flex-shrink: 0;
+		width: 45%;
+	}
+
+	.editor__project-permalink-dropdown {
+		padding: 8px;
+		width: 238px;
+		display: block;
+		.project-permalink-current-url {
 			word-break: break-word;
-			text-align: left;
 		}
+	}
+
+	.project-permalink-button {
+		height: auto;
+		word-break: break-word;
+		text-align: left;
+		white-space: normal;
 	}
 `;
 

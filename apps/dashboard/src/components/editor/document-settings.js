@@ -15,7 +15,7 @@ import {
 import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
@@ -99,8 +99,16 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 
 	const activeTheme = getTheme( editorTheme );
 
+	const [ slugExplain, setSlugExplain ] = useState(
+		__( 'The last part of the URL', 'dashboard' )
+	);
 	const updateSlug = ( value ) => {
 		updateEditorSlug( value );
+		setSlugExplain(
+			isPublic( project )
+				? __( 'Click Update or Save to save permalink', 'dashboard' )
+				: __( 'Click Save or Publish to save permalink', 'dashboard' )
+		);
 	};
 
 	return (
@@ -191,16 +199,16 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 									name="project-permalink-popover"
 									inputComponent={ TextControl }
 									label={ __( 'Permalink', 'dashboard' ) }
-									explanation={ __(
-										'The last part of the URL',
-										'dashboard'
-									) }
+									explanation={ slugExplain }
 									value={ editorSlug }
 									onChange={ updateSlug }
 									disabled={ ! canPublish }
 								/>
 								{ __( 'View Project', 'dashboard' ) }
-								<ExternalLink href={ project.permalink }>
+								<ExternalLink
+									className="project-permalink-current-url"
+									href={ project.permalink }
+								>
 									{ project.permalink }
 								</ExternalLink>
 							</>
