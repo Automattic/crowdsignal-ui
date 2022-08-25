@@ -19,6 +19,7 @@ const getEditorProjectData = ( project, draft = true ) => ( {
 	theme: draft ? project.draftTheme : project.publicTheme,
 	embedCard: draft ? project.draftEmbedCard : project.publicEmbedCard,
 	navigation: draft ? project.draftNavigation : project.publicNavigation,
+	slug: project.slug,
 } );
 
 export const useEditorContent = ( project ) => {

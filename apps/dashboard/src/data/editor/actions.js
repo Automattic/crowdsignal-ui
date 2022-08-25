@@ -23,6 +23,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_SLUG_UPDATE,
 	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
@@ -40,13 +41,14 @@ const autosave = ( actionCreator ) => {
 
 export const initializeEditor = (
 	projectId,
-	{ embedCard, navigation, pages, theme, title }
+	{ embedCard, navigation, pages, slug, theme, title }
 ) => ( {
 	type: EDITOR_INIT,
 	projectId,
 	embedCard,
 	navigation,
 	pages,
+	slug,
 	theme,
 	title,
 } );
@@ -158,4 +160,9 @@ export const updateEditorEmbedCardViewport = ( viewport ) => ( {
 export const updateEditorNavigationSettings = ( navigation ) => ( {
 	type: EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	navigation,
+} );
+
+export const updateEditorSlug = ( slug ) => ( {
+	type: EDITOR_SLUG_UPDATE,
+	slug,
 } );

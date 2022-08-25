@@ -143,6 +143,14 @@ export const getEditorTheme = ( state ) =>
 export const getEditorTemplate = ( state ) => state.editor.template;
 
 /**
+ * Returns the slug for the project currently in the editor.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed card settings object.
+ */
+export const getEditorSlug = ( state ) => state.editor.slug;
+
+/**
  * Returns the embed card settings for the project currently in the editor.
  *
  * @param  {Object} state App state.
@@ -186,6 +194,10 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 
 	if ( changes.theme || options.public ) {
 		data.draftTheme = getEditorTheme( state );
+	}
+
+	if ( changes.slug || options.public ) {
+		data.slug = getEditorSlug( state );
 	}
 
 	if ( changes.embedCard || options.public ) {

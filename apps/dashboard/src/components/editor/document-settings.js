@@ -15,7 +15,7 @@ import {
 import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
@@ -41,11 +41,13 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		saveAndUpdateProject,
 		updateEditorEmbedCardViewport,
 		updateEditorNavigationSettings,
+		updateEditorSlug,
 	} = useDispatch( STORE_NAME );
 
 	const [
 		canPublish,
 		editorTheme,
+		editorSlug,
 		selectedBlockClientId,
 		embedCardSettings,
 		navigationSettings,
@@ -53,6 +55,7 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
+		select( STORE_NAME ).getEditorSlug(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
 		select( STORE_NAME ).getEditorNavigationSettings(),
@@ -96,16 +99,8 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 
 	const activeTheme = getTheme( editorTheme );
 
-	//I'm quite sure this is not the right way
-	const [ newSlug, setnewSlug ] = useState( '' );
-	// console.log( project );
-	const updatePermalink = ( value ) => {
-		setnewSlug( value );
-	};
-
-	const updateSlug = () => {
-		project.slug = newSlug;
-		saveAndUpdateProject( project.id, project );
+	const updateSlug = ( value ) => {
+		updateEditorSlug( value );
 	};
 
 	return (
@@ -200,13 +195,10 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 										'The last part of the URL',
 										'dashboard'
 									) }
-									value={ newSlug ? newSlug : project.slug }
-									onChange={ updatePermalink }
+									value={ editorSlug }
+									onChange={ updateSlug }
 									disabled={ ! canPublish }
 								/>
-								<Button onClick={ updateSlug } label="clicky!">
-									clicky!
-								</Button>
 								{ __( 'View Project', 'dashboard' ) }
 								<ExternalLink href={ project.permalink }>
 									{ project.permalink }
