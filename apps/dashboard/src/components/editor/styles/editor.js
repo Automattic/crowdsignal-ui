@@ -171,20 +171,25 @@ export const EditorWrapper = styled.div`
 		width: 45%;
 	}
 
-	.editor__project-permalink-dropdown {
-		padding: 8px;
-		width: 238px;
-		display: block;
-		.project-permalink-current-url {
+	.project-permalink-dropdown {
+		width: 55%;
+		.project-permalink-button {
+			height: auto;
 			word-break: break-word;
+			text-align: left;
+			white-space: normal;
 		}
 	}
 
-	.project-permalink-button {
-		height: auto;
-		word-break: break-word;
-		text-align: left;
-		white-space: normal;
+	.editor__project-permalink-edit {
+		padding: 8px;
+		max-width: 300px;
+		.components-popover__content {
+			width: unset;
+		}
+		.project-permalink-current-url {
+			word-break: break-word;
+		}
 	}
 `;
 

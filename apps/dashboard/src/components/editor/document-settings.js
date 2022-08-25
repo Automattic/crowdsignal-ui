@@ -173,8 +173,9 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						{ __( 'URL', 'dashboard' ) }
 					</span>
 					<Dropdown
+						className="project-permalink-dropdown"
 						popoverProps={ {
-							className: 'editor__project-permalink-dropdown',
+							className: 'editor__project-permalink-edit',
 						} }
 						renderToggle={ ( { isOpen, onToggle } ) => (
 							<Button
