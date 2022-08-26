@@ -13,6 +13,7 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
+import SingleCheckbox from './single-checkbox';
 
 export * from './components';
 
@@ -29,6 +30,7 @@ export {
 	RankingQuestion,
 	RatingScaleAnswer,
 	RatingScaleQuestion,
+	SingleCheckbox,
 	SubmitButton,
 	TextInput,
 	TextQuestion,
@@ -45,6 +47,7 @@ export const projectBlocks = [
 	RankingQuestion,
 	RatingScaleAnswer,
 	RatingScaleQuestion,
+	SingleCheckbox,
 	SubmitButton,
 	TextInput,
 	TextQuestion,

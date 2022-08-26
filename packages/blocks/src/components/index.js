@@ -1,4 +1,5 @@
 export { default as Button } from './button';
+export { default as CheckboxAnswer } from './checkbox-answer';
 export { default as ContentWrapper } from './content-wrapper';
 export { default as ErrorMessage } from './error-message';
 export { default as FormCheckbox } from './form-checkbox';

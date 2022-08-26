@@ -11,6 +11,11 @@ import { ErrorMessage } from '../';
 const FormInputWrapper = styled.div`
 	position: relative;
 
+	&.is-inline {
+		display: flex;
+		align-items: center;
+	}
+
 	${ ErrorMessage.className } {
 		position: absolute;
 		left: 0;
@@ -25,6 +30,9 @@ FormInputWrapper.Label = styled.div`
 	${ FormInputWrapper.className }.is-required & div::after {
 		display: inline;
 		content: ' *';
+	}
+	${ FormInputWrapper.className }.is-inline & {
+		margin-bottom: 0px;
 	}
 `;
 
