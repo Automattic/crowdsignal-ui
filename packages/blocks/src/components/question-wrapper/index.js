@@ -7,7 +7,11 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { useBorderStyles, useColorStyles } from '@crowdsignal/styles';
+import {
+	breakpoint,
+	useBorderStyles,
+	useColorStyles,
+} from '@crowdsignal/styles';
 import { ErrorMessage } from '../index';
 
 const StyledQuestionWrapper = styled.div`
@@ -18,7 +22,7 @@ const StyledQuestionWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	outline: none;
-	padding: 32px;
+	padding: 16px;
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -36,6 +40,10 @@ const StyledQuestionWrapper = styled.div`
 		left: 0;
 		bottom: 0;
 		transform: translateY( calc( 100% + 4px ) );
+	}
+
+	${ breakpoint( '>480px' ) } {
+		padding: 32px;
 	}
 `;
 

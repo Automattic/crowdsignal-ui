@@ -1,3 +1,6 @@
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/mixins";
+
 body {
 	--cs--style--button--background: var(--p2-color-white);
 	--cs--style--button--foreground: var(--p2-color-link);
@@ -73,13 +76,26 @@ input, textarea {
 	&:not(.is-editing) {
 		*.alignfull, *.alignwide {
 			width: unset;
-			margin-left: var(--cs--style--block-gap);
-			margin-right: var(--cs--style--block-gap);
+			margin-left: unset;
+			margin-right: unset;
+
+			@include break-mobile {
+				margin-left: var(--cs--style--block-gap);
+				margin-right: var(--cs--style--block-gap);
+			}
 		}
 	}
 
 	*.wp-block-columns {
 		gap: var( --wp--style--block-gap, 2em );
+	}
+
+	.wp-block-button.is-style-outline .wp-block-button__link {
+		padding: 10px 16px;
+
+		@include break-mobile {
+			padding: 10px 24px;
+		}
 	}
 }
 

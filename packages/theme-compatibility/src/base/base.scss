@@ -114,8 +114,13 @@ body {
 		margin-top: var(--cs--style--block-gap-big);
 
 		&.alignfull {
-			margin-left: var(--cs--style--block-gap);
-			margin-right: var(--cs--style--block-gap);
+			margin-left: unset;
+			margin-right: unset;
+
+			@include break-mobile {
+				margin-left: var(--cs--style--block-gap);
+				margin-right: var(--cs--style--block-gap);
+			}
 		}
 	}
 
@@ -179,11 +184,16 @@ body {
 				&, &:hover {
 					display: flex;
 					border-color: transparent;
-					padding: 12px;
+					padding: 8px;
 					line-height: 1;
-					font-size: calc(var(--cs--style--answer--emoji--font-size) * 2);
+					font-size: calc(var(--cs--style--answer--emoji--font-size) * 1.5);
 					font-weight: normal;
 					letter-spacing: initial;
+
+					@include break-mobile {
+						font-size: calc(var(--cs--style--answer--emoji--font-size) * 2);
+						padding: 12px;
+					}
 				}
 			}
 		}
