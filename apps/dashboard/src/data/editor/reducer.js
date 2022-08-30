@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { combineReducers } from '@wordpress/data';
-import { filter, map, slice, tap } from 'lodash';
+import { filter, map, omit, slice, tap } from 'lodash';
 
 /**
  * Internal dependencies
@@ -10,6 +10,7 @@ import { filter, map, slice, tap } from 'lodash';
 import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
+	EDITOR_EMBED_SETTINGS_SAVE_SUCCESS,
 	EDITOR_INIT,
 	EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	EDITOR_PAGE_DELETE,
@@ -95,6 +96,10 @@ const changes = ( state = {}, action ) => {
 			...state,
 			embedCard: true,
 		};
+	}
+
+	if ( action.type === EDITOR_EMBED_SETTINGS_SAVE_SUCCESS ) {
+		return omit( state, action.savedSettings );
 	}
 
 	if ( action.type === EDITOR_NAVIGATION_SETTINGS_UPDATE ) {

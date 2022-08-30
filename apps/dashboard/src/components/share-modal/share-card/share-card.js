@@ -17,20 +17,32 @@ export const ShareCard = styled.div`
 	}
 `;
 
-export const ShareCardHeader = styled.h1`
-	position: relative;
-	font-size: 16px;
-	font-weight: 700;
-	margin-top: 0;
+export const ShareCardHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 12px;
 
-	a {
-		position: absolute;
-		right: 0;
+	a,
+	button {
 		font-size: 11px;
-		text-decoration: none;
 		font-weight: normal;
+		text-decoration: none;
 	}
+
+	button {
+		background: none;
+		border: none;
+		color: var( --wp-admin-theme-color );
+		display: flex;
+		padding: 0;
+	}
+`;
+
+export const ShareCardHeaderTitle = styled.h1`
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0;
 `;
 
 export const ShareCardBody = styled.div`
@@ -45,7 +57,7 @@ export const ShareCardBody = styled.div`
 	}
 
 	svg {
-		height: 200px;
+		height: 100px;
 	}
 `;
 
@@ -61,7 +73,7 @@ export const ShareCardContentText = styled.p`
 	margin: 0;
 
 	&&& {
-		font-size: 12px;
+		font-size: 11px;
 	}
 `;
 

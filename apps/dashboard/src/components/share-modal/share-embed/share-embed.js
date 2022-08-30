@@ -14,6 +14,7 @@ import {
 	ShareCardHeader,
 	SharedCardLink,
 	ShareCardContent,
+	ShareCardHeaderTitle,
 } from '../share-card/share-card';
 import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedPreview } from './share-embed-preview';
@@ -30,7 +31,9 @@ export const ShareEmbed = ( { link } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
-				{ __( 'Embed iFrame', 'dashboard' ) }
+				<ShareCardHeaderTitle>
+					{ __( 'Embed iFrame', 'dashboard' ) }
+				</ShareCardHeaderTitle>
 				<a href={ docsURL } target="_blank" rel="noreferrer">
 					{ __( 'Learn More', 'dashboard' ) }
 				</a>
@@ -40,7 +43,7 @@ export const ShareEmbed = ( { link } ) => {
 					<ShareCardContentText>
 						{ createInterpolateElement(
 							__(
-								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via responsive iFrame.',
+								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via <strong>responsive iFrame.</strong>',
 								'dashboard'
 							),
 							{
@@ -51,6 +54,7 @@ export const ShareEmbed = ( { link } ) => {
 										rel="noopener noreferrer"
 									/>
 								),
+								strong: <strong />,
 							}
 						) }
 					</ShareCardContentText>
