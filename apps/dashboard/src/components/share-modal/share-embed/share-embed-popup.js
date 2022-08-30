@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -14,10 +15,10 @@ import {
 	ShareCardHeader,
 	SharedCardLink,
 	ShareCardContent,
+	ShareCardHeaderTitle,
 } from '../share-card/share-card';
 import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareEmbedPopupPreview } from './share-embed-popup-preview';
-import { createInterpolateElement } from '@wordpress/element';
 
 const getEmbedCodeSnippet = ( projectUrl ) =>
 	'<script type="text/javascript" src="https://app.crowdsignal.com/embed.js" async></script>\n' +
@@ -30,7 +31,9 @@ export const ShareEmbedPopup = ( { link } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
-				{ __( 'Embed Popup', 'dashboard' ) }
+				<ShareCardHeaderTitle>
+					{ __( 'Embed Popup', 'dashboard' ) }
+				</ShareCardHeaderTitle>
 				<a href={ docsURL } target="_blank" rel="noreferrer">
 					{ __( 'Learn More', 'dashboard' ) }
 				</a>
@@ -40,7 +43,7 @@ export const ShareEmbedPopup = ( { link } ) => {
 					<ShareCardContentText>
 						{ createInterpolateElement(
 							__(
-								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> via a popup window on page load.',
+								'Embed your form or survey into your <a>WordPress site</a> or any <a>other website</a> <strong>via a popup window</strong> on page load.',
 								'dashboard'
 							),
 							{
@@ -51,6 +54,7 @@ export const ShareEmbedPopup = ( { link } ) => {
 										rel="noopener noreferrer"
 									/>
 								),
+								strong: <strong />,
 							}
 						) }
 					</ShareCardContentText>

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { select } from '@wordpress/data';
-import { isEmpty, dropRight, every } from 'lodash';
+import { isEmpty, dropRight, every, keys } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,6 +13,7 @@ import {
 	EDITOR_AUTOSAVE_TIMER_RESET,
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
+	EDITOR_EMBED_SETTINGS_SAVE_SUCCESS,
 	EDITOR_INIT,
 	EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	EDITOR_PAGE_DELETE,
@@ -94,6 +95,24 @@ export function* saveEditorChanges( options = {} ) {
 	} catch ( error ) {
 		return { type: EDITOR_SAVE_ERROR, changes };
 	}
+}
+
+export function* saveEmbedSettings( projectId, embedSettings ) {
+	const settings = {};
+
+	if ( embedSettings.embedCard ) {
+		settings.draftEmbedCard = embedSettings.embedCard;
+		settings.publicEmbedCard = embedSettings.embedCard;
+
+		yield updateEditorEmbedCardViewport( embedSettings.embedCard.viewport );
+	}
+
+	yield saveAndUpdateProject( projectId, settings );
+
+	return {
+		type: EDITOR_EMBED_SETTINGS_SAVE_SUCCESS,
+		savedSettings: keys( embedSettings ),
+	};
 }
 
 export const deleteEditorPage = autosave( ( pageIndex ) => ( {

@@ -14,6 +14,7 @@ import {
 	ShareCardHeader,
 	SharedCardLink,
 	ShareCardContent,
+	ShareCardHeaderTitle,
 } from '../share-card/share-card';
 import { ShareCardButton } from '../share-card/share-card-button';
 import { ShareLinkPreview } from './share-link-preview';
@@ -22,7 +23,9 @@ export const ShareLink = ( { link } ) => {
 	return (
 		<ShareCard>
 			<ShareCardHeader>
-				{ __( 'Link - Full Page', 'dashboard' ) }
+				<ShareCardHeaderTitle>
+					{ __( 'Link - Full Page', 'dashboard' ) }
+				</ShareCardHeaderTitle>
 			</ShareCardHeader>
 			<ShareCardBody>
 				<ShareCardContent>
