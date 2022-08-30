@@ -20,23 +20,33 @@
  */
 
 /**
+ * @typedef {Partial<Object>} ProjectEmbedPopupSettings
+ *
+ * @property {number}  width           Embed popup viewport width.
+ * @property {string}  position        Embed popup position on the screen.
+ * @property {boolean} showOnMobile    True to enable Embed Popup on mobile screens.
+ */
+
+/**
  * @typedef {Object} Project
  *
- * @property {number}                   id               Project ID.
- * @property {string}                   created          Project creation date.
- * @property {ProjectContent}           draftContent     Project's draft content.
- * @property {ProjectEmbedCardSettings} draftEmbedCard   Project's draft embed card settings.
- * @property {Object}                   draftNavigation  Project's draft navigation settings.
- * @property {string}                   draftTheme       Project's draft theme.
- * @property {string}                   name             Project name.
- * @property {string}                   permalink        Project URL.
- * @property {boolean}                  public           True when project is public.
- * @property {ProjectContent | null}    publicContent    Project's last published content.
- * @property {ProjectEmbedCardSettings} publicEmbedCard  Project's public embed card settings.
- * @property {Object}                   publicNavigation Project's draft navigation settings.
- * @property {string | null}            publicTheme      Project's public theme.
- * @property {string}                   slug             Project slug.
- * @property {string}                   title            Project title.
+ * @property {number}                    id               Project ID.
+ * @property {string}                    created          Project creation date.
+ * @property {ProjectContent}            draftContent     Project's draft content.
+ * @property {ProjectEmbedCardSettings}  draftEmbedCard   Project's draft embed card settings.
+ * @property {ProjectEmbedPopupSettings} draftEmbedPopup  Project's draft embed popup settings.
+ * @property {Object}                    draftNavigation  Project's draft navigation settings.
+ * @property {string}                    draftTheme       Project's draft theme.
+ * @property {string}                    name             Project name.
+ * @property {string}                    permalink        Project URL.
+ * @property {boolean}                   public           True when project is public.
+ * @property {ProjectContent | null}     publicContent    Project's last published content.
+ * @property {ProjectEmbedCardSettings}  publicEmbedCard  Project's public embed card settings.
+ * @property {ProjectEmbedPopupSettings} publicEmbedPopup Project's public embed popup settings.
+ * @property {Object}                    publicNavigation Project's draft navigation settings.
+ * @property {string | null}             publicTheme      Project's public theme.
+ * @property {string}                    slug             Project slug.
+ * @property {string}                    title            Project title.
  */
 
 /**
@@ -64,6 +74,7 @@ export const createProject = () => {
 			timestamp,
 		},
 		draftEmbedCard: {},
+		draftEmbedPopup: {},
 		draftNavigation: {},
 		draftTheme: 'leven',
 		name: '',
@@ -71,6 +82,7 @@ export const createProject = () => {
 		public: false,
 		publicContent: null,
 		publicEmbedCard: {},
+		publicEmbedPopup: {},
 		publicNavigation: {},
 		publicTheme: null,
 		slug: '',

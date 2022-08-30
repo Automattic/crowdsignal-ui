@@ -49,13 +49,16 @@ const docsURL =
 
 export const ShareEmbedCard = ( { link, projectId } ) => {
 	const [ showSettings, setShowSettings ] = useState( false );
-	const { saveEmbedSettings } = useDispatch( STORE_NAME );
+	const { saveEmbedSettings, updateEditorEmbedCardViewport } = useDispatch(
+		STORE_NAME
+	);
+
 	const embedCardSettings = useSelect(
 		( select ) => select( STORE_NAME ).getEditorEmbedCardSettings() || {}
 	);
 
 	const debouncedSaveEmbedSettings = useCallback(
-		debounce( saveEmbedSettings, 1000 ),
+		debounce( saveEmbedSettings, 500 ),
 		[]
 	);
 
@@ -67,6 +70,8 @@ export const ShareEmbedCard = ( { link, projectId } ) => {
 				[ key ]: parseInt( value, 10 ),
 			},
 		};
+
+		updateEditorEmbedCardViewport( embedCard.viewport );
 
 		debouncedSaveEmbedSettings( projectId, {
 			embedCard,

@@ -10,6 +10,7 @@ import { filter, map, omit, slice, tap } from 'lodash';
 import {
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
+	EDITOR_EMBED_POPUP_SETTINGS_UPDATE,
 	EDITOR_EMBED_SETTINGS_SAVE_SUCCESS,
 	EDITOR_INIT,
 	EDITOR_NAVIGATION_SETTINGS_UPDATE,
@@ -87,6 +88,13 @@ const changes = ( state = {}, action ) => {
 		return {
 			...state,
 			embedCard: true,
+		};
+	}
+
+	if ( action.type === EDITOR_EMBED_POPUP_SETTINGS_UPDATE ) {
+		return {
+			...state,
+			embedPopup: true,
 		};
 	}
 
@@ -182,6 +190,27 @@ const embedCard = ( state = {}, action ) => {
 		return {
 			...state,
 			viewport: action.viewport,
+		};
+	}
+
+	return state;
+};
+
+/**
+ * Tracks settings for the project's embed popup.
+ *
+ * @param  {Object} state  App state.
+ * @param  {Object} action Action object.
+ * @return {Object}        Updated embed popup settings.
+ */
+const embedPopup = ( state = {}, action ) => {
+	if ( action.type === EDITOR_INIT ) {
+		return action.embedPopup;
+	}
+
+	if ( action.type === EDITOR_EMBED_POPUP_SETTINGS_UPDATE ) {
+		return {
+			...action.settings,
 		};
 	}
 
@@ -384,6 +413,7 @@ export default combineReducers( {
 	currentPage,
 	edited,
 	embedCard,
+	embedPopup,
 	error,
 	isSaving,
 	isPristine,

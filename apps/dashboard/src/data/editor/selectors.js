@@ -151,6 +151,19 @@ export const getEditorTemplate = ( state ) => state.editor.template;
 export const getEditorEmbedCardSettings = ( state ) => state.editor.embedCard;
 
 /**
+ * Returns the embed popup settings for the project currently in the editor.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed popup settings object.
+ */
+export const getEditorEmbedPopupSettings = ( state ) =>
+	state.editor.embedPopup || {
+		width: 400,
+		position: 'bottom-left',
+		showOnMobile: true,
+	};
+
+/**
  * Returns the navigation settings for the project currently in the editor.
  *
  * @param  {Object} state App state.
@@ -192,6 +205,10 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		data.draftEmbedCard = getEditorEmbedCardSettings( state );
 	}
 
+	if ( changes.embedPopup || options.public ) {
+		data.draftEmbedPopup = getEditorEmbedPopupSettings( state );
+	}
+
 	if ( changes.navigation || options.public ) {
 		data.draftNavigation = getEditorNavigationSettings( state );
 	}
@@ -200,6 +217,7 @@ export const getEditorUpdatedProjectData = ( state, options = {} ) => {
 		data.publicContent = data.draftContent;
 		data.publicTheme = data.draftTheme;
 		data.publicEmbedCard = data.draftEmbedCard;
+		data.publicEmbedPopup = data.draftEmbedPopup;
 		data.publicNavigation = data.draftNavigation;
 		data.public = true;
 	}

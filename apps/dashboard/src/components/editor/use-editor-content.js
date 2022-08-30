@@ -18,6 +18,7 @@ const getEditorProjectData = ( project, draft = true ) => ( {
 	pages: draft ? project.draftContent.pages : project.publicContent.pages,
 	theme: draft ? project.draftTheme : project.publicTheme,
 	embedCard: draft ? project.draftEmbedCard : project.publicEmbedCard,
+	embedPopup: draft ? project.draftEmbedPopup : project.publicEmbedPopup,
 	navigation: draft ? project.draftNavigation : project.publicNavigation,
 } );
 
