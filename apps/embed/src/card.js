@@ -12,6 +12,12 @@ class CrowdsignalCard extends window.HTMLElement {
 	 */
 	#frame;
 
+	constructor() {
+		super();
+
+		this.attachShadow( { mode: 'open' } );
+	}
+
 	connectedCallback() {
 		const viewportWidth = parseInt(
 			this.getAttribute( 'viewport-width', 10 )
@@ -24,7 +30,7 @@ class CrowdsignalCard extends window.HTMLElement {
 		embedUrl.searchParams.append( 'iframe', 1 );
 
 		this.#wrapper = document.createElement( 'div' );
-		this.appendChild( this.#wrapper );
+		this.shadowRoot.appendChild( this.#wrapper );
 
 		this.#frame = document.createElement( 'iframe' );
 		this.#frame.src = embedUrl.toString();
@@ -76,6 +82,9 @@ class CrowdsignalCard extends window.HTMLElement {
 		this.#frame.style.height = `${ viewportHeight }px`;
 		this.#frame.style.transform = `scale(${ scale })`;
 		this.#frame.style.transformOrigin = 'top left';
+
+		this.setAttribute( 'width', this.#frame.style.width );
+		this.setAttribute( 'height', this.#frame.style.height );
 	}
 }
 

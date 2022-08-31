@@ -7,6 +7,12 @@ class CrowdsignalEmbed extends window.HTMLElement {
 	 */
 	#frame;
 
+	constructor() {
+		super();
+
+		this.attachShadow( { mode: 'open' } );
+	}
+
 	connectedCallback() {
 		this.#frame = document.createElement( 'iframe' );
 
@@ -20,7 +26,7 @@ class CrowdsignalEmbed extends window.HTMLElement {
 		this.#frame.width = '100%';
 		this.#frame.scrolling = 'no';
 
-		this.appendChild( this.#frame );
+		this.shadowRoot.appendChild( this.#frame );
 
 		window.addEventListener( 'message', ( event ) => {
 			if ( this.getAttribute( 'src' ).indexOf( event.origin ) !== 0 ) {
@@ -29,6 +35,7 @@ class CrowdsignalEmbed extends window.HTMLElement {
 
 			if ( event.data.type === 'crowdsignal-forms-project-page-loaded' ) {
 				this.#frame.height = `${ event.data.pageHeight }px`;
+				this.setAttribute( 'height', this.#frame.height );
 			}
 		} );
 	}
