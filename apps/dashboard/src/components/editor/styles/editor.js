@@ -160,6 +160,24 @@ export const EditorWrapper = styled.div`
 		}
 	}
 
+	.components-popover__content {
+		.editor__project-dropdown-header {
+			display: flex;
+			-webkit-box-align: center;
+			align-items: center;
+			flex-direction: row;
+			-webkit-box-pack: center;
+			justify-content: center;
+			width: 100%;
+			padding-bottom: 5%;
+			h2 {
+				line-height: 1.2;
+				font-size: calc( 13px );
+				font-weight: 600;
+				width: 80%;
+			}
+		}
+	}
 	.editor__project-visibility-popover .components-popover__content {
 		padding: 8px;
 		width: 238px;

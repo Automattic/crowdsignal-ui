@@ -11,8 +11,6 @@ import {
 	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 	ToggleControl,
 } from '@wordpress/components';
-// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
 import { useEffect, useState } from '@wordpress/element';
@@ -29,6 +27,7 @@ import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
+import { ModalCloseButton } from '../modal';
 
 /**
  * Styles
@@ -134,10 +133,10 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						) }
 						renderContent={ ( e ) => (
 							<>
-								<InspectorPopoverHeader
-									title={ __( 'Visibility', 'dashboard' ) }
-									onClose={ e.onToggle }
-								/>
+								<div className="editor__project-dropdown-header">
+									<h2>{ __( 'Visibility', 'dashboard' ) }</h2>
+									<ModalCloseButton onClick={ e.onToggle } />
+								</div>
 								<FormFieldset
 									name="project-visibility"
 									inputComponent={ FormRadio }
@@ -192,10 +191,10 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						) }
 						renderContent={ ( e ) => (
 							<>
-								<InspectorPopoverHeader
-									title={ __( 'URL', 'dashboard' ) }
-									onClose={ e.onToggle }
-								/>
+								<div className="editor__project-dropdown-header">
+									<h2>{ __( 'URL', 'dashboard' ) }</h2>
+									<ModalCloseButton onClick={ e.onToggle } />
+								</div>
 								<FormFieldset
 									name="project-permalink-popover"
 									inputComponent={ TextControl }
