@@ -58,9 +58,15 @@ const ShareModal = ( { project, onClose } ) => {
 				</ModalHeaderNote>
 				<ShareModalGrid className="crowdsignal-share-modal__grid">
 					<ShareLink link={ project.permalink } />
-					<ShareEmbedCard link={ project.permalink } />
+					<ShareEmbedCard
+						link={ project.permalink }
+						projectId={ project.id }
+					/>
 					<ShareEmbed link={ project.permalink } />
-					<ShareEmbedPopup link={ project.permalink } />
+					<ShareEmbedPopup
+						link={ project.permalink }
+						projectId={ project.id }
+					/>
 				</ShareModalGrid>
 			</ShareModalDialog>
 		</ModalWrapper>

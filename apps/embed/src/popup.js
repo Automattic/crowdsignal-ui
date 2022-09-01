@@ -22,6 +22,11 @@ class CrowdsignalPopup extends window.HTMLElement {
 	 */
 	#projectCode;
 
+	/**
+	 * Reference to the popup settings
+	 */
+	#settings;
+
 	connectedCallback() {
 		const isWpEditor =
 			this.ownerDocument.body.className.indexOf( 'wp-block-embed' ) !==
@@ -42,13 +47,34 @@ class CrowdsignalPopup extends window.HTMLElement {
 			}
 
 			if (
+				event.data.type === 'crowdsignal-forms-project-embed-popup' &&
+				!! event.data.embedPopupSettings
+			) {
+				this.#settings = event.data.embedPopupSettings;
+			}
+
+			if (
 				event.data.type === 'crowdsignal-forms-project-page-loaded' &&
 				event.data.pageHeight > 0 &&
 				! this.#getPopupClosedCookie( event.data.projectCode )
 			) {
+				let verticalPos = 'bottom';
 				const height = event.data.pageHeight + 12;
+
+				if ( this.#settings ) {
+					verticalPos = this.#settings.position.split( '-' ).shift();
+
+					this.#wrapper.classList.add( this.#settings.position );
+					this.#wrapper.style.width = `${ this.#settings.width }px`;
+
+					// eslint-disable-next-line max-depth
+					if ( ! this.#settings.showOnMobile ) {
+						this.#wrapper.classList.add( 'mobile-hidden' );
+					}
+				}
+
 				this.#wrapper.style.height = `${ height }px`;
-				this.#wrapper.style.bottom = '20px';
+				this.#wrapper.style[ verticalPos ] = '20px';
 				this.#projectCode = event.data.projectCode;
 
 				// We want the animation to play only on the first load
@@ -145,6 +171,21 @@ class CrowdsignalPopup extends window.HTMLElement {
 					transition: height 1s ease, bottom 0.3s linear;
 				}
 
+				.crowdsignal-web-popup__wrapper.bottom-right {
+					left: unset;
+					right: 0;
+				}
+
+				.crowdsignal-web-popup__wrapper.top-right {
+					top: -30px;
+					left: unset;
+					right: 0;
+				}
+
+				.crowdsignal-web-popup__wrapper.top-left {
+					top: -30px;
+				}
+
 				.crowdsignal-web-popup__close-button {
 					position: absolute;
 					top: 0;
@@ -165,6 +206,12 @@ class CrowdsignalPopup extends window.HTMLElement {
 					height: 100%;
 					border-radius: 10px;
 					filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.02)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.08));
+				}
+
+				@media screen and (max-width: 480px) {
+					.mobile-hidden {
+						display: none;
+					}
 				}
 			</style>
 		`;
