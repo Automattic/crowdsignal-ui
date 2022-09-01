@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { BlockPreview } from '@wordpress/block-editor';
+import { kebabCase } from 'lodash';
 
 /**
  * Style dependencies
@@ -9,11 +9,13 @@ import { BlockPreview } from '@wordpress/block-editor';
 import {
 	TemplatePreviewDescription,
 	TemplatePreviewFrame,
+	TemplatePreviewImage,
+	TemplatePreviewImageWrapper,
 	TemplatePreviewName,
 	TemplatePreviewWrapper,
 } from './styles/template-preview';
 
-const TemplatePreview = ( { onSelect, template } ) => {
+const TemplatePreview = ( { onSelect, template, theme } ) => {
 	const handleSelect = () => onSelect( template );
 
 	const PreviewComponent = template.preview;
@@ -24,10 +26,13 @@ const TemplatePreview = ( { onSelect, template } ) => {
 				{ PreviewComponent && <PreviewComponent /> }
 
 				{ ! PreviewComponent && (
-					<BlockPreview
-						blocks={ template.project.draftContent.pages[ 0 ] }
-						viewportWidth={ 1380 }
-					/>
+					<TemplatePreviewImageWrapper>
+						<TemplatePreviewImage
+							src={ `https://app.crowdsignal.com/templates/${ theme }/${ kebabCase(
+								template.name
+							) }.png` }
+						/>
+					</TemplatePreviewImageWrapper>
 				) }
 			</TemplatePreviewFrame>
 

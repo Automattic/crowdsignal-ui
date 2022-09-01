@@ -70,6 +70,7 @@ const NewProjectWizard = ( { onSelect, onChangeThemeClick } ) => {
 							<TemplatePreview
 								key={ `${ editorTheme }_${ template.name }` }
 								template={ template }
+								theme={ editorTheme }
 								onSelect={ onSelect }
 							/>
 						) ) }
