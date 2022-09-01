@@ -1,7 +1,17 @@
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/mixins";
 @import 'buttons';
 
 :root {
-	--wp--preset--font-size--normal: 22px;
+	--wp--preset--font-size--normal: 18px;
+
+	@include break-mobile {
+		--wp--preset--font-size--normal: 22px;
+	}
+}
+
+html {
+	font-size: var(--wp--preset--font-size--normal);
 }
 
 body {

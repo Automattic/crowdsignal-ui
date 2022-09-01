@@ -7,7 +7,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { useColorStyles } from '@crowdsignal/styles';
+import { breakpoint, useColorStyles } from '@crowdsignal/styles';
 import { forwardRef } from '@wordpress/element';
 
 const StyledButtonWrapper = styled.div`
@@ -31,9 +31,14 @@ const StyledButton = styled.button`
 	justify-content: center;
 	overflow: hidden;
 	position: relative;
+	font-size: 1rem;
 
 	&.rich-text {
 		cursor: text;
+	}
+
+	${ breakpoint( '>480px' ) } {
+		font-size: inherit;
 	}
 `;
 

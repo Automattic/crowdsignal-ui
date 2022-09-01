@@ -1,3 +1,6 @@
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/mixins";
+
 :root {
 	--wp--preset--font-size--normal: 18px;
 }
@@ -5,6 +8,20 @@
 body {
 	--cs--style--button--border-radius: var(--wp--custom--button--border--radius);
 	--cs--style--dropdown--padding-top-bottom: 15px;
+
+	--wp--custom--button--spacing--padding--top: 16px;
+	--wp--custom--button--spacing--padding--bottom: 16px;
+	--wp--custom--button--spacing--padding--left: 16px;
+	--wp--custom--button--spacing--padding--right: 16px;
+	--wp--custom--button--typography--line-height: 1;
+
+	@include break-mobile {
+		--wp--custom--button--spacing--padding--top: 0.667em;
+		--wp--custom--button--spacing--padding--bottom: 0.667em;
+		--wp--custom--button--spacing--padding--left: 1.333em;
+		--wp--custom--button--spacing--padding--right: 1.333em;
+		--wp--custom--button--typography--line-height: 2;
+	}
 }
 
 .crowdsignal-forms-question-wrapper {
