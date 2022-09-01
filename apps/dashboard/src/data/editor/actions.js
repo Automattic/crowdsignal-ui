@@ -13,6 +13,7 @@ import {
 	EDITOR_AUTOSAVE_TIMER_RESET,
 	EDITOR_CURRENT_PAGE_INDEX_SET,
 	EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
+	EDITOR_EMBED_POPUP_SETTINGS_UPDATE,
 	EDITOR_EMBED_SETTINGS_SAVE_SUCCESS,
 	EDITOR_INIT,
 	EDITOR_NAVIGATION_SETTINGS_UPDATE,
@@ -42,11 +43,12 @@ const autosave = ( actionCreator ) => {
 
 export const initializeEditor = (
 	projectId,
-	{ embedCard, navigation, pages, slug, theme, title }
+	{ embedCard, embedPopup, navigation, pages, slug, theme, title }
 ) => ( {
 	type: EDITOR_INIT,
 	projectId,
 	embedCard,
+	embedPopup,
 	navigation,
 	pages,
 	slug,
@@ -105,8 +107,11 @@ export function* saveEmbedSettings( projectId, embedSettings ) {
 	if ( embedSettings.embedCard ) {
 		settings.draftEmbedCard = embedSettings.embedCard;
 		settings.publicEmbedCard = embedSettings.embedCard;
+	}
 
-		yield updateEditorEmbedCardViewport( embedSettings.embedCard.viewport );
+	if ( embedSettings.embedPopup ) {
+		settings.draftEmbedPopup = embedSettings.embedPopup;
+		settings.publicEmbedPopup = embedSettings.embedPopup;
 	}
 
 	yield saveAndUpdateProject( projectId, settings );
@@ -174,6 +179,11 @@ export const updateEditorTemplate = ( template ) => ( {
 export const updateEditorEmbedCardViewport = ( viewport ) => ( {
 	type: EDITOR_EMBED_CARD_VIEWPORT_UPDATE,
 	viewport,
+} );
+
+export const updateEditorEmbedPopupSettings = ( settings ) => ( {
+	type: EDITOR_EMBED_POPUP_SETTINGS_UPDATE,
+	settings,
 } );
 
 export const updateEditorNavigationSettings = ( navigation ) => ( {
