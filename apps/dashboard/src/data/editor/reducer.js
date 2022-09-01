@@ -212,7 +212,7 @@ const embedCard = ( state = {}, action ) => {
  * @param  {Object} action Action object.
  * @return {Object}        Updated embed popup settings.
  */
-const embedPopup = ( state = {}, action ) => {
+const embedPopup = ( state = null, action ) => {
 	if ( action.type === EDITOR_INIT ) {
 		return action.embedPopup;
 	}
