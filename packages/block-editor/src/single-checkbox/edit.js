@@ -33,14 +33,6 @@ const EditCheckbox = ( props ) => {
 			<Sidebar { ...props } />
 			<Toolbar { ...props } />
 
-			{ /* <FormCheckbox
-				checked={ isSelected }
-				isMultiSelect={ isMultiSelect }
-				onChange={ onChange }
-				type={ type }
-				value={ value }
-			/> */ }
-
 			<FormCheckbox isMultiSelect />
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
 				<RichText

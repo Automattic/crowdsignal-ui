@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import { ErrorMessage, FormCheckbox, FormInputWrapper } from '../components';
+import { ErrorMessage, CheckboxAnswer, FormInputWrapper } from '../components';
 
 const SingleCheckbox = ( { attributes, className } ) => {
 	const { error, fieldValue, onChange } = useField( {
@@ -47,7 +47,7 @@ const SingleCheckbox = ( { attributes, className } ) => {
 
 	return (
 		<FormInputWrapper className={ classes }>
-			<FormCheckbox
+			<CheckboxAnswer
 				attributes={ attributes }
 				isMultiSelect
 				isSelected={ isSelected }
@@ -55,7 +55,7 @@ const SingleCheckbox = ( { attributes, className } ) => {
 				value={ attributes.clientId }
 			/>
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
-				<RawHTML>{ attributes.label }</RawHTML>
+				<RawHTML>{ attributes.mandatory }</RawHTML>
 			</FormInputWrapper.Label>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
