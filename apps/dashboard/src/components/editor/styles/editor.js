@@ -131,6 +131,7 @@ export const EditorWrapper = styled.div`
 	.iso-sidebar {
 		.project-visibility,
 		.project-created-date,
+		.project-permalink,
 		.project-updated-date {
 			span {
 				&:first-child {
@@ -159,9 +160,54 @@ export const EditorWrapper = styled.div`
 		}
 	}
 
+	.components-popover__content {
+		.editor__project-dropdown-header {
+			display: flex;
+			-webkit-box-align: center;
+			align-items: center;
+			flex-direction: row;
+			-webkit-box-pack: center;
+			justify-content: center;
+			width: 100%;
+			padding-bottom: 5%;
+			h2 {
+				line-height: 1.2;
+				font-size: calc( 13px );
+				font-weight: 600;
+				width: 80%;
+			}
+		}
+	}
 	.editor__project-visibility-popover .components-popover__content {
 		padding: 8px;
-		width: 250px;
+		width: 238px;
+	}
+
+	.edit-project-slug span {
+		display: block;
+		flex-shrink: 0;
+		width: 45%;
+	}
+
+	.project-permalink-dropdown {
+		width: 55%;
+		.project-permalink-button {
+			height: auto;
+			word-break: break-word;
+			text-align: left;
+			white-space: normal;
+		}
+	}
+
+	.editor__project-permalink-edit {
+		padding: 8px;
+		max-width: 300px;
+		.components-popover__content {
+			width: unset;
+		}
+		.project-permalink-current-url {
+			word-break: break-word;
+		}
 	}
 `;
 

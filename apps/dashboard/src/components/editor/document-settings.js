@@ -6,13 +6,14 @@ import {
 	Dropdown,
 	ExternalLink,
 	PanelBody,
+	TextControl,
 	PanelRow,
 	__experimentalUnitControl as UnitControl, // eslint-disable-line @wordpress/no-unsafe-wp-apis
 	ToggleControl,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { format } from '@wordpress/date';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
 import { DocumentSection } from 'isolated-block-editor';
@@ -26,6 +27,7 @@ import { isPublic, getLastUpdatedDate } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
 import { ToolbarButton } from './styles/button';
 import { getTheme } from '../../util/theme/themes';
+import { ModalCloseButton } from '../modal';
 
 /**
  * Styles
@@ -38,11 +40,13 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		saveAndUpdateProject,
 		updateEditorEmbedCardViewport,
 		updateEditorNavigationSettings,
+		updateEditorSlug,
 	} = useDispatch( STORE_NAME );
 
 	const [
 		canPublish,
 		editorTheme,
+		editorSlug,
 		selectedBlockClientId,
 		embedCardSettings,
 		navigationSettings,
@@ -50,6 +54,7 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditorContentPublishable(),
 		select( STORE_NAME ).getEditorTheme(),
+		select( STORE_NAME ).getEditorSlug(),
 		select( 'core/block-editor' ).getSelectedBlockClientId(),
 		select( STORE_NAME ).getEditorEmbedCardSettings() || {},
 		select( STORE_NAME ).getEditorNavigationSettings(),
@@ -93,9 +98,21 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 
 	const activeTheme = getTheme( editorTheme );
 
+	const [ slugExplain, setSlugExplain ] = useState(
+		__( 'The last part of the URL', 'dashboard' )
+	);
+	const updateSlug = ( value ) => {
+		updateEditorSlug( value );
+		setSlugExplain(
+			isPublic( project )
+				? __( 'Click Update to save permalink', 'dashboard' )
+				: __( 'Click Publish to save permalink', 'dashboard' )
+		);
+	};
+
 	return (
 		<DocumentSection>
-			<PanelBody title={ __( 'Status & Visibility', 'dashboard' ) }>
+			<PanelBody title={ __( 'Summary', 'dashboard' ) }>
 				<PanelRow className="project-visibility">
 					<span>{ __( 'Visibility', 'dashboard' ) }</span>
 					<Dropdown
@@ -114,8 +131,12 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 								{ visibility }
 							</Button>
 						) }
-						renderContent={ () => (
+						renderContent={ ( e ) => (
 							<>
+								<div className="editor__project-dropdown-header">
+									<h2>{ __( 'Visibility', 'dashboard' ) }</h2>
+									<ModalCloseButton onClick={ e.onToggle } />
+								</div>
 								<FormFieldset
 									name="project-visibility"
 									inputComponent={ FormRadio }
@@ -145,6 +166,69 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 						) }
 					/>
 				</PanelRow>
+
+				<PanelRow className="project-permalink">
+					<span className="edit-project-slug">
+						{ __( 'URL', 'dashboard' ) }
+					</span>
+					<Dropdown
+						className="project-permalink-dropdown"
+						popoverProps={ {
+							className: 'editor__project-permalink-edit',
+						} }
+						renderToggle={ ( { isOpen, onToggle } ) => (
+							<Button
+								className="project-permalink-button"
+								aria-expanded={ isOpen }
+								onClick={ onToggle }
+								variant="tertiary"
+								disabled={
+									! isPublic( project ) && ! canPublish
+								}
+							>
+								{ ! canPublish ? 'Pending' : project.permalink }
+							</Button>
+						) }
+						renderContent={ ( e ) => (
+							<>
+								<div className="editor__project-dropdown-header">
+									<h2>{ __( 'URL', 'dashboard' ) }</h2>
+									<ModalCloseButton onClick={ e.onToggle } />
+								</div>
+								<FormFieldset
+									name="project-permalink-popover"
+									inputComponent={ TextControl }
+									label={ __( 'Permalink', 'dashboard' ) }
+									explanation={ slugExplain }
+									value={ editorSlug }
+									onChange={ updateSlug }
+									disabled={ ! canPublish }
+								/>
+
+								{ isPublic( project ) ? (
+									<div>
+										{ __( 'View Project', 'dashboard' ) }
+										<ExternalLink
+											className="project-permalink-current-url"
+											href={ project.permalink }
+										>
+											{ project.permalink }
+										</ExternalLink>
+									</div>
+								) : (
+									<div>
+										{ ' ' }
+										{ __(
+											'Publish project to view link',
+											'dashboard'
+										) }{ ' ' }
+									</div>
+								) }
+							</>
+						) }
+					/>
+				</PanelRow>
+
 				<PanelRow className="project-created-date">
 					<span>{ __( 'Created', 'dashboard' ) }</span>
 					<span>
@@ -167,19 +251,6 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 			</PanelBody>
 			{ project && (
 				<>
-					<PanelBody title={ __( 'Permalink', 'dashboard' ) }>
-						<PanelRow>
-							<span>{ __( 'View Project', 'dashboard' ) }</span>
-						</PanelRow>
-						<ExternalLink
-							href={ project.permalink }
-							title={ project.permalink }
-						>
-							<span className="components-external-link__text">
-								{ project.permalink }
-							</span>
-						</ExternalLink>
-					</PanelBody>
 					<PanelBody
 						title={ __( 'Theme', 'dashboard' ) }
 						className="theme-panel"

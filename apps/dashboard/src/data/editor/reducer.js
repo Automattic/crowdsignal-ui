@@ -20,6 +20,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_SLUG_UPDATE,
 	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
@@ -65,6 +66,13 @@ const changes = ( state = {}, action ) => {
 		return {
 			...state,
 			content: true,
+		};
+	}
+
+	if ( action.type === EDITOR_SLUG_UPDATE ) {
+		return {
+			...state,
+			slug: true,
 		};
 	}
 
@@ -152,6 +160,7 @@ const edited = ( state = false, action ) => {
 		action.type === EDITOR_PAGE_DELETE ||
 		action.type === EDITOR_PAGE_UPDATE ||
 		action.type === EDITOR_PAGE_ORDER_UPDATE ||
+		action.type === EDITOR_SLUG_UPDATE ||
 		action.type === EDITOR_TITLE_UPDATE ||
 		action.type === EDITOR_THEME_UPDATE
 	) {
@@ -330,6 +339,21 @@ const projectId = ( state = 0, action ) => {
 };
 
 /**
+ * Project template.
+ *
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Template.
+ */
+const slug = ( state = '', action ) => {
+	if ( action.type === EDITOR_SLUG_UPDATE || action.type === EDITOR_INIT ) {
+		return action.slug;
+	}
+
+	return state;
+};
+
+/**
  * Project title.
  *
  * @param  {string} state  App state.
@@ -385,6 +409,7 @@ export default combineReducers( {
 	navigation,
 	pages,
 	projectId,
+	slug,
 	template,
 	theme,
 	title,
