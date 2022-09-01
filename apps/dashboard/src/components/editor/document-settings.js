@@ -105,8 +105,8 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 		updateEditorSlug( value );
 		setSlugExplain(
 			isPublic( project )
-				? __( 'Click Update or Save to save permalink', 'dashboard' )
-				: __( 'Click Save or Publish to save permalink', 'dashboard' )
+				? __( 'Click Update to save permalink', 'dashboard' )
+				: __( 'Click Publish to save permalink', 'dashboard' )
 		);
 	};
 
@@ -204,13 +204,26 @@ const DocumentSettings = ( { onChangeThemeClick, project } ) => {
 									onChange={ updateSlug }
 									disabled={ ! canPublish }
 								/>
-								{ __( 'View Project', 'dashboard' ) }
-								<ExternalLink
-									className="project-permalink-current-url"
-									href={ project.permalink }
-								>
-									{ project.permalink }
-								</ExternalLink>
+
+								{ isPublic( project ) ? (
+									<div>
+										{ __( 'View Project', 'dashboard' ) }
+										<ExternalLink
+											className="project-permalink-current-url"
+											href={ project.permalink }
+										>
+											{ project.permalink }
+										</ExternalLink>
+									</div>
+								) : (
+									<div>
+										{ ' ' }
+										{ __(
+											'Publish project to view link',
+											'dashboard'
+										) }{ ' ' }
+									</div>
+								) }
 							</>
 						) }
 					/>
