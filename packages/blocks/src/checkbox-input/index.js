@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { RawHTML } from '@wordpress/element';
+import { RawHTML, useEffect } from '@wordpress/element';
 import classnames from 'classnames';
-
+import { isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -11,8 +11,9 @@ import { __ } from '@wordpress/i18n';
  */
 import { useField } from '@crowdsignal/form';
 import { ErrorMessage, CheckboxAnswer, FormInputWrapper } from '../components';
+import { useColorStyles, useBorderStyles } from '@crowdsignal/styles';
 
-const SingleCheckbox = ( { attributes, className } ) => {
+const CheckboxInput = ( { attributes, className } ) => {
 	const { error, fieldValue, onChange } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
@@ -22,7 +23,10 @@ const SingleCheckbox = ( { attributes, className } ) => {
 		},
 	} );
 
-	const isSelected = fieldValue === attributes.clientId;
+	const isSelected = fieldValue === attributes.checkedText;
+	const value = isSelected
+		? attributes.checkedText
+		: attributes.uncheckedText;
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-simple-checkbox',
@@ -30,29 +34,37 @@ const SingleCheckbox = ( { attributes, className } ) => {
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
-			[ `align${ attributes.align }` ]: attributes.align,
 		}
 	);
 
-	const onChangeHandler = ( value ) => {
+	useEffect( () => {
+		if ( isEmpty( fieldValue ) ) {
+			onChange( attributes.uncheckedText );
+		}
+	}, [] );
+
+	const onChangeHandler = () => {
 		if ( isSelected ) {
-			onChange( '' );
+			onChange( attributes.uncheckedText );
 		} else {
-			onChange( value );
+			onChange( attributes.checkedText );
 		}
 	};
-	// const style = {
-	// 	height: attributes.inputHeight,
-	// };
 
 	return (
-		<FormInputWrapper className={ classes }>
+		<FormInputWrapper
+			style={ {
+				...useColorStyles( attributes ),
+				...useBorderStyles( attributes ),
+			} }
+			className={ classes }
+		>
 			<CheckboxAnswer
 				attributes={ attributes }
 				isMultiSelect
 				isSelected={ isSelected }
 				onChange={ onChangeHandler }
-				value={ attributes.clientId }
+				value={ value }
 			/>
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
 				<RawHTML>{ attributes.mandatory }</RawHTML>
@@ -62,6 +74,6 @@ const SingleCheckbox = ( { attributes, className } ) => {
 	);
 };
 
-SingleCheckbox.blockName = 'crowdsignal-forms/single-checkbox';
+CheckboxInput.blockName = 'crowdsignal-forms/single-checkbox';
 
-export default SingleCheckbox;
+export default CheckboxInput;

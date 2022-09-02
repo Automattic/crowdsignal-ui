@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -27,6 +27,19 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'Field is Required' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
+				/>
+
+				<TextControl
+					label={ __( 'Checked Value', 'block-editor' ) }
+					value={ attributes.checkedText }
+					onChange={ handleChangeAttribute( 'checkedText' ) }
+					help={ __( 'TBD', 'block-editor' ) }
+				/>
+				<TextControl
+					label={ __( 'Unchecked Value', 'block-editor' ) }
+					value={ attributes.uncheckedText }
+					onChange={ handleChangeAttribute( 'uncheckedText' ) }
+					help={ __( 'TBD', 'block-editor' ) }
 				/>
 			</PanelBody>
 

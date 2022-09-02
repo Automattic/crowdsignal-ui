@@ -1,3 +1,4 @@
+import CheckboxInput from './checkbox-input';
 import CoreEmbed from './core-embed';
 import DropdownInput from './dropdown-input';
 import FileInput from './file-input';
@@ -13,11 +14,11 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
-import SingleCheckbox from './single-checkbox';
 
 export * from './components';
 
 export {
+	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
 	FileInput,
@@ -30,13 +31,13 @@ export {
 	RankingQuestion,
 	RatingScaleAnswer,
 	RatingScaleQuestion,
-	SingleCheckbox,
 	SubmitButton,
 	TextInput,
 	TextQuestion,
 };
 
 export const projectBlocks = [
+	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
 	FileInput,
@@ -47,7 +48,6 @@ export const projectBlocks = [
 	RankingQuestion,
 	RatingScaleAnswer,
 	RatingScaleQuestion,
-	SingleCheckbox,
 	SubmitButton,
 	TextInput,
 	TextQuestion,

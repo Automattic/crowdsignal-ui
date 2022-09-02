@@ -3,21 +3,17 @@ export default {
 		type: 'string',
 		default: null,
 	},
-	restrictions: {
-		type: 'object',
-		default: {},
-	},
 	label: {
 		type: 'string',
 		default: null,
 	},
-	note: {
+	checkedText: {
 		type: 'string',
-		default: '',
+		default: 'checked',
 	},
-	placeholder: {
+	uncheckedText: {
 		type: 'string',
-		default: '',
+		default: 'unchecked',
 	},
 	// should this be an entry on restrictions?
 	mandatory: {
@@ -43,24 +39,10 @@ export default {
 		type: 'number',
 		default: '',
 	},
-	fontFamily: {
-		type: 'string',
-	},
 	gradient: {
 		type: 'string',
 	},
-	inputHeight: {
-		type: 'string',
-		default: '80px',
-	},
 	textColor: {
-		type: 'string',
-	},
-	width: {
-		type: 'number',
-		default: 100,
-	},
-	justification: {
 		type: 'string',
 	},
 };

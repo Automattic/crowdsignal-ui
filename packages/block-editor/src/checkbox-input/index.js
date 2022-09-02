@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { SingleCheckbox } from '@crowdsignal/blocks';
+import { CheckboxInput } from '@crowdsignal/blocks';
 import { CheckboxInputIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditFreeText from './edit';
@@ -18,12 +18,12 @@ const settings = {
 		'Do you need consent to something like terms of service?',
 		'block-editor'
 	),
-	category: 'crowdsignal-forms/question',
+	category: 'crowdsignal-forms/form',
 	keywords: [
 		__( 'checkbox', 'block-editor' ),
 		__( 'text', 'block-editor' ),
 		__( 'open text', 'block-editor' ),
-		__( 'input', 'block-editor' ),
+		__( 'form', 'block-editor' ),
 	],
 	icon: <CheckboxInputIcon />,
 	edit: EditFreeText,
@@ -46,6 +46,6 @@ const settings = {
 };
 
 export default {
-	name: SingleCheckbox.blockName,
+	name: CheckboxInput.blockName,
 	settings,
 };
