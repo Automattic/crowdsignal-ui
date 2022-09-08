@@ -9,6 +9,7 @@ import { map } from 'lodash';
  * Internal dependencies
  */
 import { useStylesheet } from '@crowdsignal/hooks';
+import { STORE_NAME } from '../../data';
 
 window.__editorAssets = window.__editorAssets || {
 	styles: '',
@@ -16,7 +17,7 @@ window.__editorAssets = window.__editorAssets || {
 };
 
 const PreviewStylesResolver = ( { theme } ) => {
-	const { updateSettings } = useDispatch( 'core/block-editor' );
+	const { updateEditorSettings } = useDispatch( STORE_NAME );
 
 	const stylesheets = {
 		base: '/ui/stable/theme-compatibility/base-editor.css',
@@ -41,7 +42,11 @@ const PreviewStylesResolver = ( { theme } ) => {
 					node.dataset.emotion === 'crowdsignal' ||
 					node.dataset.emotion === 'crowdsignal-global'
 			)
-			.map( ( node ) => node.textContent.replace( /\/\*.*\*\//, '' ) )
+			.map( ( node ) =>
+				[ ...node.sheet.cssRules ]
+					.map( ( rule ) => rule.cssText )
+					.join( ' ' )
+			)
 			.join( '' );
 
 		// This relies on __unstableResolvedAssets which unfortunately seems like
@@ -49,13 +54,15 @@ const PreviewStylesResolver = ( { theme } ) => {
 		// Gutenberg version. Leaving the link as a reference for when it does change:
 		//
 		// https://github.com/WordPress/gutenberg/blob/v12.9.0/packages/block-editor/src/components/block-preview/auto.js#L35
-		updateSettings( {
+		const settings = {
 			__unstableResolvedAssets: {
 				styles: [
-					`${ externalStyles }<style>${ inlineStyles }</styles>`,
+					`${ externalStyles }<style>${ inlineStyles }</style>`,
 				],
 			},
-		} );
+		};
+
+		updateEditorSettings( { editor: { ...settings } } );
 	}, [ theme ] );
 
 	useEffect( () => {

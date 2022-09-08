@@ -12,7 +12,6 @@ import { Global } from '@emotion/react';
  * Internal dependencies
  */
 import { NavigationBar } from '@crowdsignal/components';
-import { editorSettings } from './settings';
 import { registerBlocks } from './blocks';
 import { registerPatterns } from './patterns';
 import { STORE_NAME } from '../../data';
@@ -41,7 +40,6 @@ import {
 } from './styles/editor';
 
 registerBlocks();
-const baseSettings = registerPatterns( editorSettings );
 
 const Editor = ( { project } ) => {
 	const [ showWizard, setShowWizard ] = useState( ! project.id );
@@ -52,16 +50,18 @@ const Editor = ( { project } ) => {
 		document.cookie.indexOf( 'hide_editor_guide=1' ) === -1
 	);
 
-	const { updateEditorTitle, setEditorCurrentPage } = useDispatch(
-		STORE_NAME
-	);
+	const {
+		updateEditorTitle,
+		setEditorCurrentPage,
+		updateEditorSettings,
+	} = useDispatch( STORE_NAME );
 
 	const { updateSettings } = useDispatch( 'core/block-editor' );
-	const { updateEditorSettings } = useDispatch( 'core/editor' );
 
 	const {
 		confirmationPage,
 		editorId,
+		editorSettings,
 		editorTheme,
 		loadBlocks,
 		saveBlocks,
@@ -108,22 +108,33 @@ const Editor = ( { project } ) => {
 
 	const settings = useMemo( () => {
 		if ( ! confirmationPage ) {
-			return baseSettings;
+			return editorSettings;
 		}
 
-		return tap( cloneDeep( baseSettings ), ( { editor, iso } ) => {
+		return tap( cloneDeep( editorSettings ), ( { editor, iso } ) => {
 			iso.blocks.allowBlocks = filter(
 				iso.blocks.allowBlocks,
 				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
 			);
 			editor.allowedBlockTypes = iso.blocks.allowBlocks;
 		} );
-	}, [ confirmationPage ] );
+	}, [ confirmationPage, editorSettings ] );
+
+	useEffect( () => {
+		if ( ! window.isoInitialisedBlocks ) {
+			return;
+		}
+
+		updateEditorSettings( registerPatterns() );
+	}, [ window.isoInitialisedBlocks ] );
 
 	useEffect( () => {
 		updateSettings( settings.editor );
-		updateEditorSettings( settings.editor );
 	}, [ settings ] );
+
+	if ( ! editorSettings ) {
+		return null;
+	}
 
 	return (
 		<EditorLayout className="editor">

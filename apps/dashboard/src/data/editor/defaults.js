@@ -80,7 +80,7 @@ export const editorSettings = {
 		allowedMimeTypes: [ 'audio', 'image' ],
 		// Object must be a valid handler for the file select callback.
 		// NOTE: if mediaUpload is not present, addFilter( 'editor.MediaUpload' ... ) will not work (????)
-		// NOTE: costumize the handler on its own and just use the import here
+		// NOTE: customize the handler on its own and just use the import here
 		mediaUpload: uploadMedia,
 	},
 };

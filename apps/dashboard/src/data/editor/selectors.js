@@ -143,6 +143,14 @@ export const getEditorTheme = ( state ) =>
 export const getEditorTemplate = ( state ) => state.editor.template;
 
 /**
+ * Returns the current editor settings.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed card settings object.
+ */
+export const getEditorSettings = ( state ) => state.editor.settings;
+
+/**
  * Returns the slug for the project currently in the editor.
  *
  * @param  {Object} state App state.
