@@ -48,6 +48,7 @@
     "react-beautiful-dnd": "^13.1.0",
     "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.2",
+    "reselect": "^4.1.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

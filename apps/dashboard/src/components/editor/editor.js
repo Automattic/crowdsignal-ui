@@ -2,9 +2,9 @@
  * External dependencies
  */
 import { useDispatch } from '@wordpress/data';
-import { useEffect, useMemo, useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { cloneDeep, filter, noop, tap } from 'lodash';
+import { noop } from 'lodash';
 import IsolatedBlockEditor, { EditorHeadingSlot } from 'isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/react';
 
@@ -59,7 +59,6 @@ const Editor = ( { project } ) => {
 	const { updateSettings } = useDispatch( 'core/block-editor' );
 
 	const {
-		confirmationPage,
 		editorId,
 		editorSettings,
 		editorTheme,
@@ -106,20 +105,6 @@ const Editor = ( { project } ) => {
 		setShowEditorGuide( false );
 	};
 
-	const settings = useMemo( () => {
-		if ( ! confirmationPage ) {
-			return editorSettings;
-		}
-
-		return tap( cloneDeep( editorSettings ), ( { editor, iso } ) => {
-			iso.blocks.allowBlocks = filter(
-				iso.blocks.allowBlocks,
-				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
-			);
-			editor.allowedBlockTypes = iso.blocks.allowBlocks;
-		} );
-	}, [ confirmationPage, editorSettings ] );
-
 	useEffect( () => {
 		if ( ! window.isoInitialisedBlocks ) {
 			return;
@@ -129,8 +114,8 @@ const Editor = ( { project } ) => {
 	}, [ window.isoInitialisedBlocks ] );
 
 	useEffect( () => {
-		updateSettings( settings.editor );
-	}, [ settings ] );
+		updateSettings( editorSettings.editor );
+	}, [ editorSettings ] );
 
 	if ( ! editorSettings ) {
 		return null;
@@ -175,7 +160,7 @@ const Editor = ( { project } ) => {
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
 				key={ editorId }
-				settings={ settings }
+				settings={ editorSettings }
 				onSaveBlocks={ saveBlocks }
 				onLoad={ loadBlocks }
 				onError={ noop }
