@@ -3,7 +3,7 @@
  */
 import { useCallback, useEffect } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
-import { map } from 'lodash';
+import { debounce, map } from 'lodash';
 
 /**
  * Internal dependencies
@@ -29,41 +29,44 @@ const PreviewStylesResolver = ( { theme } ) => {
 	useStylesheet( stylesheets.theme );
 	useStylesheet( stylesheets.compatibility );
 
-	const reloadEditorAssets = useCallback( () => {
-		const externalStyles = map(
-			stylesheets,
-			( path, id ) =>
-				`<link id="${ id }" href="${ path }" rel="stylesheet" type="text/css" />`
-		).join( '' );
+	const reloadEditorAssets = useCallback(
+		debounce( () => {
+			const externalStyles = map(
+				stylesheets,
+				( path, id ) =>
+					`<link id="${ id }" href="${ path }" rel="stylesheet" type="text/css" />`
+			).join( '' );
 
-		const inlineStyles = Array.from( document.head.children )
-			.filter(
-				( node ) =>
-					node.dataset.emotion === 'crowdsignal' ||
-					node.dataset.emotion === 'crowdsignal-global'
-			)
-			.map( ( node ) =>
-				[ ...node.sheet.cssRules ]
-					.map( ( rule ) => rule.cssText )
-					.join( ' ' )
-			)
-			.join( '' );
+			const inlineStyles = Array.from( document.head.children )
+				.filter(
+					( node ) =>
+						node.dataset.emotion === 'crowdsignal' ||
+						node.dataset.emotion === 'crowdsignal-global'
+				)
+				.map( ( node ) =>
+					[ ...node.sheet.cssRules ]
+						.map( ( rule ) => rule.cssText )
+						.join( ' ' )
+				)
+				.join( '' );
 
-		// This relies on __unstableResolvedAssets which unfortunately seems like
-		// the only way to inject our styles into block preview components for the current
-		// Gutenberg version. Leaving the link as a reference for when it does change:
-		//
-		// https://github.com/WordPress/gutenberg/blob/v12.9.0/packages/block-editor/src/components/block-preview/auto.js#L35
-		const settings = {
-			__unstableResolvedAssets: {
-				styles: [
-					`${ externalStyles }<style>${ inlineStyles }</style>`,
-				],
-			},
-		};
-
-		updateEditorSettings( { editor: { ...settings } } );
-	}, [ theme ] );
+			// This relies on __unstableResolvedAssets which unfortunately seems like
+			// the only way to inject our styles into block preview components for the current
+			// Gutenberg version. Leaving the link as a reference for when it does change:
+			//
+			// https://github.com/WordPress/gutenberg/blob/v12.9.0/packages/block-editor/src/components/block-preview/auto.js#L35
+			updateEditorSettings( {
+				editor: {
+					__unstableResolvedAssets: {
+						styles: [
+							`${ externalStyles }<style>${ inlineStyles }</style>`,
+						],
+					},
+				},
+			} );
+		}, 1000 ),
+		[ theme ]
+	);
 
 	useEffect( () => {
 		const observer = new window.MutationObserver( reloadEditorAssets );

@@ -7,21 +7,13 @@ import {
 	filter,
 	get,
 	isEmpty,
-	isEqual,
 	map,
 	pickBy,
 	slice,
 	some,
 	tap,
 } from 'lodash';
-import { createSelectorCreator, defaultMemoize } from 'reselect';
-
-// Creates a 'createSelector' instance using lodash 'isEqual'
-// function as the comparison method
-const createDeepEqualSelector = createSelectorCreator(
-	defaultMemoize,
-	isEqual
-);
+import { createSelector } from 'reselect';
 
 /**
  * Internal dependencies
@@ -167,7 +159,7 @@ export const getEditorTemplate = ( state ) => state.editor.template;
  * @param  {Object} state App state.
  * @return {Object}       Embed card settings object.
  */
-export const getEditorSettings = createDeepEqualSelector(
+export const getEditorSettings = createSelector(
 	( state ) => state.editor.settings,
 	isEditingConfirmationPage,
 	( settings, isConfirmationPage ) => {
