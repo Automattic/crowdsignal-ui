@@ -33,13 +33,19 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					label={ __( 'Checked Value', 'block-editor' ) }
 					value={ attributes.checkedText }
 					onChange={ handleChangeAttribute( 'checkedText' ) }
-					help={ __( 'TBD', 'block-editor' ) }
+					help={ __(
+						'Results text when box is checked',
+						'block-editor'
+					) }
 				/>
 				<TextControl
 					label={ __( 'Unchecked Value', 'block-editor' ) }
 					value={ attributes.uncheckedText }
 					onChange={ handleChangeAttribute( 'uncheckedText' ) }
-					help={ __( 'TBD', 'block-editor' ) }
+					help={ __(
+						'Results text when box is unchecked',
+						'block-editor'
+					) }
 				/>
 			</PanelBody>
 

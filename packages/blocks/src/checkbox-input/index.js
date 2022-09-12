@@ -29,7 +29,7 @@ const CheckboxInput = ( { attributes, className } ) => {
 		: attributes.uncheckedText;
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-simple-checkbox',
+		'crowdsignal-forms-checkbox-input',
 		'is-inline',
 		{
 			'is-required': attributes.mandatory,
@@ -66,7 +66,7 @@ const CheckboxInput = ( { attributes, className } ) => {
 				onChange={ onChangeHandler }
 				value={ value }
 			/>
-			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-checkbox-input-block__label">
 				<RawHTML>{ attributes.mandatory }</RawHTML>
 			</FormInputWrapper.Label>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
@@ -74,6 +74,6 @@ const CheckboxInput = ( { attributes, className } ) => {
 	);
 };
 
-CheckboxInput.blockName = 'crowdsignal-forms/single-checkbox';
+CheckboxInput.blockName = 'crowdsignal-forms/checkbox-input';
 
 export default CheckboxInput;
