@@ -2,7 +2,18 @@
  * External dependencies
  */
 import { serialize, parse } from '@wordpress/blocks';
-import { get, isEmpty, map, pickBy, slice, some } from 'lodash';
+import {
+	cloneDeep,
+	filter,
+	get,
+	isEmpty,
+	map,
+	pickBy,
+	slice,
+	some,
+	tap,
+} from 'lodash';
+import { createSelector } from 'reselect';
 
 /**
  * Internal dependencies
@@ -141,6 +152,30 @@ export const getEditorTheme = ( state ) =>
  * @return {string}       Theme.
  */
 export const getEditorTemplate = ( state ) => state.editor.template;
+
+/**
+ * Returns the current editor settings.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed card settings object.
+ */
+export const getEditorSettings = createSelector(
+	( state ) => state.editor.settings,
+	isEditingConfirmationPage,
+	( settings, isConfirmationPage ) => {
+		if ( ! isConfirmationPage ) {
+			return settings;
+		}
+
+		return tap( cloneDeep( settings ), ( { editor, iso } ) => {
+			iso.blocks.allowBlocks = filter(
+				iso.blocks.allowBlocks,
+				( block ) => ! block.match( /^crowdsignal\-forms\/.+/ )
+			);
+			editor.allowedBlockTypes = iso.blocks.allowBlocks;
+		} );
+	}
+);
 
 /**
  * Returns the slug for the project currently in the editor.

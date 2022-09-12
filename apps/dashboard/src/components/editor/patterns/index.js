@@ -10,11 +10,9 @@ import { serialize } from '@wordpress/blocks';
 import { CATEGORIES } from './categories';
 import PATTERNS from './patterns';
 
-export const registerPatterns = ( settings ) => {
+export const registerPatterns = () => {
 	return {
-		...settings,
 		editor: {
-			...settings.editor,
 			__experimentalBlockPatternCategories: CATEGORIES,
 			__experimentalBlockPatterns: map( PATTERNS, ( pattern ) => ( {
 				...pattern,

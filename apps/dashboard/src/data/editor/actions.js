@@ -25,6 +25,7 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_SETTINGS_UPDATE,
 	EDITOR_SLUG_UPDATE,
 	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
@@ -189,6 +190,11 @@ export const updateEditorEmbedPopupSettings = ( settings ) => ( {
 export const updateEditorNavigationSettings = ( navigation ) => ( {
 	type: EDITOR_NAVIGATION_SETTINGS_UPDATE,
 	navigation,
+} );
+
+export const updateEditorSettings = ( settings ) => ( {
+	type: EDITOR_SETTINGS_UPDATE,
+	settings,
 } );
 
 export const updateEditorSlug = ( slug ) => ( {

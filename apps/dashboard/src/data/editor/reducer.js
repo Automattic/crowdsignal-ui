@@ -22,13 +22,14 @@ import {
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
+	EDITOR_SETTINGS_UPDATE,
 	EDITOR_SLUG_UPDATE,
 	EDITOR_TEMPLATE_UPDATE,
 	EDITOR_THEME_UPDATE,
 	EDITOR_TITLE_UPDATE,
 } from '../action-types';
 import { clonePage, errors } from './util';
-
+import { editorSettings } from './defaults';
 /**
  * Tracks which project properties have changed since the last save.
  *
@@ -373,6 +374,31 @@ const projectId = ( state = 0, action ) => {
 };
 
 /**
+ * Editor settings.
+ *
+ * @param  {Object} state  App state.
+ * @param  {Object} action Action object.
+ * @return {Object}        Settings.
+ */
+const settings = ( state = editorSettings, action ) => {
+	if ( action.type === EDITOR_SETTINGS_UPDATE ) {
+		return {
+			...state,
+			iso: {
+				...state.iso,
+				...action.settings.iso,
+			},
+			editor: {
+				...state.editor,
+				...action.settings.editor,
+			},
+		};
+	}
+
+	return state;
+};
+
+/**
  * Project template.
  *
  * @param  {string} state  App state.
@@ -444,6 +470,7 @@ export default combineReducers( {
 	navigation,
 	pages,
 	projectId,
+	settings,
 	slug,
 	template,
 	theme,

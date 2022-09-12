@@ -45,6 +45,7 @@ export const useEditorContent = ( project ) => {
 		totalPages,
 		currentPageContent,
 		editorProjectId,
+		editorSettings,
 		isEditorContentSaved,
 		editorTheme,
 		navigationSettings,
@@ -55,6 +56,7 @@ export const useEditorContent = ( project ) => {
 		select( STORE_NAME ).getEditorPages().length,
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
+		select( STORE_NAME ).getEditorSettings(),
 		select( STORE_NAME ).isEditorContentSaved(),
 		select( STORE_NAME ).getEditorTheme(),
 		select( STORE_NAME ).getEditorNavigationSettings(),
@@ -140,6 +142,7 @@ export const useEditorContent = ( project ) => {
 
 	return {
 		editorId,
+		editorSettings,
 		editorTheme,
 		confirmationPage,
 		currentPage,
