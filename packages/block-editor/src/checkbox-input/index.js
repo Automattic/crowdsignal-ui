@@ -21,9 +21,7 @@ const settings = {
 	category: 'crowdsignal-forms/form',
 	keywords: [
 		__( 'checkbox', 'block-editor' ),
-		__( 'text', 'block-editor' ),
-		__( 'open text', 'block-editor' ),
-		__( 'form', 'block-editor' ),
+		__( 'terms of service', 'block-editor' ),
 	],
 	icon: <CheckboxInputIcon />,
 	edit: EditFreeText,
@@ -35,7 +33,7 @@ const settings = {
 	},
 	example: {
 		attributes: {
-			question: __( 'How does gravity work?', 'block-editor' ),
+			label: __( 'I agree to the terms of service', 'block-editor' ),
 		},
 	},
 	getEditWrapperProps( { justification } ) {
