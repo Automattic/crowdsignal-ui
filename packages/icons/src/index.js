@@ -10,6 +10,7 @@ export * from './multiple-choice';
 export * from './multiple-choice-answer';
 export * from './multiple-choice-dropdown';
 export * from './multiple-choice-question';
+export * from './phone-number';
 export * from './radio-input';
 export * from './ranking-question';
 export * from './rating-scale-question';

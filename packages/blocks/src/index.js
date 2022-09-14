@@ -5,6 +5,7 @@ import FileInput from './file-input';
 import MatrixQuestion from './matrix-question';
 import MultipleChoiceAnswer from './multiple-choice-answer';
 import MultipleChoiceQuestion from './multiple-choice-question';
+import PhoneNumber from './phone-number';
 import Poll from './poll';
 import PollAnswer from './poll-answer';
 import RankingAnswer from './ranking-answer';
@@ -26,6 +27,7 @@ export {
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
+	PhoneNumber,
 	Poll,
 	PollAnswer,
 	RankingAnswer,
@@ -46,6 +48,7 @@ export const projectBlocks = [
 	MatrixQuestion,
 	MultipleChoiceAnswer,
 	MultipleChoiceQuestion,
+	PhoneNumber,
 	RankingAnswer,
 	RankingQuestion,
 	RatingScaleAnswer,
