@@ -86,5 +86,12 @@ export const FULL_WIDTH_IMAGE_WITH_OFF_CENTER_TEXT_AND_BUTTON = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

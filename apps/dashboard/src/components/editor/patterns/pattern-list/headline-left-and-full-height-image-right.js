@@ -85,5 +85,12 @@ export const HEADLINE_LEFT_AND_FULL_HEIGHT_IMAGE_RIGHT = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

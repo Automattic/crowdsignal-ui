@@ -67,5 +67,12 @@ export const THANK_YOU_IMAGE_RIGHT = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

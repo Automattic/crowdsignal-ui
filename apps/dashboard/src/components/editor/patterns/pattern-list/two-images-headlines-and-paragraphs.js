@@ -119,5 +119,12 @@ export const TWO_IMAGES_HEADLINES_AND_PARAGRAPHS = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

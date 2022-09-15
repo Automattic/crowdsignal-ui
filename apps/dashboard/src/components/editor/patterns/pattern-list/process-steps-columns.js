@@ -31,7 +31,7 @@ export const PROCESS_STEPS_COLUMNS = {
 								className: 'margin-bottom-none',
 								style: {
 									typography: {
-										fontSize: 120,
+										fontSize: 110,
 										lineHeight: '0.8',
 									},
 									color: { text: '#d3d3d3' },
@@ -103,7 +103,7 @@ export const PROCESS_STEPS_COLUMNS = {
 								className: 'margin-bottom-none',
 								style: {
 									typography: {
-										fontSize: 120,
+										fontSize: 110,
 										lineHeight: '0.8',
 									},
 									color: { text: '#d3d3d3' },
@@ -174,7 +174,7 @@ export const PROCESS_STEPS_COLUMNS = {
 								className: 'margin-bottom-none',
 								style: {
 									typography: {
-										fontSize: 120,
+										fontSize: 110,
 										lineHeight: '0.8',
 									},
 									color: { text: '#d3d3d3' },
@@ -246,7 +246,7 @@ export const PROCESS_STEPS_COLUMNS = {
 								style: {
 									typography: {
 										lineHeight: '0.8',
-										fontSize: 120,
+										fontSize: 110,
 									},
 									color: { text: '#d3d3d3' },
 								},

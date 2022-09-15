@@ -101,5 +101,12 @@ export const IMAGE_AND_TEXT_SIDE_BY_SIDE = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

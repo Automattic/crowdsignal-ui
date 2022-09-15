@@ -133,5 +133,12 @@ export const INTRO_WITH_TEXT_AND_SPOT_IMAGE = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

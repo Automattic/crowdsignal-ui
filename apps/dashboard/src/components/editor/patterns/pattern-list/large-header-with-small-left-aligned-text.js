@@ -93,5 +93,12 @@ export const LARGE_HEADER_WITH_SMALL_LEFT_ALIGNED_TEXT = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

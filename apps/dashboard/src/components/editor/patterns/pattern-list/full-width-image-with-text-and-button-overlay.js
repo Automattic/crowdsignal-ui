@@ -66,5 +66,12 @@ export const FULL_WIDTH_IMAGE_WITH_TEXT_AND_BUTTON_OVERLAY = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

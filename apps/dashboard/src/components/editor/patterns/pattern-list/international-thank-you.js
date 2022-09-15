@@ -41,5 +41,12 @@ export const INTERNATIONAL_THANK_YOU = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

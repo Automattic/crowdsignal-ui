@@ -99,5 +99,12 @@ export const LARGE_IMAGE_HEADLINE_RIGHT = {
 				},
 			],
 		},
+		{
+			name: 'core/spacer',
+			attributes: {
+				height: '10px',
+			},
+			innerBlocks: [],
+		},
 	],
 };

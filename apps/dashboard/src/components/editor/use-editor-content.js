@@ -3,6 +3,7 @@
  */
 import { useCallback, useEffect, useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
+import { isEmpty, isEqual } from 'lodash';
 
 /**
  * Internal dependencies
@@ -25,8 +26,6 @@ const getEditorProjectData = ( project, draft = true ) => ( {
 
 export const useEditorContent = ( project ) => {
 	const [ forceDraft, setForceDraft ] = useState( false );
-	const [ ready, setReady ] = useState( false );
-
 	const [ editorId, setEditorId ] = useState();
 
 	const { removeNotice } = useDispatch( 'core/notices' );
@@ -42,7 +41,7 @@ export const useEditorContent = ( project ) => {
 	const [
 		confirmationPage,
 		currentPage,
-		totalPages,
+		editorPages,
 		currentPageContent,
 		editorProjectId,
 		editorSettings,
@@ -53,7 +52,7 @@ export const useEditorContent = ( project ) => {
 	] = useSelect( ( select ) => [
 		select( STORE_NAME ).isEditingConfirmationPage(),
 		select( STORE_NAME ).getEditorCurrentPageIndex(),
-		select( STORE_NAME ).getEditorPages().length,
+		select( STORE_NAME ).getEditorPages(),
 		select( STORE_NAME ).getEditorCurrentPage(),
 		select( STORE_NAME ).getEditorProjectId(),
 		select( STORE_NAME ).getEditorSettings(),
@@ -76,7 +75,6 @@ export const useEditorContent = ( project ) => {
 				confirmationPage ? 'confirm' : ''
 			}`
 		);
-		setReady( false );
 	}, [ editorProjectId, confirmationPage, currentPage ] );
 
 	useEffect( () => {
@@ -93,17 +91,19 @@ export const useEditorContent = ( project ) => {
 	const saveBlocks = useCallback(
 		( blocks ) => {
 			// Isolated block editor forces a save as soon as the editor content has loaded.
-			// Ignore the first save and set 'ready' to true.
+			// Ignore the first save if the editor pages is empty or if the content if identical.
 			//
 			// https://github.com/Automattic/isolated-block-editor/blob/bca504ae1ef98cf1aba136d70e29fc339aa8ec61/src/components/content-saver/index.js#L47
-			if ( ! ready ) {
-				setReady( true );
+			if (
+				isEmpty( editorPages ) ||
+				isEqual( editorPages[ currentPage ], blocks )
+			) {
 				return;
 			}
 
 			updateEditorPage( currentPage, blocks );
 		},
-		[ ready ]
+		[ editorPages, currentPage ]
 	);
 
 	const restoreDraft = () => {
@@ -112,7 +112,6 @@ export const useEditorContent = ( project ) => {
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
 
-		setReady( false );
 		useClientId.resetRegistry();
 	};
 
@@ -127,7 +126,6 @@ export const useEditorContent = ( project ) => {
 
 		// Force IsolatedBlockEditor to reload
 		setEditorId( `${ editorId }*` );
-		setReady( false );
 	};
 
 	const setProjectTheme = ( theme, autoSave = true ) => {
@@ -146,7 +144,7 @@ export const useEditorContent = ( project ) => {
 		editorTheme,
 		confirmationPage,
 		currentPage,
-		totalPages,
+		totalPages: editorPages.length,
 		navigationSettings,
 		loadBlocks,
 		saveBlocks,
