@@ -15,7 +15,6 @@ export default {
 		type: 'string',
 		default: 'unchecked',
 	},
-	// should this be an entry on restrictions?
 	mandatory: {
 		type: 'boolean',
 		default: false,

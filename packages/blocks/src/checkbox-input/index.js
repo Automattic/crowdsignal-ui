@@ -10,7 +10,12 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import { ErrorMessage, CheckboxAnswer, FormInputWrapper } from '../components';
+import {
+	ErrorMessage,
+	CheckboxAnswer,
+	FormInputWrapper,
+	FormCheckbox,
+} from '../components';
 import { useColorStyles, useBorderStyles } from '@crowdsignal/styles';
 
 const CheckboxInput = ( { attributes, className } ) => {
@@ -23,10 +28,10 @@ const CheckboxInput = ( { attributes, className } ) => {
 		},
 	} );
 
-	const isSelected = fieldValue === attributes.checkedText;
+	const isSelected = fieldValue === __( 'Checked', 'blocks' );
 	const value = isSelected
-		? attributes.checkedText
-		: attributes.uncheckedText;
+		? __( 'Unchecked', 'blocks' )
+		: __( 'Checked', 'blocks' );
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-checkbox-input',
@@ -39,16 +44,14 @@ const CheckboxInput = ( { attributes, className } ) => {
 
 	useEffect( () => {
 		if ( isEmpty( fieldValue ) ) {
-			onChange( attributes.uncheckedText );
+			onChange( __( 'Unchecked', 'blocks' ) );
 		}
 	}, [] );
 
 	const onChangeHandler = () => {
-		if ( isSelected ) {
-			onChange( attributes.uncheckedText );
-		} else {
-			onChange( attributes.checkedText );
-		}
+		onChange(
+			isSelected ? __( 'Unchecked', 'blocks' ) : __( 'Checked', 'blocks' )
+		);
 	};
 
 	return (
@@ -61,14 +64,15 @@ const CheckboxInput = ( { attributes, className } ) => {
 		>
 			<CheckboxAnswer
 				attributes={ attributes }
+				checked={ isSelected }
 				isMultiSelect
 				isSelected={ isSelected }
 				onChange={ onChangeHandler }
 				value={ value }
 			/>
-			<FormInputWrapper.Label className="crowdsignal-forms-checkbox-input-block__label">
+			<FormCheckbox.Label className="crowdsignal-forms-checkbox-input-block__label">
 				<RawHTML>{ attributes.mandatory }</RawHTML>
-			</FormInputWrapper.Label>
+			</FormCheckbox.Label>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);

@@ -54,7 +54,7 @@ const EditTextInput = ( props ) => {
 			style={ { ...useColorStyles( attributes ) } }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-checkbox-input-block__label">
 				<RichText
 					placeholder={ __( 'Enter form label', 'block-editor' ) }
 					onChange={ handleChangeLabel }

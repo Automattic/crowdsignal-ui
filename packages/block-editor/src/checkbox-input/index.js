@@ -29,7 +29,6 @@ const settings = {
 	supports: {
 		html: false,
 		reusable: false,
-		align: [ 'wide', 'full' ],
 	},
 	example: {
 		attributes: {
