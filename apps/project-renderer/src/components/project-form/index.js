@@ -50,7 +50,7 @@ const ProjectForm = ( props ) => {
 	};
 
 	if ( ! pageContent ) {
-		return 'Wait...';
+		return 'Please wait, connecting to Crowdsignal...';
 	}
 
 	return (
