@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /**
  * External dependencies
  */
@@ -12,8 +13,9 @@ import { filter } from 'lodash';
  */
 import { hasUnpublishedChanges, isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import PublishButton from './publish-button';
 import { NOTICE_UNPUBLISHED } from './notice';
+import PublishButton from './publish-button';
+import PreviewButton from './preview-button';
 
 /**
  * Style dependencies
@@ -75,6 +77,11 @@ const Toolbar = ( { project, onShareClick } ) => {
 							: __( 'Save draft', 'dashboard' ) }
 					</ToolbarButton>
 				) }
+
+			<PreviewButton
+				previewURL={ previewURL }
+				disabled={ ! project || ! project.id }
+			/>
 
 			<ToolbarButton
 				as={ Button }

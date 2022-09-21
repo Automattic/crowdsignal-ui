@@ -129,6 +129,15 @@ export const isEditorContentPublishable = ( state ) => {
 };
 
 /**
+ * Returns the current editor preview type.
+ *
+ * @param  {Object} state App state.
+ * @return {string}       Current preview type.
+ */
+export const getEditorPreviewType = ( state ) =>
+	state.editor.previewType || 'Desktop';
+
+/**
  * Returns the editor project's title.
  *
  * @param  {Object} state App state.
@@ -194,6 +203,27 @@ export const getEditorSlug = ( state ) => state.editor.slug;
 export const getEditorEmbedCardSettings = ( state ) => state.editor.embedCard;
 
 /**
+ * Returns the embed card preview styles.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed card styles object.
+ */
+export const getEditorEmbedCardPreviewStyle = ( state ) => {
+	const cardSettings = getEditorEmbedCardSettings( state ) || {};
+	const width = cardSettings?.viewport?.width || 1000;
+	const height = cardSettings?.viewport?.height || 600;
+
+	return {
+		width: `${ width }px`,
+		height: `${ height }px`,
+		margin: 'auto',
+		display: 'block',
+		alignSelf: 'center',
+		overflow: 'hidden',
+	};
+};
+
+/**
  * Returns the embed popup settings for the project currently in the editor.
  *
  * @param  {Object} state App state.
@@ -205,6 +235,30 @@ export const getEditorEmbedPopupSettings = ( state ) =>
 		position: 'bottom-left',
 		showOnMobile: true,
 	};
+
+/**
+ * Returns the embed popup preview styles.
+ *
+ * @param  {Object} state App state.
+ * @return {Object}       Embed popup styles object.
+ */
+export const getEditorEmbedPopupPreviewStyle = ( state ) => {
+	const { position, width } = getEditorEmbedPopupSettings( state );
+	const [ verticalPos, horizontalPos ] = position.split( '-' );
+
+	return {
+		position: 'absolute',
+		[ verticalPos ]: '30px',
+		[ horizontalPos ]: '30px',
+		width: `${ width }px`,
+		maxHeight: '90%',
+		height: '4000px',
+		margin: 0,
+		display: 'block',
+		overflow: 'hidden',
+		borderRadius: '10px',
+	};
+};
 
 /**
  * Returns the navigation settings for the project currently in the editor.

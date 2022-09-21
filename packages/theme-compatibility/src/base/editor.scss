@@ -117,7 +117,9 @@ html {
 	}
 }
 
-.editor .iso-editor {
+.editor .iso-editor,
+body.editor-styles-wrapper
+{
 	.block-editor-writing-flow {
 		line-height: initial;
 		padding: 0;

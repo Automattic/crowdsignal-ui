@@ -22,6 +22,7 @@ import {
 	EDITOR_PAGE_INSERT,
 	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
+	EDITOR_PREVIEW_TYPE_UPDATE,
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
@@ -161,6 +162,11 @@ export const updateEditorPageOrder = autosave( ( order ) => ( {
 	type: EDITOR_PAGE_ORDER_UPDATE,
 	order,
 } ) );
+
+export const updateEditorPreviewType = ( previewType ) => ( {
+	type: EDITOR_PREVIEW_TYPE_UPDATE,
+	previewType,
+} );
 
 export const updateEditorTitle = autosave( ( title ) => ( {
 	type: EDITOR_TITLE_UPDATE,

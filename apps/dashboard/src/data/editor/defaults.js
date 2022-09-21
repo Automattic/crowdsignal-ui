@@ -59,6 +59,7 @@ export const editorSettings = {
 		defaultPreferences: {
 			fixedToolbar: false,
 		},
+		disableCanvasAnimations: true,
 		sidebar: {
 			inserter: true,
 			inspector: true,
