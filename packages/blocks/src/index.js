@@ -13,6 +13,7 @@ import RatingScaleQuestion from './rating-scale-question';
 import SubmitButton from './submit-button';
 import TextInput from './text-input';
 import TextQuestion from './text-question';
+import DateTimePicker from './date-time-picker';
 
 export * from './components';
 
@@ -32,6 +33,7 @@ export {
 	SubmitButton,
 	TextInput,
 	TextQuestion,
+	DateTimePicker,
 };
 
 export const projectBlocks = [
@@ -48,6 +50,7 @@ export const projectBlocks = [
 	SubmitButton,
 	TextInput,
 	TextQuestion,
+	DateTimePicker,
 ];
 
 export { renderBlocks } from './render-blocks';
