@@ -21,20 +21,13 @@ export const useField = ( {
 	const { name: formName } = useContext( Form.Context );
 	const { setFieldValue } = useDispatch( STORE_NAME );
 	const { error, validateField } = useValidation( { fieldName, validation } );
-	const fieldValue = useSelect(
-		( select ) => {
-			const value = select( STORE_NAME ).getFieldValue(
-				formName,
-				fieldName
-			);
-
-			return ! isNil( value ) ? value : defaultValue;
-		},
+	const currentValue = useSelect(
+		( select ) => select( STORE_NAME ).getFieldValue( formName, fieldName ),
 		[ formName, fieldName ]
 	);
 
 	useEffect( () => {
-		if ( initialValue ) {
+		if ( initialValue && isNil( currentValue ) ) {
 			setFieldValue( formName, fieldName, initialValue );
 		}
 	}, [] );
@@ -43,6 +36,8 @@ export const useField = ( {
 		setFieldValue( formName, fieldName, value );
 		validateField( value );
 	};
+
+	const fieldValue = ! isNil( currentValue ) ? currentValue : defaultValue;
 
 	return {
 		error,

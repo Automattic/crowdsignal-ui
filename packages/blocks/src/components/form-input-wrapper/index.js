@@ -11,6 +11,11 @@ import { ErrorMessage } from '../';
 const FormInputWrapper = styled.div`
 	position: relative;
 
+	&.is-inline {
+		display: flex;
+		align-items: center;
+	}
+
 	${ ErrorMessage.className } {
 		position: absolute;
 		left: 0;

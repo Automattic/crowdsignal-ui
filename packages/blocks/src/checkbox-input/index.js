@@ -1,9 +1,8 @@
 /**
  * External dependencies
  */
-import { RawHTML, useEffect } from '@wordpress/element';
+import { RawHTML } from '@wordpress/element';
 import classnames from 'classnames';
-import { isEmpty } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -18,6 +17,7 @@ const CheckboxInput = ( { attributes, className } ) => {
 	const isUnchecked = __( 'Unchecked', 'blocks' );
 	const { error, fieldValue, onChange } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
+		initialValue: isUnchecked,
 		validation: ( value ) => {
 			if ( attributes.mandatory && value === isUnchecked ) {
 				return __( 'This field is required', 'blocks' );
@@ -36,12 +36,6 @@ const CheckboxInput = ( { attributes, className } ) => {
 			'is-error': error,
 		}
 	);
-
-	useEffect( () => {
-		if ( isEmpty( fieldValue ) ) {
-			onChange( isUnchecked );
-		}
-	}, [] );
 
 	const onChangeHandler = () => {
 		onChange( isSelected ? isUnchecked : isChecked );
