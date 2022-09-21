@@ -9,13 +9,8 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import {
-	FormInputWrapper,
-	FormTextInput,
-	FormDropdownInput,
-} from '@crowdsignal/blocks';
+import { FormInputWrapper, FormTextInput } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
-import { ChevronDownIcon } from '@crowdsignal/icons';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
@@ -48,9 +43,6 @@ const EditPhoneNumber = ( props ) => {
 		}
 	);
 
-	const handleChangeAttribute = ( key ) => ( value ) =>
-		setAttributes( { [ key ]: value } );
-
 	return (
 		<FormInputWrapper
 			className={ classes }
@@ -64,17 +56,6 @@ const EditPhoneNumber = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDropdownInput.Button outline>
-				<RichText
-					placeholder={ __( '+1', 'block-editor' ) }
-					value={ attributes.buttonLabel }
-					onChange={ handleChangeAttribute( 'buttonLabel' ) }
-					allowedFormats={ [] }
-					multiline={ false }
-					disableLineBreaks={ true }
-				/>
-				<ChevronDownIcon />
-			</FormDropdownInput.Button>
 			<ResizableBox
 				showHandle={ isSelected }
 				enable={ { bottom: true, right: true } }

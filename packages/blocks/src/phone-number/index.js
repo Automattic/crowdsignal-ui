@@ -52,7 +52,7 @@ const PhoneNumber = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-phone-number-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			{ attributes.inputHeight < MULTILINE_THRESHOLD ? (
@@ -80,7 +80,7 @@ const PhoneNumber = ( { attributes, className } ) => {
 	);
 };
 
-PhoneNumber.blockName = 'crowdsignal-forms/text-input';
+PhoneNumber.blockName = 'crowdsignal-forms/phone-number';
 PhoneNumber.MULTILINE_THRESHOLD = MULTILINE_THRESHOLD;
 
 export default PhoneNumber;

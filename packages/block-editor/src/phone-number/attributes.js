@@ -5,7 +5,7 @@ export default {
 	},
 	label: {
 		type: 'string',
-		default: '',
+		default: 'Phone Number',
 	},
 	placeholder: {
 		type: 'string',
