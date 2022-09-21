@@ -10,28 +10,23 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { useField } from '@crowdsignal/form';
-import {
-	ErrorMessage,
-	CheckboxAnswer,
-	FormInputWrapper,
-	FormCheckbox,
-} from '../components';
+import { ErrorMessage, FormInputWrapper, FormCheckbox } from '../components';
 import { useColorStyles, useBorderStyles } from '@crowdsignal/styles';
 
 const CheckboxInput = ( { attributes, className } ) => {
+	const isChecked = __( 'Checked', 'blocks' );
+	const isUnchecked = __( 'Unchecked', 'blocks' );
 	const { error, fieldValue, onChange } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
-			if ( attributes.mandatory && ! value ) {
+			if ( attributes.mandatory && value === isUnchecked ) {
 				return __( 'This field is required', 'blocks' );
 			}
 		},
 	} );
 
-	const isSelected = fieldValue === __( 'Checked', 'blocks' );
-	const value = isSelected
-		? __( 'Unchecked', 'blocks' )
-		: __( 'Checked', 'blocks' );
+	const isSelected = fieldValue === isChecked;
+	const value = isSelected ? isUnchecked : isChecked;
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-checkbox-input',
@@ -44,14 +39,12 @@ const CheckboxInput = ( { attributes, className } ) => {
 
 	useEffect( () => {
 		if ( isEmpty( fieldValue ) ) {
-			onChange( __( 'Unchecked', 'blocks' ) );
+			onChange( isUnchecked );
 		}
 	}, [] );
 
 	const onChangeHandler = () => {
-		onChange(
-			isSelected ? __( 'Unchecked', 'blocks' ) : __( 'Checked', 'blocks' )
-		);
+		onChange( isSelected ? isUnchecked : isChecked );
 	};
 
 	return (
@@ -62,17 +55,14 @@ const CheckboxInput = ( { attributes, className } ) => {
 			} }
 			className={ classes }
 		>
-			<CheckboxAnswer
-				attributes={ attributes }
-				checked={ isSelected }
-				isMultiSelect
-				isSelected={ isSelected }
-				onChange={ onChangeHandler }
-				value={ value }
-			/>
-			<FormCheckbox.Label className="crowdsignal-forms-checkbox-input-block__label">
-				<RawHTML>{ attributes.mandatory }</RawHTML>
-			</FormCheckbox.Label>
+			<FormInputWrapper.Label>
+				<FormCheckbox
+					checked={ isSelected }
+					onChange={ onChangeHandler }
+					value={ value }
+				/>
+				<RawHTML>{ attributes.label }</RawHTML>
+			</FormInputWrapper.Label>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
