@@ -16,10 +16,9 @@ import { useField } from '@crowdsignal/form';
 // import validator from './validations';
 
 const DateTimePicker = ( { attributes, className } ) => {
-	const [ startDate, setStartDate ] = useState( new Date() );
-	console.log( startDate );
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
+		initialValue: new Date(),
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -27,12 +26,17 @@ const DateTimePicker = ( { attributes, className } ) => {
 		},
 	} );
 
+	const handleDateChange = ( e ) => {
+		onChange( e.toDateString() );
+		return e;
+	};
+
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-date-time-picker-block',
 		{
 			'is-required': attributes.mandatory,
-			// 'is-error': error,
+			'is-error': error,
 		}
 	);
 
@@ -46,9 +50,10 @@ const DateTimePicker = ( { attributes, className } ) => {
 			</FormInputWrapper.Label>
 			<DatePicker
 				className={ classes }
-				selected={ startDate }
+				selected={ handleDateChange }
 				dateFormat="MMMM d, yyyy"
-				onChange={ ( date ) => setStartDate( date ) }
+				onChange={ handleDateChange }
+				value={ fieldValue }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

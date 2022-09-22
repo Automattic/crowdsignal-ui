@@ -11,7 +11,11 @@ export default {
 		type: 'string',
 		default: null,
 	},
-	time: {
+	initialValue: {
+		type: 'string',
+		default: new Date(),
+	},
+	selected: {
 		type: 'string',
 		default: null,
 	},

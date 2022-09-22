@@ -5,6 +5,7 @@
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { RichText } from '@wordpress/block-editor';
+import DatePicker from 'react-datepicker';
 
 /**
  * Internal dependencies
@@ -45,11 +46,9 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<DateTimePicker
+			<DatePicker
 				className={ classes }
-				selected={ startDate }
-				onChange={ ( date ) => setStartDate( date ) }
-				customInput={ EditButton }
+				selected={ new Date() }
 				{ ...props }
 			/>
 		</FormInputWrapper>
