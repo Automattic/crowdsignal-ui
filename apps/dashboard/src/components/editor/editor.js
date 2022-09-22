@@ -5,7 +5,9 @@ import { useDispatch } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { kebabCase, noop } from 'lodash';
-import IsolatedBlockEditor, { EditorHeadingSlot } from 'isolated-block-editor'; // eslint-disable-line import/default
+import IsolatedBlockEditor, {
+	EditorHeadingSlot,
+} from '@automattic/isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/react';
 
 /**

@@ -16,7 +16,7 @@ import { format } from '@wordpress/date';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 // eslint-disable-next-line import/named
-import { DocumentSection } from 'isolated-block-editor';
+import { DocumentSection } from '@automattic/isolated-block-editor';
 
 /**
  * Internal dependencies

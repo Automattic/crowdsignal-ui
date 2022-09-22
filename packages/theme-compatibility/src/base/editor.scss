@@ -1,5 +1,5 @@
 @import 'base';
-@import '~isolated-block-editor/build-browser/core.css';
+@import '~@automattic/isolated-block-editor/build-browser/core.css';
 
 html {
 	--cs--preset--font-size--normal: var(--wp--preset--font-size--normal, 16px);

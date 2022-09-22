@@ -5,7 +5,7 @@
 import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
+import { ToolbarSlot } from '@automattic/isolated-block-editor'; // eslint-disable-line import/named
 import { filter } from 'lodash';
 
 /**
