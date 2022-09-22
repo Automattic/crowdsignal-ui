@@ -79,19 +79,9 @@ const Toolbar = ( { project, onShareClick } ) => {
 				) }
 
 			<PreviewButton
+				disabled={ ! project || ! project.id }
 				previewURL={ previewURL }
-				disabled={ ! project || ! project.id }
 			/>
-
-			<ToolbarButton
-				as={ Button }
-				variant="tertiary"
-				href={ previewURL }
-				target="_blank"
-				disabled={ ! project || ! project.id }
-			>
-				{ __( 'Preview', 'block-editor' ) }
-			</ToolbarButton>
 
 			<PublishButton
 				project={ project }
