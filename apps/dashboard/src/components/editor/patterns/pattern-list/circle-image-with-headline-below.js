@@ -28,7 +28,7 @@ export const CIRCLE_IMAGE_WITH_HEADLINE_BELOW = {
 			name: 'core/heading',
 			attributes: {
 				textAlign: 'center',
-				content: '<strong>Did you enjoy your icecream today?</strong>',
+				content: '<strong>Did you enjoy your ice cream today?</strong>',
 				level: 2,
 			},
 			innerBlocks: [],
