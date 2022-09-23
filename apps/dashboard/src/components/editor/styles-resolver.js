@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useCallback, useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { debounce, map } from 'lodash';
 
 /**
@@ -16,8 +16,15 @@ window.__editorAssets = window.__editorAssets || {
 	scripts: '',
 };
 
+const IFRAME_SELECTOR =
+	'.block-editor-block-preview__container iframe, .edit-post-visual-editor__content-area iframe';
+const WRAPPER_DIV_SELECTOR = 'body > div:first-child';
+
 const PreviewStylesResolver = ( { theme } ) => {
 	const { updateEditorSettings } = useDispatch( STORE_NAME );
+	const currentPreviewType = useSelect( ( select ) =>
+		select( STORE_NAME ).getEditorPreviewType()
+	);
 
 	const stylesheets = {
 		base: '/ui/stable/theme-compatibility/base-editor.css',
@@ -64,8 +71,29 @@ const PreviewStylesResolver = ( { theme } ) => {
 					},
 				},
 			} );
+
+			// Gutenberg tries to get styles from the current document and include in the previews
+			// https://github.com/WordPress/gutenberg/blob/trunk/packages/block-editor/src/components/iframe/index.js#L360-L363
+			// This logic fails to get external stylesheets and since it resides inside the iframe body
+			// it has higher precedence and it's messing with our previews styles
+			// This logic will try to remove these <link> tags from the preview body
+			Array.from( document.querySelectorAll( IFRAME_SELECTOR ) ).forEach(
+				( iframe ) => {
+					const wrapper = iframe.contentDocument.querySelector(
+						WRAPPER_DIV_SELECTOR
+					);
+
+					// The div added to wrap the stylesheets doesn't have any better
+					// attribute to target this condition ¯\_(ツ)_/¯
+					if ( wrapper && wrapper.style.display === 'none' ) {
+						wrapper
+							.querySelectorAll( 'link' )
+							.forEach( ( n ) => n.remove() );
+					}
+				}
+			);
 		}, 1000 ),
-		[ theme ]
+		[ theme, currentPreviewType ]
 	);
 
 	useEffect( () => {
