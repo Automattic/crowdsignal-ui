@@ -26,7 +26,6 @@ const CheckboxInput = ( { attributes, className } ) => {
 	} );
 
 	const isSelected = fieldValue === isChecked;
-	const value = isSelected ? isUnchecked : isChecked;
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-checkbox-input',
@@ -53,7 +52,7 @@ const CheckboxInput = ( { attributes, className } ) => {
 				<FormCheckbox
 					checked={ isSelected }
 					onChange={ onChangeHandler }
-					value={ value }
+					value={ fieldValue }
 				/>
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
