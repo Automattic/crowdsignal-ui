@@ -7,22 +7,6 @@ export default {
 		type: 'string',
 		default: '',
 	},
-	date: {
-		type: 'string',
-		default: null,
-	},
-	initialValue: {
-		type: 'string',
-		default: new Date(),
-	},
-	selected: {
-		type: 'string',
-		default: null,
-	},
-	placeholder: {
-		type: 'string',
-		default: '',
-	},
 	mandatory: {
 		type: 'boolean',
 		default: false,
