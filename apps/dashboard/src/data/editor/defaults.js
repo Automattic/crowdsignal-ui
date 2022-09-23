@@ -28,8 +28,10 @@ setCategories( [
 
 const enabledBlocks = [
 	'core/buttons',
+	'core/button',
 	'core/code',
 	'core/columns',
+	'core/column',
 	'core/cover',
 	'core/embed',
 	'core/group',

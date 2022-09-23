@@ -1,10 +1,40 @@
-const CONTACT_FORMS = {
-	name: 'crowdsignal-contact-forms',
-	label: 'Contact Forms',
+const COVER = {
+	name: 'cover',
+	label: 'Cover',
+};
+
+const CONTACT = {
+	name: 'contact',
+	label: 'Contact',
+};
+
+const ADDRESS_FORM = {
+	name: 'address-form',
+	label: 'Address Form',
+};
+
+const REGISTRATION = {
+	name: 'registration',
+	label: 'Registration',
+};
+
+const CONFIRMATION = {
+	name: 'confirmation',
+	label: 'Confirmation',
 };
 
 export const CATEGORY_NAMES = {
-	CONTACT_FORMS: CONTACT_FORMS.name,
+	ADDRESS_FORM: ADDRESS_FORM.name,
+	CONFIRMATION: CONFIRMATION.name,
+	CONTACT: CONTACT.name,
+	COVER: COVER.name,
+	REGISTRATION: REGISTRATION.name,
 };
 
-export const CATEGORIES = [ CONTACT_FORMS ];
+export const CATEGORIES = [
+	COVER,
+	CONTACT,
+	ADDRESS_FORM,
+	REGISTRATION,
+	CONFIRMATION,
+];
