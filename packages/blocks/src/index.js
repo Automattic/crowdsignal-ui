@@ -1,3 +1,4 @@
+import CheckboxInput from './checkbox-input';
 import CoreEmbed from './core-embed';
 import DropdownInput from './dropdown-input';
 import FileInput from './file-input';
@@ -18,6 +19,7 @@ import DateTimePicker from './date-time-picker';
 export * from './components';
 
 export {
+	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
 	FileInput,
@@ -37,6 +39,7 @@ export {
 };
 
 export const projectBlocks = [
+	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
 	FileInput,

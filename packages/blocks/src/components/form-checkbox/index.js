@@ -11,7 +11,7 @@ import { popAnimation } from '@crowdsignal/styles';
 
 const CheckboxLabel = styled.label`
 	display: flex;
-	align-items: baseline;
+	align-items: center;
 `;
 
 const CheckboxWrapper = styled.div`
@@ -28,7 +28,6 @@ const CheckboxWrapper = styled.div`
 	margin-right: 0.7em;
 	overflow: hidden;
 	position: relative;
-	transform: translateY( 1px );
 	width: 1em;
 
 	&:last-child {
