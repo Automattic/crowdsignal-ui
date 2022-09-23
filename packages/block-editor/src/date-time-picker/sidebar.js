@@ -1,15 +1,7 @@
 /**
  * External dependencies
  */
-import {
-	// eslint-disable-next-line
-	__experimentalToggleGroupControl as ToggleGroupControl,
-	// eslint-disable-next-line
-	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-	PanelBody,
-	TextControl,
-	ToggleControl,
-} from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 
@@ -19,15 +11,10 @@ import { InspectorControls } from '@wordpress/block-editor';
 import ColorSettings from '../components/color-settings';
 
 export default ( { attributes, setAttributes } ) => {
-	const widthOptions = [ '25%', '50%', '75%', '100%' ];
-
 	const handleChangeAttribute = ( key ) => ( value ) =>
 		setAttributes( {
 			[ key ]: value,
 		} );
-
-	const handleChangeNumericAttribute = ( key ) => ( value ) =>
-		handleChangeAttribute( key )( parseInt( value ) || '' );
 
 	return (
 		<InspectorControls>
@@ -40,25 +27,6 @@ export default ( { attributes, setAttributes } ) => {
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
 				/>
-				<TextControl
-					label={ __( 'Input field height', 'block-editor' ) }
-					type="number"
-					value={ attributes.inputHeight }
-					onChange={ handleChangeNumericAttribute( 'inputHeight' ) }
-				/>
-				<ToggleGroupControl
-					label={ __( 'Field Width', 'block-editor' ) }
-					value={ attributes.inputWidth }
-					onChange={ handleChangeAttribute( 'inputWidth' ) }
-				>
-					{ widthOptions.map( ( option ) => (
-						<ToggleGroupControlOption
-							key={ option }
-							value={ option }
-							label={ option }
-						/>
-					) ) }
-				</ToggleGroupControl>
 			</PanelBody>
 			<ColorSettings
 				initialOpen={ false }

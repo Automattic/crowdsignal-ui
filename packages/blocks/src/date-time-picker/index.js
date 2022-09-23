@@ -13,7 +13,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useColorStyles } from '@crowdsignal/styles';
 import { ErrorMessage, FormInputWrapper } from '../components';
 import { useField } from '@crowdsignal/form';
-// import validator from './validations';
 
 const DateTimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
@@ -56,13 +55,20 @@ const DateTimePicker = ( { attributes, className } ) => {
 				selected={ parsedDate }
 				dateFormat="MMMM d, yyyy"
 				onChange={ handleDateChange }
-				value={ parsedDate }
+				popperModifiers={ [
+					{
+						name: 'arrow',
+						options: {
+							padding: 100,
+						},
+					},
+				] }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
 };
 
-DateTimePicker.blockName = 'crowdsignal-forms/date-time-picker';
+DateTimePicker.blockName = 'crowdsignal-forms/date-picker';
 
 export default DateTimePicker;

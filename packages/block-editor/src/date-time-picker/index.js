@@ -6,13 +6,13 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { DateTimePicker } from '@crowdsignal/blocks';
-import { TextInputIcon } from '@crowdsignal/icons';
+import { DatePickerIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditDateTimePicker from './edit';
 
 const settings = {
 	apiVersion: 1,
-	title: __( 'Date-Time Picker', 'block-editor' ),
+	title: __( 'Date Picker', 'block-editor' ),
 	description: __( 'A date picker for your form.', 'block-editor' ),
 	category: 'crowdsignal-forms/form',
 	keywords: [
@@ -20,12 +20,12 @@ const settings = {
 		__( 'time', 'block-editor' ),
 		__( 'calendar', 'block-editor' ),
 	],
-	icon: <TextInputIcon />,
+	icon: <DatePickerIcon />,
 	edit: EditDateTimePicker,
 	attributes,
 	example: {
 		attributes: {
-			label: __( 'Name', 'block-editor' ),
+			label: __( 'Select Date', 'block-editor' ),
 		},
 	},
 };

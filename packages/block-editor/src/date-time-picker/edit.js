@@ -10,17 +10,13 @@ import DatePicker from 'react-datepicker';
 /**
  * Internal dependencies
  */
-import { FormInputWrapper, DateTimePicker } from '@crowdsignal/blocks';
-import { useState } from '@wordpress/element';
+import { FormInputWrapper } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
-import { default as EditButton } from '../components/edit-button';
 
 const EditDateTimePicker = ( props ) => {
-	const [ startDate, setStartDate ] = useState( new Date() );
-
-	const { attributes, setAttributes, className, isSelected } = props;
+	const { attributes, setAttributes, className } = props;
 
 	useClientId( props );
 
@@ -49,7 +45,14 @@ const EditDateTimePicker = ( props ) => {
 			<DatePicker
 				className={ classes }
 				selected={ new Date() }
-				{ ...props }
+				popperModifiers={ [
+					{
+						name: 'arrow',
+						options: {
+							padding: 100,
+						},
+					},
+				] }
 			/>
 		</FormInputWrapper>
 	);
