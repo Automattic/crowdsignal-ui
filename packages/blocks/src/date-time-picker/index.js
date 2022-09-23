@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { RawHTML, useState } from '@wordpress/element';
+import { RawHTML, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
@@ -28,8 +28,11 @@ const DateTimePicker = ( { attributes, className } ) => {
 
 	const handleDateChange = ( e ) => {
 		onChange( e.toDateString() );
-		return e;
 	};
+
+	const parsedDate = useMemo( () => {
+		return Date.parse( fieldValue );
+	}, [ fieldValue ] );
 
 	const classes = classnames(
 		className,
@@ -50,10 +53,10 @@ const DateTimePicker = ( { attributes, className } ) => {
 			</FormInputWrapper.Label>
 			<DatePicker
 				className={ classes }
-				selected={ handleDateChange }
+				selected={ parsedDate }
 				dateFormat="MMMM d, yyyy"
 				onChange={ handleDateChange }
-				value={ fieldValue }
+				value={ parsedDate }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
