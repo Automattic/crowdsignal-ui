@@ -17,7 +17,7 @@ import { useField } from '@crowdsignal/form';
 const DateTimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
-		initialValue: new Date(),
+		initialValue: new Date().toDateString(),
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
