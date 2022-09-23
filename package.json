@@ -25,7 +25,8 @@
   "dependencies": {
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1"
+    "@emotion/styled": "^11.8.1",
+	"libphonenumber-js": "1.10.13"
   },
   "devDependencies": {
     "@automattic/calypso-build": "^10.0.0",

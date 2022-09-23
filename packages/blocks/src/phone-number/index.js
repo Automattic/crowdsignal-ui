@@ -5,17 +5,13 @@ import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
+// import { AsYouType } from 'libphonenumber-js';
 
 /**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import {
-	ErrorMessage,
-	FormInputWrapper,
-	FormTextarea,
-	FormTextInput,
-} from '../components';
+import { ErrorMessage, FormInputWrapper, FormTextInput } from '../components';
 import { useField } from '@crowdsignal/form';
 import validator from './validations';
 
@@ -38,6 +34,14 @@ const PhoneNumber = ( { attributes, className } ) => {
 		},
 	} );
 
+	// const parseDigits = ( string ) =>
+	// 	( string.match( /\d+/g ) || [] ).join( '' );
+
+	// const formatPhone = ( string ) => {
+	// 	const digits = parseDigits( string ).substr( 0, 10 );
+	// 	return new AsYouType( 'US' ).input( digits );
+	// };
+
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-phone-number-block',
@@ -55,26 +59,14 @@ const PhoneNumber = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-phone-number-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			{ attributes.inputHeight < MULTILINE_THRESHOLD ? (
-				<FormTextInput
-					onChange={ onChange }
-					placeholder={ attributes.placeholder }
-					style={ {
-						width: attributes.inputWidth,
-						height: `${ attributes.inputHeight }px`,
-					} }
-					value={ fieldValue }
-				/>
-			) : (
-				<FormTextarea
-					onChange={ onChange }
-					placeholder={ attributes.placeholder }
-					style={ {
-						height: `${ attributes.inputHeight }px`,
-					} }
-					value={ fieldValue }
-				/>
-			) }
+			<FormTextInput
+				onChange={ onChange }
+				placeholder={ attributes.placeholder }
+				style={ {
+					width: attributes.inputWidth,
+				} }
+				value={ fieldValue }
+			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
