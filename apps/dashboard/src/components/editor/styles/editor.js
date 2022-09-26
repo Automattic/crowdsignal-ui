@@ -50,10 +50,27 @@ export const EditorWrapper = styled.div`
 		width: calc( 100% - 180px );
 	}
 
-	.interface-interface-skeleton__content
-		> .components-notice-list
-		.components-notice {
-		margin: 0;
+	&.is-tablet-preview,
+	&.is-mobile-preview,
+	&.is-popup-preview,
+	&.is-embed-card-preview {
+		.edit-post-visual-editor__content-area {
+			background-color: darkgrey;
+
+			.is-tablet-preview {
+				margin: auto !important;
+			}
+		}
+	}
+
+	.interface-interface-skeleton__content {
+		> .components-notice-list .components-notice {
+			margin: 0;
+		}
+
+		> div:not( [class] ) {
+			height: 100%;
+		}
 	}
 
 	.edit-post-layout.interface-interface-skeleton {
@@ -67,6 +84,7 @@ export const EditorWrapper = styled.div`
 	.edit-post-visual-editor {
 		background-color: transparent;
 		position: relative;
+		height: 100%;
 	}
 
 	.edit-post-visual-editor__content-area .is-desktop-preview {

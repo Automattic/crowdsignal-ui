@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { useCallback, useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { debounce, map } from 'lodash';
 
 /**
@@ -22,6 +22,9 @@ const WRAPPER_DIV_SELECTOR = 'body > div:first-child';
 
 const PreviewStylesResolver = ( { theme } ) => {
 	const { updateEditorSettings } = useDispatch( STORE_NAME );
+	const currentPreviewType = useSelect( ( select ) =>
+		select( STORE_NAME ).getEditorPreviewType()
+	);
 
 	const stylesheets = {
 		base: '/ui/stable/theme-compatibility/base-editor.css',
@@ -90,7 +93,7 @@ const PreviewStylesResolver = ( { theme } ) => {
 				}
 			);
 		}, 1000 ),
-		[ theme ]
+		[ theme, currentPreviewType ]
 	);
 
 	useEffect( () => {

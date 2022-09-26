@@ -19,6 +19,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
+    "@automattic/isolated-block-editor": "2.18.0",
     "@crowdsignal/block-editor": "^0.1.0",
     "@crowdsignal/block-editor-filters": "^0.1.0",
     "@crowdsignal/blocks": "^0.1.0",
@@ -43,7 +44,6 @@
     "@wordpress/icons": "^9.3.0",
     "@wordpress/interface": "4.11.0",
     "classnames": "^2.2.5",
-    "isolated-block-editor": "https://github.com/Automattic/isolated-block-editor.git#2.16.0",
     "lodash": "^4.17.21",
     "react-beautiful-dnd": "^13.1.0",
     "react-helmet": "^6.1.0",

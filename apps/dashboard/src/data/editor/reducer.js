@@ -19,6 +19,7 @@ import {
 	EDITOR_PAGE_INSERT,
 	EDITOR_PAGE_ORDER_UPDATE,
 	EDITOR_PAGE_UPDATE,
+	EDITOR_PREVIEW_TYPE_UPDATE,
 	EDITOR_SAVE,
 	EDITOR_SAVE_ERROR,
 	EDITOR_SAVE_SUCCESS,
@@ -358,6 +359,21 @@ const pages = ( state = [], action ) => {
 };
 
 /**
+ * Current editor preview type.
+ *
+ * @param  {string} state  App state.
+ * @param  {Object} action Action object.
+ * @return {string}        Current preview type.
+ */
+const previewType = ( state = undefined, action ) => {
+	if ( action.type === EDITOR_PREVIEW_TYPE_UPDATE ) {
+		return action.previewType;
+	}
+
+	return state;
+};
+
+/**
  * Project ID of the project that's currently loaded into the editor.
  * '0' means the a new/non-existing project.
  *
@@ -469,6 +485,7 @@ export default combineReducers( {
 	isPristine,
 	navigation,
 	pages,
+	previewType,
 	projectId,
 	settings,
 	slug,

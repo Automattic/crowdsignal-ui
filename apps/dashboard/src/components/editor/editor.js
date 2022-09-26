@@ -4,8 +4,10 @@
 import { useDispatch } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { noop } from 'lodash';
-import IsolatedBlockEditor, { EditorHeadingSlot } from 'isolated-block-editor'; // eslint-disable-line import/default
+import { kebabCase, noop } from 'lodash';
+import IsolatedBlockEditor, {
+	EditorHeadingSlot,
+} from '@automattic/isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/react';
 
 /**
@@ -59,6 +61,7 @@ const Editor = ( { project } ) => {
 	const { updateSettings } = useDispatch( 'core/block-editor' );
 
 	const {
+		currentPreviewType,
 		editorId,
 		editorSettings,
 		editorTheme,
@@ -72,6 +75,8 @@ const Editor = ( { project } ) => {
 		totalPages,
 		navigationSettings,
 	} = useEditorContent( project );
+
+	const editorClass = `is-${ kebabCase( currentPreviewType ) }-preview`;
 
 	const handleSelectTemplate = ( template ) => {
 		setProjectTemplate( template );
@@ -159,6 +164,7 @@ const Editor = ( { project } ) => {
 			<PageNavigation key={ `nav_${ editorTheme }` } />
 			<EditorWrapper
 				as={ IsolatedBlockEditor }
+				className={ editorClass }
 				key={ editorId }
 				settings={ editorSettings }
 				onSaveBlocks={ saveBlocks }

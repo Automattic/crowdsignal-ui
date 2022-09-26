@@ -1,10 +1,11 @@
+/* eslint-disable complexity */
 /**
  * External dependencies
  */
 import { Button } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { ToolbarSlot } from 'isolated-block-editor'; // eslint-disable-line import/named
+import { ToolbarSlot } from '@automattic/isolated-block-editor'; // eslint-disable-line import/named
 import { filter } from 'lodash';
 
 /**
@@ -12,8 +13,9 @@ import { filter } from 'lodash';
  */
 import { hasUnpublishedChanges, isPublic } from '@crowdsignal/project';
 import { STORE_NAME } from '../../data';
-import PublishButton from './publish-button';
 import { NOTICE_UNPUBLISHED } from './notice';
+import PublishButton from './publish-button';
+import PreviewButton from './preview-button';
 
 /**
  * Style dependencies
@@ -76,15 +78,10 @@ const Toolbar = ( { project, onShareClick } ) => {
 					</ToolbarButton>
 				) }
 
-			<ToolbarButton
-				as={ Button }
-				variant="tertiary"
-				href={ previewURL }
-				target="_blank"
+			<PreviewButton
 				disabled={ ! project || ! project.id }
-			>
-				{ __( 'Preview', 'block-editor' ) }
-			</ToolbarButton>
+				previewURL={ previewURL }
+			/>
 
 			<PublishButton
 				project={ project }
