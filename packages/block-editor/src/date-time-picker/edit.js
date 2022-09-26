@@ -21,6 +21,7 @@ const EditDateTimePicker = ( props ) => {
 	useClientId( props );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
+
 	const classes = classnames(
 		className,
 		'crowdsignal-forms-date-time-picker-block',
@@ -30,7 +31,10 @@ const EditDateTimePicker = ( props ) => {
 	);
 
 	return (
-		<FormInputWrapper style={ { ...useColorStyles( attributes ) } }>
+		<FormInputWrapper
+			style={ { ...useColorStyles( attributes ) } }
+			className={ classes }
+		>
 			<Sidebar { ...props } />
 			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
 				<RichText
@@ -43,7 +47,6 @@ const EditDateTimePicker = ( props ) => {
 				/>
 			</FormInputWrapper.Label>
 			<DatePicker
-				className={ classes }
 				selected={ new Date() }
 				popperModifiers={ [
 					{
