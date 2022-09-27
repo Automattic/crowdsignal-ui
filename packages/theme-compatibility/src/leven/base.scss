@@ -10,6 +10,7 @@ body {
 	--wp--preset--color--background: #f7f7f6;
 
 	--crowdsignal-forms-input-border-color: #ddd;
+	--crowdsignal-forms-input-background-color: #ddd;
 	--crowdsignal-forms-question-border-color: #eee;
 	--crowdsignal-forms-question-background-color: #fff;
 	--crowdsignal-forms-submit-button-background-color: #ff302c;
@@ -56,6 +57,13 @@ body {
 .crowdsignal-forms-text-input-block,
 .crowdsignal-forms-text-question-block {
 	input, textarea {
+		border: 1px solid var(--crowdsignal-forms-input-border-color);
+	}
+}
+
+.crowdsignal-forms-date-time-picker-block .react-datepicker-wrapper {
+	input {
+		background-color: var(--crowdsignal-forms-input-background-color);
 		border: 1px solid var(--crowdsignal-forms-input-border-color);
 	}
 }
