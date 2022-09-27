@@ -5,20 +5,14 @@
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { RichText } from '@wordpress/block-editor';
-import DatePicker from 'react-datepicker';
 
 /**
  * Internal dependencies
  */
-import { FormInputWrapper } from '@crowdsignal/blocks';
+import { FormInputWrapper, FormDatePicker } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
-
-/**
- * Style dependencies
- */
-import { DatePickerPlaceholderStyle } from './styles';
 
 const EditDateTimePicker = ( props ) => {
 	const { attributes, setAttributes, className } = props;
@@ -51,20 +45,7 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<DatePickerPlaceholderStyle>
-				<DatePicker
-					selected={ new Date() }
-					dateFormat="MMMM d, yyyy"
-					popperModifiers={ [
-						{
-							name: 'arrow',
-							options: {
-								padding: 100,
-							},
-						},
-					] }
-				/>
-			</DatePickerPlaceholderStyle>
+			<FormDatePicker selected={ new Date() } />
 		</FormInputWrapper>
 	);
 };

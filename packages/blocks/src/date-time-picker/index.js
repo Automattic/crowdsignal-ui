@@ -5,19 +5,12 @@ import { RawHTML, useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 /**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { ErrorMessage, FormInputWrapper } from '../components';
+import { ErrorMessage, FormInputWrapper, FormDatePicker } from '../components';
 import { useField } from '@crowdsignal/form';
-
-/**
- * Style dependencies
- */
-import { DatePickerStyle } from './styles';
 
 const DateTimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
@@ -55,22 +48,10 @@ const DateTimePicker = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<DatePickerStyle>
-				<DatePicker
-					className={ classes }
-					selected={ parsedDate }
-					dateFormat="MMMM d, yyyy"
-					onChange={ handleDateChange }
-					popperModifiers={ [
-						{
-							name: 'arrow',
-							options: {
-								padding: 100,
-							},
-						},
-					] }
-				/>
-			</DatePickerStyle>
+			<FormDatePicker
+				selected={ parsedDate }
+				onChange={ handleDateChange }
+			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
