@@ -14,6 +14,11 @@ import { useColorStyles } from '@crowdsignal/styles';
 import { ErrorMessage, FormInputWrapper } from '../components';
 import { useField } from '@crowdsignal/form';
 
+/**
+ * Style dependencies
+ */
+import { DatePickerStyle } from './styles';
+
 const DateTimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
@@ -47,23 +52,25 @@ const DateTimePicker = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<DatePicker
-				className={ classes }
-				selected={ parsedDate }
-				dateFormat="MMMM d, yyyy"
-				onChange={ handleDateChange }
-				popperModifiers={ [
-					{
-						name: 'arrow',
-						options: {
-							padding: 100,
+			<DatePickerStyle>
+				<DatePicker
+					className={ classes }
+					selected={ parsedDate }
+					dateFormat="MMMM d, yyyy"
+					onChange={ handleDateChange }
+					popperModifiers={ [
+						{
+							name: 'arrow',
+							options: {
+								padding: 100,
+							},
 						},
-					},
-				] }
-			/>
+					] }
+				/>
+			</DatePickerStyle>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);

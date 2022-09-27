@@ -15,6 +15,11 @@ import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
+/**
+ * Style dependencies
+ */
+import { DatePickerPlaceholderStyle } from './styles';
+
 const EditDateTimePicker = ( props ) => {
 	const { attributes, setAttributes, className } = props;
 
@@ -36,7 +41,7 @@ const EditDateTimePicker = ( props ) => {
 			className={ classes }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-text-input-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
 				<RichText
 					placeholder={ __(
 						'Enter date picker label',
@@ -46,17 +51,20 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<DatePicker
-				selected={ new Date() }
-				popperModifiers={ [
-					{
-						name: 'arrow',
-						options: {
-							padding: 100,
+			<DatePickerPlaceholderStyle>
+				<DatePicker
+					selected={ new Date() }
+					dateFormat="MMMM d, yyyy"
+					popperModifiers={ [
+						{
+							name: 'arrow',
+							options: {
+								padding: 100,
+							},
 						},
-					},
-				] }
-			/>
+					] }
+				/>
+			</DatePickerPlaceholderStyle>
 		</FormInputWrapper>
 	);
 };
