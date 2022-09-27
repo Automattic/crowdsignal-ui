@@ -9,7 +9,8 @@ body {
 	--cs--style--answer--selected--background: var(--p2-color-link) ;
 	--cs--style--answer--selected--color: var(--p2-color-white);
 	--cs--style--color--primary: var(--p2-color-link);
-
+	--wp--preset--color--primary: var(--p2-color-link);
+	--wp--preset--color--background: var(--p2-color-white);
 	background-color: var(--p2-color-white);
 }
 
@@ -30,13 +31,16 @@ input, textarea {
 }
 
 .crowdsignal-forms-text-input-block,
-.crowdsignal-forms-text-question-block {
+.crowdsignal-forms-text-question-block, 
+.crowdsignal-forms-date-time-picker-block .react-datepicker-wrapper {
 	input, textarea {
 		border: 1px solid var(--p2-color-border);
 		padding: 12px 8px;
 		border-radius: 2px;
 	}
 }
+
+
 
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--p2-color-border);

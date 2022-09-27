@@ -10,6 +10,7 @@ import { flatten, includes, map } from 'lodash';
  * Internal dependencies
  */
 import {
+	dateTimePickerBlock,
 	dropdownInputBlock,
 	fileInputBlock,
 	matrixQuestionBlock,
@@ -26,6 +27,7 @@ import {
 
 const FORM_BLOCKS = map(
 	[
+		dateTimePickerBlock,
 		dropdownInputBlock,
 		fileInputBlock,
 		matrixQuestionBlock,

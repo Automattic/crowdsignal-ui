@@ -2,6 +2,7 @@ export * from './check-icon';
 export * from './checkbox-input';
 export * from './chevron-down';
 export * from './close-arrow';
+export * from './date-picker';
 export * from './drag-handle';
 export * from './file-input';
 export * from './matrix-question';

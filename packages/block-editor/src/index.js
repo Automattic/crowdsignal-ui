@@ -1,4 +1,5 @@
 export { default as checkboxInputBlock } from './checkbox-input';
+export { default as dateTimePickerBlock } from './date-time-picker';
 export { default as dropdownInputBlock } from './dropdown-input';
 export { default as fileInputBlock } from './file-input';
 export { default as matrixQuestionBlock } from './matrix-question';
