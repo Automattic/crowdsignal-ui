@@ -7,6 +7,10 @@ export default {
 		type: 'string',
 		default: '',
 	},
+	flag: {
+		type: 'boolean',
+		default: false,
+	},
 	label: {
 		type: 'string',
 		default: 'Phone Number',

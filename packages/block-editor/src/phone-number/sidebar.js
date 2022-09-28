@@ -37,6 +37,11 @@ export default ( { attributes, setAttributes } ) => {
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
 				/>
+				<ToggleControl
+					label={ __( 'Enable flag drop down', 'block-editor' ) }
+					checked={ attributes.flag }
+					onChange={ handleChangeAttribute( 'flag' ) }
+				/>
 				<TextControl
 					label={ __( 'Set a Default Country', 'block-editor' ) }
 					value={ attributes.country.toUpperCase() }

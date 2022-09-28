@@ -5,17 +5,22 @@ import { RichText } from '@wordpress/block-editor';
 import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import Input from 'react-phone-number-input/input';
 
 /**
  * Internal dependencies
  */
-import { FormInputWrapper, FormTextInput } from '@crowdsignal/blocks';
+import { FormInputWrapper } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
 const EditPhoneNumber = ( props ) => {
 	const { attributes, setAttributes, className, isSelected } = props;
+
+	const flag = attributes.flag;
 
 	useClientId( props );
 
@@ -35,7 +40,6 @@ const EditPhoneNumber = ( props ) => {
 
 	const classes = classnames(
 		className,
-		'is-inline',
 		'crowdsignal-forms-phone-number-block',
 		{
 			'is-required': attributes.mandatory,
@@ -63,12 +67,30 @@ const EditPhoneNumber = ( props ) => {
 					width: attributes.inputWidth,
 				} }
 			>
-				<FormTextInput
-					placeholder={ __( 'Enter Phone Number', 'block-editor' ) }
-					value={ attributes.placeholder }
-					onChange={ handleChangeCountry }
-					className="crowdsignal-forms-phone-number-block__wrapper"
-				/>
+				{ flag && (
+					<PhoneInput
+						defaultCountry={ attributes.country.toUpperCase() }
+						placeholder={ __(
+							'Enter Phone Number',
+							'block-editor'
+						) }
+						value={ attributes.placeholder }
+						onChange={ handleChangeCountry }
+						className="crowdsignal-forms-phone-number-block__wrapper"
+					/>
+				) }
+				{ ! flag && (
+					<Input
+						defaultCountry={ attributes.country.toUpperCase() }
+						placeholder={ __(
+							'Enter Phone Number',
+							'block-editor'
+						) }
+						value={ attributes.placeholder }
+						onChange={ handleChangeCountry }
+						className="crowdsignal-forms-phone-number-block__wrapper"
+					/>
+				) }
 			</ResizableBox>
 		</FormInputWrapper>
 	);

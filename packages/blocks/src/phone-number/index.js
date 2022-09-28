@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import Input from 'react-phone-number-input/input';
 
 /**
  * Internal dependencies
@@ -16,6 +17,7 @@ import { ErrorMessage, FormInputWrapper } from '../components';
 import { useField } from '@crowdsignal/form';
 
 const PhoneNumber = ( { attributes, className } ) => {
+	const flag = attributes.flag;
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
 		validation: ( value ) => {
@@ -42,17 +44,28 @@ const PhoneNumber = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-phone-number-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-
-			<PhoneInput
-				defaultCountry={ attributes.country.toUpperCase() }
-				onChange={ onChange }
-				placeholder={ attributes.placeholder }
-				style={ {
-					width: attributes.inputWidth,
-					height: `${ attributes.inputHeight }px`,
-				} }
-				value={ fieldValue }
-			/>
+			{ flag && (
+				<PhoneInput
+					defaultCountry={ attributes.country.toUpperCase() }
+					onChange={ onChange }
+					placeholder={ attributes.placeholder }
+					style={ {
+						width: attributes.inputWidth,
+					} }
+					value={ fieldValue }
+				/>
+			) }
+			{ ! flag && (
+				<Input
+					defaultCountry={ attributes.country.toUpperCase() }
+					onChange={ onChange }
+					placeholder={ attributes.placeholder }
+					style={ {
+						width: attributes.inputWidth,
+					} }
+					value={ fieldValue }
+				/>
+			) }
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
