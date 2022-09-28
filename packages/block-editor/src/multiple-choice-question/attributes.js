@@ -16,6 +16,10 @@ export default {
 		type: 'boolean',
 		default: false,
 	},
+	otherPlaceholder: {
+		type: 'string',
+		default: '',
+	},
 	minimumChoices: {
 		type: 'number',
 		default: 0,

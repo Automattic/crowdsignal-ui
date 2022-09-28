@@ -32,7 +32,7 @@ const ButtonContent = styled.span`
 `;
 
 const ButtonAnswer = ( {
-	attributes,
+	attributes = {},
 	children,
 	className,
 	isMultiSelect,
