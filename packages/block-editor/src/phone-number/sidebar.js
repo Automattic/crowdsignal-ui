@@ -8,6 +8,7 @@ import {
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	PanelBody,
 	ToggleControl,
+	TextControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
@@ -35,6 +36,12 @@ export default ( { attributes, setAttributes } ) => {
 					label={ __( 'The field is required', 'block-editor' ) }
 					checked={ attributes.mandatory }
 					onChange={ handleChangeAttribute( 'mandatory' ) }
+				/>
+				<TextControl
+					label={ __( 'Set a Default Country', 'block-editor' ) }
+					value={ attributes.country.toUpperCase() }
+					onChange={ handleChangeAttribute( 'country' ) }
+					help={ __( 'Use country two letter code', 'block-editor' ) }
 				/>
 				<ToggleGroupControl
 					label={ __( 'Field Width', 'block-editor' ) }

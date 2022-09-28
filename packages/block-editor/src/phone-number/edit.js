@@ -21,8 +21,7 @@ const EditPhoneNumber = ( props ) => {
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
-	const handleChangePlaceholder = ( placeholder ) =>
-		setAttributes( { placeholder } );
+	const handleChangeCountry = ( country ) => setAttributes( { country } );
 
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' && handle !== 'right' ) {
@@ -51,7 +50,7 @@ const EditPhoneNumber = ( props ) => {
 			<Sidebar { ...props } />
 			<FormInputWrapper.Label className="crowdsignal-forms-phone-number-block__label">
 				<RichText
-					placeholder={ __( 'Enter form label', 'block-editor' ) }
+					placeholder={ __( 'Phone Number', 'block-editor' ) }
 					onChange={ handleChangeLabel }
 					value={ attributes.label }
 				/>
@@ -67,7 +66,7 @@ const EditPhoneNumber = ( props ) => {
 				<FormTextInput
 					placeholder={ __( 'Enter Phone Number', 'block-editor' ) }
 					value={ attributes.placeholder }
-					onChange={ handleChangePlaceholder }
+					onChange={ handleChangeCountry }
 					className="crowdsignal-forms-phone-number-block__wrapper"
 				/>
 			</ResizableBox>

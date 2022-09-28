@@ -5,17 +5,15 @@ import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
-// import { AsYouType } from 'libphonenumber-js';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 /**
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { ErrorMessage, FormInputWrapper, FormTextInput } from '../components';
+import { ErrorMessage, FormInputWrapper } from '../components';
 import { useField } from '@crowdsignal/form';
-import validator from './validations';
-
-const MULTILINE_THRESHOLD = 70;
 
 const PhoneNumber = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
@@ -24,23 +22,8 @@ const PhoneNumber = ( { attributes, className } ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
 			}
-			if ( attributes.validation && ! isEmpty( value ) ) {
-				return attributes.validation.reduce(
-					( errorMsg, validatorKey ) =>
-						errorMsg || validator[ validatorKey ]( value ),
-					null
-				);
-			}
 		},
 	} );
-
-	// const parseDigits = ( string ) =>
-	// 	( string.match( /\d+/g ) || [] ).join( '' );
-
-	// const formatPhone = ( string ) => {
-	// 	const digits = parseDigits( string ).substr( 0, 10 );
-	// 	return new AsYouType( 'US' ).input( digits );
-	// };
 
 	const classes = classnames(
 		className,
@@ -59,11 +42,14 @@ const PhoneNumber = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-phone-number-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<FormTextInput
+
+			<PhoneInput
+				defaultCountry={ attributes.country.toUpperCase() }
 				onChange={ onChange }
 				placeholder={ attributes.placeholder }
 				style={ {
 					width: attributes.inputWidth,
+					height: `${ attributes.inputHeight }px`,
 				} }
 				value={ fieldValue }
 			/>
@@ -73,6 +59,5 @@ const PhoneNumber = ( { attributes, className } ) => {
 };
 
 PhoneNumber.blockName = 'crowdsignal-forms/phone-number';
-PhoneNumber.MULTILINE_THRESHOLD = MULTILINE_THRESHOLD;
 
 export default PhoneNumber;

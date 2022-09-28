@@ -3,6 +3,10 @@ export default {
 		type: 'string',
 		default: null,
 	},
+	country: {
+		type: 'string',
+		default: '',
+	},
 	label: {
 		type: 'string',
 		default: 'Phone Number',
@@ -24,9 +28,5 @@ export default {
 	inputWidth: {
 		type: 'string',
 		default: '100%',
-	},
-	validation: {
-		type: 'array',
-		default: null,
 	},
 };
