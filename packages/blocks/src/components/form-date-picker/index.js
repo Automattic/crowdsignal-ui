@@ -25,7 +25,6 @@ const FormDatePicker = ( props ) => {
 	return (
 		<DatePickerWrapper>
 			<DatePicker
-				dateFormat="MMMM d, yyyy"
 				popperModifiers={ [
 					{
 						name: 'arrow',

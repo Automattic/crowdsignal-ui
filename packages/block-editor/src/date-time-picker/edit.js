@@ -45,7 +45,7 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDatePicker selected={ new Date() } />
+			<FormDatePicker placeholderText={ attributes.placeholderText } />
 		</FormInputWrapper>
 	);
 };

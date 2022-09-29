@@ -1,4 +1,4 @@
-export const CheckIcon = () => (
+export const TimePickerIcon = () => (
 	<svg
 		width="25"
 		height="24"

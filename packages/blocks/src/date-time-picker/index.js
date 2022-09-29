@@ -15,7 +15,7 @@ import { useField } from '@crowdsignal/form';
 const DateTimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
-		initialValue: new Date().toDateString(),
+		initialValue: new Date(),
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -24,10 +24,18 @@ const DateTimePicker = ( { attributes, className } ) => {
 	} );
 
 	const handleDateChange = ( e ) => {
-		onChange( e.toDateString() );
+		if ( attributes.showTimeSelectOnly ) {
+			onChange( e.toTimeString() );
+		} else {
+			onChange( e.toDateString() );
+		}
 	};
 
 	const parsedDate = useMemo( () => {
+		if ( attributes.showTimeSelectOnly ) {
+			// the DatePicker component has to have a fully formatted date, adding an arbitrary date to value
+			return Date.parse( 'Thu Sep 29 2022 ' + fieldValue );
+		}
 		return Date.parse( fieldValue );
 	}, [ fieldValue ] );
 
@@ -51,6 +59,10 @@ const DateTimePicker = ( { attributes, className } ) => {
 			<FormDatePicker
 				selected={ parsedDate }
 				onChange={ handleDateChange }
+				showTimeInput={ attributes.showTimeInput }
+				showTimeSelectOnly={ attributes.showTimeSelectOnly }
+				dateFormat={ attributes.dateFormat }
+				placeholderText={ attributes.placeholderText }
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>

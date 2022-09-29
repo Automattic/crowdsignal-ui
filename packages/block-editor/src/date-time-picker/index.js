@@ -9,6 +9,7 @@ import { DateTimePicker } from '@crowdsignal/blocks';
 import { DatePickerIcon } from '@crowdsignal/icons';
 import attributes from './attributes';
 import EditDateTimePicker from './edit';
+import variation from './variations';
 
 const settings = {
 	apiVersion: 1,
@@ -21,6 +22,7 @@ const settings = {
 		__( 'calendar', 'block-editor' ),
 	],
 	icon: <DatePickerIcon />,
+	variations: variation,
 	edit: EditDateTimePicker,
 	attributes,
 	example: {
