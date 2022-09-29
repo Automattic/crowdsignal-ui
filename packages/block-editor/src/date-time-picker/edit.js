@@ -45,7 +45,10 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDatePicker placeholderText={ attributes.placeholderText } />
+			<FormDatePicker
+				placeholderText={ attributes.placeholderText }
+				showTimeSelectOnly={ attributes.showTimeSelectOnly }
+			/>
 		</FormInputWrapper>
 	);
 };
