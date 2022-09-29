@@ -7,13 +7,18 @@ import { __ } from '@wordpress/i18n';
 import { kebabCase, noop } from 'lodash';
 import IsolatedBlockEditor, {
 	EditorHeadingSlot,
+	FooterSlot,
 } from '@automattic/isolated-block-editor'; // eslint-disable-line import/default
 import { Global } from '@emotion/react';
 
 /**
  * Internal dependencies
  */
-import { NavigationBar } from '@crowdsignal/components';
+import {
+	CrowdsignalFooter,
+	NavigationBar,
+	StickyFooter,
+} from '@crowdsignal/components';
 import { registerBlocks } from './blocks';
 import { registerPatterns } from './patterns';
 import { STORE_NAME } from '../../data';
@@ -195,6 +200,19 @@ const Editor = ( { project } ) => {
 					onRestore={ restoreDraft }
 					version={ version }
 				/>
+				<FooterSlot>
+					<StickyFooter>
+						<CrowdsignalFooter
+							logo
+							upgradeLink
+							source="editor-footer"
+							message={ __(
+								'Collect your own feedback with Crowdsignal',
+								'dashboard'
+							) }
+						/>
+					</StickyFooter>
+				</FooterSlot>
 			</EditorWrapper>
 
 			{ ! showWizard && showEditorGuide && (

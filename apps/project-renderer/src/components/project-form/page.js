@@ -13,7 +13,12 @@ import {
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
-import { NavigationBar } from '@crowdsignal/components';
+import {
+	CrowdsignalFooter,
+	NavigationBar,
+	StickyFooter,
+} from '@crowdsignal/components';
+import { __ } from '@wordpress/i18n';
 
 const blockMap = zipObject( map( projectBlocks, 'blockName' ), projectBlocks );
 
@@ -53,6 +58,16 @@ const ProjectPage = ( {
 			<ContentWrapper className={ classes }>
 				{ renderBlocks( blocks, blockMap ) }
 			</ContentWrapper>
+			<StickyFooter>
+				<CrowdsignalFooter
+					logo
+					source="project-footer"
+					message={ __(
+						'Collect your own feedback with Crowdsignal',
+						'project-renderer'
+					) }
+				/>
+			</StickyFooter>
 		</Form>
 	);
 };
