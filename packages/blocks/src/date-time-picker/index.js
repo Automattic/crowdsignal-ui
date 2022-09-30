@@ -49,7 +49,7 @@ const DateTimePicker = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-date-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormDateTimePicker

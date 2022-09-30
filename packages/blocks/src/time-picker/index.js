@@ -32,8 +32,9 @@ const TimePicker = ( { attributes, className } ) => {
 	};
 
 	const parsedTime = useMemo( () => {
-		// the DatePicker component has to have a fully formatted date, adding an arbitrary date to value
-		return Date.parse( 'Thu Sep 29 2022 ' + fieldValue );
+		if ( ! isEmpty( fieldValue ) ) {
+			return new Date( `${ new Date().toDateString() } ${ fieldValue }` );
+		}
 	}, [ fieldValue ] );
 
 	const classes = classnames(
@@ -50,7 +51,7 @@ const TimePicker = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-time-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormDateTimePicker
