@@ -37,7 +37,7 @@ const DateTimePicker = ( { attributes, className } ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-date-time-picker-block',
+		'crowdsignal-forms-date-picker-block',
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,

@@ -23,7 +23,7 @@ const EditDateTimePicker = ( props ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-date-time-picker-block',
+		'crowdsignal-forms-date-picker-block',
 		{
 			'is-required': attributes.mandatory,
 		}
@@ -35,7 +35,7 @@ const EditDateTimePicker = ( props ) => {
 			className={ classes }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-date-picker-block__label">
 				<RichText
 					placeholder={ __(
 						'Enter date picker label',
