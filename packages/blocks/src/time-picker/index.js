@@ -16,10 +16,9 @@ import {
 } from '../components';
 import { useField } from '@crowdsignal/form';
 
-const DateTimePicker = ( { attributes, className } ) => {
+const TimePicker = ( { attributes, className } ) => {
 	const { error, onChange, fieldValue } = useField( {
 		fieldName: `q_${ attributes.clientId }[text]`,
-		initialValue: new Date().toDateString(),
 		validation: ( value ) => {
 			if ( attributes.mandatory && isEmpty( value ) ) {
 				return __( 'This field is required', 'blocks' );
@@ -27,17 +26,19 @@ const DateTimePicker = ( { attributes, className } ) => {
 		},
 	} );
 
-	const handleDateChange = ( e ) => {
-		onChange( e.toDateString() );
+	const handleTimeChange = ( e ) => {
+		onChange( e.toTimeString() );
 	};
 
-	const parsedDate = useMemo( () => {
-		return Date.parse( fieldValue );
+	const parsedTime = useMemo( () => {
+		if ( ! isEmpty( fieldValue ) ) {
+			return new Date( `${ new Date().toDateString() } ${ fieldValue }` );
+		}
 	}, [ fieldValue ] );
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-date-picker-block',
+		'crowdsignal-forms-time-picker-block',
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
@@ -49,18 +50,19 @@ const DateTimePicker = ( { attributes, className } ) => {
 			className={ classes }
 			style={ { ...useColorStyles( attributes ) } }
 		>
-			<FormInputWrapper.Label className="crowdsignal-forms-date-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-time-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
 			<FormDateTimePicker
-				selected={ parsedDate }
-				onChange={ handleDateChange }
+				selected={ parsedTime }
+				onChange={ handleTimeChange }
+				timePicker
 			/>
 			{ error && <ErrorMessage>{ error }</ErrorMessage> }
 		</FormInputWrapper>
 	);
 };
 
-DateTimePicker.blockName = 'crowdsignal-forms/date-picker';
+TimePicker.blockName = 'crowdsignal-forms/time-picker';
 
-export default DateTimePicker;
+export default TimePicker;

@@ -19,5 +19,6 @@ export * from './single-choice-dropdown';
 export * from './submit-button';
 export * from './text-input';
 export * from './text-question';
+export * from './time-picker';
 export * from './email-input';
 export * from './url-input';
