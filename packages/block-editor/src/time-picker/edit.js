@@ -14,7 +14,7 @@ import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
 
-const EditDateTimePicker = ( props ) => {
+const EditTimePicker = ( props ) => {
 	const { attributes, setAttributes, className } = props;
 
 	useClientId( props );
@@ -23,7 +23,7 @@ const EditDateTimePicker = ( props ) => {
 
 	const classes = classnames(
 		className,
-		'crowdsignal-forms-date-picker-block',
+		'crowdsignal-forms-time-picker-block',
 		{
 			'is-required': attributes.mandatory,
 		}
@@ -35,19 +35,19 @@ const EditDateTimePicker = ( props ) => {
 			className={ classes }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-date-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-time-picker-block__label">
 				<RichText
 					placeholder={ __(
-						'Enter date picker label',
+						'Enter time picker label',
 						'block-editor'
 					) }
 					onChange={ handleChangeLabel }
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDateTimePicker selected={ new Date() } />
+			<FormDateTimePicker timePicker />
 		</FormInputWrapper>
 	);
 };
 
-export default EditDateTimePicker;
+export default EditTimePicker;

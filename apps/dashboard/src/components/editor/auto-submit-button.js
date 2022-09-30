@@ -22,6 +22,7 @@ import {
 	checkboxInputBlock,
 	textQuestionBlock,
 	textInputBlock,
+	timePickerBlock,
 	submitButtonBlock,
 } from '@crowdsignal/block-editor';
 
@@ -39,6 +40,7 @@ const FORM_BLOCKS = map(
 		checkboxInputBlock,
 		textQuestionBlock,
 		textInputBlock,
+		timePickerBlock,
 	],
 	'name'
 );

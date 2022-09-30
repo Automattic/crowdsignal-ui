@@ -12,4 +12,4 @@ export { default as JustificationWrapper } from './justification-wrapper';
 export { default as QuestionHeader } from './question-header';
 export { default as QuestionWrapper } from './question-wrapper';
 export { default as Spinner } from './spinner';
-export { default as FormDatePicker } from './form-date-picker';
+export { default as FormDateTimePicker } from './form-date-time-picker';
