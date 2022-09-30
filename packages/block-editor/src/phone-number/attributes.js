@@ -29,6 +29,10 @@ export default {
 	backgroundColor: {
 		type: 'string',
 	},
+	inputHeight: {
+		type: 'number',
+		default: '',
+	},
 	inputWidth: {
 		type: 'string',
 		default: '100%',

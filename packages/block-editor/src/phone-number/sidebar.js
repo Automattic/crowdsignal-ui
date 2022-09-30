@@ -26,6 +26,9 @@ export default ( { attributes, setAttributes } ) => {
 			[ key ]: value,
 		} );
 
+	const handleChangeNumericAttribute = ( key ) => ( value ) =>
+		handleChangeAttribute( key )( parseInt( value ) || '' );
+
 	return (
 		<InspectorControls>
 			<PanelBody
@@ -47,6 +50,12 @@ export default ( { attributes, setAttributes } ) => {
 					value={ attributes.country.toUpperCase() }
 					onChange={ handleChangeAttribute( 'country' ) }
 					help={ __( 'Use country two letter code', 'block-editor' ) }
+				/>
+				<TextControl
+					label={ __( 'Input field height', 'block-editor' ) }
+					type="number"
+					value={ attributes.inputHeight }
+					onChange={ handleChangeNumericAttribute( 'inputHeight' ) }
 				/>
 				<ToggleGroupControl
 					label={ __( 'Field Width', 'block-editor' ) }

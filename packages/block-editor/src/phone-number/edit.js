@@ -6,13 +6,12 @@ import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import Input from 'react-phone-number-input/input';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { FormInputWrapper } from '@crowdsignal/blocks';
+import { FormInputWrapper, FormPhoneNumber } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
@@ -26,7 +25,7 @@ const EditPhoneNumber = ( props ) => {
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
 
-	const handleChangeCountry = ( country ) => setAttributes( { country } );
+	// const handleChangeCountry = ( country ) => setAttributes( { country } );
 
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' && handle !== 'right' ) {
@@ -34,6 +33,7 @@ const EditPhoneNumber = ( props ) => {
 		}
 
 		setAttributes( {
+			inputHeight: element.offsetHeight,
 			inputWidth: `${ element.offsetWidth }px`,
 		} );
 	};
@@ -65,32 +65,18 @@ const EditPhoneNumber = ( props ) => {
 				onResizeStop={ handleResizeInput }
 				size={ {
 					width: attributes.inputWidth,
+					height: `${ attributes.inputHeight }px`,
 				} }
 			>
-				{ flag && (
-					<PhoneInput
-						defaultCountry={ attributes.country.toUpperCase() }
-						placeholder={ __(
-							'Enter Phone Number',
-							'block-editor'
-						) }
-						value={ attributes.placeholder }
-						onChange={ handleChangeCountry }
-						className="crowdsignal-forms-phone-number-block__wrapper"
-					/>
-				) }
-				{ ! flag && (
-					<Input
-						defaultCountry={ attributes.country.toUpperCase() }
-						placeholder={ __(
-							'Enter Phone Number',
-							'block-editor'
-						) }
-						value={ attributes.placeholder }
-						onChange={ handleChangeCountry }
-						className="crowdsignal-forms-phone-number-block__wrapper"
-					/>
-				) }
+				<FormPhoneNumber
+					flag={ flag }
+					defaultCountry={ attributes.country.toUpperCase() }
+					placeholder={ __( 'Enter Phone Number', 'block-editor' ) }
+					value={ attributes.placeholder }
+					onChange={ noop }
+					style={ { minHeight: 40 } }
+					className="crowdsignal-forms-phone-number-block__wrapper"
+				/>
 			</ResizableBox>
 		</FormInputWrapper>
 	);
