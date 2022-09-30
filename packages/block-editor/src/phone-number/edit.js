@@ -74,7 +74,6 @@ const EditPhoneNumber = ( props ) => {
 					placeholder={ __( 'Enter Phone Number', 'block-editor' ) }
 					value={ attributes.placeholder }
 					onChange={ noop }
-					style={ { minHeight: 40 } }
 					className="crowdsignal-forms-phone-number-block__wrapper"
 				/>
 			</ResizableBox>
