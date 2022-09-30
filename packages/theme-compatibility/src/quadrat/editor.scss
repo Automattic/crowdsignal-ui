@@ -1,7 +1,7 @@
 @import 'base';
 
 .block-editor-writing-flow {
-	.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea {
+	.crowdsignal-forms-text-input-block__wrapper, .crowdsignal-forms-text-question-block textarea, .crowdsignal-forms-phone-number-block {
 		color: var(--custom--placeholder--color);
 
 		&:focus {
