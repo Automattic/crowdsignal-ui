@@ -67,6 +67,7 @@ const Editor = ( { project } ) => {
 
 	const {
 		currentPreviewType,
+		currentUser,
 		editorId,
 		editorSettings,
 		editorTheme,
@@ -201,17 +202,19 @@ const Editor = ( { project } ) => {
 					version={ version }
 				/>
 				<FooterSlot>
-					<StickyFooter>
-						<CrowdsignalFooter
-							logo
-							upgradeLink
-							source="editor-footer"
-							message={ __(
-								'Collect your own feedback with Crowdsignal',
-								'dashboard'
-							) }
-						/>
-					</StickyFooter>
+					{ currentUser.isFree && (
+						<StickyFooter>
+							<CrowdsignalFooter
+								logo
+								upgradeLink
+								source="editor-footer"
+								message={ __(
+									'Collect your own feedback with Crowdsignal',
+									'dashboard'
+								) }
+							/>
+						</StickyFooter>
+					) }
 				</FooterSlot>
 			</EditorWrapper>
 

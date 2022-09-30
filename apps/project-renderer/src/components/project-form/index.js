@@ -19,6 +19,7 @@ const ProjectForm = ( props ) => {
 		fetchProject,
 		theme,
 		totalPages,
+		showBranding,
 	} = useProjectData( props );
 
 	useEffect( () => {
@@ -63,6 +64,7 @@ const ProjectForm = ( props ) => {
 				onSubmit={ submitPage }
 				projectCode={ props.projectCode }
 				totalPages={ totalPages }
+				showBranding={ showBranding }
 			/>
 		</ProjectFormThemeProvider>
 	);

@@ -30,6 +30,7 @@ const ProjectPage = ( {
 	onSubmit,
 	projectCode,
 	totalPages,
+	showBranding,
 } ) => {
 	const classes = classnames( 'wp-embed-responsive', 'crowdsignal-content', {
 		'crowdsignal-forms-form__content': !! onSubmit,
@@ -58,16 +59,18 @@ const ProjectPage = ( {
 			<ContentWrapper className={ classes }>
 				{ renderBlocks( blocks, blockMap ) }
 			</ContentWrapper>
-			<StickyFooter>
-				<CrowdsignalFooter
-					logo
-					source="project-footer"
-					message={ __(
-						'Collect your own feedback with Crowdsignal',
-						'project-renderer'
-					) }
-				/>
-			</StickyFooter>
+			{ showBranding && (
+				<StickyFooter>
+					<CrowdsignalFooter
+						logo
+						source="project-footer"
+						message={ __(
+							'Collect your own feedback with Crowdsignal',
+							'project-renderer'
+						) }
+					/>
+				</StickyFooter>
+			) }
 		</Form>
 	);
 };

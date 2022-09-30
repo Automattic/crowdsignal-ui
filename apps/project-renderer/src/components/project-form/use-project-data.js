@@ -19,6 +19,7 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 	const [ pageContent, setPageContent ] = useState();
 	const [ navigationSettings, setNavigationSettings ] = useState( {} );
 	const [ isCompleted, setIsCompleted ] = useState( false );
+	const [ showBranding, setShowBranding ] = useState( false );
 
 	useEffect( () => {
 		if ( preview ) {
@@ -43,6 +44,7 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 
 				setTheme( res.data.theme );
 				setTotalPages( res.data.totalPages );
+				setShowBranding( res.data.branding );
 				setStartDate(
 					res.data.startTime || Math.round( Date.now() / 1000 )
 				);
@@ -118,5 +120,6 @@ export const useProjectData = ( { projectCode, preview = false } ) => {
 		fetchProject,
 		theme,
 		navigationSettings,
+		showBranding,
 	};
 };

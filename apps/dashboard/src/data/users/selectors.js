@@ -12,6 +12,24 @@ import {
 	getAccountPartnerUserId,
 } from '../accounts/selectors';
 
+const ACCOUNT_TYPES = {
+	FREE: 10,
+	PWYW_9: 12,
+	PWYW_19: 13,
+	PWYW_29: 14,
+	PWYW_39: 15,
+	PWYW_49: 16,
+	PRO: 20,
+	JETPACKPRO: 22,
+	CORPORATE: 30,
+	CORPORATE_6_MONTHLY: 32,
+	ENTERPRISE: 35,
+	VIP: 40,
+	PREMIUM: 50,
+	BUSINESS: 60,
+	TEAM: 70,
+};
+
 export const getUserAccountId = ( state, userId ) =>
 	get( state, [ 'users', userId, 'account' ], 0 );
 
@@ -59,6 +77,7 @@ export const getUser = ( state, userId ) => {
 		profile: getUserProfile( state, userId ),
 		signalCount: getUserSignalCount( state, userId ),
 		type: getUserAccountType( state, userId ),
+		isFree: getUserAccountType( state, userId ) === ACCOUNT_TYPES.FREE,
 	};
 };
 
