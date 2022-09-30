@@ -35,7 +35,7 @@ const EditTimePicker = ( props ) => {
 			className={ classes }
 		>
 			<Sidebar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
+			<FormInputWrapper.Label className="crowdsignal-forms-time-picker-block__label">
 				<RichText
 					placeholder={ __(
 						'Enter time picker label',
