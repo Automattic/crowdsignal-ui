@@ -9,7 +9,11 @@ import { isEmpty } from 'lodash';
  * Internal dependencies
  */
 import { useColorStyles } from '@crowdsignal/styles';
-import { ErrorMessage, FormInputWrapper, FormDatePicker } from '../components';
+import {
+	ErrorMessage,
+	FormInputWrapper,
+	FormDateTimePicker,
+} from '../components';
 import { useField } from '@crowdsignal/form';
 
 const DateTimePicker = ( { attributes, className } ) => {
@@ -48,7 +52,7 @@ const DateTimePicker = ( { attributes, className } ) => {
 			<FormInputWrapper.Label className="crowdsignal-forms-date-time-picker-block__label">
 				<RawHTML>{ attributes.label }</RawHTML>
 			</FormInputWrapper.Label>
-			<FormDatePicker
+			<FormDateTimePicker
 				selected={ parsedDate }
 				onChange={ handleDateChange }
 			/>

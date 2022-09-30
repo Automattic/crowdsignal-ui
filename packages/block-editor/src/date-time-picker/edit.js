@@ -9,7 +9,7 @@ import { RichText } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { FormInputWrapper, FormDatePicker } from '@crowdsignal/blocks';
+import { FormInputWrapper, FormDateTimePicker } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 import Sidebar from './sidebar';
 import { useClientId } from '@crowdsignal/hooks';
@@ -45,7 +45,7 @@ const EditDateTimePicker = ( props ) => {
 					value={ attributes.label }
 				/>
 			</FormInputWrapper.Label>
-			<FormDatePicker selected={ new Date() } />
+			<FormDateTimePicker selected={ new Date() } />
 		</FormInputWrapper>
 	);
 };

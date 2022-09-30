@@ -21,7 +21,7 @@ export const DatePickerWrapper = styled.div`
 	}
 `;
 
-const FormDatePicker = ( props ) => {
+const FormDateTimePicker = ( props ) => {
 	return (
 		<DatePickerWrapper>
 			<DatePicker
@@ -40,4 +40,4 @@ const FormDatePicker = ( props ) => {
 	);
 };
 
-export default FormDatePicker;
+export default FormDateTimePicker;
