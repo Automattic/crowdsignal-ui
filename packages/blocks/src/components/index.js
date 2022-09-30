@@ -8,6 +8,7 @@ export { default as FormFileInput } from './form-file-input';
 export { default as FormInputWrapper } from './form-input-wrapper';
 export { default as FormTextarea } from './form-textarea';
 export { default as FormTextInput } from './form-text-input';
+export { default as FormTimePicker } from './form-time-picker';
 export { default as JustificationWrapper } from './justification-wrapper';
 export { default as QuestionHeader } from './question-header';
 export { default as QuestionWrapper } from './question-wrapper';
