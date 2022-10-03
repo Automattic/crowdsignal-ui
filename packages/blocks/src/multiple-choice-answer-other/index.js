@@ -12,28 +12,28 @@ import { useField } from '@crowdsignal/form';
 import MultipleChoiceQuestion from '../multiple-choice-question';
 import { Button, FormCheckbox } from '../components';
 import { getBlockStyle } from '../util';
-
-const OTHER = 'other';
+import { __ } from '@wordpress/i18n';
 
 const MultipleChoiceAnswerOther = ( { attributes } ) => {
 	const parentQuestion = useContext( MultipleChoiceQuestion.Context );
 	const isMultiSelect = parentQuestion.maximumChoices !== 1;
+	const { otherPlaceholder } = attributes;
 
-	const { fieldValue, onChange: onChangeChoice } = useField( {
-		fieldName: `q_${ parentQuestion.clientId }[choice]`,
+	const { fieldValue, onChange } = useField( {
+		fieldName: `q_${ parentQuestion.clientId }[choice]${
+			isMultiSelect ? '[]' : ''
+		}`,
 	} );
 
 	const { fieldValue: otherValue, onChange: onChangeOther } = useField( {
 		fieldName: `q_${ parentQuestion.clientId }[other]`,
 	} );
 
-	const isSelected =
-		! isEmpty( otherValue ) &&
-		( isMultiSelect ? fieldValue.includes( OTHER ) : fieldValue === OTHER );
+	const isSelected = ! isEmpty( otherValue );
 
-	const onChangeHandler = ( value ) => {
-		onChangeChoice( OTHER );
+	const changeHandler = ( value ) => {
 		onChangeOther( value );
+		onChange( ! isMultiSelect ? '' : fieldValue );
 	};
 
 	const classes = classnames( 'multiple-choice-answer-other', {
@@ -41,10 +41,14 @@ const MultipleChoiceAnswerOther = ( { attributes } ) => {
 	} );
 
 	useEffect( () => {
-		if ( fieldValue !== OTHER && attributes.maximumChoices === 1 ) {
+		if ( ! isEmpty( fieldValue ) && ! isMultiSelect ) {
 			onChangeOther( '' );
 		}
 	}, [ fieldValue ] );
+
+	const placeholder = ! isEmpty( otherPlaceholder )
+		? otherPlaceholder
+		: __( 'Enter other', 'block-editor' );
 
 	if (
 		getBlockStyle( parentQuestion.className ) ===
@@ -52,13 +56,9 @@ const MultipleChoiceAnswerOther = ( { attributes } ) => {
 	) {
 		return (
 			<FormCheckbox.Label className={ classes }>
-				<FormCheckbox
-					checked={ isSelected }
-					type={ isMultiSelect ? 'checkbox' : 'radio' }
-				/>
 				<input
-					placeholder={ attributes.otherPlaceholder }
-					onChange={ ( e ) => onChangeHandler( e.target.value ) }
+					placeholder={ placeholder }
+					onChange={ ( e ) => changeHandler( e.target.value ) }
 					value={ otherValue }
 					type="text"
 				/>
@@ -68,12 +68,9 @@ const MultipleChoiceAnswerOther = ( { attributes } ) => {
 
 	return (
 		<Button as={ 'div' } className={ classes } outline>
-			{ isMultiSelect && (
-				<FormCheckbox type="checkbox" checked={ isSelected } />
-			) }
 			<input
-				placeholder={ attributes.otherPlaceholder }
-				onChange={ ( e ) => onChangeHandler( e.target.value ) }
+				placeholder={ placeholder }
+				onChange={ ( e ) => changeHandler( e.target.value ) }
 				value={ otherValue }
 				type="text"
 			/>

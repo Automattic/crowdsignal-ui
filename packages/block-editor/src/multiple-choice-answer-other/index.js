@@ -20,17 +20,17 @@ const MultipleChoiceAnswerOther = ( { attributes, setAttributes } ) => {
 		<>
 			{ blockStyle === MultipleChoiceQuestion.Style.LIST && (
 				<EditCheckboxAnswer
-					attributes={ attributes }
 					className="multiple-choice-answer-other"
-					multipleChoice={ attributes.maximumChoices !== 1 }
 					onChange={ handleChangeOtherPlaceholder }
+					placeholder={ __( 'Enter other', 'block-editor' ) }
+					value={ attributes.otherPlaceholder }
+					hideCheck
 				/>
 			) }
 
 			{ blockStyle === MultipleChoiceQuestion.Style.BUTTON && (
 				<EditButtonAnswer
 					className="multiple-choice-answer-other"
-					multipleChoice={ attributes.maximumChoices !== 1 }
 					onChange={ handleChangeOtherPlaceholder }
 					placeholder={ __( 'Enter other', 'block-editor' ) }
 					value={ attributes.otherPlaceholder }

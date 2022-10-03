@@ -20,7 +20,6 @@ import { useValidation } from '@crowdsignal/form';
 import MultipleChoiceAnswerOther from '../multiple-choice-answer-other';
 
 const Context = createContext();
-const OTHER = 'other';
 
 const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 	const { error } = useValidation( {
@@ -32,10 +31,7 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 				const otherFieldValue =
 					formData[ `q_${ attributes.clientId }[other]` ];
 
-				if (
-					( value === OTHER && isEmpty( otherFieldValue ) ) ||
-					isEmpty( value )
-				) {
+				if ( isEmpty( value ) && isEmpty( otherFieldValue ) ) {
 					return __( 'This question is required', 'blocks' );
 				}
 			}
