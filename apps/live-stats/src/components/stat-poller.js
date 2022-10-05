@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { http } from '@crowdsignal/http';
 
-export const fetchStat = ( name, value, entries = 1 ) =>
+export const fetchStat = ( name, value ) =>
 	http( {
 		host: 'https://api.crowdsignal.com',
-		path: `/v4/admin/stats/${ name }/${ value }/${ entries }`,
+		path: `/v4/admin/stats/${ name }/${ value }`,
 		method: 'GET',
 		mode: 'cors',
 		credentials: 'include',
