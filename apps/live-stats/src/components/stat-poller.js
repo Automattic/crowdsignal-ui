@@ -1,31 +1,38 @@
 import { useEffect, useState } from 'react';
 
+import { http } from '@crowdsignal/http';
+
+export const fetchStat = ( name, value, entries = 1 ) =>
+	http( {
+		host: 'https://api.crowdsignal.com',
+		path: `/v4/admin/stats/${ name }/${ value }/${ entries }`,
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include',
+	} );
+
 const SingleStatPoller = ( props ) => {
-	const [ count, setCount ] = useState( props.count || 0 );
-	const [ diff, setDiff ] = useState( 0 );
+	// const [ initialized, setInitialized ] = useState( false );
+	const [ stat, setStat ] = useState( {} );
+
+	const pollStatDelta = () => {
+		return fetchStat( props.statName, props.statValue ).then(
+			( { data } ) => {
+				setStat( {
+					count: data[ 0 ].views,
+					delta: stat.count ? data[ 0 ].views - stat.count : 0,
+				} );
+			}
+		);
+	};
+	// pollStatDelta().then( () => setInitialized( true ) );
 
 	useEffect( () => {
 		const ticker = setInterval( () => {
-			window
-				.fetch(
-					`https://api.crowdsignal.com/v4/admin/stats/${ props.statName }/${ props.statValue }`,
-					{
-						credentials: 'include',
-						mode: 'cors',
-					}
-				)
-				.then( ( response ) => response.json() )
-				.then( ( json ) => {
-					if ( count ) {
-						setDiff( json[ 0 ].views - count );
-					}
-
-					setCount( json[ 0 ].views );
-				} )
-				.catch( ( err ) => {
-					// eslint-disable-next-line
-					console.error( err );
-				} );
+			pollStatDelta().catch( ( err ) => {
+				// eslint-disable-next-line
+				console.error( err );
+			} );
 		}, props.interval || 5000 );
 
 		return () => ticker && clearInterval( ticker );
@@ -55,8 +62,8 @@ const SingleStatPoller = ( props ) => {
 			} }
 		>
 			<div style={ smallText }>{ topText }</div>
-			<div style={ bigStat }>{ diff }</div>
-			<div style={ smallText }>({ count })</div>
+			<div style={ bigStat }>{ stat.delta || 0 }</div>
+			<div style={ smallText }>({ stat.count || 0 })</div>
 		</div>
 	);
 };
