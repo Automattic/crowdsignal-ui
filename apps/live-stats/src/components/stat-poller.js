@@ -66,7 +66,7 @@ const SingleStatPoller = ( props ) => {
 		>
 			<div style={ smallText }>{ topText }</div>
 			<div style={ bigStat }>{ stat.delta || 0 }</div>
-			<div style={ smallText }>({ stat.count || 0 })</div>
+			<div style={ smallText }>Daily count { stat.count || 0 }</div>
 		</div>
 	);
 };
