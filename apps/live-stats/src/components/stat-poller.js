@@ -25,7 +25,10 @@ const SingleStatPoller = ( props ) => {
 			}
 		);
 	};
-	// pollStatDelta().then( () => setInitialized( true ) );
+
+	useEffect( () => {
+		setTimeout( pollStatDelta, Math.random() * 1000 );
+	}, [] );
 
 	useEffect( () => {
 		const ticker = setInterval( () => {
