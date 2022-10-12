@@ -47,6 +47,13 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 					checked={ attributes.mandatory }
 					onChange={ handleChangeMandatory }
 				/>
+				<ToggleControl
+					label={ __( 'Allow "other" answer', 'block-editor' ) }
+					checked={ attributes.allowOther }
+					onChange={ ( allowOther ) =>
+						setAttributes( { allowOther } )
+					}
+				/>
 
 				<TextControl
 					label={ __( 'Max. choices', 'block-editor' ) }

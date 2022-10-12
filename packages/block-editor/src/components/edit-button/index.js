@@ -31,13 +31,14 @@ const ButtonContent = styled.div`
 
 const EditButtonAnswer = ( {
 	value,
-	attributes,
+	attributes = {},
 	className,
 	multipleChoice,
 	onChange,
 	onReplace,
 	onSplit,
 	onDelete,
+	placeholder = __( 'Enter an answer', 'block-editor' ),
 	allowedFormats = [
 		'core/bold',
 		'core/italic',
@@ -63,7 +64,7 @@ const EditButtonAnswer = ( {
 				{ multipleChoice && <FormCheckbox type="checkbox" /> }
 
 				<RichText
-					placeholder={ __( 'Enter an answer', 'block-editor' ) }
+					placeholder={ placeholder }
 					onChange={ onChange }
 					onReplace={ onReplace }
 					onSplit={ onSplit }

@@ -16,6 +16,7 @@ import { useClientId } from '@crowdsignal/hooks';
 import { QuestionHeader, QuestionWrapper } from '@crowdsignal/blocks';
 import Toolbar from './toolbar';
 import Sidebar from './sidebar';
+import MultipleChoiceAnswerOther from '../multiple-choice-answer-other';
 
 const ALLOWED_ANSWER_BLOCKS = [
 	'core/image',
@@ -35,6 +36,7 @@ const EditMultipleChoiceQuestion = ( props ) => {
 		className,
 		{
 			'is-required': attributes.mandatory,
+			'allow-other': attributes.allowOther,
 		}
 	);
 
@@ -61,6 +63,12 @@ const EditMultipleChoiceQuestion = ( props ) => {
 					orientation="vertical"
 					__experimentalMoverDirection="vertical"
 				/>
+				{ attributes.allowOther && (
+					<MultipleChoiceAnswerOther
+						attributes={ attributes }
+						setAttributes={ setAttributes }
+					/>
+				) }
 			</QuestionWrapper.Content>
 		</QuestionWrapper>
 	);

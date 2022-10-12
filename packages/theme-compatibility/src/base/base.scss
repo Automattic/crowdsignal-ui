@@ -340,3 +340,54 @@ body {
 		}
 	}
 }
+
+.crowdsignal-forms-multiple-choice-question-block.allow-other {
+	&.is-style-list {
+		.multiple-choice-answer-other {
+			.rich-text {
+				border: 1px solid var(--crowdsignal-forms-input-border-color);
+				padding: 8px;
+				line-height: 1.15;
+				width: 50%;
+			}
+		}
+	}
+
+	&.is-style-button {
+		.multiple-choice-answer-other {
+			input {
+				border: none;
+				background-color: transparent;
+				color: inherit;
+				font-weight: inherit;
+				line-height: normal;
+				padding: 0;
+				outline: none;
+
+				&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+					color: currentColor;
+					opacity: 0.62;
+				}
+
+				&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+					color: currentColor;
+					opacity: 0.62;
+				}
+
+				&::-ms-input-placeholder { /* Microsoft Edge */
+					color: currentColor;
+					opacity: 0.62;
+				}
+			}
+		}
+	}
+
+	.multiple-choice-answer-other {
+		margin-top: var(--cs--style--block-gap-small);
+
+		.rich-text {
+			opacity: 0.62;
+		}
+	}
+}
+

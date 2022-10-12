@@ -11,30 +11,35 @@ import { FormCheckbox } from '@crowdsignal/blocks';
 import { useColorStyles } from '@crowdsignal/styles';
 
 const EditCheckboxAnswer = ( {
-	attributes,
+	attributes = {},
 	className,
+	hideCheck = false,
 	multipleChoice,
 	onChange,
 	onReplace,
 	onSplit,
 	onDelete,
+	placeholder = __( 'Enter an answer', 'block-editor' ),
+	value,
 } ) => (
 	<FormCheckbox.Label
 		as={ 'div' }
 		className={ className }
 		style={ useColorStyles( attributes ) }
 	>
-		<FormCheckbox type={ multipleChoice ? 'checkbox' : 'radio' } />
+		{ ! hideCheck && (
+			<FormCheckbox type={ multipleChoice ? 'checkbox' : 'radio' } />
+		) }
 
 		<RichText
-			placeholder={ __( 'Enter an answer', 'block-editor' ) }
+			placeholder={ placeholder }
 			multiline={ false }
 			preserveWhiteSpace={ false }
 			onChange={ onChange }
 			onReplace={ onReplace }
 			onSplit={ onSplit }
 			onRemove={ onDelete }
-			value={ attributes.label }
+			value={ value || attributes.label }
 			allowedFormats={ [] }
 			withoutInteractiveFormatting
 		/>

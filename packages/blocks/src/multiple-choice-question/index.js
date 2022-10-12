@@ -17,6 +17,7 @@ import {
 } from '../components';
 import { Style } from './constants';
 import { useValidation } from '@crowdsignal/form';
+import MultipleChoiceAnswerOther from '../multiple-choice-answer-other';
 
 const Context = createContext();
 
@@ -25,9 +26,14 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 		fieldName: `q_${ attributes.clientId }[choice]${
 			attributes.maximumChoices !== 1 ? '[]' : ''
 		}`,
-		validation: ( value ) => {
-			if ( attributes.mandatory && isEmpty( value ) ) {
-				return __( 'This question is required', 'blocks' );
+		validation: ( value, formData ) => {
+			if ( attributes.mandatory ) {
+				const otherFieldValue =
+					formData[ `q_${ attributes.clientId }[other]` ];
+
+				if ( isEmpty( value ) && isEmpty( otherFieldValue ) ) {
+					return __( 'This question is required', 'blocks' );
+				}
 			}
 		},
 	} );
@@ -38,6 +44,7 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 		{
 			'is-required': attributes.mandatory,
 			'is-error': error,
+			'allow-other': attributes.allowOther,
 			[ `align${ attributes.align }` ]: attributes.align,
 		}
 	);
@@ -51,6 +58,11 @@ const MultipleChoiceQuestion = ( { attributes, children, className } ) => {
 				<Context.Provider value={ attributes }>
 					<QuestionWrapper.Content>
 						{ children }
+						{ attributes.allowOther && (
+							<MultipleChoiceAnswerOther
+								attributes={ attributes }
+							/>
+						) }
 					</QuestionWrapper.Content>
 				</Context.Provider>
 				{ error && <ErrorMessage>{ error }</ErrorMessage> }
