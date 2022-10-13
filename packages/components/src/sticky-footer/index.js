@@ -3,6 +3,7 @@ import CrowdsignalFooter from '../crowdsignal-footer';
 
 const Footer = styled.div`
 	position: sticky;
+	z-index: 1000;
 	bottom: 0;
 	background-color: var( --cs--style--color--background, white );
 	padding: 12px;
