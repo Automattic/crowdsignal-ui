@@ -32,16 +32,15 @@ input, textarea {
 
 .crowdsignal-forms-text-input-block,
 .crowdsignal-forms-text-question-block, 
-.crowdsignal-forms-date-time-picker-block .react-datepicker-wrapper,
-.crowdsignal-forms-phone-number-block {
+.crowdsignal-forms-phone-number-block,
+.crowdsignal-forms-date-picker-block .react-datepicker-wrapper,
+.crowdsignal-forms-time-picker-block .react-datepicker-wrapper {
 	input, textarea {
 		border: 1px solid var(--p2-color-border);
 		padding: 12px 8px;
 		border-radius: 2px;
 	}
 }
-
-
 
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--p2-color-border);
