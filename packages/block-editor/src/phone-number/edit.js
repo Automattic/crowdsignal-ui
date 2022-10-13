@@ -5,7 +5,6 @@ import { RichText } from '@wordpress/block-editor';
 import { ResizableBox } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import 'react-phone-number-input/style.css';
 import { noop } from 'lodash';
 
 /**
@@ -24,8 +23,6 @@ const EditPhoneNumber = ( props ) => {
 	useClientId( props );
 
 	const handleChangeLabel = ( label ) => setAttributes( { label } );
-
-	// const handleChangeCountry = ( country ) => setAttributes( { country } );
 
 	const handleResizeInput = ( event, handle, element ) => {
 		if ( handle !== 'bottom' && handle !== 'right' ) {
