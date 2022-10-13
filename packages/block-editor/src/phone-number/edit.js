@@ -58,11 +58,10 @@ const EditPhoneNumber = ( props ) => {
 			</FormInputWrapper.Label>
 			<ResizableBox
 				showHandle={ isSelected }
-				enable={ { bottom: true, right: true } }
+				enable={ { bottom: false, right: false } }
 				onResizeStop={ handleResizeInput }
 				size={ {
 					width: attributes.inputWidth,
-					height: `${ attributes.inputHeight }px`,
 				} }
 			>
 				<FormPhoneNumber

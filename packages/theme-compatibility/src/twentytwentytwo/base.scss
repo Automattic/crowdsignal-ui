@@ -29,6 +29,10 @@ body {
 	}
 }
 
+input.PhoneInputInput {
+	padding: 12px;
+}
+
 .crowdsignal-forms-question-wrapper {
 	border-radius: 0;
 	color: var(--wp--preset--color--foreground);
