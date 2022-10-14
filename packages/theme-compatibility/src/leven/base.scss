@@ -61,14 +61,13 @@ body {
 	}
 }
 
-.crowdsignal-forms-phone-number-block {
+.crowdsignal-forms-phone-number-block .crowdsignal-forms-phone-input-wrapper,
 .crowdsignal-forms-date-picker-block .react-datepicker-wrapper,
-.crowdsignal-forms-time-picker-block .react-datepicker-wrapper{
+.crowdsignal-forms-time-picker-block .react-datepicker-wrapper {
 	input {
 		background-color: var(--crowdsignal-forms-input-background-color);
 		border: 1px solid var(--crowdsignal-forms-input-border-color);
 	}
-}
 }
 
 .wp-block-image {

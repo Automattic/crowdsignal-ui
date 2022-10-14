@@ -17,6 +17,7 @@ export const PhoneInputWrapper = styled.div`
 		border-width: 1px;
 		border-style: solid;
 		padding: 8px;
+		width: 100%;
 	}
 
 	${ ErrorMessage.className } {
@@ -30,13 +31,13 @@ export const PhoneInputWrapper = styled.div`
 const FormPhoneNumber = ( { flag, ...props } ) => {
 	if ( flag ) {
 		return (
-			<PhoneInputWrapper>
+			<PhoneInputWrapper className="crowdsignal-forms-phone-input-wrapper">
 				<PhoneInput { ...props } />
 			</PhoneInputWrapper>
 		);
 	}
 	return (
-		<PhoneInputWrapper>
+		<PhoneInputWrapper className="crowdsignal-forms-phone-input-wrapper">
 			<Input { ...props } />
 		</PhoneInputWrapper>
 	);
