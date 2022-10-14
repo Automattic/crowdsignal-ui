@@ -27,7 +27,7 @@ body {
 	line-height: 1.5;
 
 	&__content {
-		input[type="text"] {
+		input[type="text"], input[type="tel"] {
 			min-height: 45px;
 		}
 	}

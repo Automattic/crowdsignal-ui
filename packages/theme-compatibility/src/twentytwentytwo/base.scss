@@ -17,7 +17,7 @@ body {
 	--wp--custom--input--focus--color: #010101;
 }
 
-.crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block {
+.crowdsignal-forms-text-input-block, .crowdsignal-forms-text-question-block, .crowdsignal-forms-phone-number-block {
 	input, textarea {
 		border-width: 1px;
 		border-style: solid;
@@ -27,6 +27,10 @@ body {
 			border-color: var(--wp--custom--input--focus--color);
 		}
 	}
+}
+
+input.PhoneInputInput {
+	padding: 12px;
 }
 
 .crowdsignal-forms-question-wrapper {

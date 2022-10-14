@@ -71,3 +71,8 @@ body {
 		color: var(--wp--custom--color--foreground);
 	}
 }
+
+input.PhoneInputInput {
+	border-width: 2px;
+	padding: 14px;
+}

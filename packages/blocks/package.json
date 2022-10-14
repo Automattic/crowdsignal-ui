@@ -28,7 +28,8 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.21",
     "react-beautiful-dnd": "^13.1.0",
-    "react-datepicker": "^4.8.0"
+    "react-datepicker": "^4.8.0",
+	"react-phone-number-input": "^3.2.11"
   },
   "peerDependencies": {
     "@emotion/react": "^11.9.0",
