@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 /**
  * Internal dependencies
  */
-import { ErrorMessage } from '../';
+import { ErrorMessage, FormInputWrapper } from '../';
 
 export const PhoneInputWrapper = styled.div`
 	input {
@@ -18,6 +18,9 @@ export const PhoneInputWrapper = styled.div`
 		border-style: solid;
 		padding: 8px;
 		width: 100%;
+
+		${ FormInputWrapper }.is-error & {
+			border: 1px solid var( --color-error ) !important;
 	}
 
 	${ ErrorMessage.className } {
