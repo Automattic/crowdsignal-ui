@@ -66,7 +66,7 @@ const PreviewStylesResolver = ( { theme } ) => {
 				editor: {
 					__unstableResolvedAssets: {
 						styles: [
-							`${ externalStyles }<style>${ inlineStyles }</style>`,
+							`<style>${ inlineStyles }</style>${ externalStyles }`,
 						],
 					},
 				},

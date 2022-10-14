@@ -202,7 +202,7 @@ const Editor = ( { project } ) => {
 					version={ version }
 				/>
 				<FooterSlot>
-					{ currentUser.isFree && (
+					{ currentUser?.isFree && (
 						<StickyFooter>
 							<CrowdsignalFooter
 								logo

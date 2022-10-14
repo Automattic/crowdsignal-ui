@@ -5,6 +5,10 @@ const Footer = styled.div`
 	position: sticky;
 	z-index: 1000;
 	bottom: 0;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
 	background-color: var( --cs--style--color--background, white );
 	padding: 12px;
 	filter: drop-shadow( 0 0 6px rgba( 0, 0, 0, 0.02 ) )

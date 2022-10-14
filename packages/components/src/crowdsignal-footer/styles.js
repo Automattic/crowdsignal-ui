@@ -3,6 +3,7 @@
  */
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { breakpoint } from '@crowdsignal/styles';
 
 export const Footer = styled.div`
 	align-items: center;
@@ -22,6 +23,10 @@ export const FooterLink = styled.div( () => {
 
 		&:not( :hover ) {
 			opacity: 0.7;
+		}
+
+		${ breakpoint( '<480px' ) } {
+			text-align: center;
 		}
 	`;
 } );
@@ -61,6 +66,10 @@ export const UpgradeTooltip = styled.div`
 	font-size: 10px;
 	padding: 4px 8px;
 	text-align: center;
+
+	${ breakpoint( '<480px' ) } {
+		right: 0;
+	}
 `;
 
 export const Logo = styled.div`
