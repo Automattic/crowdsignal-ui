@@ -11,8 +11,6 @@ const Footer = styled.div`
 	box-sizing: border-box;
 	background-color: var( --cs--style--color--background, white );
 	padding: 12px;
-	filter: drop-shadow( 0 0 6px rgba( 0, 0, 0, 0.02 ) )
-		drop-shadow( 0 2px 4px rgba( 0, 0, 0, 0.08 ) );
 
 	${ CrowdsignalFooter.Wrapper } {
 		margin: 0;
