@@ -145,6 +145,7 @@ export const useEditorContent = ( project ) => {
 		editorSettings,
 		editorTheme,
 		currentPreviewType,
+		currentUser,
 		confirmationPage,
 		currentPage,
 		totalPages: editorPages.length,

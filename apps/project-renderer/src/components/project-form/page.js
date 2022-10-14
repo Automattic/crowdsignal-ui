@@ -13,7 +13,12 @@ import {
 	renderBlocks,
 } from '@crowdsignal/blocks';
 import { Form } from '@crowdsignal/form';
-import { NavigationBar } from '@crowdsignal/components';
+import {
+	CrowdsignalFooter,
+	NavigationBar,
+	StickyFooter,
+} from '@crowdsignal/components';
+import { __ } from '@wordpress/i18n';
 
 const blockMap = zipObject( map( projectBlocks, 'blockName' ), projectBlocks );
 
@@ -25,6 +30,7 @@ const ProjectPage = ( {
 	onSubmit,
 	projectCode,
 	totalPages,
+	showBranding,
 } ) => {
 	const classes = classnames( 'wp-embed-responsive', 'crowdsignal-content', {
 		'crowdsignal-forms-form__content': !! onSubmit,
@@ -53,6 +59,18 @@ const ProjectPage = ( {
 			<ContentWrapper className={ classes }>
 				{ renderBlocks( blocks, blockMap ) }
 			</ContentWrapper>
+			{ showBranding && (
+				<StickyFooter>
+					<CrowdsignalFooter
+						logo
+						source="project-footer"
+						message={ __(
+							'Collect your own feedback with Crowdsignal',
+							'project-renderer'
+						) }
+					/>
+				</StickyFooter>
+			) }
 		</Form>
 	);
 };

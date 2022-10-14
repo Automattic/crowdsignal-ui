@@ -19,7 +19,7 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@automattic/isolated-block-editor": "2.18.0",
+    "@automattic/isolated-block-editor": "2.18.1",
     "@crowdsignal/block-editor": "^0.1.0",
     "@crowdsignal/block-editor-filters": "^0.1.0",
     "@crowdsignal/blocks": "^0.1.0",

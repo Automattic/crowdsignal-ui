@@ -131,6 +131,8 @@ body.editor-styles-wrapper
 	}
 
 	.block-editor-block-list__layout.is-root-container {
+		min-height: calc(100% - 50px);
+		box-sizing: border-box;
 		padding: var(--cs--content-padding-top) var(--cs--content-padding-horizontal) var(--cs--content-padding-bottom);
 		overflow: hidden;
 	}

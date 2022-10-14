@@ -17,7 +17,7 @@
     "url": "https://github.com/Automattic/crowdsignal-ui/issues"
   },
   "devDependencies": {
-    "@automattic/isolated-block-editor": "2.18.0"
+    "@automattic/isolated-block-editor": "2.18.1"
   },
   "scripts": {
     "build": "calypso-build"

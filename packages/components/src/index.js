@@ -14,5 +14,6 @@ export { default as Popover } from './popover';
 export { default as PopoverMenu } from './popover-menu';
 export { default as PopoverNotice } from './popover-notice';
 export { default as Sandbox } from './sandbox';
+export { default as StickyFooter } from './sticky-footer';
 export { default as StyleProvider } from './style-provider';
 export { default as TabNavigation } from './tab-navigation';

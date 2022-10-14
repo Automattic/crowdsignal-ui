@@ -23,10 +23,6 @@ export const resetStyles = ( { shadowRoot = false } ) => css`
 		padding: 0;
 	}
 
-	a {
-		color: var( --color-text );
-	}
-
 	button,
 	input,
 	textarea {
