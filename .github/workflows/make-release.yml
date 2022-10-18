@@ -23,14 +23,14 @@ jobs:
       - name: "Trigger"
         run: echo "Triggered by ${{ github.event_name }}"
 
-      - name: Setup Node version 14
-        uses: actions/setup-node@v2
+      - name: Setup Node version 16
+        uses: actions/setup-node@v3.5.1
         with:
-          node-version: '14'
+          node-version: '16'
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.5.0
         with:
           ref: ${{ github.event.inputs.buildBranch }}
 
