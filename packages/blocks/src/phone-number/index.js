@@ -5,7 +5,6 @@ import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
-import 'react-phone-number-input/style.css';
 
 /**
  * Internal dependencies
