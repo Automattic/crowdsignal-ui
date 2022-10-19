@@ -4,61 +4,61 @@ name: Build release
 
 # Controls when the action will run.
 on:
-  workflow_dispatch:
-    inputs:
-      buildBranch:
-        description: Branch to build
-        required: true
-        default: main
+    workflow_dispatch:
+        inputs:
+            buildBranch:
+                description: Branch to build
+                required: true
+                default: main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    # This workflow contains a single job called "build"
+    build:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: "Trigger"
-        run: echo "Triggered by ${{ github.event_name }}"
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            - name: 'Trigger'
+              run: echo "Triggered by ${{ github.event_name }}"
 
-      - name: Setup Node version 16
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: '16'
+            - name: Setup Node version 16
+              uses: actions/setup-node@v3.5.1
+              with:
+                  node-version: '16'
 
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout
-        uses: actions/checkout@v2.5.0
-        with:
-          ref: ${{ github.event.inputs.buildBranch }}
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Checkout
+              uses: actions/checkout@v2.5.0
+              with:
+                  ref: ${{ github.event.inputs.buildBranch }}
 
-      - name: Install YARN
-        run: npm install yarn
+            - name: Install YARN
+              run: npm install yarn
 
-      - name: Install dependencies
-        run: yarn install
+            - name: Install dependencies
+              run: yarn install
 
-      # - name: Build Gutenberg
-      #   run: ./scripts/build-gutenberg.sh
-      #   env:
-      #     NODE_ENV: production
+            # - name: Build Gutenberg
+            #   run: ./scripts/build-gutenberg.sh
+            #   env:
+            #     NODE_ENV: production
 
-      - name: Build release
-        run: ./scripts/build-release.sh
+            - name: Build release
+              run: ./scripts/build-release.sh
 
-      - name: Pack
-        run: |
-          cd dist
-          zip -r dist.zip *
-          cd ..
+            - name: Pack
+              run: |
+                  cd dist
+                  zip -r dist.zip *
+                  cd ..
 
-      - name: Create GH release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest
-          prerelease: true
-          title: Development Build
-          files: dist/dist.zip
+            - name: Create GH release
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: latest
+                  prerelease: true
+                  title: Development Build
+                  files: dist/dist.zip
