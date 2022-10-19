@@ -10,6 +10,11 @@ import styled from '@emotion/styled';
  */
 import { ErrorMessage, FormInputWrapper } from '../';
 
+/**
+ * Style dependencies
+ */
+import './style.css';
+
 export const PhoneInputWrapper = styled.div`
 	input {
 		color: var( --wp--preset--color--foreground );
