@@ -38,6 +38,14 @@ input, textarea {
 }
 
 .crowdsignal-forms-question-wrapper {
+	--cs--style--button--background: var(--wp--preset--color--background);
+	--cs--style--button--font-size: 0.88889em;
+	--cs--style--button--font-weight: bold;
+
+	.crowdsignal-forms-dropdown-input__button{
+		--cs--style--dropdown--padding-top-bottom: 0.76rem;
+	}
+
 	border: 1px solid #CCC;
 	background-color: var(--wp--preset--color--background);
 	color: var(--color-text);

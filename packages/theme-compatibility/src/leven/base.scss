@@ -43,6 +43,13 @@ body {
 	border-color: var(--crowdsignal-forms-question-border-color);
 	background-color: var(--crowdsignal-forms-question-background-color);
 
+	.crowdsignal-forms-dropdown-input {
+		.crowdsignal-forms-button__button {
+			--cs--style--dropdown--padding-top-bottom: 14px;
+			--cs--style--button--font-weight: 700;
+		}
+	}
+
 	.wp-block-cover & {
 		h3:not(.has-text-color) {
 			color: var( --color-text );

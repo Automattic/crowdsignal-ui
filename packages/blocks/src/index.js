@@ -1,6 +1,7 @@
 import CheckboxInput from './checkbox-input';
 import CoreEmbed from './core-embed';
 import DropdownInput from './dropdown-input';
+import DropdownQuestion from './dropdown-question';
 import FileInput from './file-input';
 import MatrixQuestion from './matrix-question';
 import MultipleChoiceAnswer from './multiple-choice-answer';
@@ -24,6 +25,7 @@ export {
 	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
+	DropdownQuestion,
 	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,
@@ -46,6 +48,7 @@ export const projectBlocks = [
 	CheckboxInput,
 	CoreEmbed,
 	DropdownInput,
+	DropdownQuestion,
 	FileInput,
 	MatrixQuestion,
 	MultipleChoiceAnswer,

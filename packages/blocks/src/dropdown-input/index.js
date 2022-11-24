@@ -1,7 +1,8 @@
+/* eslint-disable complexity */
 /**
  * External dependencies
  */
-import { RawHTML } from '@wordpress/element';
+import { RawHTML, useContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
@@ -15,16 +16,23 @@ import {
 	FormInputWrapper,
 } from '../components';
 import { useField } from '@crowdsignal/form';
+import DropdownQuestion from '../dropdown-question';
 
 const DropdownInput = ( { attributes, className } ) => {
+	const parentQuestion = useContext( DropdownQuestion.Context );
+	const clientId = parentQuestion
+		? parentQuestion.clientId
+		: attributes.clientId;
+	const mandatory = parentQuestion
+		? parentQuestion.mandatory
+		: attributes.mandatory;
 	const multipleChoice = attributes.maximumChoices > 1;
+
 	const { error, onChange, fieldValue } = useField( {
-		fieldName: `q_${ attributes.clientId }[choice]${
-			multipleChoice ? '[]' : ''
-		}`,
+		fieldName: `q_${ clientId }[choice]${ multipleChoice ? '[]' : '' }`,
 		defaultValue: multipleChoice ? [] : '',
 		validation: ( val ) => {
-			if ( attributes.mandatory && isEmpty( val ) ) {
+			if ( mandatory && isEmpty( val ) ) {
 				return __( 'This field is required', 'blocks' );
 			}
 		},
@@ -51,9 +59,11 @@ const DropdownInput = ( { attributes, className } ) => {
 
 	return (
 		<FormInputWrapper className={ classes } style={ { ...styles } }>
-			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
-				<RawHTML>{ attributes.label }</RawHTML>
-			</FormInputWrapper.Label>
+			{ ! attributes.isNested && (
+				<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
+					<RawHTML>{ attributes.label }</RawHTML>
+				</FormInputWrapper.Label>
+			) }
 			<FormDropdownInput
 				buttonLabel={ attributes.buttonLabel || defaultButtonLabel }
 				options={ attributes.options }
@@ -63,7 +73,9 @@ const DropdownInput = ( { attributes, className } ) => {
 				multipleChoice={ multipleChoice }
 				maxChoices={ attributes.maximumChoices }
 			/>
-			{ error && <ErrorMessage>{ error }</ErrorMessage> }
+			{ ! attributes.isNested && error && (
+				<ErrorMessage>{ error }</ErrorMessage>
+			) }
 		</FormInputWrapper>
 	);
 };

@@ -24,6 +24,7 @@ import {
 
 const Sidebar = ( { attributes, setAttributes } ) => {
 	const widthOptions = [ '25%', '50%', '75%', '100%' ];
+	const { isNested } = attributes;
 
 	const handleChangeInputWidth = ( value ) => {
 		setAttributes( {
@@ -53,11 +54,14 @@ const Sidebar = ( { attributes, setAttributes } ) => {
 				title={ __( 'Field Settings', 'block-editor' ) }
 				initialOpen={ true }
 			>
-				<ToggleControl
-					label={ __( 'The answer is required', 'block-editor' ) }
-					checked={ attributes.mandatory }
-					onChange={ handleChangeMandatory }
-				/>
+				{ ! isNested && (
+					<ToggleControl
+						label={ __( 'The answer is required', 'block-editor' ) }
+						checked={ attributes.mandatory }
+						onChange={ handleChangeMandatory }
+					/>
+				) }
+
 				<TextControl
 					label={ __( 'Max. choices', 'block-editor' ) }
 					type="number"
