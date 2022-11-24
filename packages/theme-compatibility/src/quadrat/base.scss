@@ -45,6 +45,13 @@ body {
 .crowdsignal-forms-question-wrapper {
 	color: var(--wp--custom--color--foreground);
 	background-color: var(--wp--preset--color--background);
+
+	--cs--style--button--background: var(--wp--preset--color--background);
+	--cs--style--dropdown--line-height: var(--wp--custom--button--typography--line-height);
+
+	.crowdsignal-forms-dropdown-input__button{
+		--cs--style--dropdown--padding-top-bottom: var(--wp--custom--button--spacing--padding--top);
+	}
 }
 
 .crowdsignal-forms-dropdown-input {

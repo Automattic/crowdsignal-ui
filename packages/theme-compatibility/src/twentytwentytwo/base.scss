@@ -34,6 +34,14 @@ input.PhoneInputInput {
 }
 
 .crowdsignal-forms-question-wrapper {
+	--cs--style--button--background: var(--wp--preset--color--background);
+	--cs--style--button--font-size: var(--wp--preset--font-size--medium);
+	--cs--style--dropdown--line-height: 1;
+
+	.crowdsignal-forms-dropdown-input__button{
+		--cs--style--dropdown--padding-top-bottom: 16px;
+	}
+
 	border-radius: 0;
 	color: var(--wp--preset--color--foreground);
 	background-color: var(--wp--preset--color--background);

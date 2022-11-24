@@ -3,33 +3,35 @@ export default {
 		type: 'string',
 		default: null,
 	},
-	label: {
+	question: {
+		type: 'string',
+		default: null,
+	},
+	placeholder: {
 		type: 'string',
 		default: '',
-	},
-	isNested: {
-		type: 'boolean',
-		default: false,
-	},
-	buttonLabel: {
-		type: 'string',
-		default: '',
-	},
-	options: {
-		type: 'array',
-		default: [],
 	},
 	mandatory: {
 		type: 'boolean',
 		default: false,
 	},
-	maximumChoices: {
-		type: 'number',
-		default: 1,
-	},
-	// Style attributes, should follow the name scheme supported by @crowdsignal/styles helpers.
 	backgroundColor: {
 		type: 'string',
+	},
+	borderColor: {
+		type: 'string',
+	},
+	borderRadius: {
+		type: 'number',
+		default: '',
+	},
+	boxShadow: {
+		type: 'boolean',
+		default: false,
+	},
+	borderWidth: {
+		type: 'number',
+		default: '',
 	},
 	gradient: {
 		type: 'string',
@@ -37,7 +39,7 @@ export default {
 	textColor: {
 		type: 'string',
 	},
-	inputWidth: {
+	justification: {
 		type: 'string',
 	},
 };

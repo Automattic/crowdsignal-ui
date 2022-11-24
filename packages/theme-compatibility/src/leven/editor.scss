@@ -19,3 +19,11 @@
 	margin-top: 0;
 	margin-bottom: 0;
 }
+
+.crowdsignal-forms-question-wrapper {
+	.crowdsignal-forms-dropdown-input {
+		.crowdsignal-forms-button__button {
+			--cs--style--button--font-size: 1.2125em;
+		}
+	}
+}
