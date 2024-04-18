@@ -27,10 +27,17 @@ class CrowdsignalPopup extends window.HTMLElement {
 	 */
 	#settings;
 
+	/**
+	 * Allow defining a nonce for more environments with more restrictive CSP rules
+	 */
+	#styleNonce;
+
 	connectedCallback() {
 		const isWpEditor =
 			this.ownerDocument.body.className.indexOf( 'wp-block-embed' ) !==
 			-1;
+
+		this.#styleNonce = this.getAttribute( 'style-nonce' ) ?? '';
 
 		if ( isWpEditor ) {
 			this.#showPlaceholder();
@@ -91,7 +98,7 @@ class CrowdsignalPopup extends window.HTMLElement {
 
 		this.#wrapper = document.createElement( 'div' );
 		this.#wrapper.innerHTML = `
-			<style>
+			<style nonce="${ this.#styleNonce }">
 				body {
 					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 					color: #1e1e1e;
@@ -154,7 +161,7 @@ class CrowdsignalPopup extends window.HTMLElement {
 
 	#showPopup() {
 		this.innerHTML += `
-			<style>
+			<style nonce="${ this.#styleNonce }">
 				.crowdsignal-web-popup__wrapper {
 					width: 400px;
 					max-width: 100%;
