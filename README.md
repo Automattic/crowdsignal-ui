@@ -96,6 +96,12 @@ yarn storybook
 yarn build
 ```
 
+Then copy the files in `/dist` to your crowdsignal sandbox at `/app.crowdsignal.com/public_html/ui/`:
+- `/next` is for internal testing
+- `/stable` is for public release
+
+Create a PR and deploy once you're satisfied everything is working.
+
 ### Troubleshooting
 
 **How to Install Node 14.15**
