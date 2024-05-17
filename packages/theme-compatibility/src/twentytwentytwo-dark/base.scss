@@ -21,6 +21,19 @@ body {
 
 .crowdsignal-forms-question-wrapper {
 	border-color: var(--wp--preset--color--foreground);
+
+	.crowdsignal-forms-dropdown-input {
+		.crowdsignal-forms-dropdown-input__button.is-style-outline {
+			button.crowdsignal-forms-button__button {
+				border: 2px solid currentColor;
+			}
+		}
+
+		.crowdsignal-forms-dropdown-input__options {
+			border-width: 2px;
+			border-color: currentColor;
+		}
+	}
 }
 
 .crowdsignal-forms-button {

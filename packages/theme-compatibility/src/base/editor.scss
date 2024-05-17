@@ -170,6 +170,10 @@ body.editor-styles-wrapper
 		margin-top: 0;
 		margin-bottom: var(--cs--style--block-gap-small);
 
+	&:last-child {
+		margin-bottom: 0;
+	}
+
 	&[data-type="crowdsignal-forms/multiple-choice-answer"] + :not(.wp-block[data-type="crowdsignal-forms/multiple-choice-answer"]) {
 		margin-top: var(--cs--style--block-gap);
 	}

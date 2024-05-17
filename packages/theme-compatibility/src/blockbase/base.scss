@@ -30,6 +30,10 @@ body {
 	box-shadow: var(--wp--custom--form--color--box-shadow);
 	color: var(--wp--preset--color--foreground);
 	background-color: var(--wp--preset--color--background);
+
+	--cs--style--dropdown--line-height: var(--wp--custom--button--typography--line-height);
+	--cs--style--dropdown--padding-top-bottom: 12px;
+	--cs--style--button--background: var(--wp--preset--color--background);
 }
 
 input.PhoneInputInput {
