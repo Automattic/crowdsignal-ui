@@ -55,7 +55,7 @@ jobs:
                   cd ..
 
             - name: Create GH release
-              uses: marvinpinto/action-automatic-releases@latest
+              uses: marvinpinto/action-automatic-releases@d68defdd11f9dcc7f52f35c1b7c236ee7513bcc1 # latest @ 2022-01-29 (untagged rolling build, 3 dist rebuilds past v1.2.1)
               with:
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   automatic_release_tag: latest
