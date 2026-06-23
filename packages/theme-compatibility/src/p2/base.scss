@@ -31,7 +31,7 @@ input, textarea {
 }
 
 .crowdsignal-forms-text-input-block,
-.crowdsignal-forms-text-question-block, 
+.crowdsignal-forms-text-question-block,
 .crowdsignal-forms-phone-number-block,
 .crowdsignal-forms-date-picker-block .react-datepicker-wrapper,
 .crowdsignal-forms-time-picker-block .react-datepicker-wrapper {
@@ -43,6 +43,7 @@ input, textarea {
 }
 
 .crowdsignal-forms-question-wrapper {
+	--cs--style--dropdown--padding-top-bottom: 10px;
 	border-color: var(--p2-color-border);
 	background-color: var(--p2-color-white);
 }
@@ -111,7 +112,7 @@ input, textarea {
 	& &__button.is-style-outline {
 		button.crowdsignal-forms-button__button {
 			padding-left: 24px;
-			padding-right: 36px;
+			padding-right: 44px;
 
 			svg {
 				right: 20px;

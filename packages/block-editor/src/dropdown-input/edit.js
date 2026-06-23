@@ -135,13 +135,16 @@ export default ( props ) => {
 		<FormInputWrapper className={ classes } style={ { ...styles } }>
 			<Sidebar { ...props } />
 			<Toolbar { ...props } />
-			<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
-				<RichText
-					placeholder={ __( 'Enter form label', 'block-editor' ) }
-					onChange={ handleChangeAttribute( 'label' ) }
-					value={ attributes.label }
-				/>
-			</FormInputWrapper.Label>
+
+			{ ! attributes.isNested && (
+				<FormInputWrapper.Label className="crowdsignal-forms-dropdown-input-block__label">
+					<RichText
+						placeholder={ __( 'Enter form label', 'block-editor' ) }
+						onChange={ handleChangeAttribute( 'label' ) }
+						value={ attributes.label }
+					/>
+				</FormInputWrapper.Label>
+			) }
 			<FormDropdownInput.Wrapper width={ attributes.inputWidth }>
 				<FormDropdownInput.Button outline>
 					<RichText

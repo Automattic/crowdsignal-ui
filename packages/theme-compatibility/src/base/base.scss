@@ -391,6 +391,10 @@ body {
 	}
 }
 
+.crowdsignal-forms-question-wrapper {
+	--cs--style--button--background: var(--crowdsignal-forms-question-background-color);
+}
+
 #crowdsignal-project .crowdsignal-sticky-footer {
 	position: fixed;
 	bottom: 0;
